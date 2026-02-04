@@ -4,26 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeX404 | Where Bugs Meet Their Match</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <script src="javascript/main.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- NAVBAR -->
 <header class="navbar">
     <div class="container">
-        <h1 class="logo">CodeX404</h1>
-        <nav>
+        <div class="logo">CodeX404</div>
+
+        <nav class="nav">
             <a href="#">Home</a>
             <a href="#">Services</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
         </nav>
+
+        <!-- MOBILE MENU ICON -->
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
 </header>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero">
     <div class="container hero-content">
         <h2>Build Smarter. Scale Faster. Stay Secure.</h2>
@@ -31,6 +42,7 @@
             We build modern software, smart automation, and secure digital solutions
             that help businesses grow.
         </p>
+
         <div class="hero-buttons">
             <a href="#" class="btn primary">Get Free Consultation</a>
             <a href="#" class="btn secondary">View Services</a>
@@ -43,8 +55,8 @@
     <div class="container">
         <h3>About CodeX404</h3>
         <p>
-            CodeX404 is a software company focused on clean code, smart automation,
-            and real business solutions. We don’t just build software — we solve problems.
+            CodeX404 helps businesses with clean code, smart automation,
+            and scalable digital solutions. We focus on real results.
         </p>
     </div>
 </section>
@@ -53,33 +65,32 @@
 <section class="services">
     <div class="container">
         <h3>Our Core Services</h3>
-        <div class="service-grid">
 
+        <div class="service-grid">
             <div class="service-card">
                 <h4>Custom Software</h4>
-                <p>Scalable and secure software built exactly for your business needs.</p>
+                <p>Secure and scalable software tailored to your needs.</p>
             </div>
 
             <div class="service-card">
                 <h4>Web Development</h4>
-                <p>Modern, fast, mobile-friendly websites and web applications.</p>
+                <p>Modern, fast, and mobile-friendly websites.</p>
             </div>
 
             <div class="service-card">
                 <h4>AI Automation</h4>
-                <p>Automate tasks and workflows to save time and reduce errors.</p>
+                <p>Automate tasks and improve business efficiency.</p>
             </div>
 
             <div class="service-card">
                 <h4>Backend & Databases</h4>
-                <p>Strong backend systems with optimized and secure databases.</p>
+                <p>Robust backend systems with optimized databases.</p>
             </div>
 
             <div class="service-card">
                 <h4>Security & Optimization</h4>
-                <p>Bug fixing, performance tuning, and security improvements.</p>
+                <p>Bug fixing, performance tuning, and security.</p>
             </div>
-
         </div>
     </div>
 </section>
@@ -89,7 +100,7 @@
     <div class="container">
         <h3>Why Choose CodeX404?</h3>
         <ul>
-            <li>✔ Senior-level development approach</li>
+            <li>✔ Senior-level development</li>
             <li>✔ Clean & maintainable code</li>
             <li>✔ Business-focused solutions</li>
             <li>✔ Transparent communication</li>
@@ -101,7 +112,7 @@
 <!-- CTA -->
 <section class="cta">
     <div class="container">
-        <h3>Have an Idea or Project?</h3>
+        <h3>Have an Idea?</h3>
         <p>Let’s build something powerful together.</p>
         <a href="#" class="btn primary">Start Your Project</a>
     </div>
@@ -115,5 +126,7 @@
     </div>
 </footer>
 
+<!-- JS -->
+<script src="javascript/main.js"></script>
 </body>
 </html>
