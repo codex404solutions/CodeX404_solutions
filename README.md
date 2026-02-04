@@ -91,6 +91,12 @@ Our focus areas:
 │   ├── contact.php
 │   ├── css
 │   │   └── style.css
+│   ├── database
+│   │   ├── migrate.php
+│   │   └── migrations
+│   │       ├── 001_create_migrations_table.php
+│   │       ├── 002_create_contact_messages.php
+│   │       └── 003_create_users.php
 │   ├── includes
 │   │   ├── footer.php
 │   │   └── header.php
