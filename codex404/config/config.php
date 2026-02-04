@@ -1,6 +1,4 @@
 <?php
-
-date_default_timezone_set('Asia/Kolkata');
 // Prevent direct access
 if (!defined('APP_START')) {
     die('Direct access not allowed');
