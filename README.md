@@ -88,6 +88,7 @@ Our focus areas:
 │   │   └── config.php
 │   ├── connection
 │   │   └── connection.php
+│   ├── contact.php
 │   ├── css
 │   │   └── style.css
 │   ├── includes
