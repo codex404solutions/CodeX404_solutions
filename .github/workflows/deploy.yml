@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp
-          local-dir: ./
+          local-dir: ./codex404/
           server-dir: codex404/
           timeout: 120000
           dangerous-clean-slate: false
