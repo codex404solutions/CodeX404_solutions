@@ -83,14 +83,6 @@ Our focus areas:
 <!-- TREE_START -->
 ```
 ├── README.md
-├── codex4040
-│   ├── connection
-│   │   └── connection.php
-│   ├── css
-│   │   └── style.css
-│   ├── index.html
-│   └── javascript
-│       └── main.js
 ├── index.html
 ├── setup.bat
 └── update_tree.py
