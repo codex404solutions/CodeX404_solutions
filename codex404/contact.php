@@ -2,17 +2,17 @@
 include 'includes/header.php';
 include 'connection/connection.php';
 
-$success = $error = "";
+    $success = $error = "";
 
-if (isset($_POST['submit'])) {
-    $name    = mysqli_real_escape_string($conn, $_POST['name']);
-    $email   = mysqli_real_escape_string($conn, $_POST['email']);
-    $subject = mysqli_real_escape_string($conn, $_POST['subject']);
-    $message = mysqli_real_escape_string($conn, $_POST['message']);
+    if (isset($_POST['submit'])) {
+        $name    = mysqli_real_escape_string($conn, $_POST['name']);
+        $email = strtolower(mysqli_real_escape_string($conn, $_POST['email']));
+        $subject = mysqli_real_escape_string($conn, $_POST['subject']);
+        $message = mysqli_real_escape_string($conn, $_POST['message']);
 
-    if ($name && $email && $message) {
-        $sql = "INSERT INTO contact_messages (name, email, subject, message)
-                VALUES ('$name', '$email', '$subject', '$message')";
+        if ($name && $email && $message) {
+            $sql = "INSERT INTO contact_messages (name, email, subject, message)
+                    VALUES ('$name', '$email', '$subject', '$message')";
 
         if (mysqli_query($conn, $sql)) {
             $success = "Message sent successfully!";
