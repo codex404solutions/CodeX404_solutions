@@ -1,6 +1,6 @@
 
 # CodeX404 💻
-**Bugs Meet Their Match** 
+*Bugs Meet Their Match*
 
 A modern software development company where  
  
