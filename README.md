@@ -105,7 +105,7 @@ Our focus areas:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/CodeX404lab/CodeX404.git
+   git clone https://github.com/CodeX404lab/CodeX404_php.git
 
 2. Change Directroy
    ```bash
