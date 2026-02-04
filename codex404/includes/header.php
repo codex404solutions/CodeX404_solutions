@@ -29,7 +29,7 @@
             <a href="index.php">Home</a>
             <a href="#">Services</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="contact.php">Contact</a>
         </nav>
 
         <!-- MOBILE MENU -->
