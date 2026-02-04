@@ -80,8 +80,14 @@ Our focus areas:
 ## 🗂️ Folder Structure
 
 <!-- TREE_START -->
-
-
+```
+├── CodeX404
+│   └── connection
+│       └── connection.php
+├── README.md
+├── setup.bat
+└── update_tree.py
+```
 <!-- TREE_END -->
 
 ---
@@ -150,3 +156,17 @@ Our focus areas:
    - Change default admin credentials
    - Set proper folder permissions
    - Enable HTTPS on production server
+<<<<<<< HEAD
+=======
+=======
+# CodeX404
+CodeX404 official repository: software development, AI automation, and scalable digital solutions.
+
+
+<!-- TREE_START -->
+```
+├── README.md
+├── setup.bat
+└── update_tree.py
+```
+>>>>>>> ea28b23a10697fe551c50d7cf6884f0ac4bdde86
