@@ -1,8 +1,9 @@
-<<<<<<< HEAD
-# CodeX404 💻🚀
+
+# CodeX404 💻
+**Bugs Meet Their Match** 
 
 A modern software development company where  
-**bugs meet their match**.  
+ 
 We build secure, scalable, and smart digital solutions for businesses.
 
 ---
