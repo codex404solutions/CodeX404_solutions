@@ -11,11 +11,8 @@ include 'connection/connection.php';
         $message = mysqli_real_escape_string($conn, $_POST['message']);
 
         if ($name && $email && $message) {
-            $created_at = date('Y-m-d H:i:s');
-
-            $sql = "INSERT INTO contact_messages (name, email, subject, message, created_at)
-                    VALUES ('$name', '$email', '$subject', '$message', '$created_at')";
-
+            $sql = "INSERT INTO contact_messages (name, email, subject, message)
+                    VALUES ('$name', '$email', '$subject', '$message')";
 
         if (mysqli_query($conn, $sql)) {
             $success = "Message sent successfully!";
