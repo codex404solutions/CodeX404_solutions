@@ -90,7 +90,11 @@ Our focus areas:
 │   │   └── connection.php
 │   ├── css
 │   │   └── style.css
+│   ├── includes
+│   │   ├── footer.php
+│   │   └── header.php
 │   ├── index.html
+│   ├── index.php
 │   ├── javascript
 │   │   └── main.js
 │   └── test_db.php
