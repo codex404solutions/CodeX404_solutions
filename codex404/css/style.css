@@ -43,11 +43,49 @@ body {
     padding: 18px 0;
 }
 
+/* LOGO + TAGLINE */
+.logo-box {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
 .logo {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 28px;
+    font-weight: 900;
     color: var(--primary);
 }
+
+.tagline {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    letter-spacing: 0.6px;
+}
+
+/* LOGO LINK */
+.logo-link {
+    text-decoration: none;
+}
+
+.logo-link:hover .logo {
+    opacity: 0.9;
+}
+
+
+/* REMOVE UNDERLINE FROM LOGO LINK */
+.logo-link,
+.logo-link:hover,
+.logo-link:focus,
+.logo-link:active {
+    text-decoration: none !important;
+    border: none;
+}
+
+/* EXTRA SAFETY: prevent underline on children */
+.logo-link * {
+    text-decoration: none !important;
+}
+
 
 .nav {
     display: flex;
