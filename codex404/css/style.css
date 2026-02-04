@@ -26,7 +26,7 @@ body {
     margin: auto;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar {
     position: sticky;
     top: 0;
@@ -40,7 +40,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 0;
+    padding: 18px 0;
 }
 
 .logo {
@@ -49,7 +49,6 @@ body {
     color: var(--primary);
 }
 
-/* DESKTOP MENU */
 .nav {
     display: flex;
 }
@@ -64,11 +63,11 @@ body {
 .nav a::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -6px;
     width: 0;
     height: 2px;
     background: var(--primary);
+    bottom: -6px;
+    left: 0;
     transition: 0.3s;
 }
 
@@ -76,7 +75,7 @@ body {
     width: 100%;
 }
 
-/* HAMBURGER ICON */
+/* MOBILE MENU ICON */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -88,10 +87,10 @@ body {
     height: 3px;
     background: var(--text-main);
     margin: 4px 0;
-    border-radius: 2px;
+    transition: 0.3s;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero {
     min-height: 90vh;
     display: flex;
@@ -121,15 +120,21 @@ body {
 .btn {
     padding: 14px 30px;
     border-radius: 8px;
-    font-weight: 600;
     text-decoration: none;
+    font-weight: 600;
     margin: 6px;
     display: inline-block;
+    transition: 0.3s;
 }
 
 .primary {
     background: var(--primary);
     color: #020617;
+    box-shadow: 0 10px 30px rgba(56,189,248,0.35);
+}
+
+.primary:hover {
+    transform: translateY(-4px);
 }
 
 .secondary {
@@ -137,25 +142,28 @@ body {
     color: var(--primary);
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 section {
     padding: 90px 0;
 }
 
-.about,
-.why-us {
+/* ABOUT */
+.about {
     text-align: center;
 }
 
+.about h3 {
+    font-size: 34px;
+}
+
+/* SERVICES */
 .services {
     background: var(--bg-dark);
 }
 
-.services h3,
-.about h3,
-.why-us h3 {
+.services h3 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     font-size: 34px;
 }
 
@@ -167,15 +175,26 @@ section {
 
 .service-card {
     background: var(--bg-main);
-    padding: 30px;
+    padding: 35px;
     border-radius: 16px;
     border: 1px solid var(--border);
+    transition: 0.4s;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+}
+
+/* WHY US */
+.why-us {
+    text-align: center;
 }
 
 .why-us ul {
     list-style: none;
     max-width: 500px;
-    margin: auto;
+    margin: 30px auto 0;
 }
 
 .why-us li {
@@ -198,38 +217,30 @@ section {
     color: var(--text-muted);
 }
 
-/* ================= MOBILE MENU ================= */
+/* MOBILE VIEW */
 @media (max-width: 768px) {
-
-    /* show hamburger */
-    .menu-toggle {
-        display: flex;
-        z-index: 1100;
-    }
-
-    /* hide desktop menu */
     .nav {
         position: fixed;
-        top: 68px;
+        top: 70px;
         right: -100%;
-        width: 240px;
-        height: calc(100vh - 68px);
+        width: 220px;
+        height: calc(100vh - 70px);
         background: var(--bg-dark);
         flex-direction: column;
         padding: 30px;
-        transition: right 0.3s ease;
-        border-left: 1px solid var(--border);
-        z-index: 1000;
+        transition: 0.3s;
     }
 
     .nav a {
-        margin: 16px 0;
-        font-size: 18px;
+        margin: 15px 0;
     }
 
-    /* active state */
     .nav.active {
         right: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
     }
 
     .hero h2 {
