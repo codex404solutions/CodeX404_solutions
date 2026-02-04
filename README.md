@@ -84,13 +84,16 @@ Our focus areas:
 ```
 ├── README.md
 ├── codex404
+│   ├── config
+│   │   └── config.php
 │   ├── connection
 │   │   └── connection.php
 │   ├── css
 │   │   └── style.css
 │   ├── index.html
-│   └── javascript
-│       └── main.js
+│   ├── javascript
+│   │   └── main.js
+│   └── test_db.php
 ├── setup.bat
 └── update_tree.py
 ```
