@@ -80,8 +80,14 @@ Our focus areas:
 ## 🗂️ Folder Structure
 
 <!-- TREE_START -->
-
-
+```
+├── CodeX404
+│   └── connection
+│       └── connection.php
+├── README.md
+├── setup.bat
+└── update_tree.py
+```
 <!-- TREE_END -->
 
 ---
@@ -161,5 +167,3 @@ CodeX404 official repository: software development, AI automation, and scalable 
 ├── setup.bat
 └── update_tree.py
 ```
-<!-- TREE_END -->
->>>>>>> 5c07d20010bd0d283b2a7f384750d0b11da01735
