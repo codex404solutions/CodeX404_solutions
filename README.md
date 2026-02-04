@@ -91,7 +91,6 @@ Our focus areas:
 │   ├── index.html
 │   └── javascript
 │       └── main.js
-├── index.html
 ├── setup.bat
 └── update_tree.py
 ```
