@@ -458,52 +458,118 @@ section {
 
 
 
-/* FOUNDER SECTION */
+
+/* ============================
+   FOUNDER / TEAM – PREMIUM UI
+============================= */
+
 .founder {
-    padding: 90px 0;
-    background: var(--bg-dark);
+    padding: 80px 0;
+    background: linear-gradient(180deg, #070b18 0%, #0b1220 100%);
 }
 
 .founder-box {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 36px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.founder-image img {
-    width: 220px;
-    height: 220px;
+/* CARD */
+.founder-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 32px 26px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border 0.35s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 194, 255, 0.4);
+    box-shadow: 0 22px 45px rgba(0,0,0,0.45);
+}
+
+/* IMAGE */
+.founder-card img {
+    width: 132px;
+    height: 132px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--primary);
+    border: 3px solid rgba(0, 194, 255, 0.7);
+    padding: 3px;
+    background: linear-gradient(135deg, #00c2ff, #0077ff);
+    margin-bottom: 16px;
 }
 
-.founder-content h3 {
-    font-size: 28px;
+/* NAME */
+.founder-card h3 {
+    font-size: 21px;
+    font-weight: 700;
     margin-bottom: 6px;
+    letter-spacing: 0.3px;
 }
 
-.founder-content span {
-    color: var(--primary);
+/* ROLE */
+.founder-card span {
+    display: inline-block;
+    font-size: 13px;
     font-weight: 600;
+    color: #00c2ff;
+    margin-bottom: 14px;
 }
 
-.founder-content p {
-    margin: 15px 0;
-    color: var(--text-muted);
-    max-width: 600px;
+/* BIO */
+.founder-card p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #b6c0d1;
+    margin-bottom: 22px;
 }
 
-@media (max-width: 768px) {
-    .founder-box {
-        text-align: center;
-        justify-content: center;
-    }
+/* LINKEDIN BUTTON */
+.founder-card .btn.secondary {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(0,194,255,0.6);
+    color: #00c2ff;
+    background: transparent;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
 }
 
+.founder-card .btn.secondary:hover {
+    background: #00c2ff;
+    color: #050914;
+    box-shadow: 0 10px 25px rgba(0,194,255,0.35);
+}
+
+/* FADE-IN ANIMATION */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.founder-card:nth-child(1) { transition-delay: 0.1s; }
+.founder-card:nth-child(2) { transition-delay: 0.25s; }
 
 
+
+/* About Section */
 .about-page {
     padding: 120px 0 60px;
     text-align: center;
