@@ -31,7 +31,16 @@ if (ENVIRONMENT === 'local') {
 
 // Founder Details
 define('FOUNDER_NAME', 'Muhammad Noukhez');
-define('FOUNDER_ROLE', 'Founder & Lead Engineer');
+define('FOUNDER_ROLE', 'Founder & CEO');
 define('FOUNDER_BIO', 'Founder of CodeX404, a software engineer focused on building clean, secure, and scalable web applications.');
 define('FOUNDER_IMAGE', BASE_URL . 'images/founder.jpg');
 define('FOUNDER_LINKEDIN', 'https://www.linkedin.com/in/mnoukhej/');
+
+
+// Co-Founder Details
+define('COFOUNDER_NAME', 'Md Yousuf Ansari');
+define('COFOUNDER_ROLE', 'Co-Founder & MD');
+define('COFOUNDER_BIO', 'Co-founder of CodeX404, contributing to business strategy, operations, and project coordination with a strong focus on client success.');
+define('COFOUNDER_IMAGE', BASE_URL . 'images/cofounder.jpg');
+define('COFOUNDER_LINKEDIN', 'https://www.linkedin.com/in/md-yousuf-ansari-87ba5369/');
+    
