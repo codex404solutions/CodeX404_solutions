@@ -274,52 +274,36 @@ section {
     color: var(--text-muted);
 }
 
-
-/* =========================
-   MOBILE MENU FIX
-========================= */
-
+/* MOBILE VIEW */
 @media (max-width: 768px) {
-
-    /* Hide menu completely by default */
     .nav {
         position: fixed;
-        top: 0;
+        top: 70px;
         right: -100%;
-        width: 75%;
-        height: 100vh;
-        background: linear-gradient(180deg, #070b18, #0b1220);
-        display: flex;
+        width: 220px;
+        height: calc(100vh - 70px);
+        background: var(--bg-dark);
         flex-direction: column;
-        align-items: flex-start;
-        padding: 100px 30px;
-        gap: 22px;
-        transition: right 0.35s ease;
-        z-index: 999;
+        padding: 30px;
+        transition: 0.3s;
     }
 
-    /* Show menu ONLY when active */
+    .nav a {
+        margin: 15px 0;
+    }
+
     .nav.active {
         right: 0;
     }
 
-    /* Nav links */
-    .nav a {
-        font-size: 18px;
-    }
-
-    /* Hamburger always on top */
     .menu-toggle {
-        z-index: 1000;
-        cursor: pointer;
+        display: flex;
     }
 
-    /* Prevent layout shift */
-    body.menu-open {
-        overflow: hidden;
+    .hero h2 {
+        font-size: 38px;
     }
 }
-
 
 
 

@@ -1,12 +1,10 @@
-// Mobile menu toggle
-const menuToggle = document.getElementById('menuToggle');
-const nav = document.querySelector('.nav');
+// MOBILE MENU TOGGLE
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.querySelector(".nav");
 
-menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
+menuToggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
 });
-
 
 // SCROLL ANIMATION
 const observer = new IntersectionObserver(entries => {
