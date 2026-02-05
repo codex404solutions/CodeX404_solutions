@@ -22,3 +22,27 @@ document.querySelectorAll("section, .service-card").forEach(el => {
     el.style.transition = "0.8s ease";
     observer.observe(el);
 });
+
+
+// CONTACT TABS
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+});
+
+
+// AUTO HIDE SUCCESS MESSAGE AFTER 5 SECONDS
+document.addEventListener("DOMContentLoaded", function () {
+    const successMsg = document.querySelector(".auto-hide");
+
+    if (successMsg) {
+        setTimeout(() => {
+            successMsg.classList.add("hide");
+        }, 5000);
+    }
+});
