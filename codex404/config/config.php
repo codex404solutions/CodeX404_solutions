@@ -27,3 +27,11 @@ if (ENVIRONMENT === 'local') {
     error_reporting(0);
     ini_set('display_errors', 0);
 }
+
+
+// Founder Details
+define('FOUNDER_NAME', 'Muhammad Noukhez');
+define('FOUNDER_ROLE', 'Founder & Lead Engineer');
+define('FOUNDER_BIO', 'Founder of CodeX404, a software engineer focused on building clean, secure, and scalable web applications.');
+define('FOUNDER_IMAGE', BASE_URL . 'images/founder.jpg');
+define('FOUNDER_LINKEDIN', 'https://www.linkedin.com/in/mnoukhej/');

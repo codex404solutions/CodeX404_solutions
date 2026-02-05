@@ -94,6 +94,10 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
+<!-- FOUNDER SECTION -->
+<?php include __DIR__ . '/includes/founder-section.php'; ?>
+
+
 <!-- CALL TO ACTION -->
 <section class="cta">
     <div class="container">
