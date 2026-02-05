@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Prevent directory listing
+Options -Indexes
+
+# Force UTF-8
+AddDefaultCharset UTF-8
+
+# Remove .php from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Security headers
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-XSS-Protection "1; mode=block"
