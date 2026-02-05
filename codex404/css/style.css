@@ -18,6 +18,12 @@ body {
     background: var(--bg-main);
     color: var(--text-main);
     line-height: 1.7;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
 }
 
 .container {
@@ -180,10 +186,17 @@ body {
     color: var(--primary);
 }
 
+
+
+
 /* SECTIONS */
 section {
     padding: 90px 0;
 }
+
+
+
+
 
 /* ABOUT */
 .about {
@@ -193,6 +206,9 @@ section {
 .about h3 {
     font-size: 34px;
 }
+
+
+
 
 /* SERVICES */
 .services {
@@ -223,6 +239,9 @@ section {
     transform: translateY(-10px);
     border-color: var(--primary);
 }
+
+
+
 
 /* WHY US */
 .why-us {
@@ -599,4 +618,63 @@ section {
 
 .about-values li {
     padding: 10px 0;
+}
+
+
+
+/* HERO ANIMATION */
+.hero h2,
+.hero p,
+.hero .hero-buttons {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero.animate h2 {
+    animation: heroFade 0.8s ease forwards;
+}
+
+.hero.animate p {
+    animation: heroFade 0.8s ease forwards;
+    animation-delay: 0.15s;
+}
+
+.hero.animate .hero-buttons {
+    animation: heroFade 0.8s ease forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes heroFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ROLE WITH ICON */
+.founder-card .role {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #00c2ff;
+    margin-bottom: 14px;
+}
+
+.role-icon {
+    font-size: 15px;
+    line-height: 1;
+}
+
+
+
+.team-name a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.team-name a:hover {
+    text-decoration: underline;
 }

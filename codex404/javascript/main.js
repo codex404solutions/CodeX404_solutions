@@ -84,3 +84,18 @@ const fadeInObserver = new IntersectionObserver(
 );
 
 fadeElements.forEach(el => fadeInObserver.observe(el));
+
+
+
+
+// Hero animation on load
+window.addEventListener('load', () => {
+    const hero = document.querySelector('.hero');
+    if (hero) hero.classList.add('animate');
+});
+
+
+// Page fade-in transition
+window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('page-loaded');
+});

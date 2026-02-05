@@ -11,9 +11,19 @@
         <!-- FOUNDER -->
         <div class="founder-card fade-in">
             <img src="<?= FOUNDER_IMAGE ?>" alt="<?= FOUNDER_NAME ?>">
-            <h3><?= FOUNDER_NAME ?></h3>
-            <span><?= FOUNDER_ROLE ?></span>
-            <p><?= FOUNDER_BIO ?></p>
+            <h3 class="team-name">
+                <a href="https://mnoukhej.github.io/portfolio/"
+                target="_blank"
+                rel="noopener noreferrer">
+                    <?= FOUNDER_NAME ?>
+                </a>
+            </h3>
+
+            <!-- <span><?= FOUNDER_ROLE ?></span> -->
+            <span class="role">
+                <i class="role-icon">🧠</i> <?= FOUNDER_ROLE ?>
+            </span>
+                <p><?= FOUNDER_BIO ?></p>
             <a href="<?= FOUNDER_LINKEDIN ?>" target="_blank" class="btn secondary">
                 LinkedIn
             </a>
@@ -22,8 +32,20 @@
         <!-- CO-FOUNDER -->
         <div class="founder-card fade-in">
             <img src="<?= COFOUNDER_IMAGE ?>" alt="<?= COFOUNDER_NAME ?>">
-            <h3><?= COFOUNDER_NAME ?></h3>
-            <span><?= COFOUNDER_ROLE ?></span>
+            <!-- <h3><?= COFOUNDER_NAME ?></h3> -->
+             <h3 class="team-name">
+                <a href="https://www.linkedin.com/in/md-yousuf-ansari-87ba5369/"
+                target="_blank"
+                rel="noopener noreferrer">
+                    <?= COFOUNDER_NAME ?>
+                </a>
+            </h3>
+
+            <!-- <span><?= COFOUNDER_ROLE ?></span> -->
+            <span class="role">
+                <i class="role-icon">🤝</i> <?= COFOUNDER_ROLE ?>
+            </span>
+
             <p><?= COFOUNDER_BIO ?></p>
             <a href="<?= COFOUNDER_LINKEDIN ?>" target="_blank" class="btn secondary">
                 LinkedIn
@@ -32,3 +54,4 @@
 
     </div>
 </section>
+
