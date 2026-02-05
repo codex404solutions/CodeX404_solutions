@@ -5,4 +5,3 @@ error_reporting(E_ALL);
 
 // require_once __DIR__ . "/connection/connection.php";
 // echo "Database connected successfully";
-// what is test database?
