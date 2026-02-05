@@ -455,3 +455,82 @@ section {
     font-size: 13px;
     color: var(--primary);
 }
+
+
+
+/* FOUNDER SECTION */
+.founder {
+    padding: 90px 0;
+    background: var(--bg-dark);
+}
+
+.founder-box {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.founder-image img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+.founder-content h3 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.founder-content span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.founder-content p {
+    margin: 15px 0;
+    color: var(--text-muted);
+    max-width: 600px;
+}
+
+@media (max-width: 768px) {
+    .founder-box {
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+
+
+.about-page {
+    padding: 120px 0 60px;
+    text-align: center;
+}
+
+.about-page h1 {
+    font-size: 42px;
+}
+
+.about-intro {
+    max-width: 700px;
+    margin: 15px auto 0;
+    color: var(--text-muted);
+}
+
+.about-mission,
+.about-values {
+    padding: 70px 0;
+    text-align: center;
+}
+
+.about-values ul {
+    list-style: none;
+    max-width: 500px;
+    margin: 20px auto 0;
+}
+
+.about-values li {
+    padding: 10px 0;
+}
