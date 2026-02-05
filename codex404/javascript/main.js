@@ -66,3 +66,21 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         });
     });
 });
+
+
+// Fade-in on scroll
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const fadeInObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                fadeInObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.2 }
+);
+
+fadeElements.forEach(el => fadeInObserver.observe(el));
