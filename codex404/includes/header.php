@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php require_once __DIR__ . '/../config/config.php'; ?>
+    <?php require_once __DIR__ . '/../connection/connection.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeX404 | Where Bugs Meet Their Match</title>
@@ -17,7 +19,7 @@
     <div class="container">
 
         <!-- LOGO -->
-        <a href="index.php" class="logo-link">
+        <a href="<?= BASE_URL ?>index" class="logo-link">
             <div class="logo-box">
                 <div class="logo">CodeX404</div>
                 <div class="tagline">Where Bugs Meet Their Match</div>
@@ -26,11 +28,11 @@
 
         <!-- NAV -->
         <nav class="nav">
-            <a href="index.php">Home</a>
-            <a href="#">Services</a>
-            <a href="portfolio.php">Portfolio</a>
-            <a href="#">About</a>
-            <a href="contact.php">Contact</a>
+            <a href="<?= BASE_URL ?>index">Home</a>
+            <a href="<?= BASE_URL ?>">Services</a>
+            <a href="<?= BASE_URL ?>portfolio">Portfolio</a>
+            <a href="<?= BASE_URL ?>">About</a>
+            <a href="<?= BASE_URL ?>contact">Contact</a>
         </nav>
 
         <!-- MOBILE MENU -->

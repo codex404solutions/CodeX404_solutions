@@ -1,30 +1,29 @@
 <?php
-// Prevent direct access
-if (!defined('APP_START')) {
-    die('Direct access not allowed');
+// Detect protocol
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+
+// Detect host
+$host = $_SERVER['HTTP_HOST'];
+
+// Detect base path
+$scriptName = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+$basePath = rtrim($scriptName, '/');
+
+// Base URL
+define('BASE_URL', $protocol . $host . $basePath . '/');
+
+// Environment
+if (strpos($host, 'localhost') !== false || strpos($host, '127.0.0.1') !== false) {
+    define('ENVIRONMENT', 'local');
+} else {
+    define('ENVIRONMENT', 'production');
 }
 
-// Database config
-$db_config = [
-    'host'     => 'localhost',
-    'username' => 'u274161808_codex404_user',
-    'password' => 'Kolkata@@@786',
-    'database' => 'u274161808_codex404_db'
-];
-
-// Connect DB
-$conn = mysqli_connect(
-    $db_config['host'],
-    $db_config['username'],
-    $db_config['password'],
-    $db_config['database']
-);
-
-// Check connection
-if (!$conn) {
-    error_log("DB Error: " . mysqli_connect_error());
-    die("Database connection failed.");
+// Error handling
+if (ENVIRONMENT === 'local') {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+} else {
+    error_reporting(0);
+    ini_set('display_errors', 0);
 }
-
-// Charset
-mysqli_set_charset($conn, "utf8mb4");
