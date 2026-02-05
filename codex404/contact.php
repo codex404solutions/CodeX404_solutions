@@ -1,6 +1,6 @@
 <?php
-include 'includes/header.php';
-include 'connection/connection.php';
+require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/connection/connection.php';
 
 date_default_timezone_set('Asia/Kolkata');
 
@@ -151,4 +151,7 @@ if (isset($_POST['send_project'])) {
     </div>
 </section>
 
-<?php include 'includes/footer.php'; ?>
+<?php
+require_once __DIR__ . '/includes/footer.php';
+?>
+

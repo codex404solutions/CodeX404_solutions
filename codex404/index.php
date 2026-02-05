@@ -1,7 +1,7 @@
 <?php
-// Home Page
-include 'includes/header.php';
+require_once __DIR__ . '/includes/header.php';
 ?>
+
 
 <!-- HERO SECTION -->
 <section class="hero">
@@ -104,5 +104,5 @@ include 'includes/header.php';
 </section>
 
 <?php
-include 'includes/footer.php';
+require_once __DIR__ . '/includes/footer.php';
 ?>
