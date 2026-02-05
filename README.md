@@ -104,6 +104,7 @@ Our focus areas:
 │   ├── index.php
 │   ├── javascript
 │   │   └── main.js
+│   ├── portfolio.php
 │   └── test_db.php
 ├── setup.bat
 └── update_tree.py
