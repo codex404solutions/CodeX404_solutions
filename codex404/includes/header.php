@@ -31,7 +31,7 @@
             <a href="<?= BASE_URL ?>">Home</a>
             <a href="<?= BASE_URL ?>">Services</a>
             <a href="<?= BASE_URL ?>portfolio">Portfolio</a>
-            <a href="<?= BASE_URL ?>">About</a>
+            <a href="<?= BASE_URL ?>about">About</a>
             <a href="<?= BASE_URL ?>contact">Contact</a>
         </nav>
 
