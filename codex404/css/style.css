@@ -274,36 +274,52 @@ section {
     color: var(--text-muted);
 }
 
-/* MOBILE VIEW */
+
+/* =========================
+   MOBILE MENU FIX
+========================= */
+
 @media (max-width: 768px) {
+
+    /* Hide menu completely by default */
     .nav {
         position: fixed;
-        top: 70px;
+        top: 0;
         right: -100%;
-        width: 220px;
-        height: calc(100vh - 70px);
-        background: var(--bg-dark);
+        width: 75%;
+        height: 100vh;
+        background: linear-gradient(180deg, #070b18, #0b1220);
+        display: flex;
         flex-direction: column;
-        padding: 30px;
-        transition: 0.3s;
+        align-items: flex-start;
+        padding: 100px 30px;
+        gap: 22px;
+        transition: right 0.35s ease;
+        z-index: 999;
     }
 
-    .nav a {
-        margin: 15px 0;
-    }
-
+    /* Show menu ONLY when active */
     .nav.active {
         right: 0;
     }
 
-    .menu-toggle {
-        display: flex;
+    /* Nav links */
+    .nav a {
+        font-size: 18px;
     }
 
-    .hero h2 {
-        font-size: 38px;
+    /* Hamburger always on top */
+    .menu-toggle {
+        z-index: 1000;
+        cursor: pointer;
+    }
+
+    /* Prevent layout shift */
+    body.menu-open {
+        overflow: hidden;
     }
 }
+
 
 
 
