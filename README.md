@@ -84,6 +84,7 @@ Our focus areas:
 ```
 ├── README.md
 ├── codex404
+│   ├── about.php
 │   ├── config
 │   │   └── config.php
 │   ├── connection
@@ -97,8 +98,12 @@ Our focus areas:
 │   │       ├── 001_create_migrations_table.php
 │   │       ├── 002_create_contact_messages.php
 │   │       └── 003_create_users.php
+│   ├── images
+│   │   ├── cofounder.jpg
+│   │   └── founder.jpg
 │   ├── includes
 │   │   ├── footer.php
+│   │   ├── founder-section.php
 │   │   └── header.php
 │   ├── index.html
 │   ├── index.php
