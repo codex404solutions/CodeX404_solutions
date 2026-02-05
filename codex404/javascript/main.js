@@ -46,3 +46,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5000);
     }
 });
+
+
+// PORTFOLIO FILTER
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            if (filter === 'all' || card.classList.contains(filter)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});

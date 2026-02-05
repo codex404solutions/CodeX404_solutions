@@ -28,6 +28,7 @@
         <nav class="nav">
             <a href="index.php">Home</a>
             <a href="#">Services</a>
+            <a href="portfolio.php">Portfolio</a>
             <a href="#">About</a>
             <a href="contact.php">Contact</a>
         </nav>

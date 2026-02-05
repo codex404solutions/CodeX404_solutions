@@ -383,3 +383,75 @@ section {
     opacity: 0;
     transform: translateY(-10px);
 }
+/* PORTFOLIO */
+.portfolio-hero {
+    padding: 120px 0 60px;
+    text-align: center;
+}
+
+.portfolio-hero h1 {
+    font-size: 44px;
+}
+
+.portfolio-hero p {
+    color: var(--text-muted);
+    margin-top: 10px;
+}
+
+.portfolio {
+    padding: 80px 0;
+}
+
+.portfolio-filters {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    margin: 0 12px;
+    font-size: 16px;
+    cursor: pointer;
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+}
+
+.filter-btn.active {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.portfolio-card {
+    background: linear-gradient(145deg, #0b1220, #0f172a);
+    border-radius: 14px;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.portfolio-content h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.portfolio-content p {
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.portfolio-content span {
+    font-size: 13px;
+    color: var(--primary);
+}
