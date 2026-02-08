@@ -1,4 +1,6 @@
 <?php
+
+// config.php
 // Detect protocol
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
 
