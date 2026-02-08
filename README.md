@@ -182,3 +182,12 @@ Our focus areas:
    - Change default admin credentials
    - Set proper folder permissions
    - Enable HTTPS on production server
+
+
+
+## 👤 Author
+
+**Muhammad Noukhez**  
+📧 Email: mnoukhej@gmail.com  
+🐙 GitHub: https://github.com/mnoukhej  
+💼 LinkedIn: https://www.linkedin.com/in/mnoukhej/
