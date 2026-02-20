@@ -21,10 +21,10 @@
         <!-- LOGO -->
         <a href="<?= BASE_URL ?>" class="logo-link">
             <div class="logo-box">
-                <div class="logo">CodeX404</div>
-                <div class="tagline">Where Bugs Meet Their Match</div>
+                <img src="<?= BASE_URL ?>logo/logo.png" alt="CodeX404 Solutions Logo" class="logo-img">
             </div>
         </a>
+
 
         <!-- NAV -->
         <nav class="nav">
