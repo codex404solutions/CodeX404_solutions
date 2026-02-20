@@ -109,6 +109,9 @@ Our focus areas:
 │   ├── index.php
 │   ├── javascript
 │   │   └── main.js
+│   ├── logo
+│   │   ├── logo.jpg
+│   │   └── logo.png
 │   ├── portfolio.php
 │   └── test_db.php
 ├── setup.bat
