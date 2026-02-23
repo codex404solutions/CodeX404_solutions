@@ -10,7 +10,7 @@ We build secure, scalable, and smart digital solutions for businesses.
 
 ## 📘 Project Overview
 
-**CodeX404** delivers high-quality software products and automation systems.  
+**CodeX404 Solutions** delivers high-quality software products and automation systems.  
 We help startups and businesses turn ideas into reliable applications using clean code and modern technology.
 
 Our focus areas:
@@ -128,7 +128,7 @@ Our focus areas:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/CodeX404lab/CodeX404_php.git
+   git clone https://github.com/codex404solutions/CodeX404_php.git
 
 2. Change Directroy
    ```bash
