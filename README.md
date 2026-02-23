@@ -1,5 +1,5 @@
 
-# 📁 Code X404 Php
+# 📁 Code X404 Solutions
 *Bugs Meet Their Match*
 
 A modern software development company where  
@@ -128,11 +128,11 @@ Our focus areas:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/codex404solutions/CodeX404_php.git
+   git clone https://github.com/codex404solutions/CodeX404_solutions.git
 
 2. Change Directroy
    ```bash
-   cd CodeX404_php
+   cd CodeX404_solutions
 
 3. Run the setup script (Windows only):
    ```bash
