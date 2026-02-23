@@ -5,7 +5,9 @@
     <?php require_once __DIR__ . '/../connection/connection.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeX404 | Where Bugs Meet Their Match</title>
+    <title>CodeX404 Solutions| Where Bugs Meet Their Match</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>logo/favicon.ico">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
