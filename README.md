@@ -110,6 +110,7 @@ Our focus areas:
 │   ├── javascript
 │   │   └── main.js
 │   ├── logo
+│   │   ├── favicon.ico
 │   │   ├── logo.jpg
 │   │   └── logo.png
 │   ├── portfolio.php
