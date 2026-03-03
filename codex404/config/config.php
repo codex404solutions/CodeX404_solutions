@@ -40,7 +40,7 @@ define('FOUNDER_LINKEDIN', 'https://www.linkedin.com/in/mnoukhej/');
 
 
 // Co-Founder Details
-define('COFOUNDER_NAME', 'Md Yousuf Ansari');
+define('COFOUNDER_NAME', 'Yousuf Ansari');
 define('COFOUNDER_ROLE', 'Co-Founder & MD');
 define('COFOUNDER_BIO', 'Co-founder of CodeX404 Solutions, contributing to business strategy, operations, and project coordination with a strong focus on client success.');
 define('COFOUNDER_IMAGE', BASE_URL . 'images/cofounder.jpg');
