@@ -22,7 +22,7 @@ jobs:
           port: 21
           protocol: ftp
           local-dir: ./codex404/
-          server-dir: codex404/
+          server-dir: /
           timeout: 120000
           dangerous-clean-slate: false
           exclude: |
@@ -40,4 +40,3 @@ jobs:
             **/*.doc
             **/*.sql
             **/*.zip
-
