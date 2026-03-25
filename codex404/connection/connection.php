@@ -11,21 +11,23 @@ require_once __DIR__ . '/../config/config.php';
 
 if (ENVIRONMENT === 'local') {
 
-    // 🔹 LOCAL DATABASE
     $host = "localhost";
     $user = "root";
     $password = "";
     $database = "codex404_db";
+} elseif (ENVIRONMENT === 'development') {
 
+    $host = "localhost";
+    $user = "u274161808_codex404_dev_u";
+    $password = "Kolkata@@@786";
+    $database = "u274161808_codex404_dev";
 } else {
 
-    // 🔹 LIVE SERVER DATABASE (Hostinger)
     $host = "localhost";
     $user = "u274161808_codex404_user";
     $password = "Kolkata@@@786";
     $database = "u274161808_codex404_db";
 }
-
 // Create connection
 $conn = mysqli_connect($host, $user, $password, $database);
 

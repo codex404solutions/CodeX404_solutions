@@ -15,8 +15,10 @@ $basePath = rtrim($scriptName, '/');
 define('BASE_URL', $protocol . $host . $basePath . '/');
 
 // Environment
-if (strpos($host, 'localhost') !== false || strpos($host, '127.0.0.1') !== false) {
+if (in_array($host, ['localhost', '127.0.0.1'])) {
     define('ENVIRONMENT', 'local');
+} elseif (strpos($host, 'dev.') !== false) {
+    define('ENVIRONMENT', 'dev');
 } else {
     define('ENVIRONMENT', 'production');
 }
