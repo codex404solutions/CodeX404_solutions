@@ -73,3 +73,5 @@ jobs:
             **/*.doc
             **/*.sql
             **/*.zip
+
+# This workflow automates the deployment of the codex404 project to Hostinger's FTP servers. It triggers on pushes to the main and dev branches, deploying to the production server for main and the development server for dev. The workflow uses the SamKirkland/FTP-Deploy-Action to handle the FTP deployment, excluding certain files and directories from being uploaded.
