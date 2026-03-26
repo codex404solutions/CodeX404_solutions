@@ -1,38 +1,40 @@
 <?php
-// connection.php
 require_once __DIR__ . '/../config/config.php';
 
 /*
-|--------------------------------------------------------------------------
-| Database Connection
-|--------------------------------------------------------------------------
-| Automatically switches between LOCAL and LIVE
+|--------------------------------------------------
+| DATABASE CONFIG (AUTO SWITCH)
+|--------------------------------------------------
 */
 
 if (ENVIRONMENT === 'local') {
 
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $database = "codex404_db";
-} elseif (ENVIRONMENT === 'development') {
+    $db_host = "localhost";
+    $db_user = "root";
+    $db_pass = "";
+    $db_name = "codex404_db";
+} elseif (ENVIRONMENT === 'dev') {
 
-    $host = "localhost";
-    $user = "u274161808_codex404_dev_u";
-    $password = "Kolkata@@@786";
-    $database = "u274161808_codex404_dev";
-} else {
+    $db_host = "localhost"; // change if hosting requires
+    $db_user = "u274161808_codex404_dev_u";
+    $db_pass = "Kolkata@@@786";
+    $db_name = "u274161808_codex404_dev";
+} else { // production
 
-    $host = "localhost";
-    $user = "u274161808_codex404_user";
-    $password = "Kolkata@@@786";
-    $database = "u274161808_codex404_db";
+    $db_host = "localhost"; // change if hosting requires
+    $db_user = "u274161808_codex404_user";
+    $db_pass = "Kolkata@@@786";
+    $db_name = "u274161808_codex404_db";
 }
-// Create connection
-$conn = mysqli_connect($host, $user, $password, $database);
 
-// Check connection
+// ---------------- CONNECT ----------------
+
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+// ---------------- ERROR ----------------
+
 if (!$conn) {
+
     if (ENVIRONMENT === 'local') {
         die("DB Error: " . mysqli_connect_error());
     } else {
