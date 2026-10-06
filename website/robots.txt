@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /storage/
+Disallow: /config/
+Disallow: /app/
+
+Sitemap: https://codex404solutions.online/sitemap.xml
