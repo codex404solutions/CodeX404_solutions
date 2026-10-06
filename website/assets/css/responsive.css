@@ -1,6 +1,6 @@
 /* ==========================================================================
    CodeX404 Solutions — Responsive Stylesheet & Breakpoints
-   Desktop-first graceful degradation to tablet and mobile
+   Aurora Midnight Theme — Desktop-first graceful degradation
    ========================================================================== */
 
 /* Tablet (max-width: 1024px) */
@@ -48,6 +48,11 @@
   .grid-cols-3 {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Reduce particle count on tablet */
+  #particleCanvas {
+    opacity: 0.6;
+  }
 }
 
 /* Mobile & Small Tablets (max-width: 768px) */
@@ -64,9 +69,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(7, 17, 31, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(6, 11, 24, 0.98);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
     flex-direction: column;
     align-items: flex-start;
     padding: 2rem 1.5rem;
@@ -102,7 +107,7 @@
     transform: none;
     box-shadow: none;
     border: none;
-    background: rgba(19, 45, 82, 0.3);
+    background: rgba(17, 29, 58, 0.3);
     margin-top: 0.5rem;
     width: 100%;
   }
@@ -155,6 +160,54 @@
     right: 1rem;
     bottom: 1rem;
   }
+
+  /* Reduce particles and aurora on mobile for performance */
+  #particleCanvas {
+    opacity: 0.35;
+  }
+
+  body::before {
+    animation-duration: 40s;
+  }
+
+  /* Reduce glow effects on mobile */
+  .tech-frame {
+    box-shadow: var(--shadow-md);
+  }
+
+  .tech-frame::before {
+    display: none;
+  }
+
+  .hero-section::before,
+  .hero-section::after {
+    opacity: 0.5;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .hero-headline {
+    font-size: 2rem;
+  }
+
+  .btn-lg {
+    padding: 1rem 1.8rem;
+    font-size: 0.95rem;
+  }
+
+  .card {
+    padding: 1.75rem;
+  }
+
+  .process-step {
+    padding: 1.5rem;
+  }
+
+  /* Hide particles on very small screens */
+  #particleCanvas {
+    display: none;
+  }
 }
 
 /* Touch Comfort Targets (WCAG 2.2 target size: 44px) */
@@ -165,5 +218,20 @@
   .form-control,
   .form-select {
     min-height: 48px;
+  }
+}
+
+/* High-contrast mode enhancements */
+@media (prefers-contrast: high) {
+  .card {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-primary {
+    background: var(--electric-blue);
+  }
+
+  .section-tag {
+    border-color: rgba(255, 255, 255, 0.3);
   }
 }
