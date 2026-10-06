@@ -6,16 +6,12 @@ declare(strict_types=1);
         <div class="footer-grid">
             <!-- Col 1: Brand Info -->
             <div class="footer-col">
-                <a href="<?= url('index.php') ?>" class="brand-logo" style="margin-bottom: 1rem;">
-                    <img src="<?= asset('images/logo/logo.png') ?>" alt="<?= APP_NAME ?> Logo" width="36" height="36">
-                    <div>
-                        <span>CodeX<span class="text-cyan">404</span></span>
-                        <span class="brand-tagline">Solutions</span>
-                    </div>
+                <a href="<?= url('index.php') ?>" class="brand-logo" style="margin-bottom: 1.25rem;">
+                    <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" class="site-logo-img" width="160" height="44">
                 </a>
                 <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
-                    <?= APP_TAGLINE ?>.<br>
-                    Engineered in India for fast-moving businesses across North America, the UK, Europe, UAE, and APAC.
+                    <strong style="color: var(--white); display: block; margin-bottom: 0.25rem;">Where Bugs Meet Their Match.</strong>
+                    High-performance software, custom enterprise platforms, and intelligent AI automation systems engineered for growth.
                 </p>
                 <div class="system-status-indicator">
                     <span class="status-pulse"></span>

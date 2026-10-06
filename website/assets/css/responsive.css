@@ -49,6 +49,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Slider Card Responsiveness on Tablet */
+  .slider-card {
+    flex: 0 0 calc(50% - 0.75rem);
+    min-width: 280px;
+  }
+
   /* Reduce particle count on tablet */
   #particleCanvas {
     opacity: 0.6;
@@ -177,6 +183,16 @@
 
   .tech-frame::before {
     display: none;
+  }
+
+  .slider-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding: 1.75rem;
+  }
+
+  .terminal-tabs {
+    flex-wrap: wrap;
   }
 
   .hero-section::before,

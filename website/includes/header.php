@@ -30,5 +30,6 @@ $pageMeta = $pageMeta ?? [];
     <link rel="stylesheet" href="<?= asset('css/responsive.css') ?>">
 </head>
 <body>
+<div class="screen-vignette" aria-hidden="true"></div>
 
 <?php require_once __DIR__ . '/navigation.php'; ?>

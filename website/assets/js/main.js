@@ -370,4 +370,207 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // ======================================================================
+  // 11. Interactive Hero Terminal Tab Switcher
+  // ======================================================================
+  const initTerminalTabs = () => {
+    const tabButtons = document.querySelectorAll('.terminal-tab-btn');
+    const panes = document.querySelectorAll('.terminal-pane');
+    if (!tabButtons.length || !panes.length) return;
+
+    let activeIndex = 0;
+    let autoCycleTimer = null;
+    let userInteracted = false;
+
+    const switchTab = (index) => {
+      tabButtons.forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+        btn.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      panes.forEach((pane, i) => {
+        pane.classList.toggle('active', i === index);
+      });
+      activeIndex = index;
+    };
+
+    tabButtons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        userInteracted = true;
+        if (autoCycleTimer) clearInterval(autoCycleTimer);
+        switchTab(index);
+      });
+    });
+
+    // Auto-cycle through terminal tabs every 6 seconds unless user manually clicked
+    autoCycleTimer = setInterval(() => {
+      if (!userInteracted) {
+        const nextIndex = (activeIndex + 1) % tabButtons.length;
+        switchTab(nextIndex);
+      }
+    }, 6000);
+  };
+
+  initTerminalTabs();
+
+  // ======================================================================
+  // 12. Interactive Case Studies & Projects Slider (Carousel)
+  // ======================================================================
+  const initCaseStudiesSlider = () => {
+    const sliderContainer = document.querySelector('.slider-container[data-slider="case-studies"]');
+    if (!sliderContainer) return;
+
+    const track = sliderContainer.querySelector('.slider-track');
+    const cards = sliderContainer.querySelectorAll('.slider-card');
+    const prevBtn = sliderContainer.querySelector('.slider-prev-btn');
+    const nextBtn = sliderContainer.querySelector('.slider-next-btn');
+    const dotsContainer = sliderContainer.querySelector('.slider-dots');
+
+    if (!track || !cards.length) return;
+
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const getVisibleCards = () => {
+      if (window.innerWidth <= 768) return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 3;
+    };
+
+    const getMaxIndex = () => {
+      const visible = getVisibleCards();
+      return Math.max(0, cards.length - visible);
+    };
+
+    // Render navigation dots
+    const updateDots = () => {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      const maxIdx = getMaxIndex();
+      for (let i = 0; i <= maxIdx; i++) {
+        const dot = document.createElement('button');
+        dot.className = `slider-dot ${i === currentIndex ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+    };
+
+    const updateSlider = () => {
+      const maxIdx = getMaxIndex();
+      if (currentIndex > maxIdx) currentIndex = maxIdx;
+      if (currentIndex < 0) currentIndex = 0;
+
+      const card = cards[0];
+      const gap = 24; // 1.5rem
+      const cardWidth = card.getBoundingClientRect().width;
+      const offset = currentIndex * (cardWidth + gap);
+
+      track.style.transform = `translateX(-${offset}px)`;
+
+      if (prevBtn) prevBtn.disabled = currentIndex === 0;
+      if (nextBtn) nextBtn.disabled = currentIndex >= maxIdx;
+
+      // Update dots
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.slider-dot');
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+      }
+    };
+
+    const goToSlide = (idx) => {
+      currentIndex = idx;
+      updateSlider();
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlider();
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < getMaxIndex()) {
+          currentIndex++;
+          updateSlider();
+        }
+      });
+    }
+
+    // Touch swipe support
+    sliderContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentIndex < getMaxIndex()) {
+          currentIndex++;
+        } else if (diff < 0 && currentIndex > 0) {
+          currentIndex--;
+        }
+        updateSlider();
+      }
+    }, { passive: true });
+
+    // Auto-advance slider
+    const startAutoPlay = () => {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(() => {
+        const maxIdx = getMaxIndex();
+        if (currentIndex >= maxIdx) {
+          currentIndex = 0;
+        } else {
+          currentIndex++;
+        }
+        updateSlider();
+      }, 5000);
+    };
+
+    const stopAutoPlay = () => {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+    };
+
+    sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+    sliderContainer.addEventListener('mouseleave', startAutoPlay);
+
+    window.addEventListener('resize', () => {
+      updateDots();
+      updateSlider();
+    });
+
+    updateDots();
+    updateSlider();
+    startAutoPlay();
+  };
+
+  initCaseStudiesSlider();
+
+  // ======================================================================
+  // 13. Interactive Card Spotlight Glow (Follows Cursor)
+  // ======================================================================
+  const initCardSpotlights = () => {
+    const cards = document.querySelectorAll('.card, .slider-card, .process-step, .testimonial-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  };
+
+  initCardSpotlights();
 });

@@ -5,13 +5,9 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
 ?>
 <header class="site-header">
     <div class="container nav-container">
-        <!-- Logo -->
-        <a href="<?= url('index.php') ?>" class="brand-logo" aria-label="<?= APP_NAME ?> Home">
-            <img src="<?= asset('images/logo/logo.png') ?>" alt="<?= APP_NAME ?> Logo" width="40" height="40">
-            <div>
-                <span>CodeX<span class="text-cyan">404</span></span>
-                <span class="brand-tagline">Solutions</span>
-            </div>
+        <!-- Logo (Clean brand mark without extra text or background) -->
+        <a href="<?= url('index.php') ?>" class="brand-logo" aria-label="CodeX404 Solutions Home">
+            <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" class="site-logo-img" width="160" height="44">
         </a>
 
         <!-- Main Navigation Links -->
