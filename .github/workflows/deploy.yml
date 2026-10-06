@@ -1,20 +1,24 @@
-name: Deploy to Hostinger
+name: Deploy Website to Hostinger
 
 on:
   push:
     branches:
       - main
       - dev
+    paths:
+      - 'website/**'
+      - '.github/workflows/deploy.yml'
+
 jobs:
   deploy-prod:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Deploy to Production
+      - name: 🚀 Deploy Website to Production
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER_PROD }}
@@ -22,33 +26,37 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_PROD }}
           port: 21
           protocol: ftp
-          local-dir: ./codex404/
+          local-dir: ./website/
           server-dir: /
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.github/**
             **/*.md
-            **/*.bat
-            **/*.py
-            **/deploy.yml
+            **/.env
+            **/.env.example
             **/tests/**
-            **/*.yml
-            **/README.md
-            .git/**
-            .github/**
-            **/*.doc
-            **/*.sql
-            **/*.zip
+            **/storage/logs/**
+            **/storage/cache/**
+            **/storage/sessions/**
+            **/.DS_Store
+            **/Thumbs.db
+            **/*.bak
+
+      - name: ✅ Deployment Complete
+        run: |
+          echo "✅ Website deployed to codex404solutions.online"
+          echo "📅 Deployment time: $(date)"
 
   deploy-dev:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Deploy to Dev Server
+      - name: 🧪 Deploy Website to Dev Environment
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER_DEV }}
@@ -56,20 +64,24 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           port: 21
           protocol: ftp
-          local-dir: ./codex404/
+          local-dir: ./website/
           server-dir: /
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.github/**
             **/*.md
-            **/*.bat
-            **/*.py
-            **/deploy.yml
+            **/.env
+            **/.env.example
             **/tests/**
-            **/*.yml
-            **/README.md
-            .git/**
-            .github/**
-            **/*.doc
-            **/*.sql
-            **/*.zip
+            **/storage/logs/**
+            **/storage/cache/**
+            **/storage/sessions/**
+            **/.DS_Store
+            **/Thumbs.db
+            **/*.bak
+
+      - name: ✅ Dev Deployment Complete
+        run: |
+          echo "✅ Website deployed to dev.codex404solutions.online"
+          echo "📅 Deployment time: $(date)"
