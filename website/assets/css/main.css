@@ -240,20 +240,30 @@ img {
 }
 
 .section {
-  padding-top: var(--space-4xl);
-  padding-bottom: var(--space-4xl);
+  padding-top: 3.25rem;
+  padding-bottom: 3.25rem;
   position: relative;
 }
 
+/* First section on any page (serves as the subpage hero/header) */
+body > .section:first-of-type,
+main > .section:first-of-type,
+.site-header + .section,
+.site-header + main > .section:first-child,
+.site-header + * .section:first-of-type {
+  padding-top: 1.75rem;
+  padding-bottom: 2.25rem;
+}
+
 .section-sm {
-  padding-top: var(--space-2xl);
-  padding-bottom: var(--space-2xl);
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
 }
 
 /* Section Header Structure */
 .section-header {
   text-align: center;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: 2rem;
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;

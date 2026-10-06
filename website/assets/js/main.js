@@ -9,19 +9,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('navMenu');
 
   if (navToggleBtn && navMenu) {
-    navToggleBtn.addEventListener('click', () => {
-      const isExpanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
-      navToggleBtn.setAttribute('aria-expanded', !isExpanded);
-      navMenu.classList.toggle('open');
-      document.body.classList.toggle('nav-open');
+    const hamburgerSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    const closeSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
+    const toggleNav = (openState) => {
+      const willOpen = typeof openState === 'boolean' ? openState : !navMenu.classList.contains('open');
+      navToggleBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      if (willOpen) {
+        navMenu.classList.add('open');
+        document.body.classList.add('nav-open');
+        navToggleBtn.innerHTML = closeSvg;
+      } else {
+        navMenu.classList.remove('open');
+        document.body.classList.remove('nav-open');
+        navToggleBtn.innerHTML = hamburgerSvg;
+      }
+    };
+
+    navToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleNav();
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!navMenu.contains(e.target) && !navToggleBtn.contains(e.target) && navMenu.classList.contains('open')) {
-        navMenu.classList.remove('open');
-        navToggleBtn.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !navToggleBtn.contains(e.target)) {
+        toggleNav(false);
+      }
+    });
+
+    // Close menu when tapping links inside drawer
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleNav(false);
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+        toggleNav(false);
       }
     });
   }

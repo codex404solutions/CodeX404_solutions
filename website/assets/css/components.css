@@ -1232,7 +1232,7 @@
    13. Page Banner (Sub-Pages Header)
    -------------------------------------------------------------------------- */
 .page-banner {
-  padding: calc(var(--space-4xl) + 1rem) 0 var(--space-2xl);
+  padding: 1.75rem 0 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1620,3 +1620,142 @@
   border-radius: var(--radius-sm);
   white-space: nowrap;
 }
+
+/* --------------------------------------------------------------------------
+   19. Floating WhatsApp Button (Only WhatsApp Floats)
+   Mobile-friendly, high-contrast, accessible
+   -------------------------------------------------------------------------- */
+.floating-whatsapp-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+  pointer-events: auto;
+}
+
+.floating-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF !important;
+  text-decoration: none;
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4), 0 0 30px rgba(18, 140, 126, 0.25);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.floating-whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6), 0 0 45px rgba(18, 140, 126, 0.4);
+}
+
+.whatsapp-pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.6);
+  animation: whatsappRingPulse 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes whatsappRingPulse {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  60% { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+.whatsapp-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+}
+
+/* Mobile responsive WhatsApp floating adjustment */
+@media (max-width: 768px) {
+  .floating-whatsapp-container {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .floating-whatsapp-btn {
+    width: 52px;
+    height: 52px;
+  }
+
+  .whatsapp-icon {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. Official Footer Social Media Bar (Non-floating)
+   -------------------------------------------------------------------------- */
+.footer-social-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(17, 29, 58, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--slate);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.footer-social-link:hover {
+  transform: translateY(-2px) scale(1.08);
+  color: var(--white);
+}
+
+.footer-social-link[title="LinkedIn"]:hover {
+  background: #0A66C2;
+  border-color: #0A66C2;
+  box-shadow: 0 0 15px rgba(10, 102, 194, 0.5);
+}
+
+.footer-social-link[title="GitHub"]:hover {
+  background: #24292F;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.footer-social-link[title="Twitter / X"]:hover {
+  background: #000000;
+  border-color: #1D9BF0;
+  box-shadow: 0 0 15px rgba(29, 155, 240, 0.5);
+}
+
+.footer-social-link[title="Instagram"]:hover {
+  background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF);
+  border-color: #DD2A7B;
+  box-shadow: 0 0 15px rgba(221, 42, 123, 0.5);
+}
+
+.footer-social-link[title="Facebook"]:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+  box-shadow: 0 0 15px rgba(24, 119, 242, 0.5);
+}
+
+.footer-social-link[title="YouTube"]:hover {
+  background: #FF0000;
+  border-color: #FF0000;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.55);
+}
+
