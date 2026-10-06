@@ -1,4 +1,4 @@
-# CodeX404 Solutions
+# 📁 Code X404 Solutions
 
 **AI & Software Engineering Partner for Growing Businesses**
 
@@ -132,7 +132,7 @@ CodeX404_solutions/
 
 **1. Clone Repository**
 ```bash
-git clone https://github.com/mnoukhej/CodeX404_solutions.git
+git clone https://github.com/codex404solutions/CodeX404_solutions.git
 cd CodeX404_solutions
 ```
 
@@ -143,7 +143,7 @@ composer install
 
 **3. Setup Website**
 ```bash
-cd website
+cd CodeX404_solutions
 cp .env.example .env
 # Edit .env with your database credentials
 ```
@@ -547,3 +547,107 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
   <a href="https://www.linkedin.com/in/mnoukhej/">Connect on LinkedIn</a> •
   <a href="mailto:hello@codex404solutions.online">Get in Touch</a>
 </p>
+
+<!-- TREE_START -->
+```
+├── README.md
+├── docs
+│   ├── API_CONTRACT.md
+│   ├── CRM
+│   │   ├── ARCHITECTURE.md
+│   │   ├── DESIGN.md
+│   │   ├── DEVELOPMENT_PROMPT.md
+│   │   ├── MEMORY.md
+│   │   ├── PRD.md
+│   │   ├── RULES.md
+│   │   └── TASKS.md
+│   ├── DEPLOYMENT.md
+│   ├── MONOREPO_STRUCTURE.md
+│   ├── Main-Website
+│   │   ├── ARCHITECTURE.md
+│   │   ├── DESIGN.md
+│   │   ├── DEVELOPMENT_PROMPT.md
+│   │   ├── MEMORY.md
+│   │   ├── PRD.md
+│   │   ├── RULES.md
+│   │   └── TASKS.md
+│   ├── QUICK_START_GUIDE.md
+│   ├── RAZORPAY_INTEGRATION.md
+│   └── STACK.md
+├── founder-section.php
+├── images
+│   ├── cofounder.jpg
+│   └── founder.jpg
+├── logo
+│   ├── favicon.ico
+│   ├── logo.jpg
+│   └── logo.png
+├── setup.bat
+├── update_tree.py
+└── website
+    ├── 404.php
+    ├── about.php
+    ├── ai-agents.php
+    ├── ai-solutions.php
+    ├── app
+    │   ├── Controllers
+    │   │   ├── ContactController.php
+    │   │   └── LeadController.php
+    │   ├── Helpers
+    │   │   └── Sanitizer.php
+    │   ├── Services
+    │   │   ├── CRMIntegrationService.php
+    │   │   └── EmailService.php
+    │   └── Validators
+    │       └── FormValidator.php
+    ├── assets
+    │   ├── css
+    │   │   ├── components.css
+    │   │   ├── main.css
+    │   │   └── responsive.css
+    │   ├── images
+    │   │   ├── logo
+    │   │   │   ├── favicon.ico
+    │   │   │   ├── logo.jpg
+    │   │   │   └── logo.png
+    │   │   └── team
+    │   │       ├── cofounder.jpg
+    │   │       └── founder.jpg
+    │   └── js
+    │       ├── forms.js
+    │       └── main.js
+    ├── automation.php
+    ├── case-studies.php
+    ├── components
+    │   ├── cookie-banner.php
+    │   ├── cta.php
+    │   ├── floating-social.php
+    │   └── leadership.php
+    ├── config
+    │   └── database.php
+    ├── contact.php
+    ├── discovery-call.php
+    ├── engagement-models.php
+    ├── faq.php
+    ├── includes
+    │   ├── config.php
+    │   ├── footer.php
+    │   ├── header.php
+    │   ├── navigation.php
+    │   ├── security.php
+    │   └── seo.php
+    ├── index.php
+    ├── industries.php
+    ├── mobile-apps.php
+    ├── portfolio.php
+    ├── privacy.php
+    ├── process.php
+    ├── robots.txt
+    ├── saas.php
+    ├── security.php
+    ├── sitemap.xml
+    ├── software-development.php
+    ├── solutions.php
+    └── terms.php
+```
+<!-- TREE_END -->
