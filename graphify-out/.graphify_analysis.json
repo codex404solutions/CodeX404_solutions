@@ -34,6 +34,15 @@
       "website_includes_security_verify_csrf_token"
     ],
     "3": [
+      "website_app_controllers_contactcontroller",
+      "website_app_controllers_contactcontroller_contactcontroller",
+      "website_app_controllers_contactcontroller_contactcontroller_handle",
+      "website_app_validators_formvalidator",
+      "website_app_validators_formvalidator_formvalidator",
+      "website_app_validators_formvalidator_formvalidator_geterrors",
+      "website_app_validators_formvalidator_formvalidator_validatecontact"
+    ],
+    "4": [
       "website_app_controllers_leadcontroller_leadcontroller_handlediscovery",
       "website_app_helpers_sanitizer",
       "website_app_helpers_sanitizer_sanitizer",
@@ -42,7 +51,7 @@
       "website_app_helpers_sanitizer_sanitizer_cleanstring",
       "website_app_validators_formvalidator_formvalidator_validatediscovery"
     ],
-    "4": [
+    "5": [
       "website_app_controllers_leadcontroller",
       "website_app_controllers_leadcontroller_leadcontroller",
       "website_app_services_emailservice",
@@ -50,20 +59,13 @@
       "website_app_services_emailservice_emailservice_sendleadnotification",
       "website_discovery_call"
     ],
-    "5": [
+    "6": [
       "website_assets_js_main",
       "website_assets_js_main_particle",
       "website_assets_js_main_particle_constructor",
       "website_assets_js_main_particle_draw",
       "website_assets_js_main_particle_reset",
       "website_assets_js_main_particle_update"
-    ],
-    "6": [
-      "website_app_controllers_contactcontroller_contactcontroller_handle",
-      "website_app_validators_formvalidator",
-      "website_app_validators_formvalidator_formvalidator",
-      "website_app_validators_formvalidator_formvalidator_geterrors",
-      "website_app_validators_formvalidator_formvalidator_validatecontact"
     ],
     "7": [
       "pdo",
@@ -78,8 +80,7 @@
       "website_app_services_crmintegrationservice_crmintegrationservice_dispatchlead"
     ],
     "9": [
-      "website_app_controllers_contactcontroller",
-      "website_app_controllers_contactcontroller_contactcontroller",
+      "app_controllers_contactcontroller",
       "website_contact"
     ],
     "10": [
@@ -171,13 +172,13 @@
     "0": 0.36363636363636365,
     "1": 0.2857142857142857,
     "2": 0.2857142857142857,
-    "3": 0.38095238095238093,
-    "4": 0.3333333333333333,
-    "5": 0.5333333333333333,
-    "6": 0.6,
+    "3": 0.42857142857142855,
+    "4": 0.38095238095238093,
+    "5": 0.3333333333333333,
+    "6": 0.5333333333333333,
     "7": 0.6666666666666666,
     "8": 0.5,
-    "9": 0.6666666666666666,
+    "9": 1.0,
     "10": 1.0,
     "11": 1.0,
     "12": 1.0,
@@ -219,11 +220,6 @@
       "degree": 7
     },
     {
-      "id": "update_tree_update_readme",
-      "label": "update_readme()",
-      "degree": 6
-    },
-    {
       "id": "website_app_helpers_sanitizer_sanitizer",
       "label": "Sanitizer",
       "degree": 6
@@ -234,13 +230,18 @@
       "degree": 6
     },
     {
-      "id": "update_tree_generate_tree",
-      "label": "generate_tree()",
-      "degree": 5
+      "id": "update_tree_update_readme",
+      "label": "update_readme()",
+      "degree": 6
     },
     {
       "id": "website_assets_js_main_particle",
       "label": "Particle",
+      "degree": 5
+    },
+    {
+      "id": "update_tree_generate_tree",
+      "label": "generate_tree()",
       "degree": 5
     },
     {
@@ -249,8 +250,8 @@
       "degree": 4
     },
     {
-      "id": "update_tree_get_repo_name",
-      "label": "get_repo_name()",
+      "id": "website_app_controllers_leadcontroller_leadcontroller",
+      "label": "LeadController",
       "degree": 3
     },
     {
@@ -261,22 +262,22 @@
   ],
   "surprises": [
     {
-      "source": "render_json_ld_organization()",
-      "target": "asset()",
+      "source": "asset()",
+      "target": "render_json_ld_organization()",
       "source_files": [
-        "website/includes/seo.php",
-        "website/includes/config.php"
+        "website/includes/config.php",
+        "website/includes/seo.php"
       ],
       "confidence": "INFERRED",
       "relation": "calls",
       "why": "inferred connection - not explicitly stated in source"
     },
     {
-      "source": "render_meta_tags()",
-      "target": "asset()",
+      "source": "asset()",
+      "target": "render_meta_tags()",
       "source_files": [
-        "website/includes/seo.php",
-        "website/includes/config.php"
+        "website/includes/config.php",
+        "website/includes/seo.php"
       ],
       "confidence": "INFERRED",
       "relation": "calls",

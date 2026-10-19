@@ -609,4 +609,212 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initCardSpotlights();
+
+  // ======================================================================
+  // 14. Interactive Project Filter Tabs System
+  // ======================================================================
+  const initProjectFilters = () => {
+    const filterButtons = document.querySelectorAll('.project-filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    if (!filterButtons.length || !projectCards.length) return;
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetCategory = btn.getAttribute('data-filter') || 'all';
+
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        projectCards.forEach(card => {
+          const cardCat = card.getAttribute('data-category') || '';
+          if (targetCategory === 'all' || cardCat.includes(targetCategory)) {
+            card.classList.remove('hidden');
+            card.style.animation = 'fadeIn 0.35s ease forwards';
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  };
+
+  initProjectFilters();
+
+  // ======================================================================
+  // 15. Live Project Demo Modal & Interactive Simulators
+  // ======================================================================
+  const initDemoModal = () => {
+    const modalOverlay = document.getElementById('projectDemoModal');
+    if (!modalOverlay) return;
+
+    const closeBtn = modalOverlay.querySelector('.demo-close-btn');
+    const navTabs = modalOverlay.querySelectorAll('.demo-nav-tab');
+    const panes = modalOverlay.querySelectorAll('.demo-simulator-pane');
+    const triggers = document.querySelectorAll('.btn-demo-trigger');
+
+    const openModal = (demoKey) => {
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Switch to targeted tab
+      if (demoKey) {
+        navTabs.forEach(tab => {
+          const isTarget = tab.getAttribute('data-demo-target') === demoKey;
+          tab.classList.toggle('active', isTarget);
+        });
+        panes.forEach(pane => {
+          const isTarget = pane.id === `demo-pane-${demoKey}`;
+          pane.classList.toggle('active', isTarget);
+        });
+      }
+    };
+
+    const closeModal = () => {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    triggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const demoKey = btn.getAttribute('data-demo') || 'rag';
+        openModal(demoKey);
+      });
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    navTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-demo-target');
+        navTabs.forEach(t => t.classList.toggle('active', t === tab));
+        panes.forEach(p => p.classList.toggle('active', p.id === `demo-pane-${target}`));
+      });
+    });
+
+    // --- Simulator 1: AI RAG Assistant Sandbox ---
+    const ragSendBtn = document.getElementById('ragSendBtn');
+    const ragInput = document.getElementById('ragInput');
+    const ragChatBox = document.getElementById('ragChatBox');
+    const ragChips = document.querySelectorAll('.rag-chip');
+
+    const cannedRagAnswers = {
+      'ip': 'Under CodeX404 standard engineering contracts, all source code, database architectures, APIs, and IP are 100% owned by the client upon project delivery. We enforce zero vendor lock-in and provide full repository transfer.',
+      'pipeline': 'The multi-channel lead ingestion pipeline operates via serverless webhooks listening to WhatsApp Cloud API and web forms. Messages undergo PII sanitization and deduplication before being queued to CRM endpoints within 1.8 seconds.',
+      'erp': 'The School ERP platform is built on PHP 8.4 and MySQL with strict role-based access control (RBAC). It isolates student academic records, fee ledgers, and staff payroll while processing thousands of concurrent transactions.',
+      'default': 'CodeX404 Solutions designs, builds, and automates high-performance systems with a strict zero-bug engineering policy, senior-only technical leadership, and transparent milestones.'
+    };
+
+    const sendRagMessage = (text) => {
+      if (!text.trim() || !ragChatBox) return;
+
+      // Add user bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = 'chat-bubble user';
+      userBubble.textContent = text;
+      ragChatBox.appendChild(userBubble);
+      ragChatBox.scrollTop = ragChatBox.scrollHeight;
+
+      if (ragInput) ragInput.value = '';
+
+      // Add loading state
+      const aiBubble = document.createElement('div');
+      aiBubble.className = 'chat-bubble ai';
+      aiBubble.innerHTML = '<span style="color: #38BDF8;">🤖 Searching private enterprise vectors...</span>';
+      ragChatBox.appendChild(aiBubble);
+      ragChatBox.scrollTop = ragChatBox.scrollHeight;
+
+      setTimeout(() => {
+        let answer = cannedRagAnswers.default;
+        const lower = text.toLowerCase();
+        if (lower.includes('ip') || lower.includes('ownership')) answer = cannedRagAnswers.ip;
+        else if (lower.includes('pipeline') || lower.includes('lead') || lower.includes('whatsapp')) answer = cannedRagAnswers.pipeline;
+        else if (lower.includes('erp') || lower.includes('school') || lower.includes('student')) answer = cannedRagAnswers.erp;
+
+        aiBubble.innerHTML = `
+          <div style="margin-bottom: 0.4rem; color: #34D399; font-weight: 600; font-size: 0.75rem;">
+            ● Vector Match: 99.4% confidence (latency: 142ms)
+          </div>
+          <div>${answer}</div>
+          <div style="margin-top: 0.5rem; font-size: 0.72rem; color: var(--slate-dark); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.35rem;">
+            Source: <code>docs/architecture/client-ip-and-security.spec.md (L14-29)</code>
+          </div>
+        `;
+        ragChatBox.scrollTop = ragChatBox.scrollHeight;
+      }, 750);
+    };
+
+    if (ragSendBtn && ragInput) {
+      ragSendBtn.addEventListener('click', () => sendRagMessage(ragInput.value));
+      ragInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendRagMessage(ragInput.value);
+        }
+      });
+    }
+
+    ragChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const query = chip.getAttribute('data-prompt') || chip.textContent;
+        sendRagMessage(query);
+      });
+    });
+
+    // --- Simulator 2: WhatsApp Lead Pipeline Sandbox ---
+    const waSimulateBtn = document.getElementById('waSimulateBtn');
+    const waChatLog = document.getElementById('waChatLog');
+    const crmLeadList = document.getElementById('crmLeadList');
+
+    if (waSimulateBtn && waChatLog && crmLeadList) {
+      let leadCount = 1;
+      waSimulateBtn.addEventListener('click', () => {
+        const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        // Add inbound message
+        const inMsg = document.createElement('div');
+        inMsg.style.cssText = 'background: #202C33; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%;';
+        inMsg.innerHTML = `<strong>Lead #${leadCount}:</strong> Hi, we need a custom CRM + AI customer support for our 35-person sales team. Can you quote? <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">${timeNow}</div>`;
+        waChatLog.appendChild(inMsg);
+        waChatLog.scrollTop = waChatLog.scrollHeight;
+
+        // Auto automated reply after 900ms
+        setTimeout(() => {
+          const outMsg = document.createElement('div');
+          outMsg.style.cssText = 'background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%; margin-left: auto;';
+          outMsg.innerHTML = `<strong>CodeX404 Auto-Agent:</strong> Thank you! We received your custom CRM inquiry. Our solutions architect is reviewing your requirements and will reply shortly. Reference: #LD-${1040 + leadCount}. <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">${timeNow}</div>`;
+          waChatLog.appendChild(outMsg);
+          waChatLog.scrollTop = waChatLog.scrollHeight;
+
+          // Add to CRM board
+          const crmItem = document.createElement('div');
+          crmItem.style.cssText = 'background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 10px; margin-bottom: 8px; font-size: 0.8rem;';
+          crmItem.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <strong style="color: #38BDF8;">Custom CRM Inquiry #${1040 + leadCount}</strong>
+              <span style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px;">QUALIFIED</span>
+            </div>
+            <div style="color: var(--slate); font-size: 0.75rem;">Source: WhatsApp Cloud API &nbsp;•&nbsp; Latency: 1.1s</div>
+          `;
+          crmLeadList.prepend(crmItem);
+          leadCount++;
+        }, 900);
+      });
+    }
+  };
+
+  initDemoModal();
 });
+

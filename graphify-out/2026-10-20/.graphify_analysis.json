@@ -1,0 +1,290 @@
+{
+  "communities": {
+    "0": [
+      "os",
+      "re",
+      "subprocess",
+      "update_tree",
+      "update_tree_format_project_name",
+      "update_tree_generate_tree",
+      "update_tree_get_repo_name",
+      "update_tree_update_commands",
+      "update_tree_update_readme",
+      "update_tree_update_title",
+      "update_tree_update_tree_section"
+    ],
+    "1": [
+      "website_includes_config",
+      "website_includes_config_asset",
+      "website_includes_config_closure_1",
+      "website_includes_config_url",
+      "website_includes_seo",
+      "website_includes_seo_render_json_ld_faq",
+      "website_includes_seo_render_json_ld_organization",
+      "website_includes_seo_render_meta_tags"
+    ],
+    "2": [
+      "website_includes_security",
+      "website_includes_security_check_rate_limit",
+      "website_includes_security_csrf_input_field",
+      "website_includes_security_generate_csrf_token",
+      "website_includes_security_sanitize_email",
+      "website_includes_security_sanitize_text",
+      "website_includes_security_send_security_headers",
+      "website_includes_security_verify_csrf_token"
+    ],
+    "3": [
+      "website_app_controllers_leadcontroller_leadcontroller_handlediscovery",
+      "website_app_helpers_sanitizer",
+      "website_app_helpers_sanitizer_sanitizer",
+      "website_app_helpers_sanitizer_sanitizer_cleanemail",
+      "website_app_helpers_sanitizer_sanitizer_cleanphone",
+      "website_app_helpers_sanitizer_sanitizer_cleanstring",
+      "website_app_validators_formvalidator_formvalidator_validatediscovery"
+    ],
+    "4": [
+      "website_app_controllers_leadcontroller",
+      "website_app_controllers_leadcontroller_leadcontroller",
+      "website_app_services_emailservice",
+      "website_app_services_emailservice_emailservice",
+      "website_app_services_emailservice_emailservice_sendleadnotification",
+      "website_discovery_call"
+    ],
+    "5": [
+      "website_assets_js_main",
+      "website_assets_js_main_particle",
+      "website_assets_js_main_particle_constructor",
+      "website_assets_js_main_particle_draw",
+      "website_assets_js_main_particle_reset",
+      "website_assets_js_main_particle_update"
+    ],
+    "6": [
+      "website_app_controllers_contactcontroller_contactcontroller_handle",
+      "website_app_validators_formvalidator",
+      "website_app_validators_formvalidator_formvalidator",
+      "website_app_validators_formvalidator_formvalidator_geterrors",
+      "website_app_validators_formvalidator_formvalidator_validatecontact"
+    ],
+    "7": [
+      "pdo",
+      "website_config_database",
+      "website_config_database_database",
+      "website_config_database_database_getconnection"
+    ],
+    "8": [
+      "website_app_services_crmintegrationservice",
+      "website_app_services_crmintegrationservice_crmintegrationservice",
+      "website_app_services_crmintegrationservice_crmintegrationservice_construct",
+      "website_app_services_crmintegrationservice_crmintegrationservice_dispatchlead"
+    ],
+    "9": [
+      "website_app_controllers_contactcontroller",
+      "website_app_controllers_contactcontroller_contactcontroller",
+      "website_contact"
+    ],
+    "10": [
+      "founder_section"
+    ],
+    "11": [
+      "website_404"
+    ],
+    "12": [
+      "website_about"
+    ],
+    "13": [
+      "website_ai_agents"
+    ],
+    "14": [
+      "website_ai_solutions"
+    ],
+    "15": [
+      "website_assets_js_forms"
+    ],
+    "16": [
+      "website_automation"
+    ],
+    "17": [
+      "website_case_studies"
+    ],
+    "18": [
+      "website_components_cookie_banner"
+    ],
+    "19": [
+      "website_components_cta"
+    ],
+    "20": [
+      "website_components_floating_social"
+    ],
+    "21": [
+      "website_components_leadership"
+    ],
+    "22": [
+      "website_engagement_models"
+    ],
+    "23": [
+      "website_faq"
+    ],
+    "24": [
+      "website_includes_footer"
+    ],
+    "25": [
+      "website_includes_header"
+    ],
+    "26": [
+      "website_includes_navigation"
+    ],
+    "27": [
+      "website_index"
+    ],
+    "28": [
+      "website_industries"
+    ],
+    "29": [
+      "website_mobile_apps"
+    ],
+    "30": [
+      "website_portfolio"
+    ],
+    "31": [
+      "website_privacy"
+    ],
+    "32": [
+      "website_process"
+    ],
+    "33": [
+      "website_saas"
+    ],
+    "34": [
+      "website_security"
+    ],
+    "35": [
+      "website_software_development"
+    ],
+    "36": [
+      "website_solutions"
+    ],
+    "37": [
+      "website_terms"
+    ]
+  },
+  "cohesion": {
+    "0": 0.36363636363636365,
+    "1": 0.2857142857142857,
+    "2": 0.2857142857142857,
+    "3": 0.38095238095238093,
+    "4": 0.3333333333333333,
+    "5": 0.5333333333333333,
+    "6": 0.6,
+    "7": 0.6666666666666666,
+    "8": 0.5,
+    "9": 0.6666666666666666,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0
+  },
+  "gods": [
+    {
+      "id": "website_app_validators_formvalidator_formvalidator",
+      "label": "FormValidator",
+      "degree": 8
+    },
+    {
+      "id": "website_app_services_crmintegrationservice_crmintegrationservice",
+      "label": "CRMIntegrationService",
+      "degree": 7
+    },
+    {
+      "id": "website_app_helpers_sanitizer_sanitizer",
+      "label": "Sanitizer",
+      "degree": 6
+    },
+    {
+      "id": "website_app_services_emailservice_emailservice",
+      "label": "EmailService",
+      "degree": 6
+    },
+    {
+      "id": "update_tree_update_readme",
+      "label": "update_readme()",
+      "degree": 6
+    },
+    {
+      "id": "update_tree_generate_tree",
+      "label": "generate_tree()",
+      "degree": 5
+    },
+    {
+      "id": "website_assets_js_main_particle",
+      "label": "Particle",
+      "degree": 5
+    },
+    {
+      "id": "website_config_database_database",
+      "label": "Database",
+      "degree": 4
+    },
+    {
+      "id": "website_app_controllers_leadcontroller_leadcontroller",
+      "label": "LeadController",
+      "degree": 3
+    },
+    {
+      "id": "website_app_controllers_contactcontroller_contactcontroller",
+      "label": "ContactController",
+      "degree": 3
+    }
+  ],
+  "surprises": [
+    {
+      "source": "asset()",
+      "target": "render_json_ld_organization()",
+      "source_files": [
+        "website/includes/config.php",
+        "website/includes/seo.php"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "asset()",
+      "target": "render_meta_tags()",
+      "source_files": [
+        "website/includes/config.php",
+        "website/includes/seo.php"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

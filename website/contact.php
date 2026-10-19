@@ -35,20 +35,20 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Get in Touch</span>
+                <span>Direct Engineering Communication</span>
             </div>
-            <h1 class="section-title">Direct Engineering Communication</h1>
+            <h1 class="section-title">Let's Discuss Your System Architecture</h1>
             <p class="section-subtitle">
-                Have a question, technical specification, or partnership opportunity? Send us a message and our lead solutions architect will respond within 24 business hours.
+                Have a question, technical specification, or operational bottleneck to solve? Send us a message and our lead solutions architect will review and reply within 24 business hours.
             </p>
         </div>
 
         <div class="grid grid-cols-2" style="gap: 3.5rem; align-items: start;">
-            <!-- Contact Details -->
+            <!-- Left Column: Direct Access & Trust Guarantees -->
             <div>
-                <h2 style="font-size: 1.75rem; margin-bottom: 1.25rem;">Let's Talk Architecture</h2>
-                <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
-                    We skip the aggressive sales pitches. When you reach out to CodeX404 Solutions, you discuss your challenges directly with technical practitioners who build software.
+                <h2 style="font-size: 1.75rem; color: var(--white); margin-bottom: 1.25rem;">Direct Technical Access</h2>
+                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">
+                    We skip the aggressive sales pitches and account manager layers. When you reach out to CodeX404 Solutions, you discuss your challenges directly with technical practitioners who build software.
                 </p>
 
                 <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
@@ -56,7 +56,17 @@ require_once __DIR__ . '/includes/header.php';
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">✉️</div>
                         <div>
                             <strong style="color: var(--white); display: block;">Primary Email</strong>
-                            <a href="mailto:<?= COMPANY_EMAIL ?>"><?= COMPANY_EMAIL ?></a>
+                            <a href="mailto:<?= COMPANY_EMAIL ?>" style="color: var(--cyan);"><?= COMPANY_EMAIL ?></a>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">💬</div>
+                        <div>
+                            <strong style="color: var(--white); display: block;">Instant WhatsApp Discussion</strong>
+                            <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                                Chat on WhatsApp (<?= COMPANY_WHATSAPP_NUMBER ?>) &rarr;
+                            </a>
                         </div>
                     </div>
 
@@ -71,23 +81,44 @@ require_once __DIR__ . '/includes/header.php';
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">⏱️</div>
                         <div>
-                            <strong style="color: var(--white); display: block;">Turnaround Guarantee</strong>
-                            <span>Responses within 24 business hours</span>
+                            <strong style="color: var(--white); display: block;">Turnaround Commitment</strong>
+                            <span>Direct technical response within 24 business hours</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- Trust Guarantees -->
+                <div class="trust-badge-list" style="margin-bottom: 2rem;">
+                    <div class="trust-badge-item">
+                        <div class="trust-badge-icon">✓</div>
+                        <span><strong>100% IP & Code Ownership:</strong> Complete source code and database ownership upon delivery.</span>
+                    </div>
+                    <div class="trust-badge-item">
+                        <div class="trust-badge-icon">✓</div>
+                        <span><strong>Mutual NDA Protection:</strong> Strict confidentiality before technical scoping.</span>
+                    </div>
+                    <div class="trust-badge-item">
+                        <div class="trust-badge-icon">✓</div>
+                        <span><strong>Zero Vendor Lock-in:</strong> Clean, portable, documented code running on open standards.</span>
+                    </div>
+                </div>
+
                 <div style="background: rgba(11, 31, 58, 0.4); padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--cyan);">Looking for an in-depth project consultation?</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">For complex scopes, complete our Discovery Questionnaire to schedule a dedicated video strategy session.</p>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--cyan);">Looking for a dedicated video strategy session?</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--slate);">For complex architectures, complete our Discovery Questionnaire to schedule a video roadmap call.</p>
                     <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm">
-                        Book a Discovery Call Instead →
+                        Book a Discovery Call Instead &rarr;
                     </a>
                 </div>
             </div>
 
-            <!-- Form Card -->
-            <div class="form-card">
+            <!-- Right Column: Form Card -->
+            <div class="form-card" style="border: 1px solid rgba(59, 130, 246, 0.35); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(59, 130, 246, 0.15);">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.35rem;">Send Us a Message</h3>
+                    <p style="font-size: 0.875rem; color: var(--slate-dark);">Fill out this form to connect directly with our engineering team.</p>
+                </div>
+
                 <div class="form-alert-container">
                     <?php if ($controllerResult): ?>
                         <div class="alert-box <?= $controllerResult['status'] === 'success' ? 'alert-success' : 'alert-danger' ?>" role="alert">
@@ -127,14 +158,22 @@ require_once __DIR__ . '/includes/header.php';
                             <input type="text" id="company" name="company" class="form-control" placeholder="e.g. Acme Corp">
                         </div>
                         <div class="form-group">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" placeholder="e.g. Custom CRM Inquiry">
+                            <label for="subject" class="form-label">Primary Solution Needed</label>
+                            <select id="subject" name="subject" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
+                                <option value="Custom Software Development">Custom Software / Web Platform</option>
+                                <option value="Enterprise AI & RAG">Enterprise AI & Knowledge Base (RAG)</option>
+                                <option value="Autonomous AI Agents">Autonomous AI Agents</option>
+                                <option value="Workflow & WhatsApp Automation">Workflow & WhatsApp Automation</option>
+                                <option value="Mobile App Development">Mobile App (iOS/Android/PWA)</option>
+                                <option value="SaaS & MVP Engineering">SaaS MVP Development</option>
+                                <option value="General Architecture Consultation">Other / General Consultation</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="message" class="form-label">Message Details <span class="required">*</span></label>
-                        <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Briefly describe your business requirements, challenge, or questions..." required></textarea>
+                        <label for="message" class="form-label">Message Details & Challenge <span class="required">*</span></label>
+                        <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Briefly describe the operational friction, manual workflows, or technical idea you want to build..." required></textarea>
                     </div>
 
                     <!-- GDPR Consent Checkbox -->

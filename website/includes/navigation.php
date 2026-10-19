@@ -120,7 +120,7 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         </nav>
 
         <!-- Actions -->
-        <!-- <div class="nav-actions">
+        <div class="nav-actions">
             <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm">
                 Book a Discovery Call
             </a>
@@ -131,6 +131,6 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
-        </div> -->
+        </div>
     </div>
 </header>

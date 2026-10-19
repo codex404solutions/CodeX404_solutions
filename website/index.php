@@ -2,10 +2,11 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/security.php';
 
 $pageMeta = [
     'title' => 'Software & AI that moves your business forward',
-    'description' => 'CodeX404 Solutions designs, builds and automates digital systems helping growing businesses operate smarter, move faster and scale with confidence.',
+    'description' => 'CodeX404 Solutions designs, builds and automates custom software, enterprise AI, autonomous agents, and workflow systems for growing businesses globally.',
     'canonical' => BASE_URL,
     'keywords' => 'custom software development, business AI solutions, AI agents, workflow automation, SaaS MVP development, enterprise systems'
 ];
@@ -14,7 +15,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- ==========================================================================
-     HERO SECTION
+     HERO SECTION (Preserved & Polished from Screenshot)
      ========================================================================== -->
 <section class="hero-section">
     <div class="container hero-grid">
@@ -33,7 +34,7 @@ require_once __DIR__ . '/includes/header.php';
             </p>
 
             <div class="hero-cta-group">
-                <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg">
+                <a href="#contact-section" class="btn btn-primary btn-lg">
                     🚀 Start Your Project
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
@@ -205,7 +206,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     PROBLEM TO SOLUTION TRANSFORMATION SECTION
+     THE OPERATIONAL REALITY (PROBLEM TO SOLUTION TRANSFORMATION)
      ========================================================================== -->
 <section class="section" style="background: rgba(11, 31, 58, 0.2);">
     <div class="container">
@@ -214,33 +215,33 @@ require_once __DIR__ . '/includes/header.php';
                 <span class="dot"></span>
                 <span>The Operational Reality</span>
             </div>
-            <h2 class="section-title">Turning Friction into Velocity</h2>
+            <h2 class="section-title">Eliminating Friction. Engineering Velocity.</h2>
             <p class="section-subtitle">
-                Most growing businesses are held back by fragmented tools, repetitive spreadsheet operations, and disconnected workflows. Here is how we bridge the gap.
+                Most growing businesses lose hours every day to fragmented tools, fragile spreadsheet workarounds, and manual data re-entry. Here is how CodeX404 transforms your operating model.
             </p>
         </div>
 
         <div class="transformation-container">
             <!-- Manual Inefficient Reality -->
             <div class="transform-box problem">
-                <span class="transform-badge">Typical Bottlenecks</span>
-                <h3 style="margin-bottom: 1rem; color: #FCA5A5;">Fragmented Manual Work</h3>
+                <span class="transform-badge">The Daily Bottlenecks</span>
+                <h3 style="margin-bottom: 1rem; color: #FCA5A5;">Fragmented Operations</h3>
                 <ul class="transform-list">
                     <li>
                         <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span>Key customer and financial data trapped across multiple spreadsheets.</span>
+                        <span><strong>Spreadsheet Dependency:</strong> Critical customer records, fees, and orders trapped in disconnected sheets that break.</span>
                     </li>
                     <li>
                         <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span>Hours wasted copying inquiries between WhatsApp, Gmail, and CRM tools.</span>
+                        <span><strong>Inquiry Leakage:</strong> Prospects messaging on WhatsApp or web forms wait 4+ hours for manual staff response.</span>
                     </li>
                     <li>
                         <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span>Slow response times leading to qualified lead leakage and missed revenue.</span>
+                        <span><strong>Escalating SaaS Costs:</strong> Paying high per-seat monthly subscription fees for rigid tools that don't match your workflow.</span>
                     </li>
                     <li>
                         <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span>Legacy off-the-shelf software with rigid limitations and escalating SaaS costs.</span>
+                        <span><strong>Zero IP Ownership:</strong> Relying on closed third-party platforms with no direct access to underlying source code or database.</span>
                     </li>
                 </ul>
             </div>
@@ -252,24 +253,24 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- CodeX404 Solution -->
             <div class="transform-box solution">
-                <span class="transform-badge">The CodeX404 System</span>
-                <h3 style="margin-bottom: 1rem; color: var(--cyan);">Bespoke Software + AI</h3>
+                <span class="transform-badge">The CodeX404 Architecture</span>
+                <h3 style="margin-bottom: 1rem; color: var(--cyan);">Bespoke Software + Applied AI</h3>
                 <ul class="transform-list">
                     <li>
                         <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span>Centralized database architecture with real-time role-based access.</span>
+                        <span><strong>Unified Data Architecture:</strong> Single source of truth database with role-based access, audit logs, and real-time dashboards.</span>
                     </li>
                     <li>
                         <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span>Autonomous multi-channel pipelines syncing orders, leads, and documents.</span>
+                        <span><strong>Autonomous Instant Pipelines:</strong> WhatsApp Cloud API & webhooks capture, qualify, and sync inbound leads under 3 minutes.</span>
                     </li>
                     <li>
                         <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span>Instant AI-driven customer and employee knowledge assistants answering queries in seconds.</span>
+                        <span><strong>Domain-Specific AI Knowledge Bases:</strong> Private RAG assistants that answer staff & customer queries with 0 hallucinations.</span>
                     </li>
                     <li>
                         <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span>Custom-built proprietary software tailored precisely to your operational workflow.</span>
+                        <span><strong>100% Full IP Ownership:</strong> Clean, documented, zero-dependency codebase that belongs entirely to your business.</span>
                     </li>
                 </ul>
             </div>
@@ -278,7 +279,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     CORE CAPABILITIES / SOLUTIONS GRID
+     CORE CAPABILITIES & SOLUTIONS PILLARS
      ========================================================================== -->
 <section class="section" id="solutions">
     <div class="container">
@@ -289,44 +290,44 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <h2 class="section-title">Built for Performance. Engineered to Scale.</h2>
             <p class="section-subtitle">
-                Comprehensive digital engineering across full-stack applications, enterprise AI, intelligent automations, and scalable cloud platforms.
+                Six specialized digital engineering pillars covering custom full-stack software, enterprise AI, autonomous agents, and end-to-end workflow automation.
             </p>
         </div>
 
         <div class="grid grid-cols-3">
-            <!-- 1. Software Development -->
+            <!-- 1. Custom Software -->
             <div class="card">
                 <div class="card-icon">💻</div>
                 <h3 class="card-title">Custom Software & Web Apps</h3>
                 <p class="card-description">
-                    High-performance business applications, customer portals, custom CRMs, and internal ERP systems tailored to your workflows.
+                    Tailored business management portals, administrative ERPs, custom CRMs, and customer-facing web platforms engineered around your exact processes.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">PHP / Python</span>
-                    <span class="tag-chip">Modern JavaScript</span>
+                    <span class="tag-chip">PHP 8.4 / Python</span>
                     <span class="tag-chip">MySQL / PostgreSQL</span>
+                    <span class="tag-chip">RBAC Security</span>
                     <span class="tag-chip">REST APIs</span>
                 </div>
                 <a href="<?= url('software-development.php') ?>" class="card-arrow-link">
-                    Explore Software Development →
+                    Explore Custom Software →
                 </a>
             </div>
 
-            <!-- 2. AI Solutions -->
+            <!-- 2. Enterprise AI -->
             <div class="card">
                 <div class="card-icon">🤖</div>
                 <h3 class="card-title">Enterprise AI & Knowledge Systems</h3>
                 <p class="card-description">
-                    Retrieval-Augmented Generation (RAG), private enterprise knowledge bases, document intelligence, and conversational assistants.
+                    Retrieval-Augmented Generation (RAG) engines, private document intelligence, and domain-trained chatbots that query thousands of internal documents securely.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">RAG Systems</span>
-                    <span class="tag-chip">Vector Databases</span>
+                    <span class="tag-chip">Private RAG</span>
+                    <span class="tag-chip">Qdrant Vector DB</span>
                     <span class="tag-chip">Document OCR</span>
-                    <span class="tag-chip">Domain Assistants</span>
+                    <span class="tag-chip">Zero Data Leaks</span>
                 </div>
                 <a href="<?= url('ai-solutions.php') ?>" class="card-arrow-link">
-                    Explore AI Solutions →
+                    Explore Enterprise AI →
                 </a>
             </div>
 
@@ -335,13 +336,13 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="card-icon">🧠</div>
                 <h3 class="card-title">Autonomous AI Agents</h3>
                 <p class="card-description">
-                    Goal-oriented agents that interact with external APIs, databases, and software tools to execute multi-step operational tasks with human oversight.
+                    Multi-step autonomous agents equipped with tool-calling capabilities to query APIs, reconcile spreadsheets, verify documents, and dispatch alerts with human oversight.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Tool Calling</span>
-                    <span class="tag-chip">Workflow Execution</span>
+                    <span class="tag-chip">Multi-Step Execution</span>
                     <span class="tag-chip">Human-in-the-Loop</span>
-                    <span class="tag-chip">Audit Trails</span>
+                    <span class="tag-chip">Traceable Logs</span>
                 </div>
                 <a href="<?= url('ai-agents.php') ?>" class="card-arrow-link">
                     Explore AI Agents →
@@ -353,13 +354,13 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="card-icon">⚡</div>
                 <h3 class="card-title">Workflow & Process Automation</h3>
                 <p class="card-description">
-                    Connect disconnected systems. End-to-end CRM synchronization, WhatsApp/Email notification pipelines, and automated reporting.
+                    Eliminate repetitive manual coordination. Seamless WhatsApp Business API integrations, instant CRM sync, automated invoicing, and asynchronous webhooks.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">CRM Automation</span>
-                    <span class="tag-chip">WhatsApp API</span>
+                    <span class="tag-chip">WhatsApp Cloud API</span>
+                    <span class="tag-chip">CRM Pipelines</span>
+                    <span class="tag-chip">Automated Invoicing</span>
                     <span class="tag-chip">Webhooks</span>
-                    <span class="tag-chip">Scheduled Jobs</span>
                 </div>
                 <a href="<?= url('automation.php') ?>" class="card-arrow-link">
                     Explore Automation →
@@ -369,15 +370,15 @@ require_once __DIR__ . '/includes/header.php';
             <!-- 5. Mobile Applications -->
             <div class="card">
                 <div class="card-icon">📱</div>
-                <h3 class="card-title">Cross-Platform Mobile Apps</h3>
+                <h3 class="card-title">Cross-Platform Mobile Apps & PWA</h3>
                 <p class="card-description">
-                    Intuitive, responsive iOS and Android applications built for high performance, offline resilience, and seamless API synchronization.
+                    High-performance mobile applications and resilient Progressive Web Apps featuring offline synchronization, localized caching, and responsive biometric auth.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">iOS & Android</span>
-                    <span class="tag-chip">Cross-Platform</span>
-                    <span class="tag-chip">Offline Sync</span>
-                    <span class="tag-chip">Secure Auth</span>
+                    <span class="tag-chip">PWA Offline Cache</span>
+                    <span class="tag-chip">IndexedDB Sync</span>
+                    <span class="tag-chip">Push Alerts</span>
                 </div>
                 <a href="<?= url('mobile-apps.php') ?>" class="card-arrow-link">
                     Explore Mobile Apps →
@@ -387,15 +388,15 @@ require_once __DIR__ . '/includes/header.php';
             <!-- 6. SaaS Development -->
             <div class="card">
                 <div class="card-icon">🚀</div>
-                <h3 class="card-title">SaaS & MVP Engineering</h3>
+                <h3 class="card-title">SaaS Product & MVP Engineering</h3>
                 <p class="card-description">
-                    Turn software concepts into scalable cloud products with multi-tenant data architecture, subscription billing, and administrative dashboards.
+                    Turn your proprietary domain knowledge into a scalable software-as-a-service with multi-tenant database isolation, Stripe/Razorpay billing, and analytics dashboards.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">Rapid MVP</span>
-                    <span class="tag-chip">Multi-Tenant</span>
-                    <span class="tag-chip">Razorpay / Stripe</span>
-                    <span class="tag-chip">Admin Telemetry</span>
+                    <span class="tag-chip">Rapid MVP Launch</span>
+                    <span class="tag-chip">Multi-Tenant Isolation</span>
+                    <span class="tag-chip">Subscription Billing</span>
+                    <span class="tag-chip">Audit Telemetry</span>
                 </div>
                 <a href="<?= url('saas.php') ?>" class="card-arrow-link">
                     Explore SaaS Development →
@@ -406,7 +407,445 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     PROVEN DELIVERY PROCESS (7 STEPS)
+     PROJECTS & LIVE DEMOS SHOWCASE (CLEAR, PROMINENT & INTERACTIVE)
+     ========================================================================== -->
+<section class="section" id="projects-showcase" style="background: rgba(6, 11, 24, 0.7); position: relative;">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>Verified Deliverables & Live Demos</span>
+            </div>
+            <h2 class="section-title">Production Systems & Interactive Demos</h2>
+            <p class="section-subtitle">
+                Real software, AI pipelines, and operational systems engineered for growing companies. Filter by domain or launch an interactive live demo directly in your browser.
+            </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="project-filter-bar" role="tablist" aria-label="Project Categories">
+            <button type="button" class="project-filter-btn active" data-filter="all">
+                <span>✦</span> All Projects (6)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="ai">
+                <span>🤖</span> AI & Agents (2)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="software">
+                <span>💻</span> Custom Software & ERP (2)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="commerce">
+                <span>🛍️</span> Commerce & SaaS (1)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="mobile">
+                <span>📱</span> Mobile & PWA (1)
+            </button>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="project-showcase-grid">
+
+            <!-- PROJECT 1: AI RAG Assistant -->
+            <article class="project-card" data-category="ai">
+                <div class="project-mockup-frame">
+                    <div class="project-mockup-header">
+                        <div class="project-mockup-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">rag-assistant.codex404.internal</span>
+                        <span class="project-badge-pill live">● Production Live</span>
+                    </div>
+                    <div class="project-mockup-screen">
+                        <div class="mockup-ui-bar">
+                            <span style="color: #A78BFA;">🤖 Qdrant Vector Search</span>
+                            <span style="color: #34D399;">Latency: 142ms</span>
+                        </div>
+                        <div class="mockup-stat-row">
+                            <div class="mockup-stat-cell">
+                                <strong>14,200+</strong>
+                                <span>Indexed Docs</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>99.4%</strong>
+                                <span>Precision Rate</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>0</strong>
+                                <span>Cloud Leakage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-body">
+                    <div class="project-category" style="color: #A78BFA;">Enterprise Applied AI</div>
+                    <h3 class="project-title">Enterprise RAG Knowledge Assistant</h3>
+                    <p class="project-problem">
+                        <strong>Problem:</strong> Technical manuals, compliance policies, and SOPs were scattered across 14,000 PDFs, taking staff 45+ minutes to find accurate information.
+                    </p>
+                    <p class="project-solution">
+                        <strong>Engineering Solution:</strong> Built a private retrieval-augmented generation engine with Qdrant vector indexing, hybrid keyword search, and role-based permissions.
+                    </p>
+                    <div class="project-metric-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Sub-second semantic search with 0 hallucination leaks</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag-chip">Python 3.12</span>
+                        <span class="tag-chip">Qdrant Vector DB</span>
+                        <span class="tag-chip">Hybrid RAG</span>
+                        <span class="tag-chip">FastAPI</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-demo-trigger" data-demo="rag">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Launch Live Interactive Demo
+                        </button>
+                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
+                            Case Details →
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 2: WhatsApp Automation -->
+            <article class="project-card" data-category="ai">
+                <div class="project-mockup-frame">
+                    <div class="project-mockup-header">
+                        <div class="project-mockup-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">pipeline.whatsapp-sync</span>
+                        <span class="project-badge-pill demo">⚡ Interactive Demo Ready</span>
+                    </div>
+                    <div class="project-mockup-screen">
+                        <div class="mockup-ui-bar">
+                            <span style="color: #25D366;">💬 WhatsApp Cloud Webhook</span>
+                            <span style="color: #38BDF8;">Auto-CRM Sync</span>
+                        </div>
+                        <div class="mockup-stat-row">
+                            <div class="mockup-stat-cell">
+                                <strong style="color: #25D366;">&lt; 3 mins</strong>
+                                <span>Response Time</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>100%</strong>
+                                <span>Leads Captured</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong style="color: #34D399;">+110%</strong>
+                                <span>Conversion Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-body">
+                    <div class="project-category" style="color: #34D399;">Workflow Automation & AI</div>
+                    <h3 class="project-title">Multi-Channel WhatsApp Lead Ingestion Pipeline</h3>
+                    <p class="project-problem">
+                        <strong>Problem:</strong> High-intent customer inquiries via WhatsApp, website forms, and email waited an average of 4 hours for manual staff follow-up.
+                    </p>
+                    <p class="project-solution">
+                        <strong>Engineering Solution:</strong> Developed an asynchronous webhook pipeline that auto-qualifies leads, replies via WhatsApp API in 900ms, and updates CRM deal stages.
+                    </p>
+                    <div class="project-metric-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Response latency: 4 hours &rarr; under 3 minutes</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag-chip">WhatsApp Cloud API</span>
+                        <span class="tag-chip">PHP 8.4</span>
+                        <span class="tag-chip">Idempotent Worker</span>
+                        <span class="tag-chip">CRM Webhook</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-demo-trigger" data-demo="wa">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Launch Live Interactive Demo
+                        </button>
+                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
+                            Case Details →
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 3: School ERP -->
+            <article class="project-card" data-category="software">
+                <div class="project-mockup-frame">
+                    <div class="project-mockup-header">
+                        <div class="project-mockup-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">erp.institution-portal</span>
+                        <span class="project-badge-pill live">● Production Live</span>
+                    </div>
+                    <div class="project-mockup-screen">
+                        <div class="mockup-ui-bar">
+                            <span style="color: #38BDF8;">🏫 Academic Ledger & Fees</span>
+                            <span style="color: #34D399;">Role: SuperAdmin</span>
+                        </div>
+                        <div class="mockup-stat-row">
+                            <div class="mockup-stat-cell">
+                                <strong>4,800+</strong>
+                                <span>Students Managed</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>4 Roles</strong>
+                                <span>Strict RBAC</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong style="color: #34D399;">0 Errors</strong>
+                                <span>Fee Ledgers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-body">
+                    <div class="project-category" style="color: #38BDF8;">Custom Enterprise Software</div>
+                    <h3 class="project-title">School ERP & Administrative Portal</h3>
+                    <p class="project-problem">
+                        <strong>Problem:</strong> Administrative staff managed student fee collections, academic marks, and parent notifications across 12 manual paper registers.
+                    </p>
+                    <p class="project-solution">
+                        <strong>Engineering Solution:</strong> Engineered a unified role-based web platform consolidating student lifecycles, automated fee receipts, ledger audits, and staff records.
+                    </p>
+                    <div class="project-metric-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Replaced paper ledgers across 4 departments</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag-chip">PHP 8.4</span>
+                        <span class="tag-chip">MySQL Enterprise</span>
+                        <span class="tag-chip">RBAC Security</span>
+                        <span class="tag-chip">Audit Logs</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-demo-trigger" data-demo="erp">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Launch Live Interactive Demo
+                        </button>
+                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
+                            Case Details →
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 4: B2B E-Commerce -->
+            <article class="project-card" data-category="commerce">
+                <div class="project-mockup-frame">
+                    <div class="project-mockup-header">
+                        <div class="project-mockup-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">store.b2b-checkout</span>
+                        <span class="project-badge-pill demo">⚡ Interactive Demo Ready</span>
+                    </div>
+                    <div class="project-mockup-screen">
+                        <div class="mockup-ui-bar">
+                            <span style="color: #EC4899;">🛍️ Wholesale Tier Engine</span>
+                            <span style="color: #34D399;">Live Stock Lock</span>
+                        </div>
+                        <div class="mockup-stat-row">
+                            <div class="mockup-stat-cell">
+                                <strong>Tier 3</strong>
+                                <span>Bulk Pricing</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>Instant</strong>
+                                <span>GST PDF Invoice</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong style="color: #34D399;">0 Errors</strong>
+                                <span>Stock Mismatch</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-body">
+                    <div class="project-category" style="color: #F472B6;">B2B Commerce & SaaS</div>
+                    <h3 class="project-title">B2B Wholesale Ordering & Invoice Engine</h3>
+                    <p class="project-problem">
+                        <strong>Problem:</strong> Wholesale buyers phoned in orders; inventory counts frequently conflicted with warehouse stock, and tax invoice generation took 3 days.
+                    </p>
+                    <p class="project-solution">
+                        <strong>Engineering Solution:</strong> Custom wholesale ordering system with real-time inventory reservation, volume tier discounts, automated GST invoice PDF generation, and Razorpay/Stripe checkout.
+                    </p>
+                    <div class="project-metric-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Zero inventory reconciliation errors post-launch</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag-chip">Payment Gateways</span>
+                        <span class="tag-chip">PDF Invoice Engine</span>
+                        <span class="tag-chip">PHP 8.4</span>
+                        <span class="tag-chip">Redis Caching</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-demo-trigger" data-demo="b2b">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Launch Live Interactive Demo
+                        </button>
+                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
+                            Case Details →
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 5: Clinic OPD Scheduling -->
+            <article class="project-card" data-category="software">
+                <div class="project-mockup-frame">
+                    <div class="project-mockup-header">
+                        <div class="project-mockup-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">med.opd-scheduler</span>
+                        <span class="project-badge-pill live">● Production Live</span>
+                    </div>
+                    <div class="project-mockup-screen">
+                        <div class="mockup-ui-bar">
+                            <span style="color: #2DD4BF;">🏥 Multi-Doctor Calendar</span>
+                            <span style="color: #34D399;">Slot Lock: Active</span>
+                        </div>
+                        <div class="mockup-stat-row">
+                            <div class="mockup-stat-cell">
+                                <strong>26+</strong>
+                                <span>Doctors Active</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>100%</strong>
+                                <span>SMS Delivery</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong style="color: #34D399;">0</strong>
+                                <span>Double Bookings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-body">
+                    <div class="project-category" style="color: #2DD4BF;">Healthcare & Booking</div>
+                    <h3 class="project-title">Central Medical Clinic OPD Portal</h3>
+                    <p class="project-problem">
+                        <strong>Problem:</strong> Front-desk staff taking phone appointments suffered daily double-bookings across 26 specialists, causing patient wait times over 90 minutes.
+                    </p>
+                    <p class="project-solution">
+                        <strong>Engineering Solution:</strong> Multi-specialty clinical booking portal with transaction-level slot reservation, doctor vacation overrides, and automated SMS appointment reminders.
+                    </p>
+                    <div class="project-metric-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Zero appointment double-bookings across 18 months</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag-chip">MySQL Transactions</span>
+                        <span class="tag-chip">SMS API</span>
+                        <span class="tag-chip">Calendar UI</span>
+                        <span class="tag-chip">PHP 8.4</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-demo-trigger" data-demo="rag">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Launch Live Interactive Demo
+                        </button>
+                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
+                            Case Details →
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 6: Imaan360 PWA -->
+            <article class="project-card" data-category="mobile">
+                <div class="project-mockup-frame">
+                    <div class="project-mockup-header">
+                        <div class="project-mockup-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">app.imaan360.pwa</span>
+                        <span class="project-badge-pill live">● Production Live</span>
+                    </div>
+                    <div class="project-mockup-screen">
+                        <div class="mockup-ui-bar">
+                            <span style="color: #FB923C;">📱 Progressive Web App</span>
+                            <span style="color: #34D399;">Offline Cache: 100%</span>
+                        </div>
+                        <div class="mockup-stat-row">
+                            <div class="mockup-stat-cell">
+                                <strong>50,000+</strong>
+                                <span>Active Users</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong>99.99%</strong>
+                                <span>Uptime SLA</span>
+                            </div>
+                            <div class="mockup-stat-cell">
+                                <strong style="color: #38BDF8;">60 FPS</strong>
+                                <span>Smooth UI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-body">
+                    <div class="project-category" style="color: #FB923C;">Mobile & PWA</div>
+                    <h3 class="project-title">Imaan360 — Community & Lifestyle PWA</h3>
+                    <p class="project-problem">
+                        <strong>Problem:</strong> Native app stores carried high publishing friction and users in low-bandwidth areas faced frequent network drops while accessing daily schedules.
+                    </p>
+                    <p class="project-solution">
+                        <strong>Engineering Solution:</strong> Engineered a lightweight Progressive Web App using Service Workers and IndexedDB for full offline capabilities and instant sub-second page loads.
+                    </p>
+                    <div class="project-metric-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>50,000+ active installs with 99.99% reliability</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag-chip">Service Workers</span>
+                        <span class="tag-chip">IndexedDB</span>
+                        <span class="tag-chip">PWA Offline</span>
+                        <span class="tag-chip">Vanilla JS</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-demo-trigger" data-demo="rag">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Launch Live Interactive Demo
+                        </button>
+                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
+                            Case Details →
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3.5rem;">
+            <a href="<?= url('case-studies.php') ?>" class="btn btn-secondary btn-lg">
+                View All Deliverables & Architecture Notes →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     PROVEN 7-STAGE DELIVERY FRAMEWORK
      ========================================================================== -->
 <section class="section" style="background: rgba(11, 31, 58, 0.3);">
     <div class="container">
@@ -417,7 +856,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <h2 class="section-title">The 7-Stage Engineering Framework</h2>
             <p class="section-subtitle">
-                A disciplined, transparent delivery cadence engineered to eliminate ambiguity and guarantee production readiness.
+                A disciplined, transparent delivery cadence engineered to eliminate ambiguity, enforce strict type-safety, and guarantee production readiness.
             </p>
         </div>
 
@@ -425,12 +864,12 @@ require_once __DIR__ . '/includes/header.php';
             <div class="process-step">
                 <div class="step-num">01</div>
                 <h3>Discover</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Deconstruct operational friction, user requirements, data sources, and target business outcomes.</p>
+                <p style="font-size: 0.9rem; color: var(--slate);">Deconstruct operational friction, user workflows, data models, and business objectives.</p>
             </div>
             <div class="process-step">
                 <div class="step-num">02</div>
                 <h3>Strategize</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Define system architecture, database schema, security boundaries, and technical stack selection.</p>
+                <p style="font-size: 0.9rem; color: var(--slate);">Define system architecture, database schema, security boundaries, and technology stack.</p>
             </div>
             <div class="process-step">
                 <div class="step-num">03</div>
@@ -468,154 +907,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     FEATURED CASE STUDIES
-     ========================================================================== -->
-<section class="section">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Verified Deliverables</span>
-            </div>
-            <h2 class="section-title">Practical Engineering Case Studies</h2>
-            <p class="section-subtitle">
-                Explore real software systems, AI pipelines, and enterprise automation platforms delivered for high-growth operations.
-            </p>
-        </div>
-
-        <!-- Interactive Case Studies Slider (Carousel) -->
-        <div class="slider-container" data-slider="case-studies">
-            <div class="slider-wrapper">
-                <div class="slider-track">
-                    <!-- Case Study 1 -->
-                    <div class="slider-card" style="border-top: 3px solid #3B82F6;">
-                        <div style="font-size: 0.8rem; color: #38BDF8; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Education & Enterprise</div>
-                        <h3 class="card-title">School ERP & Administrative Portal</h3>
-                        <p class="card-description">
-                            Consolidated student records, fee collection, staff attendance, and parent communication into a unified role-based management web platform.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag-chip">PHP 8</span>
-                            <span class="tag-chip">MySQL</span>
-                            <span class="tag-chip">RBAC Security</span>
-                            <span class="tag-chip">Fee Automation</span>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 1.25rem; font-size: 0.85rem; color: #34D399; font-weight: 600;">
-                            ✓ Replaced paper registers across 4 departments
-                        </div>
-                    </div>
-
-                    <!-- Case Study 2 -->
-                    <div class="slider-card" style="border-top: 3px solid #06D6A0;">
-                        <div style="font-size: 0.8rem; color: #34D399; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Sales Automation</div>
-                        <h3 class="card-title">Multi-Channel Lead Ingestion Pipeline</h3>
-                        <p class="card-description">
-                            Built an automated inbound lead ingestion engine connecting website forms, WhatsApp Business API, and email inquiries into a structured CRM.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag-chip">Webhook Ingestion</span>
-                            <span class="tag-chip">WhatsApp Business API</span>
-                            <span class="tag-chip">Idempotent Worker</span>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 1.25rem; font-size: 0.85rem; color: #34D399; font-weight: 600;">
-                            ✓ Lead response time: 4 hours → under 3 minutes
-                        </div>
-                    </div>
-
-                    <!-- Case Study 3 -->
-                    <div class="slider-card" style="border-top: 3px solid #EC4899;">
-                        <div style="font-size: 0.8rem; color: #F472B6; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Retail & Commerce</div>
-                        <h3 class="card-title">B2B E-Commerce & Checkout Engine</h3>
-                        <p class="card-description">
-                            Developed a robust custom ordering portal featuring live inventory sync, payment gateway integration, automated invoice generation, and order tracking.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag-chip">Payment Gateway</span>
-                            <span class="tag-chip">Live Inventory</span>
-                            <span class="tag-chip">PDF Invoice Engine</span>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 1.25rem; font-size: 0.85rem; color: #34D399; font-weight: 600;">
-                            ✓ Zero inventory reconciliation errors post-launch
-                        </div>
-                    </div>
-
-                    <!-- Case Study 4 -->
-                    <div class="slider-card" style="border-top: 3px solid #8B5CF6;">
-                        <div style="font-size: 0.8rem; color: #A78BFA; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Applied AI Systems</div>
-                        <h3 class="card-title">Enterprise RAG Knowledge Assistant</h3>
-                        <p class="card-description">
-                            Deployed a private retrieval-augmented generation engine indexing 14,000+ proprietary manuals and technical specs with strict role isolation.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag-chip">Vector Embeddings</span>
-                            <span class="tag-chip">Python</span>
-                            <span class="tag-chip">Hybrid Search</span>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 1.25rem; font-size: 0.85rem; color: #34D399; font-weight: 600;">
-                            ✓ Sub-second semantic search with 0 hallucination leaks
-                        </div>
-                    </div>
-
-                    <!-- Case Study 5 -->
-                    <div class="slider-card" style="border-top: 3px solid #F97316;">
-                        <div style="font-size: 0.8rem; color: #FB923C; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Mobile & PWA</div>
-                        <h3 class="card-title">Imaan360 — Community & Lifestyle PWA</h3>
-                        <p class="card-description">
-                            High-concurrency mobile progressive web application featuring offline prayer synchronization, localized timing APIs, and instant caching.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag-chip">Service Workers</span>
-                            <span class="tag-chip">IndexedDB</span>
-                            <span class="tag-chip">PWA Offline</span>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 1.25rem; font-size: 0.85rem; color: #34D399; font-weight: 600;">
-                            ✓ 50,000+ active installs with 99.99% reliability
-                        </div>
-                    </div>
-
-                    <!-- Case Study 6 -->
-                    <div class="slider-card" style="border-top: 3px solid #14B8A6;">
-                        <div style="font-size: 0.8rem; color: #2DD4BF; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Healthcare & Booking</div>
-                        <h3 class="card-title">Central Medical Clinic OPD Portal</h3>
-                        <p class="card-description">
-                            Custom multi-specialty clinical scheduling system managing 26+ specialist doctors, real-time slot locking, and automated patient SMS updates.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag-chip">Real-time Locking</span>
-                            <span class="tag-chip">MySQL Transactions</span>
-                            <span class="tag-chip">SMS Alerts</span>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 1.25rem; font-size: 0.85rem; color: #34D399; font-weight: 600;">
-                            ✓ Zero appointment double-bookings across 18 months
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slider Controls -->
-            <div class="slider-controls">
-                <div class="slider-dots" role="tablist" aria-label="Case studies slides"></div>
-                <div class="slider-btn-group">
-                    <button class="slider-nav-btn slider-prev-btn" aria-label="Previous slide" title="Previous Project">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </button>
-                    <button class="slider-nav-btn slider-next-btn" aria-label="Next slide" title="Next Project">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 2.5rem;">
-            <a href="<?= url('case-studies.php') ?>" class="btn btn-secondary">
-                View All Deliverables & Architecture Notes →
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     CLIENT TESTIMONIALS & TRUST CAROUSEL
+     CLIENT VALIDATION & TESTIMONIALS
      ========================================================================== -->
 <section class="testimonials-section">
     <div class="container">
@@ -683,17 +975,397 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     LEADERSHIP SECTION
+     FOUNDER & SENIOR LEADERSHIP SECTION
      ========================================================================== -->
 <?php include __DIR__ . '/components/leadership.php'; ?>
 
 <!-- ==========================================================================
-     CONVERSION CTA SECTION
+     DIRECT CONTACT & PROJECT INQUIRY FORM (HOMEPAGE EMBEDDED)
      ========================================================================== -->
-<?php
-$ctaHeading = "Ready to elevate your technology capabilities?";
-$ctaSubtitle = "Whether you need to build custom software from scratch, automate high-friction workflows, or explore applied AI — we are ready to partner.";
-include __DIR__ . '/components/cta.php';
-?>
+<section class="home-contact-section" id="contact-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>Direct Engineering Communication</span>
+            </div>
+            <h2 class="section-title">Start Your Project or Schedule a Consultation</h2>
+            <p class="section-subtitle">
+                Discuss your software, AI, or automation requirements directly with our senior technical leadership. We review scopes and reply within 24 business hours.
+            </p>
+        </div>
+
+        <div class="home-contact-grid">
+            <!-- Left Column: Direct Access & Trust Guarantees -->
+            <div>
+                <h3 style="font-size: 1.65rem; color: var(--white); margin-bottom: 1rem;">
+                    Let's Talk Architecture
+                </h3>
+                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">
+                    We skip aggressive sales calls and agency account managers. When you reach out to CodeX404 Solutions, you discuss your operational challenges directly with technical practitioners who design and build software.
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.25rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.2rem; margin: 0;">✉️</div>
+                        <div>
+                            <strong style="color: var(--white); display: block;">Primary Email</strong>
+                            <a href="mailto:<?= COMPANY_EMAIL ?>" style="color: var(--cyan);"><?= COMPANY_EMAIL ?></a>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.2rem; margin: 0;">💬</div>
+                        <div>
+                            <strong style="color: var(--white); display: block;">Instant WhatsApp Discussion</strong>
+                            <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                                Chat on WhatsApp (<?= COMPANY_WHATSAPP_NUMBER ?>) &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.2rem; margin: 0;">⏱️</div>
+                        <div>
+                            <strong style="color: var(--white); display: block;">Turnaround Commitment</strong>
+                            <span style="color: var(--slate);">Direct engineering review within 24 business hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Guarantees List -->
+                <div class="trust-badge-list">
+                    <div class="trust-badge-item">
+                        <div class="trust-badge-icon">✓</div>
+                        <span><strong>100% IP & Code Ownership:</strong> You retain complete repository and database rights.</span>
+                    </div>
+                    <div class="trust-badge-item">
+                        <div class="trust-badge-icon">✓</div>
+                        <span><strong>Mutual NDA Protection:</strong> Strict confidentiality prior to technical scoping.</span>
+                    </div>
+                    <div class="trust-badge-item">
+                        <div class="trust-badge-icon">✓</div>
+                        <span><strong>Zero Vendor Lock-in:</strong> Clean, portable, documented code running on open standards.</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; background: rgba(11, 31, 58, 0.4); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                    <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem; color: var(--cyan);">Prefer an in-depth video roadmap session?</h4>
+                    <p style="font-size: 0.88rem; margin-bottom: 0.85rem; color: var(--slate);">For complex architectures, fill out our questionnaire to reserve a video call.</p>
+                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm">
+                        Book a Discovery Call Instead &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Embedded Form -->
+            <div class="form-card" style="border: 1px solid rgba(59, 130, 246, 0.35); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(59, 130, 246, 0.15);">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.35rem;">Send Us a Message</h3>
+                    <p style="font-size: 0.875rem; color: var(--slate-dark);">Complete this form to reach our engineering lead directly.</p>
+                </div>
+
+                <div class="form-alert-container"></div>
+
+                <form action="<?= url('contact.php') ?>" method="POST" class="ajax-form" id="homeContactForm" novalidate>
+                    <?= csrf_input_field() ?>
+
+                    <!-- Honeypot -->
+                    <div style="display: none;" aria-hidden="true">
+                        <label for="_home_gotcha">Do not fill this</label>
+                        <input type="text" name="_gotcha" id="_home_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="grid grid-cols-2" style="gap: 1rem;">
+                        <div class="form-group">
+                            <label for="home_name" class="form-label">Full Name <span class="required">*</span></label>
+                            <input type="text" id="home_name" name="name" class="form-control" placeholder="Sarah Jenkins" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="home_email" class="form-label">Work Email <span class="required">*</span></label>
+                            <input type="email" id="home_email" name="email" class="form-control" placeholder="sarah@company.com" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2" style="gap: 1rem;">
+                        <div class="form-group">
+                            <label for="home_phone" class="form-label">Phone / WhatsApp</label>
+                            <input type="tel" id="home_phone" name="phone" class="form-control" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="home_company" class="form-label">Company Name</label>
+                            <input type="text" id="home_company" name="company" class="form-control" placeholder="Acme Logistics">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2" style="gap: 1rem;">
+                        <div class="form-group">
+                            <label for="home_subject" class="form-label">Primary Solution Needed</label>
+                            <select id="home_subject" name="subject" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
+                                <option value="Custom Software Development">Custom Software / Web Platform</option>
+                                <option value="Enterprise AI & RAG">Enterprise AI & Knowledge Base (RAG)</option>
+                                <option value="Autonomous AI Agents">Autonomous AI Agents</option>
+                                <option value="Workflow & WhatsApp Automation">Workflow & WhatsApp Automation</option>
+                                <option value="Mobile App Development">Mobile App (iOS/Android/PWA)</option>
+                                <option value="SaaS & MVP Engineering">SaaS MVP Development</option>
+                                <option value="General Architecture Consultation">Other / General Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="home_budget" class="form-label">Estimated Scope / Budget</label>
+                            <select id="home_budget" name="budget_tier" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
+                                <option value="mvp_scale">Focused MVP (&lt; $2,500 / ₹2L)</option>
+                                <option value="standard" selected>Core System ($2,500 - $10,000 / ₹2L - ₹8L)</option>
+                                <option value="enterprise">Full Enterprise Platform ($10,000+ / ₹8L+)</option>
+                                <option value="exploring">Just Exploring / Need Guidance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="home_message" class="form-label">Project Details & Challenge <span class="required">*</span></label>
+                        <textarea id="home_message" name="message" class="form-textarea" rows="4" placeholder="Describe the operational friction you are solving, your timeline, or current stack..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-checkbox-label">
+                            <input type="checkbox" name="privacy_consent" value="1" required>
+                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and consent to CodeX404 Solutions processing my inquiry details.</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Submit Project Inquiry
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     INTERACTIVE PROJECT DEMO MODAL SYSTEM
+     ========================================================================== -->
+<div class="demo-modal-overlay" id="projectDemoModal" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
+    <div class="demo-modal-window">
+        <!-- Modal Header -->
+        <div class="demo-modal-header">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="project-mockup-dots">
+                    <span class="dot-red"></span>
+                    <span class="dot-yellow"></span>
+                    <span class="dot-green"></span>
+                </div>
+                <h3 id="demoModalTitle" style="font-size: 1.05rem; color: var(--white); margin: 0;">
+                    ⚡ Interactive Project Sandbox
+                </h3>
+            </div>
+
+            <div class="demo-modal-nav" role="tablist">
+                <button type="button" class="demo-nav-tab active" data-demo-target="rag" role="tab">
+                    🤖 AI RAG Assistant
+                </button>
+                <button type="button" class="demo-nav-tab" data-demo-target="wa" role="tab">
+                    💬 WhatsApp Pipeline
+                </button>
+                <button type="button" class="demo-nav-tab" data-demo-target="erp" role="tab">
+                    🏫 School ERP
+                </button>
+                <button type="button" class="demo-nav-tab" data-demo-target="b2b" role="tab">
+                    🛍️ B2B Wholesale
+                </button>
+            </div>
+
+            <button type="button" class="demo-close-btn" aria-label="Close demo modal">&times;</button>
+        </div>
+
+        <!-- Modal Body / Active Simulator Panes -->
+        <div class="demo-modal-body">
+
+            <!-- PANE 1: AI RAG Simulator -->
+            <div class="demo-simulator-pane active" id="demo-pane-rag">
+                <div style="margin-bottom: 1.25rem;">
+                    <h4 style="color: #38BDF8; margin-bottom: 0.25rem; font-size: 1.15rem;">
+                        Enterprise RAG Knowledge Assistant — Live Sandbox
+                    </h4>
+                    <p style="font-size: 0.85rem; color: var(--slate);">
+                        Ask a question to see how our vector search engine indexes internal company documentation and produces verified, cited answers with zero hallucinations.
+                    </p>
+                </div>
+
+                <!-- Prompt suggestion chips -->
+                <div class="rag-prompt-suggestions">
+                    <span style="font-size: 0.78rem; color: var(--slate-dark); align-self: center;">Try Asking:</span>
+                    <button type="button" class="rag-chip" data-prompt="What is your IP and source code ownership policy?">
+                        💼 IP Ownership Policy
+                    </button>
+                    <button type="button" class="rag-chip" data-prompt="How does the WhatsApp lead pipeline work?">
+                        ⚡ WhatsApp Pipeline
+                    </button>
+                    <button type="button" class="rag-chip" data-prompt="Explain the School ERP role-based security">
+                        🏫 School ERP Security
+                    </button>
+                </div>
+
+                <!-- Chat Box -->
+                <div class="rag-chat-box" id="ragChatBox">
+                    <div class="chat-bubble ai">
+                        <div style="margin-bottom: 0.4rem; color: #34D399; font-weight: 600; font-size: 0.75rem;">
+                            ● RAG Agent Online &bull; Qdrant Vector Index Active (14,200 chunks)
+                        </div>
+                        <div>
+                            Hello! I am the CodeX404 Enterprise Knowledge Assistant. How can I assist you with our engineering architectures, system specs, or client policies today?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input row -->
+                <div class="rag-input-row">
+                    <input type="text" id="ragInput" class="form-control" placeholder="Type a question (e.g. 'How is client IP protected?')..." style="flex: 1;">
+                    <button type="button" id="ragSendBtn" class="btn btn-primary btn-sm" style="white-space: nowrap;">
+                        Send Query &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANE 2: WhatsApp Lead Pipeline Simulator -->
+            <div class="demo-simulator-pane" id="demo-pane-wa">
+                <div style="margin-bottom: 1.25rem;">
+                    <h4 style="color: #25D366; margin-bottom: 0.25rem; font-size: 1.15rem;">
+                        Multi-Channel WhatsApp Pipeline — Live Ingestion Simulation
+                    </h4>
+                    <p style="font-size: 0.85rem; color: var(--slate);">
+                        Click the button below to simulate an inbound lead from Meta WhatsApp Cloud API. Watch our webhook engine parse, auto-respond, and update the CRM board in real-time.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <button type="button" id="waSimulateBtn" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, #25D366, #128C7E); color: #FFF;">
+                        ⚡ Simulate Inbound WhatsApp Lead
+                    </button>
+                </div>
+
+                <div class="wa-simulator-grid">
+                    <!-- Phone View -->
+                    <div class="wa-phone-frame">
+                        <div style="font-size: 0.75rem; color: #8696A0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; margin-bottom: 10px;">
+                            📱 Client WhatsApp Chat Window
+                        </div>
+                        <div id="waChatLog" style="height: 220px; overflow-y: auto;">
+                            <div style="background: #202C33; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%;">
+                                <strong>Lead #1039:</strong> Hello CodeX404! We need an automated booking portal for our diagnostic lab.
+                                <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">10:14 AM</div>
+                            </div>
+                            <div style="background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%; margin-left: auto;">
+                                <strong>CodeX404 Auto-Agent:</strong> Thank you for reaching out! We received your booking portal inquiry. Our medical systems architect is reviewing this and will reply shortly. Ref: #LD-1039.
+                                <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">10:14 AM &bull; 1.2s</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CRM Pipeline Kanban View -->
+                    <div class="crm-board-frame">
+                        <div style="font-size: 0.75rem; color: #38BDF8; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; margin-bottom: 10px;">
+                            📊 Live CRM Pipeline Stage: Inbound Qualified
+                        </div>
+                        <div id="crmLeadList" style="height: 220px; overflow-y: auto;">
+                            <div style="background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 10px; margin-bottom: 8px; font-size: 0.8rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <strong style="color: #38BDF8;">Diagnostic Lab Booking #LD-1039</strong>
+                                    <span style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px;">QUALIFIED</span>
+                                </div>
+                                <div style="color: var(--slate); font-size: 0.75rem;">Source: WhatsApp Cloud API &nbsp;•&nbsp; Latency: 1.2s</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 3: School ERP Simulator -->
+            <div class="demo-simulator-pane" id="demo-pane-erp">
+                <div style="margin-bottom: 1.25rem;">
+                    <h4 style="color: #38BDF8; margin-bottom: 0.25rem; font-size: 1.15rem;">
+                        School ERP & Administrative Portal — Ledger Dashboard
+                    </h4>
+                    <p style="font-size: 0.85rem; color: var(--slate);">
+                        Real-time student fee collection and ledger reconciliation dashboard preview.
+                    </p>
+                </div>
+
+                <div style="background: rgba(10, 22, 40, 0.9); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.75rem;">
+                        <div>
+                            <strong style="color: var(--white); font-size: 1.05rem;">Al-Huda International Academy — Session 2026-27</strong>
+                            <div style="font-size: 0.8rem; color: #34D399;">● RBAC Active: Finance Controller Mode</div>
+                        </div>
+                        <span style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;">Term 2 Audited</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.25rem;">
+                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Total Enrolled</span>
+                            <strong style="display: block; font-size: 1.15rem; color: var(--white);">1,420</strong>
+                        </div>
+                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Fees Collected</span>
+                            <strong style="display: block; font-size: 1.15rem; color: #34D399;">94.2%</strong>
+                        </div>
+                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Attendance Rate</span>
+                            <strong style="display: block; font-size: 1.15rem; color: #38BDF8;">97.8%</strong>
+                        </div>
+                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Reconciliation</span>
+                            <strong style="display: block; font-size: 1.15rem; color: #34D399;">Balanced</strong>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.825rem; color: var(--slate); background: rgba(17, 29, 58, 0.5); padding: 0.75rem; border-radius: 6px;">
+                        ✔ Auto-generated 1,420 digital fee receipts with SMS delivery &bull; 0 manual cash reconciliation errors reported.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 4: B2B Wholesale Simulator -->
+            <div class="demo-simulator-pane" id="demo-pane-b2b">
+                <div style="margin-bottom: 1.25rem;">
+                    <h4 style="color: #EC4899; margin-bottom: 0.25rem; font-size: 1.15rem;">
+                        B2B Wholesale Ordering & Automated Pricing Engine
+                    </h4>
+                    <p style="font-size: 0.85rem; color: var(--slate);">
+                        Live volume tier discount & real-time stock allocation calculator.
+                    </p>
+                </div>
+
+                <div style="background: rgba(10, 22, 40, 0.9); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div>
+                            <strong style="color: var(--white);">Industrial SKU: #PWR-SOLAR-INVERTER-5KW</strong>
+                            <div style="font-size: 0.8rem; color: var(--slate);">Warehouse Inventory: 340 units in stock</div>
+                        </div>
+                        <span style="background: rgba(16, 185, 129, 0.15); color: #34D399; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;">Tier 3 Bulk Discount Active</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: rgba(17, 29, 58, 0.6); padding: 0.85rem; border-radius: 6px;">
+                            <div style="font-size: 0.8rem; color: var(--slate-dark); margin-bottom: 4px;">Standard Retail Unit Price</div>
+                            <div style="font-size: 1.1rem; color: var(--slate); text-decoration: line-through;">$1,200.00 / unit</div>
+                        </div>
+                        <div style="background: rgba(17, 29, 58, 0.6); padding: 0.85rem; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div style="font-size: 0.8rem; color: #34D399; margin-bottom: 4px;">Wholesale Bulk Price (&gt; 25 units)</div>
+                            <div style="font-size: 1.25rem; color: #34D399; font-weight: bold;">$890.00 / unit (-25.8%)</div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.825rem; color: var(--slate); background: rgba(17, 29, 58, 0.5); padding: 0.75rem; border-radius: 6px;">
+                        ✔ Checkout triggers instant stock locking in Redis, automated GST PDF invoice dispatch, and payment gateway settlement.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
