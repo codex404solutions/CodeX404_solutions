@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>graphify - graphify-out/graph.html</title>
+<script src="https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js"
+        integrity="sha384-Ux6phic9PEHJ38YtrijhkzyJ8yQlH8i/+buBR8s3mAZOJrP1gwyvAcIYl3GWtpX1"
+        crossorigin="anonymous"></script>
+<style>
+  :root {
+    --bg: #0f0f1a; --panel: #1a1a2e; --border: #2a2a4e; --input-border: #3a3a5e;
+    --text: #e0e0e0; --text-2: #aaa; --text-3: #ccc; --muted: #555; --count: #666;
+    --neighbor-border: #333; --node-label: #ffffff;
+  }
+  [data-theme="light"] {
+    --bg: #ffffff; --panel: #f8f9fa; --border: #d9dee5; --input-border: #c3cad4;
+    --text: #222222; --text-2: #666666; --text-3: #333333; --muted: #888888; --count: #777777;
+    --neighbor-border: #ccc; --node-label: #222222;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; overflow: hidden; }
+  #graph { flex: 1; }
+  #sidebar { width: 280px; background: var(--panel); border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+  #search-wrap { padding: 12px; border-bottom: 1px solid var(--border); }
+  #search { width: 100%; background: var(--bg); border: 1px solid var(--input-border); color: var(--text); padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
+  #search:focus { border-color: #4E79A7; }
+  #search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid var(--border); display: none; }
+  .search-item { padding: 4px 6px; cursor: pointer; border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .search-item:hover { background: var(--border); }
+  #info-panel { padding: 14px; border-bottom: 1px solid var(--border); min-height: 140px; }
+  #info-panel h3 { font-size: 13px; color: var(--text-2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #info-content { font-size: 13px; color: var(--text-3); line-height: 1.6; }
+  #info-content .field { margin-bottom: 5px; }
+  #info-content .field b { color: var(--text); }
+  #info-content .empty { color: var(--muted); font-style: italic; }
+  .neighbor-link { display: block; padding: 2px 6px; margin: 2px 0; border-radius: 3px; cursor: pointer; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid var(--neighbor-border); }
+  .neighbor-link:hover { background: var(--border); }
+  #neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
+  #legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
+  #legend-wrap h3 { font-size: 13px; color: var(--text-2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .legend-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; border-radius: 4px; font-size: 12px; }
+  .legend-item:hover { background: var(--border); padding-left: 4px; }
+  .legend-item.dimmed { opacity: 0.35; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend-count { color: var(--count); font-size: 11px; }
+  #stats { padding: 10px 14px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); }
+  #legend-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 4px 0; }
+  #legend-controls label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; color: var(--text-2); user-select: none; }
+  #legend-controls label:hover { color: var(--text); }
+  .legend-cb, #select-all-cb { appearance: none; -webkit-appearance: none; width: 14px; height: 14px; border: 1.5px solid var(--input-border); border-radius: 3px; background: var(--bg); cursor: pointer; position: relative; flex-shrink: 0; }
+  .legend-cb:checked, #select-all-cb:checked { background: #4E79A7; border-color: #4E79A7; }
+  .legend-cb:checked::after, #select-all-cb:checked::after { content: ''; position: absolute; left: 3.5px; top: 1px; width: 4px; height: 7px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  #select-all-cb:indeterminate { background: #4E79A7; border-color: #4E79A7; }
+  #select-all-cb:indeterminate::after { content: ''; position: absolute; left: 2px; top: 5px; width: 8px; height: 2px; background: #fff; border: none; transform: none; }
+  #theme-wrap { display: flex; gap: 4px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  #theme-wrap button { flex: 1; background: var(--bg); color: var(--text-2); border: 1px solid var(--input-border); border-radius: 4px; padding: 3px 0; font-size: 11px; cursor: pointer; }
+  #theme-wrap button:hover { color: var(--text); }
+  #theme-wrap button[aria-pressed="true"] { background: #4E79A7; border-color: #4E79A7; color: #fff; }
+</style>
+<script id="graphify-theme-init">
+// Apply the saved theme before first paint (#3894). No saved choice keeps the
+// historical dark look; "system" follows prefers-color-scheme.
+(function () {
+  var pref = null;
+  try { pref = localStorage.getItem('graphify-theme'); } catch (e) {}
+  var t = pref === 'light' ? 'light'
+    : pref === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light'
+    : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+</head>
+<body>
+<div id="graph"></div>
+<div id="sidebar">
+  <div id="theme-wrap" role="group" aria-label="Theme">
+    <button type="button" data-theme-choice="light">Light</button>
+    <button type="button" data-theme-choice="dark">Dark</button>
+    <button type="button" data-theme-choice="system">System</button>
+  </div>
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search nodes..." autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div id="info-panel">
+    <h3>Node Info</h3>
+    <div id="info-content"><span class="empty">Click a node to inspect it</span></div>
+  </div>
+  <div id="legend-wrap">
+    <h3>Communities</h3>
+    <div id="legend-controls">
+      <label><input type="checkbox" id="select-all-cb" checked onchange="toggleAllCommunities(!this.checked)">Select All</label>
+    </div>
+    <div id="legend"></div>
+  </div>
+  <div id="stats">90 nodes &middot; 102 edges &middot; 38 communities</div>
+</div>
+<script>
+const RAW_NODES = [{"id": "website_app_helpers_sanitizer_sanitizer", "label": "Sanitizer", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 22.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Sanitizer", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Helpers/Sanitizer.php", "file_type": "code", "degree": 6}, {"id": "website_app_controllers_leadcontroller_leadcontroller", "label": "LeadController", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "LeadController", "community": 4, "community_name": "Lead Processing & Email Notification", "source_file": "website/app/Controllers/LeadController.php", "file_type": "code", "degree": 3}, {"id": "website_app_services_emailservice_emailservice", "label": "EmailService", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 22.9, "font": {"size": 12, "color": "#ffffff"}, "title": "EmailService", "community": 4, "community_name": "Lead Processing & Email Notification", "source_file": "website/app/Services/EmailService.php", "file_type": "code", "degree": 6}, {"id": "website_assets_js_main_particle", "label": "Particle", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 20.7, "font": {"size": 12, "color": "#ffffff"}, "title": "Particle", "community": 5, "community_name": "Canvas Particle FX & UI Scripts", "source_file": "website/assets/js/main.js", "file_type": "code", "degree": 5}, {"id": "website_app_validators_formvalidator_formvalidator", "label": "FormValidator", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 27.1, "font": {"size": 12, "color": "#ffffff"}, "title": "FormValidator", "community": 6, "community_name": "Form Validation System", "source_file": "website/app/Validators/FormValidator.php", "file_type": "code", "degree": 8}, {"id": "website_config_database_database", "label": "Database", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 18.6, "font": {"size": 12, "color": "#ffffff"}, "title": "Database", "community": 7, "community_name": "Database Connection & PDO Layer", "source_file": "website/config/database.php", "file_type": "code", "degree": 4}, {"id": "website_app_services_crmintegrationservice_crmintegrationservice", "label": "CRMIntegrationService", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 25.0, "font": {"size": 12, "color": "#ffffff"}, "title": "CRMIntegrationService", "community": 8, "community_name": "CRM Integration Service", "source_file": "website/app/Services/CRMIntegrationService.php", "file_type": "code", "degree": 7}, {"id": "website_app_controllers_contactcontroller_contactcontroller", "label": "ContactController", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "ContactController", "community": 9, "community_name": "Contact Routing & Controller", "source_file": "website/app/Controllers/ContactController.php", "file_type": "code", "degree": 3}, {"id": "update_tree_format_project_name", "label": "format_project_name()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "format_project_name()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 3}, {"id": "update_tree_generate_tree", "label": "generate_tree()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 20.7, "font": {"size": 12, "color": "#ffffff"}, "title": "generate_tree()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 5}, {"id": "update_tree_get_repo_name", "label": "get_repo_name()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "get_repo_name()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 3}, {"id": "update_tree_update_commands", "label": "update_commands()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "update_commands()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 3}, {"id": "update_tree_update_readme", "label": "update_readme()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 22.9, "font": {"size": 12, "color": "#ffffff"}, "title": "update_readme()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 6}, {"id": "update_tree_update_title", "label": "update_title()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "update_title()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 2}, {"id": "update_tree_update_tree_section", "label": "update_tree_section()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "update_tree_section()", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 3}, {"id": "website_includes_config_asset", "label": "asset()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "asset()", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/config.php", "file_type": "code", "degree": 3}, {"id": "website_includes_config_closure_1", "label": "{closure#1}()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "{closure#1}()", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/config.php", "file_type": "code", "degree": 1}, {"id": "website_includes_config_url", "label": "url()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "url()", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/config.php", "file_type": "code", "degree": 1}, {"id": "website_includes_seo_render_json_ld_faq", "label": "render_json_ld_faq()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "render_json_ld_faq()", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/seo.php", "file_type": "code", "degree": 1}, {"id": "website_includes_seo_render_json_ld_organization", "label": "render_json_ld_organization()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "render_json_ld_organization()", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/seo.php", "file_type": "code", "degree": 2}, {"id": "website_includes_seo_render_meta_tags", "label": "render_meta_tags()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "render_meta_tags()", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/seo.php", "file_type": "code", "degree": 2}, {"id": "website_includes_security_check_rate_limit", "label": "check_rate_limit()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "check_rate_limit()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 3}, {"id": "website_includes_security_csrf_input_field", "label": "csrf_input_field()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "csrf_input_field()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 2}, {"id": "website_includes_security_generate_csrf_token", "label": "generate_csrf_token()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "generate_csrf_token()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 2}, {"id": "website_includes_security_sanitize_email", "label": "sanitize_email()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "sanitize_email()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 1}, {"id": "website_includes_security_sanitize_text", "label": "sanitize_text()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "sanitize_text()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 1}, {"id": "website_includes_security_send_security_headers", "label": "send_security_headers()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "send_security_headers()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 1}, {"id": "website_includes_security_verify_csrf_token", "label": "verify_csrf_token()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "verify_csrf_token()", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 3}, {"id": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": ".handleDiscovery()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 37.9, "font": {"size": 12, "color": "#ffffff"}, "title": ".handleDiscovery()", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Controllers/LeadController.php", "file_type": "code", "degree": 13}, {"id": "website_app_helpers_sanitizer_sanitizer_cleanemail", "label": ".cleanEmail()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".cleanEmail()", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Helpers/Sanitizer.php", "file_type": "code", "degree": 3}, {"id": "website_app_helpers_sanitizer_sanitizer_cleanphone", "label": ".cleanPhone()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".cleanPhone()", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Helpers/Sanitizer.php", "file_type": "code", "degree": 3}, {"id": "website_app_helpers_sanitizer_sanitizer_cleanstring", "label": ".cleanString()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".cleanString()", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Helpers/Sanitizer.php", "file_type": "code", "degree": 3}, {"id": "website_app_validators_formvalidator_formvalidator_validatediscovery", "label": ".validateDiscovery()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": ".validateDiscovery()", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Validators/FormValidator.php", "file_type": "code", "degree": 2}, {"id": "website_app_services_emailservice_emailservice_sendleadnotification", "label": ".sendLeadNotification()", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".sendLeadNotification()", "community": 4, "community_name": "Lead Processing & Email Notification", "source_file": "website/app/Services/EmailService.php", "file_type": "code", "degree": 3}, {"id": "website_assets_js_main_particle_constructor", "label": ".constructor()", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": ".constructor()", "community": 5, "community_name": "Canvas Particle FX & UI Scripts", "source_file": "website/assets/js/main.js", "file_type": "code", "degree": 2}, {"id": "website_assets_js_main_particle_draw", "label": ".draw()", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": ".draw()", "community": 5, "community_name": "Canvas Particle FX & UI Scripts", "source_file": "website/assets/js/main.js", "file_type": "code", "degree": 2}, {"id": "website_assets_js_main_particle_reset", "label": ".reset()", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": ".reset()", "community": 5, "community_name": "Canvas Particle FX & UI Scripts", "source_file": "website/assets/js/main.js", "file_type": "code", "degree": 2}, {"id": "website_assets_js_main_particle_update", "label": ".update()", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": ".update()", "community": 5, "community_name": "Canvas Particle FX & UI Scripts", "source_file": "website/assets/js/main.js", "file_type": "code", "degree": 2}, {"id": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": ".handle()", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": ".handle()", "community": 6, "community_name": "Form Validation System", "source_file": "website/app/Controllers/ContactController.php", "file_type": "code", "degree": 14}, {"id": "website_app_validators_formvalidator_formvalidator_geterrors", "label": ".getErrors()", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".getErrors()", "community": 6, "community_name": "Form Validation System", "source_file": "website/app/Validators/FormValidator.php", "file_type": "code", "degree": 3}, {"id": "website_app_validators_formvalidator_formvalidator_validatecontact", "label": ".validateContact()", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": ".validateContact()", "community": 6, "community_name": "Form Validation System", "source_file": "website/app/Validators/FormValidator.php", "file_type": "code", "degree": 2}, {"id": "website_config_database_database_getconnection", "label": ".getConnection()", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".getConnection()", "community": 7, "community_name": "Database Connection & PDO Layer", "source_file": "website/config/database.php", "file_type": "code", "degree": 3}, {"id": "website_app_services_crmintegrationservice_crmintegrationservice_construct", "label": ".__construct()", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": ".__construct()", "community": 8, "community_name": "CRM Integration Service", "source_file": "website/app/Services/CRMIntegrationService.php", "file_type": "code", "degree": 1}, {"id": "website_app_services_crmintegrationservice_crmintegrationservice_dispatchlead", "label": ".dispatchLead()", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": ".dispatchLead()", "community": 8, "community_name": "CRM Integration Service", "source_file": "website/app/Services/CRMIntegrationService.php", "file_type": "code", "degree": 3}, {"id": "update_tree", "label": "update_tree.py", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 31.4, "font": {"size": 12, "color": "#ffffff"}, "title": "update_tree.py", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "update_tree.py", "file_type": "code", "degree": 10}, {"id": "website_includes_config", "label": "config.php", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "config.php", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/config.php", "file_type": "code", "degree": 3}, {"id": "website_includes_seo", "label": "seo.php", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "seo.php", "community": 1, "community_name": "Frontend & SEO Helpers", "source_file": "website/includes/seo.php", "file_type": "code", "degree": 3}, {"id": "founder_section", "label": "founder-section.php", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "founder-section.php", "community": 10, "community_name": "Module 10", "source_file": "founder-section.php", "file_type": "code", "degree": 0}, {"id": "website_404", "label": "404.php", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "404.php", "community": 11, "community_name": "Module 11", "source_file": "website/404.php", "file_type": "code", "degree": 0}, {"id": "website_about", "label": "about.php", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "about.php", "community": 12, "community_name": "Module 12", "source_file": "website/about.php", "file_type": "code", "degree": 0}, {"id": "website_ai_agents", "label": "ai-agents.php", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "ai-agents.php", "community": 13, "community_name": "Module 13", "source_file": "website/ai-agents.php", "file_type": "code", "degree": 0}, {"id": "website_ai_solutions", "label": "ai-solutions.php", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "ai-solutions.php", "community": 14, "community_name": "Module 14", "source_file": "website/ai-solutions.php", "file_type": "code", "degree": 0}, {"id": "website_assets_js_forms", "label": "forms.js", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "forms.js", "community": 15, "community_name": "Module 15", "source_file": "website/assets/js/forms.js", "file_type": "code", "degree": 0}, {"id": "website_automation", "label": "automation.php", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "automation.php", "community": 16, "community_name": "Module 16", "source_file": "website/automation.php", "file_type": "code", "degree": 0}, {"id": "website_case_studies", "label": "case-studies.php", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "case-studies.php", "community": 17, "community_name": "Module 17", "source_file": "website/case-studies.php", "file_type": "code", "degree": 0}, {"id": "website_components_cookie_banner", "label": "cookie-banner.php", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "cookie-banner.php", "community": 18, "community_name": "Module 18", "source_file": "website/components/cookie-banner.php", "file_type": "code", "degree": 0}, {"id": "website_components_cta", "label": "cta.php", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "cta.php", "community": 19, "community_name": "Module 19", "source_file": "website/components/cta.php", "file_type": "code", "degree": 0}, {"id": "website_includes_security", "label": "includes/security.php", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 25.0, "font": {"size": 12, "color": "#ffffff"}, "title": "includes/security.php", "community": 2, "community_name": "Security & CSRF Protection", "source_file": "website/includes/security.php", "file_type": "code", "degree": 7}, {"id": "website_components_floating_social", "label": "floating-social.php", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "floating-social.php", "community": 20, "community_name": "Module 20", "source_file": "website/components/floating-social.php", "file_type": "code", "degree": 0}, {"id": "website_components_leadership", "label": "leadership.php", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "leadership.php", "community": 21, "community_name": "Module 21", "source_file": "website/components/leadership.php", "file_type": "code", "degree": 0}, {"id": "website_engagement_models", "label": "engagement-models.php", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "engagement-models.php", "community": 22, "community_name": "Module 22", "source_file": "website/engagement-models.php", "file_type": "code", "degree": 0}, {"id": "website_faq", "label": "faq.php", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "faq.php", "community": 23, "community_name": "Module 23", "source_file": "website/faq.php", "file_type": "code", "degree": 0}, {"id": "website_includes_footer", "label": "footer.php", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "footer.php", "community": 24, "community_name": "Module 24", "source_file": "website/includes/footer.php", "file_type": "code", "degree": 0}, {"id": "website_includes_header", "label": "header.php", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "header.php", "community": 25, "community_name": "Module 25", "source_file": "website/includes/header.php", "file_type": "code", "degree": 0}, {"id": "website_includes_navigation", "label": "navigation.php", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "navigation.php", "community": 26, "community_name": "Module 26", "source_file": "website/includes/navigation.php", "file_type": "code", "degree": 0}, {"id": "website_index", "label": "index.php", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "index.php", "community": 27, "community_name": "Module 27", "source_file": "website/index.php", "file_type": "code", "degree": 0}, {"id": "website_industries", "label": "industries.php", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "industries.php", "community": 28, "community_name": "Module 28", "source_file": "website/industries.php", "file_type": "code", "degree": 0}, {"id": "website_mobile_apps", "label": "mobile-apps.php", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "mobile-apps.php", "community": 29, "community_name": "Module 29", "source_file": "website/mobile-apps.php", "file_type": "code", "degree": 0}, {"id": "website_app_helpers_sanitizer", "label": "Sanitizer.php", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "Sanitizer.php", "community": 3, "community_name": "Input Sanitization & Data Cleaning", "source_file": "website/app/Helpers/Sanitizer.php", "file_type": "code", "degree": 1}, {"id": "website_portfolio", "label": "portfolio.php", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "portfolio.php", "community": 30, "community_name": "Module 30", "source_file": "website/portfolio.php", "file_type": "code", "degree": 0}, {"id": "website_privacy", "label": "privacy.php", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "privacy.php", "community": 31, "community_name": "Module 31", "source_file": "website/privacy.php", "file_type": "code", "degree": 0}, {"id": "website_process", "label": "process.php", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "process.php", "community": 32, "community_name": "Module 32", "source_file": "website/process.php", "file_type": "code", "degree": 0}, {"id": "website_saas", "label": "saas.php", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "saas.php", "community": 33, "community_name": "Module 33", "source_file": "website/saas.php", "file_type": "code", "degree": 0}, {"id": "website_security", "label": "website/security.php", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "website/security.php", "community": 34, "community_name": "Module 34", "source_file": "website/security.php", "file_type": "code", "degree": 0}, {"id": "website_software_development", "label": "software-development.php", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "software-development.php", "community": 35, "community_name": "Module 35", "source_file": "website/software-development.php", "file_type": "code", "degree": 0}, {"id": "website_solutions", "label": "solutions.php", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "solutions.php", "community": 36, "community_name": "Module 36", "source_file": "website/solutions.php", "file_type": "code", "degree": 0}, {"id": "website_terms", "label": "terms.php", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "terms.php", "community": 37, "community_name": "Module 37", "source_file": "website/terms.php", "file_type": "code", "degree": 0}, {"id": "website_app_controllers_leadcontroller", "label": "LeadController.php", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 20.7, "font": {"size": 12, "color": "#ffffff"}, "title": "LeadController.php", "community": 4, "community_name": "Lead Processing & Email Notification", "source_file": "website/app/Controllers/LeadController.php", "file_type": "code", "degree": 5}, {"id": "website_app_services_emailservice", "label": "EmailService.php", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "EmailService.php", "community": 4, "community_name": "Lead Processing & Email Notification", "source_file": "website/app/Services/EmailService.php", "file_type": "code", "degree": 1}, {"id": "website_discovery_call", "label": "discovery-call.php", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "discovery-call.php", "community": 4, "community_name": "Lead Processing & Email Notification", "source_file": "website/discovery-call.php", "file_type": "code", "degree": 1}, {"id": "website_assets_js_main", "label": "main.js", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "main.js", "community": 5, "community_name": "Canvas Particle FX & UI Scripts", "source_file": "website/assets/js/main.js", "file_type": "code", "degree": 3}, {"id": "website_app_validators_formvalidator", "label": "FormValidator.php", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "FormValidator.php", "community": 6, "community_name": "Form Validation System", "source_file": "website/app/Validators/FormValidator.php", "file_type": "code", "degree": 1}, {"id": "pdo", "label": "PDO", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "PDO", "community": 7, "community_name": "Database Connection & PDO Layer", "source_file": "", "file_type": "code", "degree": 2}, {"id": "website_config_database", "label": "database.php", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "database.php", "community": 7, "community_name": "Database Connection & PDO Layer", "source_file": "website/config/database.php", "file_type": "code", "degree": 1}, {"id": "website_app_services_crmintegrationservice", "label": "CRMIntegrationService.php", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "CRMIntegrationService.php", "community": 8, "community_name": "CRM Integration Service", "source_file": "website/app/Services/CRMIntegrationService.php", "file_type": "code", "degree": 1}, {"id": "website_app_controllers_contactcontroller", "label": "ContactController.php", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 22.9, "font": {"size": 12, "color": "#ffffff"}, "title": "ContactController.php", "community": 9, "community_name": "Contact Routing & Controller", "source_file": "website/app/Controllers/ContactController.php", "file_type": "code", "degree": 6}, {"id": "website_contact", "label": "contact.php", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 12.1, "font": {"size": 0, "color": "#ffffff"}, "title": "contact.php", "community": 9, "community_name": "Contact Routing & Controller", "source_file": "website/contact.php", "file_type": "code", "degree": 1}, {"id": "os", "label": "os", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "os", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "", "file_type": "concept", "degree": 2}, {"id": "re", "label": "re", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 16.4, "font": {"size": 12, "color": "#ffffff"}, "title": "re", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "", "file_type": "concept", "degree": 3}, {"id": "subprocess", "label": "subprocess", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 14.3, "font": {"size": 0, "color": "#ffffff"}, "title": "subprocess", "community": 0, "community_name": "Project Maintenance & Tree Generator", "source_file": "", "file_type": "concept", "degree": 2}];
+const RAW_EDGES = [{"from": "website_app_helpers_sanitizer_sanitizer", "to": "website_app_controllers_contactcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer", "to": "website_app_controllers_leadcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer", "to": "website_app_helpers_sanitizer", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer", "to": "website_app_helpers_sanitizer_sanitizer_cleanemail", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer", "to": "website_app_helpers_sanitizer_sanitizer_cleanphone", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer", "to": "website_app_helpers_sanitizer_sanitizer_cleanstring", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller", "to": "website_discovery_call", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller", "to": "website_app_controllers_leadcontroller", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller", "to": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice", "to": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice", "to": "website_app_controllers_contactcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice", "to": "website_app_controllers_leadcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice", "to": "website_app_services_emailservice", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice", "to": "website_app_services_emailservice_emailservice_sendleadnotification", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle", "to": "website_assets_js_main", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle", "to": "website_assets_js_main_particle_constructor", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle", "to": "website_assets_js_main_particle_reset", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle", "to": "website_assets_js_main_particle_update", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle", "to": "website_assets_js_main_particle_draw", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_controllers_contactcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_controllers_leadcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_validators_formvalidator", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_validators_formvalidator_formvalidator_validatediscovery", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_validators_formvalidator_formvalidator_geterrors", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_validators_formvalidator_formvalidator", "to": "website_app_validators_formvalidator_formvalidator_validatecontact", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_config_database_database", "to": "pdo", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_config_database_database", "to": "website_app_controllers_contactcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_config_database_database", "to": "website_config_database", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_config_database_database", "to": "website_config_database_database_getconnection", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_controllers_contactcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_controllers_leadcontroller", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_services_crmintegrationservice", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_services_crmintegrationservice_crmintegrationservice_construct", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_crmintegrationservice_crmintegrationservice", "to": "website_app_services_crmintegrationservice_crmintegrationservice_dispatchlead", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller", "to": "website_contact", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller", "to": "website_app_controllers_contactcontroller", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "method", "title": "method [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_format_project_name", "to": "update_tree_update_readme", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_format_project_name", "to": "re", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_format_project_name", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_generate_tree", "to": "update_tree_update_tree_section", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_generate_tree", "to": "os", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_generate_tree", "to": "update_tree_generate_tree", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_generate_tree", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_get_repo_name", "to": "update_tree_update_readme", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_get_repo_name", "to": "subprocess", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_get_repo_name", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_commands", "to": "update_tree_update_readme", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_commands", "to": "re", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_commands", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_readme", "to": "update_tree_update_title", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_readme", "to": "update_tree_update_tree_section", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_readme", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_title", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree_update_tree_section", "to": "update_tree", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_config_asset", "to": "website_includes_config", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_config_asset", "to": "website_includes_seo_render_meta_tags", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_includes_config_asset", "to": "website_includes_seo_render_json_ld_organization", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_includes_config_closure_1", "to": "website_includes_config", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_config_url", "to": "website_includes_config", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_seo_render_json_ld_faq", "to": "website_includes_seo", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_seo_render_json_ld_organization", "to": "website_includes_seo", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_seo_render_meta_tags", "to": "website_includes_seo", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_check_rate_limit", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_check_rate_limit", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_includes_security_check_rate_limit", "to": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_includes_security_csrf_input_field", "to": "website_includes_security_generate_csrf_token", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_csrf_input_field", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_generate_csrf_token", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_sanitize_email", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_sanitize_text", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_send_security_headers", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_verify_csrf_token", "to": "website_includes_security", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_includes_security_verify_csrf_token", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_includes_security_verify_csrf_token", "to": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_helpers_sanitizer_sanitizer_cleanstring", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_helpers_sanitizer_sanitizer_cleanemail", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_helpers_sanitizer_sanitizer_cleanphone", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_validators_formvalidator_formvalidator_validatediscovery", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_validators_formvalidator_formvalidator_geterrors", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_services_crmintegrationservice_crmintegrationservice_dispatchlead", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_controllers_leadcontroller_leadcontroller_handlediscovery", "to": "website_app_services_emailservice_emailservice_sendleadnotification", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_helpers_sanitizer_sanitizer_cleanemail", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer_cleanphone", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_helpers_sanitizer_sanitizer_cleanstring", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_services_emailservice_emailservice_sendleadnotification", "to": "website_app_controllers_contactcontroller_contactcontroller_handle", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_assets_js_main_particle_constructor", "to": "website_assets_js_main_particle_reset", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle_draw", "to": "website_assets_js_main", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_assets_js_main_particle_update", "to": "website_assets_js_main", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller_handle", "to": "website_config_database_database_getconnection", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller_handle", "to": "website_app_validators_formvalidator_formvalidator_validatecontact", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller_handle", "to": "website_app_validators_formvalidator_formvalidator_geterrors", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_app_controllers_contactcontroller_contactcontroller_handle", "to": "website_app_services_crmintegrationservice_crmintegrationservice_dispatchlead", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "website_config_database_database_getconnection", "to": "pdo", "label": "references_constant", "title": "references_constant [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree", "to": "os", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree", "to": "subprocess", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "update_tree", "to": "re", "label": "imports", "title": "imports [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}];
+const LEGEND = [{"cid": 0, "color": "#4E79A7", "label": "Project Maintenance &amp; Tree Generator", "count": 11}, {"cid": 1, "color": "#F28E2B", "label": "Frontend &amp; SEO Helpers", "count": 8}, {"cid": 2, "color": "#E15759", "label": "Security &amp; CSRF Protection", "count": 8}, {"cid": 3, "color": "#76B7B2", "label": "Input Sanitization &amp; Data Cleaning", "count": 7}, {"cid": 4, "color": "#59A14F", "label": "Lead Processing &amp; Email Notification", "count": 6}, {"cid": 5, "color": "#EDC948", "label": "Canvas Particle FX &amp; UI Scripts", "count": 6}, {"cid": 6, "color": "#B07AA1", "label": "Form Validation System", "count": 5}, {"cid": 7, "color": "#FF9DA7", "label": "Database Connection &amp; PDO Layer", "count": 4}, {"cid": 8, "color": "#9C755F", "label": "CRM Integration Service", "count": 4}, {"cid": 9, "color": "#BAB0AC", "label": "Contact Routing &amp; Controller", "count": 3}, {"cid": 10, "color": "#4E79A7", "label": "Module 10", "count": 1}, {"cid": 11, "color": "#F28E2B", "label": "Module 11", "count": 1}, {"cid": 12, "color": "#E15759", "label": "Module 12", "count": 1}, {"cid": 13, "color": "#76B7B2", "label": "Module 13", "count": 1}, {"cid": 14, "color": "#59A14F", "label": "Module 14", "count": 1}, {"cid": 15, "color": "#EDC948", "label": "Module 15", "count": 1}, {"cid": 16, "color": "#B07AA1", "label": "Module 16", "count": 1}, {"cid": 17, "color": "#FF9DA7", "label": "Module 17", "count": 1}, {"cid": 18, "color": "#9C755F", "label": "Module 18", "count": 1}, {"cid": 19, "color": "#BAB0AC", "label": "Module 19", "count": 1}, {"cid": 20, "color": "#4E79A7", "label": "Module 20", "count": 1}, {"cid": 21, "color": "#F28E2B", "label": "Module 21", "count": 1}, {"cid": 22, "color": "#E15759", "label": "Module 22", "count": 1}, {"cid": 23, "color": "#76B7B2", "label": "Module 23", "count": 1}, {"cid": 24, "color": "#59A14F", "label": "Module 24", "count": 1}, {"cid": 25, "color": "#EDC948", "label": "Module 25", "count": 1}, {"cid": 26, "color": "#B07AA1", "label": "Module 26", "count": 1}, {"cid": 27, "color": "#FF9DA7", "label": "Module 27", "count": 1}, {"cid": 28, "color": "#9C755F", "label": "Module 28", "count": 1}, {"cid": 29, "color": "#BAB0AC", "label": "Module 29", "count": 1}, {"cid": 30, "color": "#4E79A7", "label": "Module 30", "count": 1}, {"cid": 31, "color": "#F28E2B", "label": "Module 31", "count": 1}, {"cid": 32, "color": "#E15759", "label": "Module 32", "count": 1}, {"cid": 33, "color": "#76B7B2", "label": "Module 33", "count": 1}, {"cid": 34, "color": "#59A14F", "label": "Module 34", "count": 1}, {"cid": 35, "color": "#EDC948", "label": "Module 35", "count": 1}, {"cid": 36, "color": "#B07AA1", "label": "Module 36", "count": 1}, {"cid": 37, "color": "#FF9DA7", "label": "Module 37", "count": 1}];
+
+// HTML-escape helper — prevents XSS when injecting graph data into innerHTML
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Build vis datasets
+const nodesDS = new vis.DataSet(RAW_NODES.map((n, i) => ({
+  id: n.id, label: n.label, color: n.color, size: n.size,
+  font: n.font, title: n.title,
+  // Fermat/golden-angle spiral seed positions (#3699): spreading nodes out
+  // before physics runs keeps avoidOverlap from computing near-zero-distance
+  // repulsion that blows the BarnesHut recursion into a stack overflow on large
+  // graphs. `i` is the map index — physics still settles small graphs identically.
+  x: 30 * Math.sqrt(i) * Math.cos(i * 2.4),
+  y: 30 * Math.sqrt(i) * Math.sin(i * 2.4),
+  community: n.community, community_name: n.community_name,
+  source_file: n.source_file, file_type: n.file_type, degree: n.degree,
+  member_count: n.member_count,
+})));
+
+const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({
+  id: i, from: e.from, to: e.to,
+  label: '',
+  title: e.title,
+  dashes: e.dashes,
+  width: e.width,
+  color: e.color,
+  arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+})));
+
+const container = document.getElementById('graph');
+const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
+  physics: {
+    enabled: true,
+    solver: 'forceAtlas2Based',
+    forceAtlas2Based: {
+      gravitationalConstant: -60,
+      centralGravity: 0.005,
+      springLength: 120,
+      springConstant: 0.08,
+      damping: 0.4,
+      avoidOverlap: 0.8,
+    },
+    stabilization: { iterations: 200, fit: true },
+  },
+  interaction: {
+    hover: true,
+    tooltipDelay: 100,
+    hideEdgesOnDrag: true,
+    navigationButtons: false,
+    keyboard: false,
+  },
+  nodes: { shape: 'dot', borderWidth: 1.5 },
+  edges: { smooth: { type: 'continuous', roundness: 0.2 }, selectionWidth: 3 },
+});
+
+// Theme toggle (#3894): Light / Dark / System, persisted in localStorage.
+const THEME_KEY = 'graphify-theme';
+const themeMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+let themeLabelColor = '#ffffff';  // matches the per-node font color set in Python
+function themePref() {
+  let p = null;
+  try { p = localStorage.getItem(THEME_KEY); } catch (e) {}
+  return (p === 'light' || p === 'dark' || p === 'system') ? p : null;
+}
+function applyTheme(pref) {
+  const t = pref === 'light' ? 'light' : (pref === 'system' && themeMQ && themeMQ.matches) ? 'light' : 'dark';
+  const root = document.documentElement;
+  if (!root) return;
+  root.setAttribute('data-theme', t);
+  document.querySelectorAll('[data-theme-choice]').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.themeChoice === (pref || 'dark')));
+  });
+  const labelColor = getComputedStyle(root).getPropertyValue('--node-label').trim();
+  if (labelColor && labelColor !== themeLabelColor) {
+    themeLabelColor = labelColor;
+    nodesDS.update(nodesDS.get().map(n => ({ id: n.id, font: Object.assign({}, n.font, { color: labelColor }) })));
+  }
+}
+document.querySelectorAll('[data-theme-choice]').forEach(b => {
+  b.addEventListener('click', () => {
+    const pref = b.dataset.themeChoice;
+    try { localStorage.setItem(THEME_KEY, pref); } catch (e) {}
+    applyTheme(pref);
+  });
+});
+if (themeMQ) {
+  const onSchemeChange = () => { if (themePref() === 'system') applyTheme('system'); };
+  if (themeMQ.addEventListener) themeMQ.addEventListener('change', onSchemeChange);
+  else if (themeMQ.addListener) themeMQ.addListener(onSchemeChange);
+}
+applyTheme(themePref());
+
+network.once('stabilizationIterationsDone', () => {
+  network.setOptions({ physics: { enabled: false } });
+});
+
+function showInfo(nodeId) {
+  const n = nodesDS.get(nodeId);
+  if (!n) return;
+  const neighborIds = network.getConnectedNodes(nodeId);
+  const neighborItems = neighborIds.map(nid => {
+    const nb = nodesDS.get(nid);
+    const color = nb ? nb.color.background : '#555';
+    return `<span class="neighbor-link" style="border-left-color:${esc(color)}" data-nid="${esc(nid)}">${esc(nb ? nb.label : nid)}</span>`;
+  }).join('');
+  const isMetaNode = !n.file_type && !n.source_file;
+  let html = `<div class="field"><b>${esc(n.label)}</b></div>`;
+  if (!isMetaNode) {
+    html += `<div class="field">Type: ${esc(n.file_type || 'unknown')}</div>`;
+  }
+  html += `<div class="field">Community: ${esc(n.community_name || '')}</div>`;
+  if (!isMetaNode) {
+    html += `<div class="field">Source: ${esc(n.source_file || '-')}</div>`;
+  } else if (n.member_count !== undefined && n.member_count !== null) {
+    html += `<div class="field">Members: ${esc(n.member_count)}</div>`;
+  }
+  html += `<div class="field">Degree: ${n.degree}</div>`;
+  if (neighborIds.length) {
+    html += `<div class="field" style="margin-top:8px;color:var(--text-2);font-size:11px">Neighbors (${neighborIds.length})</div><div id="neighbors-list">${neighborItems}</div>`;
+  }
+  document.getElementById('info-content').innerHTML = html;
+}
+
+function focusNode(nodeId) {
+  network.focus(nodeId, { scale: 1.4, animation: true });
+  network.selectNodes([nodeId]);
+  showInfo(nodeId);
+}
+
+// Neighbor links use a data attribute + one delegated listener rather than an
+// inline onclick. A node id/label sourced from a document or a scraped URL
+// (graphify add) can contain a double-quote; dropping the stringified id
+// unescaped into a quoted onclick both broke every link and allowed a hostile
+// source to inject an event handler into the local report (stored XSS, #1838).
+// esc() on data-nid keeps the value inside the attribute; the listener reads it
+// back verbatim. Bound to document so it survives the innerHTML rebuild that
+// recreates #neighbors-list on each showInfo().
+document.addEventListener('click', e => {
+  const el = e.target.closest('.neighbor-link');
+  if (el && el.dataset.nid !== undefined) focusNode(el.dataset.nid);
+});
+
+// Sidebar tooltips reuse vis-network's .vis-tooltip style and 100ms tooltipDelay.
+// Names get one only when CSS ellipsis truncates them (the full text is still in
+// the DOM); counts always get one, to say what the number is. Text is set with
+// textContent only (labels are untrusted). Delegated on document so rows rebuilt
+// later (search results, showInfo()) are covered.
+const sidebarTip = document.createElement('div');
+sidebarTip.className = 'vis-tooltip';
+sidebarTip.style.cssText = 'white-space: normal; max-width: 360px; overflow-wrap: break-word;';
+document.body.appendChild(sidebarTip);
+let sidebarTipTimer = null;
+let sidebarTipEl = null;    // element whose text the tooltip shows
+let sidebarTipZone = null;  // element the pointer must leave to hide it
+function hideSidebarTip() {
+  clearTimeout(sidebarTipTimer);
+  sidebarTip.style.visibility = 'hidden';
+  sidebarTip.textContent = '';
+  sidebarTipEl = sidebarTipZone = null;
+}
+document.addEventListener('mouseover', e => {
+  const zone = e.target.closest && e.target.closest('.legend-count, .legend-item, .search-item, .neighbor-link');
+  // Anywhere on a legend row except its count (dot, checkbox, gaps, padding)
+  // stands for the row's name, so moving within the row never re-triggers it.
+  const el = zone && zone.classList.contains('legend-item') ? zone.querySelector('.legend-label') : zone;
+  if (!el || el === sidebarTipEl) return;
+  hideSidebarTip();
+  const isCount = el.classList.contains('legend-count');
+  if (!isCount && el.scrollWidth <= el.clientWidth) return;
+  const text = isCount ? `${el.textContent} ${el.textContent === '1' ? 'node' : 'nodes'}` : el.textContent;
+  sidebarTipEl = el;
+  sidebarTipZone = zone;
+  const x = e.clientX, y = e.clientY;
+  sidebarTipTimer = setTimeout(() => {
+    sidebarTip.textContent = text;
+    sidebarTip.style.left = sidebarTip.style.top = '0px';  // measure at full max-width
+    sidebarTip.style.visibility = 'visible';
+    const w = sidebarTip.offsetWidth, h = sidebarTip.offsetHeight;
+    sidebarTip.style.left = Math.max(4, Math.min(x + 12, window.innerWidth - w - 4)) + 'px';
+    sidebarTip.style.top = (y + 16 + h > window.innerHeight ? Math.max(4, y - h - 8) : y + 16) + 'px';
+  }, 100);
+});
+document.addEventListener('mouseout', e => {
+  if (sidebarTipZone && !sidebarTipZone.contains(e.relatedTarget)) hideSidebarTip();
+});
+// A click rebuilds or hides the row (showInfo(), search pick) without a mouseout.
+document.addEventListener('mousedown', hideSidebarTip);
+
+// Track hovered node — hover detection is more reliable than click params
+let hoveredNodeId = null;
+network.on('hoverNode', params => {
+  hoveredNodeId = params.node;
+  container.style.cursor = 'pointer';
+});
+network.on('blurNode', () => {
+  hoveredNodeId = null;
+  container.style.cursor = 'default';
+});
+container.addEventListener('click', () => {
+  if (hoveredNodeId !== null) {
+    showInfo(hoveredNodeId);
+    network.selectNodes([hoveredNodeId]);
+  }
+});
+network.on('click', params => {
+  if (params.nodes.length > 0) {
+    showInfo(params.nodes[0]);
+  } else if (hoveredNodeId === null) {
+    document.getElementById('info-content').innerHTML = '<span class="empty">Click a node to inspect it</span>';
+  }
+});
+
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const matches = RAW_NODES.filter(n => n.label.toLowerCase().includes(q)).slice(0, 20);
+  if (!matches.length) { searchResults.style.display = 'none'; return; }
+  searchResults.style.display = 'block';
+  matches.forEach(n => {
+    const el = document.createElement('div');
+    el.className = 'search-item';
+    el.textContent = n.label;
+    el.style.borderLeft = `3px solid ${n.color.background}`;
+    el.style.paddingLeft = '8px';
+    el.onclick = () => {
+      network.focus(n.id, { scale: 1.5, animation: true });
+      network.selectNodes([n.id]);
+      showInfo(n.id);
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+    };
+    searchResults.appendChild(el);
+  });
+});
+document.addEventListener('click', e => {
+  if (!searchResults.contains(e.target) && e.target !== searchInput)
+    searchResults.style.display = 'none';
+});
+
+const hiddenCommunities = new Set();
+
+const selectAllCb = document.getElementById('select-all-cb');
+
+function updateSelectAllState() {
+  const total = LEGEND.length;
+  const hidden = hiddenCommunities.size;
+  selectAllCb.checked = hidden === 0;
+  selectAllCb.indeterminate = hidden > 0 && hidden < total;
+}
+
+function toggleAllCommunities(hide) {
+  document.querySelectorAll('.legend-item').forEach(item => {
+    hide ? item.classList.add('dimmed') : item.classList.remove('dimmed');
+  });
+  document.querySelectorAll('.legend-cb').forEach(cb => {
+    cb.checked = !hide;
+  });
+  LEGEND.forEach(c => {
+    if (hide) hiddenCommunities.add(c.cid); else hiddenCommunities.delete(c.cid);
+  });
+  const updates = RAW_NODES.map(n => ({ id: n.id, hidden: hide }));
+  nodesDS.update(updates);
+  updateSelectAllState();
+}
+
+const legendEl = document.getElementById('legend');
+LEGEND.forEach(c => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  const cb = document.createElement('input');
+  cb.type = 'checkbox';
+  cb.className = 'legend-cb';
+  cb.checked = true;
+  cb.addEventListener('change', (e) => {
+    e.stopPropagation();
+    if (cb.checked) {
+      hiddenCommunities.delete(c.cid);
+      item.classList.remove('dimmed');
+    } else {
+      hiddenCommunities.add(c.cid);
+      item.classList.add('dimmed');
+    }
+    const updates = RAW_NODES
+      .filter(n => n.community === c.cid)
+      .map(n => ({ id: n.id, hidden: !cb.checked }));
+    nodesDS.update(updates);
+    updateSelectAllState();
+  });
+  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>
+    <span class="legend-label">${c.label}</span>
+    <span class="legend-count">${c.count}</span>`;
+  item.prepend(cb);
+  item.onclick = (e) => {
+    if (e.target === cb) return;
+    cb.checked = !cb.checked;
+    cb.dispatchEvent(new Event('change'));
+  };
+  legendEl.appendChild(item);
+});
+</script>
+<script>
+// Render hyperedges as shaded regions
+const hyperedges = [];
+// afterDrawing passes ctx already transformed to network coordinate space.
+// Draw node positions raw — no manual pan/zoom/DPR math needed.
+
+// Andrew's monotone chain. Returns the hull in counter-clockwise order, which
+// is what the perimeter must be traced in. Collinear and duplicate points
+// collapse to the extremes, so degenerate member sets render as a segment
+// rather than a zero-area crossed path.
+function convexHull(pts) {
+    const p = pts.slice().sort((a, b) => (a.x - b.x) || (a.y - b.y));
+    if (p.length < 3) return p;
+    const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+    const build = seq => {
+        const out = [];
+        for (const q of seq) {
+            while (out.length >= 2 && cross(out[out.length - 2], out[out.length - 1], q) <= 0) out.pop();
+            out.push(q);
+        }
+        out.pop();
+        return out;
+    };
+    const hull = build(p).concat(build(p.slice().reverse()));
+    return hull.length >= 3 ? hull : p;
+}
+network.on('afterDrawing', function(ctx) {
+    hyperedges.forEach(h => {
+        const positions = h.nodes
+            .map(nid => network.getPositions([nid])[nid])
+            .filter(p => p !== undefined);
+        if (positions.length < 2) return;
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.fillStyle = '#6366f1';
+        ctx.strokeStyle = '#6366f1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Centroid and expanded hull in network coordinates.
+        // The perimeter must follow hull order, not h.nodes order: tracing the
+        // raw member order self-intersects whenever the layout does not happen
+        // to place members in angular order, filling as crossed wedges.
+        const cx = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+        const cy = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+        const hull = convexHull(positions);
+        const expanded = hull.map(p => ({
+            x: cx + (p.x - cx) * 1.15,
+            y: cy + (p.y - cy) * 1.15
+        }));
+        ctx.moveTo(expanded[0].x, expanded[0].y);
+        expanded.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 0.4;
+        ctx.stroke();
+        // Label
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = '#4f46e5';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(h.label, cx, cy - 5);
+        ctx.restore();
+    });
+});
+</script>
+</body>
+</html>
