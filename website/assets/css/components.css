@@ -102,6 +102,29 @@
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
 }
 
+/* Nav Dropdown Toggle */
+.nav-link-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-dropdown-toggle {
+  background: transparent;
+  border: none;
+  color: var(--slate);
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.nav-dropdown-toggle:hover {
+  color: var(--white);
+}
+
 /* Nav Dropdown */
 .nav-dropdown {
   position: absolute;
@@ -259,6 +282,39 @@
   color: var(--white);
   border-color: var(--cyan);
   box-shadow: 0 0 20px rgba(6, 214, 160, 0.15);
+}
+
+/* Button disabled/loading state */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.55;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn:disabled::before,
+.btn.disabled::before {
+  display: none;
+}
+
+.btn-block {
+  width: 100%;
+  display: flex;
+}
+
+/* Button loading state */
+.btn[disabled],
+.btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn[disabled]::before,
+.btn.disabled::before {
+  display: none;
 }
 
 /* --------------------------------------------------------------------------

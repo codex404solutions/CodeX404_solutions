@@ -9,7 +9,7 @@ $ctaSecondaryUrl = $ctaSecondaryUrl ?? url('contact.php');
 ?>
 <section class="section" style="position: relative; overflow: hidden;">
     <div class="container">
-        <div style="background: radial-gradient(ellipse 100% 100% at 50% -20%, rgba(37, 99, 235, 0.25), rgba(11, 31, 58, 0.95)), var(--bg-surface); border: 1px solid var(--border-highlight); border-radius: var(--radius-lg); padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem); text-align: center; box-shadow: var(--shadow-lg), 0 0 60px rgba(37, 99, 235, 0.2); position: relative;">
+        <div class="cta-section-wrap">
             
             <div class="section-tag" style="margin-bottom: 1.5rem;">
                 <span class="dot"></span>
@@ -24,14 +24,8 @@ $ctaSecondaryUrl = $ctaSecondaryUrl ?? url('contact.php');
                 <?= htmlspecialchars($ctaSubtitle, ENT_QUOTES, 'UTF-8') ?>
             </p>
 
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="<?= $ctaPrimaryUrl ?>" class="btn btn-primary btn-lg">
-                    <?= htmlspecialchars($ctaPrimaryText, ENT_QUOTES, 'UTF-8') ?>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <a href="<?= $ctaSecondaryUrl ?>" class="btn btn-secondary btn-lg">
-                    <?= htmlspecialchars($ctaSecondaryText, ENT_QUOTES, 'UTF-8') ?>
-                </a>
+            <div class="cta-section-wrap" style="padding: 1.5rem; text-align: center;">
+                <a href="<?= $ctaPrimaryUrl ?>" class="btn btn-primary btn-sm">Book a Discovery Call</a>
             </div>
 
             <div style="margin-top: 2rem; font-size: 0.85rem; color: var(--slate-dark);">

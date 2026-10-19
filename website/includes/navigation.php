@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
@@ -11,19 +12,23 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         </a>
 
         <!-- Main Navigation Links -->
-        <nav>
+        <nav aria-label="Primary navigation">
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
                     <a href="<?= url('index.php') ?>" class="nav-link <?= $currentScript === 'index.php' ? 'active' : '' ?>">Home</a>
                 </li>
 
                 <!-- Solutions Dropdown -->
-                <li class="nav-item">
-                    <a href="<?= url('solutions.php') ?>" class="nav-link <?= in_array($currentScript, ['solutions.php', 'ai-solutions.php', 'ai-agents.php', 'automation.php', 'software-development.php', 'mobile-apps.php', 'saas.php']) ? 'active' : '' ?>">
-                        Solutions
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </a>
-                    <ul class="nav-dropdown">
+                <li class="nav-item nav-item-dropdown">
+                    <div class="nav-link-group">
+                        <a href="<?= url('solutions.php') ?>" class="nav-link <?= in_array($currentScript, ['solutions.php', 'ai-solutions.php', 'ai-agents.php', 'automation.php', 'software-development.php', 'mobile-apps.php', 'saas.php']) ? 'active' : '' ?>">Solutions</a>
+                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Solutions menu" aria-expanded="false" aria-controls="solutionsMenu">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <ul class="nav-dropdown" id="solutionsMenu">
                         <li>
                             <a href="<?= url('software-development.php') ?>" class="dropdown-link">
                                 <strong>Custom Software</strong>
@@ -68,12 +73,16 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
                 </li>
 
                 <!-- Work Dropdown -->
-                <li class="nav-item">
-                    <a href="<?= url('case-studies.php') ?>" class="nav-link <?= in_array($currentScript, ['case-studies.php', 'portfolio.php']) ? 'active' : '' ?>">
-                        Work
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </a>
-                    <ul class="nav-dropdown">
+                <li class="nav-item nav-item-dropdown">
+                    <div class="nav-link-group">
+                        <a href="<?= url('case-studies.php') ?>" class="nav-link <?= in_array($currentScript, ['case-studies.php', 'portfolio.php']) ? 'active' : '' ?>">Work</a>
+                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Work menu" aria-expanded="false" aria-controls="workMenu">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <ul class="nav-dropdown" id="workMenu">
                         <li>
                             <a href="<?= url('case-studies.php') ?>" class="dropdown-link">
                                 <strong>Case Studies</strong>
@@ -102,8 +111,8 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
                 </li>
 
                 <!-- Mobile Only CTA -->
-                <li class="mobile-cta" style="display: none;">
-                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary" style="width: 100%;">
+                <li class="mobile-cta">
+                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-block">
                         Book a Discovery Call
                     </a>
                 </li>
@@ -111,13 +120,17 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         </nav>
 
         <!-- Actions -->
-        <div class="nav-actions">
+        <!-- <div class="nav-actions">
             <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm">
                 Book a Discovery Call
             </a>
-            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <button type="button" class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
             </button>
-        </div>
+        </div> -->
     </div>
 </header>

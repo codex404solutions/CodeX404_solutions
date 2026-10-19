@@ -59,16 +59,25 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           // Display validation errors
           if (result.errors) {
+            let firstInvalidField = null;
             Object.keys(result.errors).forEach(fieldName => {
               const field = form.querySelector(`[name="${fieldName}"]`);
               if (field) {
+                const uniqueErrorId = 'error-' + fieldName + '-' + Math.floor(Math.random() * 10000);
                 field.classList.add('is-invalid');
+                field.setAttribute('aria-invalid', 'true');
+                field.setAttribute('aria-describedby', uniqueErrorId);
+                if (!firstInvalidField) firstInvalidField = field;
                 const errorMsg = document.createElement('div');
                 errorMsg.className = 'invalid-feedback';
+                errorMsg.id = uniqueErrorId;
                 errorMsg.innerText = result.errors[fieldName];
                 field.parentNode.appendChild(errorMsg);
               }
             });
+            if (firstInvalidField) {
+              firstInvalidField.focus();
+            }
           }
 
           if (alertContainer) {

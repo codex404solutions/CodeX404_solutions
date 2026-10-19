@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 ?>
+</main>
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">

@@ -68,15 +68,21 @@ document.addEventListener('DOMContentLoaded', () => {
     handleScroll();
   }
 
-  // 3. FAQ Accordion
+  // 3. FAQ Accordion (with keyboard support and ARIA state)
   const faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(item => {
     const questionBtn = item.querySelector('.faq-question');
     const answer = item.querySelector('.faq-answer');
 
     if (questionBtn && answer) {
+      const answerId = answer.id || (questionBtn.id + '-answer');
+      if (!answer.id) answer.id = answerId;
+      questionBtn.setAttribute('aria-controls', answerId);
+
       questionBtn.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
+        const nowActive = item.classList.toggle('active');
+        questionBtn.setAttribute('aria-expanded', nowActive ? 'true' : 'false');
+        answer.style.maxHeight = nowActive ? answer.scrollHeight + 'px' : null;
 
         // Close other items in same list
         const parentList = item.closest('.faq-list');
@@ -84,18 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
           parentList.querySelectorAll('.faq-item').forEach(other => {
             if (other !== item) {
               other.classList.remove('active');
+              const otherBtn = other.querySelector('.faq-question');
+              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
               const otherAnswer = other.querySelector('.faq-answer');
               if (otherAnswer) otherAnswer.style.maxHeight = null;
             }
           });
         }
+      });
 
-        if (isActive) {
-          item.classList.remove('active');
-          answer.style.maxHeight = null;
-        } else {
-          item.classList.add('active');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
+      // Keyboard: Enter / Space to toggle
+      questionBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          questionBtn.click();
         }
       });
     }

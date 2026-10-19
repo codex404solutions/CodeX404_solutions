@@ -3,8 +3,6 @@
    Theme: Aurora Midnight — Vibrant, Colorful, Premium
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
 :root {
   /* Brand Color Palette — Expanded Vivid Spectrum */
   --midnight: #060B18;
@@ -23,8 +21,8 @@
   --orange: #F97316;
   --teal: #14B8A6;
   --white: #FFFFFF;
-  --slate: #94A3B8;
-  --slate-dark: #64748B;
+  --slate: #CBD5E1;
+  --slate-dark: #94A3B8;
   --light: #F8FAFC;
   --dark-text: #0F172A;
   --danger: #EF4444;
@@ -103,6 +101,7 @@ html {
   font-size: 16px;
   line-height: 1.6;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -173,6 +172,29 @@ h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; }
 h2 { font-size: clamp(1.85rem, 3.5vw, 2.75rem); }
 h3 { font-size: clamp(1.35rem, 2.2vw, 1.75rem); }
 h4 { font-size: 1.25rem; }
+h5 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.015em; }
+h6 { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; text-transform: uppercase; color: var(--slate); }
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--electric-blue);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  z-index: 99999;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom-right-radius: var(--radius-md);
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+}
+main:focus {
+  outline: none;
+}
 
 p {
   margin-bottom: 1rem;
@@ -374,6 +396,11 @@ main > .section:first-of-type,
 .stagger-children > *:nth-child(5) { transition-delay: 320ms; }
 .stagger-children > *:nth-child(6) { transition-delay: 400ms; }
 .stagger-children > *:nth-child(7) { transition-delay: 480ms; }
+
+/* Scroll margin for anchor targets */
+main:target {
+  scroll-margin-top: 80px;
+}
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {

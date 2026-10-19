@@ -24,12 +24,17 @@ $pageMeta = $pageMeta ?? [];
     <?php render_json_ld_organization(); ?>
     <?php if (!empty($pageMeta['faq'])) { render_json_ld_faq($pageMeta['faq']); } ?>
 
-    <!-- Stylesheets -->
+    <!-- Fonts & Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" href="<?= asset('css/main.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/responsive.css') ?>">
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="screen-vignette" aria-hidden="true"></div>
 
 <?php require_once __DIR__ . '/navigation.php'; ?>
+<main id="main-content" tabindex="-1">
