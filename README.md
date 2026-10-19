@@ -576,6 +576,10 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   └── STACK.md
 ├── founder-section.php
 ├── graphify-out
+│   ├── 2026-10-20
+│   │   ├── GRAPH_REPORT.md
+│   │   ├── graph.json
+│   │   └── manifest.json
 │   ├── GRAPH_REPORT.md
 │   ├── GRAPH_TREE.html
 │   ├── cache
@@ -586,11 +590,13 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 0a42ceac3faa90350f2a2505d8e4d0dde97d1d7badf0b994fbe421a04c43b079.json
 │   │   │       ├── 0cd59dcc25a92aaee09f5ef60d9eccea61bb081e7df0183713291b950c409df8.json
 │   │   │       ├── 0ec8fcd06f45b51043057062ddb7c0bd229c91bd0a1545b19ca87533a78733d4.json
+│   │   │       ├── 11fcc416c8baf8c5531a70a30e23413aeaadd59934e205bd5a79eeef81bb71b0.json
 │   │   │       ├── 153b9a84eff8bafd07c03277b77efb7d4762a10b75a67b3f57b6ff441d5c11bb.json
 │   │   │       ├── 1c6055d963896fd73e145f56a00e3378710e0598e067a2fc67633900540c3549.json
 │   │   │       ├── 312833499f9c491079bd9c421bb7748b0cbd6d61995dd3f737c95a3cbb419618.json
 │   │   │       ├── 320b8e977e78e0a2e0785ab924e34865f7a375e972ef9321734f8f80c3eb8cc1.json
 │   │   │       ├── 3de13cca391c49e098175655088ac9aacfa54cd798b39d348bfb5dc6f07ebebd.json
+│   │   │       ├── 41cef0bb70ac77cebe7f2faf8bb7787b615a1024467f899fc56f2317c49ff36b.json
 │   │   │       ├── 4bee4421938055c8a36ee409415785b976f25af69be087449593412db046df70.json
 │   │   │       ├── 4e4cf0606e497bec9d3dbc18c7ad727a16fc6e42bd49a85c59159c77f12b3193.json
 │   │   │       ├── 545c9d6ad1a4c383120b4f68276e7524ae04ab58edebabfb6e174c89926c7d92.json
@@ -606,10 +612,12 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 8eb7e9e653ffbcbb28b60a0fd10ebcfaf275ec24e4a7bedbe95895dd90334d3e.json
 │   │   │       ├── 9974f2700a05ec68ab7097d19edb6bf86926125ea3274c5f5fac5cbd16b0ce67.json
 │   │   │       ├── a0a6b1ea3e368be4d2ee9827ec0dd4b5ed86be39e0989095e56504b9a95b3e6d.json
+│   │   │       ├── ac5bd830caffcbcea91ed5ebc6fb019965e4df43218e117bc4efb25a71e4df20.json
 │   │   │       ├── ae0176d271f39b3d2cd8de91a9d82b15aa25a411a18e7c0bb9f3119efdb9136d.json
 │   │   │       ├── b0479e24e4c3dc60e1ecd46841c33e4da7d5ce9e6885afc5351bb21dca132dec.json
 │   │   │       ├── b963faff0dc0d459dcae2632d521c7ddca1e6085ab5b01e562bebcd4a2cbdc65.json
 │   │   │       ├── bc9c1eb96b2e06b6ed747eb8fbf3dab6f6ea8739c44589dd2bac6711405cdb55.json
+│   │   │       ├── bd3b31ca841072b8cad45eb5d4e1d55c986c7c487bd18f58a48d01cca132ce83.json
 │   │   │       ├── c21f5b0f5d70577723d6afc2fb2874c64be051505deada0d7af8ee70c75b61d1.json
 │   │   │       ├── cb62722a94f22324bf8673a052019b121f4d14703176d46273835f6c74eb158c.json
 │   │   │       ├── ccac5466a562bfeac3693b93361ecb9d86445eaccba94a10e990c4e6312f234e.json
