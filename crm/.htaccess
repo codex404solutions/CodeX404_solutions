@@ -1,0 +1,55 @@
+# ==============================================================================
+# CodeX404 Solutions — CRM Apache Configuration
+# Separate application: private dashboard + signed lead API.
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # --- Block sensitive paths -------------------------------------------------
+    # Directories that must never be served over HTTP.
+    RewriteRule ^(app|config|storage|database|views|vendor)(/|$) - [F,L]
+    # Hidden files (.env, .htaccess, .git).
+    RewriteRule (^|/)\. - [F,L]
+    # SQL dumps and backups.
+    RewriteRule \.(sql|bak|log|ini|sh|md)$ - [F,L]
+
+    # --- Allow direct access to api/ -------------------------------------------
+    RewriteRule ^api(/|$) - [L]
+
+    # --- Public routing --------------------------------------------------------
+    # Root -> dashboard
+    RewriteRule ^$ public/index.php [L]
+
+    # Clean aliases for the auth endpoints
+    RewriteRule ^login(\.php)?$ public/login.php [L]
+    RewriteRule ^logout(\.php)?$ public/logout.php [L]
+
+    # Clean URLs: /leads -> public/leads.php (only when the target file exists)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond public/$1.php -f
+    RewriteRule ^(.*)$ public/$1.php [L]
+
+    # Direct files in public/ (e.g. assets, static files)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond public/$1 -f
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>
+
+# Never execute or expose anything under storage
+<IfModule mod_rewrite.c>
+    RewriteRule ^storage/ - [F,L]
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
