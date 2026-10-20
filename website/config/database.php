@@ -4,7 +4,11 @@ declare(strict_types=1);
 /**
  * CodeX404 Solutions — Database Configuration & Connection Provider
  * Uses PDO with resilient error handling and graceful fallbacks.
+ * Credentials are read dynamically from environment variables or .env.
  */
+
+require_once __DIR__ . '/Env.php';
+Env::load(dirname(__DIR__) . '/.env');
 
 class Database {
     private static ?PDO $instance = null;
@@ -14,23 +18,11 @@ class Database {
             return self::$instance;
         }
 
-        // Credentials based on environment
-        $host = getenv('DB_HOST') ?: 'localhost';
-        $port = getenv('DB_PORT') ?: '3306';
-
-        if (ENVIRONMENT === 'local') {
-            $user = getenv('DB_USER') ?: 'root';
-            $pass = getenv('DB_PASS') ?: '';
-            $name = getenv('DB_NAME') ?: 'codex404_db';
-        } elseif (ENVIRONMENT === 'dev') {
-            $user = getenv('DB_USER') ?: 'u274161808_codex404_dev_u';
-            $pass = getenv('DB_PASS') ?: 'Kolkata@@@786';
-            $name = getenv('DB_NAME') ?: 'u274161808_codex404_dev';
-        } else {
-            $user = getenv('DB_USER') ?: 'u274161808_codex404_user';
-            $pass = getenv('DB_PASS') ?: 'Kolkata@@@786';
-            $name = getenv('DB_NAME') ?: 'u274161808_codex404_db';
-        }
+        $host = Env::get('DB_HOST', 'localhost');
+        $port = Env::get('DB_PORT', '3306');
+        $user = Env::get('DB_USER', 'root');
+        $pass = Env::get('DB_PASS', '');
+        $name = Env::get('DB_NAME', 'codex404_db');
 
         $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
 
@@ -43,10 +35,16 @@ class Database {
             ]);
             return self::$instance;
         } catch (PDOException $e) {
-            // Log database connection error silently
-            $logFile = LOGS_PATH . '/errors.log';
-            $msg = "[" . date('Y-m-d H:i:s') . "] DB Connection Failed: " . $e->getMessage() . PHP_EOL;
-            @file_put_contents($logFile, $msg, FILE_APPEND);
+            $logFile = (defined('LOGS_PATH') ? LOGS_PATH : dirname(__DIR__) . '/storage/logs') . '/errors.log';
+            @mkdir(dirname($logFile), 0755, true);
+            // Strip any sensitive credentials or host topology before logging
+            $sanitizedMsg = preg_replace(
+                ['/password[=:][^\s;,\)]+/i', '/user[=:][^\s;,\)]+/i', "/user '[^']+'/i"],
+                ['password=***', 'user=***', "user '***'"],
+                $e->getMessage()
+            ) ?? 'Connection error';
+            $msg = "[" . date('Y-m-d H:i:s') . "] DB Connection Failed [Code: " . $e->getCode() . "]: " . $sanitizedMsg . PHP_EOL;
+            @file_put_contents($logFile, $msg, FILE_APPEND | LOCK_EX);
             return null;
         }
     }

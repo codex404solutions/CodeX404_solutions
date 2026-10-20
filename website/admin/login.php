@@ -13,22 +13,44 @@ $error = '';
 $usernameVal = 'admin';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $token = $_POST['csrf_token'] ?? '';
-    if (!verify_csrf_token($token)) {
-        $error = 'Security session expired. Please refresh and try again.';
+    // 1. Rate limiting on login attempts (both session & persistent IP-based)
+    if (!check_rate_limit('admin_login_submit', 10, 300)) {
+        $error = 'Too many sign-in attempts from this location. Please wait a few minutes before trying again.';
     } else {
-        $username = trim((string)($_POST['username'] ?? ''));
-        $password = (string)($_POST['password'] ?? '');
-        $usernameVal = $username;
-
-        if ($username === '' || $password === '') {
-            $error = 'Please enter both username and password.';
-        } elseif (authenticate_admin($username, $password)) {
-            $return = $_GET['return'] ?? admin_url('index.php');
-            header('Location: ' . $return);
-            exit;
+        $token = $_POST['csrf_token'] ?? '';
+        if (!verify_csrf_token($token)) {
+            $error = 'Security session expired. Please refresh and try again.';
         } else {
-            $error = 'Invalid credentials. Please verify your username and password.';
+            $username = trim((string)($_POST['username'] ?? ''));
+            $password = (string)($_POST['password'] ?? '');
+            $usernameVal = $username;
+
+            if ($username === '' || $password === '') {
+                $error = 'Please enter both username and password.';
+            } elseif (is_admin_locked_out($username)) {
+                $remaining = get_admin_lockout_remaining($username);
+                $minutes = max(1, (int)ceil($remaining / 60));
+                $error = "Account or IP temporarily locked due to multiple failed attempts. Please try again in {$minutes} minute(s).";
+            } elseif (authenticate_admin($username, $password)) {
+                $return = (string)($_GET['return'] ?? '');
+                $parsedReturn = parse_url($return);
+                $isLocalReturn = $return !== ''
+                    && str_starts_with($return, '/')
+                    && !str_starts_with($return, '//')
+                    && ($parsedReturn === false || !isset($parsedReturn['scheme'], $parsedReturn['host']));
+                header('Location: ' . ($isLocalReturn ? $return : admin_url('index.php')));
+                exit;
+            } else {
+                // If this failure triggered a lockout, notify user
+                if (is_admin_locked_out($username)) {
+                    $remaining = get_admin_lockout_remaining($username);
+                    $minutes = max(1, (int)ceil($remaining / 60));
+                    $error = "Too many failed attempts. Access has been temporarily suspended for {$minutes} minute(s).";
+                } else {
+                    // Generic message prevents username enumeration
+                    $error = 'Invalid credentials. Please verify your username and password.';
+                }
+            }
         }
     }
 }
@@ -290,11 +312,6 @@ $flash = get_admin_flash();
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
     </form>
-
-    <div class="credential-helper">
-        <strong>Authorized Access Only</strong><br>
-        Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>admin@1234</code>
-    </div>
 
     <div class="login-footer">
         <a href="<?= url('index.php') ?>">← Return to Live Website</a>

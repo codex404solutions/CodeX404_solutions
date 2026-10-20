@@ -32,25 +32,25 @@ class ContactController {
             ];
         }
 
-        // Sanitize
+        // Sanitize with strict field length bounds
         $data = [
             'type' => 'general_contact',
-            'name' => Sanitizer::cleanString($_POST['name'] ?? ''),
-            'email' => Sanitizer::cleanEmail($_POST['email'] ?? ''),
-            'phone' => Sanitizer::cleanPhone($_POST['phone'] ?? ''),
-            'company' => Sanitizer::cleanString($_POST['company'] ?? ''),
-            'subject' => Sanitizer::cleanString($_POST['subject'] ?? 'General Inquiry'),
-            'message' => Sanitizer::cleanString($_POST['message'] ?? ''),
+            'name' => Sanitizer::cleanString($_POST['name'] ?? '', 100),
+            'email' => Sanitizer::cleanEmail($_POST['email'] ?? '', 254),
+            'phone' => Sanitizer::cleanPhone($_POST['phone'] ?? '', 25),
+            'company' => Sanitizer::cleanString($_POST['company'] ?? '', 120),
+            'subject' => Sanitizer::cleanString($_POST['subject'] ?? 'General Inquiry', 150),
+            'message' => Sanitizer::cleanString($_POST['message'] ?? '', 5000),
             'privacy_consent' => !empty($_POST['privacy_consent']),
             'newsletter' => !empty($_POST['newsletter']),
-            '_gotcha' => $_POST['_gotcha'] ?? ''
+            '_gotcha' => Sanitizer::cleanString($_POST['_gotcha'] ?? '', 100)
         ];
 
         // Validate
         $validator = new FormValidator();
         if (!$validator->validateContact($data)) {
             return [
-                'status' => 'error',
+                'status' => 'error', 
                 'message' => 'Please correct the highlighted form errors.',
                 'errors' => $validator->getErrors()
             ];
@@ -71,7 +71,12 @@ class ContactController {
                     ':message' => $data['message']
                 ]);
             } catch (\Throwable $e) {
-                // Non-fatal, fallback to file
+                // Non-fatal, fallback to file storage; log code only to avoid information leakage
+                @file_put_contents(
+                    LOGS_PATH . '/app.log',
+                    "[" . date('c') . "] Contact DB insert skipped: code " . $e->getCode() . PHP_EOL,
+                    FILE_APPEND | LOCK_EX
+                );
             }
         }
 
