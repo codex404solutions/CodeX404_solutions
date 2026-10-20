@@ -556,11 +556,6 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   └── v1
 │   │       └── leads.php
 │   ├── app
-│   │   ├── Controllers
-│   │   ├── Helpers
-│   │   ├── Middleware
-│   │   ├── Models
-│   │   ├── Repositories
 │   │   └── Services
 │   │       ├── ApprovalService.php
 │   │       ├── AuthService.php
@@ -580,30 +575,25 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   └── seed_approvals.php
 │   ├── index.php
 │   ├── public
-│   │   ├── css
-│   │   ├── images
+│   │   ├── assets
+│   │   │   └── images
+│   │   │       └── logo
+│   │   │           ├── favicon.ico
+│   │   │           ├── logo.jpg
+│   │   │           └── logo.png
 │   │   ├── index.php
-│   │   ├── js
 │   │   ├── login.php
+│   │   ├── logo
+│   │   │   ├── favicon.ico
+│   │   │   ├── logo.jpg
+│   │   │   └── logo.png
 │   │   └── logout.php
 │   ├── seed.php
-│   ├── storage
-│   │   ├── data
-│   │   │   ├── approvals.json
-│   │   │   ├── leads.json
-│   │   │   ├── opportunities.json
-│   │   │   ├── paperclip_tasks.json
-│   │   │   └── projects.json
-│   │   └── logs
-│   └── views
-│       ├── approvals
-│       ├── auth
-│       ├── dashboard
-│       ├── layouts
-│       ├── leads
-│       ├── opportunities
-│       ├── projects
-│       └── settings
+│   └── storage
+│       └── data
+│           ├── approvals.json
+│           ├── paperclip_tasks.json
+│           └── projects.json
 ├── docs
 │   ├── API_CONTRACT.md
 │   ├── CRM
@@ -641,6 +631,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 021e7b51a2f500c8313b40bd42f26016fb0100562e2e850be4d87a0d4dd17ee2.json
 │   │   │       ├── 0360e79a5850587a03277f8756c093af51ee9fb0342d2d105c6df55b2405fa52.json
 │   │   │       ├── 0394e84cff79fee987b4ac559c2b502517d000947851cb50fa95886124d42d1f.json
+│   │   │       ├── 04a83d28d15f23700b6c65992e6629c7192cc434a18aacce05e64c8fff4d6bf9.json
 │   │   │       ├── 0722cdcfd4fbe6b18e856c30b77fa6f30f12302b8ea64f74504fb4ae25268633.json
 │   │   │       ├── 076421ab3d2288c3589c6a909b4aaeeeced7a63cbcb02ca6cc3b6a1366b579fd.json
 │   │   │       ├── 0a42ceac3faa90350f2a2505d8e4d0dde97d1d7badf0b994fbe421a04c43b079.json
@@ -658,6 +649,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 153b9a84eff8bafd07c03277b77efb7d4762a10b75a67b3f57b6ff441d5c11bb.json
 │   │   │       ├── 15b47e2c40bd4d56aef19b930a2ea1b4d0025ef73f98472e0e86eec29909193c.json
 │   │   │       ├── 17cf10bdccb55e359cb5816d136676ce966ccfccfc033b247f1e48c5e88b1ad8.json
+│   │   │       ├── 19f60f877ad289fffa9a71e53e14c37b391c95379f923f94790ed8a1fbf14a63.json
 │   │   │       ├── 1c6055d963896fd73e145f56a00e3378710e0598e067a2fc67633900540c3549.json
 │   │   │       ├── 1d58e9a8ee0348a1a7c2ca309a55b3a1cf375732c9ca244f7cd7ca6b36a8a5fc.json
 │   │   │       ├── 1d91d966a45a0de6f72cde59a4f11b21ee81e4cd54af2c03f06227d9c0fdd967.json
@@ -667,6 +659,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 269428309dbd1c0ca43f2e3f6ebf19a8745ce36971b4f63b333f3fb6e35c1494.json
 │   │   │       ├── 26bc44efc7be87639acbf60c8076d9c417effc3c743b6b088ef388860499e1f7.json
 │   │   │       ├── 270de5d9cef0214e695a0a2462fa1ab12a12e391ac63d5afa2001e00f8242590.json
+│   │   │       ├── 27120e39d759b85e598733d7d524b8d4a1cc1e4a173f0a1650ca0195c04bb73e.json
 │   │   │       ├── 2dc983806fb70b0bceb5f44de80f2f4598c50f2ccc3a46d6a37ac8153a9b24c0.json
 │   │   │       ├── 312833499f9c491079bd9c421bb7748b0cbd6d61995dd3f737c95a3cbb419618.json
 │   │   │       ├── 3178dd9c1418b3beef1622f8c6d799a7696658dd0836ad58b07ad32b4de7d45a.json
@@ -683,6 +676,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 42fb2bad50133e35a6d5ef48c791dfbc1663c619a7285707af911479a7855a47.json
 │   │   │       ├── 44ced40f05ee80ae5379c0b8f915e8ca4225c71129874a7be4fd7752323d5d3b.json
 │   │   │       ├── 450f801ddc6b9422b78345505360fecfbd53eb7c3d457c9d4defc88f4642205a.json
+│   │   │       ├── 45184495c3c612375da12f85476b36e6458cad8e4108c73f806ffac275be398c.json
 │   │   │       ├── 458b1a962aa7f0c6a7ba7ae830fd4573c43696f00fd99c9bcc3e63103f9c02fd.json
 │   │   │       ├── 45c01dc025ab83b73ffd2aad2fa243005a188dd8e892f3b67c7a329bc79b5765.json
 │   │   │       ├── 460db33fb2758cbd068c7d60ec4d593e3031b36b555bf774fd786c5c12eab419.json
@@ -700,6 +694,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 66adc12f022c0f317bfbf8fbcc5caf7269664b5d0540cabf37e18263267a195d.json
 │   │   │       ├── 6a7f2b0c6468ba34b317bc1b31742a0c146be409367c6cd8da22692db607194b.json
 │   │   │       ├── 6c511d203fe69a8d55d54ca83000526cd1969faadf3384ab669f08448feb8898.json
+│   │   │       ├── 6d373bb30189d6870f3f7c267a85a8552d09a99e293b04b1e1e92b1afd3abd82.json
 │   │   │       ├── 6f88a5bde4bf595c4f5100db053ea2f4eb64290b2c70592868b0d85b53aac8d9.json
 │   │   │       ├── 705f7b5f88d4d8ecbd740be0173095291cd76e12abe7cd26c8d2d173e19fe07c.json
 │   │   │       ├── 70706616f919cff0a1ebbbfa2e27ace0f019a2ecaf0c48a62e3307c80b0fef1a.json
@@ -729,7 +724,9 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 8f815d453cad3f68baacfe151bb75fa397f4165b325118f91e12fc83b16ed804.json
 │   │   │       ├── 94cb8d9db980db4282a00d26617ea80a9ac2cd5ddcf00f365b1473a38b3e2658.json
 │   │   │       ├── 950c826227fa7ce5f0e6faa5875105974429919d2182c853a1de7ed8a2221109.json
+│   │   │       ├── 994932df3fdabffe815bb829e38a0b3b3e835710ec40e565fdd6db82c89f95c7.json
 │   │   │       ├── 9974f2700a05ec68ab7097d19edb6bf86926125ea3274c5f5fac5cbd16b0ce67.json
+│   │   │       ├── 9cb0f3a2a677e4f07f26cf767b5b6403074de86edc625e80de2e53e0fbcb512f.json
 │   │   │       ├── 9e3fca6e0271d7997f2122b1a21a64a9accdf920f722cfe3a4a429481d6c9731.json
 │   │   │       ├── a0a6b1ea3e368be4d2ee9827ec0dd4b5ed86be39e0989095e56504b9a95b3e6d.json
 │   │   │       ├── a4ff108281bdee8578ef46283c168f551fa8b06e26d7aafd1c7e10e8ca22b63d.json
@@ -739,9 +736,11 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── a822fcea3230562bd471308bce62471db8f2086becde9a8b87d53f9bcada2425.json
 │   │   │       ├── abb3a41b35cae6eb46c7933de5d67ca1aa9900592a46153e2bb490b17576a510.json
 │   │   │       ├── ac5bd830caffcbcea91ed5ebc6fb019965e4df43218e117bc4efb25a71e4df20.json
+│   │   │       ├── adacac6e6dad84292c7168e9ae88755b9efcdc639e8f9c061f57077e9c76b5c5.json
 │   │   │       ├── ae0176d271f39b3d2cd8de91a9d82b15aa25a411a18e7c0bb9f3119efdb9136d.json
 │   │   │       ├── b0479e24e4c3dc60e1ecd46841c33e4da7d5ce9e6885afc5351bb21dca132dec.json
 │   │   │       ├── b2bd075c1fcfe82d5d9d5aca6672a915e746dfecbf6db0987bde34416d3421af.json
+│   │   │       ├── b424e4235130ca8e63c0696db03d659e83dff96c511f70068388bf39d48c7482.json
 │   │   │       ├── b44971cc99529eb090027e3ba7031407a4c71a0e7f8660d875fc66c2dae96d9b.json
 │   │   │       ├── b56cfb737d63b1be31353a460349ebe46f674c64d021a56c54bad318ba03ab71.json
 │   │   │       ├── b963faff0dc0d459dcae2632d521c7ddca1e6085ab5b01e562bebcd4a2cbdc65.json
@@ -760,6 +759,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── cb62722a94f22324bf8673a052019b121f4d14703176d46273835f6c74eb158c.json
 │   │   │       ├── ccac5466a562bfeac3693b93361ecb9d86445eaccba94a10e990c4e6312f234e.json
 │   │   │       ├── ccdf976f5a2a7038926ae66a7f54dc40f4733784b509954324ae7444fc7b748e.json
+│   │   │       ├── cd93cd8df278e5e9a8beeb053307b18b29faf111519cd13db972e4ba5dd2ab86.json
 │   │   │       ├── ce810d9c5b58714d1c6323deccb8a3bd6ef6561f822343877321db7a21488c99.json
 │   │   │       ├── d121cbb159f9033c7a7821e2bd1d0239e6d847fe069ef73c5f25e344b87d25cf.json
 │   │   │       ├── d34d913f928f29d289b039944c132ad257323ef3eadc89057d00b03aae01105c.json
@@ -783,6 +783,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── f6a40f3f4684617d05372a00b32e899878a5dcd177e898fa203d906a29357ea2.json
 │   │   │       ├── f75cdf8eba23931464b8e289ba8f1218d80f9f5e92ccdbd1217f3845a72ded17.json
 │   │   │       ├── f85363455bdb26c33aacbe0fcfbd0cd1477f026562a4f2e3dc6850b4b3603182.json
+│   │   │       ├── f8754a2b8f2035772fa339de050900916b41d2f124603c505fe10cbaaf953d29.json
 │   │   │       ├── fcd1f72b02d9195a8e92ae0032628d784d8ed3e4a5f5e6cb5451424718a87ba2.json
 │   │   │       └── fd60ab68e05b4bd7d6c6d58656f349ffc3c11aec7d86f646175243510339fd0e.json
 │   │   ├── last_query_stamp
@@ -816,21 +817,20 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │   └── AGENTS.md
 │   │   └── technical-lead
 │   │       └── AGENTS.md
-│   ├── projects
-│   │   └── us-client-web-apps
-│   │       ├── PROJECT.md
-│   │       └── tasks
-│   │           ├── 01-discovery
-│   │           │   └── TASK.md
-│   │           ├── 02-scoping
-│   │           │   └── TASK.md
-│   │           ├── 03-build
-│   │           │   └── TASK.md
-│   │           ├── 04-qa
-│   │           │   └── TASK.md
-│   │           └── 05-deploy
-│   │               └── TASK.md
-│   └── tasks
+│   └── projects
+│       └── us-client-web-apps
+│           ├── PROJECT.md
+│           └── tasks
+│               ├── 01-discovery
+│               │   └── TASK.md
+│               ├── 02-scoping
+│               │   └── TASK.md
+│               ├── 03-build
+│               │   └── TASK.md
+│               ├── 04-qa
+│               │   └── TASK.md
+│               └── 05-deploy
+│                   └── TASK.md
 ├── setup.bat
 ├── update_tree.py
 └── website
@@ -909,9 +909,6 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── sitemap.xml
     ├── software-development.php
     ├── solutions.php
-    ├── storage
-    │   └── auth
-    │       └── admin_lockouts.json
     └── terms.php
 ```
 <!-- TREE_END -->
