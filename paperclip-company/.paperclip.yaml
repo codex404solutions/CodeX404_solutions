@@ -1,0 +1,21 @@
+version: 1
+
+# Runtime adapters are intentionally omitted from the portable package.
+# Select claude_local or codex_local during Paperclip import based on the
+# credentials and runtime installed on the host.
+
+agents:
+  ceo:
+    env: {}
+  chief-of-staff:
+    env: {}
+  lead-researcher:
+    env: {}
+  sales-engineer:
+    env: {}
+  technical-lead:
+    env: {}
+  qa-security:
+    env: {}
+  delivery-lead:
+    env: {}
