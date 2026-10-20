@@ -35,6 +35,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CodeX404 Solutions — CRM Login</title>
+
+    <script>
+        (() => {
+            const storedTheme = localStorage.getItem('codex_crm_theme');
+            const theme = storedTheme ? storedTheme : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        })();
+    </script>
+
+    <!-- Favicon using Original Logo -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo.png">
+    <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
+
     <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -71,19 +84,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25);
             color: #FFF;
         }
+
+        /* Light Mode Styles */
+        [data-bs-theme="light"] body {
+            background-color: #F1F5F9;
+            color: #0F172A;
+        }
+        [data-bs-theme="light"] .login-card {
+            background: #FFFFFF;
+            border-color: rgba(14, 165, 233, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+        }
+        [data-bs-theme="light"] .form-control {
+            background-color: #FFFFFF;
+            border-color: #CBD5E1;
+            color: #0F172A;
+        }
+        [data-bs-theme="light"] .form-control:focus {
+            background-color: #FFFFFF;
+            border-color: #0284C7;
+            color: #0F172A;
+        }
+        [data-bs-theme="light"] .bg-dark {
+            background-color: #F1F5F9 !important;
+            color: #0F172A !important;
+        }
+        [data-bs-theme="light"] .border-secondary {
+            border-color: #CBD5E1 !important;
+        }
+        [data-bs-theme="light"] .input-group-text {
+            background-color: #F1F5F9 !important;
+            border-color: #CBD5E1 !important;
+            color: #475569 !important;
+        }
+        [data-bs-theme="light"] .dropdown-menu {
+            background-color: #FFFFFF;
+            border-color: #CBD5E1;
+        }
+        [data-bs-theme="light"] .dropdown-item {
+            color: #0F172A;
+        }
+        [data-bs-theme="light"] .dropdown-item:hover,
+        [data-bs-theme="light"] .dropdown-item:focus {
+            background-color: #F1F5F9;
+            color: #0284C7;
+        }
     </style>
 </head>
 <body>
 <div class="container p-3">
+    <!-- Top Theme Switcher Bar -->
+    <div class="d-flex justify-content-end mb-3">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-3 py-1 shadow-sm" id="bd-theme-login" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-circle-half theme-icon-active text-info"></i>
+                <span class="small" id="bd-theme-login-text">Theme</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-login">
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark">
+                        <i class="bi bi-moon-stars-fill text-info"></i> Dark
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="light">
+                        <i class="bi bi-sun-fill text-warning"></i> Light
+                    </button>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto">
+                        <i class="bi bi-circle-half text-secondary"></i> System Auto
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
             <div class="login-card p-4 p-md-5">
                 <div class="text-center mb-4">
-                    <div class="d-inline-flex p-3 rounded-circle mb-3" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <i class="bi bi-cpu-fill text-info fs-2"></i>
-                    </div>
-                    <h3 class="fw-bold mb-1">CodeX<span class="text-info">404</span> Solutions</h3>
-                    <p class="text-muted small mb-0">Executive CRM & Paperclip Agent Command Center</p>
+                    <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid mb-2" style="max-height: 56px; object-fit: contain;">
+                    <h4 class="fw-bold mb-1">Company Command Center</h4>
+                    <p class="text-muted small mb-0">Executive CRM & Paperclip Agent Network</p>
                 </div>
 
                 <?php if ($error): ?>
@@ -128,5 +211,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </div>
+<!-- Bootstrap 5.3.3 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const getStoredTheme = () => localStorage.getItem('codex_crm_theme');
+    const setStoredTheme = theme => localStorage.setItem('codex_crm_theme', theme);
+    const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme();
+        if (storedTheme) return storedTheme;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    };
+
+    const updateThemeUI = (theme) => {
+        const textEl = document.getElementById('bd-theme-login-text');
+        const iconEl = document.querySelector('#bd-theme-login .theme-icon-active');
+        if (textEl) textEl.textContent = theme === 'auto' ? 'Auto' : (theme === 'light' ? 'Light' : 'Dark');
+        if (iconEl) {
+            if (theme === 'light') iconEl.className = 'bi bi-sun-fill text-warning theme-icon-active';
+            else if (theme === 'dark') iconEl.className = 'bi bi-moon-stars-fill text-info theme-icon-active';
+            else iconEl.className = 'bi bi-circle-half text-secondary theme-icon-active';
+        }
+    };
+
+    const applyTheme = (theme) => {
+        if (theme === 'auto') {
+            const autoTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-bs-theme', autoTheme);
+        } else {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        }
+        updateThemeUI(theme);
+    };
+
+    applyTheme(getPreferredTheme());
+
+    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const selected = btn.getAttribute('data-bs-theme-value');
+            setStoredTheme(selected);
+            applyTheme(selected);
+        });
+    });
+</script>
 </body>
 </html>

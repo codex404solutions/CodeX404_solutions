@@ -296,6 +296,21 @@ $csrfToken = CrmSecurity::csrfToken();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeX404 Solutions — CRM & Paperclip Autonomous Command Center</title>
 
+    <script>
+        (() => {
+            const storedTheme = localStorage.getItem('codex_crm_theme');
+            let theme = storedTheme ? storedTheme : 'combo';
+            const effective = (theme === 'auto')
+                ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'combo' : 'dark')
+                : theme;
+            document.documentElement.setAttribute('data-bs-theme', effective);
+        })();
+    </script>
+
+    <!-- Favicon using Original Logo -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo.png">
+    <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
+
     <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap Icons -->
@@ -306,7 +321,7 @@ $csrfToken = CrmSecurity::csrfToken();
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        :root {
+        :root, [data-bs-theme="dark"] {
             --cx-bg: #0B0F19;
             --cx-card: #111827;
             --cx-card-hover: #162032;
@@ -318,6 +333,381 @@ $csrfToken = CrmSecurity::csrfToken();
             --cx-purple: #818CF8;
             --cx-text-primary: #F8FAFC;
             --cx-text-muted: #94A3B8;
+            --cx-kanban-col: rgba(17, 24, 39, 0.6);
+            --cx-kanban-card: #1A2234;
+        }
+
+        /* ========================================================= */
+        /* Dual-Tone Architecture: Dark & Light Combination          */
+        /* ========================================================= */
+        [data-bs-theme="light"],
+        [data-bs-theme="combo"] {
+            --cx-bg: #F8FAFC;
+            --cx-card: #FFFFFF;
+            --cx-card-hover: #F1F5F9;
+            --cx-border: #E2E8F0;
+            --cx-border-active: #0284C7;
+            --cx-cyan: #0284C7;
+            --cx-emerald: #059669;
+            --cx-amber: #D97706;
+            --cx-purple: #6366F1;
+            --cx-text-primary: #0F172A;
+            --cx-text-muted: #64748B;
+            --cx-kanban-col: #F1F5F9;
+            --cx-kanban-card: #FFFFFF;
+        }
+
+        [data-bs-theme="light"] body,
+        [data-bs-theme="combo"] body {
+            background-color: #F8FAFC !important;
+            color: #0F172A !important;
+        }
+
+        /* 1. DARK EXECUTIVE SIDEBAR (Anchors visual hierarchy & gives original logo 100% crisp contrast) */
+        .crm-sidebar,
+        [data-bs-theme="light"] .crm-sidebar,
+        [data-bs-theme="combo"] .crm-sidebar,
+        #mobileSidebar,
+        [data-bs-theme="light"] #mobileSidebar,
+        [data-bs-theme="combo"] #mobileSidebar {
+            background: #0B0F19 !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: #F8FAFC !important;
+        }
+
+        .crm-sidebar .crm-brand,
+        [data-bs-theme="light"] .crm-sidebar .crm-brand,
+        [data-bs-theme="combo"] .crm-sidebar .crm-brand {
+            color: #FFFFFF !important;
+        }
+
+        .crm-sidebar .text-white,
+        [data-bs-theme="light"] .crm-sidebar .text-white,
+        [data-bs-theme="combo"] .crm-sidebar .text-white,
+        #mobileSidebar .text-white,
+        [data-bs-theme="light"] #mobileSidebar .text-white,
+        [data-bs-theme="combo"] #mobileSidebar .text-white {
+            color: #FFFFFF !important;
+        }
+
+        .crm-sidebar .text-muted,
+        [data-bs-theme="light"] .crm-sidebar .text-muted,
+        [data-bs-theme="combo"] .crm-sidebar .text-muted,
+        #mobileSidebar .text-muted,
+        [data-bs-theme="light"] #mobileSidebar .text-muted,
+        [data-bs-theme="combo"] #mobileSidebar .text-muted {
+            color: #94A3B8 !important;
+        }
+
+        .crm-sidebar .rounded-3,
+        [data-bs-theme="light"] .crm-sidebar .rounded-3,
+        [data-bs-theme="combo"] .crm-sidebar .rounded-3 {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .crm-sidebar .crm-nav-link,
+        [data-bs-theme="light"] .crm-sidebar .crm-nav-link,
+        [data-bs-theme="combo"] .crm-sidebar .crm-nav-link,
+        #mobileSidebar .crm-nav-link,
+        [data-bs-theme="light"] #mobileSidebar .crm-nav-link,
+        [data-bs-theme="combo"] #mobileSidebar .crm-nav-link {
+            color: #94A3B8 !important;
+        }
+
+        .crm-sidebar .crm-nav-link:hover,
+        .crm-sidebar .crm-nav-link.active,
+        [data-bs-theme="light"] .crm-sidebar .crm-nav-link:hover,
+        [data-bs-theme="light"] .crm-sidebar .crm-nav-link.active,
+        [data-bs-theme="combo"] .crm-sidebar .crm-nav-link:hover,
+        [data-bs-theme="combo"] .crm-sidebar .crm-nav-link.active,
+        #mobileSidebar .crm-nav-link:hover,
+        #mobileSidebar .crm-nav-link.active,
+        [data-bs-theme="light"] #mobileSidebar .crm-nav-link:hover,
+        [data-bs-theme="light"] #mobileSidebar .crm-nav-link.active,
+        [data-bs-theme="combo"] #mobileSidebar .crm-nav-link:hover,
+        [data-bs-theme="combo"] #mobileSidebar .crm-nav-link.active {
+            background: rgba(56, 189, 248, 0.12) !important;
+            color: #38BDF8 !important;
+            border-left: 3px solid #38BDF8 !important;
+        }
+
+        .crm-sidebar .badge.bg-dark,
+        [data-bs-theme="light"] .crm-sidebar .badge.bg-dark,
+        [data-bs-theme="combo"] .crm-sidebar .badge.bg-dark {
+            background-color: #111827 !important;
+            color: #94A3B8 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+
+        .crm-sidebar .btn-outline-secondary,
+        [data-bs-theme="light"] .crm-sidebar .btn-outline-secondary,
+        [data-bs-theme="combo"] .crm-sidebar .btn-outline-secondary {
+            color: #CBD5E1 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            background: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        .crm-sidebar .btn-outline-secondary:hover,
+        [data-bs-theme="light"] .crm-sidebar .btn-outline-secondary:hover,
+        [data-bs-theme="combo"] .crm-sidebar .btn-outline-secondary:hover {
+            color: #38BDF8 !important;
+            border-color: #38BDF8 !important;
+            background: rgba(56, 189, 248, 0.1) !important;
+        }
+
+        /* 2. LIGHT MAIN WORKSPACE (Cards, Charts, Tables, Kanban) */
+        [data-bs-theme="light"] main,
+        [data-bs-theme="combo"] main {
+            background-color: #F8FAFC !important;
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] main .border-bottom,
+        [data-bs-theme="combo"] main .border-bottom {
+            border-color: #E2E8F0 !important;
+        }
+
+        [data-bs-theme="light"] .crm-card,
+        [data-bs-theme="combo"] .crm-card {
+            background-color: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        [data-bs-theme="light"] .crm-card[style*="linear-gradient"],
+        [data-bs-theme="combo"] .crm-card[style*="linear-gradient"] {
+            background: linear-gradient(135deg, #F0F9FF 0%, #EEF2FF 100%) !important;
+            border: 1px solid #BAE6FD !important;
+        }
+
+        [data-bs-theme="light"] .agent-card,
+        [data-bs-theme="combo"] .agent-card {
+            background: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        [data-bs-theme="light"] .agent-card:hover,
+        [data-bs-theme="combo"] .agent-card:hover {
+            border-color: #0284C7 !important;
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15) !important;
+        }
+
+        [data-bs-theme="light"] .kanban-col,
+        [data-bs-theme="combo"] .kanban-col {
+            background: #F1F5F9 !important;
+            border: 1px solid #CBD5E1 !important;
+        }
+
+        [data-bs-theme="light"] .kanban-deal-card,
+        [data-bs-theme="combo"] .kanban-deal-card {
+            background: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        [data-bs-theme="light"] .kanban-deal-card:hover,
+        [data-bs-theme="combo"] .kanban-deal-card:hover {
+            border-color: #0284C7 !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        [data-bs-theme="light"] .approval-box,
+        [data-bs-theme="combo"] .approval-box {
+            background: #FFFBEB !important;
+            border: 1px solid #FDE68A !important;
+        }
+
+        [data-bs-theme="light"] .modal-content,
+        [data-bs-theme="combo"] .modal-content {
+            background-color: #FFFFFF !important;
+            color: #0F172A !important;
+            border: 1px solid #CBD5E1 !important;
+        }
+
+        [data-bs-theme="light"] .modal-header,
+        [data-bs-theme="light"] .modal-footer,
+        [data-bs-theme="combo"] .modal-header,
+        [data-bs-theme="combo"] .modal-footer {
+            border-color: #E2E8F0 !important;
+        }
+
+        [data-bs-theme="light"] .form-control,
+        [data-bs-theme="light"] .form-select,
+        [data-bs-theme="combo"] .form-control,
+        [data-bs-theme="combo"] .form-select {
+            background-color: #FFFFFF !important;
+            border-color: #CBD5E1 !important;
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] .form-control:focus,
+        [data-bs-theme="light"] .form-select:focus,
+        [data-bs-theme="combo"] .form-control:focus,
+        [data-bs-theme="combo"] .form-select:focus {
+            background-color: #FFFFFF !important;
+            border-color: #0284C7 !important;
+            color: #0F172A !important;
+            box-shadow: 0 0 0 0.25rem rgba(14, 165, 233, 0.2) !important;
+        }
+
+        [data-bs-theme="light"] select option,
+        [data-bs-theme="combo"] select option {
+            background-color: #FFFFFF !important;
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] .input-group-text,
+        [data-bs-theme="combo"] .input-group-text {
+            background-color: #F1F5F9 !important;
+            border-color: #CBD5E1 !important;
+            color: #475569 !important;
+        }
+
+        [data-bs-theme="light"] .table-custom,
+        [data-bs-theme="combo"] .table-custom {
+            --bs-table-bg: transparent;
+            --bs-table-border-color: #E2E8F0;
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] .table-custom th,
+        [data-bs-theme="combo"] .table-custom th {
+            background-color: #F8FAFC !important;
+            color: #64748B !important;
+            border-bottom: 2px solid #E2E8F0 !important;
+        }
+
+        [data-bs-theme="light"] .table-custom td,
+        [data-bs-theme="combo"] .table-custom td {
+            border-bottom: 1px solid #E2E8F0 !important;
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] .table-hover tbody tr:hover td,
+        [data-bs-theme="combo"] .table-hover tbody tr:hover td {
+            background-color: #F8FAFC !important;
+        }
+
+        [data-bs-theme="light"] .dropdown-menu,
+        [data-bs-theme="combo"] .dropdown-menu {
+            background-color: #FFFFFF !important;
+            color: #0F172A !important;
+            border-color: #CBD5E1 !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        [data-bs-theme="light"] .dropdown-item,
+        [data-bs-theme="combo"] .dropdown-item {
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] .dropdown-item:hover,
+        [data-bs-theme="light"] .dropdown-item:focus,
+        [data-bs-theme="combo"] .dropdown-item:hover,
+        [data-bs-theme="combo"] .dropdown-item:focus {
+            background-color: #F1F5F9 !important;
+            color: #0284C7 !important;
+        }
+
+        [data-bs-theme="light"] .dropdown-divider,
+        [data-bs-theme="combo"] .dropdown-divider {
+            border-color: #E2E8F0 !important;
+        }
+
+        /* Target text in main area */
+        [data-bs-theme="light"] main .text-white,
+        [data-bs-theme="combo"] main .text-white {
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] main .text-light,
+        [data-bs-theme="combo"] main .text-light {
+            color: #334155 !important;
+        }
+
+        [data-bs-theme="light"] main .text-white-50,
+        [data-bs-theme="combo"] main .text-white-50 {
+            color: #64748B !important;
+        }
+
+        [data-bs-theme="light"] main .text-muted,
+        [data-bs-theme="combo"] main .text-muted {
+            color: #64748B !important;
+        }
+
+        [data-bs-theme="light"] main .bg-dark,
+        [data-bs-theme="combo"] main .bg-dark {
+            background-color: #F1F5F9 !important;
+            color: #0F172A !important;
+        }
+
+        [data-bs-theme="light"] main .border-secondary,
+        [data-bs-theme="combo"] main .border-secondary {
+            border-color: #CBD5E1 !important;
+        }
+
+        [data-bs-theme="light"] main [style*="background: rgba(255, 255, 255"],
+        [data-bs-theme="combo"] main [style*="background: rgba(255, 255, 255"] {
+            background: #F8FAFC !important;
+            border-color: #E2E8F0 !important;
+        }
+
+        [data-bs-theme="light"] main [style*="background: rgba(0, 0, 0"],
+        [data-bs-theme="combo"] main [style*="background: rgba(0, 0, 0"] {
+            background: #F1F5F9 !important;
+            border-color: #E2E8F0 !important;
+        }
+
+        [data-bs-theme="light"] pre#outputModalBody,
+        [data-bs-theme="light"] pre.mono,
+        [data-bs-theme="combo"] pre#outputModalBody,
+        [data-bs-theme="combo"] pre.mono {
+            background-color: #F8FAFC !important;
+            border: 1px solid #E2E8F0 !important;
+            color: #0F172A !important;
+        }
+
+        /* Badges & Buttons contrast protection */
+        [data-bs-theme="light"] .badge.text-white,
+        [data-bs-theme="light"] .btn.text-white,
+        [data-bs-theme="light"] .badge .text-white,
+        [data-bs-theme="light"] .btn .text-white,
+        [data-bs-theme="light"] .btn-danger,
+        [data-bs-theme="light"] .btn-primary,
+        [data-bs-theme="light"] .btn-success,
+        [data-bs-theme="light"] .bg-danger,
+        [data-bs-theme="light"] .bg-success,
+        [data-bs-theme="light"] .bg-primary,
+        [data-bs-theme="combo"] .badge.text-white,
+        [data-bs-theme="combo"] .btn.text-white,
+        [data-bs-theme="combo"] .badge .text-white,
+        [data-bs-theme="combo"] .btn .text-white,
+        [data-bs-theme="combo"] .btn-danger,
+        [data-bs-theme="combo"] .btn-primary,
+        [data-bs-theme="combo"] .btn-success,
+        [data-bs-theme="combo"] .bg-danger,
+        [data-bs-theme="combo"] .bg-success,
+        [data-bs-theme="combo"] .bg-primary {
+            color: #FFFFFF !important;
+        }
+
+        [data-bs-theme="light"] .btn-info,
+        [data-bs-theme="combo"] .btn-info {
+            background-color: #0284C7 !important;
+            border-color: #0284C7 !important;
+            color: #FFFFFF !important;
+        }
+
+        [data-bs-theme="light"] ::-webkit-scrollbar-track,
+        [data-bs-theme="combo"] ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+
+        [data-bs-theme="light"] ::-webkit-scrollbar-thumb,
+        [data-bs-theme="combo"] ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
         }
 
         body {
@@ -515,14 +905,13 @@ $csrfToken = CrmSecurity::csrfToken();
         <!-- SIDEBAR NAVIGATION (Desktop + Offcanvas Mobile)         -->
         <!-- ======================================================== -->
         <aside class="col-12 col-lg-2 d-none d-lg-block crm-sidebar p-3 position-sticky top-0" style="height: 100vh; overflow-y: auto;">
-            <!-- Brand -->
-            <div class="d-flex align-items-center gap-2 mb-4 px-2 pt-2">
-                <div class="rounded-3 p-2 d-flex align-items-center justify-content-center" style="background: rgba(56, 189, 248, 0.15); border: 1px solid var(--cx-border);">
-                    <i class="bi bi-cpu-fill text-info fs-5"></i>
-                </div>
-                <div>
-                    <div class="crm-brand text-white lh-1">CodeX<span class="text-info">404</span></div>
-                    <small class="text-muted" style="font-size: 0.72rem; letter-spacing: 0.05em;">CRM & AGENT OS</small>
+            <!-- Brand with Original Logo -->
+            <div class="mb-4 px-2 pt-2 text-center">
+                <a href="index.php" class="d-block text-decoration-none">
+                    <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid" style="max-height: 48px; object-fit: contain;">
+                </a>
+                <div class="mt-2 d-flex align-items-center justify-content-center gap-2">
+                    <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.08em;">CRM & AGENT OS</span>
                 </div>
             </div>
 
@@ -621,12 +1010,43 @@ $csrfToken = CrmSecurity::csrfToken();
                         <span class="fw-semibold">Paperclip Engine: <?= htmlspecialchars($paperclipConn['mode'] ?? 'Local Runtime') ?></span>
                     </div>
 
+                    <!-- Bootstrap Theme Toggle Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-2 py-1" id="bd-theme-crm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-circle-half theme-icon-active text-primary"></i>
+                            <span class="small d-none d-md-inline" id="bd-theme-crm-text">Dark &amp; Light</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-crm">
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="combo">
+                                    <i class="bi bi-circle-half text-primary"></i> Dark &amp; Light Combo
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark">
+                                    <i class="bi bi-moon-stars-fill text-info"></i> Full Dark Mode
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="light">
+                                    <i class="bi bi-sun-fill text-warning"></i> Pure Light Mode
+                                </button>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto">
+                                    <i class="bi bi-laptop text-secondary"></i> System Auto
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
                     <!-- Quick Action Dropdown -->
                     <div class="dropdown">
                         <button class="btn btn-info btn-sm dropdown-toggle fw-bold text-dark px-3" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-plus-lg me-1"></i> Quick Action
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow">
+                        <ul class="dropdown-menu dropdown-menu-end shadow">
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNewLead"><i class="bi bi-person-plus me-2 text-warning"></i> Add Inbound Lead</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNewDeal"><i class="bi bi-cash-stack me-2 text-success"></i> Add Pipeline Deal</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNewProject"><i class="bi bi-rocket me-2 text-primary"></i> Create Client Project</a></li>
@@ -1908,10 +2328,9 @@ $csrfToken = CrmSecurity::csrfToken();
 <!-- Mobile Offcanvas Sidebar -->
 <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar" style="width: 280px;">
     <div class="offcanvas-header border-bottom border-secondary">
-        <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-cpu-fill text-info fs-4"></i>
-            <h5 class="offcanvas-title fw-bold">CodeX<span class="text-info">404</span> CRM</h5>
-        </div>
+        <a href="index.php" class="d-inline-block text-decoration-none">
+            <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" style="max-height: 38px; object-fit: contain;">
+        </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body p-3">
@@ -1925,6 +2344,22 @@ $csrfToken = CrmSecurity::csrfToken();
             <a href="#settings" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-settings" data-bs-dismiss="offcanvas"><i class="bi bi-sliders me-2"></i> System & API</a>
         </nav>
         <hr class="border-secondary my-3">
+        <!-- Mobile Theme Toggle -->
+        <div class="dropdown mb-3">
+            <button class="btn btn-outline-secondary btn-sm dropdown-toggle w-100 d-flex align-items-center justify-content-between px-3 py-2" id="bd-theme-mobile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="d-flex align-items-center gap-2">
+                    <i class="bi bi-circle-half theme-icon-active text-primary"></i>
+                    <span id="bd-theme-mobile-text">Dark &amp; Light</span>
+                </span>
+            </button>
+            <ul class="dropdown-menu w-100 shadow" aria-labelledby="bd-theme-mobile">
+                <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="combo"><i class="bi bi-circle-half text-primary"></i> Dark &amp; Light Combo</button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark"><i class="bi bi-moon-stars-fill text-info"></i> Full Dark Mode</button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="light"><i class="bi bi-sun-fill text-warning"></i> Pure Light Mode</button></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto"><i class="bi bi-laptop text-secondary"></i> System Auto</button></li>
+            </ul>
+        </div>
         <div class="d-grid gap-2">
             <a href="../website/discovery-call.php" target="_blank" class="btn btn-sm btn-outline-warning text-start"><i class="bi bi-lightning-charge me-1"></i> Public Discovery Form</a>
             <a href="logout.php" class="btn btn-sm btn-danger text-start mt-2"><i class="bi bi-box-arrow-left me-1"></i> Sign Out</a>
@@ -1989,6 +2424,79 @@ $csrfToken = CrmSecurity::csrfToken();
                 }
             });
         }
+
+        // =========================================================
+        // Bootstrap 5.3 Theme Switcher (Combo / Dark / Light / Auto)
+        // =========================================================
+        const getStoredTheme = () => localStorage.getItem('codex_crm_theme');
+        const setStoredTheme = theme => localStorage.setItem('codex_crm_theme', theme);
+        const getPreferredTheme = () => {
+            const storedTheme = getStoredTheme();
+            if (storedTheme) return storedTheme;
+            return 'combo'; // Default to requested Dark & Light combination
+        };
+
+        const updateThemeUI = (theme) => {
+            let label = 'Dark & Light';
+            let iconClass = 'bi bi-circle-half text-primary theme-icon-active';
+
+            if (theme === 'combo') {
+                label = 'Dark & Light';
+                iconClass = 'bi bi-circle-half text-primary theme-icon-active';
+            } else if (theme === 'light') {
+                label = 'Light';
+                iconClass = 'bi bi-sun-fill text-warning theme-icon-active';
+            } else if (theme === 'dark') {
+                label = 'Dark';
+                iconClass = 'bi bi-moon-stars-fill text-info theme-icon-active';
+            } else {
+                label = 'Auto';
+                iconClass = 'bi bi-laptop text-secondary theme-icon-active';
+            }
+
+            const textEl = document.getElementById('bd-theme-crm-text');
+            const iconEl = document.querySelector('#bd-theme-crm .theme-icon-active');
+            if (textEl) textEl.textContent = label;
+            if (iconEl) iconEl.className = iconClass;
+
+            const mobileTextEl = document.getElementById('bd-theme-mobile-text');
+            const mobileIconEl = document.querySelector('#bd-theme-mobile .theme-icon-active');
+            if (mobileTextEl) mobileTextEl.textContent = label;
+            if (mobileIconEl) mobileIconEl.className = iconClass;
+
+            document.querySelectorAll('[data-bs-theme-value]').forEach(el => {
+                if (el.getAttribute('data-bs-theme-value') === theme) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        };
+
+        const applyTheme = (theme) => {
+            const effectiveTheme = (theme === 'auto')
+                ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'combo' : 'dark')
+                : theme;
+            document.documentElement.setAttribute('data-bs-theme', effectiveTheme);
+            updateThemeUI(theme);
+        };
+
+        applyTheme(getPreferredTheme());
+
+        document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const selected = btn.getAttribute('data-bs-theme-value');
+                setStoredTheme(selected);
+                applyTheme(selected);
+            });
+        });
+
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+            const stored = getStoredTheme();
+            if (!stored || stored === 'auto') {
+                applyTheme('auto');
+            }
+        });
     });
 </script>
 

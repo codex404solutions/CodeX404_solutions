@@ -68,5 +68,21 @@
         "created_at": "2026-10-20T19:16:01+02:00",
         "approved_by": "CodeX404 Founder",
         "updated_at": "2026-10-20T19:20:57+02:00"
+    },
+    {
+        "type": "email_draft",
+        "title": "Outreach Draft: your organization (Prospect)",
+        "status": "pending",
+        "requested_by": "Chief of Staff",
+        "payload": {
+            "to": "client@example.com",
+            "subject": "Architecture observations for your organization",
+            "body": "Hi Prospect,\n\nThanks for connecting with CodeX404 Solutions.\n\nOur engineering team completed an initial review of your requirements for your organization. We've developed tailored high-throughput systems solving identical scaling challenges for US clients.\n\nWould 15 minutes this Thursday or Friday work for a focused technical alignment call?\n\nBest regards,\nMuhammad Noukhez\nFounder & CEO, CodeX404 Solutions",
+            "lead_id": null
+        },
+        "decision_notes": null,
+        "resolved_at": null,
+        "id": "rec_16eb8c1956045db2aee771af",
+        "created_at": "2026-10-20T19:41:06+02:00"
     }
 ]
