@@ -4,170 +4,311 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Technology Solutions & Engineering Capabilities',
-    'description' => 'Explore CodeX404 Solutions full-spectrum software and AI engineering services: custom web apps, autonomous AI agents, workflow automation, and SaaS products.',
+    'title' => 'Software & AI Engineering Solutions — Enterprise Capabilities',
+    'description' => 'Explore CodeX404 Solutions full-spectrum engineering capabilities: bespoke web applications, autonomous AI agents, enterprise RAG, WhatsApp automation, and scalable SaaS platforms.',
     'canonical' => url('solutions.php'),
-    'keywords' => 'software solutions, AI development, automation engineering, SaaS development, business systems'
+    'keywords' => 'software engineering solutions, custom web applications, autonomous AI agents, enterprise RAG, business process automation, SaaS product engineering'
 ];
 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<section class="section">
+<!-- HERO SECTION -->
+<section class="section" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3rem;">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
+        <div class="section-header" style="max-width: 840px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
                 <span class="dot"></span>
-                <span>Complete Capabilities</span>
+                <span>Full-Stack Engineering Capabilities</span>
             </div>
-            <h1 class="section-title">Software & AI Solutions Engineered for Growth</h1>
-            <p class="section-subtitle">
-                We deliver tailored digital products, intelligent automations, and scalable cloud systems that eliminate operational bottlenecks and drive measurable business impact.
+            <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
+                Software, AI & Automation Engineered for <span class="gradient-text">Measurable Scale</span>
+            </h1>
+            <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 720px; margin: 0 auto;">
+                We partner with growing enterprises and visionary founders to eliminate operational bottlenecks, automate manual friction, and build proprietary digital assets that deliver lasting competitive advantages.
             </p>
         </div>
 
-        <!-- Filter Controls -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3rem; flex-wrap: wrap;">
-            <button type="button" class="btn btn-secondary btn-sm filter-btn active" data-filter="all">All Solutions</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="software">Custom Software</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="ai">AI & Intelligence</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="automation">Automation</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="saas">SaaS & Products</button>
+        <!-- Capability Filter Bar -->
+        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary btn-sm filter-btn active" data-filter="all">All Capabilities</button>
+            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="software">Custom Software & ERP</button>
+            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="ai">AI Systems & Agents</button>
+            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="automation">Workflow Automation</button>
+            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="saas">SaaS & Cloud MVPs</button>
         </div>
 
-        <!-- Solutions Grid -->
-        <div class="grid grid-cols-3">
-            <!-- 1. Custom Web Applications -->
-            <div class="card" data-category="software">
-                <div class="card-icon">💻</div>
-                <h2 class="card-title">Custom Web Applications</h2>
-                <p class="card-description">
-                    Tailor-made web applications designed around your specific operational workflows. Eliminate off-the-shelf software compromises with scalable, proprietary code.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Modern PHP</span>
-                    <span class="tag-chip">JavaScript</span>
-                    <span class="tag-chip">Cloud Ready</span>
+        <!-- Solutions Grid (6 Core Pillars) -->
+        <div class="grid grid-cols-3" style="gap: 2rem;">
+            <!-- 1. Custom Web Applications & Internal Portals -->
+            <div class="card" data-category="software" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-icon">💻</div>
+                    <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Bespoke Web Applications & Portals</h2>
+                    <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                        Replace fragmented spreadsheets and rigid off-the-shelf software with tailor-made web platforms. Custom administrative control rooms, customer self-serve portals, and vendor workflows built precisely around your operational rules.
+                    </p>
+                    <div class="card-tags" style="margin-bottom: 1.5rem;">
+                        <span class="tag-chip">Modern PHP 8.2+ / Python</span>
+                        <span class="tag-chip">Strict RBAC</span>
+                        <span class="tag-chip">Audit Trails</span>
+                        <span class="tag-chip">Relational Schemas</span>
+                    </div>
                 </div>
-                <a href="<?= url('software-development.php') ?>" class="card-arrow-link">View Details →</a>
+                <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?= url('software-development.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore Architecture →</a>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">Zero Seat Fees</span>
+                </div>
             </div>
 
-            <!-- 2. AI Solutions & RAG -->
-            <div class="card" data-category="ai">
-                <div class="card-icon">🤖</div>
-                <h2 class="card-title">Enterprise AI & RAG</h2>
-                <p class="card-description">
-                    Retrieval-Augmented Generation (RAG) and private knowledge assistants that allow teams to converse with company documentation, manuals, and internal databases securely.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">RAG Systems</span>
-                    <span class="tag-chip">Vector Embeddings</span>
-                    <span class="tag-chip">Document Intelligence</span>
+            <!-- 2. Applied AI & Private Enterprise RAG -->
+            <div class="card" data-category="ai" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-icon">🧠</div>
+                    <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Enterprise AI & Private RAG</h2>
+                    <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                        Deploy domain-specific AI assistants grounded entirely in your company’s verified documentation, manuals, catalogs, and databases. Zero external model training, zero hallucination risk, and cryptographic data privacy.
+                    </p>
+                    <div class="card-tags" style="margin-bottom: 1.5rem;">
+                        <span class="tag-chip">Vector Search (Qdrant)</span>
+                        <span class="tag-chip">Zero Hallucination</span>
+                        <span class="tag-chip">Strict Schema Outputs</span>
+                        <span class="tag-chip">Self-Hosted VPC</span>
+                    </div>
                 </div>
-                <a href="<?= url('ai-solutions.php') ?>" class="card-arrow-link">View Details →</a>
+                <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?= url('ai-solutions.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore AI RAG →</a>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">100% Private</span>
+                </div>
             </div>
 
             <!-- 3. Autonomous AI Agents -->
-            <div class="card" data-category="ai">
-                <div class="card-icon">🧠</div>
-                <h2 class="card-title">Autonomous AI Agents</h2>
-                <p class="card-description">
-                    Multi-step agents that execute complex workflows across your existing software stack, featuring tool use, structured inputs, and rigorous human-in-the-loop safeguards.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Tool Integration</span>
-                    <span class="tag-chip">Autonomous Workflows</span>
-                    <span class="tag-chip">Auditability</span>
+            <div class="card" data-category="ai" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-icon">⚡</div>
+                    <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Autonomous AI Agents</h2>
+                    <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                        Move beyond passive Q&A chatbots. We engineer autonomous agents capable of querying internal databases, calling external REST APIs, planning execution paths, and completing multi-step operations with rigorous human approval gates.
+                    </p>
+                    <div class="card-tags" style="margin-bottom: 1.5rem;">
+                        <span class="tag-chip">Function Tool Calling</span>
+                        <span class="tag-chip">Approval Gates</span>
+                        <span class="tag-chip">Episodic Memory</span>
+                        <span class="tag-chip">Deterministic I/O</span>
+                    </div>
                 </div>
-                <a href="<?= url('ai-agents.php') ?>" class="card-arrow-link">View Details →</a>
+                <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?= url('ai-agents.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore Agent Systems →</a>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">Audited Execution</span>
+                </div>
             </div>
 
-            <!-- 4. Workflow Automation -->
-            <div class="card" data-category="automation">
-                <div class="card-icon">⚡</div>
-                <h2 class="card-title">Business Automation Pipelines</h2>
-                <p class="card-description">
-                    Connect disconnected tools. Seamlessly pass customer inquiries from WhatsApp and web forms into CRM and accounting software without human data entry.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">WhatsApp API</span>
-                    <span class="tag-chip">CRM Sync</span>
-                    <span class="tag-chip">Automated Invoicing</span>
+            <!-- 4. Workflow & Process Automation -->
+            <div class="card" data-category="automation" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-icon">🔄</div>
+                    <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Workflow & Process Automation</h2>
+                    <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                        Connect disconnected business tools. Automate lead intake, route customer requests over WhatsApp Cloud API, trigger instant billing receipts, and eliminate hours of manual copy-pasting between systems.
+                    </p>
+                    <div class="card-tags" style="margin-bottom: 1.5rem;">
+                        <span class="tag-chip">WhatsApp Cloud API</span>
+                        <span class="tag-chip">Idempotent Webhooks</span>
+                        <span class="tag-chip">Automated Billing</span>
+                        <span class="tag-chip">Queue Retries</span>
+                    </div>
                 </div>
-                <a href="<?= url('automation.php') ?>" class="card-arrow-link">View Details →</a>
+                <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?= url('automation.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore Automation →</a>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">&lt; 3 Min Response</span>
+                </div>
             </div>
 
-            <!-- 5. Cross-Platform Mobile Apps -->
-            <div class="card" data-category="software">
-                <div class="card-icon">📱</div>
-                <h2 class="card-title">Mobile App Development</h2>
-                <p class="card-description">
-                    Native-feel iOS and Android mobile applications built for field staff, customer interactions, or consumer distribution with offline caching and background synchronization.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">iOS / Android</span>
-                    <span class="tag-chip">Offline Sync</span>
-                    <span class="tag-chip">REST APIs</span>
+            <!-- 5. Cross-Platform Mobile Applications -->
+            <div class="card" data-category="software" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-icon">📱</div>
+                    <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Mobile Applications & PWAs</h2>
+                    <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                        High-performance mobile solutions built for field teams, customer engagement, and distribution. Engineered with offline-first local storage, biometric security, push notifications, and background synchronization.
+                    </p>
+                    <div class="card-tags" style="margin-bottom: 1.5rem;">
+                        <span class="tag-chip">iOS & Android</span>
+                        <span class="tag-chip">Offline SQLite Sync</span>
+                        <span class="tag-chip">Push Notifications</span>
+                        <span class="tag-chip">Biometric Auth</span>
+                    </div>
                 </div>
-                <a href="<?= url('mobile-apps.php') ?>" class="card-arrow-link">View Details →</a>
+                <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?= url('mobile-apps.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore Mobile Apps →</a>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">Offline-First</span>
+                </div>
             </div>
 
-            <!-- 6. SaaS & MVP Development -->
-            <div class="card" data-category="saas">
-                <div class="card-icon">🚀</div>
-                <h2 class="card-title">SaaS & MVP Engineering</h2>
-                <p class="card-description">
-                    Turn your product vision into a validated cloud application with multi-tenant data isolation, self-serve subscription billing, and rich analytics telemetry.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Multi-Tenancy</span>
-                    <span class="tag-chip">Payment Gateways</span>
-                    <span class="tag-chip">Admin Dashboards</span>
+            <!-- 6. SaaS & Rapid MVP Development -->
+            <div class="card" data-category="saas" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-icon">🚀</div>
+                    <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">SaaS Product Engineering & MVPs</h2>
+                    <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                        Transform software concepts into market-tested, revenue-generating SaaS platforms in 4 to 8 weeks. Includes multi-tenant data isolation, turnkey subscription billing (Stripe/Razorpay), and founder superadmin analytics.
+                    </p>
+                    <div class="card-tags" style="margin-bottom: 1.5rem;">
+                        <span class="tag-chip">4-8 Week Delivery</span>
+                        <span class="tag-chip">Multi-Tenancy RLS</span>
+                        <span class="tag-chip">Recurring Billing</span>
+                        <span class="tag-chip">100% IP Handover</span>
+                    </div>
                 </div>
-                <a href="<?= url('saas.php') ?>" class="card-arrow-link">View Details →</a>
+                <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?= url('saas.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore SaaS Delivery →</a>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">Fast Time-to-Market</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Solution Architecture Overview -->
-<section class="section" style="background: rgba(11, 31, 58, 0.3);">
+<!-- COMPARISON SECTION: OFF-THE-SHELF VS CODEX404 BESPOKE ENGINEERING -->
+<section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
+        <div class="section-header" style="max-width: 780px; margin: 0 auto 3.5rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
                 <span class="dot"></span>
-                <span>Engineering Standards</span>
+                <span>Strategic Advantage</span>
             </div>
-            <h2 class="section-title">How We Build Every Solution</h2>
+            <h2 class="section-title">Why Global Companies Choose Bespoke Engineering</h2>
             <p class="section-subtitle">
-                Our core architectural tenets guarantee that every line of code is resilient, maintainable, and aligned with international standards.
+                Compare the hidden operational friction of generic subscriptions against custom software built to your exact specifications.
             </p>
         </div>
 
-        <div class="grid grid-cols-4">
-            <div class="card">
-                <h3 style="color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.15rem;">Defensive Security</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Zero-trust authentication, parameterized queries, CSRF validation, and strict data encryption.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            <!-- Off-the-Shelf Compromise -->
+            <div class="card" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.03);">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                    <span style="font-size: 1.5rem;">❌</span>
+                    <h3 style="color: #F87171; font-size: 1.35rem; margin: 0;">Generic Off-The-Shelf SaaS</h3>
+                </div>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; font-size: 0.925rem; color: var(--slate);">
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #F87171; font-weight: bold;">✕</span>
+                        <span><strong>Expensive Seat-Based Penalties:</strong> Costs multiply each time you hire staff, disincentivizing company growth.</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #F87171; font-weight: bold;">✕</span>
+                        <span><strong>Rigid Workflows:</strong> Forces your unique operational process into someone else's rigid cookie-cutter software model.</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #F87171; font-weight: bold;">✕</span>
+                        <span><strong>Zero IP Ownership:</strong> You pay rent every month forever; you build zero enterprise equity or company valuation.</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #F87171; font-weight: bold;">✕</span>
+                        <span><strong>Vendor Lock-In:</strong> Your proprietary customer records and workflows are trapped behind closed third-party databases.</span>
+                    </li>
+                </ul>
             </div>
-            <div class="card">
-                <h3 style="color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.15rem;">Modular Architecture</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Loosely coupled components, clear separation of concerns, and well-documented API contracts.</p>
+
+            <!-- CodeX404 Bespoke Engineering -->
+            <div class="card" style="border-color: rgba(34, 211, 238, 0.4); background: rgba(34, 211, 238, 0.04); box-shadow: 0 10px 30px -10px rgba(34, 211, 238, 0.15);">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                    <span style="font-size: 1.5rem;">✨</span>
+                    <h3 style="color: var(--cyan); font-size: 1.35rem; margin: 0;">CodeX404 Tailored Architecture</h3>
+                </div>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; font-size: 0.925rem; color: var(--slate);">
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #34D399; font-weight: bold;">✓</span>
+                        <span><strong>Zero Recurring Per-User Tax:</strong> Unlimited employees, contractors, and clients without paying a cent extra.</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #34D399; font-weight: bold;">✓</span>
+                        <span><strong>Built Around Your Workflow:</strong> The software conforms 100% to how your business operates, cutting training time to zero.</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #34D399; font-weight: bold;">✓</span>
+                        <span><strong>100% Intellectual Property Ownership:</strong> You own the source code, databases, design assets, and deployment keys permanently.</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: #34D399; font-weight: bold;">✓</span>
+                        <span><strong>Full Sovereignty & Security:</strong> Host in your own private cloud (AWS, DigitalOcean, Hetzner) under strict compliance.</span>
+                    </li>
+                </ul>
             </div>
-            <div class="card">
-                <h3 style="color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.15rem;">High Velocity</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Rapid prototyping followed by disciplined test-driven deployment cycles to minimize time to value.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ARCHITECTURE STANDARDS -->
+<section class="section">
+    <div class="container">
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+                <span class="dot"></span>
+                <span>Engineering Philosophy</span>
             </div>
-            <div class="card">
-                <h3 style="color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.15rem;">Full IP Ownership</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">All repositories, architecture diagrams, and intellectual property belong 100% to your company.</p>
+            <h2 class="section-title">The Four Non-Negotiable Standards of Every CodeX404 System</h2>
+            <p class="section-subtitle">
+                We believe software should be defensive, maintainable, and built to withstand real production loads from day one.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-4" style="gap: 1.5rem;">
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.75rem;">01</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Defensive Security</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    Strict input sanitization, parameterized SQL queries, CSRF validation tokens, and OWASP Top 10 mitigation standard on every endpoint.
+                </p>
+            </div>
+
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.75rem;">02</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Modular Architecture</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    Separation of concerns, clean interfaces, and isolated database layers ensure your application can scale horizontally without architectural rewrites.
+                </p>
+            </div>
+
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.75rem;">03</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Deterministic Speed</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    Optimized database indexing, minimal script overhead, and intelligent caching achieve sub-200ms page loads and instantaneous API responses.
+                </p>
+            </div>
+
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.75rem;">04</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Full Asset Handover</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    Comprehensive architecture documentation, automated deployment scripts, and complete Git repository transfer upon project milestone delivery.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIVE DEMO SANDBOX CALLOUT -->
+<section class="section" style="background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.08) 0%, transparent 70%); padding: 3rem 0; border-top: 1px solid var(--border-subtle);">
+    <div class="container" style="text-align: center;">
+        <div style="max-width: 680px; margin: 0 auto;">
+            <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Try Before You Build</span>
+            <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 1rem;">Experience Our Live Interactive Engineering Demos</h3>
+            <p style="font-size: 1rem; color: var(--slate); line-height: 1.6; margin-bottom: 2rem;">
+                Test our live AI RAG knowledge retrieval, WhatsApp webhook automation pipeline, School ERP portal, and B2B ordering engine directly inside your browser right now.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="<?= url('index.php#projects') ?>" class="btn btn-primary">Launch Interactive Demos ⚡</a>
+                <a href="<?= url('contact.php') ?>" class="btn btn-secondary">Request Custom Scope & Estimate</a>
             </div>
         </div>
     </div>
 </section>
 
 <?php
-$ctaHeading = "Unsure which technical path matches your goal?";
-$ctaSubtitle = "Schedule a technical discovery session with our lead architects to evaluate stack, scope, and implementation strategy.";
+$ctaHeading = "Unsure Which Architectural Path Fits Your Roadmap?";
+$ctaSubtitle = "Schedule a direct technical discovery call with our founding engineers to evaluate feasibility, timelines, and implementation strategy.";
 include __DIR__ . '/components/cta.php';
 ?>
 

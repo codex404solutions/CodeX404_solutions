@@ -69,7 +69,12 @@ date_default_timezone_set('Asia/Kolkata');
 // ---------------- BASE URL CALCULATION ----------------
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
 $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
-$basePath = rtrim($scriptDir, '/');
+if (str_ends_with($scriptDir, '/admin')) {
+    $basePath = substr($scriptDir, 0, -6);
+} else {
+    $basePath = $scriptDir;
+}
+$basePath = rtrim($basePath, '/');
 
 // When loaded from root index.php vs subdirectories
 if (defined('CUSTOM_BASE_URL')) {
@@ -77,6 +82,8 @@ if (defined('CUSTOM_BASE_URL')) {
 } else {
     define('BASE_URL', $protocol . $host . $basePath . '/');
 }
+define('ADMIN_URL', BASE_URL . 'admin/');
+
 
 // ---------------- BRAND CONSTANTS ----------------
 define('APP_NAME', 'CodeX404 Solutions');
@@ -125,4 +132,9 @@ function url(string $path = ''): string {
 // Helper for asset URLs
 function asset(string $path = ''): string {
     return BASE_URL . 'assets/' . ltrim($path, '/');
+}
+
+// Helper for admin panel URLs
+function admin_url(string $path = ''): string {
+    return ADMIN_URL . ltrim($path, '/');
 }

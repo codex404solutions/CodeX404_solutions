@@ -100,11 +100,15 @@ declare(strict_types=1);
             <div>
                 &copy; <?= date('Y') ?> <?= APP_NAME ?>. All rights reserved.
             </div>
-            <div style="display: flex; gap: 1.5rem;">
+            <div style="display: flex; gap: 1.5rem; align-items: center;">
                 <a href="<?= url('privacy.php') ?>">Privacy</a>
                 <a href="<?= url('terms.php') ?>">Terms</a>
                 <a href="<?= url('security.php') ?>">Security</a>
                 <a href="<?= url('contact.php') ?>">Contact</a>
+                <a href="<?= admin_url('index.php') ?>" style="opacity: 0.75; display: inline-flex; align-items: center; gap: 0.25rem;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    Admin
+                </a>
             </div>
         </div>
     </div>

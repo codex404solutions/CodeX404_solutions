@@ -34,12 +34,11 @@ require_once __DIR__ . '/includes/header.php';
             </p>
 
             <div class="hero-cta-group">
-                <a href="#contact-section" class="btn btn-primary btn-lg">
-                    🚀 Start Your Project
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <a href="#work" class="btn btn-primary btn-lg">
+                    Explore Our Work & Live Demos ↓
                 </a>
-                <a href="#solutions" class="btn btn-secondary btn-lg">
-                    Explore Solutions
+                <a href="#contact-section" class="btn btn-secondary btn-lg">
+                    🚀 Start Your Project
                 </a>
             </div>
 
@@ -206,107 +205,163 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     THE OPERATIONAL REALITY (PROBLEM TO SOLUTION TRANSFORMATION)
+     OUR WORK — PRODUCTION SYSTEMS & INTERACTIVE DEMOS (CLEAN & PROMINENT)
      ========================================================================== -->
-<section class="section" style="background: rgba(11, 31, 58, 0.2);">
+<section class="section" id="work" style="position: relative; padding-top: 4rem;">
+    <!-- Also alias anchor id="projects" for backward compatibility -->
+    <div id="projects" style="position: absolute; top: -80px; left: 0;"></div>
+    
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
+        <div class="section-header" style="max-width: 840px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
                 <span class="dot"></span>
-                <span>The Operational Reality</span>
+                <span>Verified Deliverables & Live Working Demos</span>
             </div>
-            <h2 class="section-title">Eliminating Friction. Engineering Velocity.</h2>
-            <p class="section-subtitle">
-                Most growing businesses lose hours every day to fragmented tools, fragile spreadsheet workarounds, and manual data re-entry. Here is how CodeX404 transforms your operating model.
+            <h2 class="section-title" style="font-size: clamp(2rem, 3.5vw, 3rem);">
+                Our Work — Systems Built for <span class="gradient-text">Real Business Impact</span>
+            </h2>
+            <p class="section-subtitle" style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); max-width: 720px; margin: 0 auto;">
+                Explore real software platforms, automation pipelines, and AI systems engineered by CodeX404 Solutions. Clean, fast, and easy to understand — test live working simulators directly in your browser.
             </p>
         </div>
 
-        <div class="transformation-container">
-            <!-- Manual Inefficient Reality -->
-            <div class="transform-box problem">
-                <span class="transform-badge">The Daily Bottlenecks</span>
-                <h3 style="margin-bottom: 1rem; color: #FCA5A5;">Fragmented Operations</h3>
-                <ul class="transform-list">
-                    <li>
-                        <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span><strong>Spreadsheet Dependency:</strong> Critical customer records, fees, and orders trapped in disconnected sheets that break.</span>
-                    </li>
-                    <li>
-                        <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span><strong>Inquiry Leakage:</strong> Prospects messaging on WhatsApp or web forms wait 4+ hours for manual staff response.</span>
-                    </li>
-                    <li>
-                        <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span><strong>Escalating SaaS Costs:</strong> Paying high per-seat monthly subscription fees for rigid tools that don't match your workflow.</span>
-                    </li>
-                    <li>
-                        <span style="color: #EF4444; font-weight: bold;">✕</span>
-                        <span><strong>Zero IP Ownership:</strong> Relying on closed third-party platforms with no direct access to underlying source code or database.</span>
-                    </li>
-                </ul>
-            </div>
+        <?php
+        $homepageProjects = \App\Services\ProjectService::getActive();
+        $countAll = count($homepageProjects);
+        $countSoftware = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'software'));
+        $countAi = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'ai'));
+        $countCommerce = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'commerce'));
+        $countMobile = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'mobile'));
+        ?>
+        <!-- Category Filter Tabs -->
+        <div class="project-filter-bar" role="tablist" aria-label="Project Categories" style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
+            <button type="button" class="project-filter-btn active" data-filter="all">
+                <span>✦</span> All Work (<?= $countAll ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="software">
+                <span>🏫</span> School ERP & Software (<?= $countSoftware ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="commerce">
+                <span>🛍️</span> E-Commerce & Catalogs (<?= $countCommerce ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="mobile">
+                <span>📱</span> Mobile & PWA (<?= $countMobile ?>)
+            </button>
+            <?php if ($countAi > 0): ?>
+            <button type="button" class="project-filter-btn" data-filter="ai">
+                <span>🤖</span> AI & Automation (<?= $countAi ?>)
+            </button>
+            <?php endif; ?>
+        </div>
 
-            <!-- Transformation Node -->
-            <div class="transform-arrow-center" title="CodeX404 Engineering Shift">
-                ⚡
-            </div>
+        <!-- Project Cards Grid -->
+        <div class="project-showcase-grid">
+            <?php foreach ($homepageProjects as $p): ?>
+                <article class="project-card clean-project-card" data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
+                    <div>
+                        <!-- Header with meta & verified live domain -->
+                        <div class="cpc-header">
+                            <div class="cpc-meta">
+                                <span class="cpc-category"><?= htmlspecialchars($p['category_label'] ?? 'Custom Software') ?></span>
+                                <span class="cpc-badge">
+                                    <span class="cpc-dot"></span>
+                                    <?= htmlspecialchars($p['badge_text'] ?? 'Production Live') ?>
+                                </span>
+                            </div>
+                            <?php if (!empty($p['live_url'])): ?>
+                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-domain-pill" title="Visit Live Website">
+                                    <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            <?php else: ?>
+                                <span class="cpc-domain-pill">
+                                    <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
+                                </span>
+                            <?php endif; ?>
+                        </div>
 
-            <!-- CodeX404 Solution -->
-            <div class="transform-box solution">
-                <span class="transform-badge">The CodeX404 Architecture</span>
-                <h3 style="margin-bottom: 1rem; color: var(--cyan);">Bespoke Software + Applied AI</h3>
-                <ul class="transform-list">
-                    <li>
-                        <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span><strong>Unified Data Architecture:</strong> Single source of truth database with role-based access, audit logs, and real-time dashboards.</span>
-                    </li>
-                    <li>
-                        <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span><strong>Autonomous Instant Pipelines:</strong> WhatsApp Cloud API & webhooks capture, qualify, and sync inbound leads under 3 minutes.</span>
-                    </li>
-                    <li>
-                        <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span><strong>Domain-Specific AI Knowledge Bases:</strong> Private RAG assistants that answer staff & customer queries with 0 hallucinations.</span>
-                    </li>
-                    <li>
-                        <span style="color: #10B981; font-weight: bold;">✓</span>
-                        <span><strong>100% Full IP Ownership:</strong> Clean, documented, zero-dependency codebase that belongs entirely to your business.</span>
-                    </li>
-                </ul>
-            </div>
+                        <!-- Card Body -->
+                        <div class="cpc-body">
+                            <h3 class="cpc-title">
+                                <?php if (!empty($p['live_url'])): ?>
+                                    <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" title="Visit <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
+                                <?php else: ?>
+                                    <?= htmlspecialchars($p['title']) ?>
+                                <?php endif; ?>
+                            </h3>
+                            <p class="cpc-description"><?= htmlspecialchars($p['solution'] ?? $p['description'] ?? '') ?></p>
+                            
+                            <?php if (!empty($p['metric'])): ?>
+                                <div class="cpc-metric">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span><?= htmlspecialchars($p['metric']) ?></span>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($p['tags'])): ?>
+                                <div class="cpc-tags">
+                                    <?php foreach (array_slice($p['tags'], 0, 5) as $tag): ?>
+                                        <span class="cpc-tag"><?= htmlspecialchars($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Clean Actions -->
+                    <div class="cpc-actions">
+                        <?php if (!empty($p['live_url'])): ?>
+                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-btn cpc-btn-primary" title="Visit Live Site">
+                                Visit Live Site
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            </a>
+                        <?php endif; ?>
+                        <button type="button" class="cpc-btn cpc-btn-secondary btn-demo-trigger" data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'erp') ?>">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Interactive Demo
+                        </button>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+
+        <div style="text-align: center; margin-top: 3.5rem;">
+            <a href="<?= url('case-studies.php') ?>" class="btn btn-secondary btn-lg">
+                View All Deliverables & Architecture Notes →
+            </a>
         </div>
     </div>
 </section>
 
 <!-- ==========================================================================
-     CORE CAPABILITIES & SOLUTIONS PILLARS
+     WHAT WE BUILD — CORE CAPABILITIES (CLEAN & CONCISE)
      ========================================================================== -->
-<section class="section" id="solutions">
+<section class="section" id="solutions" style="background: rgba(11, 31, 58, 0.25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
                 <span class="dot"></span>
                 <span>Our Capabilities</span>
             </div>
-            <h2 class="section-title">Built for Performance. Engineered to Scale.</h2>
+            <h2 class="section-title">Full-Spectrum Engineering Capabilities</h2>
             <p class="section-subtitle">
-                Six specialized digital engineering pillars covering custom full-stack software, enterprise AI, autonomous agents, and end-to-end workflow automation.
+                We engineer proprietary software, applied AI, and automated workflows designed specifically around how your business operates.
             </p>
         </div>
 
-        <div class="grid grid-cols-3">
+        <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Custom Software -->
             <div class="card">
                 <div class="card-icon">💻</div>
                 <h3 class="card-title">Custom Software & Web Apps</h3>
                 <p class="card-description">
-                    Tailored business management portals, administrative ERPs, custom CRMs, and customer-facing web platforms engineered around your exact processes.
+                    Tailored operational control rooms, administrative ERPs, bespoke CRMs, and client portals built to eliminate spreadsheets and per-seat license fees permanently.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">PHP 8.4 / Python</span>
-                    <span class="tag-chip">MySQL / PostgreSQL</span>
-                    <span class="tag-chip">RBAC Security</span>
-                    <span class="tag-chip">REST APIs</span>
+                    <span class="tag-chip">Modern PHP 8.2+</span>
+                    <span class="tag-chip">Python FastAPI</span>
+                    <span class="tag-chip">Strict RBAC</span>
+                    <span class="tag-chip">Relational Schemas</span>
                 </div>
                 <a href="<?= url('software-development.php') ?>" class="card-arrow-link">
                     Explore Custom Software →
@@ -318,13 +373,13 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="card-icon">🤖</div>
                 <h3 class="card-title">Enterprise AI & Knowledge Systems</h3>
                 <p class="card-description">
-                    Retrieval-Augmented Generation (RAG) engines, private document intelligence, and domain-trained chatbots that query thousands of internal documents securely.
+                    Retrieval-Augmented Generation (RAG) engines, private document intelligence, and domain-trained assistants that search company documents with zero hallucinations.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Private RAG</span>
                     <span class="tag-chip">Qdrant Vector DB</span>
-                    <span class="tag-chip">Document OCR</span>
-                    <span class="tag-chip">Zero Data Leaks</span>
+                    <span class="tag-chip">Exact Citations</span>
+                    <span class="tag-chip">100% Private VPC</span>
                 </div>
                 <a href="<?= url('ai-solutions.php') ?>" class="card-arrow-link">
                     Explore Enterprise AI →
@@ -340,9 +395,9 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Tool Calling</span>
-                    <span class="tag-chip">Multi-Step Execution</span>
-                    <span class="tag-chip">Human-in-the-Loop</span>
-                    <span class="tag-chip">Traceable Logs</span>
+                    <span class="tag-chip">Approval Gates</span>
+                    <span class="tag-chip">Episodic Memory</span>
+                    <span class="tag-chip">Audit Trails</span>
                 </div>
                 <a href="<?= url('ai-agents.php') ?>" class="card-arrow-link">
                     Explore AI Agents →
@@ -352,15 +407,15 @@ require_once __DIR__ . '/includes/header.php';
             <!-- 4. Automation -->
             <div class="card">
                 <div class="card-icon">⚡</div>
-                <h3 class="card-title">Workflow & Process Automation</h3>
+                <h3 class="card-title">Workflow & WhatsApp Automation</h3>
                 <p class="card-description">
-                    Eliminate repetitive manual coordination. Seamless WhatsApp Business API integrations, instant CRM sync, automated invoicing, and asynchronous webhooks.
+                    Eliminate repetitive manual coordination. Seamless Meta WhatsApp Business API integrations, instant CRM sync, automated invoicing, and asynchronous webhooks.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">WhatsApp Cloud API</span>
-                    <span class="tag-chip">CRM Pipelines</span>
+                    <span class="tag-chip">Idempotent Webhooks</span>
                     <span class="tag-chip">Automated Invoicing</span>
-                    <span class="tag-chip">Webhooks</span>
+                    <span class="tag-chip">&lt; 3 Min SLA</span>
                 </div>
                 <a href="<?= url('automation.php') ?>" class="card-arrow-link">
                     Explore Automation →
@@ -370,15 +425,15 @@ require_once __DIR__ . '/includes/header.php';
             <!-- 5. Mobile Applications -->
             <div class="card">
                 <div class="card-icon">📱</div>
-                <h3 class="card-title">Cross-Platform Mobile Apps & PWA</h3>
+                <h3 class="card-title">Mobile Apps & Offline PWAs</h3>
                 <p class="card-description">
-                    High-performance mobile applications and resilient Progressive Web Apps featuring offline synchronization, localized caching, and responsive biometric auth.
+                    Performant cross-platform iOS and Android mobile apps and Progressive Web Apps featuring offline synchronization, biometric auth, and native hardware sensor hooks.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">iOS & Android</span>
-                    <span class="tag-chip">PWA Offline Cache</span>
-                    <span class="tag-chip">IndexedDB Sync</span>
+                    <span class="tag-chip">Offline SQLite Sync</span>
                     <span class="tag-chip">Push Alerts</span>
+                    <span class="tag-chip">Single Codebase</span>
                 </div>
                 <a href="<?= url('mobile-apps.php') ?>" class="card-arrow-link">
                     Explore Mobile Apps →
@@ -388,15 +443,15 @@ require_once __DIR__ . '/includes/header.php';
             <!-- 6. SaaS Development -->
             <div class="card">
                 <div class="card-icon">🚀</div>
-                <h3 class="card-title">SaaS Product & MVP Engineering</h3>
+                <h3 class="card-title">SaaS Product & Rapid MVPs</h3>
                 <p class="card-description">
-                    Turn your proprietary domain knowledge into a scalable software-as-a-service with multi-tenant database isolation, Stripe/Razorpay billing, and analytics dashboards.
+                    Turn your product vision into a scalable cloud software with multi-tenant data isolation, turnkey Stripe/Razorpay subscription billing, and founder admin telemetry in 4-8 weeks.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">Rapid MVP Launch</span>
-                    <span class="tag-chip">Multi-Tenant Isolation</span>
+                    <span class="tag-chip">4-8 Week Delivery</span>
+                    <span class="tag-chip">Multi-Tenancy RLS</span>
                     <span class="tag-chip">Subscription Billing</span>
-                    <span class="tag-chip">Audit Telemetry</span>
+                    <span class="tag-chip">100% IP Handover</span>
                 </div>
                 <a href="<?= url('saas.php') ?>" class="card-arrow-link">
                     Explore SaaS Development →
@@ -407,504 +462,57 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     PROJECTS & LIVE DEMOS SHOWCASE (CLEAR, PROMINENT & INTERACTIVE)
+     WHY CLIENTS PARTNER WITH CODEX404 (CLEAN TRUST STANDARDS)
      ========================================================================== -->
-<section class="section" id="projects-showcase" style="background: rgba(6, 11, 24, 0.7); position: relative;">
+<section class="section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
                 <span class="dot"></span>
-                <span>Verified Deliverables & Live Demos</span>
+                <span>The CodeX404 Standard</span>
             </div>
-            <h2 class="section-title">Production Systems & Interactive Demos</h2>
+            <h2 class="section-title">Built for Founders Who Value Reliability</h2>
             <p class="section-subtitle">
-                Real software, AI pipelines, and operational systems engineered for growing companies. Filter by domain or launch an interactive live demo directly in your browser.
+                We remove the agency bloat and deliver rock-solid software systems with full transparency and senior accountability.
             </p>
         </div>
 
-        <!-- Category Filter Tabs -->
-        <div class="project-filter-bar" role="tablist" aria-label="Project Categories">
-            <button type="button" class="project-filter-btn active" data-filter="all">
-                <span>✦</span> All Projects (6)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="ai">
-                <span>🤖</span> AI & Agents (2)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="software">
-                <span>💻</span> Custom Software & ERP (2)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="commerce">
-                <span>🛍️</span> Commerce & SaaS (1)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="mobile">
-                <span>📱</span> Mobile & PWA (1)
-            </button>
-        </div>
+        <div class="grid grid-cols-4" style="gap: 1.5rem;">
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">100%</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Full IP Ownership</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    All source code, database architecture, and credentials belong entirely to your company. Zero vendor lock-in.
+                </p>
+            </div>
 
-        <!-- Project Cards Grid -->
-        <div class="project-showcase-grid">
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">Direct</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Senior Engineers</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    No middleman account managers playing telephone. You speak directly with architects who write your code.
+                </p>
+            </div>
 
-            <!-- PROJECT 1: AI RAG Assistant -->
-            <article class="project-card" data-category="ai">
-                <div class="project-mockup-frame">
-                    <div class="project-mockup-header">
-                        <div class="project-mockup-dots">
-                            <span class="dot-red"></span>
-                            <span class="dot-yellow"></span>
-                            <span class="dot-green"></span>
-                        </div>
-                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">rag-assistant.codex404.internal</span>
-                        <span class="project-badge-pill live">● Production Live</span>
-                    </div>
-                    <div class="project-mockup-screen">
-                        <div class="mockup-ui-bar">
-                            <span style="color: #A78BFA;">🤖 Qdrant Vector Search</span>
-                            <span style="color: #34D399;">Latency: 142ms</span>
-                        </div>
-                        <div class="mockup-stat-row">
-                            <div class="mockup-stat-cell">
-                                <strong>14,200+</strong>
-                                <span>Indexed Docs</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>99.4%</strong>
-                                <span>Precision Rate</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>0</strong>
-                                <span>Cloud Leakage</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">Zero</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Bugs Philosophy</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    Defensive type-safety, parameterized queries, and rigorous QA ensure code is production-ready from day one.
+                </p>
+            </div>
 
-                <div class="project-card-body">
-                    <div class="project-category" style="color: #A78BFA;">Enterprise Applied AI</div>
-                    <h3 class="project-title">Enterprise RAG Knowledge Assistant</h3>
-                    <p class="project-problem">
-                        <strong>Problem:</strong> Technical manuals, compliance policies, and SOPs were scattered across 14,000 PDFs, taking staff 45+ minutes to find accurate information.
-                    </p>
-                    <p class="project-solution">
-                        <strong>Engineering Solution:</strong> Built a private retrieval-augmented generation engine with Qdrant vector indexing, hybrid keyword search, and role-based permissions.
-                    </p>
-                    <div class="project-metric-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Sub-second semantic search with 0 hallucination leaks</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag-chip">Python 3.12</span>
-                        <span class="tag-chip">Qdrant Vector DB</span>
-                        <span class="tag-chip">Hybrid RAG</span>
-                        <span class="tag-chip">FastAPI</span>
-                    </div>
-                    <div class="project-actions">
-                        <button type="button" class="btn-demo-trigger" data-demo="rag">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Launch Live Interactive Demo
-                        </button>
-                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
-                            Case Details →
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROJECT 2: WhatsApp Automation -->
-            <article class="project-card" data-category="ai">
-                <div class="project-mockup-frame">
-                    <div class="project-mockup-header">
-                        <div class="project-mockup-dots">
-                            <span class="dot-red"></span>
-                            <span class="dot-yellow"></span>
-                            <span class="dot-green"></span>
-                        </div>
-                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">pipeline.whatsapp-sync</span>
-                        <span class="project-badge-pill demo">⚡ Interactive Demo Ready</span>
-                    </div>
-                    <div class="project-mockup-screen">
-                        <div class="mockup-ui-bar">
-                            <span style="color: #25D366;">💬 WhatsApp Cloud Webhook</span>
-                            <span style="color: #38BDF8;">Auto-CRM Sync</span>
-                        </div>
-                        <div class="mockup-stat-row">
-                            <div class="mockup-stat-cell">
-                                <strong style="color: #25D366;">&lt; 3 mins</strong>
-                                <span>Response Time</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>100%</strong>
-                                <span>Leads Captured</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong style="color: #34D399;">+110%</strong>
-                                <span>Conversion Rate</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-body">
-                    <div class="project-category" style="color: #34D399;">Workflow Automation & AI</div>
-                    <h3 class="project-title">Multi-Channel WhatsApp Lead Ingestion Pipeline</h3>
-                    <p class="project-problem">
-                        <strong>Problem:</strong> High-intent customer inquiries via WhatsApp, website forms, and email waited an average of 4 hours for manual staff follow-up.
-                    </p>
-                    <p class="project-solution">
-                        <strong>Engineering Solution:</strong> Developed an asynchronous webhook pipeline that auto-qualifies leads, replies via WhatsApp API in 900ms, and updates CRM deal stages.
-                    </p>
-                    <div class="project-metric-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Response latency: 4 hours &rarr; under 3 minutes</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag-chip">WhatsApp Cloud API</span>
-                        <span class="tag-chip">PHP 8.4</span>
-                        <span class="tag-chip">Idempotent Worker</span>
-                        <span class="tag-chip">CRM Webhook</span>
-                    </div>
-                    <div class="project-actions">
-                        <button type="button" class="btn-demo-trigger" data-demo="wa">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Launch Live Interactive Demo
-                        </button>
-                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
-                            Case Details →
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROJECT 3: School ERP -->
-            <article class="project-card" data-category="software">
-                <div class="project-mockup-frame">
-                    <div class="project-mockup-header">
-                        <div class="project-mockup-dots">
-                            <span class="dot-red"></span>
-                            <span class="dot-yellow"></span>
-                            <span class="dot-green"></span>
-                        </div>
-                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">erp.institution-portal</span>
-                        <span class="project-badge-pill live">● Production Live</span>
-                    </div>
-                    <div class="project-mockup-screen">
-                        <div class="mockup-ui-bar">
-                            <span style="color: #38BDF8;">🏫 Academic Ledger & Fees</span>
-                            <span style="color: #34D399;">Role: SuperAdmin</span>
-                        </div>
-                        <div class="mockup-stat-row">
-                            <div class="mockup-stat-cell">
-                                <strong>4,800+</strong>
-                                <span>Students Managed</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>4 Roles</strong>
-                                <span>Strict RBAC</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong style="color: #34D399;">0 Errors</strong>
-                                <span>Fee Ledgers</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-body">
-                    <div class="project-category" style="color: #38BDF8;">Custom Enterprise Software</div>
-                    <h3 class="project-title">School ERP & Administrative Portal</h3>
-                    <p class="project-problem">
-                        <strong>Problem:</strong> Administrative staff managed student fee collections, academic marks, and parent notifications across 12 manual paper registers.
-                    </p>
-                    <p class="project-solution">
-                        <strong>Engineering Solution:</strong> Engineered a unified role-based web platform consolidating student lifecycles, automated fee receipts, ledger audits, and staff records.
-                    </p>
-                    <div class="project-metric-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Replaced paper ledgers across 4 departments</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag-chip">PHP 8.4</span>
-                        <span class="tag-chip">MySQL Enterprise</span>
-                        <span class="tag-chip">RBAC Security</span>
-                        <span class="tag-chip">Audit Logs</span>
-                    </div>
-                    <div class="project-actions">
-                        <button type="button" class="btn-demo-trigger" data-demo="erp">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Launch Live Interactive Demo
-                        </button>
-                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
-                            Case Details →
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROJECT 4: B2B E-Commerce -->
-            <article class="project-card" data-category="commerce">
-                <div class="project-mockup-frame">
-                    <div class="project-mockup-header">
-                        <div class="project-mockup-dots">
-                            <span class="dot-red"></span>
-                            <span class="dot-yellow"></span>
-                            <span class="dot-green"></span>
-                        </div>
-                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">store.b2b-checkout</span>
-                        <span class="project-badge-pill demo">⚡ Interactive Demo Ready</span>
-                    </div>
-                    <div class="project-mockup-screen">
-                        <div class="mockup-ui-bar">
-                            <span style="color: #EC4899;">🛍️ Wholesale Tier Engine</span>
-                            <span style="color: #34D399;">Live Stock Lock</span>
-                        </div>
-                        <div class="mockup-stat-row">
-                            <div class="mockup-stat-cell">
-                                <strong>Tier 3</strong>
-                                <span>Bulk Pricing</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>Instant</strong>
-                                <span>GST PDF Invoice</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong style="color: #34D399;">0 Errors</strong>
-                                <span>Stock Mismatch</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-body">
-                    <div class="project-category" style="color: #F472B6;">B2B Commerce & SaaS</div>
-                    <h3 class="project-title">B2B Wholesale Ordering & Invoice Engine</h3>
-                    <p class="project-problem">
-                        <strong>Problem:</strong> Wholesale buyers phoned in orders; inventory counts frequently conflicted with warehouse stock, and tax invoice generation took 3 days.
-                    </p>
-                    <p class="project-solution">
-                        <strong>Engineering Solution:</strong> Custom wholesale ordering system with real-time inventory reservation, volume tier discounts, automated GST invoice PDF generation, and Razorpay/Stripe checkout.
-                    </p>
-                    <div class="project-metric-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Zero inventory reconciliation errors post-launch</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag-chip">Payment Gateways</span>
-                        <span class="tag-chip">PDF Invoice Engine</span>
-                        <span class="tag-chip">PHP 8.4</span>
-                        <span class="tag-chip">Redis Caching</span>
-                    </div>
-                    <div class="project-actions">
-                        <button type="button" class="btn-demo-trigger" data-demo="b2b">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Launch Live Interactive Demo
-                        </button>
-                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
-                            Case Details →
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROJECT 5: Clinic OPD Scheduling -->
-            <article class="project-card" data-category="software">
-                <div class="project-mockup-frame">
-                    <div class="project-mockup-header">
-                        <div class="project-mockup-dots">
-                            <span class="dot-red"></span>
-                            <span class="dot-yellow"></span>
-                            <span class="dot-green"></span>
-                        </div>
-                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">med.opd-scheduler</span>
-                        <span class="project-badge-pill live">● Production Live</span>
-                    </div>
-                    <div class="project-mockup-screen">
-                        <div class="mockup-ui-bar">
-                            <span style="color: #2DD4BF;">🏥 Multi-Doctor Calendar</span>
-                            <span style="color: #34D399;">Slot Lock: Active</span>
-                        </div>
-                        <div class="mockup-stat-row">
-                            <div class="mockup-stat-cell">
-                                <strong>26+</strong>
-                                <span>Doctors Active</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>100%</strong>
-                                <span>SMS Delivery</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong style="color: #34D399;">0</strong>
-                                <span>Double Bookings</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-body">
-                    <div class="project-category" style="color: #2DD4BF;">Healthcare & Booking</div>
-                    <h3 class="project-title">Central Medical Clinic OPD Portal</h3>
-                    <p class="project-problem">
-                        <strong>Problem:</strong> Front-desk staff taking phone appointments suffered daily double-bookings across 26 specialists, causing patient wait times over 90 minutes.
-                    </p>
-                    <p class="project-solution">
-                        <strong>Engineering Solution:</strong> Multi-specialty clinical booking portal with transaction-level slot reservation, doctor vacation overrides, and automated SMS appointment reminders.
-                    </p>
-                    <div class="project-metric-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Zero appointment double-bookings across 18 months</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag-chip">MySQL Transactions</span>
-                        <span class="tag-chip">SMS API</span>
-                        <span class="tag-chip">Calendar UI</span>
-                        <span class="tag-chip">PHP 8.4</span>
-                    </div>
-                    <div class="project-actions">
-                        <button type="button" class="btn-demo-trigger" data-demo="rag">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Launch Live Interactive Demo
-                        </button>
-                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
-                            Case Details →
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROJECT 6: Imaan360 PWA -->
-            <article class="project-card" data-category="mobile">
-                <div class="project-mockup-frame">
-                    <div class="project-mockup-header">
-                        <div class="project-mockup-dots">
-                            <span class="dot-red"></span>
-                            <span class="dot-yellow"></span>
-                            <span class="dot-green"></span>
-                        </div>
-                        <span style="font-size: 0.75rem; color: var(--slate); font-family: var(--font-mono);">app.imaan360.pwa</span>
-                        <span class="project-badge-pill live">● Production Live</span>
-                    </div>
-                    <div class="project-mockup-screen">
-                        <div class="mockup-ui-bar">
-                            <span style="color: #FB923C;">📱 Progressive Web App</span>
-                            <span style="color: #34D399;">Offline Cache: 100%</span>
-                        </div>
-                        <div class="mockup-stat-row">
-                            <div class="mockup-stat-cell">
-                                <strong>50,000+</strong>
-                                <span>Active Users</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong>99.99%</strong>
-                                <span>Uptime SLA</span>
-                            </div>
-                            <div class="mockup-stat-cell">
-                                <strong style="color: #38BDF8;">60 FPS</strong>
-                                <span>Smooth UI</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-body">
-                    <div class="project-category" style="color: #FB923C;">Mobile & PWA</div>
-                    <h3 class="project-title">Imaan360 — Community & Lifestyle PWA</h3>
-                    <p class="project-problem">
-                        <strong>Problem:</strong> Native app stores carried high publishing friction and users in low-bandwidth areas faced frequent network drops while accessing daily schedules.
-                    </p>
-                    <p class="project-solution">
-                        <strong>Engineering Solution:</strong> Engineered a lightweight Progressive Web App using Service Workers and IndexedDB for full offline capabilities and instant sub-second page loads.
-                    </p>
-                    <div class="project-metric-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>50,000+ active installs with 99.99% reliability</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag-chip">Service Workers</span>
-                        <span class="tag-chip">IndexedDB</span>
-                        <span class="tag-chip">PWA Offline</span>
-                        <span class="tag-chip">Vanilla JS</span>
-                    </div>
-                    <div class="project-actions">
-                        <button type="button" class="btn-demo-trigger" data-demo="rag">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Launch Live Interactive Demo
-                        </button>
-                        <a href="<?= url('case-studies.php') ?>" class="btn-case-link">
-                            Case Details →
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-        <div style="text-align: center; margin-top: 3.5rem;">
-            <a href="<?= url('case-studies.php') ?>" class="btn btn-secondary btn-lg">
-                View All Deliverables & Architecture Notes →
-            </a>
+            <div class="card" style="padding: 2rem;">
+                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">Clear</div>
+                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Milestone Pricing</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
+                    Predictable sprint milestones, regular staging demos, and guaranteed scopes with zero surprise invoice fees.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================================================
-     PROVEN 7-STAGE DELIVERY FRAMEWORK
-     ========================================================================== -->
-<section class="section" style="background: rgba(11, 31, 58, 0.3);">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Our Methodology</span>
-            </div>
-            <h2 class="section-title">The 7-Stage Engineering Framework</h2>
-            <p class="section-subtitle">
-                A disciplined, transparent delivery cadence engineered to eliminate ambiguity, enforce strict type-safety, and guarantee production readiness.
-            </p>
-        </div>
-
-        <div class="process-grid">
-            <div class="process-step">
-                <div class="step-num">01</div>
-                <h3>Discover</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Deconstruct operational friction, user workflows, data models, and business objectives.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-num">02</div>
-                <h3>Strategize</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Define system architecture, database schema, security boundaries, and technology stack.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-num">03</div>
-                <h3>Design</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Create wireframes, intuitive user flows, responsive UI layouts, and interactive prototypes.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-num">04</div>
-                <h3>Build</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Write clean, modular code with strict typing, API contracts, and defensive error handling.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-num">05</div>
-                <h3>Test</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Rigorous automated and manual QA covering security vulnerabilities, mobile UX, and edge cases.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-num">06</div>
-                <h3>Launch</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Zero-downtime deployment, DNS provisioning, SSL encryption, and smoke validation in production.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-num">07</div>
-                <h3>Scale</h3>
-                <p style="font-size: 0.9rem; color: var(--slate);">Continuous telemetry, performance tuning, automation expansion, and iterative feature sprints.</p>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 2.5rem;">
-            <a href="<?= url('process.php') ?>" class="btn btn-secondary">
-                View Full Process Details →
-            </a>
-        </div>
-    </div>
-</section>
 
 <!-- ==========================================================================
      CLIENT VALIDATION & TESTIMONIALS
