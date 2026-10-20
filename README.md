@@ -554,18 +554,26 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 ├── crm
 │   ├── api
 │   │   └── v1
-│   │       └── leads.php
+│   │       ├── leads.php
+│   │       └── rates.php
 │   ├── app
 │   │   └── Services
 │   │       ├── ApprovalService.php
 │   │       ├── AuthService.php
 │   │       ├── CrmSecurity.php
+│   │       ├── CurrencyService.php
 │   │       ├── LeadService.php
 │   │       ├── OpportunityService.php
 │   │       ├── PaperclipService.php
 │   │       ├── ProjectService.php
 │   │       ├── RBACService.php
 │   │       └── StorageService.php
+│   ├── assets
+│   │   └── images
+│   │       └── logo
+│   │           ├── favicon.ico
+│   │           ├── logo.jpg
+│   │           └── logo.png
 │   ├── config
 │   │   ├── Env.php
 │   │   └── config.php
@@ -574,6 +582,10 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │   └── 001_initial_schema.sql
 │   │   └── seed_approvals.php
 │   ├── index.php
+│   ├── logo
+│   │   ├── favicon.ico
+│   │   ├── logo.jpg
+│   │   └── logo.png
 │   ├── public
 │   │   ├── assets
 │   │   │   └── images
@@ -593,7 +605,8 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │       └── data
 │           ├── approvals.json
 │           ├── paperclip_tasks.json
-│           └── projects.json
+│           ├── projects.json
+│           └── rates_cache.json.json
 ├── docs
 │   ├── API_CONTRACT.md
 │   ├── CRM
@@ -623,6 +636,10 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   ├── GRAPH_REPORT.md
 │   │   ├── graph.json
 │   │   └── manifest.json
+│   ├── 2026-10-21
+│   │   ├── GRAPH_REPORT.md
+│   │   ├── graph.json
+│   │   └── manifest.json
 │   ├── GRAPH_REPORT.md
 │   ├── GRAPH_TREE.html
 │   ├── cache
@@ -636,6 +653,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 076421ab3d2288c3589c6a909b4aaeeeced7a63cbcb02ca6cc3b6a1366b579fd.json
 │   │   │       ├── 0a42ceac3faa90350f2a2505d8e4d0dde97d1d7badf0b994fbe421a04c43b079.json
 │   │   │       ├── 0c41e818af886f09b713884e0352513294bbc89ecc34effb20a573b325d23919.json
+│   │   │       ├── 0c782fc903c25e5f06358eaa140d10671e822c589255f9a50d34e32f0cb22b06.json
 │   │   │       ├── 0c9abbc81e1864d1fbdf7034ea1dd77cc1825458ca35e911fcf29ec5ea8d0ef1.json
 │   │   │       ├── 0cd59dcc25a92aaee09f5ef60d9eccea61bb081e7df0183713291b950c409df8.json
 │   │   │       ├── 0cec993c467f26bc76df7c0a17df3f08634eaf0cada8244f1dd019890c5a3593.json
@@ -654,10 +672,13 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 1d58e9a8ee0348a1a7c2ca309a55b3a1cf375732c9ca244f7cd7ca6b36a8a5fc.json
 │   │   │       ├── 1d91d966a45a0de6f72cde59a4f11b21ee81e4cd54af2c03f06227d9c0fdd967.json
 │   │   │       ├── 1e21a7c677e67629759b274fd703e4007b6e2320cd8d52fb4c8bbf6166637f4c.json
+│   │   │       ├── 20a1c8a59fd9901787a09d0da932819623616bf7c3d63e0ba8f654116fba9820.json
+│   │   │       ├── 20ac9ca478b7723fec1225679f830ebeb589ee793accd1c1fd2bb57ff1c56e3d.json
 │   │   │       ├── 25b74de0f519e3cc9053c67c55920ccf067308134f61f52256e59a9cc4826502.json
 │   │   │       ├── 25ba040f73a9f3bbe059f33a1f080159818b4a4dd7f4bb742199c57988af969a.json
 │   │   │       ├── 269428309dbd1c0ca43f2e3f6ebf19a8745ce36971b4f63b333f3fb6e35c1494.json
 │   │   │       ├── 26bc44efc7be87639acbf60c8076d9c417effc3c743b6b088ef388860499e1f7.json
+│   │   │       ├── 26e2c71f9981e4939ee38eb76f86bb3b7d832b43e36bdd947a67bedc10e1d950.json
 │   │   │       ├── 270de5d9cef0214e695a0a2462fa1ab12a12e391ac63d5afa2001e00f8242590.json
 │   │   │       ├── 27120e39d759b85e598733d7d524b8d4a1cc1e4a173f0a1650ca0195c04bb73e.json
 │   │   │       ├── 2dc983806fb70b0bceb5f44de80f2f4598c50f2ccc3a46d6a37ac8153a9b24c0.json
@@ -668,6 +689,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 35dfd8f664244499c4f71ee3f823646cedbcdf81e2d4347cf0811fb8c6c125ee.json
 │   │   │       ├── 36937ecb88a6e9f8fa651301eec6ff67475bbac1be25e7a13c86a8277c98bb48.json
 │   │   │       ├── 3834c7260d5e13652912c368323a34730dc146130308b24fe9ea8973d9a8e506.json
+│   │   │       ├── 3bc9c9b07dab82f75d94147d1db553355cb0d9981bf4571d0399ec0305e86716.json
 │   │   │       ├── 3dbd47e5e0948a0ff31276286ec4fb6efc8aa812dbd480bd13bdd38b943de8d9.json
 │   │   │       ├── 3de13cca391c49e098175655088ac9aacfa54cd798b39d348bfb5dc6f07ebebd.json
 │   │   │       ├── 3e9651207bdc1dfcb70dd793e64f67c868c387aa35a49a8063f41fa6a8043717.json
@@ -686,6 +708,8 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 519116ed0682c1aee2eec2e319669e279fadc7eecf7a86e1f4784f845c7cbfc5.json
 │   │   │       ├── 545c9d6ad1a4c383120b4f68276e7524ae04ab58edebabfb6e174c89926c7d92.json
 │   │   │       ├── 557755d0b740a2773da830dc267c4931a1cb521e6871f168053c839dc0b1eb1d.json
+│   │   │       ├── 55f8909c28fb44f48de9b6ed5630077fb76b24d734942728df8c33e09d522b04.json
+│   │   │       ├── 5682fb55bc7298ff4de6a4edd5ba0543bf0aa029248fe09c45216255010315a4.json
 │   │   │       ├── 57ecce380c8e87034e85dc8f2d252950626ba2129c42904a3ffddf1ea9c12207.json
 │   │   │       ├── 5cc37d422f622c72daaad2426c4ace8ca05fd3d16e2d7b4b659ab15626d174ff.json
 │   │   │       ├── 603347a75259c2f0e426f611fb35796aa0d6f2dfc4c2b2414fddeb82a5254e62.json
@@ -703,6 +727,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 75b785fd795e1bfc3894b17b3013fe51b231f4ccf16e2377650e0c101a8b9763.json
 │   │   │       ├── 764fea27ad135ccb3b760e477bbc780ab5c2f39f47506d01d59b9c1586449e26.json
 │   │   │       ├── 7770672cf01f7b1e870aa72c326c109c69e2ed7e1697964f3bfbc863525d1afc.json
+│   │   │       ├── 7833fa7e10f1120d465a5d5396639b7f25d4ee3f0f59e78bde2e64e23107a11b.json
 │   │   │       ├── 7a931a1744f298c3ec03405427e10ae7a0ee64e848d305a75bd83daa421fcb7c.json
 │   │   │       ├── 7b6384ad709d3b71b20d35906c9c23a0f96311757803ab1d0d8f11368d4501e1.json
 │   │   │       ├── 7d10a5735351908e238cf2c414618bbe7d48d18ce9d49b3984fa8d607719caee.json
@@ -716,19 +741,25 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── 8558a550dcc57e110dbc758fe6096b11e2a056403865be9922651f1f23a4caf9.json
 │   │   │       ├── 86243c6707d84e5d69ce4b7e6214dc497c500c524941b52c8158ae5654d47cb4.json
 │   │   │       ├── 8911446e74221b4711da435c47e7ea033d1add78884e1142d8553597248d539b.json
+│   │   │       ├── 89c7dbef887038b7aaacff29c2e47c39fb7e719b5b7d925132d413cfe452ec51.json
 │   │   │       ├── 8a6f4cba34bf0b3c26cbc4e0c119d472c6f52ecb4d81ae896d6cb5806adac8fc.json
 │   │   │       ├── 8b7e750d9913f5d66ff4cdfcae23ff47d97be94b4fa2c17d85d9ad946efa22bc.json
 │   │   │       ├── 8b8c3c4839624435bb46c544a16b197625edb4b5f60bc0affd3a592258ba84b6.json
 │   │   │       ├── 8bc0ad8f117a166a9db6610c0fd1bc7f244b10fad7c32c0bad3efe05d2214913.json
 │   │   │       ├── 8eb7e9e653ffbcbb28b60a0fd10ebcfaf275ec24e4a7bedbe95895dd90334d3e.json
 │   │   │       ├── 8f815d453cad3f68baacfe151bb75fa397f4165b325118f91e12fc83b16ed804.json
+│   │   │       ├── 91513ef5b14262ee9449422475db6e4c0eaf263f2d1910f6d81c1ddcffad2237.json
 │   │   │       ├── 94cb8d9db980db4282a00d26617ea80a9ac2cd5ddcf00f365b1473a38b3e2658.json
 │   │   │       ├── 950c826227fa7ce5f0e6faa5875105974429919d2182c853a1de7ed8a2221109.json
+│   │   │       ├── 9560400a6f49e74aab9f487b129cc0fe05fef547b7621b1b1d72dcb4001aada4.json
 │   │   │       ├── 994932df3fdabffe815bb829e38a0b3b3e835710ec40e565fdd6db82c89f95c7.json
 │   │   │       ├── 9974f2700a05ec68ab7097d19edb6bf86926125ea3274c5f5fac5cbd16b0ce67.json
+│   │   │       ├── 9b7783add2143f2ea6108ccd23bed37627a83f072784eb155f1b6d3b1d167a2d.json
 │   │   │       ├── 9cb0f3a2a677e4f07f26cf767b5b6403074de86edc625e80de2e53e0fbcb512f.json
+│   │   │       ├── 9e0e0d3c2fbe5a6f8b840ecaf3c31a83d31f99d823ac117580f22d8b2e37f148.json
 │   │   │       ├── 9e3fca6e0271d7997f2122b1a21a64a9accdf920f722cfe3a4a429481d6c9731.json
 │   │   │       ├── a0a6b1ea3e368be4d2ee9827ec0dd4b5ed86be39e0989095e56504b9a95b3e6d.json
+│   │   │       ├── a44a7544dae462cb6f92195f8ba05a0befef958eea1a52de621b8e40106dbe45.json
 │   │   │       ├── a4ff108281bdee8578ef46283c168f551fa8b06e26d7aafd1c7e10e8ca22b63d.json
 │   │   │       ├── a54648429f837c4db2df2d6b828a43e7e40548f9aa28cc039518d33d5be5b83f.json
 │   │   │       ├── a6e0be65ca17539e17f9eee0ffbea22f5f165c073e04ec10f6a60063b05bbb64.json
@@ -740,11 +771,15 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── ae0176d271f39b3d2cd8de91a9d82b15aa25a411a18e7c0bb9f3119efdb9136d.json
 │   │   │       ├── b0479e24e4c3dc60e1ecd46841c33e4da7d5ce9e6885afc5351bb21dca132dec.json
 │   │   │       ├── b2bd075c1fcfe82d5d9d5aca6672a915e746dfecbf6db0987bde34416d3421af.json
+│   │   │       ├── b3aa38c7ffea587a09be2c43dc2ce9a1c62f4863e8fea77d45a6d2af12c3f350.json
 │   │   │       ├── b424e4235130ca8e63c0696db03d659e83dff96c511f70068388bf39d48c7482.json
 │   │   │       ├── b44971cc99529eb090027e3ba7031407a4c71a0e7f8660d875fc66c2dae96d9b.json
+│   │   │       ├── b5559309260f9e574eec10b6fa87814315e8c93f6db27926ebfb447f35501e2f.json
 │   │   │       ├── b56cfb737d63b1be31353a460349ebe46f674c64d021a56c54bad318ba03ab71.json
+│   │   │       ├── b581d90e89e101b47c8178581e61038d13ad6d19d76c0176f13f8dedc08d3fcb.json
 │   │   │       ├── b963faff0dc0d459dcae2632d521c7ddca1e6085ab5b01e562bebcd4a2cbdc65.json
 │   │   │       ├── b99baac85a08b8462b8368f8550283aeff2209c052d1a96ec80561369825502d.json
+│   │   │       ├── bbb4df5ea3a5e291a54b33f6f70ce09bd8596a79f458616373793de692bbdebd.json
 │   │   │       ├── bc9c1eb96b2e06b6ed747eb8fbf3dab6f6ea8739c44589dd2bac6711405cdb55.json
 │   │   │       ├── bd3b31ca841072b8cad45eb5d4e1d55c986c7c487bd18f58a48d01cca132ce83.json
 │   │   │       ├── bd65a36941ced0cb34037d0f068968af970efbef014a79ee8e6f96a4add6a73b.json
@@ -753,7 +788,9 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── bfa18c1dd1b993fd0ff7bc2009cb4f8bff1a5bb85f67009d9735452c2831da05.json
 │   │   │       ├── c11e3e12f2ad4ee03828f555f312c7e2559a78ac6a7f6bea80ba684e23f16488.json
 │   │   │       ├── c21f5b0f5d70577723d6afc2fb2874c64be051505deada0d7af8ee70c75b61d1.json
+│   │   │       ├── c323607d4fe1a6a891428d17b0328c8e2bd3ac384023acd41144693992c7411c.json
 │   │   │       ├── c4870067b3b063062eafd7891a7edeb166c51c5f60cd6bee87e647606dee13db.json
+│   │   │       ├── c5b1903f5a3e4219869823a1648cda3b0106d8db772ee72a18d56eb171a6d6d0.json
 │   │   │       ├── c72acd652ce7d452ddcceb7ac722ff42775032feb7d2cf8f37ec8806e6462c33.json
 │   │   │       ├── cacc3c1958a051f036db54131a70d99abf6c2027b3041f1c3d9b109d63de5dec.json
 │   │   │       ├── cb62722a94f22324bf8673a052019b121f4d14703176d46273835f6c74eb158c.json
@@ -768,11 +805,13 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │       ├── d423e9ce434eceeb72b4e4747aee96a841537388f074b0b31a4b05be616fc614.json
 │   │   │       ├── d5b93d02505b8ecd6db5069dc1bc0a187d570633066b1b45b815bbf601639981.json
 │   │   │       ├── d9111e2817a3a92974d324deea405f5bad304432c7760a4ed22ccdb6a3b6e632.json
+│   │   │       ├── d9628255d10df974ce16280776bc081dd4644ca6f8dd345387243aecc531e2b7.json
 │   │   │       ├── ddb908d0f5a042e6192aea1cea3069aa642aaaf66d43899c60d3934897bd2060.json
 │   │   │       ├── ddc5713d519cc18c3f72f2f3150c2c37001e1423b3790aa047c78e982db28b53.json
 │   │   │       ├── de245d1d763cf84b62e743c43d5e56ee84969d5d2f2be7d360a7b52015efc476.json
 │   │   │       ├── e03de2510a71614629c78808fc4745b79cb1f733364fa49751add41117e066d6.json
 │   │   │       ├── e38c6d22f916bcaf610e1566cf56f0756b0664779ac30003ac383d2d241a56b2.json
+│   │   │       ├── e3a694f5a5aeed2189d38a386e7b9b36511e9d804ab61256f3ee646e99001bb7.json
 │   │   │       ├── e9885d38a3be3cfe7c69816636c061f8eeab6d2e455d1c49621681806f29cf0a.json
 │   │   │       ├── ebe147ea306792e53c76714dc339ba341c2d969e4c4f742e2bbb3653118a44e9.json
 │   │   │       ├── ee005ea3000ea3f488068a89d0e20a39323d456f022e6bb8f05ff5869b57c378.json
