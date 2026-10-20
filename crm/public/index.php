@@ -17,6 +17,7 @@ use CRM\Services\PaperclipService;
 use CRM\Services\RBACService;
 use CRM\Services\AuthService;
 use CRM\Services\CrmSecurity;
+use CRM\Services\CurrencyService;
 
 $crmRoot = dirname(__DIR__);
 require_once $crmRoot . '/app/Services/StorageService.php';
@@ -28,6 +29,7 @@ require_once $crmRoot . '/app/Services/PaperclipService.php';
 require_once $crmRoot . '/app/Services/RBACService.php';
 require_once $crmRoot . '/app/Services/AuthService.php';
 require_once $crmRoot . '/app/Services/CrmSecurity.php';
+require_once $crmRoot . '/app/Services/CurrencyService.php';
 
 StorageService::init($crmRoot . '/storage');
 AuthService::startSession();
@@ -287,6 +289,7 @@ $closedWonValue = array_sum(array_column($closedWonDeals, 'value'));
 $activeProjectsCount = count(array_filter($projects, fn($p) => ($p['status'] ?? '') === 'in_progress'));
 $activeAgentsCount = count($agents);
 
+$liveExchangeRates = CurrencyService::getRates();
 $csrfToken = CrmSecurity::csrfToken();
 ?>
 <!DOCTYPE html>
@@ -305,6 +308,8 @@ $csrfToken = CrmSecurity::csrfToken();
                 : theme;
             document.documentElement.setAttribute('data-bs-theme', effective);
         })();
+        window.CODEX_EXCHANGE_RATES = <?= json_encode($liveExchangeRates, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
+        window.CODEX_CURRENCIES = <?= json_encode(CurrencyService::CURRENCIES, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
     </script>
 
     <!-- Favicon using Original Logo -->
@@ -1010,6 +1015,102 @@ $csrfToken = CrmSecurity::csrfToken();
                         <span class="fw-semibold">Paperclip Engine: <?= htmlspecialchars($paperclipConn['mode'] ?? 'Local Runtime') ?></span>
                     </div>
 
+                    <!-- Real-Time Live Currency Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-2 py-1" id="bd-currency-crm" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Switch Currency in Real Time">
+                            <span class="currency-flag-active" id="bd-currency-flag">🇺🇸</span>
+                            <span class="fw-bold small" id="bd-currency-code">USD</span>
+                            <span class="badge bg-dark border border-secondary text-info px-1 py-0" id="bd-currency-symbol" style="font-size: 0.65rem;">$</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-currency-crm" style="min-width: 250px;">
+                            <li class="dropdown-header d-flex justify-content-between align-items-center">
+                                <span class="small text-uppercase fw-bold text-muted">Real-Time Currency</span>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.65rem;">
+                                    <span class="agent-badge-pulse me-1" style="width: 6px; height: 6px;"></span>Live Rates
+                                </span>
+                            </li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="USD">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇺🇸</span>
+                                        <span><strong>USD</strong> &bull; US Dollar</span>
+                                    </span>
+                                    <span class="badge bg-secondary-subtle text-muted">$</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="INR">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇮🇳</span>
+                                        <span><strong>INR</strong> &bull; Indian Rupee</span>
+                                    </span>
+                                    <span class="badge bg-warning-subtle text-warning">₹</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="EUR">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇪🇺</span>
+                                        <span><strong>EUR</strong> &bull; Euro</span>
+                                    </span>
+                                    <span class="badge bg-info-subtle text-info">€</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="GBP">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇬🇧</span>
+                                        <span><strong>GBP</strong> &bull; British Pound</span>
+                                    </span>
+                                    <span class="badge bg-primary-subtle text-primary">£</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="AED">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇦🇪</span>
+                                        <span><strong>AED</strong> &bull; UAE Dirham</span>
+                                    </span>
+                                    <span class="badge bg-success-subtle text-success">د.إ</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="CAD">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇨🇦</span>
+                                        <span><strong>CAD</strong> &bull; Canadian Dollar</span>
+                                    </span>
+                                    <span class="badge bg-secondary-subtle text-muted">C$</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="AUD">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇦🇺</span>
+                                        <span><strong>AUD</strong> &bull; Australian Dollar</span>
+                                    </span>
+                                    <span class="badge bg-secondary-subtle text-muted">A$</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="SGD">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span>🇸🇬</span>
+                                        <span><strong>SGD</strong> &bull; Singapore Dollar</span>
+                                    </span>
+                                    <span class="badge bg-secondary-subtle text-muted">S$</span>
+                                </button>
+                            </li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li class="px-3 py-1">
+                                <small class="text-muted" style="font-size: 0.68rem;" id="crm-currency-ticker">
+                                    1 USD = ₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> &bull; €<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> &bull; £<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?>
+                                </small>
+                            </li>
+                        </ul>
+                    </div>
+
                     <!-- Bootstrap Theme Toggle Dropdown -->
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-2 py-1" id="bd-theme-crm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -1098,9 +1199,9 @@ $csrfToken = CrmSecurity::csrfToken();
                                     <span class="text-muted small fw-bold text-uppercase">Active Pipeline</span>
                                     <span class="badge bg-success-subtle text-success border border-success-subtle"><?= count($activePipelineDeals) ?> Deals</span>
                                 </div>
-                                <div class="kpi-num text-success">$<?= number_format($pipelineValue, 0) ?></div>
+                                <div class="kpi-num text-success currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></div>
                                 <div class="small text-muted mt-2 d-flex align-items-center gap-1">
-                                    <i class="bi bi-trophy text-warning"></i> $<?= number_format($closedWonValue, 0) ?> won closed
+                                    <i class="bi bi-trophy text-warning"></i> <span class="currency-val" data-usd="<?= (float)$closedWonValue ?>">$<?= number_format($closedWonValue, 0) ?></span> won closed
                                 </div>
                             </div>
                         </div>
@@ -1135,7 +1236,7 @@ $csrfToken = CrmSecurity::csrfToken();
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
                                 <h6 class="fw-bold mb-1"><i class="bi bi-funnel text-info me-2"></i>Sales Funnel Velocity & Pipeline Distribution</h6>
-                                <p class="text-muted small mb-0">Total combined pipeline value: <strong>$<?= number_format($pipelineValue + $closedWonValue, 0) ?> USD</strong></p>
+                                <p class="text-muted small mb-0">Total combined pipeline value: <strong><span class="currency-val" data-usd="<?= (float)($pipelineValue + $closedWonValue) ?>">$<?= number_format($pipelineValue + $closedWonValue, 0) ?></span> <span class="currency-label-code">USD</span></strong></p>
                             </div>
                             <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalNewDeal">
                                 <i class="bi bi-plus-circle me-1"></i> New Deal
@@ -1251,7 +1352,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                                             <div class="fw-bold text-white"><?= htmlspecialchars($l['name'] ?? 'Prospect') ?></div>
                                                             <small class="text-muted"><?= htmlspecialchars($l['company_name'] ?? 'N/A') ?> &bull; <?= htmlspecialchars($l['country'] ?? 'USA') ?></small>
                                                         </td>
-                                                        <td class="small text-white"><?= htmlspecialchars($l['budget'] ?? 'Flexible') ?></td>
+                                                        <td class="small text-white currency-budget" data-raw-budget="<?= htmlspecialchars($l['budget'] ?? 'Flexible') ?>"><?= htmlspecialchars($l['budget'] ?? 'Flexible') ?></td>
                                                         <td>
                                                             <?php
                                                             $score = (int)($l['lead_score'] ?? 0);
@@ -1305,7 +1406,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                                             <div class="fw-bold text-white"><?= htmlspecialchars($opp['title'] ?? 'Deal') ?></div>
                                                             <small class="text-muted"><?= htmlspecialchars($opp['company'] ?? ($opp['client_name'] ?? 'Client')) ?></small>
                                                         </td>
-                                                        <td class="fw-bold text-success">$<?= number_format((float)($opp['value'] ?? 0), 0) ?></td>
+                                                        <td class="fw-bold text-success currency-val" data-usd="<?= (float)($opp['value'] ?? 0) ?>">$<?= number_format((float)($opp['value'] ?? 0), 0) ?></td>
                                                         <td>
                                                             <span class="badge bg-dark border border-secondary text-capitalize" style="font-size: 0.7rem;">
                                                                 <?= htmlspecialchars(str_replace('_', ' ', $opp['stage'] ?? 'discovery')) ?>
@@ -1371,7 +1472,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <div class="small fw-semibold text-white"><?= htmlspecialchars($l['budget'] ?? 'Flexible') ?></div>
+                                                    <div class="small fw-semibold text-white currency-budget" data-raw-budget="<?= htmlspecialchars($l['budget'] ?? 'Flexible') ?>"><?= htmlspecialchars($l['budget'] ?? 'Flexible') ?></div>
                                                     <div class="small text-muted"><?= htmlspecialchars($l['timeline'] ?? '1-3 months') ?></div>
                                                 </td>
                                                 <td>
@@ -1449,7 +1550,7 @@ $csrfToken = CrmSecurity::csrfToken();
                         </div>
                         <div class="d-flex gap-2">
                             <span class="badge bg-success-subtle text-success border border-success-subtle d-flex align-items-center px-3">
-                                Total Value: $<?= number_format(array_sum(array_column($opportunities, 'value')), 0) ?>
+                                Total Value:&nbsp;<span class="currency-val" data-usd="<?= (float)array_sum(array_column($opportunities, 'value')) ?>">$<?= number_format(array_sum(array_column($opportunities, 'value')), 0) ?></span>
                             </span>
                             <button class="btn btn-success btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#modalNewDeal">
                                 <i class="bi bi-plus-circle me-1"></i> + New Deal
@@ -1481,7 +1582,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                         </div>
                                         <span class="badge bg-dark border border-secondary" style="font-size: 0.7rem;"><?= count($stageDeals) ?></span>
                                     </div>
-                                    <div class="text-muted small mb-3" style="font-size: 0.75rem;">
+                                    <div class="text-muted small mb-3 currency-val" data-usd="<?= (float)$colTotalVal ?>" style="font-size: 0.75rem;">
                                         $<?= number_format($colTotalVal, 0) ?>
                                     </div>
 
@@ -1494,7 +1595,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                                 <div class="fw-bold text-white small mb-1"><?= htmlspecialchars($deal['title'] ?? 'Deal') ?></div>
                                                 <div class="small text-muted mb-2"><?= htmlspecialchars($deal['company'] ?? ($deal['client_name'] ?? 'Client')) ?></div>
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <span class="fw-bold text-success" style="font-size: 0.95rem;">$<?= number_format((float)($deal['value'] ?? 0), 0) ?></span>
+                                                    <span class="fw-bold text-success currency-val" data-usd="<?= (float)($deal['value'] ?? 0) ?>" style="font-size: 0.95rem;">$<?= number_format((float)($deal['value'] ?? 0), 0) ?></span>
                                                     <span class="badge bg-dark border border-secondary small" style="font-size: 0.65rem;"><?= (int)($deal['probability'] ?? 50) ?>% Win</span>
                                                 </div>
                                                 <div class="small text-muted mb-3" style="font-size: 0.72rem;">
@@ -1564,7 +1665,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                                 <h5 class="fw-bold text-white mb-1"><?= htmlspecialchars($proj['name'] ?? 'Project') ?></h5>
                                                 <div class="text-muted small">
                                                     <i class="bi bi-building me-1"></i>Client: <strong><?= htmlspecialchars($proj['client_name'] ?? ($proj['client'] ?? 'Client')) ?></strong>
-                                                    &bull; Budget: <strong class="text-success">$<?= number_format((float)($proj['budget'] ?? 0), 0) ?></strong>
+                                                    &bull; Budget: <strong class="text-success currency-val" data-usd="<?= (float)($proj['budget'] ?? 0) ?>">$<?= number_format((float)($proj['budget'] ?? 0), 0) ?></strong>
                                                 </div>
                                             </div>
                                             <span class="badge bg-<?= ($proj['status'] ?? '') === 'delivered' ? 'success' : (($proj['status'] ?? '') === 'in_progress' ? 'primary' : 'secondary') ?>-subtle text-<?= ($proj['status'] ?? '') === 'delivered' ? 'success' : (($proj['status'] ?? '') === 'in_progress' ? 'primary' : 'secondary') ?> border border-<?= ($proj['status'] ?? '') === 'delivered' ? 'success' : (($proj['status'] ?? '') === 'in_progress' ? 'primary' : 'secondary') ?>-subtle text-uppercase" style="font-size: 0.72rem;">
@@ -2344,6 +2445,29 @@ $csrfToken = CrmSecurity::csrfToken();
             <a href="#settings" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-settings" data-bs-dismiss="offcanvas"><i class="bi bi-sliders me-2"></i> System & API</a>
         </nav>
         <hr class="border-secondary my-3">
+        <!-- Mobile Currency Selector -->
+        <div class="dropdown mb-2">
+            <button class="btn btn-outline-secondary btn-sm dropdown-toggle w-100 d-flex align-items-center justify-content-between px-3 py-2" id="bd-currency-mobile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="d-flex align-items-center gap-2">
+                    <span id="bd-currency-mobile-flag">🇺🇸</span>
+                    <span id="bd-currency-mobile-text"><strong>USD</strong> &bull; US Dollar</span>
+                </span>
+                <span class="badge bg-secondary-subtle text-muted" id="bd-currency-mobile-symbol">$</span>
+            </button>
+            <ul class="dropdown-menu w-100 shadow" aria-labelledby="bd-currency-mobile">
+                <li class="dropdown-header small text-uppercase fw-bold text-muted">Real-Time Currency</li>
+                <li><hr class="dropdown-divider my-1"></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="USD"><span>🇺🇸 <strong>USD</strong> &bull; US Dollar</span><span class="badge bg-secondary-subtle text-muted">$</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="INR"><span>🇮🇳 <strong>INR</strong> &bull; Rupee</span><span class="badge bg-warning-subtle text-warning">₹</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="EUR"><span>🇪🇺 <strong>EUR</strong> &bull; Euro</span><span class="badge bg-info-subtle text-info">€</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="GBP"><span>🇬🇧 <strong>GBP</strong> &bull; British Pound</span><span class="badge bg-primary-subtle text-primary">£</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="AED"><span>🇦🇪 <strong>AED</strong> &bull; UAE Dirham</span><span class="badge bg-success-subtle text-success">د.إ</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="CAD"><span>🇨🇦 <strong>CAD</strong> &bull; Canadian Dollar</span><span class="badge bg-secondary-subtle text-muted">C$</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="AUD"><span>🇦🇺 <strong>AUD</strong> &bull; Australian Dollar</span><span class="badge bg-secondary-subtle text-muted">A$</span></button></li>
+                <li><button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" data-crm-currency="SGD"><span>🇸🇬 <strong>SGD</strong> &bull; Singapore Dollar</span><span class="badge bg-secondary-subtle text-muted">S$</span></button></li>
+            </ul>
+        </div>
+
         <!-- Mobile Theme Toggle -->
         <div class="dropdown mb-3">
             <button class="btn btn-outline-secondary btn-sm dropdown-toggle w-100 d-flex align-items-center justify-content-between px-3 py-2" id="bd-theme-mobile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -2497,6 +2621,134 @@ $csrfToken = CrmSecurity::csrfToken();
                 applyTheme('auto');
             }
         });
+
+        // =========================================================
+        // Real-Time Multi-Currency Conversion Engine
+        // (USD, INR, EUR, GBP, AED, CAD, AUD, SGD)
+        // =========================================================
+        const getStoredCurrency = () => localStorage.getItem('codex_crm_currency') || 'USD';
+        const setStoredCurrency = cur => localStorage.setItem('codex_crm_currency', cur);
+
+        const formatMoney = (amountUsd, targetCurrency) => {
+            const rates = window.CODEX_EXCHANGE_RATES || {};
+            const rate = parseFloat(rates[targetCurrency]) || 1.0;
+            const meta = (window.CODEX_CURRENCIES && window.CODEX_CURRENCIES[targetCurrency]) || { symbol: '$', locale: 'en-US' };
+            const converted = Math.round(amountUsd * rate);
+
+            try {
+                const formatted = new Intl.NumberFormat(meta.locale || 'en-US', {
+                    maximumFractionDigits: 0
+                }).format(converted);
+                return `${meta.symbol}${formatted}`;
+            } catch (err) {
+                return `${meta.symbol}${converted.toLocaleString()}`;
+            }
+        };
+
+        const formatBudgetRange = (rawBudget, targetCurrency) => {
+            if (!rawBudget || typeof rawBudget !== 'string') return rawBudget;
+            const rates = window.CODEX_EXCHANGE_RATES || {};
+            const rate = parseFloat(rates[targetCurrency]) || 1.0;
+            const meta = (window.CODEX_CURRENCIES && window.CODEX_CURRENCIES[targetCurrency]) || { symbol: '$', locale: 'en-US' };
+
+            // Match all $15,000 patterns
+            return rawBudget.replace(/\$\s*([\d,]+)/g, (match, p1) => {
+                const num = parseFloat(p1.replace(/,/g, ''));
+                if (isNaN(num)) return match;
+                const converted = Math.round(num * rate);
+                try {
+                    const formatted = new Intl.NumberFormat(meta.locale || 'en-US', {
+                        maximumFractionDigits: 0
+                    }).format(converted);
+                    return `${meta.symbol}${formatted}`;
+                } catch (e) {
+                    return `${meta.symbol}${converted.toLocaleString()}`;
+                }
+            });
+        };
+
+        const applyCurrency = (currencyCode) => {
+            const currencies = window.CODEX_CURRENCIES || {};
+            const cur = currencies[currencyCode] || { symbol: '$', flag: '🇺🇸', name: 'US Dollar' };
+
+            // 1. Update Top Navbar Trigger
+            const flagEl = document.getElementById('bd-currency-flag');
+            const codeEl = document.getElementById('bd-currency-code');
+            const symEl = document.getElementById('bd-currency-symbol');
+            if (flagEl) flagEl.textContent = cur.flag;
+            if (codeEl) codeEl.textContent = currencyCode;
+            if (symEl) symEl.textContent = cur.symbol;
+
+            // 2. Update Mobile Trigger
+            const mFlagEl = document.getElementById('bd-currency-mobile-flag');
+            const mTextEl = document.getElementById('bd-currency-mobile-text');
+            const mSymEl = document.getElementById('bd-currency-mobile-symbol');
+            if (mFlagEl) mFlagEl.textContent = cur.flag;
+            if (mTextEl) mTextEl.innerHTML = `<strong>${currencyCode}</strong> &bull; ${cur.name}`;
+            if (mSymEl) mSymEl.textContent = cur.symbol;
+
+            // 3. Mark Active Item in Dropdowns
+            document.querySelectorAll('[data-crm-currency]').forEach(item => {
+                if (item.getAttribute('data-crm-currency') === currencyCode) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // 4. Update all tagged monetary values in real time
+            document.querySelectorAll('.currency-val').forEach(el => {
+                const usd = parseFloat(el.getAttribute('data-usd') || '0');
+                el.textContent = formatMoney(usd, currencyCode);
+            });
+
+            // 5. Update all tagged budget ranges in real time
+            document.querySelectorAll('.currency-budget').forEach(el => {
+                const raw = el.getAttribute('data-raw-budget') || el.textContent;
+                el.textContent = formatBudgetRange(raw, currencyCode);
+            });
+
+            // 6. Update currency labels (e.g. USD in pipeline summary)
+            document.querySelectorAll('.currency-label-code').forEach(el => {
+                el.textContent = currencyCode;
+            });
+        };
+
+        // Attach click listeners to all currency buttons
+        document.querySelectorAll('[data-crm-currency]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selected = btn.getAttribute('data-crm-currency');
+                setStoredCurrency(selected);
+                applyCurrency(selected);
+            });
+        });
+
+        // Initialize preferred currency on load
+        const initialCurrency = getStoredCurrency();
+        applyCurrency(initialCurrency);
+
+        // Background live rates sync (fetch from API endpoint to keep rates freshest)
+        (async () => {
+            try {
+                const res = await fetch('api/v1/rates.php');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.rates) {
+                        window.CODEX_EXCHANGE_RATES = data.rates;
+                        // Re-apply to reflect latest precision rates
+                        applyCurrency(getStoredCurrency());
+                        // Update ticker text if element exists
+                        const tickerEl = document.getElementById('crm-currency-ticker');
+                        if (tickerEl && data.rates.INR && data.rates.EUR && data.rates.GBP) {
+                            tickerEl.innerHTML = `1 USD = ₹${parseFloat(data.rates.INR).toFixed(2)} &bull; €${parseFloat(data.rates.EUR).toFixed(2)} &bull; £${parseFloat(data.rates.GBP).toFixed(2)}`;
+                        }
+                    }
+                }
+            } catch (err) {
+                // Silently fallback to server-injected rates
+            }
+        })();
     });
 </script>
 
