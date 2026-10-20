@@ -58,15 +58,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $flash = get_admin_flash();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal Login — CodeX404 Solutions</title>
     <meta name="robots" content="noindex, nofollow">
+
+    <script>
+        (() => {
+            const storedTheme = localStorage.getItem('codex_admin_theme');
+            const theme = storedTheme ? storedTheme : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        })();
+    </script>
+
+    <!-- Bootstrap 5.3.3 CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= asset('images/logo/logo.png') ?>">
     <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
     <style>
         body {
@@ -246,18 +260,97 @@ $flash = get_admin_flash();
             padding: 0.1rem 0.35rem;
             border-radius: 0.25rem;
         }
+        /* Light Mode Styles */
+        [data-bs-theme="light"] body {
+            background: #F1F5F9 !important;
+            color: #0F172A !important;
+        }
+        [data-bs-theme="light"] .login-card {
+            background: #FFFFFF !important;
+            border-color: rgba(14, 165, 233, 0.3) !important;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08) !important;
+        }
+        [data-bs-theme="light"] .login-title {
+            color: #0F172A !important;
+        }
+        [data-bs-theme="light"] .login-subtitle {
+            color: #64748B !important;
+        }
+        [data-bs-theme="light"] .form-label {
+            color: #334155 !important;
+        }
+        [data-bs-theme="light"] .form-control {
+            background: #FFFFFF !important;
+            border-color: #CBD5E1 !important;
+            color: #0F172A !important;
+        }
+        [data-bs-theme="light"] .form-control:focus {
+            border-color: #0284C7 !important;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+        }
+        [data-bs-theme="light"] .login-footer {
+            border-top-color: #E2E8F0 !important;
+            color: #64748B !important;
+        }
+        [data-bs-theme="light"] .dropdown-menu {
+            background: #FFFFFF !important;
+            border-color: #CBD5E1 !important;
+        }
+        [data-bs-theme="light"] .dropdown-item {
+            color: #0F172A !important;
+        }
+        [data-bs-theme="light"] .dropdown-item:hover,
+        [data-bs-theme="light"] .dropdown-item:focus {
+            background-color: #F1F5F9 !important;
+            color: #0284C7 !important;
+        }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <div class="login-header">
-        <div class="brand-badge">
+<div style="width: 100%; max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem;">
+    <!-- Top Theme Switcher Bar -->
+    <div style="display: flex; justify-content: flex-end;">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-3 py-1 shadow-sm" id="bd-theme-admin-login" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-color: rgba(148, 163, 184, 0.3);">
+                <i class="bi bi-circle-half theme-icon-active text-info"></i>
+                <span class="small" id="bd-theme-admin-login-text">Theme</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-admin-login">
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="combo">
+                        <i class="bi bi-circle-half text-primary"></i> Dark &amp; Light Combo
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark">
+                        <i class="bi bi-moon-stars-fill text-info"></i> Full Dark Mode
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="light">
+                        <i class="bi bi-sun-fill text-warning"></i> Pure Light Mode
+                    </button>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto">
+                        <i class="bi bi-laptop text-secondary"></i> System Auto
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="login-header" style="text-align: center;">
+        <div class="mb-3 d-inline-block px-3 py-2 rounded-4" style="background: #0B0F19; border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.35);">
+            <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="max-height: 40px; object-fit: contain;">
+        </div>
+        <div class="brand-badge" style="justify-content: center; margin-bottom: 0.75rem;">
             <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#22D3EE;"></span>
             CodeX404 Engineering
         </div>
         <h1 class="login-title">Admin Sign In</h1>
-        <p class="login-subtitle">Project Showcase & Work Portfolio Management</p>
+        <p class="login-subtitle">Project Showcase &amp; Work Portfolio Management</p>
     </div>
 
     <?php if (!empty($flash)): ?>
@@ -316,9 +409,11 @@ $flash = get_admin_flash();
     <div class="login-footer">
         <a href="<?= url('index.php') ?>">← Return to Live Website</a>
         <span>&copy; <?= date('Y') ?> CodeX404</span>
-    </div>
+</div>
 </div>
 
+<!-- Bootstrap 5.3.3 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.getElementById('togglePassBtn').addEventListener('click', function() {
     const passInput = document.getElementById('password');
@@ -330,6 +425,46 @@ document.getElementById('togglePassBtn').addEventListener('click', function() {
         passInput.type = 'password';
         eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
     }
+});
+
+// Admin Theme Switcher Logic
+const getStoredTheme = () => localStorage.getItem('codex_admin_theme');
+const setStoredTheme = theme => localStorage.setItem('codex_admin_theme', theme);
+const getPreferredTheme = () => {
+    const storedTheme = getStoredTheme();
+    if (storedTheme) return storedTheme;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+};
+
+const updateThemeUI = (theme) => {
+    const textEl = document.getElementById('bd-theme-admin-login-text');
+    const iconEl = document.querySelector('#bd-theme-admin-login .theme-icon-active');
+    if (textEl) textEl.textContent = theme === 'auto' ? 'Auto' : (theme === 'light' ? 'Light' : 'Dark');
+    if (iconEl) {
+        if (theme === 'light') iconEl.className = 'bi bi-sun-fill text-warning theme-icon-active';
+        else if (theme === 'dark') iconEl.className = 'bi bi-moon-stars-fill text-info theme-icon-active';
+        else iconEl.className = 'bi bi-circle-half text-secondary theme-icon-active';
+    }
+};
+
+const applyTheme = (theme) => {
+    if (theme === 'auto') {
+        const autoTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-bs-theme', autoTheme);
+    } else {
+        document.documentElement.setAttribute('data-bs-theme', theme);
+    }
+    updateThemeUI(theme);
+};
+
+applyTheme(getPreferredTheme());
+
+document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-bs-theme-value');
+        setStoredTheme(selected);
+        applyTheme(selected);
+    });
 });
 </script>
 

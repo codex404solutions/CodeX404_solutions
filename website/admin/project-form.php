@@ -117,245 +117,199 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $tagsString = implode(', ', $project['tags'] ?? []);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="combo">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $isEdit ? 'Edit Project' : 'Upload New Project' ?> — CodeX404 Admin</title>
+    <title><?= $isEdit ? 'Edit ' . htmlspecialchars($project['title']) : 'Upload New Deliverable' ?> — CodeX404 Admin</title>
     <meta name="robots" content="noindex, nofollow">
+
+    <script>
+        (() => {
+            const storedTheme = localStorage.getItem('codex_admin_theme');
+            let theme = storedTheme ? storedTheme : 'combo';
+            const effective = (theme === 'auto')
+                ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'combo' : 'dark')
+                : theme;
+            document.documentElement.setAttribute('data-bs-theme', effective);
+        })();
+    </script>
+
+    <!-- Bootstrap 5.3.3 CSS & Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= asset('images/logo/logo.png') ?>">
+
     <style>
         :root {
-            --admin-bg: #030712;
-            --admin-panel: rgba(15, 23, 42, 0.75);
-            --admin-border: rgba(56, 189, 248, 0.15);
-        }
-        body {
-            background-color: var(--admin-bg);
-            color: #F8FAFC;
-            font-family: var(--font-main);
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
-        .admin-nav {
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid var(--admin-border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            backdrop-filter: blur(16px);
-        }
-        .admin-nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0.9rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .admin-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 4rem 1.5rem;
-            flex: 1;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .btn-back {
-            color: #94A3B8;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-        .btn-back:hover {
-            color: var(--cyan);
+            --cx-cyan: #22D3EE;
+            --cx-blue: #3B82F6;
+            --cx-indigo: #6366F1;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
         }
 
-        .form-section {
-            background: var(--admin-panel);
-            border: 1px solid var(--admin-border);
-            border-radius: 1rem;
-            padding: 1.75rem 2rem;
-            margin-bottom: 1.75rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        [data-bs-theme="dark"] {
+            --cx-bg-canvas: #030712;
+            --cx-bg-surface: #0B0F19;
+            --cx-bg-card: rgba(17, 24, 39, 0.7);
+            --cx-border: rgba(255, 255, 255, 0.08);
+            --cx-text-primary: #F8FAFC;
+            --cx-text-muted: #64748B;
+            --cx-nav-bg: #070B14;
+            --cx-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-bs-theme="light"] {
+            --cx-bg-canvas: #F8FAFC;
+            --cx-bg-surface: #FFFFFF;
+            --cx-bg-card: #FFFFFF;
+            --cx-border: #E2E8F0;
+            --cx-text-primary: #0F172A;
+            --cx-text-muted: #64748B;
+            --cx-nav-bg: #FFFFFF;
+            --cx-card-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        [data-bs-theme="combo"] {
+            --cx-bg-canvas: #F1F5F9;
+            --cx-bg-surface: #FFFFFF;
+            --cx-bg-card: #FFFFFF;
+            --cx-border: #E2E8F0;
+            --cx-text-primary: #0F172A;
+            --cx-text-muted: #64748B;
+            --cx-nav-bg: #070B14;
+            --cx-card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--cx-bg-canvas);
+            color: var(--cx-text-primary);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .admin-navbar {
+            background-color: var(--cx-nav-bg);
+            border-bottom: 1px solid var(--cx-border);
+            padding: 0.75rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
             backdrop-filter: blur(16px);
         }
-        .section-heading {
-            font-size: 1.15rem;
+
+        [data-bs-theme="combo"] .admin-navbar,
+        [data-bs-theme="dark"] .admin-navbar {
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .admin-brand-pill {
+            display: inline-flex;
+            align-items: center;
+            background: #0B0F19;
+            padding: 6px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+            text-decoration: none;
+        }
+
+        .admin-card {
+            background-color: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 16px;
+            box-shadow: var(--cx-card-shadow);
+        }
+
+        .form-section-title {
+            font-size: 1.05rem;
             font-weight: 700;
-            color: #FFFFFF;
-            margin: 0 0 0.35rem 0;
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        .section-desc {
-            color: var(--slate);
-            font-size: 0.85rem;
-            margin: 0 0 1.5rem 0;
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            font-size: 0.9rem;
         }
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 1.25rem;
-        }
-        .form-row.triplet {
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        }
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
+
         .form-label {
-            display: block;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            color: #E2E8F0;
-            margin-bottom: 0.45rem;
-        }
-        .form-hint {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--slate);
-            margin-top: 0.3rem;
-        }
-        .form-control {
-            width: 100%;
-            background: rgba(3, 7, 18, 0.7);
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            border-radius: 0.5rem;
-            padding: 0.75rem 0.9rem;
-            color: #F8FAFC;
-            font-size: 0.9rem;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            font-family: inherit;
-        }
-        .form-control:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
-            background: rgba(3, 7, 18, 0.9);
-        }
-        textarea.form-control {
-            resize: vertical;
-            min-height: 90px;
-            line-height: 1.5;
-        }
-        select.form-control {
-            cursor: pointer;
-        }
-        .checkbox-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.65rem;
-            font-size: 0.9rem;
-            color: #F8FAFC;
-            cursor: pointer;
-            user-select: none;
-        }
-        .checkbox-label input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--cyan);
-            cursor: pointer;
-        }
-        .btn-submit-save {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
-            color: #FFFFFF;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.85rem 1.75rem;
-            border-radius: 0.65rem;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
-            transition: all 0.2s ease;
-        }
-        .btn-submit-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
-        }
-        .btn-cancel {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.85rem 1.5rem;
-            border-radius: 0.65rem;
-            color: #94A3B8;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            transition: all 0.2s;
-        }
-        .btn-cancel:hover {
-            color: #FFFFFF;
-            border-color: #CBD5E1;
-        }
-        .alert-errors {
-            background: rgba(239, 68, 68, 0.12);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #FCA5A5;
-            padding: 1rem 1.25rem;
-            border-radius: 0.65rem;
-            margin-bottom: 2rem;
-        }
-        .alert-errors ul {
-            margin: 0.5rem 0 0 1.25rem;
-            padding: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--cx-text-muted);
+            margin-bottom: 0.35rem;
         }
     </style>
 </head>
 <body>
 
-<header class="admin-nav">
-    <div class="admin-nav-inner">
-        <div style="display:flex; align-items:center; gap:0.75rem;">
-            <a href="<?= admin_url('index.php') ?>" style="font-weight:800; font-size:1.15rem; color:#FFFFFF; text-decoration:none;">CodeX404</a>
-            <span style="background:rgba(34,211,238,0.1); border:1px solid rgba(34,211,238,0.3); color:var(--cyan); padding:0.15rem 0.5rem; border-radius:9999px; font-size:0.7rem; font-weight:700;">Admin</span>
+<!-- Navigation Header -->
+<nav class="admin-navbar">
+    <div class="container-fluid px-md-4 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+            <a href="index.php" class="admin-brand-pill">
+                <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
+            </a>
+            <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.68rem;">PORTFOLIO EDITOR</span>
         </div>
-        <div>
-            <a href="<?= admin_url('index.php') ?>" class="btn-back">← Back to Dashboard</a>
+
+        <div class="d-flex align-items-center gap-2">
+            <!-- Theme Toggle -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-3 py-1" id="bd-theme-admin" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 8px;">
+                    <i class="bi bi-circle-half theme-icon-active text-info"></i>
+                    <span class="small d-none d-sm-inline" id="bd-theme-admin-text">Dark &amp; Light</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-admin">
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="combo"><i class="bi bi-circle-half text-primary"></i> Dark &amp; Light Combo</button></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark"><i class="bi bi-moon-stars-fill text-info"></i> Full Dark Mode</button></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="light"><i class="bi bi-sun-fill text-warning"></i> Pure Light Mode</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto"><i class="bi bi-laptop text-secondary"></i> System Auto</button></li>
+                </ul>
+            </div>
+
+            <a href="index.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
+                <i class="bi bi-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </a>
         </div>
     </div>
-</header>
+</nav>
 
-<main class="admin-container">
+<!-- Main Form Container -->
+<main class="container px-3 px-md-4 py-4" style="max-width: 1000px;">
 
-    <div class="page-header">
+    <!-- Page Title -->
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
         <div>
-            <h1 style="font-size: 1.85rem; font-weight: 800; margin: 0 0 0.35rem 0;">
-                <?= $isEdit ? 'Edit Deliverable: ' . htmlspecialchars($project['title']) : 'Upload New Project Deliverable' ?>
-            </h1>
-            <p style="color: var(--slate); font-size: 0.9rem; margin: 0;">
-                Fill in the verified engineering project parameters. Changes reflect live on the website immediately.
-            </p>
+            <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                <a href="index.php" class="text-decoration-none text-muted">Projects</a>
+                <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
+                <span class="text-info"><?= $isEdit ? 'Edit Deliverable' : 'Upload New' ?></span>
+            </div>
+            <h1 class="h3 fw-bold mb-1"><?= $isEdit ? 'Edit: ' . htmlspecialchars($project['title']) : 'Upload Production Deliverable' ?></h1>
+            <p class="text-muted small mb-0">Fill in verified technical parameters. Saved changes update live on the website immediately.</p>
         </div>
     </div>
 
+    <!-- Errors Banner -->
     <?php if (!empty($errors)): ?>
-        <div class="alert-errors">
-            <strong>Please resolve the following issues:</strong>
-            <ul>
+        <div class="alert alert-danger shadow-sm rounded-3 mb-4">
+            <h6 class="fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill me-2"></i>Please resolve the following issues:</h6>
+            <ul class="mb-0 ps-3 small">
                 <?php foreach ($errors as $err): ?>
                     <li><?= htmlspecialchars($err) ?></li>
                 <?php endforeach; ?>
@@ -366,183 +320,250 @@ $tagsString = implode(', ', $project['tags'] ?? []);
     <form method="POST" action="<?= admin_url('project-form.php' . ($isEdit ? '?id=' . urlencode($project['id']) : '')) ?>">
         <?= csrf_input_field() ?>
 
-        <!-- SECTION 1: CORE IDENTITY -->
-        <div class="form-section">
-            <h2 class="section-heading">1. Project Identity & Categorization</h2>
-            <p class="section-desc">Basic names, tabs, and publication settings.</p>
+        <!-- SECTION 1: IDENTITY -->
+        <div class="admin-card p-4 mb-4">
+            <h2 class="form-section-title text-info"><i class="bi bi-card-heading"></i> 1. Project Identity &amp; Classification</h2>
+            <p class="text-muted small mb-4">Core name, slug identifier, and navigation taxonomy.</p>
 
-            <div class="form-row">
-                <div class="form-group">
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-8">
                     <label class="form-label" for="title">Project Title *</label>
-                    <input type="text" id="title" name="title" class="form-control" value="<?= htmlspecialchars($project['title']) ?>" required placeholder="e.g. School ERP & Administrative Portal">
+                    <input type="text" id="title" name="title" class="form-control" value="<?= htmlspecialchars($project['title']) ?>" required placeholder="e.g. Insan Degree College — Official Web Portal">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="id">Unique Slug / ID</label>
-                    <input type="text" id="id" name="id" class="form-control" value="<?= htmlspecialchars($project['id']) ?>" <?= $isEdit ? 'readonly style="background:rgba(15,23,42,0.4); opacity:0.8;"' : '' ?> placeholder="Auto-generated if left blank (e.g. school-erp)">
-                    <span class="form-hint">Used for internal anchor and unique key.</span>
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="id">Unique ID / Slug</label>
+                    <input type="text" id="id" name="id" class="form-control" value="<?= htmlspecialchars($project['id']) ?>" <?= $isEdit ? 'readonly style="opacity: 0.7;"' : '' ?> placeholder="auto-generated-if-blank" style="font-family: var(--font-mono);">
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-4">
                     <label class="form-label" for="category">Filter Tab Category *</label>
-                    <select id="category" name="category" class="form-control">
-                        <option value="software" <?= ($project['category'] === 'software') ? 'selected' : '' ?>>Custom Software & ERP (software)</option>
-                        <option value="ai" <?= ($project['category'] === 'ai') ? 'selected' : '' ?>>AI & Automation (ai)</option>
-                        <option value="commerce" <?= ($project['category'] === 'commerce') ? 'selected' : '' ?>>B2B Commerce & Wholesale (commerce)</option>
-                        <option value="mobile" <?= ($project['category'] === 'mobile') ? 'selected' : '' ?>>Mobile & PWA (mobile)</option>
+                    <select id="category" name="category" class="form-select">
+                        <option value="software" <?= ($project['category'] === 'software') ? 'selected' : '' ?>>Custom Software &amp; Portals (software)</option>
+                        <option value="ai" <?= ($project['category'] === 'ai') ? 'selected' : '' ?>>AI Agents &amp; Automation (ai)</option>
+                        <option value="commerce" <?= ($project['category'] === 'commerce') ? 'selected' : '' ?>>B2B Commerce &amp; Wholesale (commerce)</option>
+                        <option value="mobile" <?= ($project['category'] === 'mobile') ? 'selected' : '' ?>>Mobile Apps &amp; PWA (mobile)</option>
+                        <option value="cloud" <?= ($project['category'] === 'cloud') ? 'selected' : '' ?>>Cloud &amp; DevOps (cloud)</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="col-12 col-md-5">
                     <label class="form-label" for="category_label">Category Badge Label</label>
-                    <input type="text" id="category_label" name="category_label" class="form-control" value="<?= htmlspecialchars($project['category_label'] ?? '') ?>" placeholder="e.g. Custom Enterprise Software">
+                    <input type="text" id="category_label" name="category_label" class="form-control" value="<?= htmlspecialchars($project['category_label'] ?? '') ?>" placeholder="e.g. Institutional Web Portal">
                 </div>
-                <div class="form-group">
+                <div class="col-12 col-md-3">
                     <label class="form-label" for="order">Display Order</label>
                     <input type="number" id="order" name="order" class="form-control" value="<?= (int)($project['order'] ?? 1) ?>" min="1" max="99">
                 </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 0;">
-                <label class="checkbox-label">
-                    <input type="checkbox" name="active" value="1" <?= !empty($project['active']) ? 'checked' : '' ?>>
-                    <span><strong>Active & Published</strong> (Show on public website homepage & portfolio)</span>
+            <div class="form-check form-switch pt-2">
+                <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" value="1" <?= !empty($project['active']) ? 'checked' : '' ?>>
+                <label class="form-check-label fw-bold" for="active">
+                    Published &amp; Active on Website
                 </label>
+                <div class="text-muted small">When checked, this project renders immediately on the public website showcase.</div>
             </div>
         </div>
 
-        <!-- SECTION 2: TERMINAL MOCKUP & STATUS -->
-        <div class="form-section">
-            <h2 class="section-heading">2. Browser Frame & Top Mockup Display</h2>
-            <p class="section-desc">The browser header bar and status pills shown at the top of each project card.</p>
+        <!-- SECTION 2: BROWSER MOCKUP HEADER -->
+        <div class="admin-card p-4 mb-4">
+            <h2 class="form-section-title text-success"><i class="bi bi-window"></i> 2. Browser Frame &amp; Status Header</h2>
+            <p class="text-muted small mb-4">Hostname address bar and visual status tags.</p>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label" for="mockup_host">Mockup URL / Host bar</label>
-                    <input type="text" id="mockup_host" name="mockup_host" class="form-control" value="<?= htmlspecialchars($project['mockup_host'] ?? '') ?>" placeholder="e.g. erp.institution-portal">
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="mockup_host">Mockup URL / Host Address Bar</label>
+                    <input type="text" id="mockup_host" name="mockup_host" class="form-control" value="<?= htmlspecialchars($project['mockup_host'] ?? '') ?>" placeholder="e.g. portal.insandegreeclg.online" style="font-family: var(--font-mono);">
                 </div>
-                <div class="form-group">
+                <div class="col-12 col-md-3">
                     <label class="form-label" for="badge_text">Status Badge Text</label>
-                    <input type="text" id="badge_text" name="badge_text" class="form-control" value="<?= htmlspecialchars($project['badge_text'] ?? 'Production Live') ?>" placeholder="e.g. Production Live">
+                    <input type="text" id="badge_text" name="badge_text" class="form-control" value="<?= htmlspecialchars($project['badge_text'] ?? 'Live Production') ?>" placeholder="e.g. Live Production">
                 </div>
-                <div class="form-group">
+                <div class="col-12 col-md-3">
                     <label class="form-label" for="badge_type">Badge Glow Style</label>
-                    <select id="badge_type" name="badge_type" class="form-control">
-                        <option value="live" <?= (($project['badge_type'] ?? '') === 'live') ? 'selected' : '' ?>>Live Green (Production Live)</option>
-                        <option value="demo" <?= (($project['badge_type'] ?? '') === 'demo') ? 'selected' : '' ?>>Cyan Demo (Interactive Demo Ready)</option>
+                    <select id="badge_type" name="badge_type" class="form-select">
+                        <option value="live" <?= (($project['badge_type'] ?? '') === 'live') ? 'selected' : '' ?>>Live Green (Production)</option>
+                        <option value="demo" <?= (($project['badge_type'] ?? '') === 'demo') ? 'selected' : '' ?>>Cyan Demo (Sandbox Ready)</option>
                     </select>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
                     <label class="form-label" for="mockup_tag1">Screen Top Tag 1</label>
-                    <input type="text" id="mockup_tag1" name="mockup_tag1" class="form-control" value="<?= htmlspecialchars($project['mockup_tag1'] ?? '') ?>" placeholder="e.g. 🏫 Academic Ledger & Fees">
+                    <input type="text" id="mockup_tag1" name="mockup_tag1" class="form-control" value="<?= htmlspecialchars($project['mockup_tag1'] ?? '') ?>" placeholder="e.g. 🎓 Higher Education">
                 </div>
-                <div class="form-group">
+                <div class="col-12 col-md-6">
                     <label class="form-label" for="mockup_tag2">Screen Top Tag 2</label>
-                    <input type="text" id="mockup_tag2" name="mockup_tag2" class="form-control" value="<?= htmlspecialchars($project['mockup_tag2'] ?? '') ?>" placeholder="e.g. Role: SuperAdmin">
+                    <input type="text" id="mockup_tag2" name="mockup_tag2" class="form-control" value="<?= htmlspecialchars($project['mockup_tag2'] ?? '') ?>" placeholder="e.g. Sub-200ms TTFB">
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 3: QUICK KPI TRIPLETS -->
-        <div class="form-section">
-            <h2 class="section-heading">3. Quick KPI Metric Stat Triplets</h2>
-            <p class="section-desc">The 3 quick numerical achievements displayed in the mockup frame.</p>
+        <!-- SECTION 3: KPI METRICS -->
+        <div class="admin-card p-4 mb-4">
+            <h2 class="form-section-title text-warning"><i class="bi bi-speedometer2"></i> 3. Quick KPI Metric Stat Triplets</h2>
+            <p class="text-muted small mb-4">Three standout quantitative metrics displayed inside the project card mockup.</p>
 
-            <div class="form-row triplet">
-                <div class="form-group">
-                    <label class="form-label" for="stat_1_val">Stat 1 Value</label>
-                    <input type="text" id="stat_1_val" name="stat_1_val" class="form-control" value="<?= htmlspecialchars($project['stat_1_val'] ?? '') ?>" placeholder="e.g. 4,800+">
-                    <label class="form-label" for="stat_1_lbl" style="margin-top: 0.5rem; font-size: 0.75rem;">Stat 1 Label</label>
-                    <input type="text" id="stat_1_lbl" name="stat_1_lbl" class="form-control" value="<?= htmlspecialchars($project['stat_1_lbl'] ?? '') ?>" placeholder="e.g. Students Managed">
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.03); border: 1px solid var(--cx-border);">
+                        <label class="form-label" for="stat_1_val">Stat 1 Value</label>
+                        <input type="text" id="stat_1_val" name="stat_1_val" class="form-control mb-2 fw-bold text-success" value="<?= htmlspecialchars($project['stat_1_val'] ?? '') ?>" placeholder="e.g. 100%">
+                        <label class="form-label" for="stat_1_lbl">Stat 1 Label</label>
+                        <input type="text" id="stat_1_lbl" name="stat_1_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_1_lbl'] ?? '') ?>" placeholder="e.g. Mobile Responsive">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="stat_2_val">Stat 2 Value</label>
-                    <input type="text" id="stat_2_val" name="stat_2_val" class="form-control" value="<?= htmlspecialchars($project['stat_2_val'] ?? '') ?>" placeholder="e.g. 4 Roles">
-                    <label class="form-label" for="stat_2_lbl" style="margin-top: 0.5rem; font-size: 0.75rem;">Stat 2 Label</label>
-                    <input type="text" id="stat_2_lbl" name="stat_2_lbl" class="form-control" value="<?= htmlspecialchars($project['stat_2_lbl'] ?? '') ?>" placeholder="e.g. Strict RBAC">
+
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.03); border: 1px solid var(--cx-border);">
+                        <label class="form-label" for="stat_2_val">Stat 2 Value</label>
+                        <input type="text" id="stat_2_val" name="stat_2_val" class="form-control mb-2 fw-bold text-info" value="<?= htmlspecialchars($project['stat_2_val'] ?? '') ?>" placeholder="e.g. Sub-200ms">
+                        <label class="form-label" for="stat_2_lbl">Stat 2 Label</label>
+                        <input type="text" id="stat_2_lbl" name="stat_2_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_2_lbl'] ?? '') ?>" placeholder="e.g. Page Load TTFB">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="stat_3_val">Stat 3 Value</label>
-                    <input type="text" id="stat_3_val" name="stat_3_val" class="form-control" value="<?= htmlspecialchars($project['stat_3_val'] ?? '') ?>" placeholder="e.g. 15 Mins">
-                    <label class="form-label" for="stat_3_lbl" style="margin-top: 0.5rem; font-size: 0.75rem;">Stat 3 Label</label>
-                    <input type="text" id="stat_3_lbl" name="stat_3_lbl" class="form-control" value="<?= htmlspecialchars($project['stat_3_lbl'] ?? '') ?>" placeholder="e.g. Fee Reconciliation">
+
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.03); border: 1px solid var(--cx-border);">
+                        <label class="form-label" for="stat_3_val">Stat 3 Value</label>
+                        <input type="text" id="stat_3_val" name="stat_3_val" class="form-control mb-2 fw-bold text-primary" value="<?= htmlspecialchars($project['stat_3_val'] ?? '') ?>" placeholder="e.g. 25,000+">
+                        <label class="form-label" for="stat_3_lbl">Stat 3 Label</label>
+                        <input type="text" id="stat_3_lbl" name="stat_3_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_3_lbl'] ?? '') ?>" placeholder="e.g. Monthly Inquiries">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 4: PROBLEM, SOLUTION & IMPACT -->
-        <div class="form-section">
-            <h2 class="section-heading">4. Business Problem & Engineering Solution</h2>
-            <p class="section-desc">Clear, honest explanation of the operational bottleneck and engineering solution.</p>
+        <!-- SECTION 4: PROBLEM & SOLUTION -->
+        <div class="admin-card p-4 mb-4">
+            <h2 class="form-section-title text-primary"><i class="bi bi-gear-wide-connected"></i> 4. Problem Statement &amp; Engineering Solution</h2>
+            <p class="text-muted small mb-4">Explain the operational bottleneck and architectural solution engineered by CodeX404.</p>
 
-            <div class="form-group">
-                <label class="form-label" for="problem">Problem Statement *</label>
-                <textarea id="problem" name="problem" class="form-control" required rows="3" placeholder="What manual bottleneck, lost time, or error did the client face?"><?= htmlspecialchars($project['problem']) ?></textarea>
+            <div class="mb-3">
+                <label class="form-label" for="problem">Client Problem / Operational Bottleneck *</label>
+                <textarea id="problem" name="problem" class="form-control" rows="3" required placeholder="What manual bottleneck, lost inquiries, or high server load did the client face?"><?= htmlspecialchars($project['problem']) ?></textarea>
             </div>
 
-            <div class="form-group">
-                <label class="form-label" for="solution">Engineering Solution *</label>
-                <textarea id="solution" name="solution" class="form-control" required rows="3" placeholder="What architecture, database, or workflow did CodeX404 engineer to solve it?"><?= htmlspecialchars($project['solution']) ?></textarea>
+            <div class="mb-3">
+                <label class="form-label" for="solution">CodeX404 Engineering Solution *</label>
+                <textarea id="solution" name="solution" class="form-control" rows="3" required placeholder="What technical architecture, caching, or database did CodeX404 engineer to solve it?"><?= htmlspecialchars($project['solution']) ?></textarea>
             </div>
 
-            <div class="form-group">
-                <label class="form-label" for="metric">Highlight Impact Metric</label>
-                <input type="text" id="metric" name="metric" class="form-control" value="<?= htmlspecialchars($project['metric'] ?? '') ?>" placeholder="e.g. Fee reconciliation time dropped from 10 days to under 15 minutes">
-                <span class="form-hint">Shown in green highlighted callout box with a checkmark.</span>
+            <div>
+                <label class="form-label" for="metric">Highlighted Impact Metric</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-graph-up text-success"></i></span>
+                    <input type="text" id="metric" name="metric" class="form-control" value="<?= htmlspecialchars($project['metric'] ?? '') ?>" placeholder="e.g. Over 25,000 monthly portal visits during admission season with zero downtime">
+                </div>
             </div>
         </div>
 
-        <!-- SECTION 5: TECH TAGS & INTERACTIVE DEMO BINDING -->
-        <div class="form-section">
-            <h2 class="section-heading">5. Technology Stack & In-Browser Interactive Demo</h2>
-            <p class="section-desc">Tag chips and simulator bindings.</p>
+        <!-- SECTION 5: TECH STACK & URLS -->
+        <div class="admin-card p-4 mb-4">
+            <h2 class="form-section-title text-info"><i class="bi bi-link-45deg"></i> 5. Technology Stack &amp; Live Demo Sandbox</h2>
+            <p class="text-muted small mb-4">Tag chips and simulator bindings.</p>
 
-            <div class="form-row">
-                <div class="form-group" style="flex: 2;">
-                    <label class="form-label" for="tags">Tech Stack Tags (Comma-separated)</label>
-                    <input type="text" id="tags" name="tags" class="form-control" value="<?= htmlspecialchars($tagsString) ?>" placeholder="e.g. PHP 8.2, MySQL Relational, Granular RBAC, Automated PDF Receipts">
-                    <span class="form-hint">Separate with commas. These display as interactive chips.</span>
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-8">
+                    <label class="form-label" for="tags">Tech Stack Tags (Comma-Separated)</label>
+                    <input type="text" id="tags" name="tags" class="form-control" value="<?= htmlspecialchars($tagsString) ?>" placeholder="e.g. PHP 8.2, MySQL Relational, Granular RBAC, Sub-200ms TTFB">
+                    <div class="text-muted small mt-1">Separate tags with commas. Rendered as interactive chips.</div>
                 </div>
-                <div class="form-group" style="flex: 1;">
-                    <label class="form-label" for="demo_key">Interactive Demo Sandbox</label>
-                    <select id="demo_key" name="demo_key" class="form-control">
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="demo_key">Interactive Sandbox Binding</label>
+                    <select id="demo_key" name="demo_key" class="form-select">
                         <option value="erp" <?= (($project['demo_key'] ?? '') === 'erp') ? 'selected' : '' ?>>School ERP / Role Simulator (erp)</option>
                         <option value="wa" <?= (($project['demo_key'] ?? '') === 'wa') ? 'selected' : '' ?>>WhatsApp Webhook Simulator (wa)</option>
                         <option value="b2b" <?= (($project['demo_key'] ?? '') === 'b2b') ? 'selected' : '' ?>>B2B Wholesale Checkout Engine (b2b)</option>
                         <option value="rag" <?= (($project['demo_key'] ?? '') === 'rag') ? 'selected' : '' ?>>Private RAG Knowledge Assistant (rag)</option>
                     </select>
-                    <span class="form-hint">Launches live modal when visitor clicks 'Launch Live Interactive Demo'.</span>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group" style="flex: 1;">
-                    <label class="form-label" for="live_url">Live Website URL</label>
-                    <input type="url" id="live_url" name="live_url" class="form-control" value="<?= htmlspecialchars($project['live_url'] ?? '') ?>" placeholder="https://erpinsandegreeclg.codex404solutions.online">
-                    <span class="form-hint">Direct link to the client's verified live production website.</span>
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="live_url">Verified Live Production URL</label>
+                    <input type="url" id="live_url" name="live_url" class="form-control" value="<?= htmlspecialchars($project['live_url'] ?? '') ?>" placeholder="https://insandegreeclg.codex404solutions.online">
                 </div>
-                <div class="form-group" style="flex: 1;">
-                    <label class="form-label" for="case_study_url">Case Study Link</label>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="case_study_url">Case Study URL / Anchor</label>
                     <input type="text" id="case_study_url" name="case_study_url" class="form-control" value="<?= htmlspecialchars($project['case_study_url'] ?? 'case-studies.php') ?>" placeholder="e.g. case-studies.php">
                 </div>
             </div>
         </div>
 
         <!-- ACTION BUTTONS -->
-        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
-            <button type="submit" class="btn-submit-save">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        <div class="d-flex align-items-center gap-3">
+            <button type="submit" class="btn btn-primary btn-lg fw-bold px-4 py-2 shadow-sm d-inline-flex align-items-center gap-2" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
+                <i class="bi bi-check2-circle fs-5"></i>
                 <span><?= $isEdit ? 'Save Changes' : 'Publish Project Deliverable' ?></span>
             </button>
-            <a href="<?= admin_url('index.php') ?>" class="btn-cancel">Cancel</a>
+            <a href="index.php" class="btn btn-outline-secondary btn-lg px-4 py-2" style="border-radius: 10px;">
+                Cancel
+            </a>
         </div>
 
     </form>
 
 </main>
+
+<!-- Bootstrap 5.3.3 Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const getStoredTheme = () => localStorage.getItem('codex_admin_theme');
+    const setStoredTheme = theme => localStorage.setItem('codex_admin_theme', theme);
+    const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme();
+        if (storedTheme) return storedTheme;
+        return 'combo';
+    };
+
+    const updateThemeUI = (theme) => {
+        let label = 'Dark & Light';
+        let iconClass = 'bi bi-circle-half text-primary theme-icon-active';
+
+        if (theme === 'combo') {
+            label = 'Dark & Light';
+            iconClass = 'bi bi-circle-half text-primary theme-icon-active';
+        } else if (theme === 'light') {
+            label = 'Light';
+            iconClass = 'bi bi-sun-fill text-warning theme-icon-active';
+        } else if (theme === 'dark') {
+            label = 'Dark';
+            iconClass = 'bi bi-moon-stars-fill text-info theme-icon-active';
+        } else {
+            label = 'Auto';
+            iconClass = 'bi bi-laptop text-secondary theme-icon-active';
+        }
+
+        const textEl = document.getElementById('bd-theme-admin-text');
+        const iconEl = document.querySelector('#bd-theme-admin .theme-icon-active');
+        if (textEl) textEl.textContent = label;
+        if (iconEl) iconEl.className = iconClass;
+    };
+
+    const applyTheme = (theme) => {
+        const effectiveTheme = (theme === 'auto')
+            ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'combo' : 'dark')
+            : theme;
+        document.documentElement.setAttribute('data-bs-theme', effectiveTheme);
+        updateThemeUI(theme);
+    };
+
+    applyTheme(getPreferredTheme());
+
+    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const selected = btn.getAttribute('data-bs-theme-value');
+            setStoredTheme(selected);
+            applyTheme(selected);
+        });
+    });
+});
+</script>
 
 </body>
 </html>
