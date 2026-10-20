@@ -3,6 +3,7 @@
   "7": "CodeX404 Solutions — Razorpay Integration Specification",
   "8": "22. Data Privacy & GDPR Compliance",
   "9": "CodeX404 Solutions — Main Website Design System",
+  "13": "admin/login.php",
   "31": "portfolio.php",
   "39": "Data Privacy & GDPR Compliance",
   "40": "MONOREPO_STRUCTURE.md",
@@ -93,9 +94,9 @@
   "125": "🚀 Quick Start",
   "126": ".read",
   "127": "AuthService",
-  "128": "CodeX404 Solutions — Main Website Implementation Tasks",
+  "128": "Frontend Libraries (Minimal, Optional)",
   "129": "CodeX404 Solutions — Paperclip Company",
-  "130": "README.md",
+  "130": "CurrencyService",
   "131": "ceo/AGENTS.md",
   "132": "chief-of-staff/AGENTS.md",
   "133": "delivery-lead/AGENTS.md",
@@ -117,7 +118,7 @@
   "149": "PaperclipService",
   "150": "LeadService",
   "151": "ProjectService",
-  "152": "StorageService",
+  "152": ".findById",
   "153": "PaperclipService.php",
-  "154": "Version Control"
+  "154": "ApprovalService.php"
 }

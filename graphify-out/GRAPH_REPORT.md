@@ -1,17 +1,17 @@
-# Graph Report - CodeX404_solutions  (2026-10-20)
+# Graph Report - CodeX404_solutions  (2026-10-21)
 
 ## Corpus Check
-- 110 files · ~105,994 words
+- 113 files · ~123,069 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 15 file(s) not represented in the graph (top: (none) 6, .css 3, .example 2)
+- Unclassified: 19 file(s) not represented in the graph (top: (none) 6, .ico 6, .css 3)
 
 ## Summary
-- 1143 nodes · 1226 edges · 155 communities (97 shown, 58 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.85)
+- 1160 nodes · 1252 edges · 155 communities (97 shown, 58 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b084fa30`
+- Built from commit: `2221482e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -25,6 +25,7 @@
 - CodeX404 Solutions — Razorpay Integration Specification
 - 22. Data Privacy & GDPR Compliance
 - CodeX404 Solutions — Main Website Design System
+- admin/login.php
 - Data Privacy & GDPR Compliance
 - MONOREPO_STRUCTURE.md
 - MASTER DEVELOPMENT PROMPT — CODEX404 HIGH-END CRM
@@ -114,8 +115,9 @@
 - 🚀 Quick Start
 - .read
 - AuthService
-- CodeX404 Solutions — Main Website Implementation Tasks
+- Frontend Libraries (Minimal, Optional)
 - CodeX404 Solutions — Paperclip Company
+- CurrencyService
 - ceo/AGENTS.md
 - chief-of-staff/AGENTS.md
 - delivery-lead/AGENTS.md
@@ -129,8 +131,6 @@
 - PaperclipService
 - LeadService
 - ProjectService
-- StorageService
-- Version Control
 
 ## God Nodes (most connected - your core abstractions)
 1. `CodeX404 Solutions — High-End CRM PRD` - 27 edges
@@ -189,6 +189,10 @@ Nodes (43): 22. Data Privacy & GDPR Compliance, Access Controls, Admin Privacy C
 Cohesion: 0.12
 Nodes (17): 10. Case Studies, 11. Process, 12. Security, 13. CTA, 14. Footer, 15. Accessibility, 16. Responsive Rules, 1. Design Philosophy (+9 more)
 
+### Community 13 - "admin/login.php"
+Cohesion: 0.47
+Nodes (4): applyTheme(), getPreferredTheme(), getStoredTheme(), updateThemeUI()
+
 ### Community 39 - "Data Privacy & GDPR Compliance"
 Cohesion: 0.05
 Nodes (37): Analytics Cookies (Consent required), Annual Review, Audit Logs, Brand, Children's Privacy, Claims, Clients & Projects, CodeX404 Solutions — Main Website Rules (+29 more)
@@ -226,8 +230,8 @@ Cohesion: 0.11
 Nodes (19): 400 Bad Request - Validation Error, 401 Unauthorized, 429 Too Many Requests, 500 Internal Server Error, Authentication, Company Domain, Email, Endpoint 1: Create Lead (+11 more)
 
 ### Community 48 - "CodeX404 Solutions — Main Website Architecture"
-Cohesion: 0.13
-Nodes (15): 10. Analytics, 11. SEO Architecture, 12. Security Architecture, 13. Deployment, 14. Scalability, 1. Architectural Goal, 2. Recommended Stack, 3. Application Layers (+7 more)
+Cohesion: 0.05
+Nodes (28): 10. Analytics, 11. SEO Architecture, 12. Security Architecture, 13. Deployment, 14. Scalability, 1. Architectural Goal, 2. Recommended Stack, 3. Application Layers (+20 more)
 
 ### Community 49 - "Hour 1: Environment Setup (60 minutes)"
 Cohesion: 0.14
@@ -258,16 +262,16 @@ Cohesion: 0.18
 Nodes (11): Hostinger Shared Hosting Setup, Step 10: Test Website, Step 1: Prepare Hostinger Account, Step 2: Create Databases via Hostinger Panel, Step 3: Create Subdomain for CRM, Step 4: Directory Structure on Hostinger, Step 5: Upload Files via FTP, Step 6: Configure .htaccess for Main Website (+3 more)
 
 ### Community 56 - "Product Requirements Document (PRD)"
-Cohesion: 0.15
-Nodes (12): 11. Case Study Requirements, 12. Trust Requirements, 13. Content Requirements, 14. SEO Requirements, 15. Accessibility, 16. Performance, 17. Future CRM Integration, 18. Acceptance Criteria (+4 more)
+Cohesion: 0.18
+Nodes (11): 11. Case Study Requirements, 12. Trust Requirements, 13. Content Requirements, 14. SEO Requirements, 15. Accessibility, 16. Performance, 17. Future CRM Integration, 18. Acceptance Criteria (+3 more)
 
 ### Community 57 - "Test Cases"
 Cohesion: 0.22
 Nodes (9): 1. Valid Lead Creation, 2. Duplicate Submission (Same Idempotency Key), 3. Invalid Email, 4. Missing Auth, 5. Rate Limit, Test API Key, Test Cases, Test Endpoint (+1 more)
 
 ### Community 58 - "CodeX404 Solutions — Technology Stack"
-Cohesion: 0.22
-Nodes (8): Allowed CDN Libraries (if needed), Build Process, CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Frontend Libraries (Minimal, Optional), Stack Philosophy
+Cohesion: 0.25
+Nodes (8): CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Git Strategy, .gitignore, Stack Philosophy, Version Control
 
 ### Community 59 - "CodeX404 Solutions — Website ↔ CRM API Contract"
 Cohesion: 0.25
@@ -534,20 +538,16 @@ Cohesion: 0.67
 Nodes (3): Installation, Prerequisites, 🚀 Quick Start
 
 ### Community 127 - "AuthService"
-Cohesion: 0.13
-Nodes (3): AuthService, CrmSecurity, CRMEnv
+Cohesion: 0.11
+Nodes (7): AuthService, CrmSecurity, CRMEnv, applyTheme(), getPreferredTheme(), getStoredTheme(), updateThemeUI()
 
-### Community 128 - "CodeX404 Solutions — Main Website Implementation Tasks"
-Cohesion: 0.17
-Nodes (12): CodeX404 Solutions — Main Website Implementation Tasks, Definition of Done, Phase 0 — Research and Inventory, Phase 1 — Foundation, Phase 2 — Design System, Phase 3 — Pages, Phase 4 — Lead Capture, Phase 5 — SEO (+4 more)
+### Community 128 - "Frontend Libraries (Minimal, Optional)"
+Cohesion: 0.67
+Nodes (3): Allowed CDN Libraries (if needed), Build Process, Frontend Libraries (Minimal, Optional)
 
 ### Community 129 - "CodeX404 Solutions — Paperclip Company"
 Cohesion: 0.25
 Nodes (7): CodeX404 Solutions — Paperclip Company, Import, Operating model, Org chart, References, Safety boundaries, Starter project
-
-### Community 154 - "Version Control"
-Cohesion: 0.67
-Nodes (3): Git Strategy, .gitignore, Version Control
 
 ## Knowledge Gaps
 - **58 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
@@ -555,16 +555,16 @@ Nodes (3): Git Strategy, .gitignore, Version Control
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `CodeX404 Solutions — Website ↔ CRM API Contract` connect `CodeX404 Solutions — Website ↔ CRM API Contract` to `Security Measures`, `Endpoint 1: Create Lead`, `Migration & Versioning`, `Monitoring`, `Idempotency`, `Logging`, `Endpoint 2: Newsletter Subscription (Optional)`, `Endpoint 3: UTM Tracking Pixel (Optional)`, `Error Handling`, `Performance Targets`, `Quick Reference`, `Rate Limiting`, `Webhooks (Future: CRM → Website)`, `Test Cases`?**
-  _High betweenness centrality (0.072) - this node is a cross-community bridge._
+- **Why does `📁 Code X404 Solutions` connect `📁 Code X404 Solutions` to `**Our Services**`, `🔄 CI/CD Pipeline`, `🎨 Design System`, `🎯 Business Goals`, `CodeX404 Solutions — Main Website Architecture`, `📞 Contact`, `📊 Development Progress`, `📖 Documentation`, `👨‍💻 Leadership Team`, `🔧 Technology Stack`, `🛡️ Security & Compliance`, `🚀 Quick Start`?**
+  _High betweenness centrality (0.082) - this node is a cross-community bridge._
 - **Should `Project Maintenance & Tree Generator` be split into smaller, more focused modules?**
   _Cohesion score 0.06901960784313725 - nodes in this community are weakly interconnected._
-- **Why does `CodeX404 Solutions — CRM Mandatory Rules` connect `CodeX404 Solutions — CRM Mandatory Rules` to `22. Data Privacy & GDPR Compliance`, `README.md`?**
-  _High betweenness centrality (0.072) - this node is a cross-community bridge._
+- **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
+  _High betweenness centrality (0.060) - this node is a cross-community bridge._
 - **Should `CodeX404 Solutions — High-End CRM PRD` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
-- **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
-  _High betweenness centrality (0.071) - this node is a cross-community bridge._
+- **Why does `CodeX404 Solutions — High-End CRM PRD` connect `CodeX404 Solutions — High-End CRM PRD` to `CodeX404 Solutions — Main Website Architecture`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **Should `CodeX404 Solutions — Razorpay Integration Specification` be split into smaller, more focused modules?**
   _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._
 - **Should `22. Data Privacy & GDPR Compliance` be split into smaller, more focused modules?**

@@ -264,15 +264,15 @@
     "semantic_hash": "2b943dc102f495588fd6c6f8e2cfe655"
   },
   "website/admin/index.php": {
-    "mtime": 1792442422.3329363,
-    "seen": 1792442623.761874,
-    "ast_hash": "18531b5f9c1c5d7ac7fe8a42d2d5e90e",
-    "semantic_hash": "18531b5f9c1c5d7ac7fe8a42d2d5e90e"
+    "mtime": 1792518680.8278725,
+    "seen": 1792518951.2883246,
+    "ast_hash": "ad7a5e532664f7e632b5546a06a826f1",
+    "semantic_hash": ""
   },
   "website/admin/login.php": {
-    "mtime": 1792507590.431305,
-    "seen": 1792508407.5377321,
-    "ast_hash": "2aaec0bd87a19927f741026d220ebaa6",
+    "mtime": 1792518714.7602372,
+    "seen": 1792518951.2883246,
+    "ast_hash": "13bdc04af02a300c35c97ef4923ac963",
     "semantic_hash": ""
   },
   "website/admin/logout.php": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792465090.724346,
-    "seen": 1792508407.5487306,
-    "ast_hash": "9c648bf771665e7b7e41bec5095face0",
+    "mtime": 1792516659.870443,
+    "seen": 1792517178.656595,
+    "ast_hash": "9358d1a595febf11e6ded229be92702d",
     "semantic_hash": ""
   },
   "docs/API_CONTRACT.md": {
@@ -522,21 +522,21 @@
     "semantic_hash": ""
   },
   "crm/app/Services/LeadService.php": {
-    "mtime": 1792499304.8927093,
-    "seen": 1792508407.5357354,
-    "ast_hash": "f47b245a2839b80d82ce2ae5ef7990b8",
+    "mtime": 1792516328.855564,
+    "seen": 1792517178.6234374,
+    "ast_hash": "340de77de9f7221f781b20fae7d9e27d",
     "semantic_hash": ""
   },
   "crm/app/Services/OpportunityService.php": {
-    "mtime": 1792499317.8037605,
-    "seen": 1792508407.5357354,
-    "ast_hash": "ff646d4f9fa9accca983a865cac61d14",
+    "mtime": 1792516675.8161106,
+    "seen": 1792517178.6234374,
+    "ast_hash": "92184b6531506928c6f16bd5457eaf5b",
     "semantic_hash": ""
   },
   "crm/app/Services/PaperclipService.php": {
-    "mtime": 1792500881.8595703,
-    "seen": 1792508407.5357354,
-    "ast_hash": "c4f02ccff77be04b8800605f0172167d",
+    "mtime": 1792517105.213798,
+    "seen": 1792517178.6234374,
+    "ast_hash": "bdcbd27776c7caa855fba1548716f200",
     "semantic_hash": ""
   },
   "crm/app/Services/RBACService.php": {
@@ -576,15 +576,15 @@
     "semantic_hash": ""
   },
   "crm/public/index.php": {
-    "mtime": 1792512752.586272,
-    "seen": 1792512855.0108094,
-    "ast_hash": "8f2017161fc6684c66e54b786fc53cc3",
+    "mtime": 1792518652.1683173,
+    "seen": 1792518951.2839296,
+    "ast_hash": "d21291f078c93abcc093468651f92c68",
     "semantic_hash": ""
   },
   "crm/public/login.php": {
-    "mtime": 1792501629.994189,
-    "seen": 1792508407.5357354,
-    "ast_hash": "819e50f70cd60b513a9e77ec2c37a0fb",
+    "mtime": 1792518697.8846307,
+    "seen": 1792518951.2839296,
+    "ast_hash": "c4fcc433c7add764c7f28f64a3154380",
     "semantic_hash": ""
   },
   "crm/public/logout.php": {
@@ -594,9 +594,9 @@
     "semantic_hash": ""
   },
   "crm/storage/data/approvals.json": {
-    "mtime": 1792500135.1564405,
-    "seen": 1792508407.5357354,
-    "ast_hash": "5989109ca368e9ba104a3534156ae1d4",
+    "mtime": 1792518066.195165,
+    "seen": 1792518223.0730107,
+    "ast_hash": "aa1ee6d8f1ba43f73f58d8d552b3f8d2",
     "semantic_hash": ""
   },
   "website/config/Env.php": {
@@ -699,6 +699,78 @@
     "mtime": 1792500698.5653481,
     "seen": 1792508407.55273,
     "ast_hash": "5622e7622cb9dbc4389231571e4f6808",
+    "semantic_hash": ""
+  },
+  "crm/app/Services/ProjectService.php": {
+    "mtime": 1792516592.7115643,
+    "seen": 1792517178.6234374,
+    "ast_hash": "7fe41e5fa0d8273021dc4020274d9926",
+    "semantic_hash": ""
+  },
+  "crm/seed.php": {
+    "mtime": 1792516553.6031206,
+    "seen": 1792517178.626448,
+    "ast_hash": "39bc3164e2f8292c391fb4cafa474a3f",
+    "semantic_hash": ""
+  },
+  "crm/storage/data/paperclip_tasks.json": {
+    "mtime": 1792518066.2148168,
+    "seen": 1792518223.0730107,
+    "ast_hash": "7e2a7fca37dc33381cd4eab2f9be973b",
+    "semantic_hash": ""
+  },
+  "crm/storage/data/projects.json": {
+    "mtime": 1792516561.6245215,
+    "seen": 1792517178.626448,
+    "ast_hash": "7b815885d5a3a88ac36a6142aa0b4bb8",
+    "semantic_hash": ""
+  },
+  "crm/assets/images/logo/logo.jpg": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "f7ffb94876228fea4de6461442ca7089",
+    "semantic_hash": ""
+  },
+  "crm/assets/images/logo/logo.png": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "c31e3aefa3dffd8a7ee98679a74f6d17",
+    "semantic_hash": ""
+  },
+  "crm/logo/logo.jpg": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "f7ffb94876228fea4de6461442ca7089",
+    "semantic_hash": ""
+  },
+  "crm/logo/logo.png": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "c31e3aefa3dffd8a7ee98679a74f6d17",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/logo/logo.jpg": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "f7ffb94876228fea4de6461442ca7089",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/logo/logo.png": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "c31e3aefa3dffd8a7ee98679a74f6d17",
+    "semantic_hash": ""
+  },
+  "crm/public/logo/logo.jpg": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "f7ffb94876228fea4de6461442ca7089",
+    "semantic_hash": ""
+  },
+  "crm/public/logo/logo.png": {
+    "mtime": 1792428192.2387,
+    "seen": 1792517684.82089,
+    "ast_hash": "c31e3aefa3dffd8a7ee98679a74f6d17",
     "semantic_hash": ""
   }
 }
