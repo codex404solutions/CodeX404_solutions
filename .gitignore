@@ -21,3 +21,7 @@ dist/
 *.exe
 /SetupFile/
 .spec
+website/storage/
+crm/storage/data/leads.json
+crm/storage/data/opportunities.json
+crm/storage/data/tasks.json
