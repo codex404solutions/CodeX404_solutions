@@ -556,6 +556,11 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   └── v1
 │   │       └── leads.php
 │   ├── app
+│   │   ├── Controllers
+│   │   ├── Helpers
+│   │   ├── Middleware
+│   │   ├── Models
+│   │   ├── Repositories
 │   │   └── Services
 │   │       ├── ApprovalService.php
 │   │       ├── AuthService.php
@@ -563,6 +568,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │       ├── LeadService.php
 │   │       ├── OpportunityService.php
 │   │       ├── PaperclipService.php
+│   │       ├── ProjectService.php
 │   │       ├── RBACService.php
 │   │       └── StorageService.php
 │   ├── config
@@ -574,12 +580,30 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   └── seed_approvals.php
 │   ├── index.php
 │   ├── public
+│   │   ├── css
+│   │   ├── images
 │   │   ├── index.php
+│   │   ├── js
 │   │   ├── login.php
 │   │   └── logout.php
-│   └── storage
-│       └── data
-│           └── approvals.json
+│   ├── seed.php
+│   ├── storage
+│   │   ├── data
+│   │   │   ├── approvals.json
+│   │   │   ├── leads.json
+│   │   │   ├── opportunities.json
+│   │   │   ├── paperclip_tasks.json
+│   │   │   └── projects.json
+│   │   └── logs
+│   └── views
+│       ├── approvals
+│       ├── auth
+│       ├── dashboard
+│       ├── layouts
+│       ├── leads
+│       ├── opportunities
+│       ├── projects
+│       └── settings
 ├── docs
 │   ├── API_CONTRACT.md
 │   ├── CRM
@@ -792,20 +816,21 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │   │   └── AGENTS.md
 │   │   └── technical-lead
 │   │       └── AGENTS.md
-│   └── projects
-│       └── us-client-web-apps
-│           ├── PROJECT.md
-│           └── tasks
-│               ├── 01-discovery
-│               │   └── TASK.md
-│               ├── 02-scoping
-│               │   └── TASK.md
-│               ├── 03-build
-│               │   └── TASK.md
-│               ├── 04-qa
-│               │   └── TASK.md
-│               └── 05-deploy
-│                   └── TASK.md
+│   ├── projects
+│   │   └── us-client-web-apps
+│   │       ├── PROJECT.md
+│   │       └── tasks
+│   │           ├── 01-discovery
+│   │           │   └── TASK.md
+│   │           ├── 02-scoping
+│   │           │   └── TASK.md
+│   │           ├── 03-build
+│   │           │   └── TASK.md
+│   │           ├── 04-qa
+│   │           │   └── TASK.md
+│   │           └── 05-deploy
+│   │               └── TASK.md
+│   └── tasks
 ├── setup.bat
 ├── update_tree.py
 └── website
@@ -884,6 +909,9 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── sitemap.xml
     ├── software-development.php
     ├── solutions.php
+    ├── storage
+    │   └── auth
+    │       └── admin_lockouts.json
     └── terms.php
 ```
 <!-- TREE_END -->

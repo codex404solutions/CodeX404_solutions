@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792465090.724346,
-    "seen": 1792508407.5487306,
-    "ast_hash": "9c648bf771665e7b7e41bec5095face0",
+    "mtime": 1792516659.870443,
+    "seen": 1792517178.656595,
+    "ast_hash": "9358d1a595febf11e6ded229be92702d",
     "semantic_hash": ""
   },
   "docs/API_CONTRACT.md": {
@@ -522,21 +522,21 @@
     "semantic_hash": ""
   },
   "crm/app/Services/LeadService.php": {
-    "mtime": 1792499304.8927093,
-    "seen": 1792508407.5357354,
-    "ast_hash": "f47b245a2839b80d82ce2ae5ef7990b8",
+    "mtime": 1792516328.855564,
+    "seen": 1792517178.6234374,
+    "ast_hash": "340de77de9f7221f781b20fae7d9e27d",
     "semantic_hash": ""
   },
   "crm/app/Services/OpportunityService.php": {
-    "mtime": 1792499317.8037605,
-    "seen": 1792508407.5357354,
-    "ast_hash": "ff646d4f9fa9accca983a865cac61d14",
+    "mtime": 1792516675.8161106,
+    "seen": 1792517178.6234374,
+    "ast_hash": "92184b6531506928c6f16bd5457eaf5b",
     "semantic_hash": ""
   },
   "crm/app/Services/PaperclipService.php": {
-    "mtime": 1792500881.8595703,
-    "seen": 1792508407.5357354,
-    "ast_hash": "c4f02ccff77be04b8800605f0172167d",
+    "mtime": 1792517105.213798,
+    "seen": 1792517178.6234374,
+    "ast_hash": "bdcbd27776c7caa855fba1548716f200",
     "semantic_hash": ""
   },
   "crm/app/Services/RBACService.php": {
@@ -576,15 +576,15 @@
     "semantic_hash": ""
   },
   "crm/public/index.php": {
-    "mtime": 1792512752.586272,
-    "seen": 1792512855.0108094,
-    "ast_hash": "8f2017161fc6684c66e54b786fc53cc3",
+    "mtime": 1792516903.0439818,
+    "seen": 1792517178.626448,
+    "ast_hash": "96c4b0a4db9de327c526d29ca105e40a",
     "semantic_hash": ""
   },
   "crm/public/login.php": {
-    "mtime": 1792501629.994189,
-    "seen": 1792508407.5357354,
-    "ast_hash": "819e50f70cd60b513a9e77ec2c37a0fb",
+    "mtime": 1792516929.923223,
+    "seen": 1792517178.626448,
+    "ast_hash": "b822120af7a9953816acedf251ad44e5",
     "semantic_hash": ""
   },
   "crm/public/logout.php": {
@@ -594,9 +594,9 @@
     "semantic_hash": ""
   },
   "crm/storage/data/approvals.json": {
-    "mtime": 1792500135.1564405,
-    "seen": 1792508407.5357354,
-    "ast_hash": "5989109ca368e9ba104a3534156ae1d4",
+    "mtime": 1792516857.1025462,
+    "seen": 1792517178.626448,
+    "ast_hash": "f994dba15cd82dcd1193b061108d98eb",
     "semantic_hash": ""
   },
   "website/config/Env.php": {
@@ -699,6 +699,30 @@
     "mtime": 1792500698.5653481,
     "seen": 1792508407.55273,
     "ast_hash": "5622e7622cb9dbc4389231571e4f6808",
+    "semantic_hash": ""
+  },
+  "crm/app/Services/ProjectService.php": {
+    "mtime": 1792516592.7115643,
+    "seen": 1792517178.6234374,
+    "ast_hash": "7fe41e5fa0d8273021dc4020274d9926",
+    "semantic_hash": ""
+  },
+  "crm/seed.php": {
+    "mtime": 1792516553.6031206,
+    "seen": 1792517178.626448,
+    "ast_hash": "39bc3164e2f8292c391fb4cafa474a3f",
+    "semantic_hash": ""
+  },
+  "crm/storage/data/paperclip_tasks.json": {
+    "mtime": 1792517116.304701,
+    "seen": 1792517178.626448,
+    "ast_hash": "272021b8687d9a415b931653d3f2dd68",
+    "semantic_hash": ""
+  },
+  "crm/storage/data/projects.json": {
+    "mtime": 1792516561.6245215,
+    "seen": 1792517178.626448,
+    "ast_hash": "7b815885d5a3a88ac36a6142aa0b4bb8",
     "semantic_hash": ""
   }
 }

@@ -510,9 +510,9 @@
     "semantic_hash": ""
   },
   "crm/app/Services/AuthService.php": {
-    "mtime": 1792501468.7430515,
-    "seen": 1792508407.5357354,
-    "ast_hash": "72eb21eeee98ca50ac8f6d811f4b93c7",
+    "mtime": 1792513267.6971276,
+    "seen": 1792513291.068637,
+    "ast_hash": "895635d3ebd2c869e574173e87009f91",
     "semantic_hash": ""
   },
   "crm/app/Services/CrmSecurity.php": {

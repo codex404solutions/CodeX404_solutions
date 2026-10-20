@@ -1,12 +1,12 @@
 # Graph Report - CodeX404_solutions  (2026-10-20)
 
 ## Corpus Check
-- 106 files · ~93,831 words
+- 106 files · ~93,833 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 15 file(s) not represented in the graph (top: (none) 6, .css 3, .example 2)
 
 ## Summary
-- 1099 nodes · 1148 edges · 148 communities (98 shown, 50 thin omitted)
+- 1099 nodes · 1149 edges · 148 communities (98 shown, 50 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
@@ -109,7 +109,7 @@
 - 8. Website Information Architecture
 - Performance Optimization
 - Dependencies Management
-- Version Control
+- Frontend Libraries (Minimal, Optional)
 - 🛡️ Security & Compliance
 - 🚀 Quick Start
 - StorageService
@@ -260,8 +260,8 @@ Cohesion: 0.22
 Nodes (9): 1. Valid Lead Creation, 2. Duplicate Submission (Same Idempotency Key), 3. Invalid Email, 4. Missing Auth, 5. Rate Limit, Test API Key, Test Cases, Test Endpoint (+1 more)
 
 ### Community 58 - "CodeX404 Solutions — Technology Stack"
-Cohesion: 0.22
-Nodes (8): Allowed CDN Libraries (if needed), Build Process, CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Frontend Libraries (Minimal, Optional), Stack Philosophy
+Cohesion: 0.25
+Nodes (8): CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Git Strategy, .gitignore, Stack Philosophy, Version Control
 
 ### Community 59 - "CodeX404 Solutions — Website ↔ CRM API Contract"
 Cohesion: 0.25
@@ -519,9 +519,9 @@ Nodes (3): Caching Strategy, .htaccess Optimization, Performance Optimization
 Cohesion: 0.67
 Nodes (3): Dependencies Management, PHP Dependencies (Composer), Why Minimal Dependencies?
 
-### Community 123 - "Version Control"
+### Community 123 - "Frontend Libraries (Minimal, Optional)"
 Cohesion: 0.67
-Nodes (3): Git Strategy, .gitignore, Version Control
+Nodes (3): Allowed CDN Libraries (if needed), Build Process, Frontend Libraries (Minimal, Optional)
 
 ### Community 124 - "🛡️ Security & Compliance"
 Cohesion: 0.67
@@ -536,7 +536,7 @@ Cohesion: 0.07
 Nodes (6): ApprovalService, LeadService, OpportunityService, PaperclipService, RBACService, StorageService
 
 ### Community 127 - "AuthService"
-Cohesion: 0.12
+Cohesion: 0.13
 Nodes (3): AuthService, CrmSecurity, CRMEnv
 
 ### Community 128 - "CodeX404 Solutions — Main Website Implementation Tasks"

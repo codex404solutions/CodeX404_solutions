@@ -80,8 +80,34 @@ class LeadService
         return $leads;
     }
 
+    public static function getById(string $id): ?array
+    {
+        return StorageService::findById('leads', $id);
+    }
+
+    public static function update(string $id, array $updates): ?array
+    {
+        if (isset($updates['budget']) || isset($updates['country']) || isset($updates['timeline'])) {
+            $existing = self::getById($id) ?? [];
+            $merged = array_merge($existing, $updates);
+            $updates['lead_score'] = self::calculateScore($merged);
+        }
+        return StorageService::update('leads', $id, $updates);
+    }
+
     public static function updateStatus(string $id, string $status): ?array
     {
         return StorageService::update('leads', $id, ['status' => $status]);
+    }
+
+    public static function delete(string $id): bool
+    {
+        $records = StorageService::read('leads');
+        $filtered = array_filter($records, fn($item) => ($item['id'] ?? '') !== $id);
+        if (count($filtered) !== count($records)) {
+            StorageService::write('leads', array_values($filtered));
+            return true;
+        }
+        return false;
     }
 }

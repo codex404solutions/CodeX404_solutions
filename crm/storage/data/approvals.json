@@ -32,5 +32,41 @@
         "created_at": "2026-10-20T18:06:00+05:30",
         "approved_by": "CodeX404 Founder",
         "updated_at": "2026-10-20T18:58:35+02:00"
+    },
+    {
+        "id": "app_outreach_novacare_1792516561",
+        "type": "email_draft",
+        "title": "Outreach Email: Dr. Robert Vance (NovaCare Telehealth)",
+        "status": "approved",
+        "requested_by": "Sales Engineer Agent (Paperclip)",
+        "payload": {
+            "to": "r.vance@novacarehealth.io",
+            "subject": "CodeX404 Solutions: HIPAA-ready patient onboarding architecture",
+            "body": "Hi Dr. Vance,\n\nI reviewed NovaCare's patient intake portal and noticed potential optimization in the automated eligibility verification workflow.\n\nAt CodeX404 Solutions, we construct zero-trust, HIPAA-compliant patient portals with direct EHR integration and automated verification pipelines.\n\nWould you be open to reviewing our technical architecture diagram on a brief 15-minute call this Thursday?\n\nBest regards,\nCodeX404 Solutions Delivery Team",
+            "notes": "Generated automatically by Paperclip Sales Engineer routine for lead #lead_us_novacare_02"
+        },
+        "decision_notes": null,
+        "resolved_at": "2026-10-20T19:20:47+02:00",
+        "created_at": "2026-10-20T19:16:01+02:00",
+        "approved_by": "CodeX404 Founder",
+        "updated_at": "2026-10-20T19:20:47+02:00"
+    },
+    {
+        "id": "app_quote_apex_1792516561",
+        "type": "proposal_terms",
+        "title": "Commercial Proposal: Apex Fleet Telemetry MVP ($38,000)",
+        "status": "approved",
+        "requested_by": "Chief of Staff Agent (Paperclip)",
+        "payload": {
+            "client": "Apex Global Logistics",
+            "total_value": "$38,000 USD",
+            "schedule": "Phase 1 ($19,000 upfront) / Phase 2 ($19,000 upon acceptance)",
+            "scope": "Sub-second WebSocket telemetry engine, Driver PWA, and SOC 2 audit readiness documentation."
+        },
+        "decision_notes": null,
+        "resolved_at": "2026-10-20T19:20:57+02:00",
+        "created_at": "2026-10-20T19:16:01+02:00",
+        "approved_by": "CodeX404 Founder",
+        "updated_at": "2026-10-20T19:20:57+02:00"
     }
 ]

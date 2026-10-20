@@ -18,6 +18,25 @@ class OpportunityService
         'closed_lost' => ['label' => 'Closed Lost', 'probability' => 0]
     ];
 
+    public static function getAll(): array
+    {
+        $all = StorageService::read('opportunities');
+        usort($all, fn($a, $b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?? ''));
+        return $all;
+    }
+
+    public static function advanceStage(string $id, string $newStage): ?array
+    {
+        if (!array_key_exists($newStage, self::STAGES)) {
+            return null;
+        }
+        return self::update($id, [
+            'stage' => $newStage,
+            'probability' => self::STAGES[$newStage]['probability'] ?? 20,
+            'updated_at' => date('c')
+        ]);
+    }
+
     public static function createFromLead(array $lead, float $estimatedValue = 5000.00): array
     {
         $opportunity = [
@@ -34,17 +53,44 @@ class OpportunityService
         return StorageService::insert('opportunities', $opportunity);
     }
 
-    public static function getAll(): array
+    public static function create(array $data): array
     {
-        return StorageService::read('opportunities');
+        $stage = $data['stage'] ?? 'discovery';
+        $opportunity = [
+            'lead_id' => $data['lead_id'] ?? '',
+            'title' => trim((string)($data['title'] ?? 'New Opportunity')),
+            'client_name' => trim((string)($data['client_name'] ?? 'Client')),
+            'client_email' => trim((string)($data['client_email'] ?? '')),
+            'value' => (float)($data['value'] ?? 5000.00),
+            'stage' => $stage,
+            'probability' => self::STAGES[$stage]['probability'] ?? 20,
+            'expected_close_date' => $data['expected_close_date'] ?? date('Y-m-d', strtotime('+3 weeks'))
+        ];
+
+        return StorageService::insert('opportunities', $opportunity);
     }
 
-    public static function updateStage(string $id, string $stage): ?array
+    public static function getById(string $id): ?array
     {
-        $prob = self::STAGES[$stage]['probability'] ?? 20;
-        return StorageService::update('opportunities', $id, [
-            'stage' => $stage,
-            'probability' => $prob
-        ]);
+        return StorageService::findById('opportunities', $id);
+    }
+
+    public static function update(string $id, array $updates): ?array
+    {
+        if (isset($updates['stage'])) {
+            $updates['probability'] = self::STAGES[$updates['stage']]['probability'] ?? 20;
+        }
+        return StorageService::update('opportunities', $id, $updates);
+    }
+
+    public static function delete(string $id): bool
+    {
+        $records = StorageService::read('opportunities');
+        $filtered = array_filter($records, fn($item) => ($item['id'] ?? '') !== $id);
+        if (count($filtered) !== count($records)) {
+            StorageService::write('opportunities', array_values($filtered));
+            return true;
+        }
+        return false;
     }
 }

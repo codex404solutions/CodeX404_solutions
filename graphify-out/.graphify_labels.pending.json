@@ -88,10 +88,10 @@
   "120": "8. Website Information Architecture",
   "121": "Performance Optimization",
   "122": "Dependencies Management",
-  "123": "Frontend Libraries (Minimal, Optional)",
+  "123": "public/index.php",
   "124": "🛡️ Security & Compliance",
   "125": "🚀 Quick Start",
-  "126": "StorageService",
+  "126": ".read",
   "127": "AuthService",
   "128": "CodeX404 Solutions — Main Website Implementation Tasks",
   "129": "CodeX404 Solutions — Paperclip Company",
@@ -112,5 +112,12 @@
   "144": "02-scoping/TASK.md",
   "145": "03-build/TASK.md",
   "146": "04-qa/TASK.md",
-  "147": "05-deploy/TASK.md"
+  "147": "05-deploy/TASK.md",
+  "148": "OpportunityService",
+  "149": "PaperclipService",
+  "150": "LeadService",
+  "151": "ProjectService",
+  "152": "StorageService",
+  "153": "PaperclipService.php",
+  "154": "Version Control"
 }

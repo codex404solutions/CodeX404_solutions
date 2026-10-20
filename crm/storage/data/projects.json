@@ -1,0 +1,70 @@
+[
+    {
+        "id": "proj_stratos_01",
+        "name": "Stratos Multi-Tenant SaaS Modernization",
+        "client": "Stratos Cloud Solutions",
+        "budget": 45000,
+        "status": "in_progress",
+        "progress": 45,
+        "lead_agent": "Delivery Lead",
+        "deadline": "2026-12-04",
+        "milestones": [
+            {
+                "title": "Architecture Spec & Zero-Trust Threat Model",
+                "done": true,
+                "target_date": "2026-10-15"
+            },
+            {
+                "title": "Database Schema Migration & Tenant Isolation",
+                "done": true,
+                "target_date": "2026-10-22"
+            },
+            {
+                "title": "GraphQL API Gateway & Auth Layer",
+                "done": false,
+                "target_date": "2026-11-05"
+            },
+            {
+                "title": "React Dashboard & Component Library",
+                "done": false,
+                "target_date": "2026-11-20"
+            },
+            {
+                "title": "Penetration Testing & Deployment to AWS",
+                "done": false,
+                "target_date": "2026-12-05"
+            }
+        ],
+        "created_at": "2026-09-30T19:16:01+02:00",
+        "updated_at": "2026-10-18T19:16:01+02:00"
+    },
+    {
+        "id": "proj_apex_02",
+        "name": "Apex Fleet Command & Telemetry Portal",
+        "client": "Apex Global Logistics",
+        "budget": 38000,
+        "status": "planning",
+        "progress": 15,
+        "lead_agent": "Technical Lead",
+        "deadline": "2026-12-19",
+        "milestones": [
+            {
+                "title": "GPS Telemetry Ingestion & WebSocket Pipeline",
+                "done": false,
+                "target_date": "2026-11-10"
+            },
+            {
+                "title": "Interactive Map & Geofencing UI",
+                "done": false,
+                "target_date": "2026-11-25"
+            },
+            {
+                "title": "Driver Mobile PWA & Push Notifications",
+                "done": false,
+                "target_date": "2026-12-15"
+            }
+        ],
+        "created_at": "2026-10-15T19:16:01+02:00",
+        "updated_at": "2026-10-19T19:16:01+02:00"
+    }
+]

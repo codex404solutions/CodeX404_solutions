@@ -1,17 +1,17 @@
 # Graph Report - CodeX404_solutions  (2026-10-20)
 
 ## Corpus Check
-- 106 files · ~93,833 words
+- 110 files · ~105,994 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 15 file(s) not represented in the graph (top: (none) 6, .css 3, .example 2)
 
 ## Summary
-- 1099 nodes · 1149 edges · 148 communities (98 shown, 50 thin omitted)
+- 1143 nodes · 1226 edges · 155 communities (97 shown, 58 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f8198cfc`
+- Built from commit: `b084fa30`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -109,10 +109,10 @@
 - 8. Website Information Architecture
 - Performance Optimization
 - Dependencies Management
-- Frontend Libraries (Minimal, Optional)
+- public/index.php
 - 🛡️ Security & Compliance
 - 🚀 Quick Start
-- StorageService
+- .read
 - AuthService
 - CodeX404 Solutions — Main Website Implementation Tasks
 - CodeX404 Solutions — Paperclip Company
@@ -125,6 +125,12 @@
 - technical-lead/AGENTS.md
 - CodeX404 Solutions
 - US Client Web Application Delivery
+- OpportunityService
+- PaperclipService
+- LeadService
+- ProjectService
+- StorageService
+- Version Control
 
 ## God Nodes (most connected - your core abstractions)
 1. `CodeX404 Solutions — High-End CRM PRD` - 27 edges
@@ -153,7 +159,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (148 total, 50 thin omitted)
+## Communities (155 total, 58 thin omitted)
 
 ### Community 0 - "Project Maintenance & Tree Generator"
 Cohesion: 0.07
@@ -260,8 +266,8 @@ Cohesion: 0.22
 Nodes (9): 1. Valid Lead Creation, 2. Duplicate Submission (Same Idempotency Key), 3. Invalid Email, 4. Missing Auth, 5. Rate Limit, Test API Key, Test Cases, Test Endpoint (+1 more)
 
 ### Community 58 - "CodeX404 Solutions — Technology Stack"
-Cohesion: 0.25
-Nodes (8): CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Git Strategy, .gitignore, Stack Philosophy, Version Control
+Cohesion: 0.22
+Nodes (8): Allowed CDN Libraries (if needed), Build Process, CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Frontend Libraries (Minimal, Optional), Stack Philosophy
 
 ### Community 59 - "CodeX404 Solutions — Website ↔ CRM API Contract"
 Cohesion: 0.25
@@ -519,10 +525,6 @@ Nodes (3): Caching Strategy, .htaccess Optimization, Performance Optimization
 Cohesion: 0.67
 Nodes (3): Dependencies Management, PHP Dependencies (Composer), Why Minimal Dependencies?
 
-### Community 123 - "Frontend Libraries (Minimal, Optional)"
-Cohesion: 0.67
-Nodes (3): Allowed CDN Libraries (if needed), Build Process, Frontend Libraries (Minimal, Optional)
-
 ### Community 124 - "🛡️ Security & Compliance"
 Cohesion: 0.67
 Nodes (3): GDPR Compliance, 🛡️ Security & Compliance, Security Practices
@@ -530,10 +532,6 @@ Nodes (3): GDPR Compliance, 🛡️ Security & Compliance, Security Practices
 ### Community 125 - "🚀 Quick Start"
 Cohesion: 0.67
 Nodes (3): Installation, Prerequisites, 🚀 Quick Start
-
-### Community 126 - "StorageService"
-Cohesion: 0.07
-Nodes (6): ApprovalService, LeadService, OpportunityService, PaperclipService, RBACService, StorageService
 
 ### Community 127 - "AuthService"
 Cohesion: 0.13
@@ -547,22 +545,26 @@ Nodes (12): CodeX404 Solutions — Main Website Implementation Tasks, Definition
 Cohesion: 0.25
 Nodes (7): CodeX404 Solutions — Paperclip Company, Import, Operating model, Org chart, References, Safety boundaries, Starter project
 
+### Community 154 - "Version Control"
+Cohesion: 0.67
+Nodes (3): Git Strategy, .gitignore, Version Control
+
 ## Knowledge Gaps
-- **50 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **58 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `CodeX404 Solutions — Website ↔ CRM API Contract` connect `CodeX404 Solutions — Website ↔ CRM API Contract` to `Security Measures`, `Endpoint 1: Create Lead`, `Migration & Versioning`, `Monitoring`, `Idempotency`, `Logging`, `Endpoint 2: Newsletter Subscription (Optional)`, `Endpoint 3: UTM Tracking Pixel (Optional)`, `Error Handling`, `Performance Targets`, `Quick Reference`, `Rate Limiting`, `Webhooks (Future: CRM → Website)`, `Test Cases`?**
-  _High betweenness centrality (0.101) - this node is a cross-community bridge._
+  _High betweenness centrality (0.072) - this node is a cross-community bridge._
 - **Should `Project Maintenance & Tree Generator` be split into smaller, more focused modules?**
   _Cohesion score 0.06901960784313725 - nodes in this community are weakly interconnected._
 - **Why does `CodeX404 Solutions — CRM Mandatory Rules` connect `CodeX404 Solutions — CRM Mandatory Rules` to `22. Data Privacy & GDPR Compliance`, `README.md`?**
-  _High betweenness centrality (0.093) - this node is a cross-community bridge._
+  _High betweenness centrality (0.072) - this node is a cross-community bridge._
 - **Should `CodeX404 Solutions — High-End CRM PRD` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
 - **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
-  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+  _High betweenness centrality (0.071) - this node is a cross-community bridge._
 - **Should `CodeX404 Solutions — Razorpay Integration Specification` be split into smaller, more focused modules?**
   _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._
 - **Should `22. Data Privacy & GDPR Compliance` be split into smaller, more focused modules?**
