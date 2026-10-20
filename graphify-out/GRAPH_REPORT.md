@@ -1,17 +1,17 @@
 # Graph Report - CodeX404_solutions  (2026-10-20)
 
 ## Corpus Check
-- 72 files · ~83,490 words
+- 106 files · ~93,833 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 11 file(s) not represented in the graph (top: (none) 3, .css 3, .ico 2)
+- Unclassified: 15 file(s) not represented in the graph (top: (none) 6, .css 3, .example 2)
 
 ## Summary
-- 974 nodes · 989 edges · 126 communities (94 shown, 32 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 15 edges (avg confidence: 0.85)
+- 1099 nodes · 1149 edges · 148 communities (98 shown, 50 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a1c9e1ea`
+- Built from commit: `f8198cfc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -109,9 +109,22 @@
 - 8. Website Information Architecture
 - Performance Optimization
 - Dependencies Management
-- Version Control
+- Frontend Libraries (Minimal, Optional)
 - 🛡️ Security & Compliance
 - 🚀 Quick Start
+- StorageService
+- AuthService
+- CodeX404 Solutions — Main Website Implementation Tasks
+- CodeX404 Solutions — Paperclip Company
+- ceo/AGENTS.md
+- chief-of-staff/AGENTS.md
+- delivery-lead/AGENTS.md
+- lead-researcher/AGENTS.md
+- qa-security/AGENTS.md
+- sales-engineer/AGENTS.md
+- technical-lead/AGENTS.md
+- CodeX404 Solutions
+- US Client Web Application Delivery
 
 ## God Nodes (most connected - your core abstractions)
 1. `CodeX404 Solutions — High-End CRM PRD` - 27 edges
@@ -126,25 +139,29 @@
 10. `📁 Code X404 Solutions` - 18 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `require_admin_auth()` --calls--> `admin_url()`  [INFERRED]
-  website/admin/auth.php → website/includes/config.php
-- `render_json_ld_organization()` --calls--> `asset()`  [INFERRED]
-  website/includes/seo.php → website/includes/config.php
-- `render_meta_tags()` --calls--> `asset()`  [INFERRED]
-  website/includes/seo.php → website/includes/config.php
+- `is_admin_locked_out()` --calls--> `get_client_ip()`  [INFERRED]
+  website/admin/auth.php → website/includes/security.php
+- `get_admin_lockout_remaining()` --calls--> `get_client_ip()`  [INFERRED]
+  website/admin/auth.php → website/includes/security.php
+- `record_failed_admin_attempt()` --calls--> `get_client_ip()`  [INFERRED]
+  website/admin/auth.php → website/includes/security.php
+- `reset_admin_failed_attempts()` --calls--> `get_client_ip()`  [INFERRED]
+  website/admin/auth.php → website/includes/security.php
+- `is_admin_logged_in()` --calls--> `get_client_ip()`  [INFERRED]
+  website/admin/auth.php → website/includes/security.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (126 total, 32 thin omitted)
+## Communities (148 total, 50 thin omitted)
 
 ### Community 0 - "Project Maintenance & Tree Generator"
-Cohesion: 0.10
-Nodes (11): ContactController, LeadController, Sanitizer, CRMIntegrationService, EmailService, FormValidator, Database, check_rate_limit() (+3 more)
+Cohesion: 0.07
+Nodes (13): ContactController, LeadController, Sanitizer, CRMIntegrationService, EmailService, FormValidator, Database, Env (+5 more)
 
 ### Community 1 - "Frontend & SEO Helpers"
-Cohesion: 0.14
-Nodes (6): is_admin_logged_in(), require_admin_auth(), admin_url(), asset(), render_json_ld_organization(), render_meta_tags()
+Cohesion: 0.15
+Nodes (15): admin_logout(), authenticate_admin(), get_admin_lockout_file(), get_admin_lockout_remaining(), is_admin_locked_out(), is_admin_logged_in(), record_failed_admin_attempt(), require_admin_auth() (+7 more)
 
 ### Community 3 - "Input Sanitization & Data Cleaning"
 Cohesion: 0.36
@@ -163,8 +180,8 @@ Cohesion: 0.05
 Nodes (43): 22. Data Privacy & GDPR Compliance, Access Controls, Admin Privacy Controls, All Team Members Must Know, Anonymization vs Pseudonymization, Audit Logging, Automatic Deletion Rules, B2B Legitimate Interest (+35 more)
 
 ### Community 9 - "CodeX404 Solutions — Main Website Design System"
-Cohesion: 0.05
-Nodes (30): 10. Case Studies, 11. Process, 12. Security, 13. CTA, 14. Footer, 15. Accessibility, 16. Responsive Rules, 1. Design Philosophy (+22 more)
+Cohesion: 0.12
+Nodes (17): 10. Case Studies, 11. Process, 12. Security, 13. CTA, 14. Footer, 15. Accessibility, 16. Responsive Rules, 1. Design Philosophy (+9 more)
 
 ### Community 39 - "Data Privacy & GDPR Compliance"
 Cohesion: 0.05
@@ -235,16 +252,16 @@ Cohesion: 0.18
 Nodes (11): Hostinger Shared Hosting Setup, Step 10: Test Website, Step 1: Prepare Hostinger Account, Step 2: Create Databases via Hostinger Panel, Step 3: Create Subdomain for CRM, Step 4: Directory Structure on Hostinger, Step 5: Upload Files via FTP, Step 6: Configure .htaccess for Main Website (+3 more)
 
 ### Community 56 - "Product Requirements Document (PRD)"
-Cohesion: 0.18
-Nodes (11): 11. Case Study Requirements, 12. Trust Requirements, 13. Content Requirements, 14. SEO Requirements, 15. Accessibility, 16. Performance, 17. Future CRM Integration, 18. Acceptance Criteria (+3 more)
+Cohesion: 0.15
+Nodes (12): 11. Case Study Requirements, 12. Trust Requirements, 13. Content Requirements, 14. SEO Requirements, 15. Accessibility, 16. Performance, 17. Future CRM Integration, 18. Acceptance Criteria (+4 more)
 
 ### Community 57 - "Test Cases"
 Cohesion: 0.22
 Nodes (9): 1. Valid Lead Creation, 2. Duplicate Submission (Same Idempotency Key), 3. Invalid Email, 4. Missing Auth, 5. Rate Limit, Test API Key, Test Cases, Test Endpoint (+1 more)
 
 ### Community 58 - "CodeX404 Solutions — Technology Stack"
-Cohesion: 0.22
-Nodes (8): Allowed CDN Libraries (if needed), Build Process, CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Frontend Libraries (Minimal, Optional), Stack Philosophy
+Cohesion: 0.25
+Nodes (8): CodeX404 Solutions — Technology Stack, Decision Date, Decision Log, Final Notes, Git Strategy, .gitignore, Stack Philosophy, Version Control
 
 ### Community 59 - "CodeX404 Solutions — Website ↔ CRM API Contract"
 Cohesion: 0.25
@@ -502,9 +519,9 @@ Nodes (3): Caching Strategy, .htaccess Optimization, Performance Optimization
 Cohesion: 0.67
 Nodes (3): Dependencies Management, PHP Dependencies (Composer), Why Minimal Dependencies?
 
-### Community 123 - "Version Control"
+### Community 123 - "Frontend Libraries (Minimal, Optional)"
 Cohesion: 0.67
-Nodes (3): Git Strategy, .gitignore, Version Control
+Nodes (3): Allowed CDN Libraries (if needed), Build Process, Frontend Libraries (Minimal, Optional)
 
 ### Community 124 - "🛡️ Security & Compliance"
 Cohesion: 0.67
@@ -514,23 +531,39 @@ Nodes (3): GDPR Compliance, 🛡️ Security & Compliance, Security Practices
 Cohesion: 0.67
 Nodes (3): Installation, Prerequisites, 🚀 Quick Start
 
+### Community 126 - "StorageService"
+Cohesion: 0.07
+Nodes (6): ApprovalService, LeadService, OpportunityService, PaperclipService, RBACService, StorageService
+
+### Community 127 - "AuthService"
+Cohesion: 0.13
+Nodes (3): AuthService, CrmSecurity, CRMEnv
+
+### Community 128 - "CodeX404 Solutions — Main Website Implementation Tasks"
+Cohesion: 0.17
+Nodes (12): CodeX404 Solutions — Main Website Implementation Tasks, Definition of Done, Phase 0 — Research and Inventory, Phase 1 — Foundation, Phase 2 — Design System, Phase 3 — Pages, Phase 4 — Lead Capture, Phase 5 — SEO (+4 more)
+
+### Community 129 - "CodeX404 Solutions — Paperclip Company"
+Cohesion: 0.25
+Nodes (7): CodeX404 Solutions — Paperclip Company, Import, Operating model, Org chart, References, Safety boundaries, Starter project
+
 ## Knowledge Gaps
-- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **50 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `CodeX404 Solutions — Website ↔ CRM API Contract` connect `CodeX404 Solutions — Website ↔ CRM API Contract` to `Security Measures`, `Endpoint 1: Create Lead`, `Migration & Versioning`, `Monitoring`, `Idempotency`, `Logging`, `Endpoint 2: Newsletter Subscription (Optional)`, `Endpoint 3: UTM Tracking Pixel (Optional)`, `Error Handling`, `Performance Targets`, `Quick Reference`, `Rate Limiting`, `Webhooks (Future: CRM → Website)`, `Test Cases`?**
-  _High betweenness centrality (0.115) - this node is a cross-community bridge._
+  _High betweenness centrality (0.101) - this node is a cross-community bridge._
 - **Should `Project Maintenance & Tree Generator` be split into smaller, more focused modules?**
-  _Cohesion score 0.09759759759759759 - nodes in this community are weakly interconnected._
-- **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
-  _High betweenness centrality (0.109) - this node is a cross-community bridge._
-- **Should `Frontend & SEO Helpers` be split into smaller, more focused modules?**
-  _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
-- **Why does `CodeX404 Solutions — CRM Mandatory Rules` connect `CodeX404 Solutions — CRM Mandatory Rules` to `22. Data Privacy & GDPR Compliance`, `CodeX404 Solutions — Main Website Design System`?**
-  _High betweenness centrality (0.096) - this node is a cross-community bridge._
+  _Cohesion score 0.06901960784313725 - nodes in this community are weakly interconnected._
+- **Why does `CodeX404 Solutions — CRM Mandatory Rules` connect `CodeX404 Solutions — CRM Mandatory Rules` to `22. Data Privacy & GDPR Compliance`, `README.md`?**
+  _High betweenness centrality (0.093) - this node is a cross-community bridge._
 - **Should `CodeX404 Solutions — High-End CRM PRD` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
+- **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
 - **Should `CodeX404 Solutions — Razorpay Integration Specification` be split into smaller, more focused modules?**
   _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._
+- **Should `22. Data Privacy & GDPR Compliance` be split into smaller, more focused modules?**
+  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
