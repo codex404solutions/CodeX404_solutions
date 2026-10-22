@@ -312,9 +312,11 @@ $csrfToken = CrmSecurity::csrfToken();
         window.CODEX_CURRENCIES = <?= json_encode(CurrencyService::CURRENCIES, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
     </script>
 
-    <!-- Favicon using Original Logo -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo.png">
-    <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/logo/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/favicon-16x16.png">
 
     <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">

@@ -103,11 +103,15 @@ declare(strict_types=1);
             <div>
                 &copy; <?= date('Y') ?> <?= APP_NAME ?>. All rights reserved.
             </div>
-            <div style="display: flex; gap: 1.5rem; align-items: center;">
+            <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
                 <a href="<?= url('privacy.php') ?>">Privacy</a>
                 <a href="<?= url('terms.php') ?>">Terms</a>
                 <a href="<?= url('security.php') ?>">Security</a>
                 <a href="<?= url('contact.php') ?>">Contact</a>
+                <button type="button" id="restoreChatbotBtn" class="footer-chat-toggle" style="background: none; border: none; color: var(--slate); font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0;" title="Open or restore AI Assistant">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    AI Assistant
+                </button>
                 <a href="<?= admin_url('index.php') ?>" style="opacity: 0.75; display: inline-flex; align-items: center; gap: 0.25rem;">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     Admin
@@ -118,7 +122,7 @@ declare(strict_types=1);
 </footer>
 
 <?php include __DIR__ . '/../components/cookie-banner.php'; ?>
-<?php include __DIR__ . '/../components/floating-social.php'; ?>
+<?php include __DIR__ . '/../components/chatbot.php'; ?>
 
 <!-- Floating Back-to-Top Button -->
 <button type="button" id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
@@ -128,6 +132,7 @@ declare(strict_types=1);
 <!-- Client-side Scripts -->
 <script src="<?= asset('js/main.js') ?>" defer></script>
 <script src="<?= asset('js/forms.js') ?>" defer></script>
+<script src="<?= asset('js/chatbot.js') ?>" defer></script>
 
 </body>
 </html>

@@ -674,8 +674,8 @@ main:target {
    ========================================================================== */
 .back-to-top-btn {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 92px;
+  right: 28px;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -707,6 +707,15 @@ main:target {
   border-color: var(--cyan);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5), 0 0 20px var(--cyan);
   transform: translateY(-3px) scale(1.05);
+}
+
+@media (max-width: 640px) {
+  .back-to-top-btn {
+    bottom: 78px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* ==========================================================================
