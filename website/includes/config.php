@@ -85,6 +85,11 @@ if (str_ends_with($scriptDir, '/admin')) {
     $basePath = $scriptDir;
 }
 $basePath = rtrim($basePath, '/');
+if ($basePath === '.' || $basePath === '/.') {
+    $basePath = '';
+} elseif ($basePath !== '' && !str_starts_with($basePath, '/')) {
+    $basePath = '/' . $basePath;
+}
 
 // When loaded from root index.php vs subdirectories
 if (defined('CUSTOM_BASE_URL')) {

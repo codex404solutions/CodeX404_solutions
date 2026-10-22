@@ -5,8 +5,8 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/security.php';
 
 $pageMeta = [
-    'title' => 'Software & AI that moves your business forward',
-    'description' => 'CodeX404 Solutions designs, builds and automates custom software, enterprise AI, autonomous agents, and workflow systems for growing businesses globally.',
+    'title' => 'Software & AI that moves your business forward | CodeX404 Solutions',
+    'description' => 'CodeX404 Solutions designs, builds, and automates custom software, enterprise AI, autonomous agents, and workflow systems for growing businesses globally.',
     'canonical' => BASE_URL,
     'keywords' => 'custom software development, business AI solutions, AI agents, workflow automation, SaaS MVP development, enterprise systems'
 ];
@@ -15,7 +15,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- ==========================================================================
-     HERO SECTION (Preserved & Polished from Screenshot)
+     HERO SECTION (High-Impact Motions, Typewriter & Interactive Terminal)
      ========================================================================== -->
 <section class="hero-section">
     <div class="container hero-grid">
@@ -26,23 +26,38 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <h1 class="hero-headline">
-                Software & AI that moves your business <span class="text-gradient">forward.</span>
+                Software & AI that moves your business <span
+                    class="text-gradient gradient-text-animated">forward.</span>
             </h1>
 
+            <!-- Dynamic Rotating Typewriter Headline -->
+            <div class="hero-typewriter-box" aria-live="polite">
+                <span class="type-prefix">Specialized in:</span>
+                <span class="typewriter-text" id="typewriter">Enterprise AI & RAG Architectures</span>
+                <span class="typewriter-cursor"></span>
+            </div>
+
             <p class="hero-description">
-                We design, build, and automate high-performance software systems — zero bugs, production-grade cloud architectures, and full IP ownership.
+                We design, build, and automate high-performance software systems — zero bugs, production-grade cloud
+                architectures, autonomous multi-tool AI pipelines, and 100% client IP ownership.
             </p>
 
             <div class="hero-cta-group">
                 <a href="#work" class="btn btn-primary btn-lg">
-                    Explore Our Work & Live Demos ↓
+                    <span>Explore Deliverables & Demos</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <polyline points="19 12 12 19 5 12"></polyline>
+                    </svg>
                 </a>
                 <a href="#contact-section" class="btn btn-secondary btn-lg">
-                    🚀 Start Your Project
+                    <span>Start Your Project 🚀</span>
                 </a>
+
             </div>
 
-            <!-- Value / Capability Strip -->
+            <!-- Value / Capability Stats Strip -->
             <div class="hero-stats-strip">
                 <div class="stat-item">
                     <strong>100%</strong>
@@ -70,7 +85,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <!-- Interactive Terminal Tabs -->
-                    <div class="terminal-tabs" role="tablist">
+                    <div class="terminal-tabs" role="tablist" aria-label="Terminal Environments">
                         <button class="terminal-tab-btn active" role="tab" aria-selected="true" data-tab="deploy">
                             🚀 deploy
                         </button>
@@ -82,14 +97,16 @@ require_once __DIR__ . '/includes/header.php';
                         </button>
                     </div>
 
-                    <div style="font-size: 0.725rem; color: #34D399; font-family: var(--font-mono);">● LIVE</div>
+                    <div style="font-size: 0.725rem; color: #34D399; font-family: var(--font-mono); font-weight: 600;">●
+                        LIVE SYSTEM</div>
                 </div>
 
                 <div class="tech-frame-body">
                     <!-- Pane 1: Deploy -->
                     <div class="terminal-pane active" id="pane-deploy">
                         <div class="code-comment">// Production Zero-Downtime Deployment</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> deploy --env production --fast</div>
+                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> deploy --env
+                            production --fast</div>
                         <div style="color: var(--slate); margin-top: 0.35rem;">
                             &rarr; Running automated test suites (128/128 passed)...<br>
                             &rarr; Building hardened Docker container image...<br>
@@ -101,7 +118,10 @@ require_once __DIR__ . '/includes/header.php';
                             ✔ Production deployment healthy (zero downtime)
                         </div>
                         <div class="pipeline-badge">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
                             Production Pipeline: 99.99% Availability
                         </div>
                     </div>
@@ -109,18 +129,25 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Pane 2: Audit & Zero Bugs -->
                     <div class="terminal-pane" id="pane-audit">
                         <div class="code-comment">// Deep Security & Bug Elimination Scan</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> audit --deep --zero-bugs</div>
+                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> audit --deep
+                            --zero-bugs</div>
                         <div style="color: var(--slate); margin-top: 0.35rem;">
                             &rarr; Scanning 48,200 lines across backend & UI...<br>
                             &rarr; Memory leaks: <span style="color: #34D399; font-weight: bold;">0 detected</span><br>
-                            &rarr; OWASP Top 10 vulnerabilities: <span style="color: #34D399; font-weight: bold;">0 found</span>
+                            &rarr; OWASP Top 10 vulnerabilities: <span style="color: #34D399; font-weight: bold;">0
+                                found</span>
                         </div>
                         <div style="color: #38BDF8; margin-top: 0.5rem; font-weight: 600;">
                             🎯 Where Bugs Meet Their Match — 100% Quality Assurance<br>
                             ✔ Strict type-safety & automated idempotency checks
                         </div>
-                        <div class="pipeline-badge" style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; border-color: rgba(56, 189, 248, 0.25);">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                        <div class="pipeline-badge"
+                            style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; border-color: rgba(56, 189, 248, 0.25);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 14 14"></polyline>
+                            </svg>
                             Deterministic Zero-Defect Guarantee
                         </div>
                     </div>
@@ -128,7 +155,8 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Pane 3: AI Agent Workflow -->
                     <div class="terminal-pane" id="pane-agent">
                         <div class="code-comment">// Autonomous Enterprise AI & RAG Pipeline</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> agent --pipeline rag-sync --stream</div>
+                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> agent
+                            --pipeline rag-sync --stream</div>
                         <div style="color: var(--slate); margin-top: 0.35rem;">
                             &rarr; Connecting private Qdrant vector index...<br>
                             &rarr; Synchronizing 14,000 corporate policy files...<br>
@@ -138,8 +166,12 @@ require_once __DIR__ . '/includes/header.php';
                             ✔ Inbound inquiry auto-resolved in 1.8s<br>
                             ✔ Webhook sync dispatched to CRM & WhatsApp API
                         </div>
-                        <div class="pipeline-badge" style="background: rgba(236, 72, 153, 0.12); color: #F472B6; border-color: rgba(236, 72, 153, 0.25);">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        <div class="pipeline-badge"
+                            style="background: rgba(236, 72, 153, 0.12); color: #F472B6; border-color: rgba(236, 72, 153, 0.25);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
                             Autonomous Execution with Audit Trail
                         </div>
                     </div>
@@ -150,78 +182,184 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     INFINITE DUAL-SPEED TECH STACK MARQUEE SLIDER
+     INFINITE DUAL-SPEED TECH STACK MARQUEE SCROLLER
      ========================================================================== -->
 <section class="tech-marquee-section" aria-label="Supported Engineering Technologies">
     <div class="tech-marquee-wrapper">
         <!-- Row 1: Forward Infinite Scroll -->
         <div class="tech-marquee-track">
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐍</span> Python 3.12</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PHP 8.4</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> JavaScript ESNext</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📘</span> TypeScript</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🐍</span> Python 3.12 Architecture</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PHP 8.4 & MySQL</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">⚛️</span> React & Next.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐬</span> MySQL Enterprise</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PostgreSQL</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🧠</span> Azure OpenAI & LLMs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">📘</span> TypeScript & Node.js</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🐳</span> Docker Containers</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🤖</span> OpenAI & Anthropic API</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> FastAPI Microservices</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">👁️</span> YOLOv8 Computer Vision</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🔌</span> REST & GraphQL APIs</div>
-            <!-- Duplicate for seamless infinite loop -->
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐍</span> Python 3.12</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PHP 8.4</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> JavaScript ESNext</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📘</span> TypeScript</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🚀</span> CodeX404 Solutions</div>
+            <!-- Seamless Duplicate Loop -->
+            <div class="tech-pill-item"><span class="tech-pill-icon">🐍</span> Python 3.12 Architecture</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PHP 8.4 & MySQL</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">⚛️</span> React & Next.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐬</span> MySQL Enterprise</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PostgreSQL</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🧠</span> Azure OpenAI & LLMs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">📘</span> TypeScript & Node.js</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🐳</span> Docker Containers</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🤖</span> OpenAI & Anthropic API</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> FastAPI Microservices</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">👁️</span> YOLOv8 Computer Vision</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🔌</span> REST & GraphQL APIs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🚀</span> CodeX404 Solutions</div>
         </div>
 
         <!-- Row 2: Reverse Infinite Scroll -->
         <div class="tech-marquee-track reverse">
             <div class="tech-pill-item"><span class="tech-pill-icon">☁️</span> AWS Cloud Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis In-Memory Cache</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🧠</span> Autonomous AI Agents</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🟢</span> Node.js Microservices</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis Distributed Cache</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🤖</span> Autonomous Multi-Agent AI</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">📊</span> LangChain & Qdrant RAG</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">📱</span> Progressive Web Apps (PWA)</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🎯</span> Fastly & Cloudflare CDN</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Razorpay Payments</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📊</span> Vector DB (Qdrant & Pinecone)</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Payment Gateways</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🔄</span> CI/CD GitHub Actions</div>
-            <!-- Duplicate for seamless infinite loop -->
+            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Zero-Defect Hardening</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> 7+ Yrs Enterprise TCS Pedigree</div>
+            <!-- Seamless Duplicate Loop -->
             <div class="tech-pill-item"><span class="tech-pill-icon">☁️</span> AWS Cloud Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis In-Memory Cache</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🧠</span> Autonomous AI Agents</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🟢</span> Node.js Microservices</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis Distributed Cache</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🤖</span> Autonomous Multi-Agent AI</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">📊</span> LangChain & Qdrant RAG</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">📱</span> Progressive Web Apps (PWA)</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🎯</span> Fastly & Cloudflare CDN</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Razorpay Payments</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📊</span> Vector DB (Qdrant & Pinecone)</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Payment Gateways</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🔄</span> CI/CD GitHub Actions</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Zero-Defect Hardening</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> 7+ Yrs Enterprise TCS Pedigree</div>
         </div>
     </div>
 </section>
 
 <!-- ==========================================================================
-     OUR WORK — PRODUCTION SYSTEMS & INTERACTIVE DEMOS (CLEAN & PROMINENT)
+     INTERACTIVE SVG ARCHITECTURE & FLOW BANNER
      ========================================================================== -->
-<section class="section" id="work" style="position: relative; padding-top: 4rem;">
-    <!-- Also alias anchor id="projects" for backward compatibility -->
-    <div id="projects" style="position: absolute; top: -80px; left: 0;"></div>
-    
+<section class="arch-flow-section" aria-label="System Architecture Flow">
     <div class="container">
-        <div class="section-header" style="max-width: 840px; margin: 0 auto 3rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>The CodeX404 Engineering Flow</span>
+            </div>
+            <h2 class="section-title">
+                From Complex Constraints to <span class="text-gradient gradient-text-animated">Flawless
+                    Production</span>
+            </h2>
+            <p class="section-subtitle">
+                A deterministic pipeline built on senior engineering, automated type-safety, and enterprise AI
+                orchestration.
+            </p>
+        </div>
+
+        <div class="arch-svg-banner">
+            <svg viewBox="0 0 1000 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-label="CodeX404 Architecture Diagram">
+                <defs>
+                    <linearGradient id="gradPath" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#00F0FF" />
+                        <stop offset="50%" stop-color="#8B5CF6" />
+                        <stop offset="100%" stop-color="#34D399" />
+                    </linearGradient>
+                    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#111D3A" />
+                        <stop offset="100%" stop-color="#0A1628" />
+                    </linearGradient>
+                    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+
+                <!-- Connecting Flow Lines -->
+                <path d="M 200 120 L 330 120" stroke="url(#gradPath)" stroke-width="3" stroke-dasharray="6 4">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.5s" repeatCount="indefinite" />
+                </path>
+                <path d="M 470 120 L 600 120" stroke="url(#gradPath)" stroke-width="3" stroke-dasharray="6 4">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.5s" repeatCount="indefinite" />
+                </path>
+                <path d="M 740 120 L 870 120" stroke="url(#gradPath)" stroke-width="3" stroke-dasharray="6 4">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.5s" repeatCount="indefinite" />
+                </path>
+
+                <!-- Flow Step 1: Input -->
+                <g transform="translate(40, 50)">
+                    <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#00F0FF" stroke-width="1.5" />
+                    <circle cx="90" cy="45" r="24" fill="rgba(0, 240, 255, 0.15)" stroke="#00F0FF" stroke-width="1.5" />
+                    <text x="90" y="52" fill="#00F0FF" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
+                        text-anchor="middle">🎯</text>
+                    <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
+                        font-weight="700" text-anchor="middle">1. Client Objective</text>
+                    <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
+                        text-anchor="middle">Scope & Bottleneck</text>
+                </g>
+
+                <!-- Flow Step 2: AI & Agentic RAG -->
+                <g transform="translate(310, 50)">
+                    <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#8B5CF6" stroke-width="1.5" />
+                    <circle cx="90" cy="45" r="24" fill="rgba(139, 92, 246, 0.15)" stroke="#8B5CF6"
+                        stroke-width="1.5" />
+                    <text x="90" y="52" fill="#A78BFA" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
+                        text-anchor="middle">🧠</text>
+                    <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
+                        font-weight="700" text-anchor="middle">2. AI & Architecture</text>
+                    <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
+                        text-anchor="middle">Multi-Agent & Vector</text>
+                </g>
+
+                <!-- Flow Step 3: Hardened Build -->
+                <g transform="translate(580, 50)">
+                    <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#EC4899" stroke-width="1.5" />
+                    <circle cx="90" cy="45" r="24" fill="rgba(236, 72, 153, 0.15)" stroke="#EC4899"
+                        stroke-width="1.5" />
+                    <text x="90" y="52" fill="#F472B6" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
+                        text-anchor="middle">🛡️</text>
+                    <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
+                        font-weight="700" text-anchor="middle">3. Zero-Bug Build</text>
+                    <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
+                        text-anchor="middle">Type-Safe & Scaled</text>
+                </g>
+
+                <!-- Flow Step 4: Production -->
+                <g transform="translate(850, 50)">
+                    <rect width="140" height="140" rx="14" fill="url(#cardGrad1)" stroke="#34D399" stroke-width="1.5" />
+                    <circle cx="70" cy="45" r="24" fill="rgba(52, 211, 153, 0.15)" stroke="#34D399"
+                        stroke-width="1.5" />
+                    <text x="70" y="52" fill="#34D399" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
+                        text-anchor="middle">🚀</text>
+                    <text x="70" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
+                        font-weight="700" text-anchor="middle">4. Live Asset</text>
+                    <text x="70" y="122" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="11"
+                        text-anchor="middle">100% Owned IP</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     OUR WORK — PRODUCTION SYSTEMS & DELIVERABLES SHOWCASE
+     ========================================================================== -->
+<section class="section" id="work">
+    <div id="projects" style="position: absolute; top: -80px; left: 0;"></div>
+
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
                 <span class="dot"></span>
                 <span>Verified Deliverables & Live Working Demos</span>
             </div>
-            <h2 class="section-title" style="font-size: clamp(2rem, 3.5vw, 3rem);">
-                Our Work — Systems Built for <span class="gradient-text">Real Business Impact</span>
+            <h2 class="section-title">
+                Our Work — Systems Built for <span class="text-gradient gradient-text-animated">Real Business
+                    Impact</span>
             </h2>
-            <p class="section-subtitle" style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); max-width: 720px; margin: 0 auto;">
-                Explore real software platforms, automation pipelines, and AI systems engineered by CodeX404 Solutions. Clean, fast, and easy to understand — test live working simulators directly in your browser.
+            <p class="section-subtitle">
+                Explore real software platforms, institutional web portals, automation pipelines, and AI systems
+                engineered by CodeX404 Solutions. Clean, fast, and easy to evaluate.
             </p>
         </div>
 
@@ -234,12 +372,13 @@ require_once __DIR__ . '/includes/header.php';
         $countMobile = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'mobile'));
         ?>
         <!-- Category Filter Tabs -->
-        <div class="project-filter-bar" role="tablist" aria-label="Project Categories" style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
+        <div class="project-filter-bar" role="tablist" aria-label="Project Categories"
+            style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
             <button type="button" class="project-filter-btn active" data-filter="all">
                 <span>✦</span> All Work (<?= $countAll ?>)
             </button>
             <button type="button" class="project-filter-btn" data-filter="software">
-                <span>🏫</span> School ERP & Software (<?= $countSoftware ?>)
+                <span>🏫</span> School & Institutional (<?= $countSoftware ?>)
             </button>
             <button type="button" class="project-filter-btn" data-filter="commerce">
                 <span>🛍️</span> E-Commerce & Catalogs (<?= $countCommerce ?>)
@@ -248,30 +387,38 @@ require_once __DIR__ . '/includes/header.php';
                 <span>📱</span> Mobile & PWA (<?= $countMobile ?>)
             </button>
             <?php if ($countAi > 0): ?>
-            <button type="button" class="project-filter-btn" data-filter="ai">
-                <span>🤖</span> AI & Automation (<?= $countAi ?>)
-            </button>
+                <button type="button" class="project-filter-btn" data-filter="ai">
+                    <span>🤖</span> AI & Automation (<?= $countAi ?>)
+                </button>
             <?php endif; ?>
         </div>
 
-        <!-- Project Cards Grid -->
+        <!-- Project Cards Grid with 3D Tilt -->
         <div class="project-showcase-grid">
             <?php foreach ($homepageProjects as $p): ?>
-                <article class="project-card clean-project-card" data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
+                <article class="project-card clean-project-card card-tilt"
+                    data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
                     <div>
                         <!-- Header with meta & verified live domain -->
                         <div class="cpc-header">
                             <div class="cpc-meta">
-                                <span class="cpc-category"><?= htmlspecialchars($p['category_label'] ?? 'Custom Software') ?></span>
+                                <span
+                                    class="cpc-category"><?= htmlspecialchars($p['category_label'] ?? 'Custom Software') ?></span>
                                 <span class="cpc-badge">
                                     <span class="cpc-dot"></span>
                                     <?= htmlspecialchars($p['badge_text'] ?? 'Production Live') ?>
                                 </span>
                             </div>
                             <?php if (!empty($p['live_url'])): ?>
-                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-domain-pill" title="Visit Live Website">
+                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
+                                    class="cpc-domain-pill" title="Visit Live Website">
                                     <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
-                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
                                 </a>
                             <?php else: ?>
                                 <span class="cpc-domain-pill">
@@ -284,23 +431,29 @@ require_once __DIR__ . '/includes/header.php';
                         <div class="cpc-body">
                             <h3 class="cpc-title">
                                 <?php if (!empty($p['live_url'])): ?>
-                                    <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" title="Visit <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
+                                    <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
+                                        title="Visit <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
                                 <?php else: ?>
                                     <?= htmlspecialchars($p['title']) ?>
                                 <?php endif; ?>
                             </h3>
-                            <p class="cpc-description"><?= htmlspecialchars($p['solution'] ?? $p['description'] ?? '') ?></p>
-                            
+                            <p class="cpc-description"><?= htmlspecialchars($p['solution'] ?? $p['description'] ?? '') ?>
+                            </p>
+
                             <?php if (!empty($p['metric'])): ?>
                                 <div class="cpc-metric">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
                                     <span><?= htmlspecialchars($p['metric']) ?></span>
                                 </div>
                             <?php endif; ?>
 
-                            <?php if (!empty($p['tags'])): ?>
+                            <!-- Tags -->
+                            <?php if (!empty($p['tags']) && is_array($p['tags'])): ?>
                                 <div class="cpc-tags">
-                                    <?php foreach (array_slice($p['tags'], 0, 5) as $tag): ?>
+                                    <?php foreach (array_slice($p['tags'], 0, 4) as $tag): ?>
                                         <span class="cpc-tag"><?= htmlspecialchars($tag) ?></span>
                                     <?php endforeach; ?>
                                 </div>
@@ -308,153 +461,315 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                     </div>
 
-                    <!-- Clean Actions -->
-                    <div class="cpc-actions">
+                    <!-- Card Actions -->
+                    <div class="cpc-footer">
+                        <button type="button" class="btn btn-secondary btn-sm btn-demo-trigger"
+                            data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>">
+                            <span>⚡ Interactive Demo</span>
+                        </button>
                         <?php if (!empty($p['live_url'])): ?>
-                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-btn cpc-btn-primary" title="Visit Live Site">
-                                Visit Live Site
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-primary btn-sm">
+                                <span>Live Site ↗</span>
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm">
+                                <span>Request Spec</span>
                             </a>
                         <?php endif; ?>
-                        <button type="button" class="cpc-btn cpc-btn-secondary btn-demo-trigger" data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'erp') ?>">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Interactive Demo
-                        </button>
                     </div>
                 </article>
             <?php endforeach; ?>
         </div>
-
-        <div style="text-align: center; margin-top: 3.5rem;">
-            <a href="<?= url('case-studies.php') ?>" class="btn btn-secondary btn-lg">
-                View All Deliverables & Architecture Notes →
-            </a>
-        </div>
     </div>
 </section>
 
 <!-- ==========================================================================
-     WHAT WE BUILD — CORE CAPABILITIES (CLEAN & CONCISE)
+     INTERACTIVE LIVE DEMO SIMULATORS
      ========================================================================== -->
-<section class="section" id="solutions" style="background: rgba(11, 31, 58, 0.25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+<section class="section" id="simulators"
+    style="background: rgba(10, 22, 40, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+        <div class="section-header">
+            <div class="section-tag">
                 <span class="dot"></span>
-                <span>Our Capabilities</span>
+                <span>Live In-Browser Simulators</span>
             </div>
-            <h2 class="section-title">Full-Spectrum Engineering Capabilities</h2>
+            <h2 class="section-title">
+                Experience Our Software & AI <span class="text-gradient gradient-text-animated">In Action</span>
+            </h2>
             <p class="section-subtitle">
-                We engineer proprietary software, applied AI, and automated workflows designed specifically around how your business operates.
+                Don't take our word for it. Test real working interactive prototypes of our Enterprise AI RAG assistant
+                and WhatsApp CRM automation directly in your browser.
             </p>
         </div>
 
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <!-- 1. Custom Software -->
-            <div class="card">
-                <div class="card-icon">💻</div>
-                <h3 class="card-title">Custom Software & Web Apps</h3>
-                <p class="card-description">
-                    Tailored operational control rooms, administrative ERPs, bespoke CRMs, and client portals built to eliminate spreadsheets and per-seat license fees permanently.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Modern PHP 8.2+</span>
-                    <span class="tag-chip">Python FastAPI</span>
-                    <span class="tag-chip">Strict RBAC</span>
-                    <span class="tag-chip">Relational Schemas</span>
+        <div class="grid grid-cols-2" style="gap: 2rem;">
+            <!-- Simulator 1: Enterprise AI RAG Assistant -->
+            <div class="card card-tilt"
+                style="background: rgba(17, 29, 58, 0.8); border: 1px solid rgba(59, 130, 246, 0.35);">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: #FFFFFF; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🤖</span> Enterprise AI RAG Assistant
+                        </h3>
+                        <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Multi-source grounded
+                            vector search with audit citations</p>
+                    </div>
+                    <span
+                        style="background: rgba(16, 185, 129, 0.15); color: #34D399; font-size: 0.72rem; padding: 3px 8px; border-radius: 999px; font-weight: 700;">LIVE
+                        SIMULATOR</span>
                 </div>
-                <a href="<?= url('software-development.php') ?>" class="card-arrow-link">
-                    Explore Custom Software →
-                </a>
+
+                <!-- Prompt Chips -->
+                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem;">
+                    <button type="button" class="rag-chip" data-prompt="What is CodeX404 client IP ownership policy?"
+                        style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--slate); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px; cursor: pointer;">💡
+                        IP Ownership?</button>
+                    <button type="button" class="rag-chip"
+                        data-prompt="How does the WhatsApp lead pipeline automate CRM?"
+                        style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--slate); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px; cursor: pointer;">⚡
+                        WhatsApp Pipeline?</button>
+                    <button type="button" class="rag-chip" data-prompt="Tell me about the School ERP architecture"
+                        style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--slate); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px; cursor: pointer;">🏫
+                        School ERP?</button>
+                </div>
+
+                <!-- Simulated Chat Box -->
+                <div id="ragChatBox"
+                    style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 1rem; height: 220px; overflow-y: auto; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div
+                        style="background: rgba(59, 130, 246, 0.12); border-left: 3px solid #38BDF8; padding: 8px 12px; border-radius: 4px; color: var(--slate);">
+                        <strong style="color: #38BDF8;">CodeX404 AI Agent:</strong> Welcome! Ask any technical question
+                        about our software architecture, zero-bug policy, or IP ownership.
+                    </div>
+                </div>
+
+                <!-- Input Box -->
+                <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                    <input type="text" id="ragInput" placeholder="Type a technical question or click a chip..."
+                        style="flex: 1; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #FFFFFF; font-size: 0.85rem;">
+                    <button type="button" id="ragSendBtn" class="btn btn-primary btn-sm">Ask</button>
+                </div>
             </div>
 
-            <!-- 2. Enterprise AI -->
-            <div class="card">
-                <div class="card-icon">🤖</div>
-                <h3 class="card-title">Enterprise AI & Knowledge Systems</h3>
-                <p class="card-description">
-                    Retrieval-Augmented Generation (RAG) engines, private document intelligence, and domain-trained assistants that search company documents with zero hallucinations.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Private RAG</span>
-                    <span class="tag-chip">Qdrant Vector DB</span>
-                    <span class="tag-chip">Exact Citations</span>
-                    <span class="tag-chip">100% Private VPC</span>
+            <!-- Simulator 2: WhatsApp CRM Automation -->
+            <div class="card card-tilt"
+                style="background: rgba(17, 29, 58, 0.8); border: 1px solid rgba(16, 185, 129, 0.35);">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: #FFFFFF; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>💬</span> WhatsApp Cloud & CRM Pipeline
+                        </h3>
+                        <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Sub-second webhook
+                            ingestion with auto-qualification</p>
+                    </div>
+                    <button type="button" id="waSimulateBtn" class="btn btn-secondary btn-sm"
+                        style="font-size: 0.75rem; border-color: #10B981; color: #34D399;">
+                        Simulate Inbound Lead ⚡
+                    </button>
                 </div>
-                <a href="<?= url('ai-solutions.php') ?>" class="card-arrow-link">
-                    Explore Enterprise AI →
+
+                <div class="wa-simulator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <!-- Phone View -->
+                    <div style="background: #0B141B; border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 0.75rem; height: 260px; overflow-y: auto;"
+                        id="waChatLog">
+                        <div style="font-size: 0.72rem; color: #8696A0; text-align: center; margin-bottom: 0.5rem;">
+                            WhatsApp Cloud API Stream</div>
+                        <div
+                            style="background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; margin-left: auto; max-width: 90%;">
+                            System live and listening for inbound inquiries.
+                        </div>
+                    </div>
+
+                    <!-- CRM Board View -->
+                    <div style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 0.75rem; height: 260px; overflow-y: auto;"
+                        id="crmLeadList">
+                        <div
+                            style="font-size: 0.72rem; color: var(--slate-dark); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700;">
+                            Live CRM Ingestion</div>
+                        <div
+                            style="background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 8px; font-size: 0.78rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <strong style="color: #38BDF8;">Enterprise Portal Lead</strong>
+                                <span
+                                    style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;">SYNCED</span>
+                            </div>
+                            <div style="color: var(--slate); font-size: 0.72rem; margin-top: 4px;">Source: Webhook •
+                                Latency: 42ms</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     CORE SOLUTIONS & CAPABILITIES GRID
+     ========================================================================== -->
+<section class="section" id="solutions">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>Our Core Capabilities</span>
+            </div>
+            <h2 class="section-title">
+                One Senior Partner from <span class="text-gradient gradient-text-animated">Architecture to Scale</span>
+            </h2>
+            <p class="section-subtitle">
+                Engineered for speed, strict security standards, and zero vendor lock-in.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <!-- Capability 1 -->
+            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">💻</div>
+                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Custom Web Applications</h3>
+                <p style="font-size: 0.925rem; color: var(--slate);">
+                    Internal business portals, customer dashboards, and high-load web systems shaped around your
+                    specific team workflows.
+                </p>
+                <a href="<?= url('software-development.php') ?>" class="text-cyan"
+                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
+                    Learn about Web Platforms &rarr;
                 </a>
+            </article>
+
+            <!-- Capability 2 -->
+            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
+                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Enterprise AI & RAG</h3>
+                <p style="font-size: 0.925rem; color: var(--slate);">
+                    Connect private company documents, policies, and SQL databases to intelligent LLMs with verified
+                    vector citations.
+                </p>
+                <a href="<?= url('ai-solutions.php') ?>" class="text-violet"
+                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
+                    Explore Enterprise AI &rarr;
+                </a>
+            </article>
+
+            <!-- Capability 3 -->
+            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Autonomous AI Agents</h3>
+                <p style="font-size: 0.925rem; color: var(--slate);">
+                    Multi-tool autonomous agents that read email threads, resolve customer support inquiries, and
+                    trigger CRM updates.
+                </p>
+                <a href="<?= url('ai-agents.php') ?>" class="text-pink"
+                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
+                    Discover AI Agents &rarr;
+                </a>
+            </article>
+
+            <!-- Capability 4 -->
+            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
+                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Workflow & API Automation</h3>
+                <p style="font-size: 0.925rem; color: var(--slate);">
+                    Eliminate repetitive manual data entry. Synchronize WhatsApp Cloud API, Stripe billing, and CRM
+                    databases in real-time.
+                </p>
+                <a href="<?= url('automation.php') ?>" class="text-blue"
+                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
+                    See Automation Pipelines &rarr;
+                </a>
+            </article>
+
+            <!-- Capability 5 -->
+            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
+                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">SaaS MVP Development</h3>
+                <p style="font-size: 0.925rem; color: var(--slate);">
+                    Launch your SaaS product in weeks with multi-tenant security, Stripe subscription billing, and a
+                    clean maintainable foundation.
+                </p>
+                <a href="<?= url('saas.php') ?>" class="text-emerald"
+                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
+                    Explore SaaS Roadmaps &rarr;
+                </a>
+            </article>
+
+            <!-- Capability 6 -->
+            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
+                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Mobile & PWA Apps</h3>
+                <p style="font-size: 0.925rem; color: var(--slate);">
+                    Fast, responsive mobile applications that install natively on iOS and Android devices with offline
+                    caching and push notifications.
+                </p>
+                <a href="<?= url('mobile-apps.php') ?>" class="text-amber"
+                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
+                    Learn about Mobile Apps &rarr;
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     INTERACTIVE ROI & SYSTEM EFFICIENCY CALCULATOR
+     ========================================================================== -->
+<section class="section" style="background: rgba(6, 11, 24, 0.6);">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>System Efficiency Calculator</span>
+            </div>
+            <h2 class="section-title">
+                Quantify Your <span class="text-gradient gradient-text-animated">Automation & Software ROI</span>
+            </h2>
+            <p class="section-subtitle">
+                Calculate how much operational budget and engineering bandwidth your business recovers by replacing
+                manual bottlenecks.
+            </p>
+        </div>
+
+        <div class="roi-calculator-card">
+            <!-- Slider 1: Team Size -->
+            <div class="roi-slider-group">
+                <div class="roi-slider-header">
+                    <label for="roiTeamSlider">Your Current Team / Operations Size</label>
+                    <span class="roi-slider-badge" id="roiTeamVal">12 Engineers / Staff</span>
+                </div>
+                <input type="range" id="roiTeamSlider" class="roi-slider" min="3" max="100" value="12" step="1">
             </div>
 
-            <!-- 3. AI Agents -->
-            <div class="card">
-                <div class="card-icon">🧠</div>
-                <h3 class="card-title">Autonomous AI Agents</h3>
-                <p class="card-description">
-                    Multi-step autonomous agents equipped with tool-calling capabilities to query APIs, reconcile spreadsheets, verify documents, and dispatch alerts with human oversight.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Tool Calling</span>
-                    <span class="tag-chip">Approval Gates</span>
-                    <span class="tag-chip">Episodic Memory</span>
-                    <span class="tag-chip">Audit Trails</span>
+            <!-- Slider 2: Hours wasted per person -->
+            <div class="roi-slider-group">
+                <div class="roi-slider-header">
+                    <label for="roiHoursSlider">Hours Wasted Weekly on Repetitive Work (per person)</label>
+                    <span class="roi-slider-badge" id="roiHoursVal">10 hrs / week / person</span>
                 </div>
-                <a href="<?= url('ai-agents.php') ?>" class="card-arrow-link">
-                    Explore AI Agents →
-                </a>
+                <input type="range" id="roiHoursSlider" class="roi-slider" min="2" max="25" value="10" step="1">
             </div>
 
-            <!-- 4. Automation -->
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3 class="card-title">Workflow & WhatsApp Automation</h3>
-                <p class="card-description">
-                    Eliminate repetitive manual coordination. Seamless Meta WhatsApp Business API integrations, instant CRM sync, automated invoicing, and asynchronous webhooks.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">WhatsApp Cloud API</span>
-                    <span class="tag-chip">Idempotent Webhooks</span>
-                    <span class="tag-chip">Automated Invoicing</span>
-                    <span class="tag-chip">&lt; 3 Min SLA</span>
+            <!-- Computed Outcomes Grid -->
+            <div class="roi-results-grid">
+                <div class="roi-result-item">
+                    <div class="label">Hours Recovered Annually</div>
+                    <div class="val" id="roiHoursSavedVal">4,500 hrs / yr</div>
                 </div>
-                <a href="<?= url('automation.php') ?>" class="card-arrow-link">
-                    Explore Automation →
-                </a>
+                <div class="roi-result-item">
+                    <div class="label">Estimated Annual Capital Saved</div>
+                    <div class="val" id="roiSavingsVal">$202,500</div>
+                </div>
+                <div class="roi-result-item">
+                    <div class="label">Estimated Time-to-Delivery</div>
+                    <div class="val" id="roiTimelineVal" style="color: #38BDF8;">2 - 3 Sprints</div>
+                </div>
             </div>
 
-            <!-- 5. Mobile Applications -->
-            <div class="card">
-                <div class="card-icon">📱</div>
-                <h3 class="card-title">Mobile Apps & Offline PWAs</h3>
-                <p class="card-description">
-                    Performant cross-platform iOS and Android mobile apps and Progressive Web Apps featuring offline synchronization, biometric auth, and native hardware sensor hooks.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">iOS & Android</span>
-                    <span class="tag-chip">Offline SQLite Sync</span>
-                    <span class="tag-chip">Push Alerts</span>
-                    <span class="tag-chip">Single Codebase</span>
-                </div>
-                <a href="<?= url('mobile-apps.php') ?>" class="card-arrow-link">
-                    Explore Mobile Apps →
-                </a>
-            </div>
-
-            <!-- 6. SaaS Development -->
-            <div class="card">
-                <div class="card-icon">🚀</div>
-                <h3 class="card-title">SaaS Product & Rapid MVPs</h3>
-                <p class="card-description">
-                    Turn your product vision into a scalable cloud software with multi-tenant data isolation, turnkey Stripe/Razorpay subscription billing, and founder admin telemetry in 4-8 weeks.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">4-8 Week Delivery</span>
-                    <span class="tag-chip">Multi-Tenancy RLS</span>
-                    <span class="tag-chip">Subscription Billing</span>
-                    <span class="tag-chip">100% IP Handover</span>
-                </div>
-                <a href="<?= url('saas.php') ?>" class="card-arrow-link">
-                    Explore SaaS Development →
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#contact-section" class="btn btn-primary btn-lg">
+                    <span>Discuss Custom Automation Architecture &rarr;</span>
                 </a>
             </div>
         </div>
@@ -462,120 +777,219 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     WHY CLIENTS PARTNER WITH CODEX404 (CLEAN TRUST STANDARDS)
+     FOUNDER & LEADERSHIP SECTION
      ========================================================================== -->
-<section class="section">
+<section class="section" id="leadership" style="border-top: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+        <div class="section-header">
+            <div class="section-tag">
                 <span class="dot"></span>
-                <span>The CodeX404 Standard</span>
+                <span>Leadership & Technical Pedigree</span>
             </div>
-            <h2 class="section-title">Built for Founders Who Value Reliability</h2>
+            <h2 class="section-title">
+                Senior Engineering Led by <span class="text-gradient gradient-text-animated">Real Practitioners</span>
+            </h2>
             <p class="section-subtitle">
-                We remove the agency bloat and deliver rock-solid software systems with full transparency and senior accountability.
+                No intermediate account-managers. You communicate directly with systems architects who have engineered
+                solutions for enterprise giants.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2" style="max-width: 980px; margin: 0 auto; gap: 2rem;">
+            <!-- Founder: Muhammad Noukhez -->
+            <article class="card card-tilt"
+                style="background: rgba(17, 29, 58, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); text-align: center; padding: 2.5rem;">
+                <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 1.5rem auto;">
+                    <img src="<?= FOUNDER_IMAGE ?>" alt="<?= FOUNDER_NAME ?>"
+                        style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--cyan); box-shadow: 0 0 20px rgba(6, 214, 160, 0.4);">
+                    <span
+                        style="position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; background: #10B981; border: 3px solid #060B18; border-radius: 50%; box-shadow: 0 0 8px #10B981;"></span>
+                </div>
+                <h3 style="font-size: 1.4rem; color: #FFFFFF; margin-bottom: 0.35rem;">
+                    <a href="https://mnoukhej.github.io/portfolio/" target="_blank" rel="noopener"
+                        class="top-founder-link"><?= FOUNDER_NAME ?></a>
+                </h3>
+                <div
+                    style="font-size: 0.85rem; color: #38BDF8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
+                    <?= FOUNDER_ROLE ?> • 7+ Yrs TCS Enterprise Specialist
+                </div>
+                <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.6; margin-bottom: 1.5rem;">
+                    <?= FOUNDER_BIO ?> Specialized in high-throughput Python architecture, Azure OpenAI & RAG systems,
+                    and resilient cloud web platforms.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+                    <a href="https://mnoukhej.github.io/portfolio/" target="_blank" rel="noopener"
+                        class="btn btn-primary btn-sm">
+                        <span>View Portfolio ↗</span>
+                    </a>
+                    <a href="<?= FOUNDER_LINKEDIN ?>" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-secondary btn-sm">
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Co-Founder: Yousuf Ansari -->
+            <article class="card card-tilt"
+                style="background: rgba(17, 29, 58, 0.85); border: 1px solid rgba(139, 92, 246, 0.35); text-align: center; padding: 2.5rem;">
+                <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 1.5rem auto;">
+                    <img src="<?= COFOUNDER_IMAGE ?>" alt="<?= COFOUNDER_NAME ?>"
+                        style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--violet); box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);">
+                    <span
+                        style="position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; background: #10B981; border: 3px solid #060B18; border-radius: 50%; box-shadow: 0 0 8px #10B981;"></span>
+                </div>
+                <h3 style="font-size: 1.4rem; color: #FFFFFF; margin-bottom: 0.35rem;"><?= COFOUNDER_NAME ?></h3>
+                <div
+                    style="font-size: 0.85rem; color: #A78BFA; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
+                    <?= COFOUNDER_ROLE ?>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.6; margin-bottom: 1.5rem;">
+                    <?= COFOUNDER_BIO ?>
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+                    <a href="<?= COFOUNDER_LINKEDIN ?>" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-secondary btn-sm">
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                        <span>Direct Chat</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     ENGINEERING DELIVERY PROCESS
+     ========================================================================== -->
+<section class="section" id="process" style="background: rgba(10, 22, 40, 0.3);">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>Deterministic Delivery</span>
+            </div>
+            <h2 class="section-title">
+                Clarity Before Velocity. <span class="text-gradient gradient-text-animated">Scope Before Build.</span>
+            </h2>
+            <p class="section-subtitle">
+                We eliminate guesswork through transparent technical milestones and continuous verification.
             </p>
         </div>
 
         <div class="grid grid-cols-4" style="gap: 1.5rem;">
-            <div class="card" style="padding: 2rem;">
-                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">100%</div>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Full IP Ownership</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    All source code, database architecture, and credentials belong entirely to your company. Zero vendor lock-in.
-                </p>
+            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
+                <div
+                    style="color: var(--cyan); font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
+                    01</div>
+                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Constraint Diagnosis</h3>
+                <p style="font-size: 0.875rem; color: var(--slate);">Identify current bottlenecks, data structures, and
+                    user friction points before quoting.</p>
             </div>
 
-            <div class="card" style="padding: 2rem;">
-                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">Direct</div>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Senior Engineers</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    No middleman account managers playing telephone. You speak directly with architects who write your code.
-                </p>
+            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
+                <div
+                    style="color: #38BDF8; font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
+                    02</div>
+                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Milestone Scoping</h3>
+                <p style="font-size: 0.875rem; color: var(--slate);">Define explicit deliverables, acceptance criteria,
+                    test suites, and budget boundaries.</p>
             </div>
 
-            <div class="card" style="padding: 2rem;">
-                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">Zero</div>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Bugs Philosophy</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    Defensive type-safety, parameterized queries, and rigorous QA ensure code is production-ready from day one.
-                </p>
+            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
+                <div
+                    style="color: var(--soft-violet); font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
+                    03</div>
+                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Hardened Build</h3>
+                <p style="font-size: 0.875rem; color: var(--slate);">Ship verified code every 2 weeks with live preview
+                    staging and automated regression tests.</p>
             </div>
 
-            <div class="card" style="padding: 2rem;">
-                <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.5rem;">Clear</div>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Milestone Pricing</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    Predictable sprint milestones, regular staging demos, and guaranteed scopes with zero surprise invoice fees.
-                </p>
+            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
+                <div
+                    style="color: #34D399; font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
+                    04</div>
+                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Handoff & 100% IP</h3>
+                <p style="font-size: 0.875rem; color: var(--slate);">Complete repository transfer, operating manuals,
+                    and production credentials ownership.</p>
             </div>
         </div>
     </div>
 </section>
 
-
 <!-- ==========================================================================
-     CLIENT VALIDATION & TESTIMONIALS
+     FREQUENTLY ASKED QUESTIONS (ACCORDION)
      ========================================================================== -->
-<section class="testimonials-section">
-    <div class="container">
+<section class="section" id="faq">
+    <div class="container" style="max-width: 860px;">
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Client Validation</span>
+                <span>Frequently Asked Questions</span>
             </div>
-            <h2 class="section-title">What Founders & Technical Leaders Say</h2>
-            <p class="section-subtitle">
-                Engineered for founders and technical directors who value reliability, fast delivery, and spotless code.
-            </p>
+            <h2 class="section-title">
+                Everything You Need to Know <span class="text-gradient gradient-text-animated">Before Starting</span>
+            </h2>
         </div>
 
-        <div class="grid grid-cols-3">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-quote">
-                    "CodeX404 rebuilt our legacy ERP from scratch with zero business downtime. The software bugs that had plagued our daily workflows for over a year were completely stamped out in their very first sprint."
-                </p>
-                <div class="testimonial-author-box">
-                    <div class="testimonial-avatar">AK</div>
-                    <div class="testimonial-info">
-                        <h4>Arif Khan</h4>
-                        <span>Operations Director, Global EdTech</span>
-                    </div>
-                    <div class="testimonial-metric-chip">4-Sprint Turnaround</div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button type="button" class="faq-question" id="faq-1" aria-expanded="false">
+                    <span>Who owns the source code and IP?</span>
+                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer" id="faq-1-answer">
+                    <p>You do — 100%. Upon project milestone completion and delivery, all source code, database
+                        architectures, documentation, and cloud configurations belong exclusively to your business. We
+                        enforce zero vendor lock-in.</p>
                 </div>
             </div>
 
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-quote">
-                    "Our customer inquiry response time dropped from four hours to under three minutes with their automated WhatsApp and CRM pipeline. Our sales conversions doubled within 60 days of going live."
-                </p>
-                <div class="testimonial-author-box">
-                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #06D6A0, #3B82F6);">DM</div>
-                    <div class="testimonial-info">
-                        <h4>David Miller</h4>
-                        <span>Growth Lead, Omnichannel Retail</span>
-                    </div>
-                    <div class="testimonial-metric-chip">-85% Response Latency</div>
+            <div class="faq-item">
+                <button type="button" class="faq-question" id="faq-2" aria-expanded="false">
+                    <span>What does "Where Bugs Meet Their Match" mean in practice?</span>
+                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer" id="faq-2-answer">
+                    <p>It represents our senior-led engineering discipline. We build with strict type-safety, automated
+                        unit & integration test coverage, idempotency checks, and pre-deployment vulnerability scans so
+                        issues are eliminated before production.</p>
                 </div>
             </div>
 
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-quote">
-                    "Working with CodeX404 feels like having a senior SWAT engineering team inside your company. Direct access to builders, crystal-clear milestones, and zero bloated agency overhead."
-                </p>
-                <div class="testimonial-author-box">
-                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">SJ</div>
-                    <div class="testimonial-info">
-                        <h4>Sarah Jenkins</h4>
-                        <span>Co-Founder & CTO, SaaS Logistics</span>
-                    </div>
-                    <div class="testimonial-metric-chip">100% IP Ownership</div>
+            <div class="faq-item">
+                <button type="button" class="faq-question" id="faq-3" aria-expanded="false">
+                    <span>How quickly can you deliver an initial production MVP?</span>
+                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer" id="faq-3-answer">
+                    <p>Focused MVPs and automation systems typically launch in 2 to 4 weeks. Because our leadership
+                        writes and reviews the architecture directly without management bloat, decision velocity is
+                        exceptionally fast.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question" id="faq-4" aria-expanded="false">
+                    <span>Do you offer post-launch support and SLA guarantees?</span>
+                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer" id="faq-4-answer">
+                    <p>Yes. Every launch includes a 30-day warranty period for bug fixes and stability monitoring. We
+                        also provide ongoing sprint retainers with guaranteed SLA uptime for scaling businesses.</p>
                 </div>
             </div>
         </div>
@@ -583,395 +997,161 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     FOUNDER & SENIOR LEADERSHIP SECTION
-     ========================================================================== -->
-<?php include __DIR__ . '/components/leadership.php'; ?>
-
-<!-- ==========================================================================
-     DIRECT CONTACT & PROJECT INQUIRY FORM (HOMEPAGE EMBEDDED)
+     START YOUR PROJECT — INQUIRY & CONTACT SECTION
      ========================================================================== -->
 <section class="home-contact-section" id="contact-section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Direct Engineering Communication</span>
-            </div>
-            <h2 class="section-title">Start Your Project or Schedule a Consultation</h2>
-            <p class="section-subtitle">
-                Discuss your software, AI, or automation requirements directly with our senior technical leadership. We review scopes and reply within 24 business hours.
-            </p>
-        </div>
-
         <div class="home-contact-grid">
-            <!-- Left Column: Direct Access & Trust Guarantees -->
             <div>
-                <h3 style="font-size: 1.65rem; color: var(--white); margin-bottom: 1rem;">
-                    Let's Talk Architecture
-                </h3>
+                <div class="section-tag" style="margin-bottom: 1rem;">
+                    <span class="dot"></span>
+                    <span>Start Your Project</span>
+                </div>
+                <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.2; margin-bottom: 1.25rem;">
+                    Ready to build software that <span class="text-gradient gradient-text-animated">actually
+                        delivers?</span>
+                </h2>
                 <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">
-                    We skip aggressive sales calls and agency account managers. When you reach out to CodeX404 Solutions, you discuss your operational challenges directly with technical practitioners who design and build software.
+                    Tell us what your current digital system or workflow cannot do. We will review your requirements and
+                    provide an architectural blueprint within 24 business hours.
                 </p>
 
-                <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.25rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.2rem; margin: 0;">✉️</div>
-                        <div>
-                            <strong style="color: var(--white); display: block;">Primary Email</strong>
-                            <a href="mailto:<?= COMPANY_EMAIL ?>" style="color: var(--cyan);"><?= COMPANY_EMAIL ?></a>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.2rem; margin: 0;">💬</div>
-                        <div>
-                            <strong style="color: var(--white); display: block;">Instant WhatsApp Discussion</strong>
-                            <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
-                                Chat on WhatsApp (<?= COMPANY_WHATSAPP_NUMBER ?>) &rarr;
-                            </a>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.2rem; margin: 0;">⏱️</div>
-                        <div>
-                            <strong style="color: var(--white); display: block;">Turnaround Commitment</strong>
-                            <span style="color: var(--slate);">Direct engineering review within 24 business hours</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trust Guarantees List -->
                 <div class="trust-badge-list">
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <span><strong>100% IP & Code Ownership:</strong> You retain complete repository and database rights.</span>
+                        <div>Direct access to Senior Architects (No sales runaround)</div>
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <span><strong>Mutual NDA Protection:</strong> Strict confidentiality prior to technical scoping.</span>
+                        <div>Fixed-scope milestone estimates with clear acceptance criteria</div>
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <span><strong>Zero Vendor Lock-in:</strong> Clean, portable, documented code running on open standards.</span>
+                        <div>Guaranteed 100% intellectual property ownership</div>
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem; background: rgba(11, 31, 58, 0.4); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-                    <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem; color: var(--cyan);">Prefer an in-depth video roadmap session?</h4>
-                    <p style="font-size: 0.88rem; margin-bottom: 0.85rem; color: var(--slate);">For complex architectures, fill out our questionnaire to reserve a video call.</p>
-                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm">
-                        Book a Discovery Call Instead &rarr;
+                <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener" class="btn btn-primary">
+                        <span>Direct WhatsApp: <?= COMPANY_WHATSAPP_NUMBER ?></span>
+                    </a>
+                    <a href="mailto:<?= COMPANY_EMAIL ?>" class="btn btn-secondary">
+                        <span>Email: <?= COMPANY_EMAIL ?></span>
                     </a>
                 </div>
             </div>
 
-            <!-- Right Column: Interactive Embedded Form -->
-            <div class="form-card" style="border: 1px solid rgba(59, 130, 246, 0.35); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(59, 130, 246, 0.15);">
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.35rem;">Send Us a Message</h3>
-                    <p style="font-size: 0.875rem; color: var(--slate-dark);">Complete this form to reach our engineering lead directly.</p>
-                </div>
+            <!-- Inbound Form Card -->
+            <div class="card form-card"
+                style="background: rgba(17, 29, 58, 0.9); border: 1px solid rgba(59, 130, 246, 0.35);">
+                <form id="projectInquiryForm" action="<?= url('api/contact.php') ?>" method="POST">
+                    <input type="hidden" name="csrf_token"
+                        value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
-                <div class="form-alert-container"></div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1.25rem; color: #FFFFFF;">Project Discovery Inquiry
+                    </h3>
 
-                <form action="<?= url('contact.php') ?>" method="POST" class="ajax-form" id="homeContactForm" novalidate>
-                    <?= csrf_input_field() ?>
-
-                    <!-- Honeypot -->
-                    <div style="display: none;" aria-hidden="true">
-                        <label for="_home_gotcha">Do not fill this</label>
-                        <input type="text" name="_gotcha" id="_home_gotcha" tabindex="-1" autocomplete="off">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label for="contact_name"
+                            style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Your
+                            Name *</label>
+                        <input type="text" id="contact_name" name="name" required class="form-control"
+                            placeholder="e.g. Sarah Jenkins"
+                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
                     </div>
 
-                    <div class="grid grid-cols-2" style="gap: 1rem;">
-                        <div class="form-group">
-                            <label for="home_name" class="form-label">Full Name <span class="required">*</span></label>
-                            <input type="text" id="home_name" name="name" class="form-control" placeholder="Sarah Jenkins" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="home_email" class="form-label">Work Email <span class="required">*</span></label>
-                            <input type="email" id="home_email" name="email" class="form-control" placeholder="sarah@company.com" required>
-                        </div>
+                    <div style="margin-bottom: 1.25rem;">
+                        <label for="contact_email"
+                            style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Work
+                            Email *</label>
+                        <input type="email" id="contact_email" name="email" required class="form-control"
+                            placeholder="sarah@company.com"
+                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
                     </div>
 
-                    <div class="grid grid-cols-2" style="gap: 1rem;">
-                        <div class="form-group">
-                            <label for="home_phone" class="form-label">Phone / WhatsApp</label>
-                            <input type="tel" id="home_phone" name="phone" class="form-control" placeholder="+1 (555) 000-0000">
-                        </div>
-                        <div class="form-group">
-                            <label for="home_company" class="form-label">Company Name</label>
-                            <input type="text" id="home_company" name="company" class="form-control" placeholder="Acme Logistics">
-                        </div>
+                    <div style="margin-bottom: 1.25rem;">
+                        <label for="service_interest"
+                            style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Primary
+                            Area of Interest</label>
+                        <select id="service_interest" name="service" class="form-control"
+                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
+                            <option value="custom_software">Custom Web Platform / Internal Portal</option>
+                            <option value="enterprise_ai">Enterprise AI & RAG Pipeline</option>
+                            <option value="ai_agents">Autonomous AI Agents</option>
+                            <option value="workflow_automation">Workflow Automation (WhatsApp/CRM/APIs)</option>
+                            <option value="saas_mvp">SaaS MVP Engineering</option>
+                            <option value="mobile_app">Mobile Application (iOS / Android)</option>
+                        </select>
                     </div>
 
-                    <div class="grid grid-cols-2" style="gap: 1rem;">
-                        <div class="form-group">
-                            <label for="home_subject" class="form-label">Primary Solution Needed</label>
-                            <select id="home_subject" name="subject" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
-                                <option value="Custom Software Development">Custom Software / Web Platform</option>
-                                <option value="Enterprise AI & RAG">Enterprise AI & Knowledge Base (RAG)</option>
-                                <option value="Autonomous AI Agents">Autonomous AI Agents</option>
-                                <option value="Workflow & WhatsApp Automation">Workflow & WhatsApp Automation</option>
-                                <option value="Mobile App Development">Mobile App (iOS/Android/PWA)</option>
-                                <option value="SaaS & MVP Engineering">SaaS MVP Development</option>
-                                <option value="General Architecture Consultation">Other / General Consultation</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="home_budget" class="form-label">Estimated Scope / Budget</label>
-                            <select id="home_budget" name="budget_tier" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
-                                <option value="mvp_scale">Focused MVP (&lt; $2,500 / ₹2L)</option>
-                                <option value="standard" selected>Core System ($2,500 - $10,000 / ₹2L - ₹8L)</option>
-                                <option value="enterprise">Full Enterprise Platform ($10,000+ / ₹8L+)</option>
-                                <option value="exploring">Just Exploring / Need Guidance</option>
-                            </select>
-                        </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="contact_details"
+                            style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Project
+                            Context & Current Friction *</label>
+                        <textarea id="contact_details" name="message" rows="4" required class="form-control"
+                            placeholder="Describe the business bottleneck, key user workflows, or integrations required..."
+                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF; font-family: inherit; resize: vertical;"></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="home_message" class="form-label">Project Details & Challenge <span class="required">*</span></label>
-                        <textarea id="home_message" name="message" class="form-textarea" rows="4" placeholder="Describe the operational friction you are solving, your timeline, or current stack..." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-checkbox-label">
-                            <input type="checkbox" name="privacy_consent" value="1" required>
-                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and consent to CodeX404 Solutions processing my inquiry details.</span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        Submit Project Inquiry
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" style="width: 100%;">
+                        <span>Request Architecture Blueprint & Estimate &rarr;</span>
                     </button>
+                    <div style="font-size: 0.75rem; color: var(--slate-dark); text-align: center; margin-top: 0.75rem;">
+                        🔒 Confidential • Zero spam • Response within 24 business hours
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================================================
-     INTERACTIVE PROJECT DEMO MODAL SYSTEM
-     ========================================================================== -->
-<div class="demo-modal-overlay" id="projectDemoModal" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
-    <div class="demo-modal-window">
-        <!-- Modal Header -->
+<!-- Interactive Live Demo Modal Overlay (For Trigger Buttons) -->
+<div class="demo-modal-overlay" id="projectDemoModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="demo-modal-container">
         <div class="demo-modal-header">
             <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <div class="project-mockup-dots">
-                    <span class="dot-red"></span>
-                    <span class="dot-yellow"></span>
-                    <span class="dot-green"></span>
+                <span style="font-size: 1.4rem;">⚡</span>
+                <div>
+                    <h3 style="font-size: 1.15rem; margin: 0; color: #FFFFFF;">Interactive Systems Sandbox</h3>
+                    <div style="font-size: 0.75rem; color: var(--slate-dark);">Test real CodeX404 modules live</div>
                 </div>
-                <h3 id="demoModalTitle" style="font-size: 1.05rem; color: var(--white); margin: 0;">
-                    ⚡ Interactive Project Sandbox
-                </h3>
             </div>
-
-            <div class="demo-modal-nav" role="tablist">
-                <button type="button" class="demo-nav-tab active" data-demo-target="rag" role="tab">
-                    🤖 AI RAG Assistant
-                </button>
-                <button type="button" class="demo-nav-tab" data-demo-target="wa" role="tab">
-                    💬 WhatsApp Pipeline
-                </button>
-                <button type="button" class="demo-nav-tab" data-demo-target="erp" role="tab">
-                    🏫 School ERP
-                </button>
-                <button type="button" class="demo-nav-tab" data-demo-target="b2b" role="tab">
-                    🛍️ B2B Wholesale
-                </button>
-            </div>
-
-            <button type="button" class="demo-close-btn" aria-label="Close demo modal">&times;</button>
+            <button type="button" class="demo-close-btn" aria-label="Close demo simulator">&times;</button>
         </div>
 
-        <!-- Modal Body / Active Simulator Panes -->
         <div class="demo-modal-body">
+            <div class="demo-nav-tabs">
+                <button type="button" class="demo-nav-tab active" data-demo-target="rag">🤖 AI RAG Assistant</button>
+                <button type="button" class="demo-nav-tab" data-demo-target="erp">🏫 School Portal & ERP</button>
+            </div>
 
-            <!-- PANE 1: AI RAG Simulator -->
+            <!-- Pane 1: RAG -->
             <div class="demo-simulator-pane active" id="demo-pane-rag">
-                <div style="margin-bottom: 1.25rem;">
-                    <h4 style="color: #38BDF8; margin-bottom: 0.25rem; font-size: 1.15rem;">
-                        Enterprise RAG Knowledge Assistant — Live Sandbox
-                    </h4>
-                    <p style="font-size: 0.85rem; color: var(--slate);">
-                        Ask a question to see how our vector search engine indexes internal company documentation and produces verified, cited answers with zero hallucinations.
-                    </p>
-                </div>
-
-                <!-- Prompt suggestion chips -->
-                <div class="rag-prompt-suggestions">
-                    <span style="font-size: 0.78rem; color: var(--slate-dark); align-self: center;">Try Asking:</span>
-                    <button type="button" class="rag-chip" data-prompt="What is your IP and source code ownership policy?">
-                        💼 IP Ownership Policy
-                    </button>
-                    <button type="button" class="rag-chip" data-prompt="How does the WhatsApp lead pipeline work?">
-                        ⚡ WhatsApp Pipeline
-                    </button>
-                    <button type="button" class="rag-chip" data-prompt="Explain the School ERP role-based security">
-                        🏫 School ERP Security
-                    </button>
-                </div>
-
-                <!-- Chat Box -->
-                <div class="rag-chat-box" id="ragChatBox">
-                    <div class="chat-bubble ai">
-                        <div style="margin-bottom: 0.4rem; color: #34D399; font-weight: 600; font-size: 0.75rem;">
-                            ● RAG Agent Online &bull; Qdrant Vector Index Active (14,200 chunks)
-                        </div>
-                        <div>
-                            Hello! I am the CodeX404 Enterprise Knowledge Assistant. How can I assist you with our engineering architectures, system specs, or client policies today?
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Input row -->
-                <div class="rag-input-row">
-                    <input type="text" id="ragInput" class="form-control" placeholder="Type a question (e.g. 'How is client IP protected?')..." style="flex: 1;">
-                    <button type="button" id="ragSendBtn" class="btn btn-primary btn-sm" style="white-space: nowrap;">
-                        Send Query &rarr;
-                    </button>
+                <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">
+                    This sandbox runs our grounded multi-source vector pipeline. Try asking about data encryption,
+                    client IP ownership, or API latency.
+                </p>
+                <div
+                    style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; color: var(--slate); font-size: 0.85rem;">
+                    <div style="color: #34D399; font-weight: 700; margin-bottom: 0.5rem;">✔ Vector Store Connected:
+                        Qdrant Index</div>
+                    <div>Grounded with 14,000 corporate spec tokens. Strict zero-hallucination threshold applied.</div>
                 </div>
             </div>
 
-            <!-- PANE 2: WhatsApp Lead Pipeline Simulator -->
-            <div class="demo-simulator-pane" id="demo-pane-wa">
-                <div style="margin-bottom: 1.25rem;">
-                    <h4 style="color: #25D366; margin-bottom: 0.25rem; font-size: 1.15rem;">
-                        Multi-Channel WhatsApp Pipeline — Live Ingestion Simulation
-                    </h4>
-                    <p style="font-size: 0.85rem; color: var(--slate);">
-                        Click the button below to simulate an inbound lead from Meta WhatsApp Cloud API. Watch our webhook engine parse, auto-respond, and update the CRM board in real-time.
-                    </p>
-                </div>
-
-                <div style="margin-bottom: 1rem;">
-                    <button type="button" id="waSimulateBtn" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, #25D366, #128C7E); color: #FFF;">
-                        ⚡ Simulate Inbound WhatsApp Lead
-                    </button>
-                </div>
-
-                <div class="wa-simulator-grid">
-                    <!-- Phone View -->
-                    <div class="wa-phone-frame">
-                        <div style="font-size: 0.75rem; color: #8696A0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; margin-bottom: 10px;">
-                            📱 Client WhatsApp Chat Window
-                        </div>
-                        <div id="waChatLog" style="height: 220px; overflow-y: auto;">
-                            <div style="background: #202C33; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%;">
-                                <strong>Lead #1039:</strong> Hello CodeX404! We need an automated booking portal for our diagnostic lab.
-                                <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">10:14 AM</div>
-                            </div>
-                            <div style="background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%; margin-left: auto;">
-                                <strong>CodeX404 Auto-Agent:</strong> Thank you for reaching out! We received your booking portal inquiry. Our medical systems architect is reviewing this and will reply shortly. Ref: #LD-1039.
-                                <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">10:14 AM &bull; 1.2s</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CRM Pipeline Kanban View -->
-                    <div class="crm-board-frame">
-                        <div style="font-size: 0.75rem; color: #38BDF8; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; margin-bottom: 10px;">
-                            📊 Live CRM Pipeline Stage: Inbound Qualified
-                        </div>
-                        <div id="crmLeadList" style="height: 220px; overflow-y: auto;">
-                            <div style="background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 10px; margin-bottom: 8px; font-size: 0.8rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                                    <strong style="color: #38BDF8;">Diagnostic Lab Booking #LD-1039</strong>
-                                    <span style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px;">QUALIFIED</span>
-                                </div>
-                                <div style="color: var(--slate); font-size: 0.75rem;">Source: WhatsApp Cloud API &nbsp;•&nbsp; Latency: 1.2s</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANE 3: School ERP Simulator -->
+            <!-- Pane 2: ERP -->
             <div class="demo-simulator-pane" id="demo-pane-erp">
-                <div style="margin-bottom: 1.25rem;">
-                    <h4 style="color: #38BDF8; margin-bottom: 0.25rem; font-size: 1.15rem;">
-                        School ERP & Administrative Portal — Ledger Dashboard
-                    </h4>
-                    <p style="font-size: 0.85rem; color: var(--slate);">
-                        Real-time student fee collection and ledger reconciliation dashboard preview.
-                    </p>
-                </div>
-
-                <div style="background: rgba(10, 22, 40, 0.9); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.75rem;">
-                        <div>
-                            <strong style="color: var(--white); font-size: 1.05rem;">Al-Huda International Academy — Session 2026-27</strong>
-                            <div style="font-size: 0.8rem; color: #34D399;">● RBAC Active: Finance Controller Mode</div>
-                        </div>
-                        <span style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;">Term 2 Audited</span>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.25rem;">
-                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Total Enrolled</span>
-                            <strong style="display: block; font-size: 1.15rem; color: var(--white);">1,420</strong>
-                        </div>
-                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Fees Collected</span>
-                            <strong style="display: block; font-size: 1.15rem; color: #34D399;">94.2%</strong>
-                        </div>
-                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Attendance Rate</span>
-                            <strong style="display: block; font-size: 1.15rem; color: #38BDF8;">97.8%</strong>
-                        </div>
-                        <div style="background: rgba(17, 29, 58, 0.7); padding: 0.75rem; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--slate-dark);">Reconciliation</span>
-                            <strong style="display: block; font-size: 1.15rem; color: #34D399;">Balanced</strong>
-                        </div>
-                    </div>
-
-                    <div style="font-size: 0.825rem; color: var(--slate); background: rgba(17, 29, 58, 0.5); padding: 0.75rem; border-radius: 6px;">
-                        ✔ Auto-generated 1,420 digital fee receipts with SMS delivery &bull; 0 manual cash reconciliation errors reported.
-                    </div>
+                <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">
+                    Institutional grade school management portal. Process student admissions, fee voucher generation,
+                    and faculty circulars.
+                </p>
+                <div
+                    style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; color: var(--slate); font-size: 0.85rem;">
+                    <div style="color: #38BDF8; font-weight: 700; margin-bottom: 0.5rem;">🏫 Live Production Reference:
+                        Ali Public School & Insan Degree College</div>
+                    <div>Processes thousands of daily active queries with sub-200ms TTFB response.</div>
                 </div>
             </div>
-
-            <!-- PANE 4: B2B Wholesale Simulator -->
-            <div class="demo-simulator-pane" id="demo-pane-b2b">
-                <div style="margin-bottom: 1.25rem;">
-                    <h4 style="color: #EC4899; margin-bottom: 0.25rem; font-size: 1.15rem;">
-                        B2B Wholesale Ordering & Automated Pricing Engine
-                    </h4>
-                    <p style="font-size: 0.85rem; color: var(--slate);">
-                        Live volume tier discount & real-time stock allocation calculator.
-                    </p>
-                </div>
-
-                <div style="background: rgba(10, 22, 40, 0.9); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <div>
-                            <strong style="color: var(--white);">Industrial SKU: #PWR-SOLAR-INVERTER-5KW</strong>
-                            <div style="font-size: 0.8rem; color: var(--slate);">Warehouse Inventory: 340 units in stock</div>
-                        </div>
-                        <span style="background: rgba(16, 185, 129, 0.15); color: #34D399; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;">Tier 3 Bulk Discount Active</span>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="background: rgba(17, 29, 58, 0.6); padding: 0.85rem; border-radius: 6px;">
-                            <div style="font-size: 0.8rem; color: var(--slate-dark); margin-bottom: 4px;">Standard Retail Unit Price</div>
-                            <div style="font-size: 1.1rem; color: var(--slate); text-decoration: line-through;">$1,200.00 / unit</div>
-                        </div>
-                        <div style="background: rgba(17, 29, 58, 0.6); padding: 0.85rem; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
-                            <div style="font-size: 0.8rem; color: #34D399; margin-bottom: 4px;">Wholesale Bulk Price (&gt; 25 units)</div>
-                            <div style="font-size: 1.25rem; color: #34D399; font-weight: bold;">$890.00 / unit (-25.8%)</div>
-                        </div>
-                    </div>
-
-                    <div style="font-size: 0.825rem; color: var(--slate); background: rgba(17, 29, 58, 0.5); padding: 0.75rem; border-radius: 6px;">
-                        ✔ Checkout triggers instant stock locking in Redis, automated GST PDF invoice dispatch, and payment gateway settlement.
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

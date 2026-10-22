@@ -220,123 +220,159 @@ document.addEventListener('DOMContentLoaded', () => {
   animateElements();
 
   // ======================================================================
-  // 7. Floating Particle System (Canvas)
+  // 7. Neural Constellation Canvas (Reactive Background Motion)
   // ======================================================================
-  const initParticles = () => {
+  const initNeuralCanvas = () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const canvas = document.createElement('canvas');
-    canvas.id = 'particleCanvas';
-    canvas.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;';
-    document.body.prepend(canvas);
+    const canvas = document.getElementById('neural-canvas');
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let w, h;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
     let particles = [];
-    const PARTICLE_COUNT = Math.min(50, Math.floor(window.innerWidth / 30));
+    const maxDistance = 145;
 
-    const colors = [
-      'rgba(59, 130, 246, 0.3)',   // blue
-      'rgba(139, 92, 246, 0.25)',  // violet
-      'rgba(236, 72, 153, 0.2)',   // magenta
-      'rgba(6, 214, 160, 0.25)',   // cyan-green
-      'rgba(34, 211, 238, 0.2)',   // cyan
-      'rgba(249, 115, 22, 0.15)',  // orange
-    ];
+    const mouse = {
+      x: null,
+      y: null,
+      radius: 130
+    };
 
     const resize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    }, { passive: true });
+
+    window.addEventListener('mouseout', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener('resize', resize);
+
+    const particleCount = Math.min(Math.floor((width * height) / 18000), 75);
+
+    const colors = [
+      { r: 6, g: 214, b: 160 },   // cyan-green (#06D6A0)
+      { r: 59, g: 130, b: 246 },  // electric blue (#3B82F6)
+      { r: 139, g: 92, b: 246 },  // violet (#8B5CF6)
+      { r: 56, g: 189, b: 248 },  // sky blue (#38BDF8)
+      { r: 236, g: 72, b: 153 }   // pink (#EC4899)
+    ];
 
     class Particle {
       constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.65;
+        this.vy = (Math.random() - 0.5) * 0.65;
+        this.baseRadius = Math.random() * 2 + 1;
+        this.radius = this.baseRadius;
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.opacity = Math.random() * 0.5 + 0.2;
-        this.pulseSpeed = Math.random() * 0.02 + 0.005;
-        this.pulsePhase = Math.random() * Math.PI * 2;
       }
-      update(t) {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.opacity = 0.2 + Math.sin(t * this.pulseSpeed + this.pulsePhase) * 0.15;
 
-        if (this.x < -10) this.x = w + 10;
-        if (this.x > w + 10) this.x = -10;
-        if (this.y < -10) this.y = h + 10;
-        if (this.y > h + 10) this.y = -10;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.opacity;
-        ctx.fill();
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
 
-        // Subtle glow
-        if (this.size > 1.5) {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = this.opacity * 0.1;
-          ctx.fill();
-        }
-      }
-    }
+        // Bounce off screen boundaries
+        if (this.x < 0 || this.x > width) this.vx = -this.vx;
+        if (this.y < 0 || this.y > height) this.vy = -this.vy;
 
-    resize();
-    window.addEventListener('resize', resize);
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push(new Particle());
-    }
-
-    let frame = 0;
-    const animate = () => {
-      ctx.clearRect(0, 0, w, h);
-      ctx.globalAlpha = 1;
-      frame++;
-
-      particles.forEach(p => {
-        p.update(frame);
-        p.draw();
-      });
-
-      // Draw connections between nearby particles
-      ctx.globalAlpha = 0.06;
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
+        // React to mouse / touch proximity
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = particles[i].color;
-            ctx.globalAlpha = 0.03 * (1 - dist / 150);
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
+
+          if (dist < mouse.radius) {
+            const angle = Math.atan2(dy, dx);
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x -= Math.cos(angle) * force * 2.8;
+            this.y -= Math.sin(angle) * force * 2.8;
+            this.radius = this.baseRadius * 1.5;
+          } else {
+            this.radius = this.baseRadius;
           }
         }
       }
 
-      requestAnimationFrame(animate);
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.5)`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    const connectParticles = () => {
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            const opacity = (1 - dist / maxDistance) * 0.28;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
+            ctx.lineWidth = 0.75;
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    let animationId;
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      connectParticles();
+      animationId = requestAnimationFrame(animate);
     };
 
     animate();
   };
 
-  initParticles();
+  initNeuralCanvas();
 
   // ======================================================================
   // 8. Animated Counter (for stat numbers)
@@ -814,6 +850,217 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   };
+
+  // ======================================================================
+  // 16. Reading Progress Bar Engine
+  // ======================================================================
+  const initScrollProgress = () => {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    const onScroll = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      bar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  };
+
+  initScrollProgress();
+
+  // ======================================================================
+  // 17. Typewriter Hero Animation
+  // ======================================================================
+  const initTypewriter = () => {
+    const el = document.getElementById('typewriter');
+    if (!el) return;
+
+    const phrases = [
+      'Enterprise AI & RAG Architectures',
+      'Zero-Defect Web Systems & Portals',
+      'Autonomous Multi-Tool AI Agents',
+      'High-Throughput FastAPI & Node.js',
+      'SaaS MVP Engineering & Scale'
+    ];
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 75;
+
+    const type = () => {
+      const current = phrases[phraseIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 35;
+      } else {
+        el.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 80;
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        typeSpeed = 2200; // Hold full phrase
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 400;
+      }
+
+      setTimeout(type, typeSpeed);
+    };
+
+    type();
+  };
+
+  initTypewriter();
+
+  // ======================================================================
+  // 18. Hero Interactive Terminal Tabs
+  // ======================================================================
+  const initHeroTerminalTabs = () => {
+    const tabBtns = document.querySelectorAll('.terminal-tab-btn');
+    const panes = document.querySelectorAll('.terminal-pane');
+    if (!tabBtns.length || !panes.length) return;
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        tabBtns.forEach(b => {
+          const isCurrent = b === btn;
+          b.classList.toggle('active', isCurrent);
+          b.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        });
+        panes.forEach(pane => {
+          pane.classList.toggle('active', pane.id === `pane-${target}`);
+        });
+      });
+    });
+  };
+
+  initHeroTerminalTabs();
+
+  // ======================================================================
+  // 19. 3D Card Tilt on Mouse Move
+  // ======================================================================
+  const init3DTilt = () => {
+    if (window.innerWidth < 820) return; // Prevent heavy 3D calculations on mobile
+
+    const tiltCards = document.querySelectorAll('.card-tilt, .clean-project-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+        card.style.transition = 'transform 0.4s ease';
+      });
+
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'none';
+      });
+    });
+  };
+
+  init3DTilt();
+
+  // ======================================================================
+  // 20. Back to Top Floating Button
+  // ======================================================================
+  const initBackToTop = () => {
+    const btn = document.getElementById('backToTopBtn');
+    if (!btn) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 350) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
+  initBackToTop();
+
+  // ======================================================================
+  // 21. Interactive ROI & System Efficiency Calculator
+  // ======================================================================
+  const initRoiCalculator = () => {
+    const teamSlider = document.getElementById('roiTeamSlider');
+    const hoursSlider = document.getElementById('roiHoursSlider');
+    const teamVal = document.getElementById('roiTeamVal');
+    const hoursVal = document.getElementById('roiHoursVal');
+    const savingsVal = document.getElementById('roiSavingsVal');
+    const hoursSavedVal = document.getElementById('roiHoursSavedVal');
+    const timelineVal = document.getElementById('roiTimelineVal');
+
+    if (!teamSlider || !hoursSlider) return;
+
+    const calculate = () => {
+      const team = parseInt(teamSlider.value, 10) || 12;
+      const hours = parseInt(hoursSlider.value, 10) || 10;
+
+      if (teamVal) teamVal.textContent = `${team} Engineers / Staff`;
+      if (hoursVal) hoursVal.textContent = `${hours} hrs / week / person`;
+
+      // 50 working weeks/year, average blended wage $45/hr, 75% automated recovery
+      const totalHoursWasted = team * hours * 50;
+      const savedHours = Math.round(totalHoursWasted * 0.75);
+      const dollarSavings = Math.round(savedHours * 45);
+
+      if (hoursSavedVal) hoursSavedVal.textContent = `${savedHours.toLocaleString()} hrs / yr`;
+      if (savingsVal) savingsVal.textContent = `$${dollarSavings.toLocaleString()}`;
+      if (timelineVal) {
+        timelineVal.textContent = team > 25 ? '3 - 5 Sprints' : '2 - 3 Sprints';
+      }
+    };
+
+    teamSlider.addEventListener('input', calculate);
+    hoursSlider.addEventListener('input', calculate);
+    calculate();
+  };
+
+  initRoiCalculator();
+
+  // ======================================================================
+  // 22. Mobile Navigation Dropdown Accordions
+  // ======================================================================
+  const initMobileDropdowns = () => {
+    const toggles = document.querySelectorAll('.nav-dropdown-toggle');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const parent = toggle.closest('.nav-item-dropdown');
+        if (!parent) return;
+        const dropdown = parent.querySelector('.nav-dropdown');
+        if (!dropdown) return;
+
+        const isExpanded = dropdown.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', String(isExpanded));
+      });
+    });
+  };
+
+  initMobileDropdowns();
 
   initDemoModal();
 });

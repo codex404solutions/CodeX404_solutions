@@ -97,10 +97,30 @@
     line-height: 1.5;
   }
 
+  /* Top Announcement Bar Responsive */
+  .top-announcement-container {
+    flex-direction: column !important;
+    gap: 0.25rem !important;
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .top-announcement-right {
+    display: none !important;
+  }
+
+  .top-announcement-text {
+    font-size: 0.75rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
   .site-header {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: #060B18 !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    background: rgba(6, 11, 24, 0.95) !important;
     position: sticky;
     top: 0;
     z-index: 10000;
@@ -108,29 +128,29 @@
 
   .nav-menu {
     position: fixed !important;
-    top: 68px !important;
+    top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
     width: 100vw !important;
-    height: calc(100vh - 68px) !important;
-    height: calc(100dvh - 68px) !important;
-    background: #060B18 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: rgba(6, 11, 24, 0.98) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
-    padding: 1.25rem 1.25rem 4rem 1.25rem !important;
-    gap: 0.35rem !important;
+    padding: 5.5rem 1.5rem 3rem 1.5rem !important;
+    gap: 0.45rem !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     transform: translateX(100%) !important;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    z-index: 99999 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    z-index: 9999 !important;
+    border-top: none !important;
   }
 
   .nav-menu.open {
@@ -330,22 +350,37 @@
     font-size: 2rem;
   }
 
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .btn-lg {
-    padding: 1rem 1.8rem;
+    padding: 0.9rem 1.4rem;
     font-size: 0.95rem;
   }
 
   .card {
-    padding: 1.75rem;
-  }
-
-  .process-step {
     padding: 1.5rem;
   }
 
-  /* Hide particles on very small screens */
-  #particleCanvas {
-    display: none;
+  .process-step {
+    padding: 1.25rem;
+  }
+
+  .arch-svg-banner {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem 0.5rem;
+  }
+
+  .arch-svg-banner svg {
+    min-width: 650px;
   }
 }
 
