@@ -420,49 +420,42 @@ $flash = get_admin_flash();
             background: var(--cx-ticker-bg);
             border: 1px solid var(--cx-border);
             border-radius: 14px;
-            padding: 0.65rem 0;
+            padding: 0.5rem 0.75rem;
             overflow: hidden;
             margin-bottom: 1.5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             display: flex;
             align-items: center;
-        }
-
-        .admin-marquee-wrap::before,
-        .admin-marquee-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 40px;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .admin-marquee-wrap::before {
-            left: 0;
-            background: linear-gradient(90deg, var(--cx-ticker-bg) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        .admin-marquee-wrap::after {
-            right: 0;
-            background: linear-gradient(270deg, var(--cx-ticker-bg) 0%, rgba(0,0,0,0) 100%);
+            gap: 0.75rem;
         }
 
         .admin-marquee-label {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0 1rem;
+            gap: 0.45rem;
+            padding: 0.35rem 0.75rem;
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--cx-cyan);
-            border-right: 1px solid var(--cx-border);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 9999px;
             flex-shrink: 0;
-            z-index: 4;
-            background: var(--cx-ticker-bg);
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .admin-marquee-viewport {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
         }
 
         .admin-marquee-track {
@@ -1077,79 +1070,81 @@ $flash = get_admin_flash();
             <span class="live-dot" style="width: 6px; height: 6px;"></span>
             <span>Live Telemetry</span>
         </div>
-        <div class="admin-marquee-track">
-            <!-- Set 1 -->
-            <div class="admin-marquee-item">
-                <i class="bi bi-collection-play-fill text-info"></i>
-                <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-check-circle-fill text-success"></i>
-                <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-shield-lock-fill text-warning"></i>
-                <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-cpu-fill text-primary"></i>
-                <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-robot text-warning"></i>
-                <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-globe-americas text-info"></i>
-                <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-lightning-charge-fill text-warning"></i>
-                <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
+        <div class="admin-marquee-viewport">
+            <div class="admin-marquee-track">
+                <!-- Set 1 -->
+                <div class="admin-marquee-item">
+                    <i class="bi bi-collection-play-fill text-info"></i>
+                    <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-check-circle-fill text-success"></i>
+                    <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-shield-lock-fill text-warning"></i>
+                    <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-cpu-fill text-primary"></i>
+                    <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-robot text-warning"></i>
+                    <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-globe-americas text-info"></i>
+                    <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i>
+                    <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
 
-            <!-- Set 2 (Duplicate for Infinite Smooth Loop) -->
-            <div class="admin-marquee-item">
-                <i class="bi bi-collection-play-fill text-info"></i>
-                <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-check-circle-fill text-success"></i>
-                <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-shield-lock-fill text-warning"></i>
-                <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-cpu-fill text-primary"></i>
-                <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-robot text-warning"></i>
-                <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-globe-americas text-info"></i>
-                <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-lightning-charge-fill text-warning"></i>
-                <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
-                <span class="sep">&bull;</span>
+                <!-- Set 2 (Duplicate for Infinite Smooth Loop) -->
+                <div class="admin-marquee-item">
+                    <i class="bi bi-collection-play-fill text-info"></i>
+                    <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-check-circle-fill text-success"></i>
+                    <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-shield-lock-fill text-warning"></i>
+                    <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-cpu-fill text-primary"></i>
+                    <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-robot text-warning"></i>
+                    <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-globe-americas text-info"></i>
+                    <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
+                <div class="admin-marquee-item">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i>
+                    <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
+                    <span class="sep">&bull;</span>
+                </div>
             </div>
         </div>
     </div>

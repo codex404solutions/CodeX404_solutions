@@ -971,11 +971,12 @@ $csrfToken = CrmSecurity::csrfToken();
             background: rgba(17, 24, 39, 0.7);
             border: 1px solid var(--cx-border);
             border-radius: 12px;
-            padding: 0.65rem 0;
+            padding: 0.5rem 0.75rem;
             overflow: hidden;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
+            gap: 0.75rem;
             backdrop-filter: blur(8px);
         }
 
@@ -985,50 +986,40 @@ $csrfToken = CrmSecurity::csrfToken();
             border-color: #E2E8F0 !important;
         }
 
-        .crm-marquee-wrap::before,
-        .crm-marquee-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 40px;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .crm-marquee-wrap::before {
-            left: 0;
-            background: linear-gradient(90deg, #111827 0%, rgba(17, 24, 39, 0) 100%);
-        }
-
-        [data-bs-theme="light"] .crm-marquee-wrap::before,
-        [data-bs-theme="combo"] .crm-marquee-wrap::before {
-            background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
-        }
-
-        .crm-marquee-wrap::after {
-            right: 0;
-            background: linear-gradient(270deg, #111827 0%, rgba(17, 24, 39, 0) 100%);
-        }
-
-        [data-bs-theme="light"] .crm-marquee-wrap::after,
-        [data-bs-theme="combo"] .crm-marquee-wrap::after {
-            background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
-        }
-
         .crm-marquee-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0 1rem;
+            gap: 0.45rem;
+            padding: 0.35rem 0.75rem;
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--cx-cyan);
-            border-right: 1px solid var(--cx-border);
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 9999px;
             flex-shrink: 0;
-            z-index: 4;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        [data-bs-theme="light"] .crm-marquee-badge,
+        [data-bs-theme="combo"] .crm-marquee-badge {
+            background: rgba(14, 165, 233, 0.1) !important;
+            border-color: rgba(14, 165, 233, 0.25) !important;
+            color: #0284c7 !important;
+        }
+
+        .crm-marquee-viewport {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
         }
 
         .crm-marquee-track {
@@ -1622,89 +1613,91 @@ $csrfToken = CrmSecurity::csrfToken();
                     <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span>
                     <span>Live Intelligence</span>
                 </div>
-                <div class="crm-marquee-track">
-                    <!-- Set 1 -->
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-currency-exchange text-warning"></i>
-                        <span>1 USD = <strong>₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> INR</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-currency-euro text-info"></i>
-                        <span>1 USD = <strong>€<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> EUR</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-currency-pound text-primary"></i>
-                        <span>1 USD = <strong>£<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?> GBP</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-cash-stack text-success"></i>
-                        <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-robot text-info"></i>
-                        <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-graph-up-arrow text-success"></i>
-                        <span>Pipeline Value: <strong class="currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-shield-check text-warning"></i>
-                        <span>HITL Queue: <strong><?= count($pendingApprovals) ?> Pending Decisions</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-lightning-charge-fill text-warning"></i>
-                        <span>Lead Velocity: <strong><?= $totalLeads ?> Total &bull; <?= $activeLeads ?> Active Inbound</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
+                <div class="crm-marquee-viewport">
+                    <div class="crm-marquee-track">
+                        <!-- Set 1 -->
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-currency-exchange text-warning"></i>
+                            <span>1 USD = <strong>₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> INR</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-currency-euro text-info"></i>
+                            <span>1 USD = <strong>€<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> EUR</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-currency-pound text-primary"></i>
+                            <span>1 USD = <strong>£<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?> GBP</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-cash-stack text-success"></i>
+                            <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-robot text-info"></i>
+                            <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-graph-up-arrow text-success"></i>
+                            <span>Pipeline Value: <strong class="currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-shield-check text-warning"></i>
+                            <span>HITL Queue: <strong><?= count($pendingApprovals) ?> Pending Decisions</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-lightning-charge-fill text-warning"></i>
+                            <span>Lead Velocity: <strong><?= $totalLeads ?> Total &bull; <?= $activeLeads ?> Active Inbound</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
 
-                    <!-- Set 2 (Duplicate for Infinite Smooth Loop) -->
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-currency-exchange text-warning"></i>
-                        <span>1 USD = <strong>₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> INR</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-currency-euro text-info"></i>
-                        <span>1 USD = <strong>€<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> EUR</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-currency-pound text-primary"></i>
-                        <span>1 USD = <strong>£<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?> GBP</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-cash-stack text-success"></i>
-                        <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-robot text-info"></i>
-                        <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-graph-up-arrow text-success"></i>
-                        <span>Pipeline Value: <strong class="currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-shield-check text-warning"></i>
-                        <span>HITL Queue: <strong><?= count($pendingApprovals) ?> Pending Decisions</strong></span>
-                        <span class="sep">&bull;</span>
-                    </div>
-                    <div class="crm-marquee-item">
-                        <i class="bi bi-lightning-charge-fill text-warning"></i>
-                        <span>Lead Velocity: <strong><?= $totalLeads ?> Total &bull; <?= $activeLeads ?> Active Inbound</strong></span>
-                        <span class="sep">&bull;</span>
+                        <!-- Set 2 (Duplicate for Infinite Smooth Loop) -->
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-currency-exchange text-warning"></i>
+                            <span>1 USD = <strong>₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> INR</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-currency-euro text-info"></i>
+                            <span>1 USD = <strong>€<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> EUR</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-currency-pound text-primary"></i>
+                            <span>1 USD = <strong>£<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?> GBP</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-cash-stack text-success"></i>
+                            <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-robot text-info"></i>
+                            <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-graph-up-arrow text-success"></i>
+                            <span>Pipeline Value: <strong class="currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-shield-check text-warning"></i>
+                            <span>HITL Queue: <strong><?= count($pendingApprovals) ?> Pending Decisions</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
+                        <div class="crm-marquee-item">
+                            <i class="bi bi-lightning-charge-fill text-warning"></i>
+                            <span>Lead Velocity: <strong><?= $totalLeads ?> Total &bull; <?= $activeLeads ?> Active Inbound</strong></span>
+                            <span class="sep">&bull;</span>
+                        </div>
                     </div>
                 </div>
             </div>
