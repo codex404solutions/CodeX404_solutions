@@ -1,13 +1,122 @@
 <?php
-$pageTitle = 'Insights for founders building durable digital systems | CodeX404 Solutions';
-$pageDescription = 'Practical notes on custom web development, product scope, performance, and automation for growing businesses.';
-require_once __DIR__ . '/includes/header-v2.php';
+declare(strict_types=1);
+
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/security.php';
+
+$pageMeta = [
+    'title' => 'Engineering Insights & Architectural Briefs | CodeX404 Solutions',
+    'description' => 'Practical engineering notes on custom software systems, booking engines, performance optimization, and AI automation by CodeX404 Solutions.',
+    'canonical' => url('blog.php'),
+    'keywords' => 'software engineering blog, booking system architecture, high performance web, AI workflow automation'
+];
+
+require_once __DIR__ . '/includes/header.php';
 ?>
-<section class="page-hero"><div class="container"><span class="eyebrow">Insights and proof</span><h1>Useful thinking before the build.</h1><p>A small editorial surface for the decisions that make software projects clearer: what to build, what to measure, and what to refuse.</p></div></section>
-<section class="section" style="padding-top:0"><div class="container"><div class="grid-3">
-  <article class="card article-card"><span class="eyebrow">Founder guide</span><h3 style="margin-top:16px">The website diagnostic before the rebuild</h3><p>Why a focused diagnostic can reveal whether the problem is speed, message, conversion path, ownership, or the underlying system.</p><time>Draft topic · 7 min read</time><span class="tag">Conversion</span></article>
-  <article class="card article-card"><span class="eyebrow">Engineering</span><h3 style="margin-top:16px">How to scope an MVP without creating a second job</h3><p>A practical filter for choosing the one core loop that deserves to exist in version one.</p><time>Draft topic · 6 min read</time><span class="tag">Product scope</span></article>
-  <article class="card article-card"><span class="eyebrow">Operations</span><h3 style="margin-top:16px">From contact form to accountable follow-up</h3><p>How a lead should move from capture to qualification to a human-approved next action without becoming an automation black box.</p><time>Draft topic · 8 min read</time><span class="tag">CRM</span></article>
-</div></div></section>
-<section class="section" id="case-study-proof"><div class="container"><div class="callout"><span class="eyebrow">Evidence checklist</span><h2 style="margin-top:14px">A case study is not a claim generator.</h2><p class="lead">Before publishing a result, attach the client permission, baseline, measurement period, scope of work, and a verifiable outcome. Until then, describe the work without inventing numbers, testimonials, or performance guarantees.</p><div class="cta-row"><a class="btn btn-secondary" href="mailto:contact@codex404solutions.online">Share verified project evidence</a></div></div></div></section>
-<?php require_once __DIR__ . '/includes/footer-v2.php'; ?>
+
+<!-- ==========================================================================
+     HERO SECTION
+     ========================================================================== -->
+<section class="page-hero-section" style="padding-top: calc(var(--nav-height) + 3.5rem); padding-bottom: 3rem; text-align: center;">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <div class="hero-pill" style="margin: 0 auto 1.5rem auto;">
+            <span class="dot"></span>
+            <span>Senior Architectural Insights • Practical Engineering</span>
+        </div>
+
+        <h1 class="hero-headline" style="font-size: clamp(2.25rem, 4.2vw, 3.5rem); margin-bottom: 1.25rem;">
+            Engineering & Strategy <span class="text-gradient gradient-text-animated">Before the Build</span>
+        </h1>
+
+        <p class="hero-description" style="margin: 0 auto 2.25rem auto; font-size: 1.15rem; color: var(--slate); max-width: 720px; line-height: 1.7;">
+            Architectural decisions that make software systems resilient: what to build, what to measure, and how to avoid costly rework.
+        </p>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     ARTICLES GRID
+     ========================================================================== -->
+<section class="section" style="padding-top: 0; padding-bottom: 4rem;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            
+            <article class="clean-project-card card-tilt" style="padding: 2.25rem;">
+                <div class="cpc-header" style="margin-bottom: 1rem;">
+                    <span class="cpc-category">Architecture Brief</span>
+                    <span class="cpc-badge"><span class="cpc-dot"></span>7 min read</span>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.85rem; line-height: 1.35;">
+                    Engineering High-Traffic Booking Engines: Zero Double-Booking Architecture
+                </h3>
+                <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                    How transactional database isolation, Redis slot locks, and optimistic concurrency guards prevent appointment collisions in dental clinics and busy restaurants.
+                </p>
+                <div class="cpc-tags" style="margin-top: auto;">
+                    <span class="cpc-tag">Booking Architecture</span>
+                    <span class="cpc-tag">Concurrency</span>
+                    <span class="cpc-tag">MySQL & Redis</span>
+                </div>
+            </article>
+
+            <article class="clean-project-card card-tilt" style="padding: 2.25rem;">
+                <div class="cpc-header" style="margin-bottom: 1rem;">
+                    <span class="cpc-category">Product Strategy</span>
+                    <span class="cpc-badge"><span class="cpc-dot"></span>6 min read</span>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.85rem; line-height: 1.35;">
+                    Scoping MVPs Without Creating Technical Debt: The Single Core Loop
+                </h3>
+                <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                    A rigorous filter for choosing the one primary feedback loop that delivers 80% of client business value before expanding into peripheral features.
+                </p>
+                <div class="cpc-tags" style="margin-top: auto;">
+                    <span class="cpc-tag">MVP Engineering</span>
+                    <span class="cpc-tag">Scope Control</span>
+                    <span class="cpc-tag">Product Velocity</span>
+                </div>
+            </article>
+
+            <article class="clean-project-card card-tilt" style="padding: 2.25rem;">
+                <div class="cpc-header" style="margin-bottom: 1rem;">
+                    <span class="cpc-category">Automation</span>
+                    <span class="cpc-badge"><span class="cpc-dot"></span>8 min read</span>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.85rem; line-height: 1.35;">
+                    From Lead Intake to Accountable Action via WhatsApp Webhooks
+                </h3>
+                <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                    How inbound customer leads should transition from webhook capture to qualification and human approval without turning into an unmonitored automation black box.
+                </p>
+                <div class="cpc-tags" style="margin-top: auto;">
+                    <span class="cpc-tag">WhatsApp API</span>
+                    <span class="cpc-tag">Webhooks</span>
+                    <span class="cpc-tag">Audit Trail</span>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     DIRECT CALL TO ACTION
+     ========================================================================== -->
+<section class="section" style="padding-top: 0; padding-bottom: 5rem;">
+    <div class="container">
+        <div style="background: rgba(10, 22, 40, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 3rem; text-align: center;">
+            <h2 style="font-size: 1.85rem; color: #FFFFFF; font-weight: 800; margin-bottom: 1rem;">
+                Need Architectural Guidance for Your System?
+            </h2>
+            <p style="color: var(--slate); font-size: 1.05rem; max-width: 620px; margin: 0 auto 2rem auto; line-height: 1.6;">
+                Reach out to senior engineer Muhammad Noukhez on WhatsApp (+91 77177 47620) for practical system design feedback.
+            </p>
+            <a href="https://wa.me/917717747620?text=Hi%20Muhammad,%20I%20read%20your%20engineering%20insights%20and%20want%20to%20discuss%20a%20project." 
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                <span>💬 Connect on WhatsApp (+91 77177 47620)</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

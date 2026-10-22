@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/config.php';
 
-$whatsappUrl = defined('COMPANY_WHATSAPP_URL') ? COMPANY_WHATSAPP_URL : 'https://wa.me/919934240704?text=Hi%20CodeX404%20Solutions%2C%20I%20would%20like%20to%20discuss%20a%20software%2Fengineering%20project.';
+$whatsappUrl = defined('COMPANY_WHATSAPP_URL') ? COMPANY_WHATSAPP_URL : 'https://wa.me/917717747620?text=Hi%20CodeX404%20Solutions%2C%20I%20would%20like%20to%20discuss%20a%20software%2Fengineering%20project.';
 ?>
 <!-- ==========================================================================
      FLOATING WHATSAPP BUTTON (ONLY WHATSAPP FLOATS)

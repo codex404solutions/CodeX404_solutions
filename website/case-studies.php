@@ -206,6 +206,53 @@ require_once __DIR__ . '/includes/header.php';
                     <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
                         ✓ 100% fitment accuracy; inquiry conversions increased by 85%
                     </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 5: TURNKEY BOOKING & APPOINTMENT SYSTEMS -->
+            <div class="card" style="padding: 2.75rem; border-color: rgba(6, 214, 160, 0.35); box-shadow: 0 10px 30px rgba(6, 214, 160, 0.08);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <span class="tag-chip" style="color: #06D6A0; border-color: rgba(6, 214, 160, 0.4);">Healthcare, Wellness & Hospitality Automation</span>
+                        <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--white);">Turnkey Appointment & Booking Platforms (Dental, Salon, Parlour & Restaurant)</h2>
+                        <a href="https://smiledental.codex404solutions.online" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; font-family: var(--font-mono);">
+                            <span>smiledental.codex404solutions.online</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </a>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 0.85rem; color: var(--slate-dark); display: block;">Tech Stack: PHP 8.4 • MySQL Transactions • WhatsApp Webhooks • Redis Slot Locks</span>
+                        <span style="font-size: 0.8rem; color: #94A3B8; display: block; margin-top: 0.25rem;">Multi-Tenant & Mobile Responsive</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2" style="margin-bottom: 1.75rem; gap: 2rem;">
+                    <div style="background: rgba(239, 68, 68, 0.03); padding: 1.5rem; border-radius: var(--radius-md); border-left: 3px solid #F87171;">
+                        <h4 style="color: #F87171; margin-bottom: 0.5rem; font-size: 1.1rem;">The Operational Bottleneck</h4>
+                        <p style="font-size: 0.925rem; line-height: 1.6; color: var(--slate);">
+                            Dental practices, hair styling salons, luxury beauty parlours, and high-volume dining restaurants struggled with manual phone-desk booking bottlenecks, chair collisions, late cancellations, and idle staff hours that drained 20–30% of potential revenue.
+                        </p>
+                    </div>
+                    <div style="background: rgba(52, 211, 153, 0.03); padding: 1.5rem; border-radius: var(--radius-md); border-left: 3px solid #34D399;">
+                        <h4 style="color: #34D399; margin-bottom: 0.5rem; font-size: 1.1rem;">The Engineering Solution</h4>
+                        <p style="font-size: 0.925rem; line-height: 1.6; color: var(--slate);">
+                            Engineered high-concurrency booking architectures featuring atomic database slot locking, doctor/stylist allocation, treatment package menus, table floor plan maps, deposit checkout protection, and instant multi-channel WhatsApp/SMS appointment confirmations.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(7, 17, 31, 0.6); padding: 1.25rem 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div class="card-tags" style="border: none; padding: 0; margin: 0;">
+                        <span class="tag-chip">Slot-Lock Guard</span>
+                        <span class="tag-chip">Doctor / Chair Allocation</span>
+                        <span class="tag-chip">Interactive Floor Plan</span>
+                        <span class="tag-chip">WhatsApp Alerts</span>
+                        <span class="tag-chip">Sub-30s Booking Flow</span>
+                    </div>
+                    <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
+                        ✓ Zero double-bookings; 98.7% verified customer arrival rate
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -33,25 +33,40 @@ require_once __DIR__ . '/includes/header.php';
         $portfolioProjects = \App\Services\ProjectService::getActive();
         $countAll = count($portfolioProjects);
         $countSoftware = count(array_filter($portfolioProjects, fn($p) => ($p['category'] ?? '') === 'software'));
+        $countBooking = count(array_filter($portfolioProjects, fn($p) => ($p['category'] ?? '') === 'booking'));
         $countCommerce = count(array_filter($portfolioProjects, fn($p) => ($p['category'] ?? '') === 'commerce'));
         $countMobile = count(array_filter($portfolioProjects, fn($p) => ($p['category'] ?? '') === 'mobile'));
         $countAi = count(array_filter($portfolioProjects, fn($p) => ($p['category'] ?? '') === 'ai'));
         ?>
         <!-- Filter Controls -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
-            <button type="button" class="btn btn-secondary btn-sm filter-btn active" data-filter="all">All Projects (<?= $countAll ?>)</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="software">School ERP & Software (<?= $countSoftware ?>)</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="commerce">E-Commerce & Catalogs (<?= $countCommerce ?>)</button>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="mobile">Mobile & PWA (<?= $countMobile ?>)</button>
+        <div class="project-filter-bar" role="tablist" aria-label="Project Categories"
+            style="display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 2.75rem; flex-wrap: wrap;">
+            <button type="button" class="project-filter-btn active" data-filter="all">
+                <span>✦</span> All (<?= $countAll ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="booking">
+                <span>📅</span> Booking Systems (<?= $countBooking ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="software">
+                <span>🏫</span> School & Institutional (<?= $countSoftware ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="commerce">
+                <span>🛍️</span> E-Commerce (<?= $countCommerce ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="mobile">
+                <span>📱</span> Mobile & PWA (<?= $countMobile ?>)
+            </button>
             <?php if ($countAi > 0): ?>
-            <button type="button" class="btn btn-secondary btn-sm filter-btn" data-filter="ai">AI & Automation (<?= $countAi ?>)</button>
+            <button type="button" class="project-filter-btn" data-filter="ai">
+                <span>🤖</span> AI & Automation (<?= $countAi ?>)
+            </button>
             <?php endif; ?>
         </div>
 
-        <!-- Portfolio Projects Grid -->
+        <!-- Portfolio Projects Grid (Compact & Sleek) -->
         <div class="project-showcase-grid">
             <?php foreach ($portfolioProjects as $p): ?>
-                <article class="clean-project-card" data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
+                <article class="project-card clean-project-card card-tilt" data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
                     <div>
                         <!-- Header with meta & verified live domain -->
                         <div class="cpc-header">
@@ -59,13 +74,13 @@ require_once __DIR__ . '/includes/header.php';
                                 <span class="cpc-category"><?= htmlspecialchars($p['category_label'] ?? 'Custom Software') ?></span>
                                 <span class="cpc-badge">
                                     <span class="cpc-dot"></span>
-                                    <?= htmlspecialchars($p['badge_text'] ?? 'Production Live') ?>
+                                    <?= htmlspecialchars($p['badge_text'] ?? 'Live') ?>
                                 </span>
                             </div>
                             <?php if (!empty($p['live_url'])): ?>
                                 <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-domain-pill" title="Visit Live Website">
                                     <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
-                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                                 </a>
                             <?php else: ?>
                                 <span class="cpc-domain-pill">
@@ -76,25 +91,25 @@ require_once __DIR__ . '/includes/header.php';
 
                         <!-- Card Body -->
                         <div class="cpc-body">
-                            <h2 class="cpc-title" style="font-size: 1.3rem;">
+                            <h3 class="cpc-title">
                                 <?php if (!empty($p['live_url'])): ?>
                                     <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" title="Visit <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
                                 <?php else: ?>
                                     <?= htmlspecialchars($p['title']) ?>
                                 <?php endif; ?>
-                            </h2>
+                            </h3>
                             <p class="cpc-description"><?= htmlspecialchars($p['solution'] ?? $p['description'] ?? '') ?></p>
                             
                             <?php if (!empty($p['metric'])): ?>
                                 <div class="cpc-metric">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                     <span><?= htmlspecialchars($p['metric']) ?></span>
                                 </div>
                             <?php endif; ?>
 
                             <?php if (!empty($p['tags'])): ?>
                                 <div class="cpc-tags">
-                                    <?php foreach (array_slice($p['tags'], 0, 5) as $tag): ?>
+                                    <?php foreach (array_slice($p['tags'], 0, 3) as $tag): ?>
                                         <span class="cpc-tag"><?= htmlspecialchars($tag) ?></span>
                                     <?php endforeach; ?>
                                 </div>
@@ -103,16 +118,14 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <!-- Clean Actions -->
-                    <div class="cpc-actions">
+                    <div class="cpc-footer">
                         <?php if (!empty($p['live_url'])): ?>
                             <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-btn cpc-btn-primary" title="Visit Live Site">
-                                Visit Live Site
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                <span>Live Site ↗</span>
                             </a>
                         <?php endif; ?>
-                        <a href="<?= url('index.php#project-' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-secondary" title="Try Demo on Homepage">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Interactive Demo
+                        <a href="<?= url('index.php#project-' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-secondary btn-demo-trigger" data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'wa') ?>" title="Interactive Sandbox">
+                            <span>⚡ Demo</span>
                         </a>
                     </div>
                 </article>

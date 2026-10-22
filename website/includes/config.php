@@ -115,8 +115,8 @@ define('COMPANY_TWITTER', 'https://x.com/codex404sol');
 define('COMPANY_INSTAGRAM', 'https://www.instagram.com/codex404solutions/');
 define('COMPANY_FACEBOOK', 'https://www.facebook.com/codex404solutions/');
 define('COMPANY_YOUTUBE', 'https://www.youtube.com/@codex404solutions');
-define('COMPANY_WHATSAPP_NUMBER', '+919934240704');
-define('COMPANY_WHATSAPP_URL', 'https://wa.me/919934240704?text=Hi%20CodeX404%20Solutions%2C%20I%20would%20like%20to%20discuss%20a%20software%2Fengineering%20project.');
+define('COMPANY_WHATSAPP_NUMBER', '+91 77177 47620');
+define('COMPANY_WHATSAPP_URL', 'https://wa.me/917717747620?text=Hi%20CodeX404%20Solutions%2C%20I%20would%20like%20to%20discuss%20a%20software%2Fengineering%20project.');
 define('COMPANY_LOCATION', 'India & Global Remote');
 
 // ---------------- LEADERSHIP ----------------

@@ -90,8 +90,11 @@ declare(strict_types=1);
                 <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 0.85rem;">
                     Book Discovery Call
                 </a>
-                <p style="font-size: 0.8rem; color: var(--slate-dark);">
+                <p style="font-size: 0.8rem; color: var(--slate-dark); margin-bottom: 0.35rem;">
                     Direct: <a href="mailto:<?= COMPANY_EMAIL ?>"><?= COMPANY_EMAIL ?></a>
+                </p>
+                <p style="font-size: 0.8rem; color: var(--slate-dark);">
+                    WhatsApp: <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener" style="color: var(--cyan); font-weight: 600;"><?= COMPANY_WHATSAPP_NUMBER ?></a>
                 </p>
             </div>
         </div>

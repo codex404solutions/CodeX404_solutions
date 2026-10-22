@@ -340,6 +340,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 <div class="col-12 col-md-4">
                     <label class="form-label" for="category">Filter Tab Category *</label>
                     <select id="category" name="category" class="form-select">
+                        <option value="booking" <?= ($project['category'] === 'booking') ? 'selected' : '' ?>>Online Booking &amp; Appointment Systems (booking)</option>
                         <option value="software" <?= ($project['category'] === 'software') ? 'selected' : '' ?>>Custom Software &amp; Portals (software)</option>
                         <option value="ai" <?= ($project['category'] === 'ai') ? 'selected' : '' ?>>AI Agents &amp; Automation (ai)</option>
                         <option value="commerce" <?= ($project['category'] === 'commerce') ? 'selected' : '' ?>>B2B Commerce &amp; Wholesale (commerce)</option>

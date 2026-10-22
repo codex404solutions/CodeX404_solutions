@@ -160,6 +160,7 @@ require_once __DIR__ . '/includes/header.php';
                         <div class="form-group">
                             <label for="subject" class="form-label">Primary Solution Needed</label>
                             <select id="subject" name="subject" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
+                                <option value="Turnkey Booking & Appointment System">Turnkey Booking System (Dental / Salon / Spa / Restaurant)</option>
                                 <option value="Custom Software Development">Custom Software / Web Platform</option>
                                 <option value="Enterprise AI & RAG">Enterprise AI & Knowledge Base (RAG)</option>
                                 <option value="Autonomous AI Agents">Autonomous AI Agents</option>

@@ -367,15 +367,19 @@ require_once __DIR__ . '/includes/header.php';
         $homepageProjects = \App\Services\ProjectService::getActive();
         $countAll = count($homepageProjects);
         $countSoftware = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'software'));
-        $countAi = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'ai'));
+        $countBooking = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'booking'));
         $countCommerce = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'commerce'));
         $countMobile = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'mobile'));
+        $countAi = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'ai'));
         ?>
         <!-- Category Filter Tabs -->
         <div class="project-filter-bar" role="tablist" aria-label="Project Categories"
             style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
             <button type="button" class="project-filter-btn active" data-filter="all">
                 <span>✦</span> All Work (<?= $countAll ?>)
+            </button>
+            <button type="button" class="project-filter-btn" data-filter="booking">
+                <span>📅</span> Booking & Appointments (<?= $countBooking ?>)
             </button>
             <button type="button" class="project-filter-btn" data-filter="software">
                 <span>🏫</span> School & Institutional (<?= $countSoftware ?>)
@@ -442,7 +446,7 @@ require_once __DIR__ . '/includes/header.php';
 
                             <?php if (!empty($p['metric'])): ?>
                                 <div class="cpc-metric">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg>
@@ -453,7 +457,7 @@ require_once __DIR__ . '/includes/header.php';
                             <!-- Tags -->
                             <?php if (!empty($p['tags']) && is_array($p['tags'])): ?>
                                 <div class="cpc-tags">
-                                    <?php foreach (array_slice($p['tags'], 0, 4) as $tag): ?>
+                                    <?php foreach (array_slice($p['tags'], 0, 3) as $tag): ?>
                                         <span class="cpc-tag"><?= htmlspecialchars($tag) ?></span>
                                     <?php endforeach; ?>
                                 </div>
@@ -463,20 +467,20 @@ require_once __DIR__ . '/includes/header.php';
 
                     <!-- Card Actions -->
                     <div class="cpc-footer">
-                        <button type="button" class="btn btn-secondary btn-sm btn-demo-trigger"
-                            data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>">
-                            <span>⚡ Interactive Demo</span>
-                        </button>
                         <?php if (!empty($p['live_url'])): ?>
                             <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
-                                class="btn btn-primary btn-sm">
+                                class="cpc-btn cpc-btn-primary">
                                 <span>Live Site ↗</span>
                             </a>
                         <?php else: ?>
-                            <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm">
+                            <a href="<?= url('discovery-call.php') ?>" class="cpc-btn cpc-btn-primary">
                                 <span>Request Spec</span>
                             </a>
                         <?php endif; ?>
+                        <button type="button" class="cpc-btn cpc-btn-secondary btn-demo-trigger"
+                            data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>">
+                            <span>⚡ Demo</span>
+                        </button>
                     </div>
                 </article>
             <?php endforeach; ?>
@@ -1075,6 +1079,7 @@ require_once __DIR__ . '/includes/header.php';
                             Area of Interest</label>
                         <select id="service_interest" name="service" class="form-control"
                             style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
+                            <option value="booking_system">Turnkey Booking System (Dental / Salon / Spa / Restaurant)</option>
                             <option value="custom_software">Custom Web Platform / Internal Portal</option>
                             <option value="enterprise_ai">Enterprise AI & RAG Pipeline</option>
                             <option value="ai_agents">Autonomous AI Agents</option>
