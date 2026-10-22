@@ -138,10 +138,44 @@ define('STORAGE_PATH', dirname(__DIR__) . '/storage');
 define('LOGS_PATH', STORAGE_PATH . '/logs');
 define('SUBMISSIONS_PATH', STORAGE_PATH . '/submissions');
 
-// Helper function to resolve internal page URLs
-function url(string $path = ''): string {
+/**
+ * Strips .php extension and normalizes index.php for clean, extensionless URLs.
+ */
+function clean_url_path(string $path = ''): string {
     $trimmed = ltrim($path, '/');
-    return BASE_URL . $trimmed;
+    if ($trimmed === '') {
+        return '';
+    }
+
+    // Preserve fragment (#...) and query string (?...)
+    $fragment = '';
+    $hashPos = strpos($trimmed, '#');
+    if ($hashPos !== false) {
+        $fragment = substr($trimmed, $hashPos);
+        $trimmed = substr($trimmed, 0, $hashPos);
+    }
+
+    $query = '';
+    $queryPos = strpos($trimmed, '?');
+    if ($queryPos !== false) {
+        $query = substr($trimmed, $queryPos);
+        $trimmed = substr($trimmed, 0, $queryPos);
+    }
+
+    // Normalize index.php to directory root
+    if ($trimmed === 'index.php' || $trimmed === 'index') {
+        $trimmed = '';
+    } elseif (str_ends_with(strtolower($trimmed), '.php')) {
+        $trimmed = substr($trimmed, 0, -4);
+    }
+
+    return $trimmed . $query . $fragment;
+}
+
+// Helper function to resolve internal page URLs without .php extension
+function url(string $path = ''): string {
+    $clean = clean_url_path($path);
+    return BASE_URL . $clean;
 }
 
 // Helper for asset URLs
@@ -149,7 +183,8 @@ function asset(string $path = ''): string {
     return BASE_URL . 'assets/' . ltrim($path, '/');
 }
 
-// Helper for admin panel URLs
+// Helper for admin panel URLs without .php extension
 function admin_url(string $path = ''): string {
-    return ADMIN_URL . ltrim($path, '/');
+    $clean = clean_url_path($path);
+    return ADMIN_URL . $clean;
 }

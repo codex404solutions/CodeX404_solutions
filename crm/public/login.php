@@ -12,7 +12,7 @@ require_once $crmRoot . '/app/Services/CrmSecurity.php';
 AuthService::startSession();
 
 if (AuthService::user() !== null) {
-    header('Location: index.php');
+    header('Location: ./');
     exit;
 }
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!CrmSecurity::verifyCsrf($_POST['csrf_token'] ?? null)) {
         $error = 'Security validation failed (CSRF token expired). Refresh and try again.';
     } elseif (AuthService::attempt((string)($_POST['email'] ?? ''), (string)($_POST['password'] ?? ''))) {
-        header('Location: index.php');
+        header('Location: ./');
         exit;
     } else {
         $error = AuthService::isConfigured()

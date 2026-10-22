@@ -2,121 +2,133 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://codex404solutions.online/</loc>
-        <lastmod>2026-10-06</lastmod>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/solutions.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/solutions</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/ai-solutions.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/pricing</loc>
+        <lastmod>2026-10-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://codex404solutions.online/ai-solutions</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/ai-agents.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/ai-agents</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/automation.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/automation</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/software-development.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/software-development</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/mobile-apps.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/mobile-apps</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/saas.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/saas</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/industries.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/industries</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/case-studies.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/case-studies</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.85</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/portfolio.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/portfolio</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/process.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/blog</loc>
+        <lastmod>2026-10-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://codex404solutions.online/process</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/about.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/about</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.75</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/engagement-models.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/engagement-models</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/security.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/security</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/faq.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/faq</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/contact.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/contact</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.85</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/discovery-call.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/discovery-call</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.95</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/privacy.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/privacy</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://codex404solutions.online/terms.php</loc>
-        <lastmod>2026-10-06</lastmod>
+        <loc>https://codex404solutions.online/terms</loc>
+        <lastmod>2026-10-22</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>

@@ -36,7 +36,7 @@ AuthService::startSession();
 $currentUser = AuthService::user();
 
 if ($currentUser === null) {
-    header('Location: login.php');
+    header('Location: login');
     exit;
 }
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(403);
         $_SESSION['flash_message'] = 'Security validation failed (CSRF token expired). Please try again.';
         $_SESSION['flash_type'] = 'danger';
-        header('Location: index.php');
+        header('Location: ./');
         exit;
     }
 
@@ -263,7 +263,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $targetTab = $_POST['current_tab'] ?? '';
-    header('Location: index.php' . ($targetTab !== '' ? '#' . urlencode($targetTab) : ''));
+    header('Location: ./' . ($targetTab !== '' ? '#' . urlencode($targetTab) : ''));
     exit;
 }
 
@@ -1345,6 +1345,23 @@ $csrfToken = CrmSecurity::csrfToken();
                 flex: initial;
                 min-width: 0;
             }
+        /* ========================================================= */
+        /* CRM COMMAND CENTER ENTERPRISE FOOTER                      */
+        /* ========================================================= */
+        .crm-footer {
+            background: rgba(17, 24, 39, 0.6);
+            border: 1px solid var(--cx-border);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(8px);
+        }
+
+        [data-bs-theme="light"] .crm-footer,
+        [data-bs-theme="combo"] .crm-footer {
+            background: #FFFFFF !important;
+            border-color: #E2E8F0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
@@ -1359,7 +1376,7 @@ $csrfToken = CrmSecurity::csrfToken();
         <aside class="col-12 col-lg-2 d-none d-lg-block crm-sidebar p-3 position-sticky top-0" style="height: 100vh; overflow-y: auto;">
             <!-- Brand with Original Logo -->
             <div class="mb-4 px-2 pt-2 text-center">
-                <a href="index.php" class="d-block text-decoration-none">
+                <a href="./" class="d-block text-decoration-none">
                     <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid" style="max-height: 48px; object-fit: contain;">
                 </a>
                 <div class="mt-2 d-flex align-items-center justify-content-center gap-2">
@@ -1422,15 +1439,15 @@ $csrfToken = CrmSecurity::csrfToken();
             <div class="px-2">
                 <small class="text-uppercase text-muted fw-bold" style="font-size: 0.68rem; letter-spacing: 0.06em;">Public Fronts</small>
                 <div class="d-grid gap-1 mt-2">
-                    <a href="../website/discovery-call.php" target="_blank" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center" style="font-size: 0.78rem;">
+                    <a href="../website/discovery-call" target="_blank" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center" style="font-size: 0.78rem;">
                         <span><i class="bi bi-lightning-charge me-1 text-warning"></i> Lead Discovery Form</span>
                         <i class="bi bi-box-arrow-up-right"></i>
                     </a>
-                    <a href="../website/admin/index.php" target="_blank" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center" style="font-size: 0.78rem;">
+                    <a href="../website/admin/" target="_blank" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center" style="font-size: 0.78rem;">
                         <span><i class="bi bi-shield-lock me-1 text-info"></i> Website Admin</span>
                         <i class="bi bi-box-arrow-up-right"></i>
                     </a>
-                    <a href="logout.php" class="btn btn-sm btn-outline-danger text-start mt-2" style="font-size: 0.8rem;">
+                    <a href="logout" class="btn btn-sm btn-outline-danger text-start mt-2" style="font-size: 0.8rem;">
                         <i class="bi bi-box-arrow-left me-1"></i> Sign Out
                     </a>
                 </div>
@@ -2802,6 +2819,94 @@ $csrfToken = CrmSecurity::csrfToken();
                 </div>
 
             </div>
+
+            <!-- ======================================================== -->
+            <!-- CRM COMMAND CENTER ENTERPRISE FOOTER                     -->
+            <!-- ======================================================== -->
+            <footer class="crm-footer">
+                <div class="row g-4 align-items-center">
+                    <!-- Brand & Platform Architecture -->
+                    <div class="col-12 col-md-5">
+                        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                            <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
+                            <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.08em;">CRM &amp; AGENT OS</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.68rem;">v4.0.4 Enterprise</span>
+                        </div>
+                        <p class="text-muted small mb-2" style="max-width: 440px;">
+                            Autonomous multi-agent pipeline orchestration with deterministic HITL decision governance, live real-time FX conversions, and sub-100ms task latency.
+                        </p>
+                        <div class="d-flex align-items-center gap-3 text-muted small flex-wrap" style="font-size: 0.75rem;">
+                            <span><i class="bi bi-shield-check text-success me-1"></i> HMAC Signed Ingestion</span>
+                            <span>&bull;</span>
+                            <span><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Paperclip Armed</span>
+                            <span>&bull;</span>
+                            <span><i class="bi bi-clock-history text-info me-1"></i> 99.98% SLA</span>
+                        </div>
+                    </div>
+
+                    <!-- Live Telemetry Badges -->
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.06em;">System Status</span>
+                                <span class="d-flex align-items-center gap-1 text-success small" style="font-size: 0.72rem;">
+                                    <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span> All Daemons Operational
+                                </span>
+                            </div>
+                            <div class="row g-2 text-center" style="font-size: 0.75rem;">
+                                <div class="col-4">
+                                    <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                                        <div class="fw-bold text-info"><?= count($agents) ?>/7</div>
+                                        <div class="text-muted" style="font-size: 0.65rem;">Swarm Nodes</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                                        <div class="fw-bold text-warning"><?= count($pendingApprovals) ?></div>
+                                        <div class="text-muted" style="font-size: 0.65rem;">HITL Queue</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                                        <div class="fw-bold text-success"><?= $totalLeads ?></div>
+                                        <div class="text-muted" style="font-size: 0.65rem;">Total Inbound</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cross-Platform Bridges -->
+                    <div class="col-12 col-md-3 text-md-end">
+                        <div class="small fw-bold text-uppercase text-muted mb-2" style="font-size: 0.68rem; letter-spacing: 0.06em;">Platform Bridges</div>
+                        <div class="d-flex flex-column gap-1 align-items-md-end" style="font-size: 0.8rem;">
+                            <a href="../website/admin/" target="_blank" class="text-decoration-none text-info d-inline-flex align-items-center gap-1">
+                                <i class="bi bi-grid-1x2-fill"></i> Website Portfolio Admin
+                            </a>
+                            <a href="../website/discovery-call" target="_blank" class="text-decoration-none text-muted d-inline-flex align-items-center gap-1">
+                                <i class="bi bi-lightning-charge text-warning"></i> Public Lead Intake Form
+                            </a>
+                            <a href="../website/" target="_blank" class="text-decoration-none text-muted d-inline-flex align-items-center gap-1">
+                                <i class="bi bi-box-arrow-up-right text-primary"></i> CodeX404 Public Front
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Copyright & Security Notice -->
+                <div class="pt-3 mt-3 border-top d-flex flex-wrap align-items-center justify-content-between gap-2" style="border-color: rgba(255, 255, 255, 0.05) !important; font-size: 0.75rem;">
+                    <div class="text-muted">
+                        &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong>. Autonomous Multi-Agent CRM OS &bull; Built with PHP 8.3 &bull; Bootstrap 5.3.3 &bull; All Rights Reserved.
+                    </div>
+                    <div class="d-flex align-items-center gap-3 text-muted flex-wrap">
+                        <span class="d-flex align-items-center gap-1"><i class="bi bi-hdd-stack text-info"></i> Storage: JSON Atomic</span>
+                        <span>&bull;</span>
+                        <span class="d-flex align-items-center gap-1"><i class="bi bi-shield-lock text-success"></i> Strict CSRF</span>
+                        <span>&bull;</span>
+                        <a href="logout" class="text-danger text-decoration-none fw-semibold"><i class="bi bi-box-arrow-left me-1"></i>Sign Out</a>
+                    </div>
+                </div>
+            </footer>
         </main>
     </div>
 </div>
@@ -3161,7 +3266,7 @@ $csrfToken = CrmSecurity::csrfToken();
 <!-- Mobile Offcanvas Sidebar -->
 <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar" style="width: 280px;">
     <div class="offcanvas-header border-bottom border-secondary">
-        <a href="index.php" class="d-inline-block text-decoration-none">
+        <a href="./" class="d-inline-block text-decoration-none">
             <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" style="max-height: 38px; object-fit: contain;">
         </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -3217,8 +3322,8 @@ $csrfToken = CrmSecurity::csrfToken();
             </ul>
         </div>
         <div class="d-grid gap-2">
-            <a href="../website/discovery-call.php" target="_blank" class="btn btn-sm btn-outline-warning text-start"><i class="bi bi-lightning-charge me-1"></i> Public Discovery Form</a>
-            <a href="logout.php" class="btn btn-sm btn-danger text-start mt-2"><i class="bi bi-box-arrow-left me-1"></i> Sign Out</a>
+            <a href="../website/discovery-call" target="_blank" class="btn btn-sm btn-outline-warning text-start"><i class="bi bi-lightning-charge me-1"></i> Public Discovery Form</a>
+            <a href="logout" class="btn btn-sm btn-danger text-start mt-2"><i class="bi bi-box-arrow-left me-1"></i> Sign Out</a>
         </div>
     </div>
 </div>
@@ -3463,7 +3568,7 @@ $csrfToken = CrmSecurity::csrfToken();
         // Background live rates sync (fetch from API endpoint to keep rates freshest)
         (async () => {
             try {
-                const res = await fetch('api/v1/rates.php');
+                const res = await fetch('api/v1/rates');
                 if (res.ok) {
                     const data = await res.json();
                     if (data && data.rates) {

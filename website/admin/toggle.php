@@ -22,5 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-header('Location: ' . admin_url('index.php'));
+header('Location: ' . admin_url());
 exit;

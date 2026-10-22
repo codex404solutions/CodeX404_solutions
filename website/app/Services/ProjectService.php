@@ -142,7 +142,7 @@ class ProjectService
             'tags' => is_array($tags) ? $tags : [],
             'demo_key' => trim((string)($input['demo_key'] ?? 'erp')),
             'live_url' => trim((string)($input['live_url'] ?? '')),
-            'case_study_url' => trim((string)($input['case_study_url'] ?? 'case-studies.php')),
+            'case_study_url' => trim((string)($input['case_study_url'] ?? 'case-studies')),
             'order' => (int)($input['order'] ?? (count($all) + 1)),
             'active' => !empty($input['active']),
             'created_at' => $existingIndex >= 0 ? ($all[$existingIndex]['created_at'] ?? $now) : $now,

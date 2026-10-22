@@ -6,15 +6,21 @@
 # Enable Rewrite Engine
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
-
-    # Custom 404 Page
-    ErrorDocument 404 /404.php
 
     # Block access to hidden files and sensitive directories
     RewriteRule ^(\.git|\.env|storage|app|config) - [F,L]
 
-    # Clean URL Rewrites (e.g. /solutions to solutions.php)
+    # 1. Redirect /index.php to / (root or directory) for GET/HEAD requests
+    RewriteCond %{REQUEST_METHOD} !POST
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^?]*)/index\.php([^\s?]*) [NC]
+    RewriteRule ^(.*)index\.php$ %1/%2 [R=301,L,NE]
+
+    # 2. Redirect *.php to extensionless URL for GET/HEAD requests
+    RewriteCond %{REQUEST_METHOD} !POST
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^?]+)\.php([^\s?]*) [NC]
+    RewriteRule ^(.+)\.php$ %1%2 [R=301,L,NE]
+
+    # 3. Internally rewrite extensionless URLs to .php files if matching .php exists
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
     RewriteRule ^(.*)$ $1.php [L]

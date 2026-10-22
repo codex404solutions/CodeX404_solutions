@@ -363,9 +363,9 @@ function is_admin_logged_in(): bool
 function require_admin_auth(): void
 {
     if (!is_admin_logged_in()) {
-        $loginUrl = admin_url('login.php');
+        $loginUrl = admin_url('login');
         $return = $_SERVER['REQUEST_URI'] ?? '';
-        if ($return !== '' && !str_contains($return, 'login.php')) {
+        if ($return !== '' && !str_contains($return, 'login')) {
             $loginUrl .= '?return=' . urlencode($return);
         }
         header('Location: ' . $loginUrl);

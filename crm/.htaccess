@@ -14,16 +14,40 @@
     # SQL dumps and backups.
     RewriteRule \.(sql|bak|log|ini|sh|md)$ - [F,L]
 
-    # --- Allow direct access to api/ -------------------------------------------
+    # --- Allow direct access to api/ (with extensionless rewriting) ---
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^api/(.*)$ api/$1.php [L]
     RewriteRule ^api(/|$) - [L]
+
+    # --- Redirects from .php / public to clean URLs (GET/HEAD requests only) ---
+    # 1. Redirect /index.php or /public/index(.php) to directory root
+    RewriteCond %{REQUEST_METHOD} !POST
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^?]*?)(?:/public/index(?:\.php)?|/index\.php)([^\s?]*) [NC]
+    RewriteRule ^.*$ %1/%2 [R=301,L,NE]
+
+    # 2. Redirect /login.php or /public/login(.php) to /login
+    RewriteCond %{REQUEST_METHOD} !POST
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^?]*?)(?:/public/login(?:\.php)?|/login\.php)([^\s?]*) [NC]
+    RewriteRule ^.*$ %1/login%2 [R=301,L,NE]
+
+    # 3. Redirect /logout.php or /public/logout(.php) to /logout
+    RewriteCond %{REQUEST_METHOD} !POST
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^?]*?)(?:/public/logout(?:\.php)?|/logout\.php)([^\s?]*) [NC]
+    RewriteRule ^.*$ %1/logout%2 [R=301,L,NE]
+
+    # 4. Redirect other *.php to extensionless
+    RewriteCond %{REQUEST_METHOD} !POST
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^?]+)\.php([^\s?]*) [NC]
+    RewriteRule ^(.+)\.php$ %1%2 [R=301,L,NE]
 
     # --- Public routing --------------------------------------------------------
     # Root -> dashboard
     RewriteRule ^$ public/index.php [L]
 
     # Clean aliases for the auth endpoints
-    RewriteRule ^login(\.php)?$ public/login.php [L]
-    RewriteRule ^logout(\.php)?$ public/logout.php [L]
+    RewriteRule ^login/?$ public/login.php [L]
+    RewriteRule ^logout/?$ public/logout.php [L]
 
     # Clean URLs: /leads -> public/leads.php (only when the target file exists)
     RewriteCond %{REQUEST_FILENAME} !-d

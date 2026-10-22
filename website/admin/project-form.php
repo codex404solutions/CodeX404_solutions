@@ -30,7 +30,7 @@ $project = [
     'tags' => [],
     'demo_key' => 'erp',
     'live_url' => '',
-    'case_study_url' => 'case-studies.php',
+    'case_study_url' => 'case-studies',
     'order' => count(ProjectService::getAll()) + 1,
     'active' => true,
 ];
@@ -42,7 +42,7 @@ if ($projectId !== '') {
         $isEdit = true;
     } else {
         set_admin_flash('error', "Project '{$projectId}' was not found.");
-        header('Location: ' . admin_url('index.php'));
+        header('Location: ' . admin_url());
         exit;
     }
 }
@@ -95,14 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'tags' => $tagsArr,
                 'demo_key' => trim((string)($_POST['demo_key'] ?? 'erp')),
                 'live_url' => trim((string)($_POST['live_url'] ?? '')),
-                'case_study_url' => trim((string)($_POST['case_study_url'] ?? 'case-studies.php')),
+                'case_study_url' => trim((string)($_POST['case_study_url'] ?? 'case-studies')),
                 'order' => (int)($_POST['order'] ?? 1),
                 'active' => !empty($_POST['active']),
             ];
 
             $saved = ProjectService::save($saveData);
             set_admin_flash('success', "Project '{$saved['title']}' was successfully " . ($isEdit ? 'updated' : 'created') . '!');
-            header('Location: ' . admin_url('index.php'));
+            header('Location: ' . admin_url());
             exit;
         } else {
             // Repopulate form with submitted values
@@ -255,6 +255,14 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             color: var(--cx-text-muted);
             margin-bottom: 0.35rem;
         }
+
+        .admin-footer {
+            background: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
     </style>
 </head>
 <body>
@@ -263,7 +271,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
 <nav class="admin-navbar">
     <div class="container-fluid px-md-4 d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center gap-3">
-            <a href="index.php" class="admin-brand-pill">
+            <a href="<?= admin_url() ?>" class="admin-brand-pill">
                 <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
             </a>
             <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.68rem;">PORTFOLIO EDITOR</span>
@@ -285,7 +293,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 </ul>
             </div>
 
-            <a href="index.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
+            <a href="<?= admin_url() ?>" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -300,7 +308,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
         <div>
             <div class="d-flex align-items-center gap-2 text-muted small mb-1">
-                <a href="index.php" class="text-decoration-none text-muted">Projects</a>
+                <a href="<?= admin_url() ?>" class="text-decoration-none text-muted">Projects</a>
                 <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
                 <span class="text-info"><?= $isEdit ? 'Edit Deliverable' : 'Upload New' ?></span>
             </div>
@@ -321,7 +329,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="<?= admin_url('project-form.php' . ($isEdit ? '?id=' . urlencode($project['id']) : '')) ?>">
+    <form method="POST" action="<?= admin_url('project-form' . ($isEdit ? '?id=' . urlencode($project['id']) : '')) ?>">
         <?= csrf_input_field() ?>
 
         <!-- SECTION 1: IDENTITY -->
@@ -494,7 +502,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="case_study_url">Case Study URL / Anchor</label>
-                    <input type="text" id="case_study_url" name="case_study_url" class="form-control" value="<?= htmlspecialchars($project['case_study_url'] ?? 'case-studies.php') ?>" placeholder="e.g. case-studies.php">
+                    <input type="text" id="case_study_url" name="case_study_url" class="form-control" value="<?= htmlspecialchars($project['case_study_url'] ?? 'case-studies') ?>" placeholder="e.g. case-studies">
                 </div>
             </div>
         </div>
@@ -505,12 +513,28 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 <i class="bi bi-check2-circle fs-5"></i>
                 <span><?= $isEdit ? 'Save Changes' : 'Publish Project Deliverable' ?></span>
             </button>
-            <a href="index.php" class="btn btn-outline-secondary btn-lg px-4 py-2" style="border-radius: 10px;">
+            <a href="<?= admin_url() ?>" class="btn btn-outline-secondary btn-lg px-4 py-2" style="border-radius: 10px;">
                 Cancel
             </a>
         </div>
 
-    </form>
+    <!-- ======================================================== -->
+    <!-- ADMIN FORM FOOTER                                        -->
+    <!-- ======================================================== -->
+    <footer class="admin-footer text-muted small mt-5">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <div>
+                &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong> &bull; Enterprise Deliverables Admin Console &bull; All Rights Reserved.
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <a href="<?= admin_url() ?>" class="text-decoration-none text-muted"><i class="bi bi-grid-1x2-fill me-1 text-info"></i>Dashboard</a>
+                <span>&bull;</span>
+                <a href="../../crm/" target="_blank" class="text-decoration-none text-muted"><i class="bi bi-robot me-1 text-warning"></i>CRM Swarm</a>
+                <span>&bull;</span>
+                <a href="<?= url('#work') ?>" target="_blank" class="text-decoration-none text-muted"><i class="bi bi-box-arrow-up-right me-1 text-primary"></i>Public Front</a>
+            </div>
+        </div>
+    </footer>
 
 </main>
 

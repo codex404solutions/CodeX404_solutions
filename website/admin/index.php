@@ -803,6 +803,73 @@ $flash = get_admin_flash();
             border-top: 1px solid var(--cx-border);
             padding: 1rem 0.5rem;
         }
+
+        /* ========================================================= */
+        /* ADMIN SIDEBAR & FOOTER STYLING                            */
+        /* ========================================================= */
+        .admin-sidebar {
+            background: var(--cx-nav-bg);
+            border-right: 1px solid var(--cx-border);
+            z-index: 100;
+        }
+
+        .admin-sidebar-section-title {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: var(--cx-text-muted);
+            margin-bottom: 0.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .admin-sidebar-link {
+            color: var(--cx-text-muted);
+            border-radius: 8px;
+            padding: 0.55rem 0.85rem;
+            font-weight: 600;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            margin-bottom: 0.3rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .admin-sidebar-link:hover {
+            color: var(--cx-cyan);
+            background: rgba(34, 211, 238, 0.08);
+            transform: translateX(2px);
+        }
+
+        .admin-sidebar-link.active {
+            color: var(--cx-cyan);
+            background: rgba(34, 211, 238, 0.12);
+            font-weight: 700;
+        }
+
+        .admin-sidebar-user-card {
+            background: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .admin-footer {
+            background: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            margin-top: 3rem;
+            box-shadow: var(--cx-card-shadow);
+        }
     </style>
 </head>
 <body>
@@ -814,7 +881,7 @@ $flash = get_admin_flash();
     <div class="container-fluid px-md-4 d-flex flex-wrap align-items-center justify-content-between gap-3">
         <!-- Brand with Original Logo in Dark Pill -->
         <div class="d-flex align-items-center gap-3">
-            <a href="index.php" class="admin-brand-pill" title="CodeX404 Solutions Admin">
+            <a href="<?= admin_url() ?>" class="admin-brand-pill" title="CodeX404 Solutions Admin">
                 <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
             </a>
             <div class="d-flex align-items-center gap-2">
@@ -829,26 +896,26 @@ $flash = get_admin_flash();
 
         <!-- Center Cross-Platform Nav Links (Desktop) -->
         <div class="d-none d-lg-flex align-items-center gap-1">
-            <a href="index.php" class="admin-nav-link active">
+            <a href="<?= admin_url() ?>" class="admin-nav-link active">
                 <i class="bi bi-grid-1x2-fill text-info"></i> Projects Portfolio
             </a>
-            <a href="../../crm/public/index.php" target="_blank" class="admin-nav-link">
+            <a href="../../crm/" target="_blank" class="admin-nav-link">
                 <i class="bi bi-robot text-warning"></i>
                 <span>CRM &amp; Paperclip OS</span>
                 <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1" style="font-size: 0.65rem;">Autonomous</span>
             </a>
-            <a href="../index.php#work" target="_blank" class="admin-nav-link">
+            <a href="<?= url('#work') ?>" target="_blank" class="admin-nav-link">
                 <i class="bi bi-box-arrow-up-right text-primary"></i> Public Work
             </a>
-            <a href="../discovery-call.php" target="_blank" class="admin-nav-link">
+            <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-nav-link">
                 <i class="bi bi-lightning-charge-fill text-warning"></i> Lead Intake
             </a>
         </div>
 
         <!-- Right Side Controls: Theme Switcher & Admin User Dropdown -->
         <div class="d-flex align-items-center gap-2">
-            <!-- Mobile Toggle Button -->
-            <button class="btn btn-outline-secondary btn-sm d-lg-none py-1 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#adminMobileNav" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Mobile Toggle Button (Opens Offcanvas Sidebar) -->
+            <button class="btn btn-outline-secondary btn-sm d-lg-none py-1 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminMobileSidebar" aria-controls="adminMobileSidebar" aria-label="Toggle Navigation">
                 <i class="bi bi-list fs-5"></i>
             </button>
 
@@ -899,18 +966,18 @@ $flash = get_admin_flash();
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <a href="../../crm/public/index.php" target="_blank" class="dropdown-item d-flex align-items-center gap-2">
+                        <a href="../../crm/" target="_blank" class="dropdown-item d-flex align-items-center gap-2">
                             <i class="bi bi-robot text-warning"></i> Open CRM Command Center
                         </a>
                     </li>
                     <li>
-                        <a href="../index.php#work" target="_blank" class="dropdown-item d-flex align-items-center gap-2">
+                        <a href="<?= url('#work') ?>" target="_blank" class="dropdown-item d-flex align-items-center gap-2">
                             <i class="bi bi-globe2 text-primary"></i> View Public Website
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <a href="logout.php" class="dropdown-item d-flex align-items-center gap-2 text-danger">
+                        <a href="<?= admin_url('logout') ?>" class="dropdown-item d-flex align-items-center gap-2 text-danger">
                             <i class="bi bi-box-arrow-left"></i> Sign Out
                         </a>
                     </li>
@@ -918,44 +985,213 @@ $flash = get_admin_flash();
             </div>
         </div>
     </div>
-
-    <!-- Mobile Collapsible Navigation Menu -->
-    <div class="collapse d-lg-none" id="adminMobileNav">
-        <div class="d-flex flex-column gap-1 pt-2">
-            <a href="index.php" class="admin-nav-link active">
-                <i class="bi bi-grid-1x2-fill text-info"></i> Projects Portfolio
-            </a>
-            <a href="../../crm/public/index.php" target="_blank" class="admin-nav-link">
-                <i class="bi bi-robot text-warning"></i> CRM &amp; Paperclip OS <span class="badge bg-warning-subtle text-warning ms-auto">Autonomous</span>
-            </a>
-            <a href="../index.php#work" target="_blank" class="admin-nav-link">
-                <i class="bi bi-box-arrow-up-right text-primary"></i> View Public Work
-            </a>
-            <a href="../discovery-call.php" target="_blank" class="admin-nav-link">
-                <i class="bi bi-lightning-charge-fill text-warning"></i> Lead Intake Form
-            </a>
-        </div>
-    </div>
 </nav>
 
 <!-- ======================================================== -->
-<!-- MAIN CONTENT CONTAINER                                   -->
+<!-- MOBILE OFFCANVAS SIDEBAR                                 -->
 <!-- ======================================================== -->
-<main class="container-fluid px-3 px-md-4 py-3" style="max-width: 1440px;">
-
-    <!-- Flash Notifications -->
-    <?php if ($flash): ?>
-        <div class="alert alert-<?= $flash['type'] === 'error' ? 'danger' : ($flash['type'] === 'success' ? 'success' : 'info') ?> alert-dismissible fade show d-flex align-items-center gap-2 shadow-sm rounded-3 mb-4" role="alert">
-            <i class="bi <?= $flash['type'] === 'error' ? 'bi-exclamation-triangle-fill' : ($flash['type'] === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill') ?> fs-5"></i>
-            <div><?= htmlspecialchars($flash['message']) ?></div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="adminMobileSidebar" style="width: 290px;">
+    <div class="offcanvas-header border-bottom border-secondary">
+        <div class="d-flex align-items-center gap-2">
+            <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="max-height: 32px; object-fit: contain;">
+            <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.65rem;">ADMIN</span>
         </div>
-    <?php endif; ?>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+        <!-- User Info -->
+        <div class="admin-sidebar-user-card mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-bold small text-white"><?= htmlspecialchars((string)($_SESSION['codex_admin_user'] ?? 'admin')) ?></span>
+                <span class="live-dot" title="Live Session Active"></span>
+            </div>
+            <div class="d-flex align-items-center gap-1 flex-wrap">
+                <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;">Superadmin</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.65rem;">Live Sync</span>
+            </div>
+        </div>
 
-    <!-- ======================================================== -->
-    <!-- 1. FUTURISTIC ANIMATED SVG HERO BANNER                   -->
-    <!-- ======================================================== -->
-    <section class="admin-hero-banner">
+        <div class="d-grid mb-3">
+            <a href="<?= admin_url('project-form') ?>" class="btn btn-primary btn-sm fw-bold d-flex align-items-center justify-content-center gap-2 py-2" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
+                <i class="bi bi-plus-circle-fill"></i>
+                <span>New Deliverable</span>
+            </a>
+        </div>
+
+        <div class="admin-sidebar-section-title">Navigation</div>
+        <nav class="nav flex-column mb-3">
+            <a href="#admin-hero" class="admin-sidebar-link active" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-speedometer2 me-2 text-info"></i> Overview</span>
+                <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
+            </a>
+            <a href="#portfolio-table" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
+            </a>
+            <a href="#showcase-slider" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-stars me-2 text-primary"></i> Showcase Slider</span>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
+            </a>
+            <a href="#telemetry-ticker" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-activity me-2 text-success"></i> Telemetry Ticker</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
+            </a>
+        </nav>
+
+        <div class="admin-sidebar-section-title">Filter By Status</div>
+        <div class="d-flex flex-column gap-1 mb-3">
+            <button type="button" class="admin-sidebar-link sidebar-status-filter active" data-status-filter="all" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-grid-fill me-2 text-info"></i> All Systems</span>
+                <span class="badge bg-dark border border-secondary text-white rounded-pill"><?= $totalCount ?></span>
+            </button>
+            <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="published" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-check-circle-fill me-2 text-success"></i> Published Live</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><?= $activeCount ?></span>
+            </button>
+            <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="draft" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-shield-lock-fill me-2 text-warning"></i> Staging Drafts</span>
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $draftCount ?></span>
+            </button>
+        </div>
+
+        <div class="admin-sidebar-section-title">Platform Bridges</div>
+        <nav class="nav flex-column mb-3">
+            <a href="../../crm/" target="_blank" class="admin-sidebar-link">
+                <span><i class="bi bi-robot me-2 text-warning"></i> CRM &amp; Paperclip</span>
+                <i class="bi bi-box-arrow-up-right small text-muted"></i>
+            </a>
+            <a href="<?= url('#work') ?>" target="_blank" class="admin-sidebar-link">
+                <span><i class="bi bi-globe2 me-2 text-primary"></i> Public Portfolio</span>
+                <i class="bi bi-box-arrow-up-right small text-muted"></i>
+            </a>
+            <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-sidebar-link">
+                <span><i class="bi bi-lightning-charge me-2 text-info"></i> Lead Intake Form</span>
+                <i class="bi bi-box-arrow-up-right small text-muted"></i>
+            </a>
+        </nav>
+
+        <hr style="border-color: rgba(255, 255, 255, 0.1);">
+        <div class="d-grid">
+            <a href="<?= admin_url('logout') ?>" class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-box-arrow-left"></i> Sign Out
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- 2-COLUMN LAYOUT: SIDEBAR + MAIN CONTENT AREA             -->
+<!-- ======================================================== -->
+<div class="container-fluid p-0">
+    <div class="row g-0">
+
+        <!-- ======================================================== -->
+        <!-- ADMIN SIDEBAR (Desktop)                                  -->
+        <!-- ======================================================== -->
+        <aside class="col-12 col-lg-2 d-none d-lg-block admin-sidebar p-3 position-sticky" style="top: 61px; height: calc(100vh - 61px); overflow-y: auto;">
+            <!-- Admin User Status Card -->
+            <div class="admin-sidebar-user-card">
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                    <span class="fw-bold small"><?= htmlspecialchars((string)($_SESSION['codex_admin_user'] ?? 'admin')) ?></span>
+                    <span class="live-dot" title="Live Session Active"></span>
+                </div>
+                <div class="d-flex align-items-center gap-1 flex-wrap">
+                    <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;">Superadmin</span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.65rem;">Live Sync</span>
+                </div>
+            </div>
+
+            <!-- Upload New Project Quick Action CTA -->
+            <div class="d-grid mb-3">
+                <a href="<?= admin_url('project-form') ?>" class="btn btn-primary btn-sm fw-bold d-flex align-items-center justify-content-center gap-2 py-2 shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    <span>New Deliverable</span>
+                </a>
+            </div>
+
+            <!-- Main Navigation -->
+            <div class="admin-sidebar-section-title">Navigation</div>
+            <nav class="nav flex-column mb-3" id="adminSidebarNav">
+                <a href="#admin-hero" class="admin-sidebar-link active">
+                    <span><i class="bi bi-speedometer2 me-2 text-info"></i> Overview</span>
+                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
+                </a>
+                <a href="#portfolio-table" class="admin-sidebar-link">
+                    <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
+                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
+                </a>
+                <a href="#showcase-slider" class="admin-sidebar-link">
+                    <span><i class="bi bi-stars me-2 text-primary"></i> Showcase Slider</span>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
+                </a>
+                <a href="#telemetry-ticker" class="admin-sidebar-link">
+                    <span><i class="bi bi-activity me-2 text-success"></i> Telemetry Ticker</span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
+                </a>
+            </nav>
+
+            <!-- Quick Filter Shortcuts -->
+            <div class="admin-sidebar-section-title">Filter By Status</div>
+            <div class="d-flex flex-column gap-1 mb-3">
+                <button type="button" class="admin-sidebar-link sidebar-status-filter active" data-status-filter="all">
+                    <span><i class="bi bi-grid-fill me-2 text-info"></i> All Systems</span>
+                    <span class="badge bg-dark border border-secondary text-white rounded-pill"><?= $totalCount ?></span>
+                </button>
+                <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="published">
+                    <span><i class="bi bi-check-circle-fill me-2 text-success"></i> Published Live</span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><?= $activeCount ?></span>
+                </button>
+                <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="draft">
+                    <span><i class="bi bi-shield-lock-fill me-2 text-warning"></i> Staging Drafts</span>
+                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $draftCount ?></span>
+                </button>
+            </div>
+
+            <!-- Platform Bridges -->
+            <div class="admin-sidebar-section-title">Platform Bridges</div>
+            <nav class="nav flex-column mb-3">
+                <a href="../../crm/" target="_blank" class="admin-sidebar-link">
+                    <span><i class="bi bi-robot me-2 text-warning"></i> CRM &amp; Paperclip</span>
+                    <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                </a>
+                <a href="<?= url('#work') ?>" target="_blank" class="admin-sidebar-link">
+                    <span><i class="bi bi-globe2 me-2 text-primary"></i> Public Portfolio</span>
+                    <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                </a>
+                <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-sidebar-link">
+                    <span><i class="bi bi-lightning-charge me-2 text-info"></i> Lead Intake Form</span>
+                    <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                </a>
+            </nav>
+
+            <hr style="border-color: var(--cx-border);">
+
+            <!-- Sign Out -->
+            <div class="d-grid">
+                <a href="<?= admin_url('logout') ?>" class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center gap-2" style="border-radius: 8px;">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </aside>
+
+        <!-- ======================================================== -->
+        <!-- MAIN CONTENT AREA                                        -->
+        <!-- ======================================================== -->
+        <main class="col-12 col-lg-10 p-3 p-md-4" style="min-height: calc(100vh - 61px); overflow-x: hidden;">
+
+            <!-- Flash Notifications -->
+            <?php if ($flash): ?>
+                <div class="alert alert-<?= $flash['type'] === 'error' ? 'danger' : ($flash['type'] === 'success' ? 'success' : 'info') ?> alert-dismissible fade show d-flex align-items-center gap-2 shadow-sm rounded-3 mb-4" role="alert">
+                    <i class="bi <?= $flash['type'] === 'error' ? 'bi-exclamation-triangle-fill' : ($flash['type'] === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill') ?> fs-5"></i>
+                    <div><?= htmlspecialchars($flash['message']) ?></div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+
+            <!-- ======================================================== -->
+            <!-- 1. FUTURISTIC ANIMATED SVG HERO BANNER                   -->
+            <!-- ======================================================== -->
+            <section class="admin-hero-banner" id="admin-hero">
         <!-- High-Detail Animated Cyber Vector SVG Canvas -->
         <svg class="banner-svg-canvas" viewBox="0 0 650 320" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
@@ -1031,15 +1267,15 @@ $flash = get_admin_flash();
             </p>
 
             <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-                <a href="project-form.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2 px-3 py-2 fw-bold shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
+                <a href="<?= admin_url('project-form') ?>" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2 px-3 py-2 fw-bold shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
                     <i class="bi bi-plus-circle-fill"></i>
                     <span>Upload New Project</span>
                 </a>
-                <a href="../index.php#work" target="_blank" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
+                <a href="<?= url('#work') ?>" target="_blank" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
                     <i class="bi bi-eye"></i>
                     <span>Preview Public Showcase</span>
                 </a>
-                <a href="../../crm/public/index.php" target="_blank" class="btn btn-outline-info btn-sm d-inline-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
+                <a href="../../crm/" target="_blank" class="btn btn-outline-info btn-sm d-inline-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
                     <i class="bi bi-robot text-warning"></i>
                     <span>Launch CRM Command</span>
                 </a>
@@ -1065,7 +1301,7 @@ $flash = get_admin_flash();
     <!-- ======================================================== -->
     <!-- 2. CONTINUOUS MARQUEE SCROLLER TICKER                    -->
     <!-- ======================================================== -->
-    <div class="admin-marquee-wrap">
+    <div class="admin-marquee-wrap" id="telemetry-ticker">
         <div class="admin-marquee-label">
             <span class="live-dot" style="width: 6px; height: 6px;"></span>
             <span>Live Telemetry</span>
@@ -1153,7 +1389,7 @@ $flash = get_admin_flash();
     <!-- 3. INTERACTIVE DELIVERABLES SHOWCASE SLIDER               -->
     <!-- ======================================================== -->
     <?php if (!empty($projects)): ?>
-    <section class="deliverables-slider-section">
+    <section class="deliverables-slider-section" id="showcase-slider">
         <div class="slider-header">
             <div>
                 <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
@@ -1255,7 +1491,7 @@ $flash = get_admin_flash();
                                         style="font-size: 0.75rem; border-radius: 6px;">
                                         <i class="bi bi-eye me-1"></i> Preview
                                     </button>
-                                    <a href="project-form.php?id=<?= urlencode($p['id']) ?>" class="btn btn-xs btn-outline-primary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;">
+                                    <a href="<?= admin_url('project-form?id=' . urlencode($p['id'])) ?>" class="btn btn-xs btn-outline-primary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </div>
@@ -1382,13 +1618,13 @@ $flash = get_admin_flash();
     <!-- ======================================================== -->
     <!-- PROJECTS DATA TABLE CARD                                 -->
     <!-- ======================================================== -->
-    <div class="admin-card overflow-hidden">
+    <div class="admin-card overflow-hidden" id="portfolio-table">
         <?php if (empty($projects)): ?>
             <div class="text-center py-5 text-muted">
                 <i class="bi bi-folder-x fs-1 d-block mb-3 text-secondary"></i>
                 <h5 class="fw-bold">No Projects in Portfolio</h5>
                 <p class="small mb-3">Add your first production project deliverable to populate the website showcase.</p>
-                <a href="project-form.php" class="btn btn-primary btn-sm px-3 py-2 fw-bold" style="border-radius: 8px;">
+                <a href="<?= admin_url('project-form') ?>" class="btn btn-primary btn-sm px-3 py-2 fw-bold" style="border-radius: 8px;">
                     <i class="bi bi-plus-circle me-1"></i> Add First Project
                 </a>
             </div>
@@ -1460,7 +1696,7 @@ $flash = get_admin_flash();
 
                                 <!-- Status (Toggle button) -->
                                 <td>
-                                    <form method="POST" action="toggle.php" class="d-inline">
+                                    <form method="POST" action="<?= admin_url('toggle') ?>" class="d-inline">
                                         <?= csrf_input_field() ?>
                                         <input type="hidden" name="id" value="<?= htmlspecialchars($p['id']) ?>">
                                         <?php if ($isActive): ?>
@@ -1519,7 +1755,7 @@ $flash = get_admin_flash();
                                         </button>
 
                                         <!-- Edit Project -->
-                                        <a href="project-form.php?id=<?= urlencode($p['id']) ?>" class="btn btn-sm btn-outline-primary btn-action-icon" title="Edit Deliverable">
+                                        <a href="<?= admin_url('project-form?id=' . urlencode($p['id'])) ?>" class="btn btn-sm btn-outline-primary btn-action-icon" title="Edit Deliverable">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
 
@@ -1554,7 +1790,99 @@ $flash = get_admin_flash();
         <?php endif; ?>
     </div>
 
+    <!-- ======================================================== -->
+    <!-- ADMIN CONSOLE ENTERPRISE FOOTER                          -->
+    <!-- ======================================================== -->
+    <footer class="admin-footer">
+        <div class="row g-4 align-items-center">
+            <!-- Brand & Scope -->
+            <div class="col-12 col-md-5">
+                <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                    <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
+                    <span class="badge bg-dark border border-secondary text-info text-uppercase px-2 py-1" style="font-size: 0.65rem; letter-spacing: 0.08em;">
+                        PORTFOLIO ADMIN
+                    </span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.68rem;">v14.2 Enterprise</span>
+                </div>
+                <p class="text-muted small mb-2" style="max-width: 440px;">
+                    Production Deliverables &amp; Client Project Management Console. Real-time orchestration of verified enterprise systems, interactive sandboxes, and high-availability showcase specs.
+                </p>
+                <div class="d-flex align-items-center gap-3 text-muted small flex-wrap" style="font-size: 0.75rem;">
+                    <span><i class="bi bi-shield-check text-success me-1"></i> Strict CSRF Protection</span>
+                    <span>&bull;</span>
+                    <span><i class="bi bi-speedometer2 text-info me-1"></i> 99.98% SLA Uptime</span>
+                    <span>&bull;</span>
+                    <span><i class="bi bi-hdd-network text-primary me-1"></i> Sub-100ms Edge</span>
+                </div>
+            </div>
+
+            <!-- Telemetry Summary -->
+            <div class="col-12 col-md-4">
+                <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--cx-border);">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.06em;">Repository Status</span>
+                        <span class="d-flex align-items-center gap-1 text-success small" style="font-size: 0.72rem;">
+                            <span class="live-dot" style="width: 6px; height: 6px;"></span> Active Synchronization
+                        </span>
+                    </div>
+                    <div class="row g-2 text-center" style="font-size: 0.75rem;">
+                        <div class="col-4">
+                            <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                                <div class="fw-bold text-info"><?= $totalCount ?></div>
+                                <div class="text-muted" style="font-size: 0.65rem;">Total Projects</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                                <div class="fw-bold text-success"><?= $activeCount ?></div>
+                                <div class="text-muted" style="font-size: 0.65rem;">Published</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                                <div class="fw-bold text-warning"><?= $draftCount ?></div>
+                                <div class="text-muted" style="font-size: 0.65rem;">In Review</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross-Platform Navigation -->
+            <div class="col-12 col-md-3 text-md-end">
+                <div class="small fw-bold text-uppercase text-muted mb-2" style="font-size: 0.68rem; letter-spacing: 0.06em;">Platform Bridges</div>
+                <div class="d-flex flex-column gap-1 align-items-md-end" style="font-size: 0.8rem;">
+                    <a href="../../crm/" target="_blank" class="text-decoration-none text-warning d-inline-flex align-items-center gap-1">
+                        <i class="bi bi-robot"></i> Company CRM &amp; Paperclip OS
+                    </a>
+                    <a href="<?= url('#work') ?>" target="_blank" class="text-decoration-none text-muted d-inline-flex align-items-center gap-1">
+                        <i class="bi bi-box-arrow-up-right text-primary"></i> Public Portfolio Showcase
+                    </a>
+                    <a href="<?= url('discovery-call') ?>" target="_blank" class="text-decoration-none text-muted d-inline-flex align-items-center gap-1">
+                        <i class="bi bi-lightning-charge text-info"></i> Client Discovery Intake Form
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Copyright & Security Notice -->
+        <div class="pt-3 mt-3 border-top d-flex flex-wrap align-items-center justify-content-between gap-2" style="border-color: var(--cx-border) !important; font-size: 0.75rem;">
+            <div class="text-muted">
+                &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong>. Enterprise Deliverables Admin Console &bull; Built with PHP 8.3 &bull; Bootstrap 5.3.3 &bull; All Rights Reserved.
+            </div>
+            <div class="d-flex align-items-center gap-3 text-muted flex-wrap">
+                <span class="d-flex align-items-center gap-1"><i class="bi bi-database-check text-info"></i> Storage: JSON Data Store</span>
+                <span>&bull;</span>
+                <span class="d-flex align-items-center gap-1"><i class="bi bi-shield-lock text-success"></i> Active Session</span>
+                <span>&bull;</span>
+                <a href="<?= admin_url('logout') ?>" class="text-danger text-decoration-none fw-semibold"><i class="bi bi-box-arrow-left me-1"></i>Sign Out</a>
+            </div>
+        </div>
+    </footer>
+
 </main>
+    </div>
+</div>
 
 <!-- ======================================================== -->
 <!-- MODAL: PROJECT SPEC PREVIEW                              -->
@@ -1652,7 +1980,7 @@ $flash = get_admin_flash();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                <form method="POST" action="delete.php" id="deleteProjectForm">
+                <form method="POST" action="<?= admin_url('delete') ?>" id="deleteProjectForm">
                     <?= csrf_input_field() ?>
                     <input type="hidden" name="id" id="deleteProjectInputId" value="">
                     <button type="submit" class="btn btn-danger btn-sm fw-bold">
@@ -1711,12 +2039,42 @@ document.addEventListener('DOMContentLoaded', function () {
         searchInput.addEventListener('input', filterRows);
     }
 
+    const sidebarStatusBtns = document.querySelectorAll('.sidebar-status-filter');
+
     statusPillBtns.forEach(btn => {
         btn.addEventListener('click', function () {
             statusPillBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             currentStatus = this.getAttribute('data-filter-status') || 'all';
+
+            // Sync sidebar active state
+            sidebarStatusBtns.forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-status-filter') === currentStatus);
+            });
+
             filterRows();
+        });
+    });
+
+    sidebarStatusBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const targetStatus = this.getAttribute('data-status-filter') || 'all';
+            currentStatus = targetStatus;
+
+            sidebarStatusBtns.forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-status-filter') === targetStatus);
+            });
+
+            statusPillBtns.forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-filter-status') === targetStatus);
+            });
+
+            filterRows();
+
+            const tableEl = document.getElementById('portfolio-table');
+            if (tableEl) {
+                tableEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
     });
 

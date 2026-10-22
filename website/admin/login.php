@@ -5,7 +5,7 @@ require_once __DIR__ . '/auth.php';
 
 // If already logged in, send directly to dashboard
 if (is_admin_logged_in()) {
-    header('Location: ' . admin_url('index.php'));
+    header('Location: ' . admin_url());
     exit;
 }
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     && str_starts_with($return, '/')
                     && !str_starts_with($return, '//')
                     && ($parsedReturn === false || !isset($parsedReturn['scheme'], $parsedReturn['host']));
-                header('Location: ' . ($isLocalReturn ? $return : admin_url('index.php')));
+                header('Location: ' . ($isLocalReturn ? $return : admin_url()));
                 exit;
             } else {
                 // If this failure triggered a lockout, notify user
@@ -400,7 +400,7 @@ $flash = get_admin_flash();
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="<?= admin_url('login.php' . (!empty($_GET['return']) ? '?return=' . urlencode($_GET['return']) : '')) ?>" autocomplete="off">
+    <form method="POST" action="<?= admin_url('login' . (!empty($_GET['return']) ? '?return=' . urlencode($_GET['return']) : '')) ?>" autocomplete="off">
         <?= csrf_input_field() ?>
 
         <div class="form-group">
@@ -441,7 +441,7 @@ $flash = get_admin_flash();
     </form>
 
     <div class="login-footer">
-        <a href="<?= url('index.php') ?>">← Return to Live Website</a>
+        <a href="<?= url() ?>">← Return to Live Website</a>
         <span>&copy; <?= date('Y') ?> CodeX404</span>
 </div>
 </div>

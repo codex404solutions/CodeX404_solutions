@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Custom ERP & School Systems:</strong> Institutional platforms with attendance, fee collection, and grade books.</li>
           <li><strong>Workflow & WhatsApp Automation:</strong> Cloud API pipelines that eliminate manual data entry.</li>
         </ul>
-        <p><a href="solutions.php" class="chat-link">Explore Solutions &rarr;</a> &nbsp;|&nbsp; <a href="discovery-call.php" class="chat-link">Book Free Discovery &rarr;</a></p>
+        <p><a href="solutions" class="chat-link">Explore Solutions &rarr;</a> &nbsp;|&nbsp; <a href="discovery-call" class="chat-link">Book Free Discovery &rarr;</a></p>
       `
     },
     {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Enterprise Architecture Audits:</strong> <strong>$1,200</strong> full security, performance & database refactoring blueprint.</li>
         </ul>
         <p><em>You retain 100% intellectual property ownership with zero vendor lock-in.</em></p>
-        <p><a href="pricing.php" class="chat-link">View Full Pricing Guide &rarr;</a></p>
+        <p><a href="pricing" class="chat-link">View Full Pricing Guide &rarr;</a></p>
       `
     },
     {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Meta WhatsApp Pipeline:</strong> Instant webhook routing from customer chats into CRM.</li>
           <li><strong>Private AI RAG Retrieval:</strong> Document question answering with source citations.</li>
         </ul>
-        <p><a href="portfolio.php" class="chat-link">Explore Portfolio & Live Demos &rarr;</a></p>
+        <p><a href="portfolio" class="chat-link">Explore Portfolio & Live Demos &rarr;</a></p>
       `
     },
     {
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reply: `
         <p>We'd love to discuss your technical architecture or MVP scope! Our discovery calls are direct with senior engineering leads — no sales reps.</p>
         <p>We review your data models, security requirements, and budget constraints, then produce an actionable roadmap in 48 hours.</p>
-        <p><a href="discovery-call.php" class="btn btn-primary btn-sm chat-btn-action">Book 30-Min Discovery Call &rarr;</a></p>
+        <p><a href="discovery-call" class="btn btn-primary btn-sm chat-btn-action">Book 30-Min Discovery Call &rarr;</a></p>
       `
     },
     {
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reply: `
         <p>Let's get you a tailored estimate! Please type your <strong>work email or phone</strong> along with a brief description of what you're building (e.g., <em>"Web app for logistics, email: name@company.com"</em>), and our team will prepare a scope analysis.</p>
         <p>Or jump straight to our structured inquiry form:</p>
-        <p><a href="contact.php" class="chat-link">Submit Detailed Inquiry Form &rarr;</a></p>
+        <p><a href="contact" class="chat-link">Submit Detailed Inquiry Form &rarr;</a></p>
       `
     },
     {
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Data & Storage:</strong> PostgreSQL, MySQL, Redis caching, SQLite embedded engines.</li>
           <li><strong>Infrastructure & AI:</strong> Docker, Nginx, Meta WhatsApp Cloud API, LangChain / LlamaIndex, OpenAI / Claude / Gemini API connectors.</li>
         </ul>
-        <p><a href="solutions.php" class="chat-link">Read Architecture Standards &rarr;</a></p>
+        <p><a href="solutions" class="chat-link">Read Architecture Standards &rarr;</a></p>
       `
     },
     {
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Bi-Weekly Sprints:</strong> Continuous feature releases every 2 weeks with staging preview environments.</li>
           <li><strong>Daily Updates:</strong> Loom video walk-throughs and direct communication over Slack or WhatsApp.</li>
         </ul>
-        <p><a href="process.php" class="chat-link">Explore Our 5-Stage Process &rarr;</a></p>
+        <p><a href="process" class="chat-link">Explore Our 5-Stage Process &rarr;</a></p>
       `
     }
   ];
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>Thanks for your question! While I'm specialized in CodeX404's engineering capabilities, our lead engineers can answer your exact scenario right away:</p>
         <ul>
           <li><strong>Direct WhatsApp:</strong> <a href="https://wa.me/917717747620?text=Hi%20CodeX404%20Solutions%2C%20I%20have%20a%20question%20about%20your%20services" target="_blank" rel="noopener" class="chat-link">+91 77177 47620</a></li>
-          <li><strong>Discovery Call:</strong> <a href="discovery-call.php" class="chat-link">Book a 30-min architecture review</a></li>
+          <li><strong>Discovery Call:</strong> <a href="discovery-call" class="chat-link">Book a 30-min architecture review</a></li>
           <li><strong>Email:</strong> <a href="mailto:contact@codex404solutions.online" class="chat-link">contact@codex404solutions.online</a></li>
         </ul>
         <p>Would you like to explore our <strong>Services</strong>, <strong>Pricing</strong>, or request a <strong>Project Quote</strong>?</p>
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('privacy_consent', '1');
 
     try {
-      const response = await fetch('contact.php', {
+      const response = await fetch('contact', {
         method: 'POST',
         body: formData,
         headers: { 'X-Requested-With': 'XMLHttpRequest' }

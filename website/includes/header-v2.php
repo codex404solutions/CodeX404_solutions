@@ -2,7 +2,7 @@
 declare(strict_types=1);
 $pageTitle = $pageTitle ?? 'CodeX404 Solutions — Custom Web Development for US Businesses';
 $pageDescription = $pageDescription ?? 'Senior-led custom web development for US businesses that need a faster, clearer path from website problems to measurable business results.';
-$base = '/codes/CodeX404_solutions/website/';
+$base = defined('BASE_URL') ? BASE_URL : '/codes/CodeX404_solutions/website/';
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,15 +21,15 @@ $base = '/codes/CodeX404_solutions/website/';
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container nav">
-    <a class="logo" href="<?= $base ?>index.php"><span class="logo-mark">404</span><span>CodeX404 <span style="color:#a5b4fc">Solutions</span></span></a>
+    <a class="logo" href="<?= $base ?>"><span class="logo-mark">404</span><span>CodeX404 <span style="color:#a5b4fc">Solutions</span></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
-      <a href="<?= $base ?>index.php#solutions">Solutions</a>
-      <a href="<?= $base ?>pricing.php">Pricing</a>
-      <a href="<?= $base ?>index.php#work">Case Studies</a>
-      <a href="<?= $base ?>blog.php">Insights</a>
-      <a href="<?= $base ?>index.php#about">About</a>
-      <a class="btn btn-primary" href="<?= $base ?>index.php#contact">Book a Call</a>
+      <a href="<?= $base ?>#solutions">Solutions</a>
+      <a href="<?= $base ?>pricing">Pricing</a>
+      <a href="<?= $base ?>#work">Case Studies</a>
+      <a href="<?= $base ?>blog">Insights</a>
+      <a href="<?= $base ?>#about">About</a>
+      <a class="btn btn-primary" href="<?= $base ?>#contact">Book a Call</a>
     </nav>
   </div>
 </header>

@@ -1048,7 +1048,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Inbound Form Card -->
             <div class="card form-card"
                 style="background: rgba(17, 29, 58, 0.9); border: 1px solid rgba(59, 130, 246, 0.35);">
-                <form id="projectInquiryForm" action="<?= url('api/contact.php') ?>" method="POST">
+                <form id="projectInquiryForm" action="<?= url('contact') ?>" method="POST">
                     <input type="hidden" name="csrf_token"
                         value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
