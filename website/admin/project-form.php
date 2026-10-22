@@ -256,12 +256,60 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             margin-bottom: 0.35rem;
         }
 
+        /* ========================================================= */
+        /* ADMIN CONSOLE ENTERPRISE FOOTER SYSTEM                    */
+        /* ========================================================= */
         .admin-footer {
             background: var(--cx-bg-card);
             border: 1px solid var(--cx-border);
             border-radius: 16px;
             padding: 1.5rem;
             margin-top: 3rem;
+            box-shadow: var(--cx-card-shadow);
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        [data-bs-theme="light"] .admin-footer,
+        [data-bs-theme="combo"] .admin-footer {
+            background: #FFFFFF !important;
+            border-color: #E2E8F0 !important;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
+        }
+
+        [data-bs-theme="dark"] .admin-footer {
+            background: rgba(11, 15, 25, 0.85) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55) !important;
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-footer-link {
+            color: var(--cx-text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .admin-footer-link:hover {
+            color: var(--cx-cyan) !important;
+            background: rgba(34, 211, 238, 0.08);
+            transform: translateX(2px);
+        }
+
+        [data-bs-theme="light"] .admin-footer-link,
+        [data-bs-theme="combo"] .admin-footer-link {
+            color: #334155 !important;
+        }
+
+        [data-bs-theme="light"] .admin-footer-link:hover,
+        [data-bs-theme="combo"] .admin-footer-link:hover {
+            color: #0284C7 !important;
+            background: rgba(2, 132, 199, 0.08);
         }
     </style>
 </head>
@@ -275,6 +323,18 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
             </a>
             <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.68rem;">PORTFOLIO EDITOR</span>
+        </div>
+
+        <div class="d-none d-md-flex align-items-center gap-2">
+            <a href="<?= admin_url() ?>" class="btn btn-sm btn-outline-secondary py-1 px-3" style="border-radius: 8px;">
+                <i class="bi bi-speedometer2 text-info me-1"></i> Overview
+            </a>
+            <a href="<?= admin_url('projects') ?>" class="btn btn-sm btn-outline-secondary py-1 px-3" style="border-radius: 8px;">
+                <i class="bi bi-collection-play-fill text-warning me-1"></i> Deliverables Directory
+            </a>
+            <a href="../../crm/" target="_blank" class="btn btn-sm btn-outline-secondary py-1 px-3" style="border-radius: 8px;">
+                <i class="bi bi-robot text-info me-1"></i> CRM OS
+            </a>
         </div>
 
         <div class="d-flex align-items-center gap-2">
@@ -526,12 +586,12 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             <div>
                 &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong> &bull; Enterprise Deliverables Admin Console &bull; All Rights Reserved.
             </div>
-            <div class="d-flex align-items-center gap-3">
-                <a href="<?= admin_url() ?>" class="text-decoration-none text-muted"><i class="bi bi-grid-1x2-fill me-1 text-info"></i>Dashboard</a>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <a href="<?= admin_url() ?>" class="admin-footer-link"><i class="bi bi-grid-1x2-fill text-info"></i> Dashboard</a>
                 <span>&bull;</span>
-                <a href="../../crm/" target="_blank" class="text-decoration-none text-muted"><i class="bi bi-robot me-1 text-warning"></i>CRM Swarm</a>
+                <a href="../../crm/" target="_blank" class="admin-footer-link"><i class="bi bi-robot text-warning"></i> CRM Swarm</a>
                 <span>&bull;</span>
-                <a href="<?= url('#work') ?>" target="_blank" class="text-decoration-none text-muted"><i class="bi bi-box-arrow-up-right me-1 text-primary"></i>Public Front</a>
+                <a href="<?= url('#work') ?>" target="_blank" class="admin-footer-link"><i class="bi bi-box-arrow-up-right text-primary"></i> Public Front</a>
             </div>
         </div>
     </footer>

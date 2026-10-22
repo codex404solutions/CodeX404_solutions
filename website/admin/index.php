@@ -862,13 +862,155 @@ $flash = get_admin_flash();
             margin-bottom: 1.25rem;
         }
 
+        /* ========================================================= */
+        /* ADMIN CONSOLE ENTERPRISE FOOTER SYSTEM                    */
+        /* ========================================================= */
         .admin-footer {
             background: var(--cx-bg-card);
             border: 1px solid var(--cx-border);
             border-radius: 16px;
             padding: 1.75rem 1.5rem;
-            margin-top: 3rem;
+            margin-top: auto;
             box-shadow: var(--cx-card-shadow);
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        [data-bs-theme="light"] .admin-footer,
+        [data-bs-theme="combo"] .admin-footer {
+            background: #FFFFFF !important;
+            border-color: #E2E8F0 !important;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
+        }
+
+        [data-bs-theme="dark"] .admin-footer {
+            background: rgba(11, 15, 25, 0.85) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55) !important;
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-footer-brand-pill {
+            display: inline-flex;
+            align-items: center;
+            background: #070B14;
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(34, 211, 238, 0.25);
+            text-decoration: none;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .admin-footer-brand-pill:hover {
+            transform: translateY(-1px);
+            border-color: var(--cx-cyan);
+        }
+
+        .admin-footer-badge {
+            background: #0B0F19;
+            color: #22D3EE;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.55rem;
+            border-radius: 6px;
+        }
+
+        [data-bs-theme="light"] .admin-footer-badge,
+        [data-bs-theme="combo"] .admin-footer-badge {
+            background: #0F172A !important;
+            color: #38BDF8 !important;
+            border-color: #38BDF8 !important;
+        }
+
+        /* Telemetry Card Inside Admin Footer */
+        .admin-footer-telemetry {
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        [data-bs-theme="light"] .admin-footer-telemetry,
+        [data-bs-theme="combo"] .admin-footer-telemetry {
+            background: #F8FAFC !important;
+            border: 1px solid #E2E8F0 !important;
+        }
+
+        [data-bs-theme="dark"] .admin-footer-telemetry {
+            background: rgba(255, 255, 255, 0.02) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Stat Pill Boxes inside Telemetry Card */
+        .admin-footer-stat-box {
+            padding: 0.5rem 0.25rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-bs-theme="light"] .admin-footer-stat-box,
+        [data-bs-theme="combo"] .admin-footer-stat-box {
+            background: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+        }
+
+        [data-bs-theme="dark"] .admin-footer-stat-box {
+            background: rgba(0, 0, 0, 0.45) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .admin-footer-stat-box:hover {
+            transform: translateY(-2px);
+        }
+
+        .admin-footer-stat-label {
+            font-size: 0.65rem;
+            color: var(--cx-text-muted);
+            margin-top: 2px;
+        }
+
+        /* Platform Bridges & Links inside Admin Footer */
+        .admin-footer-link {
+            color: var(--cx-text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.6rem;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+        }
+
+        .admin-footer-link:hover {
+            color: var(--cx-cyan) !important;
+            background: rgba(34, 211, 238, 0.08);
+            transform: translateX(2px);
+        }
+
+        [data-bs-theme="light"] .admin-footer-link,
+        [data-bs-theme="combo"] .admin-footer-link {
+            color: #334155 !important;
+        }
+
+        [data-bs-theme="light"] .admin-footer-link:hover,
+        [data-bs-theme="combo"] .admin-footer-link:hover {
+            color: #0284C7 !important;
+            background: rgba(2, 132, 199, 0.08);
+        }
+
+        .admin-footer-divider {
+            border-top: 1px solid var(--cx-border) !important;
+        }
+
+        [data-bs-theme="light"] .admin-footer-divider,
+        [data-bs-theme="combo"] .admin-footer-divider {
+            border-top-color: #E2E8F0 !important;
+        }
+
+        [data-bs-theme="dark"] .admin-footer-divider {
+            border-top-color: rgba(255, 255, 255, 0.08) !important;
         }
     </style>
 </head>
@@ -897,12 +1039,20 @@ $flash = get_admin_flash();
         <!-- Center Cross-Platform Nav Links (Desktop) -->
         <div class="d-none d-lg-flex align-items-center gap-1">
             <a href="<?= admin_url() ?>" class="admin-nav-link active">
-                <i class="bi bi-grid-1x2-fill text-info"></i> Projects Portfolio
+                <i class="bi bi-speedometer2 text-info"></i> Overview
+            </a>
+            <a href="<?= admin_url('projects') ?>" class="admin-nav-link">
+                <i class="bi bi-collection-play-fill text-warning"></i>
+                <span>Deliverables</span>
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1" style="font-size: 0.65rem;"><?= $totalCount ?></span>
+            </a>
+            <a href="<?= admin_url('project-form') ?>" class="admin-nav-link">
+                <i class="bi bi-plus-square text-success"></i> New Project
             </a>
             <a href="../../crm/" target="_blank" class="admin-nav-link">
-                <i class="bi bi-robot text-warning"></i>
+                <i class="bi bi-robot text-info"></i>
                 <span>CRM &amp; Paperclip OS</span>
-                <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1" style="font-size: 0.65rem;">Autonomous</span>
+                <span class="badge bg-info-subtle text-info border border-info-subtle ms-1" style="font-size: 0.65rem;">Swarm</span>
             </a>
             <a href="<?= url('#work') ?>" target="_blank" class="admin-nav-link">
                 <i class="bi bi-box-arrow-up-right text-primary"></i> Public Work
@@ -1020,21 +1170,21 @@ $flash = get_admin_flash();
 
         <div class="admin-sidebar-section-title">Navigation</div>
         <nav class="nav flex-column mb-3">
-            <a href="#admin-hero" class="admin-sidebar-link active" data-bs-dismiss="offcanvas">
+            <a href="<?= admin_url() ?>" class="admin-sidebar-link active">
                 <span><i class="bi bi-speedometer2 me-2 text-info"></i> Overview</span>
                 <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
             </a>
-            <a href="#portfolio-table" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
-                <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
+            <a href="<?= admin_url('projects') ?>" class="admin-sidebar-link">
+                <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables Directory</span>
                 <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
+            </a>
+            <a href="<?= admin_url('project-form') ?>" class="admin-sidebar-link">
+                <span><i class="bi bi-plus-square me-2 text-success"></i> New Deliverable</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Add</span>
             </a>
             <a href="#showcase-slider" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
                 <span><i class="bi bi-stars me-2 text-primary"></i> Showcase Slider</span>
                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
-            </a>
-            <a href="#telemetry-ticker" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
-                <span><i class="bi bi-activity me-2 text-success"></i> Telemetry Ticker</span>
-                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
             </a>
         </nav>
 
@@ -1177,7 +1327,7 @@ $flash = get_admin_flash();
         <!-- ======================================================== -->
         <!-- MAIN CONTENT AREA                                        -->
         <!-- ======================================================== -->
-        <main class="col-12 col-lg-10 p-3 p-md-4" style="min-height: calc(100vh - 61px); overflow-x: hidden;">
+        <main class="col-12 col-lg-10 p-3 p-md-4 d-flex flex-column" style="min-height: calc(100vh - 61px); overflow-x: hidden;">
 
             <!-- Flash Notifications -->
             <?php if ($flash): ?>
@@ -1793,13 +1943,15 @@ $flash = get_admin_flash();
     <!-- ======================================================== -->
     <!-- ADMIN CONSOLE ENTERPRISE FOOTER                          -->
     <!-- ======================================================== -->
-    <footer class="admin-footer">
+    <footer class="admin-footer mt-auto">
         <div class="row g-4 align-items-center">
             <!-- Brand & Scope -->
             <div class="col-12 col-md-5">
                 <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                    <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
-                    <span class="badge bg-dark border border-secondary text-info text-uppercase px-2 py-1" style="font-size: 0.65rem; letter-spacing: 0.08em;">
+                    <span class="admin-footer-brand-pill">
+                        <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 26px; object-fit: contain;">
+                    </span>
+                    <span class="badge admin-footer-badge text-uppercase">
                         PORTFOLIO ADMIN
                     </span>
                     <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.68rem;">v14.2 Enterprise</span>
@@ -1818,7 +1970,7 @@ $flash = get_admin_flash();
 
             <!-- Telemetry Summary -->
             <div class="col-12 col-md-4">
-                <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--cx-border);">
+                <div class="admin-footer-telemetry">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.06em;">Repository Status</span>
                         <span class="d-flex align-items-center gap-1 text-success small" style="font-size: 0.72rem;">
@@ -1827,21 +1979,21 @@ $flash = get_admin_flash();
                     </div>
                     <div class="row g-2 text-center" style="font-size: 0.75rem;">
                         <div class="col-4">
-                            <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                            <div class="admin-footer-stat-box">
                                 <div class="fw-bold text-info"><?= $totalCount ?></div>
-                                <div class="text-muted" style="font-size: 0.65rem;">Total Projects</div>
+                                <div class="admin-footer-stat-label">Total Projects</div>
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                            <div class="admin-footer-stat-box">
                                 <div class="fw-bold text-success"><?= $activeCount ?></div>
-                                <div class="text-muted" style="font-size: 0.65rem;">Published</div>
+                                <div class="admin-footer-stat-label">Published</div>
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="p-1 rounded bg-black-50 border border-secondary border-opacity-25">
+                            <div class="admin-footer-stat-box">
                                 <div class="fw-bold text-warning"><?= $draftCount ?></div>
-                                <div class="text-muted" style="font-size: 0.65rem;">In Review</div>
+                                <div class="admin-footer-stat-label">In Review</div>
                             </div>
                         </div>
                     </div>
@@ -1851,22 +2003,22 @@ $flash = get_admin_flash();
             <!-- Cross-Platform Navigation -->
             <div class="col-12 col-md-3 text-md-end">
                 <div class="small fw-bold text-uppercase text-muted mb-2" style="font-size: 0.68rem; letter-spacing: 0.06em;">Platform Bridges</div>
-                <div class="d-flex flex-column gap-1 align-items-md-end" style="font-size: 0.8rem;">
-                    <a href="../../crm/" target="_blank" class="text-decoration-none text-warning d-inline-flex align-items-center gap-1">
-                        <i class="bi bi-robot"></i> Company CRM &amp; Paperclip OS
+                <div class="d-flex flex-column gap-1 align-items-md-end">
+                    <a href="../../crm/" target="_blank" class="admin-footer-link text-warning">
+                        <i class="bi bi-robot"></i> <span>Company CRM &amp; Paperclip OS</span>
                     </a>
-                    <a href="<?= url('#work') ?>" target="_blank" class="text-decoration-none text-muted d-inline-flex align-items-center gap-1">
-                        <i class="bi bi-box-arrow-up-right text-primary"></i> Public Portfolio Showcase
+                    <a href="<?= url('#work') ?>" target="_blank" class="admin-footer-link">
+                        <i class="bi bi-box-arrow-up-right text-primary"></i> <span>Public Portfolio Showcase</span>
                     </a>
-                    <a href="<?= url('discovery-call') ?>" target="_blank" class="text-decoration-none text-muted d-inline-flex align-items-center gap-1">
-                        <i class="bi bi-lightning-charge text-info"></i> Client Discovery Intake Form
+                    <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-footer-link">
+                        <i class="bi bi-lightning-charge text-info"></i> <span>Client Discovery Intake Form</span>
                     </a>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Copyright & Security Notice -->
-        <div class="pt-3 mt-3 border-top d-flex flex-wrap align-items-center justify-content-between gap-2" style="border-color: var(--cx-border) !important; font-size: 0.75rem;">
+        <div class="admin-footer-divider pt-3 mt-3 d-flex flex-wrap align-items-center justify-content-between gap-2" style="font-size: 0.75rem;">
             <div class="text-muted">
                 &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong>. Enterprise Deliverables Admin Console &bull; Built with PHP 8.3 &bull; Bootstrap 5.3.3 &bull; All Rights Reserved.
             </div>
