@@ -45,7 +45,7 @@ $flash = get_admin_flash();
 
     <style>
         /* ========================================================= */
-        /* DESIGN TOKENS & COLOR SYSTEM                             */
+        /* DESIGN TOKENS & DUAL-THEME COLOR SYSTEM                   */
         /* ========================================================= */
         :root {
             --cx-cyan: #22D3EE;
@@ -53,6 +53,7 @@ $flash = get_admin_flash();
             --cx-blue: #3B82F6;
             --cx-indigo: #6366F1;
             --cx-purple: #A855F7;
+            --cx-pink: #EC4899;
             --cx-emerald: #10B981;
             --cx-amber: #F59E0B;
             --cx-rose: #F43F5E;
@@ -64,16 +65,19 @@ $flash = get_admin_flash();
         [data-bs-theme="dark"] {
             --cx-bg-canvas: #030712;
             --cx-bg-surface: #0B0F19;
-            --cx-bg-card: rgba(17, 24, 39, 0.7);
-            --cx-bg-hover: rgba(31, 41, 55, 0.6);
+            --cx-bg-card: rgba(17, 24, 39, 0.75);
+            --cx-bg-hover: rgba(31, 41, 55, 0.65);
             --cx-border: rgba(255, 255, 255, 0.08);
-            --cx-border-focus: rgba(34, 211, 238, 0.4);
+            --cx-border-focus: rgba(34, 211, 238, 0.45);
             --cx-text-primary: #F8FAFC;
             --cx-text-secondary: #94A3B8;
             --cx-text-muted: #64748B;
             --cx-nav-bg: #070B14;
-            --cx-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --cx-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55);
             --cx-pill-bg: rgba(255, 255, 255, 0.05);
+            --cx-hero-bg: radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.12) 0%, rgba(99, 102, 241, 0.08) 40%, rgba(11, 15, 25, 0.95) 100%), #0B0F19;
+            --cx-banner-border: rgba(34, 211, 238, 0.2);
+            --cx-ticker-bg: rgba(11, 15, 25, 0.8);
         }
 
         /* 2. PURE LIGHT MODE */
@@ -90,9 +94,12 @@ $flash = get_admin_flash();
             --cx-nav-bg: #FFFFFF;
             --cx-card-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
             --cx-pill-bg: #F1F5F9;
+            --cx-hero-bg: radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.08) 0%, rgba(99, 102, 241, 0.05) 50%, #FFFFFF 100%), #F8FAFC;
+            --cx-banner-border: rgba(14, 165, 233, 0.25);
+            --cx-ticker-bg: rgba(241, 245, 249, 0.9);
         }
 
-        /* 3. DARK & LIGHT COMBO (Recommended Pro SaaS Aesthetic) */
+        /* 3. DARK & LIGHT COMBO (Pro SaaS Aesthetic) */
         [data-bs-theme="combo"] {
             --cx-bg-canvas: #F1F5F9;
             --cx-bg-surface: #FFFFFF;
@@ -106,6 +113,19 @@ $flash = get_admin_flash();
             --cx-nav-bg: #070B14; /* Dark command navigation */
             --cx-card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
             --cx-pill-bg: #F1F5F9;
+            --cx-hero-bg: radial-gradient(circle at 85% 15%, rgba(14, 165, 233, 0.09) 0%, rgba(168, 85, 247, 0.06) 45%, #FFFFFF 100%), #FFFFFF;
+            --cx-banner-border: rgba(14, 165, 233, 0.25);
+            --cx-ticker-bg: #FFFFFF;
+        }
+
+        /* Prevent Horizontal Overflow & Overlapping */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         body {
@@ -116,6 +136,50 @@ $flash = get_admin_flash();
             margin: 0;
             padding: 0;
             transition: background-color 0.2s ease, color 0.2s ease;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================================= */
+        /* COLORFUL GRADIENT TYPOGRAPHY                             */
+        /* ========================================================= */
+        .text-gradient-rainbow {
+            background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 30%, #8B5CF6 65%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #38BDF8;
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #22D3EE 0%, #0284C7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #22D3EE;
+        }
+
+        .text-gradient-emerald {
+            background: linear-gradient(135deg, #34D399 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #10B981;
+        }
+
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #FBBF24 0%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #F59E0B;
+        }
+
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #C084FC 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #A855F7;
         }
 
         /* ========================================================= */
@@ -124,7 +188,7 @@ $flash = get_admin_flash();
         .admin-navbar {
             background-color: var(--cx-nav-bg);
             border-bottom: 1px solid var(--cx-border);
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             position: sticky;
             top: 0;
             z-index: 1030;
@@ -136,7 +200,6 @@ $flash = get_admin_flash();
             border-bottom-color: rgba(255, 255, 255, 0.08) !important;
         }
 
-        /* Brand Pill Container: Keeps Logo Pristine in ALL Themes */
         .admin-brand-pill {
             display: inline-flex;
             align-items: center;
@@ -146,12 +209,13 @@ $flash = get_admin_flash();
             border: 1px solid rgba(34, 211, 238, 0.3);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
             text-decoration: none;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .admin-brand-pill:hover {
             transform: translateY(-1px);
             border-color: var(--cx-cyan);
+            box-shadow: 0 6px 20px rgba(34, 211, 238, 0.2);
         }
 
         .admin-nav-link {
@@ -196,6 +260,363 @@ $flash = get_admin_flash();
         }
 
         /* ========================================================= */
+        /* FUTURISTIC ANIMATED SVG BANNER                           */
+        /* ========================================================= */
+        .admin-hero-banner {
+            position: relative;
+            background: var(--cx-hero-bg);
+            border: 1px solid var(--cx-banner-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--cx-card-shadow);
+            padding: 2.25rem 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #22D3EE 0%, #3B82F6 35%, #8B5CF6 70%, #EC4899 100%);
+            z-index: 2;
+        }
+
+        .banner-svg-canvas {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 55%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.85;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (max-width: 991.98px) {
+            .banner-svg-canvas {
+                width: 100%;
+                opacity: 0.22;
+            }
+            .admin-hero-banner {
+                padding: 1.75rem 1.25rem;
+            }
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .banner-tech-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.85rem;
+            border-radius: 50px;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.25);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #0284C7;
+            margin-bottom: 0.85rem;
+        }
+
+        [data-bs-theme="dark"] .banner-tech-pill {
+            color: var(--cx-cyan);
+        }
+
+        .banner-title {
+            font-size: clamp(1.4rem, 3.2vw, 2.15rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.65rem;
+        }
+
+        .banner-description {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: var(--cx-text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .banner-meta-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .banner-meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
+            background: var(--cx-pill-bg);
+            border: 1px solid var(--cx-border);
+            color: var(--cx-text-secondary);
+        }
+
+        /* SVG Animation Keyframes */
+        @keyframes flowDash {
+            to { stroke-dashoffset: -120; }
+        }
+
+        @keyframes pulseNode {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.35); opacity: 1; }
+        }
+
+        @keyframes orbitSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .svg-flow-path {
+            stroke-dasharray: 8 6;
+            animation: flowDash 15s linear infinite;
+        }
+
+        .svg-pulsing-node {
+            transform-origin: center;
+            animation: pulseNode 3s ease-in-out infinite;
+        }
+
+        .svg-rotating-ring {
+            transform-origin: 350px 180px;
+            animation: orbitSlow 25s linear infinite;
+        }
+
+        .svg-floating-group {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* ========================================================= */
+        /* CONTINUOUS MARQUEE SCROLLER TICKER                        */
+        /* ========================================================= */
+        .admin-marquee-wrap {
+            position: relative;
+            background: var(--cx-ticker-bg);
+            border: 1px solid var(--cx-border);
+            border-radius: 14px;
+            padding: 0.65rem 0;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-marquee-wrap::before,
+        .admin-marquee-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .admin-marquee-wrap::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--cx-ticker-bg) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .admin-marquee-wrap::after {
+            right: 0;
+            background: linear-gradient(270deg, var(--cx-ticker-bg) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .admin-marquee-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0 1rem;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--cx-cyan);
+            border-right: 1px solid var(--cx-border);
+            flex-shrink: 0;
+            z-index: 4;
+            background: var(--cx-ticker-bg);
+        }
+
+        .admin-marquee-track {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            white-space: nowrap;
+            width: max-content;
+            animation: marqueeScroll 36s linear infinite;
+        }
+
+        .admin-marquee-wrap:hover .admin-marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .admin-marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--cx-text-secondary);
+        }
+
+        .admin-marquee-item strong {
+            color: var(--cx-text-primary);
+        }
+
+        .admin-marquee-item .sep {
+            color: var(--cx-text-muted);
+            opacity: 0.5;
+            margin-left: 1.5rem;
+        }
+
+        /* ========================================================= */
+        /* INTERACTIVE DELIVERABLES SLIDER CAROUSEL                  */
+        /* ========================================================= */
+        .deliverables-slider-section {
+            background: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 18px;
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+            box-shadow: var(--cx-card-shadow);
+            position: relative;
+        }
+
+        .slider-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.15rem;
+            flex-wrap: wrap;
+        }
+
+        .slider-viewport {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 12px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .slider-viewport:active {
+            cursor: grabbing;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 1rem;
+        }
+
+        .slider-card-item {
+            flex: 0 0 100%;
+            min-width: 0;
+            background: var(--cx-bg-surface);
+            border: 1px solid var(--cx-border);
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 640px) {
+            .slider-card-item {
+                flex: 0 0 calc(50% - 0.5rem);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .slider-card-item {
+                flex: 0 0 calc(33.333% - 0.67rem);
+            }
+        }
+
+        .slider-card-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--cx-cyan);
+            box-shadow: 0 12px 28px -6px rgba(34, 211, 238, 0.15);
+        }
+
+        .slider-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid var(--cx-border);
+            background: var(--cx-bg-surface);
+            color: var(--cx-text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .slider-nav-btn:hover {
+            background: var(--cx-cyan);
+            border-color: var(--cx-cyan);
+            color: #030712;
+            transform: scale(1.05);
+        }
+
+        .slider-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 10px;
+            background: var(--cx-border);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .slider-dot.active {
+            width: 24px;
+            background: var(--cx-cyan);
+        }
+
+        /* ========================================================= */
         /* CARDS & METRIC WIDGETS                                    */
         /* ========================================================= */
         .admin-card {
@@ -215,6 +636,7 @@ $flash = get_admin_flash();
             position: relative;
             overflow: hidden;
             transition: transform 0.2s ease, border-color 0.2s ease;
+            height: 100%;
         }
 
         .stat-card:hover {
@@ -244,16 +666,23 @@ $flash = get_admin_flash();
             align-items: center;
             justify-content: center;
             font-size: 1.35rem;
+            flex-shrink: 0;
         }
 
         /* ========================================================= */
-        /* TABLE STYLING                                             */
+        /* TABLE STYLING & OVERFLOW GUARDS                           */
         /* ========================================================= */
+        .table-responsive {
+            -webkit-overflow-scrolling: touch;
+            border-radius: 14px;
+        }
+
         .table-admin {
             --bs-table-bg: transparent;
             --bs-table-border-color: var(--cx-border);
             color: var(--cx-text-primary);
             margin-bottom: 0;
+            width: 100%;
         }
 
         .table-admin th {
@@ -265,6 +694,7 @@ $flash = get_admin_flash();
             padding: 1rem 1.15rem;
             background: rgba(0, 0, 0, 0.02);
             border-bottom: 1px solid var(--cx-border);
+            white-space: nowrap;
         }
 
         [data-bs-theme="dark"] .table-admin th {
@@ -285,6 +715,7 @@ $flash = get_admin_flash();
             font-family: var(--font-mono);
             font-size: 0.74rem;
             color: var(--cx-text-muted);
+            word-break: break-all;
         }
 
         .demo-chip {
@@ -299,6 +730,7 @@ $flash = get_admin_flash();
             background: rgba(168, 85, 247, 0.12);
             color: #A855F7;
             border: 1px solid rgba(168, 85, 247, 0.25);
+            white-space: nowrap;
         }
 
         .category-chip {
@@ -312,6 +744,7 @@ $flash = get_admin_flash();
             background: rgba(56, 189, 248, 0.1);
             color: #0284C7;
             border: 1px solid rgba(56, 189, 248, 0.2);
+            white-space: nowrap;
         }
 
         [data-bs-theme="dark"] .category-chip {
@@ -329,6 +762,7 @@ $flash = get_admin_flash();
             color: var(--cx-text-secondary);
             transition: all 0.15s ease;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .filter-pill-btn:hover,
@@ -341,8 +775,8 @@ $flash = get_admin_flash();
 
         /* Quick Action Toolbar Buttons */
         .btn-action-icon {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             padding: 0;
             display: inline-flex;
             align-items: center;
@@ -350,6 +784,7 @@ $flash = get_admin_flash();
             border-radius: 8px;
             font-size: 0.9rem;
             transition: all 0.15s ease;
+            flex-shrink: 0;
         }
 
         /* Modals */
@@ -363,6 +798,13 @@ $flash = get_admin_flash();
 
         .modal-header, .modal-footer {
             border-color: var(--cx-border);
+        }
+
+        /* Responsive Mobile Nav Drawer */
+        #adminMobileNav {
+            background: var(--cx-nav-bg);
+            border-top: 1px solid var(--cx-border);
+            padding: 1rem 0.5rem;
         }
     </style>
 </head>
@@ -388,7 +830,7 @@ $flash = get_admin_flash();
             </div>
         </div>
 
-        <!-- Center Cross-Platform Nav Links -->
+        <!-- Center Cross-Platform Nav Links (Desktop) -->
         <div class="d-none d-lg-flex align-items-center gap-1">
             <a href="index.php" class="admin-nav-link active">
                 <i class="bi bi-grid-1x2-fill text-info"></i> Projects Portfolio
@@ -408,6 +850,11 @@ $flash = get_admin_flash();
 
         <!-- Right Side Controls: Theme Switcher & Admin User Dropdown -->
         <div class="d-flex align-items-center gap-2">
+            <!-- Mobile Toggle Button -->
+            <button class="btn btn-outline-secondary btn-sm d-lg-none py-1 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#adminMobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fs-5"></i>
+            </button>
+
             <!-- Bootstrap Theme Toggle Dropdown -->
             <div class="dropdown">
                 <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-3 py-1" id="bd-theme-admin" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 8px;">
@@ -474,12 +921,30 @@ $flash = get_admin_flash();
             </div>
         </div>
     </div>
+
+    <!-- Mobile Collapsible Navigation Menu -->
+    <div class="collapse d-lg-none" id="adminMobileNav">
+        <div class="d-flex flex-column gap-1 pt-2">
+            <a href="index.php" class="admin-nav-link active">
+                <i class="bi bi-grid-1x2-fill text-info"></i> Projects Portfolio
+            </a>
+            <a href="../../crm/public/index.php" target="_blank" class="admin-nav-link">
+                <i class="bi bi-robot text-warning"></i> CRM &amp; Paperclip OS <span class="badge bg-warning-subtle text-warning ms-auto">Autonomous</span>
+            </a>
+            <a href="../index.php#work" target="_blank" class="admin-nav-link">
+                <i class="bi bi-box-arrow-up-right text-primary"></i> View Public Work
+            </a>
+            <a href="../discovery-call.php" target="_blank" class="admin-nav-link">
+                <i class="bi bi-lightning-charge-fill text-warning"></i> Lead Intake Form
+            </a>
+        </div>
+    </div>
 </nav>
 
 <!-- ======================================================== -->
 <!-- MAIN CONTENT CONTAINER                                   -->
 <!-- ======================================================== -->
-<main class="container-fluid px-3 px-md-4 py-4" style="max-width: 1400px;">
+<main class="container-fluid px-3 px-md-4 py-3" style="max-width: 1440px;">
 
     <!-- Flash Notifications -->
     <?php if ($flash): ?>
@@ -490,31 +955,322 @@ $flash = get_admin_flash();
         </div>
     <?php endif; ?>
 
-    <!-- Breadcrumbs & Header -->
-    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
-        <div>
-            <div class="d-flex align-items-center gap-2 text-muted small mb-1">
-                <span>CodeX404 Portal</span>
-                <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
-                <span class="text-info fw-semibold">Portfolio Management</span>
-                <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
-                <span>Production Deliverables</span>
-            </div>
-            <h1 class="h3 fw-bold mb-1">Projects &amp; Production Deliverables</h1>
-            <p class="text-muted small mb-0">Configure, reorder, preview, and publish verified client systems across the public showcase.</p>
-        </div>
+    <!-- ======================================================== -->
+    <!-- 1. FUTURISTIC ANIMATED SVG HERO BANNER                   -->
+    <!-- ======================================================== -->
+    <section class="admin-hero-banner">
+        <!-- High-Detail Animated Cyber Vector SVG Canvas -->
+        <svg class="banner-svg-canvas" viewBox="0 0 650 320" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+                <linearGradient id="cyberGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.8"/>
+                    <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.2"/>
+                </linearGradient>
+                <linearGradient id="cyberGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#EC4899" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="#6366F1" stop-opacity="0.2"/>
+                </linearGradient>
+                <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <pattern id="adminGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(34, 211, 238, 0.08)" stroke-width="1"/>
+                    <circle cx="40" cy="0" r="1.5" fill="rgba(34, 211, 238, 0.25)"/>
+                </pattern>
+            </defs>
 
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-            <a href="../index.php#work" target="_blank" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
-                <i class="bi bi-eye"></i>
-                <span>Preview Public Work</span>
-            </a>
-            <a href="project-form.php" class="btn btn-primary btn-sm d-flex align-items-center gap-2 px-3 py-2 fw-bold shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
-                <i class="bi bi-plus-circle-fill"></i>
-                <span>Upload New Project</span>
-            </a>
+            <!-- Background Cyber Grid -->
+            <rect width="650" height="320" fill="url(#adminGrid)" />
+
+            <!-- Ambient Glow Spheres -->
+            <circle cx="500" cy="90" r="140" fill="rgba(34, 211, 238, 0.12)" filter="url(#glowFilter)"/>
+            <circle cx="360" cy="220" r="120" fill="rgba(168, 85, 247, 0.1)" filter="url(#glowFilter)"/>
+
+            <!-- Moving Circuit Paths -->
+            <g class="svg-flow-path" stroke="url(#cyberGrad1)" stroke-width="2" fill="none">
+                <path d="M 120 280 L 220 200 L 340 200 L 420 120 L 580 120" />
+                <path d="M 180 320 L 280 240 L 400 240 L 480 170 L 620 170" stroke="url(#cyberGrad2)" stroke-width="1.5" />
+                <path d="M 260 20 L 360 80 L 490 80 L 550 40 L 640 40" />
+            </g>
+
+            <!-- Pulsing Connection Nodes -->
+            <g class="svg-pulsing-node">
+                <circle cx="220" cy="200" r="5" fill="#22D3EE" filter="url(#glowFilter)"/>
+                <circle cx="340" cy="200" r="4" fill="#3B82F6"/>
+                <circle cx="420" cy="120" r="6" fill="#8B5CF6" filter="url(#glowFilter)"/>
+                <circle cx="580" cy="120" r="5" fill="#EC4899"/>
+                <circle cx="480" cy="170" r="4" fill="#38BDF8"/>
+                <circle cx="360" cy="80" r="5" fill="#10B981"/>
+            </g>
+
+            <!-- Rotating Orbital Ring Group -->
+            <g class="svg-rotating-ring" stroke="rgba(34, 211, 238, 0.25)" stroke-width="1.5" fill="none" stroke-dasharray="12 10">
+                <circle cx="350" cy="180" r="85" />
+                <circle cx="350" cy="180" r="125" stroke="rgba(139, 92, 246, 0.18)" stroke-dasharray="16 12"/>
+            </g>
+
+            <!-- 3D Isometric Cluster Box -->
+            <g class="svg-floating-group">
+                <polygon points="500,80 550,55 600,80 550,105" fill="rgba(34, 211, 238, 0.25)" stroke="#22D3EE" stroke-width="1.5"/>
+                <polygon points="500,80 550,105 550,155 500,130" fill="rgba(59, 130, 246, 0.3)" stroke="#3B82F6" stroke-width="1.5"/>
+                <polygon points="550,105 600,80 600,130 550,155" fill="rgba(139, 92, 246, 0.35)" stroke="#8B5CF6" stroke-width="1.5"/>
+                <circle cx="550" cy="105" r="4" fill="#FFFFFF" filter="url(#glowFilter)"/>
+            </g>
+        </svg>
+
+        <div class="banner-content">
+            <div class="banner-tech-pill">
+                <span class="live-dot" style="width: 7px; height: 7px;"></span>
+                <span>CodeX404 Enterprise Architecture V14.2</span>
+            </div>
+            <h1 class="banner-title">
+                Production Deliverables &amp; <br>
+                <span class="text-gradient-rainbow">Showcase Command Center</span>
+            </h1>
+            <p class="banner-description">
+                Real-time orchestration of verified enterprise client systems, high-availability architecture specs, interactive sandbox environments, and public portfolio deployments.
+            </p>
+
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                <a href="project-form.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2 px-3 py-2 fw-bold shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    <span>Upload New Project</span>
+                </a>
+                <a href="../index.php#work" target="_blank" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
+                    <i class="bi bi-eye"></i>
+                    <span>Preview Public Showcase</span>
+                </a>
+                <a href="../../crm/public/index.php" target="_blank" class="btn btn-outline-info btn-sm d-inline-flex align-items-center gap-2 px-3 py-2" style="border-radius: 10px;">
+                    <i class="bi bi-robot text-warning"></i>
+                    <span>Launch CRM Command</span>
+                </a>
+            </div>
+
+            <div class="banner-meta-bar">
+                <div class="banner-meta-item">
+                    <i class="bi bi-shield-check text-success"></i>
+                    <span>Sync: <strong>Instant Webhooks</strong></span>
+                </div>
+                <div class="banner-meta-item">
+                    <i class="bi bi-speedometer2 text-info"></i>
+                    <span>Uptime SLA: <strong>99.98% High-Avail</strong></span>
+                </div>
+                <div class="banner-meta-item">
+                    <i class="bi bi-hdd-network text-primary"></i>
+                    <span>Inventory: <strong><?= $totalCount ?> Total Systems</strong></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 2. CONTINUOUS MARQUEE SCROLLER TICKER                    -->
+    <!-- ======================================================== -->
+    <div class="admin-marquee-wrap">
+        <div class="admin-marquee-label">
+            <span class="live-dot" style="width: 6px; height: 6px;"></span>
+            <span>Live Telemetry</span>
+        </div>
+        <div class="admin-marquee-track">
+            <!-- Set 1 -->
+            <div class="admin-marquee-item">
+                <i class="bi bi-collection-play-fill text-info"></i>
+                <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-check-circle-fill text-success"></i>
+                <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-shield-lock-fill text-warning"></i>
+                <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-cpu-fill text-primary"></i>
+                <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-robot text-warning"></i>
+                <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-globe-americas text-info"></i>
+                <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-lightning-charge-fill text-warning"></i>
+                <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+
+            <!-- Set 2 (Duplicate for Infinite Smooth Loop) -->
+            <div class="admin-marquee-item">
+                <i class="bi bi-collection-play-fill text-info"></i>
+                <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-check-circle-fill text-success"></i>
+                <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-shield-lock-fill text-warning"></i>
+                <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-cpu-fill text-primary"></i>
+                <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-robot text-warning"></i>
+                <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-globe-americas text-info"></i>
+                <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
+            <div class="admin-marquee-item">
+                <i class="bi bi-lightning-charge-fill text-warning"></i>
+                <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
+                <span class="sep">&bull;</span>
+            </div>
         </div>
     </div>
+
+    <!-- ======================================================== -->
+    <!-- 3. INTERACTIVE DELIVERABLES SHOWCASE SLIDER               -->
+    <!-- ======================================================== -->
+    <?php if (!empty($projects)): ?>
+    <section class="deliverables-slider-section">
+        <div class="slider-header">
+            <div>
+                <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
+                    <i class="bi bi-stars text-warning"></i>
+                    <span>Featured Showcase Deliverables</span>
+                    <span class="badge bg-info-subtle text-info border border-info-subtle" style="font-size: 0.72rem;">Interactive Carousel</span>
+                </h5>
+                <p class="text-muted small mb-0">Browse production applications, verified performance metrics, and interactive sandboxes.</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-xs btn-outline-secondary py-1 px-2 d-none d-sm-inline-flex align-items-center gap-1" id="sliderAutoToggle" style="font-size: 0.75rem; border-radius: 8px;">
+                    <i class="bi bi-pause-fill" id="sliderAutoIcon"></i>
+                    <span id="sliderAutoText">Pause Slider</span>
+                </button>
+                <button type="button" class="slider-nav-btn" id="sliderPrevBtn" aria-label="Previous slide" title="Previous Slide">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button type="button" class="slider-nav-btn" id="sliderNextBtn" aria-label="Next slide" title="Next Slide">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="slider-viewport" id="deliverablesSliderViewport">
+            <div class="slider-track" id="deliverablesSliderTrack">
+                <?php foreach ($projects as $idx => $p): ?>
+                    <?php
+                    $isActive = !empty($p['active']);
+                    $category = strtolower((string)($p['category'] ?? 'software'));
+                    ?>
+                    <div class="slider-card-item">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="category-chip">
+                                    <i class="bi bi-tag-fill me-1"></i><?= htmlspecialchars($p['category_label'] ?? ucfirst($p['category'])) ?>
+                                </span>
+                                <?php if ($isActive): ?>
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle d-inline-flex align-items-center gap-1" style="font-size: 0.7rem;">
+                                        <span class="live-dot" style="width: 5px; height: 5px;"></span> Live
+                                    </span>
+                                <?php else: ?>
+                                    <span class="badge bg-secondary-subtle text-muted border border-secondary-subtle" style="font-size: 0.7rem;">
+                                        Draft
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <h6 class="fw-bold mb-1 text-truncate" title="<?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></h6>
+                            <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
+                                <code class="project-id-chip"><?= htmlspecialchars($p['id']) ?></code>
+                                <?php if (!empty($p['mockup_host'])): ?>
+                                    <span>&bull;</span>
+                                    <span class="text-truncate" style="font-size: 0.76rem; font-family: var(--font-mono);"><?= htmlspecialchars($p['mockup_host']) ?></span>
+                                <?php endif; ?>
+                            </div>
+
+                            <p class="small text-muted mb-3" style="font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4em;">
+                                <?= htmlspecialchars(!empty($p['problem']) ? $p['problem'] : 'Verified production system built for high-throughput enterprise performance.') ?>
+                            </p>
+                        </div>
+
+                        <div>
+                            <?php if (!empty($p['metric'])): ?>
+                                <div class="p-2 rounded-3 mb-3 d-flex align-items-center gap-2" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);">
+                                    <i class="bi bi-graph-up-arrow text-success"></i>
+                                    <span class="small fw-semibold text-success text-truncate" style="font-size: 0.78rem;"><?= htmlspecialchars($p['metric']) ?></span>
+                                </div>
+                            <?php else: ?>
+                                <div class="p-2 rounded-3 mb-3 d-flex align-items-center gap-2" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);">
+                                    <i class="bi bi-hdd-network text-info"></i>
+                                    <span class="small fw-semibold text-info" style="font-size: 0.78rem;">Verified Client Architecture</span>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="d-flex align-items-center justify-content-between gap-2 pt-2 border-top" style="border-color: var(--cx-border) !important;">
+                                <span class="demo-chip">
+                                    <i class="bi bi-play-circle-fill"></i>
+                                    <span><?= htmlspecialchars($p['demo_key'] ?? 'erp') ?></span>
+                                </span>
+                                <div class="d-flex align-items-center gap-1">
+                                    <button type="button" 
+                                        class="btn btn-xs btn-outline-info btn-preview-project py-1 px-2"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalProjectPreview"
+                                        data-title="<?= htmlspecialchars($p['title']) ?>"
+                                        data-category="<?= htmlspecialchars($p['category_label'] ?? $p['category']) ?>"
+                                        data-host="<?= htmlspecialchars($p['mockup_host'] ?? '') ?>"
+                                        data-problem="<?= htmlspecialchars($p['problem'] ?? '') ?>"
+                                        data-solution="<?= htmlspecialchars($p['solution'] ?? '') ?>"
+                                        data-metric="<?= htmlspecialchars((string)($p['metric'] ?? '')) ?>"
+                                        data-stat1-val="<?= htmlspecialchars($p['stat_1_val'] ?? '') ?>"
+                                        data-stat1-lbl="<?= htmlspecialchars($p['stat_1_lbl'] ?? '') ?>"
+                                        data-stat2-val="<?= htmlspecialchars($p['stat_2_val'] ?? '') ?>"
+                                        data-stat2-lbl="<?= htmlspecialchars($p['stat_2_lbl'] ?? '') ?>"
+                                        data-stat3-val="<?= htmlspecialchars($p['stat_3_val'] ?? '') ?>"
+                                        data-stat3-lbl="<?= htmlspecialchars($p['stat_3_lbl'] ?? '') ?>"
+                                        data-live-url="<?= htmlspecialchars($p['live_url'] ?? '') ?>"
+                                        data-tags='<?= json_encode($p['tags'] ?? []) ?>'
+                                        style="font-size: 0.75rem; border-radius: 6px;">
+                                        <i class="bi bi-eye me-1"></i> Preview
+                                    </button>
+                                    <a href="project-form.php?id=<?= urlencode($p['id']) ?>" class="btn btn-xs btn-outline-primary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- Slider Pagination Dots Container -->
+        <div class="slider-dots" id="deliverablesSliderDots"></div>
+    </section>
+    <?php endif; ?>
 
     <!-- ======================================================== -->
     <!-- KPI STATS CARDS ROW                                      -->
@@ -529,7 +1285,7 @@ $flash = get_admin_flash();
                         <i class="bi bi-collection-play-fill"></i>
                     </div>
                 </div>
-                <div class="h2 fw-bold mb-1"><?= $totalCount ?></div>
+                <div class="h2 fw-bold mb-1 text-gradient-cyan"><?= $totalCount ?></div>
                 <div class="small text-muted d-flex align-items-center gap-1">
                     <i class="bi bi-check-all text-success"></i> Synchronized in repository
                 </div>
@@ -579,7 +1335,7 @@ $flash = get_admin_flash();
                         <i class="bi bi-tags-fill"></i>
                     </div>
                 </div>
-                <div class="h2 fw-bold text-primary mb-1"><?= count($categories) ?></div>
+                <div class="h2 fw-bold text-gradient-purple mb-1"><?= count($categories) ?></div>
                 <div class="small text-muted d-flex align-items-center gap-1 text-truncate">
                     <span><?= htmlspecialchars(implode(', ', array_slice($categories, 0, 3))) ?></span>
                 </div>
@@ -1024,6 +1780,168 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('deleteProjectInputId').value = id;
         });
     });
+
+    // =========================================================
+    // Interactive Deliverables Slider Controller
+    // =========================================================
+    const sliderViewport = document.getElementById('deliverablesSliderViewport');
+    const sliderTrack = document.getElementById('deliverablesSliderTrack');
+    const prevBtn = document.getElementById('sliderPrevBtn');
+    const nextBtn = document.getElementById('sliderNextBtn');
+    const autoToggle = document.getElementById('sliderAutoToggle');
+    const autoIcon = document.getElementById('sliderAutoIcon');
+    const autoText = document.getElementById('sliderAutoText');
+    const dotsContainer = document.getElementById('deliverablesSliderDots');
+
+    if (sliderTrack && sliderViewport) {
+        const cards = sliderTrack.querySelectorAll('.slider-card-item');
+        let currentIndex = 0;
+        let isAutoPlaying = true;
+        let autoPlayTimer = null;
+
+        const getItemsPerPage = () => {
+            const w = window.innerWidth;
+            if (w < 640) return 1;
+            if (w < 1024) return 2;
+            return 3;
+        };
+
+        const getMaxIndex = () => {
+            const perPage = getItemsPerPage();
+            return Math.max(0, cards.length - perPage);
+        };
+
+        const renderDots = () => {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            const max = getMaxIndex();
+            if (max <= 0) return;
+
+            for (let i = 0; i <= max; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'slider-dot' + (i === currentIndex ? ' active' : '');
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                    resetTimer();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        };
+
+        const updateSlider = () => {
+            const max = getMaxIndex();
+            if (currentIndex > max) currentIndex = max;
+            if (currentIndex < 0) currentIndex = 0;
+
+            const firstCard = cards[0];
+            if (!firstCard) return;
+
+            const cardWidth = firstCard.offsetWidth;
+            const gap = 16; // 1rem gap
+            const offset = currentIndex * (cardWidth + gap);
+            sliderTrack.style.transform = `translateX(-${offset}px)`;
+
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.slider-dot');
+                dots.forEach((d, idx) => {
+                    d.classList.toggle('active', idx === currentIndex);
+                });
+            }
+        };
+
+        const nextSlide = () => {
+            const max = getMaxIndex();
+            currentIndex = (currentIndex >= max) ? 0 : currentIndex + 1;
+            updateSlider();
+        };
+
+        const prevSlide = () => {
+            const max = getMaxIndex();
+            currentIndex = (currentIndex <= 0) ? max : currentIndex - 1;
+            updateSlider();
+        };
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetTimer();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetTimer();
+            });
+        }
+
+        const startTimer = () => {
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+            if (isAutoPlaying && cards.length > getItemsPerPage()) {
+                autoPlayTimer = setInterval(nextSlide, 4500);
+            }
+        };
+
+        const resetTimer = () => {
+            startTimer();
+        };
+
+        if (autoToggle) {
+            autoToggle.addEventListener('click', () => {
+                isAutoPlaying = !isAutoPlaying;
+                if (isAutoPlaying) {
+                    if (autoIcon) autoIcon.className = 'bi bi-pause-fill';
+                    if (autoText) autoText.textContent = 'Pause Slider';
+                    startTimer();
+                } else {
+                    if (autoIcon) autoIcon.className = 'bi bi-play-fill';
+                    if (autoText) autoText.textContent = 'Play Slider';
+                    if (autoPlayTimer) clearInterval(autoPlayTimer);
+                }
+            });
+        }
+
+        sliderViewport.addEventListener('mouseenter', () => {
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+        });
+
+        sliderViewport.addEventListener('mouseleave', () => {
+            if (isAutoPlaying) startTimer();
+        });
+
+        // Touch & Swipe gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        sliderViewport.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        sliderViewport.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 40) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                resetTimer();
+            }
+        }, { passive: true });
+
+        renderDots();
+        updateSlider();
+        startTimer();
+
+        window.addEventListener('resize', () => {
+            renderDots();
+            updateSlider();
+        });
+    }
 
     // =========================================================
     // Theme Switcher (Combo, Dark, Light, Auto)

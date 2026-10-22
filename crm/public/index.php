@@ -899,6 +899,460 @@ $csrfToken = CrmSecurity::csrfToken();
             color: #FFF;
             box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.2);
         }
+
+        /* ========================================================= */
+        /* RESPONSIVE LAYOUT & OVERFLOW PREVENTIONS                  */
+        /* ========================================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        main {
+            max-width: 100%;
+            overflow-x: hidden;
+            min-width: 0;
+        }
+
+        /* ========================================================= */
+        /* COLORFUL GRADIENT TEXT UTILITIES                         */
+        /* ========================================================= */
+        .text-gradient-rainbow {
+            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 30%, #C084FC 65%, #F472B6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #38BDF8;
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #38BDF8;
+        }
+
+        .text-gradient-emerald {
+            background: linear-gradient(135deg, #34D399 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #10B981;
+        }
+
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #FBBF24 0%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #F59E0B;
+        }
+
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #C084FC 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #818CF8;
+        }
+
+        /* ========================================================= */
+        /* CONTINUOUS MARQUEE SCROLLER TICKER                        */
+        /* ========================================================= */
+        .crm-marquee-wrap {
+            position: relative;
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid var(--cx-border);
+            border-radius: 12px;
+            padding: 0.65rem 0;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        [data-bs-theme="light"] .crm-marquee-wrap,
+        [data-bs-theme="combo"] .crm-marquee-wrap {
+            background: #FFFFFF !important;
+            border-color: #E2E8F0 !important;
+        }
+
+        .crm-marquee-wrap::before,
+        .crm-marquee-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .crm-marquee-wrap::before {
+            left: 0;
+            background: linear-gradient(90deg, #111827 0%, rgba(17, 24, 39, 0) 100%);
+        }
+
+        [data-bs-theme="light"] .crm-marquee-wrap::before,
+        [data-bs-theme="combo"] .crm-marquee-wrap::before {
+            background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
+        }
+
+        .crm-marquee-wrap::after {
+            right: 0;
+            background: linear-gradient(270deg, #111827 0%, rgba(17, 24, 39, 0) 100%);
+        }
+
+        [data-bs-theme="light"] .crm-marquee-wrap::after,
+        [data-bs-theme="combo"] .crm-marquee-wrap::after {
+            background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
+        }
+
+        .crm-marquee-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0 1rem;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--cx-cyan);
+            border-right: 1px solid var(--cx-border);
+            flex-shrink: 0;
+            z-index: 4;
+        }
+
+        .crm-marquee-track {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            white-space: nowrap;
+            width: max-content;
+            animation: crmMarqueeLoop 38s linear infinite;
+        }
+
+        .crm-marquee-wrap:hover .crm-marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes crmMarqueeLoop {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .crm-marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--cx-text-muted);
+        }
+
+        .crm-marquee-item strong {
+            color: var(--cx-text-primary);
+        }
+
+        .crm-marquee-item .sep {
+            color: var(--cx-text-muted);
+            opacity: 0.4;
+            margin-left: 1.5rem;
+        }
+
+        /* ========================================================= */
+        /* FUTURISTIC ANIMATED SVG HERO BANNER (DASHBOARD)          */
+        /* ========================================================= */
+        .crm-hero-banner {
+            position: relative;
+            background: radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.12) 0%, rgba(129, 140, 248, 0.08) 45%, rgba(17, 24, 39, 0.95) 100%), #111827;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.45);
+            padding: 2.25rem 2rem;
+            margin-bottom: 1.75rem;
+            backdrop-filter: blur(12px);
+        }
+
+        [data-bs-theme="light"] .crm-hero-banner,
+        [data-bs-theme="combo"] .crm-hero-banner {
+            background: radial-gradient(circle at 85% 20%, rgba(2, 132, 199, 0.08) 0%, rgba(99, 102, 241, 0.05) 50%, #FFFFFF 100%), #FFFFFF !important;
+            border-color: rgba(2, 132, 199, 0.2) !important;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06) !important;
+        }
+
+        .crm-hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38BDF8 0%, #818CF8 35%, #C084FC 70%, #F472B6 100%);
+            z-index: 2;
+        }
+
+        .crm-banner-svg-canvas {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 55%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.85;
+            z-index: 1;
+        }
+
+        @media (max-width: 991.98px) {
+            .crm-banner-svg-canvas {
+                width: 100%;
+                opacity: 0.22;
+            }
+            .crm-hero-banner {
+                padding: 1.75rem 1.25rem;
+            }
+        }
+
+        .crm-banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .crm-banner-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.85rem;
+            border-radius: 50px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #38BDF8;
+            margin-bottom: 0.85rem;
+        }
+
+        .crm-banner-title {
+            font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.65rem;
+        }
+
+        .crm-banner-desc {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: var(--cx-text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        @keyframes crmSynapticDash {
+            to { stroke-dashoffset: -120; }
+        }
+
+        @keyframes crmNodePulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        @keyframes crmRingOrbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .svg-synapse-path {
+            stroke-dasharray: 8 6;
+            animation: crmSynapticDash 14s linear infinite;
+        }
+
+        .svg-synapse-node {
+            transform-origin: center;
+            animation: crmNodePulse 3.5s ease-in-out infinite;
+        }
+
+        .svg-orbit-ring {
+            transform-origin: 350px 170px;
+            animation: crmRingOrbit 28s linear infinite;
+        }
+
+        /* ========================================================= */
+        /* AUTONOMOUS AGENT SHOWCASE SLIDER                          */
+        /* ========================================================= */
+        .agent-slider-section {
+            background: var(--cx-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 18px;
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+            position: relative;
+        }
+
+        [data-bs-theme="light"] .agent-slider-section,
+        [data-bs-theme="combo"] .agent-slider-section {
+            background: #FFFFFF !important;
+            border-color: #E2E8F0 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .agent-slider-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.15rem;
+            flex-wrap: wrap;
+        }
+
+        .agent-slider-viewport {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 12px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .agent-slider-viewport:active {
+            cursor: grabbing;
+        }
+
+        .agent-slider-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 1rem;
+        }
+
+        .agent-slider-card {
+            flex: 0 0 100%;
+            min-width: 0;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        [data-bs-theme="light"] .agent-slider-card,
+        [data-bs-theme="combo"] .agent-slider-card {
+            background: #FFFFFF !important;
+            border-color: #E2E8F0 !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03) !important;
+        }
+
+        @media (min-width: 640px) {
+            .agent-slider-card {
+                flex: 0 0 calc(50% - 0.5rem);
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .agent-slider-card {
+                flex: 0 0 calc(33.333% - 0.67rem);
+            }
+        }
+
+        .agent-slider-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--cx-cyan);
+            box-shadow: 0 12px 28px -6px rgba(56, 189, 248, 0.18);
+        }
+
+        .agent-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid var(--cx-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--cx-text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        [data-bs-theme="light"] .agent-nav-btn,
+        [data-bs-theme="combo"] .agent-nav-btn {
+            background: #F1F5F9 !important;
+            border-color: #CBD5E1 !important;
+        }
+
+        .agent-nav-btn:hover {
+            background: var(--cx-cyan);
+            border-color: var(--cx-cyan);
+            color: #030712;
+            transform: scale(1.05);
+        }
+
+        .agent-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        .agent-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 10px;
+            background: var(--cx-border);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .agent-dot.active {
+            width: 24px;
+            background: var(--cx-cyan);
+        }
+
+        /* ========================================================= */
+        /* RESPONSIVE KANBAN BOARD CONTAINER (PREVENT OVERFLOW)     */
+        /* ========================================================= */
+        .kanban-board-container {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 1.25rem;
+            width: 100%;
+        }
+
+        .kanban-col-item {
+            flex: 0 0 280px;
+            min-width: 280px;
+            scroll-snap-align: start;
+        }
+
+        @media (min-width: 1400px) {
+            .kanban-board-container {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                overflow-x: visible;
+                gap: 1rem;
+            }
+            .kanban-col-item {
+                flex: initial;
+                min-width: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1158,6 +1612,101 @@ $csrfToken = CrmSecurity::csrfToken();
                 </div>
             </div>
 
+            <!-- ======================================================== -->
+            <!-- REAL-TIME FX & INTELLIGENCE MARQUEE SCROLLER TICKER      -->
+            <!-- ======================================================== -->
+            <div class="crm-marquee-wrap">
+                <div class="crm-marquee-badge">
+                    <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span>
+                    <span>Live Intelligence</span>
+                </div>
+                <div class="crm-marquee-track">
+                    <!-- Set 1 -->
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-currency-exchange text-warning"></i>
+                        <span>1 USD = <strong>₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> INR</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-currency-euro text-info"></i>
+                        <span>1 USD = <strong>€<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> EUR</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-currency-pound text-primary"></i>
+                        <span>1 USD = <strong>£<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?> GBP</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-cash-stack text-success"></i>
+                        <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-robot text-info"></i>
+                        <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-graph-up-arrow text-success"></i>
+                        <span>Pipeline Value: <strong class="currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-shield-check text-warning"></i>
+                        <span>HITL Queue: <strong><?= count($pendingApprovals) ?> Pending Decisions</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-lightning-charge-fill text-warning"></i>
+                        <span>Lead Velocity: <strong><?= $totalLeads ?> Total &bull; <?= $activeLeads ?> Active Inbound</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+
+                    <!-- Set 2 (Duplicate for Infinite Smooth Loop) -->
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-currency-exchange text-warning"></i>
+                        <span>1 USD = <strong>₹<?= number_format((float)($liveExchangeRates['INR'] ?? 95.05), 2) ?> INR</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-currency-euro text-info"></i>
+                        <span>1 USD = <strong>€<?= number_format((float)($liveExchangeRates['EUR'] ?? 0.89), 2) ?> EUR</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-currency-pound text-primary"></i>
+                        <span>1 USD = <strong>£<?= number_format((float)($liveExchangeRates['GBP'] ?? 0.75), 2) ?> GBP</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-cash-stack text-success"></i>
+                        <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-robot text-info"></i>
+                        <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-graph-up-arrow text-success"></i>
+                        <span>Pipeline Value: <strong class="currency-val" data-usd="<?= (float)$pipelineValue ?>">$<?= number_format($pipelineValue, 0) ?></strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-shield-check text-warning"></i>
+                        <span>HITL Queue: <strong><?= count($pendingApprovals) ?> Pending Decisions</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                    <div class="crm-marquee-item">
+                        <i class="bi bi-lightning-charge-fill text-warning"></i>
+                        <span>Lead Velocity: <strong><?= $totalLeads ?> Total &bull; <?= $activeLeads ?> Active Inbound</strong></span>
+                        <span class="sep">&bull;</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Flash Alert Messages -->
             <?php if ($flashMessage): ?>
                 <div class="alert alert-<?= htmlspecialchars($flashType) ?> alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
@@ -1179,6 +1728,194 @@ $csrfToken = CrmSecurity::csrfToken();
                 <!-- ---------------------------------------------------- -->
                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel">
 
+                    <!-- ======================================================== -->
+                    <!-- FUTURISTIC ANIMATED NEURAL NETWORK SVG BANNER            -->
+                    <!-- ======================================================== -->
+                    <section class="crm-hero-banner">
+                        <svg class="crm-banner-svg-canvas" viewBox="0 0 650 320" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="crmNeuralGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.85"/>
+                                    <stop offset="50%" stop-color="#818CF8" stop-opacity="0.6"/>
+                                    <stop offset="100%" stop-color="#C084FC" stop-opacity="0.2"/>
+                                </linearGradient>
+                                <linearGradient id="crmNeuralGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#F472B6" stop-opacity="0.75"/>
+                                    <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.2"/>
+                                </linearGradient>
+                                <filter id="crmGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="7" result="blur" />
+                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                </filter>
+                                <pattern id="crmHexGrid" width="36" height="36" patternUnits="userSpaceOnUse">
+                                    <path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
+                                    <circle cx="36" cy="0" r="1.5" fill="rgba(56, 189, 248, 0.2)"/>
+                                </pattern>
+                            </defs>
+
+                            <rect width="650" height="320" fill="url(#crmHexGrid)" />
+                            <circle cx="480" cy="110" r="130" fill="rgba(56, 189, 248, 0.12)" filter="url(#crmGlow)"/>
+                            <circle cx="340" cy="210" r="110" fill="rgba(129, 140, 248, 0.1)" filter="url(#crmGlow)"/>
+
+                            <!-- Synaptic Data Axons -->
+                            <g class="svg-synapse-path" stroke="url(#crmNeuralGrad1)" stroke-width="2" fill="none">
+                                <path d="M 140 260 L 240 180 L 360 180 L 440 100 L 600 100" />
+                                <path d="M 200 300 L 300 220 L 420 220 L 500 150 L 620 150" stroke="url(#crmNeuralGrad2)" stroke-width="1.5" />
+                                <path d="M 280 40 L 380 90 L 510 90 L 570 50 L 640 50" />
+                            </g>
+
+                            <!-- Synaptic Nodes (7 Agents Representation) -->
+                            <g class="svg-synapse-node">
+                                <circle cx="240" cy="180" r="5" fill="#38BDF8" filter="url(#crmGlow)"/>
+                                <circle cx="360" cy="180" r="4.5" fill="#818CF8"/>
+                                <circle cx="440" cy="100" r="6" fill="#C084FC" filter="url(#crmGlow)"/>
+                                <circle cx="600" cy="100" r="5" fill="#F472B6"/>
+                                <circle cx="500" cy="150" r="4.5" fill="#38BDF8"/>
+                                <circle cx="380" cy="90" r="5" fill="#10B981"/>
+                                <circle cx="300" cy="220" r="4" fill="#FBBF24"/>
+                            </g>
+
+                            <!-- Rotating Synaptic Shield Ring -->
+                            <g class="svg-orbit-ring" stroke="rgba(56, 189, 248, 0.22)" stroke-width="1.5" fill="none" stroke-dasharray="14 10">
+                                <circle cx="350" cy="170" r="80" />
+                                <circle cx="350" cy="170" r="120" stroke="rgba(192, 132, 252, 0.18)" stroke-dasharray="18 12"/>
+                            </g>
+
+                            <!-- Core Quantum Agent Node -->
+                            <g style="animation: crmNodePulse 4s ease-in-out infinite;">
+                                <polygon points="490,90 535,65 580,90 535,115" fill="rgba(56, 189, 248, 0.25)" stroke="#38BDF8" stroke-width="1.5"/>
+                                <polygon points="490,90 535,115 535,160 490,135" fill="rgba(129, 140, 248, 0.3)" stroke="#818CF8" stroke-width="1.5"/>
+                                <polygon points="535,115 580,90 580,135 535,160" fill="rgba(192, 132, 252, 0.35)" stroke="#C084FC" stroke-width="1.5"/>
+                                <circle cx="535, 115" r="4" fill="#FFFFFF" filter="url(#crmGlow)"/>
+                            </g>
+                        </svg>
+
+                        <div class="crm-banner-content">
+                            <div class="crm-banner-pill">
+                                <span class="agent-badge-pulse"></span>
+                                <span>Paperclip Autonomous Swarm &bull; Tier-1 Active</span>
+                            </div>
+                            <h1 class="crm-banner-title">
+                                Autonomous Pipeline &amp; <br>
+                                <span class="text-gradient-rainbow">Executive Command OS</span>
+                            </h1>
+                            <p class="crm-banner-desc">
+                                Enterprise multi-agent pipeline with real-time multi-currency FX conversions, automated lead scoring, automated sales discovery, and strict Human-in-the-Loop decision governance.
+                            </p>
+
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                                <button type="button" class="btn btn-info btn-sm fw-bold text-dark px-3 py-2 shadow-sm d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalNewLead" style="border-radius: 10px;">
+                                    <i class="bi bi-person-plus-fill"></i>
+                                    <span>New Inbound Lead</span>
+                                </button>
+                                <button type="button" class="btn btn-success btn-sm fw-bold px-3 py-2 shadow-sm d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalNewDeal" style="border-radius: 10px;">
+                                    <i class="bi bi-plus-circle-fill"></i>
+                                    <span>New Pipeline Deal</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm px-3 py-2 d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent" style="border-radius: 10px;">
+                                    <i class="bi bi-robot text-info"></i>
+                                    <span>Dispatch Agent</span>
+                                </button>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <span class="badge bg-dark border border-secondary text-info px-2 py-1">
+                                    <i class="bi bi-cpu me-1"></i>7 Agents Synchronized
+                                </span>
+                                <span class="badge bg-dark border border-secondary text-success px-2 py-1">
+                                    <i class="bi bi-currency-exchange me-1"></i>Live Multi-Currency FX
+                                </span>
+                                <span class="badge bg-dark border border-secondary text-warning px-2 py-1">
+                                    <i class="bi bi-shield-check me-1"></i>HITL Governance: Active
+                                </span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ======================================================== -->
+                    <!-- AUTONOMOUS AGENTS VELOCITY SLIDER CAROUSEL               -->
+                    <!-- ======================================================== -->
+                    <section class="agent-slider-section">
+                        <div class="agent-slider-header">
+                            <div>
+                                <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
+                                    <i class="bi bi-robot text-info"></i>
+                                    <span>Autonomous Agent Swarm Network</span>
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle" style="font-size: 0.72rem;">7/7 Ready</span>
+                                </h5>
+                                <p class="text-muted small mb-0">Browse specialized Paperclip AI operators and dispatch automated routines.</p>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-xs btn-outline-secondary py-1 px-2 d-none d-sm-inline-flex align-items-center gap-1" id="agentSliderAutoToggle" style="font-size: 0.75rem; border-radius: 8px;">
+                                    <i class="bi bi-pause-fill" id="agentSliderAutoIcon"></i>
+                                    <span id="agentSliderAutoText">Pause Slider</span>
+                                </button>
+                                <button type="button" class="agent-nav-btn" id="agentSliderPrevBtn" aria-label="Previous Agent" title="Previous Agent">
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                <button type="button" class="agent-nav-btn" id="agentSliderNextBtn" aria-label="Next Agent" title="Next Agent">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="agent-slider-viewport" id="agentsSliderViewport">
+                            <div class="agent-slider-track" id="agentsSliderTrack">
+                                <?php foreach ($agents as $agentSlug => $ag): ?>
+                                    <div class="agent-slider-card">
+                                        <div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="badge text-uppercase px-2 py-1" style="background: rgba(56, 189, 248, 0.12); color: <?= htmlspecialchars($ag['color'] ?? '#38BDF8') ?>; border: 1px solid rgba(56, 189, 248, 0.25); font-size: 0.7rem;">
+                                                    <i class="bi <?= htmlspecialchars($ag['icon'] ?? 'bi-robot') ?> me-1"></i><?= htmlspecialchars($ag['badge'] ?? 'Operator') ?>
+                                                </span>
+                                                <span class="d-inline-flex align-items-center gap-1 text-success small fw-semibold" style="font-size: 0.72rem;">
+                                                    <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span> Online
+                                                </span>
+                                            </div>
+
+                                            <h6 class="fw-bold mb-1 text-truncate" title="<?= htmlspecialchars($ag['name']) ?>"><?= htmlspecialchars($ag['name']) ?></h6>
+                                            <div class="small text-muted mb-2 text-truncate" style="font-size: 0.78rem;"><?= htmlspecialchars($ag['title'] ?? 'Autonomous Specialist') ?></div>
+
+                                            <p class="small text-muted mb-3" style="font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4em;">
+                                                <?= htmlspecialchars($ag['description'] ?? 'Autonomous Paperclip specialist running in local runtime.') ?>
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                                <?php foreach (array_slice((array)($ag['skills'] ?? []), 0, 3) as $sk): ?>
+                                                    <span class="badge bg-secondary-subtle text-muted" style="font-size: 0.65rem;"><?= htmlspecialchars($sk) ?></span>
+                                                <?php endforeach; ?>
+                                            </div>
+
+                                            <div class="d-flex align-items-center justify-content-between pt-2 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
+                                                <button type="button" 
+                                                    class="btn btn-xs btn-outline-info py-1 px-2 d-inline-flex align-items-center gap-1"
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#modalDispatchAgent"
+                                                    onclick="document.querySelector('#modalDispatchAgent select[name=agent_slug]').value = '<?= htmlspecialchars($agentSlug) ?>';"
+                                                    style="font-size: 0.75rem; border-radius: 6px;">
+                                                    <i class="bi bi-send-fill"></i> Dispatch
+                                                </button>
+                                                <form method="POST" class="d-inline">
+                                                    <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
+                                                    <input type="hidden" name="action" value="run_routine">
+                                                    <input type="hidden" name="routine" value="analyze_leads">
+                                                    <input type="hidden" name="current_tab" value="dashboard">
+                                                    <button type="submit" class="btn btn-xs btn-outline-secondary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;" title="Execute Fast Routine">
+                                                        <i class="bi bi-lightning-charge text-warning"></i> Run Routine
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="agent-dots" id="agentsSliderDots"></div>
+                    </section>
+
                     <!-- 4 Top KPI Cards -->
                     <div class="row g-3 mb-4">
                         <div class="col-6 col-md-3">
@@ -1187,7 +1924,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                     <span class="text-muted small fw-bold text-uppercase">Inbound Leads</span>
                                     <span class="badge bg-warning-subtle text-warning border border-warning-subtle">CRM Inflow</span>
                                 </div>
-                                <div class="kpi-num text-white"><?= $totalLeads ?></div>
+                                <div class="kpi-num text-gradient-amber"><?= $totalLeads ?></div>
                                 <div class="small text-muted mt-2 d-flex align-items-center gap-1">
                                     <i class="bi bi-shield-check text-success"></i> <?= $activeLeads ?> active qualified
                                 </div>
@@ -1211,7 +1948,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                     <span class="text-muted small fw-bold text-uppercase">Client Delivery</span>
                                     <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Active Sprints</span>
                                 </div>
-                                <div class="kpi-num text-primary"><?= $activeProjectsCount ?></div>
+                                <div class="kpi-num text-gradient-purple"><?= $activeProjectsCount ?></div>
                                 <div class="small text-muted mt-2 d-flex align-items-center gap-1">
                                     <i class="bi bi-kanban text-info"></i> <?= count($projects) ?> total client accounts
                                 </div>
@@ -1223,7 +1960,7 @@ $csrfToken = CrmSecurity::csrfToken();
                                     <span class="text-muted small fw-bold text-uppercase">Paperclip Agents</span>
                                     <span class="badge bg-info-subtle text-info border border-info-subtle">7/7 Ready</span>
                                 </div>
-                                <div class="kpi-num text-info">7</div>
+                                <div class="kpi-num text-gradient-cyan">7</div>
                                 <div class="small text-muted mt-2 d-flex align-items-center gap-1">
                                     <i class="bi bi-shield-exclamation text-warning"></i> <?= count($pendingApprovals) ?> pending HITL checks
                                 </div>
@@ -1558,8 +2295,8 @@ $csrfToken = CrmSecurity::csrfToken();
                         </div>
                     </div>
 
-                    <!-- Kanban Columns Grid -->
-                    <div class="row g-3">
+                    <!-- Responsive Kanban Columns Container (Scroll-Snap on mobile, Grid on desktop) -->
+                    <div class="kanban-board-container">
                         <?php
                         $pipelineColumns = [
                             'discovery' => ['title' => 'Discovery', 'color' => 'secondary', 'icon' => 'bi-search'],
@@ -1574,7 +2311,7 @@ $csrfToken = CrmSecurity::csrfToken();
                             $stageDeals = array_filter($opportunities, fn($o) => ($o['stage'] ?? '') === $stageSlug);
                             $colTotalVal = array_sum(array_column($stageDeals, 'value'));
                         ?>
-                            <div class="col-12 col-md-6 col-xl-2">
+                            <div class="kanban-col-item">
                                 <div class="kanban-col h-100">
                                     <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom" style="border-color: rgba(255, 255, 255, 0.08) !important;">
                                         <div class="fw-bold small text-<?= $colInfo['color'] ?>">
@@ -2749,6 +3486,168 @@ $csrfToken = CrmSecurity::csrfToken();
                 // Silently fallback to server-injected rates
             }
         })();
+
+        // =========================================================
+        // Autonomous Agent Slider Controller
+        // =========================================================
+        const agentViewport = document.getElementById('agentsSliderViewport');
+        const agentTrack = document.getElementById('agentsSliderTrack');
+        const agentPrev = document.getElementById('agentSliderPrevBtn');
+        const agentNext = document.getElementById('agentSliderNextBtn');
+        const agentAutoToggle = document.getElementById('agentSliderAutoToggle');
+        const agentAutoIcon = document.getElementById('agentSliderAutoIcon');
+        const agentAutoText = document.getElementById('agentSliderAutoText');
+        const agentDotsContainer = document.getElementById('agentsSliderDots');
+
+        if (agentTrack && agentViewport) {
+            const agentCards = agentTrack.querySelectorAll('.agent-slider-card');
+            let curAgentIdx = 0;
+            let isAgentAutoPlaying = true;
+            let agentAutoTimer = null;
+
+            const getAgentItemsPerPage = () => {
+                const w = window.innerWidth;
+                if (w < 640) return 1;
+                if (w < 1100) return 2;
+                return 3;
+            };
+
+            const getAgentMaxIdx = () => {
+                const perPage = getAgentItemsPerPage();
+                return Math.max(0, agentCards.length - perPage);
+            };
+
+            const renderAgentDots = () => {
+                if (!agentDotsContainer) return;
+                agentDotsContainer.innerHTML = '';
+                const max = getAgentMaxIdx();
+                if (max <= 0) return;
+
+                for (let i = 0; i <= max; i++) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'agent-dot' + (i === curAgentIdx ? ' active' : '');
+                    dot.setAttribute('aria-label', `Go to agent slide ${i + 1}`);
+                    dot.addEventListener('click', () => {
+                        curAgentIdx = i;
+                        updateAgentSlider();
+                        resetAgentTimer();
+                    });
+                    agentDotsContainer.appendChild(dot);
+                }
+            };
+
+            const updateAgentSlider = () => {
+                const max = getAgentMaxIdx();
+                if (curAgentIdx > max) curAgentIdx = max;
+                if (curAgentIdx < 0) curAgentIdx = 0;
+
+                const first = agentCards[0];
+                if (!first) return;
+
+                const cardW = first.offsetWidth;
+                const gap = 16;
+                const offset = curAgentIdx * (cardW + gap);
+                agentTrack.style.transform = `translateX(-${offset}px)`;
+
+                if (agentDotsContainer) {
+                    const dots = agentDotsContainer.querySelectorAll('.agent-dot');
+                    dots.forEach((d, idx) => {
+                        d.classList.toggle('active', idx === curAgentIdx);
+                    });
+                }
+            };
+
+            const nextAgent = () => {
+                const max = getAgentMaxIdx();
+                curAgentIdx = (curAgentIdx >= max) ? 0 : curAgentIdx + 1;
+                updateAgentSlider();
+            };
+
+            const prevAgent = () => {
+                const max = getAgentMaxIdx();
+                curAgentIdx = (curAgentIdx <= 0) ? max : curAgentIdx - 1;
+                updateAgentSlider();
+            };
+
+            if (agentNext) {
+                agentNext.addEventListener('click', () => {
+                    nextAgent();
+                    resetAgentTimer();
+                });
+            }
+
+            if (agentPrev) {
+                agentPrev.addEventListener('click', () => {
+                    prevAgent();
+                    resetAgentTimer();
+                });
+            }
+
+            const startAgentTimer = () => {
+                if (agentAutoTimer) clearInterval(agentAutoTimer);
+                if (isAgentAutoPlaying && agentCards.length > getAgentItemsPerPage()) {
+                    agentAutoTimer = setInterval(nextAgent, 5000);
+                }
+            };
+
+            const resetAgentTimer = () => {
+                startAgentTimer();
+            };
+
+            if (agentAutoToggle) {
+                agentAutoToggle.addEventListener('click', () => {
+                    isAgentAutoPlaying = !isAgentAutoPlaying;
+                    if (isAgentAutoPlaying) {
+                        if (agentAutoIcon) agentAutoIcon.className = 'bi bi-pause-fill';
+                        if (agentAutoText) agentAutoText.textContent = 'Pause Slider';
+                        startAgentTimer();
+                    } else {
+                        if (agentAutoIcon) agentAutoIcon.className = 'bi bi-play-fill';
+                        if (agentAutoText) agentAutoText.textContent = 'Play Slider';
+                        if (agentAutoTimer) clearInterval(agentAutoTimer);
+                    }
+                });
+            }
+
+            agentViewport.addEventListener('mouseenter', () => {
+                if (agentAutoTimer) clearInterval(agentAutoTimer);
+            });
+
+            agentViewport.addEventListener('mouseleave', () => {
+                if (isAgentAutoPlaying) startAgentTimer();
+            });
+
+            // Touch Swipe for Mobile
+            let tStartX = 0;
+            let tEndX = 0;
+
+            agentViewport.addEventListener('touchstart', (e) => {
+                tStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            agentViewport.addEventListener('touchend', (e) => {
+                tEndX = e.changedTouches[0].screenX;
+                const diff = tStartX - tEndX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) {
+                        nextAgent();
+                    } else {
+                        prevAgent();
+                    }
+                    resetAgentTimer();
+                }
+            }, { passive: true });
+
+            renderAgentDots();
+            updateAgentSlider();
+            startAgentTimer();
+
+            window.addEventListener('resize', () => {
+                renderAgentDots();
+                updateAgentSlider();
+            });
+        }
     });
 </script>
 

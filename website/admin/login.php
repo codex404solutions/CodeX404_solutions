@@ -88,26 +88,56 @@ $flash = get_admin_flash();
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.08) 0%, rgba(3, 7, 18, 0.98) 70%), var(--bg-dark);
+            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12) 0%, rgba(99, 102, 241, 0.08) 45%, rgba(3, 7, 18, 0.98) 75%), var(--bg-dark);
             padding: 1.5rem;
             position: relative;
             overflow-x: hidden;
         }
+        /* Animated Cyber Grid Backdrop */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .text-gradient-rainbow {
+            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 35%, #F472B6 70%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .login-card {
             width: 100%;
             max-width: 440px;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             border-radius: 1.25rem;
             padding: 2.5rem 2.25rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.1);
-            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(18px);
             position: relative;
             z-index: 10;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+        .login-card:hover {
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), 0 0 45px rgba(56, 189, 248, 0.22);
         }
         .login-header {
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            z-index: 10;
         }
         .brand-badge {
             display: inline-flex;
@@ -125,7 +155,7 @@ $flash = get_admin_flash();
             margin-bottom: 1rem;
         }
         .login-title {
-            font-size: 1.75rem;
+            font-size: 1.85rem;
             font-weight: 800;
             color: #FFFFFF;
             margin-bottom: 0.5rem;
@@ -349,7 +379,7 @@ $flash = get_admin_flash();
             <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#22D3EE;"></span>
             CodeX404 Engineering
         </div>
-        <h1 class="login-title">Admin Sign In</h1>
+        <h1 class="login-title text-gradient-rainbow">Admin Sign In</h1>
         <p class="login-subtitle">Project Showcase &amp; Work Portfolio Management</p>
     </div>
 

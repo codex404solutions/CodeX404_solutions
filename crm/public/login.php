@@ -56,44 +56,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #0B0F19;
+            background-color: #070B14;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12) 0%, rgba(99, 102, 241, 0.08) 50%, rgba(7, 11, 20, 0.98) 85%);
             color: #F8FAFC;
             font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            background-size: 36px 36px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .text-gradient-rainbow {
+            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 35%, #F472B6 70%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .login-card {
             width: 100%;
             max-width: 440px;
-            background: #111827;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(18px);
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+        .login-card:hover {
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 45px rgba(56, 189, 248, 0.22);
         }
         .form-control {
-            background-color: #0B0F19;
-            border-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(11, 15, 25, 0.7);
+            border-color: rgba(148, 163, 184, 0.25);
             color: #FFF;
             padding: 0.75rem 1rem;
+            border-radius: 10px;
         }
         .form-control:focus {
-            background-color: #0E1424;
+            background-color: rgba(14, 20, 36, 0.95);
             border-color: #38BDF8;
-            box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.2);
+            color: #FFF;
+        }
+        .btn-command {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            border: none;
+            color: #FFF;
+            font-weight: 700;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-command:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
             color: #FFF;
         }
 
         /* Light Mode Styles */
         [data-bs-theme="light"] body {
-            background-color: #F1F5F9;
+            background-color: #F8FAFC;
+            background-image: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.08) 0%, rgba(241, 245, 249, 0.95) 70%);
             color: #0F172A;
+        }
+        [data-bs-theme="light"] body::before {
+            background-image: 
+                linear-gradient(to right, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
         }
         [data-bs-theme="light"] .login-card {
             background: #FFFFFF;
             border-color: rgba(14, 165, 233, 0.3);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
         }
         [data-bs-theme="light"] .form-control {
             background-color: #FFFFFF;
@@ -165,8 +220,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="login-card p-4 p-md-5">
                 <div class="text-center mb-4">
                     <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid mb-2" style="max-height: 56px; object-fit: contain;">
-                    <h4 class="fw-bold mb-1">Company Command Center</h4>
-                    <p class="text-muted small mb-0">Executive CRM & Paperclip Agent Network</p>
+                    <h4 class="fw-bold mb-1 text-gradient-rainbow">Company Command Center</h4>
+                    <p class="text-muted small mb-0">Executive CRM &amp; Paperclip Agent Network</p>
                 </div>
 
                 <?php if ($error): ?>
@@ -197,14 +252,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-info w-100 py-2 fw-bold text-dark shadow-sm">
+                    <button type="submit" class="btn btn-command w-100 py-2 fw-bold text-white shadow-sm">
                         <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Command Center
                     </button>
                 </form>
 
                 <div class="text-center mt-4 pt-3 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
-                    <small class="text-muted" style="font-size: 0.75rem;">
-                        <i class="bi bi-shield-check text-success me-1"></i> OWASP Zero-Trust Hardened &bull; HMAC Replay Safe
+                    <small class="text-muted d-inline-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                        <span class="d-inline-block rounded-circle bg-success" style="width: 7px; height: 7px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);"></span>
+                        <i class="bi bi-shield-check text-success ms-1 me-1"></i> OWASP Zero-Trust Hardened &bull; HMAC Replay Safe
                     </small>
                 </div>
             </div>
