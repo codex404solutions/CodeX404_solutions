@@ -1039,20 +1039,12 @@ $flash = get_admin_flash();
         <!-- Center Cross-Platform Nav Links (Desktop) -->
         <div class="d-none d-lg-flex align-items-center gap-1">
             <a href="<?= admin_url() ?>" class="admin-nav-link active">
-                <i class="bi bi-speedometer2 text-info"></i> Overview
-            </a>
-            <a href="<?= admin_url('projects') ?>" class="admin-nav-link">
-                <i class="bi bi-collection-play-fill text-warning"></i>
-                <span>Deliverables</span>
-                <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1" style="font-size: 0.65rem;"><?= $totalCount ?></span>
-            </a>
-            <a href="<?= admin_url('project-form') ?>" class="admin-nav-link">
-                <i class="bi bi-plus-square text-success"></i> New Project
+                <i class="bi bi-grid-1x2-fill text-info"></i> Projects Portfolio
             </a>
             <a href="../../crm/" target="_blank" class="admin-nav-link">
-                <i class="bi bi-robot text-info"></i>
+                <i class="bi bi-robot text-warning"></i>
                 <span>CRM &amp; Paperclip OS</span>
-                <span class="badge bg-info-subtle text-info border border-info-subtle ms-1" style="font-size: 0.65rem;">Swarm</span>
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1" style="font-size: 0.65rem;">Autonomous</span>
             </a>
             <a href="<?= url('#work') ?>" target="_blank" class="admin-nav-link">
                 <i class="bi bi-box-arrow-up-right text-primary"></i> Public Work
@@ -1170,21 +1162,21 @@ $flash = get_admin_flash();
 
         <div class="admin-sidebar-section-title">Navigation</div>
         <nav class="nav flex-column mb-3">
-            <a href="<?= admin_url() ?>" class="admin-sidebar-link active">
+            <a href="#admin-hero" class="admin-sidebar-link active" data-bs-dismiss="offcanvas">
                 <span><i class="bi bi-speedometer2 me-2 text-info"></i> Overview</span>
                 <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
             </a>
-            <a href="<?= admin_url('projects') ?>" class="admin-sidebar-link">
-                <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables Directory</span>
+            <a href="#portfolio-table" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
                 <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
-            </a>
-            <a href="<?= admin_url('project-form') ?>" class="admin-sidebar-link">
-                <span><i class="bi bi-plus-square me-2 text-success"></i> New Deliverable</span>
-                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Add</span>
             </a>
             <a href="#showcase-slider" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
                 <span><i class="bi bi-stars me-2 text-primary"></i> Showcase Slider</span>
                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
+            </a>
+            <a href="#telemetry-ticker" class="admin-sidebar-link" data-bs-dismiss="offcanvas">
+                <span><i class="bi bi-activity me-2 text-success"></i> Telemetry Ticker</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
             </a>
         </nav>
 

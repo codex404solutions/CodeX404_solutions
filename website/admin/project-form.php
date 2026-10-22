@@ -325,18 +325,6 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.68rem;">PORTFOLIO EDITOR</span>
         </div>
 
-        <div class="d-none d-md-flex align-items-center gap-2">
-            <a href="<?= admin_url() ?>" class="btn btn-sm btn-outline-secondary py-1 px-3" style="border-radius: 8px;">
-                <i class="bi bi-speedometer2 text-info me-1"></i> Overview
-            </a>
-            <a href="<?= admin_url('projects') ?>" class="btn btn-sm btn-outline-secondary py-1 px-3" style="border-radius: 8px;">
-                <i class="bi bi-collection-play-fill text-warning me-1"></i> Deliverables Directory
-            </a>
-            <a href="../../crm/" target="_blank" class="btn btn-sm btn-outline-secondary py-1 px-3" style="border-radius: 8px;">
-                <i class="bi bi-robot text-info me-1"></i> CRM OS
-            </a>
-        </div>
-
         <div class="d-flex align-items-center gap-2">
             <!-- Theme Toggle -->
             <div class="dropdown">

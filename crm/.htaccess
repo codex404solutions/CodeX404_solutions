@@ -45,26 +45,20 @@
     # Root -> dashboard
     RewriteRule ^$ public/index.php [L]
 
-    # Clean aliases for multi-page CRM endpoints
+    # Clean aliases for the auth endpoints
     RewriteRule ^login/?$ public/login.php [L]
     RewriteRule ^logout/?$ public/logout.php [L]
-    RewriteRule ^dashboard/?$ public/dashboard.php [L]
-    RewriteRule ^leads/?$ public/leads.php [L]
-    RewriteRule ^pipeline/?$ public/pipeline.php [L]
-    RewriteRule ^projects/?$ public/projects.php [L]
-    RewriteRule ^paperclip/?$ public/paperclip.php [L]
-    RewriteRule ^agents/?$ public/agents.php [L]
-    RewriteRule ^approvals/?$ public/approvals.php [L]
-    RewriteRule ^settings/?$ public/settings.php [L]
 
-    # Internally rewrite extensionless URLs to matching .php files if they exist
+    # Clean URLs: /leads -> public/leads.php (only when the target file exists)
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME}\.php -f
-    RewriteRule ^(.*)$ $1.php [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond public/$1.php -f
+    RewriteRule ^(.*)$ public/$1.php [L]
 
     # Direct files in public/ (e.g. assets, static files)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond public/$1 -f
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
