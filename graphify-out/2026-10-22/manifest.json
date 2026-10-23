@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "website/includes/header.php": {
-    "mtime": 1792690260.703853,
-    "seen": 1792690441.8989265,
-    "ast_hash": "a6d1177597e92e9bc401da93164c8ae8",
+    "mtime": 1792691526.1077845,
+    "seen": 1792691664.9710608,
+    "ast_hash": "fa237f2ce21b0d1ef63c0256a3b804d3",
     "semantic_hash": ""
   },
   "website/includes/navigation.php": {
@@ -264,15 +264,15 @@
     "semantic_hash": "2b943dc102f495588fd6c6f8e2cfe655"
   },
   "website/admin/index.php": {
-    "mtime": 1792690166.45896,
-    "seen": 1792690441.8829155,
-    "ast_hash": "e084a84e8b2eec3823b04eb78b35cd79",
+    "mtime": 1792691474.4640713,
+    "seen": 1792691664.9607282,
+    "ast_hash": "e9254c12f00e3578e453de37c310624b",
     "semantic_hash": ""
   },
   "website/admin/login.php": {
-    "mtime": 1792690628.1076622,
-    "seen": 1792690716.0396252,
-    "ast_hash": "56d75396b4c46256ac69f63d4c70135f",
+    "mtime": 1792691486.2749915,
+    "seen": 1792691664.9607282,
+    "ast_hash": "ba970bd2e878af6a049a61f4c3955e5d",
     "semantic_hash": ""
   },
   "website/admin/logout.php": {
@@ -282,9 +282,9 @@
     "semantic_hash": "059783de4db3886b601897bd2b054ae9"
   },
   "website/admin/project-form.php": {
-    "mtime": 1792642921.4188535,
-    "seen": 1792643018.0937428,
-    "ast_hash": "3170785ef62457a653a5d90b5e4228fe",
+    "mtime": 1792691494.5215566,
+    "seen": 1792691664.9607282,
+    "ast_hash": "37e45f01690f597c5c8028056b20d76b",
     "semantic_hash": ""
   },
   "website/admin/toggle.php": {
@@ -576,15 +576,15 @@
     "semantic_hash": ""
   },
   "crm/public/index.php": {
-    "mtime": 1792690514.4567344,
-    "seen": 1792690716.031604,
-    "ast_hash": "cbb0e117fc5d0044fe334bf387fe068c",
+    "mtime": 1792691543.7310398,
+    "seen": 1792691664.9563897,
+    "ast_hash": "79b4c7d75655d5e9243c1b4b3e3ad58a",
     "semantic_hash": ""
   },
   "crm/public/login.php": {
-    "mtime": 1792690681.209277,
-    "seen": 1792690716.031604,
-    "ast_hash": "d50b79ac74762f7652228331d3160ea3",
+    "mtime": 1792691535.449267,
+    "seen": 1792691664.9563897,
+    "ast_hash": "db401ec18a5c209684bc0a819832586b",
     "semantic_hash": ""
   },
   "crm/public/logout.php": {
@@ -831,6 +831,54 @@
     "mtime": 1792690778.5427947,
     "seen": 1792691370.7155557,
     "ast_hash": "f64d4167f07dd0b219771fb43ecf1b8b",
+    "semantic_hash": ""
+  },
+  "crm/assets/images/logo/favicon-16x16.png": {
+    "mtime": 1792691434.3561316,
+    "seen": 1792691664.9892402,
+    "ast_hash": "b4b8fbf3d7da2268cd6b5c7326100229",
+    "semantic_hash": ""
+  },
+  "crm/assets/images/logo/favicon-32x32.png": {
+    "mtime": 1792691434.312631,
+    "seen": 1792691664.9892402,
+    "ast_hash": "a2ee979f48327c3f01cb84653f8f2832",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/logo/favicon-16x16.png": {
+    "mtime": 1792691434.3561316,
+    "seen": 1792691664.9921389,
+    "ast_hash": "b4b8fbf3d7da2268cd6b5c7326100229",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/logo/favicon-32x32.png": {
+    "mtime": 1792691434.312631,
+    "seen": 1792691664.9921389,
+    "ast_hash": "a2ee979f48327c3f01cb84653f8f2832",
+    "semantic_hash": ""
+  },
+  "logo/favicon-16x16.png": {
+    "mtime": 1792691434.3561316,
+    "seen": 1792691664.995647,
+    "ast_hash": "b4b8fbf3d7da2268cd6b5c7326100229",
+    "semantic_hash": ""
+  },
+  "logo/favicon-32x32.png": {
+    "mtime": 1792691434.312631,
+    "seen": 1792691664.995647,
+    "ast_hash": "a2ee979f48327c3f01cb84653f8f2832",
+    "semantic_hash": ""
+  },
+  "website/assets/images/logo/favicon-16x16.png": {
+    "mtime": 1792691434.3561316,
+    "seen": 1792691664.997072,
+    "ast_hash": "b4b8fbf3d7da2268cd6b5c7326100229",
+    "semantic_hash": ""
+  },
+  "website/assets/images/logo/favicon-32x32.png": {
+    "mtime": 1792691434.312631,
+    "seen": 1792691664.997072,
+    "ast_hash": "a2ee979f48327c3f01cb84653f8f2832",
     "semantic_hash": ""
   }
 }

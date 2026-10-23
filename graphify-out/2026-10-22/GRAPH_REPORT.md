@@ -1,7 +1,7 @@
 # Graph Report - CodeX404_solutions  (2026-10-22)
 
 ## Corpus Check
-- 120 files · ~137,322 words
+- 120 files · ~138,083 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 26 file(s) not represented in the graph (top: (none) 7, .ico 6, .bak 6)
 

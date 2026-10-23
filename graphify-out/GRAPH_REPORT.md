@@ -1,17 +1,17 @@
-# Graph Report - CodeX404_solutions  (2026-10-22)
+# Graph Report - CodeX404_solutions  (2026-10-23)
 
 ## Corpus Check
-- 120 files · ~138,083 words
+- 144 files · ~144,657 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 26 file(s) not represented in the graph (top: (none) 7, .ico 6, .bak 6)
 
 ## Summary
-- 1172 nodes · 1256 edges · 164 communities (99 shown, 65 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.85)
+- 1201 nodes · 1272 edges · 179 communities (99 shown, 80 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e538d173`
+- Built from commit: `5c2ee367`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -110,7 +110,7 @@
 - 8. Website Information Architecture
 - Performance Optimization
 - Dependencies Management
-- public/index.php
+- init.php
 - 🛡️ Security & Compliance
 - 🚀 Quick Start
 - .read
@@ -131,6 +131,7 @@
 - PaperclipService
 - LeadService
 - ProjectService
+- StorageService
 - CodeX404 Solutions — Main Website Implementation Tasks
 - CodeX404 Solutions — Redesign Deployment Record
 
@@ -161,7 +162,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (164 total, 65 thin omitted)
+## Communities (179 total, 80 thin omitted)
 
 ### Community 0 - "Project Maintenance & Tree Generator"
 Cohesion: 0.07
@@ -169,7 +170,7 @@ Nodes (13): ContactController, LeadController, Sanitizer, CRMIntegrationService,
 
 ### Community 1 - "Frontend & SEO Helpers"
 Cohesion: 0.15
-Nodes (15): admin_logout(), authenticate_admin(), get_admin_lockout_file(), get_admin_lockout_remaining(), is_admin_locked_out(), is_admin_logged_in(), record_failed_admin_attempt(), require_admin_auth() (+7 more)
+Nodes (17): admin_logout(), authenticate_admin(), get_admin_lockout_file(), get_admin_lockout_remaining(), is_admin_locked_out(), is_admin_logged_in(), record_failed_admin_attempt(), require_admin_auth() (+9 more)
 
 ### Community 3 - "Input Sanitization & Data Cleaning"
 Cohesion: 0.36
@@ -540,7 +541,7 @@ Cohesion: 0.67
 Nodes (3): Installation, Prerequisites, 🚀 Quick Start
 
 ### Community 127 - "AuthService"
-Cohesion: 0.11
+Cohesion: 0.06
 Nodes (7): AuthService, CrmSecurity, CRMEnv, applyTheme(), getPreferredTheme(), getStoredTheme(), updateThemeUI()
 
 ### Community 128 - "Version Control"
@@ -560,22 +561,22 @@ Cohesion: 0.40
 Nodes (4): Backups, CodeX404 Solutions — Redesign Deployment Record, Deployed, Rollback
 
 ## Knowledge Gaps
-- **65 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **80 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `📁 Code X404 Solutions` connect `📁 Code X404 Solutions` to `**Our Services**`, `🔄 CI/CD Pipeline`, `🎨 Design System`, `🎯 Business Goals`, `📞 Contact`, `📊 Development Progress`, `📖 Documentation`, `👨‍💻 Leadership Team`, `🛡️ Security & Compliance`, `🔧 Technology Stack`, `README.md`, `🚀 Quick Start`?**
-  _High betweenness centrality (0.082) - this node is a cross-community bridge._
+- **Why does `CodeX404 Solutions — Website ↔ CRM API Contract` connect `CodeX404 Solutions — Website ↔ CRM API Contract` to `Security Measures`, `Endpoint 1: Create Lead`, `Migration & Versioning`, `Monitoring`, `Idempotency`, `Logging`, `Endpoint 2: Newsletter Subscription (Optional)`, `Endpoint 3: UTM Tracking Pixel (Optional)`, `Error Handling`, `Performance Targets`, `Quick Reference`, `Rate Limiting`, `Webhooks (Future: CRM → Website)`, `Test Cases`?**
+  _High betweenness centrality (0.088) - this node is a cross-community bridge._
 - **Should `Project Maintenance & Tree Generator` be split into smaller, more focused modules?**
   _Cohesion score 0.06901960784313725 - nodes in this community are weakly interconnected._
 - **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
-  _High betweenness centrality (0.065) - this node is a cross-community bridge._
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
+- **Should `Frontend & SEO Helpers` be split into smaller, more focused modules?**
+  _Cohesion score 0.14855072463768115 - nodes in this community are weakly interconnected._
+- **Why does `CodeX404 Solutions — Technology Stack` connect `CodeX404 Solutions — Technology Stack` to `Version Control`, `Security Measures`, `Monitoring & Logging`, `Backup Strategy`, `Main Website Stack`, `CRM Stack`, `Deployment Strategy`, `Database`, `Development Environment`, `Migration Path (Future Scalability)`, `Razorpay Integration Specifics`, `Testing Strategy`, `Shared Libraries`, `Performance Optimization`, `Dependencies Management`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+- **Should `Security & CSRF Protection` be split into smaller, more focused modules?**
+  _Cohesion score 0.12681159420289856 - nodes in this community are weakly interconnected._
 - **Should `CodeX404 Solutions — High-End CRM PRD` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
-- **Why does `CodeX404 Solutions — High-End CRM PRD` connect `CodeX404 Solutions — High-End CRM PRD` to `README.md`?**
-  _High betweenness centrality (0.063) - this node is a cross-community bridge._
-- **Should `CodeX404 Solutions — Razorpay Integration Specification` be split into smaller, more focused modules?**
-  _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._
-- **Should `22. Data Privacy & GDPR Compliance` be split into smaller, more focused modules?**
-  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
