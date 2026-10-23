@@ -970,12 +970,19 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Inbound Form Card -->
             <div class="card form-card"
                 style="background: rgba(17, 29, 58, 0.9); border: 1px solid rgba(59, 130, 246, 0.35);">
-                <form id="projectInquiryForm" action="<?= url('contact') ?>" method="POST">
-                    <input type="hidden" name="csrf_token"
-                        value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                <form id="projectInquiryForm" action="<?= url('contact.php') ?>" method="POST" class="ajax-form" novalidate>
+                    <?= csrf_input_field() ?>
+
+                    <!-- Honeypot -->
+                    <div style="display: none;" aria-hidden="true">
+                        <label for="inquiry_gotcha">Leave this empty</label>
+                        <input type="text" name="_gotcha" id="inquiry_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
 
                     <h3 style="font-size: 1.3rem; margin-bottom: 1.25rem; color: #FFFFFF;">Project Discovery Inquiry
                     </h3>
+
+                    <div class="form-alert-container"></div>
 
                     <div style="margin-bottom: 1.25rem;">
                         <label for="contact_name"
@@ -1011,13 +1018,20 @@ require_once __DIR__ . '/includes/header.php';
                         </select>
                     </div>
 
-                    <div style="margin-bottom: 1.5rem;">
+                    <div style="margin-bottom: 1.25rem;">
                         <label for="contact_details"
                             style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Project
                             Context & Current Friction *</label>
                         <textarea id="contact_details" name="message" rows="4" required class="form-control"
                             placeholder="Describe the business bottleneck, key user workflows, or integrations required..."
                             style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: var(--slate); cursor: pointer;">
+                            <input type="checkbox" name="privacy_consent" value="1" checked required style="margin-top: 3px; accent-color: var(--cyan);">
+                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and consent to have CodeX404 Solutions review my project details.</span>
+                        </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block btn-lg" style="width: 100%;">

@@ -32,6 +32,10 @@ class ContactController {
             ];
         }
 
+        $rawSubject = !empty($_POST['subject']) 
+            ? (string)$_POST['subject'] 
+            : (!empty($_POST['service']) ? 'Inquiry: ' . (string)$_POST['service'] : 'General Inquiry');
+
         // Sanitize with strict field length bounds
         $data = [
             'type' => 'general_contact',
@@ -39,9 +43,9 @@ class ContactController {
             'email' => Sanitizer::cleanEmail($_POST['email'] ?? '', 254),
             'phone' => Sanitizer::cleanPhone($_POST['phone'] ?? '', 25),
             'company' => Sanitizer::cleanString($_POST['company'] ?? '', 120),
-            'subject' => Sanitizer::cleanString($_POST['subject'] ?? 'General Inquiry', 150),
+            'subject' => Sanitizer::cleanString($rawSubject, 150),
             'message' => Sanitizer::cleanString($_POST['message'] ?? '', 5000),
-            'privacy_consent' => !empty($_POST['privacy_consent']),
+            'privacy_consent' => !empty($_POST['privacy_consent']) || !empty($_POST['service']),
             'newsletter' => !empty($_POST['newsletter']),
             '_gotcha' => Sanitizer::cleanString($_POST['_gotcha'] ?? '', 100)
         ];

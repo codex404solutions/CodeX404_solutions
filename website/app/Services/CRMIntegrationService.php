@@ -52,7 +52,8 @@ class CRMIntegrationService
 
         $crmUrl = (class_exists('Env') ? \Env::get('CRM_WEBHOOK_URL', '') : '') ?: (getenv('CRM_WEBHOOK_URL') ?: '');
         $crmSecret = (class_exists('Env') ? \Env::get('CRM_WEBHOOK_SECRET', '') : '') ?: (getenv('CRM_WEBHOOK_SECRET') ?: '');
-        if ($crmUrl === '' || $crmSecret === '' || !str_starts_with(strtolower($crmUrl), 'https://')) {
+        $isLocal = (defined('ENVIRONMENT') && ENVIRONMENT === 'local') || str_contains($crmUrl, 'localhost') || str_contains($crmUrl, '127.0.0.1');
+        if ($crmUrl === '' || $crmSecret === '' || (!$isLocal && !str_starts_with(strtolower($crmUrl), 'https://'))) {
             return [
                 'status' => 'stored_locally',
                 'idempotency_key' => $idempotencyKey,

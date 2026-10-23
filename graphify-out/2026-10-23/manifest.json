@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "website/components/leadership.php": {
-    "mtime": 1792738220.1430097,
-    "seen": 1792738425.9959424,
-    "ast_hash": "9cd4d05d6ba02699587bce7224e3469b",
+    "mtime": 1792738961.075426,
+    "seen": 1792739235.7189286,
+    "ast_hash": "1db9e1f71750c42c6d61f23617c9755e",
     "semantic_hash": ""
   },
   "website/config/database.php": {
@@ -144,9 +144,9 @@
     "semantic_hash": "3e5dbd758e51720f08895e060e19443e"
   },
   "website/includes/config.php": {
-    "mtime": 1792693008.911432,
-    "seen": 1792694264.166013,
-    "ast_hash": "78c83a6d5f7dbfe396404ff04b797be5",
+    "mtime": 1792738606.324109,
+    "seen": 1792738773.386838,
+    "ast_hash": "9652816843f3ab4cd8b98d89c90b02a0",
     "semantic_hash": ""
   },
   "website/includes/footer.php": {
@@ -156,16 +156,16 @@
     "semantic_hash": ""
   },
   "website/includes/header.php": {
-    "mtime": 1792738302.581117,
-    "seen": 1792738426.0015144,
-    "ast_hash": "48eed4aa7e6319d15326ddf56e039a08",
+    "mtime": 1792738617.117898,
+    "seen": 1792738773.3878348,
+    "ast_hash": "ef60d2241a7af4e00e12088a332e1abf",
     "semantic_hash": ""
   },
   "website/includes/navigation.php": {
-    "mtime": 1792434648.402386,
-    "seen": 1792435154.0382679,
-    "ast_hash": "94a1ca9c6f68a77f7d9e0567c981afe0",
-    "semantic_hash": "94a1ca9c6f68a77f7d9e0567c981afe0"
+    "mtime": 1792741433.242087,
+    "seen": 1792741522.873178,
+    "ast_hash": "d17957589c8999b1d07f5820b8555260",
+    "semantic_hash": ""
   },
   "website/includes/security.php": {
     "mtime": 1792507460.2448888,
@@ -1014,9 +1014,9 @@
     "semantic_hash": ""
   },
   "founder-section.php": {
-    "mtime": 1792738239.3533936,
-    "seen": 1792738425.975609,
-    "ast_hash": "00718d6adbd9c6be1dbaa25eec788207",
+    "mtime": 1792738984.004652,
+    "seen": 1792739235.6919975,
+    "ast_hash": "dfb1cc7c19c45d2d494fb32d034ad61e",
     "semantic_hash": ""
   }
 }

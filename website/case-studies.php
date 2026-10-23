@@ -267,7 +267,7 @@ require_once __DIR__ . '/includes/header.php';
             <p style="font-size: 1rem; color: var(--slate); line-height: 1.6; margin-bottom: 2rem;">
                 Don't just take our word for it. Launch our interactive in-browser simulators to test our AI RAG knowledge retrieval, WhatsApp webhook automation pipeline, and School ERP dashboard live.
             </p>
-            <a href="<?= url('index.php#projects') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch Interactive Demos ⚡</a>
+            <a href="<?= url('index.php#simulators') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch Interactive Demos ⚡</a>
         </div>
     </div>
 </section>
