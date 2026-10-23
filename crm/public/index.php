@@ -1345,64 +1345,80 @@ $csrfToken = CrmSecurity::csrfToken();
                 flex: initial;
                 min-width: 0;
             }
+        }
+
         /* ========================================================= */
         /* CRM COMMAND CENTER ENTERPRISE FOOTER SYSTEM               */
         /* ========================================================= */
         .crm-footer {
-            background: rgba(17, 24, 39, 0.6);
+            background: rgba(17, 24, 39, 0.75);
             border: 1px solid var(--cx-border);
             border-radius: 16px;
             padding: 1.75rem 1.5rem;
             margin-top: auto;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45);
             transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         [data-bs-theme="light"] .crm-footer,
         [data-bs-theme="combo"] .crm-footer {
             background: #FFFFFF !important;
-            border-color: #E2E8F0 !important;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
+            border: 1px solid #E2E8F0 !important;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06) !important;
         }
 
         [data-bs-theme="dark"] .crm-footer {
-            background: rgba(11, 15, 25, 0.85) !important;
-            border-color: rgba(56, 189, 248, 0.15) !important;
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55) !important;
+            background: rgba(11, 15, 25, 0.9) !important;
+            border: 1px solid rgba(56, 189, 248, 0.18) !important;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6) !important;
         }
 
+        /* Brand Container in CRM Footer */
         .crm-footer-brand-pill {
             display: inline-flex;
             align-items: center;
-            background: #0B0F19;
-            padding: 4px 10px;
+            background: #0B0F19 !important;
+            padding: 5px 12px;
             border-radius: 10px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.3) !important;
             text-decoration: none;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .crm-footer-brand-pill:hover {
             transform: translateY(-1px);
-            border-color: var(--cx-cyan);
+            border-color: #38BDF8 !important;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
         }
 
+        [data-bs-theme="light"] .crm-footer-brand-pill,
+        [data-bs-theme="combo"] .crm-footer-brand-pill {
+            background: #0B0F19 !important;
+            border-color: rgba(2, 132, 199, 0.35) !important;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+        }
+
+        /* Badge in CRM Footer */
         .crm-footer-badge {
-            background: #0B0F19;
-            color: #38BDF8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: #0B0F19 !important;
+            color: #38BDF8 !important;
+            border: 1px solid rgba(56, 189, 248, 0.35) !important;
             font-size: 0.65rem;
             letter-spacing: 0.08em;
             padding: 0.35rem 0.55rem;
             border-radius: 6px;
+            font-weight: 700;
         }
 
         [data-bs-theme="light"] .crm-footer-badge,
         [data-bs-theme="combo"] .crm-footer-badge {
             background: #0F172A !important;
             color: #38BDF8 !important;
-            border-color: #38BDF8 !important;
+            border-color: rgba(56, 189, 248, 0.4) !important;
         }
 
         /* Telemetry Card Inside CRM Footer */
@@ -1451,6 +1467,12 @@ $csrfToken = CrmSecurity::csrfToken();
             font-size: 0.65rem;
             color: var(--cx-text-muted);
             margin-top: 2px;
+            font-weight: 500;
+        }
+
+        [data-bs-theme="light"] .crm-footer-stat-label,
+        [data-bs-theme="combo"] .crm-footer-stat-label {
+            color: #64748B !important;
         }
 
         /* Platform Bridges & Links inside CRM Footer */
@@ -1459,16 +1481,17 @@ $csrfToken = CrmSecurity::csrfToken();
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.45rem;
             font-size: 0.8rem;
             padding: 0.35rem 0.6rem;
             border-radius: 8px;
+            font-weight: 500;
             transition: all 0.15s ease;
         }
 
         .crm-footer-link:hover {
             color: #38BDF8 !important;
-            background: rgba(56, 189, 248, 0.08);
+            background: rgba(56, 189, 248, 0.1) !important;
             transform: translateX(2px);
         }
 
@@ -1480,7 +1503,26 @@ $csrfToken = CrmSecurity::csrfToken();
         [data-bs-theme="light"] .crm-footer-link:hover,
         [data-bs-theme="combo"] .crm-footer-link:hover {
             color: #0284C7 !important;
-            background: rgba(2, 132, 199, 0.08);
+            background: rgba(2, 132, 199, 0.08) !important;
+        }
+
+        [data-bs-theme="dark"] .crm-footer-link {
+            color: #94A3B8 !important;
+        }
+
+        [data-bs-theme="dark"] .crm-footer-link:hover {
+            color: #38BDF8 !important;
+            background: rgba(56, 189, 248, 0.1) !important;
+        }
+
+        /* Typography & Subtext in CRM Footer */
+        [data-bs-theme="light"] .crm-footer .text-muted,
+        [data-bs-theme="combo"] .crm-footer .text-muted {
+            color: #64748B !important;
+        }
+
+        [data-bs-theme="dark"] .crm-footer .text-muted {
+            color: #94A3B8 !important;
         }
 
         /* Divider Border inside CRM Footer */
@@ -2956,26 +2998,26 @@ $csrfToken = CrmSecurity::csrfToken();
             <!-- ======================================================== -->
             <!-- CRM COMMAND CENTER ENTERPRISE FOOTER                     -->
             <!-- ======================================================== -->
-            <footer class="crm-footer mt-auto">
+            <footer class="crm-footer mt-4 mt-lg-5">
                 <div class="row g-4 align-items-center">
                     <!-- Brand & Platform Architecture -->
                     <div class="col-12 col-md-5">
                         <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
                             <span class="crm-footer-brand-pill">
-                                <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" style="height: 26px; object-fit: contain;">
+                                <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" style="height: 24px; object-fit: contain;">
                             </span>
                             <span class="badge crm-footer-badge text-uppercase">CRM &amp; AGENT OS</span>
-                            <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.68rem;">v4.0.4 Enterprise</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold" style="font-size: 0.68rem;">v4.0.4 Enterprise</span>
                         </div>
                         <p class="text-muted small mb-2" style="max-width: 440px;">
                             Autonomous multi-agent pipeline orchestration with deterministic HITL decision governance, live real-time FX conversions, and sub-100ms task latency.
                         </p>
-                        <div class="d-flex align-items-center gap-3 text-muted small flex-wrap" style="font-size: 0.75rem;">
-                            <span><i class="bi bi-shield-check text-success me-1"></i> HMAC Signed Ingestion</span>
-                            <span>&bull;</span>
-                            <span><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Paperclip Armed</span>
-                            <span>&bull;</span>
-                            <span><i class="bi bi-clock-history text-info me-1"></i> 99.98% SLA</span>
+                        <div class="d-flex align-items-center gap-2 text-muted small flex-wrap" style="font-size: 0.75rem;">
+                            <span class="text-nowrap"><i class="bi bi-shield-check text-success me-1"></i>HMAC Signed Ingestion</span>
+                            <span class="d-none d-sm-inline opacity-50">&bull;</span>
+                            <span class="text-nowrap"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>Paperclip Armed</span>
+                            <span class="d-none d-sm-inline opacity-50">&bull;</span>
+                            <span class="text-nowrap"><i class="bi bi-clock-history text-info me-1"></i>99.98% SLA</span>
                         </div>
                     </div>
 
@@ -3033,11 +3075,11 @@ $csrfToken = CrmSecurity::csrfToken();
                     <div class="text-muted">
                         &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong>. Autonomous Multi-Agent CRM OS &bull; Built with PHP 8.3 &bull; Bootstrap 5.3.3 &bull; All Rights Reserved.
                     </div>
-                    <div class="d-flex align-items-center gap-3 text-muted flex-wrap">
-                        <span class="d-flex align-items-center gap-1"><i class="bi bi-hdd-stack text-info"></i> Storage: JSON Atomic</span>
-                        <span>&bull;</span>
-                        <span class="d-flex align-items-center gap-1"><i class="bi bi-shield-lock text-success"></i> Strict CSRF</span>
-                        <span>&bull;</span>
+                    <div class="d-flex align-items-center gap-2 text-muted flex-wrap">
+                        <span class="d-flex align-items-center gap-1 text-nowrap"><i class="bi bi-hdd-stack text-info"></i> Storage: JSON Atomic</span>
+                        <span class="opacity-50">&bull;</span>
+                        <span class="d-flex align-items-center gap-1 text-nowrap"><i class="bi bi-shield-lock text-success"></i> Strict CSRF</span>
+                        <span class="opacity-50">&bull;</span>
                         <a href="logout" class="text-danger text-decoration-none fw-semibold"><i class="bi bi-box-arrow-left me-1"></i>Sign Out</a>
                     </div>
                 </div>
