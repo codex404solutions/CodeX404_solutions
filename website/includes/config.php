@@ -97,6 +97,7 @@ if (defined('CUSTOM_BASE_URL')) {
 } else {
     define('BASE_URL', $protocol . $host . $basePath . '/');
 }
+define('BASE_PATH', dirname(__DIR__));
 define('ADMIN_URL', BASE_URL . 'admin/');
 
 

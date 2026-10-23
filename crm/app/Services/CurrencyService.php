@@ -9,7 +9,7 @@ namespace CRM\Services;
  */
 class CurrencyService
 {
-    private const CACHE_FILE = 'rates_cache.json';
+    private const CACHE_FILE = 'rates_cache';
     private const CACHE_TTL_SECONDS = 3600; // 1 hour
 
     /**

@@ -269,7 +269,8 @@
     grid-template-columns: 1fr;
   }
 
-  .leadership-grid {
+  .leadership-grid,
+  .founder-box {
     grid-template-columns: 1fr;
   }
 

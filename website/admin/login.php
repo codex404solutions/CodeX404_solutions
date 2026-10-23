@@ -85,7 +85,6 @@ $flash = get_admin_flash();
     <link rel="shortcut icon" type="image/x-icon" href="<?= asset('images/logo/favicon.ico') ?>">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= asset('images/logo/favicon-32x32.png') ?>">
     <link rel="icon" type="image/png" sizes="16x16" href="<?= asset('images/logo/favicon-16x16.png') ?>">
-    <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
     <style>
         body {
             min-height: 100vh;

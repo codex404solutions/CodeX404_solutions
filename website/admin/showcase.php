@@ -5,16 +5,7 @@ declare(strict_types=1);
  * CodeX404 Solutions — Admin Deliverables Showcase & Sandboxes (Multi-Page)
  */
 
-require_once __DIR__ . '/auth.php';
-require_admin_auth();
 
-use App\Services\ProjectService;
-
-$projects = ProjectService::getAll();
-$totalCount = count($projects);
-$activeCount = count(array_filter($projects, fn($p) => !empty($p['active'])));
-$draftCount = $totalCount - $activeCount;
-$categories = array_values(array_unique(array_filter(array_column($projects, 'category'))));
 
 $currentPage = 'showcase';
 $pageTitle = 'Featured Showcase & Interactive Sandboxes';

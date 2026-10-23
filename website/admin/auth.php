@@ -384,6 +384,37 @@ function authenticate_admin(string $username, string $password): bool
     }
 
     $cleanUser = trim(strtolower($username));
+
+    // 1. Try MySQL Database authentication first
+    $pdo = Database::getConnection();
+    if ($pdo) {
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM `users` WHERE LOWER(`username`) = :u OR LOWER(`email`) = :u LIMIT 1");
+            $stmt->execute([':u' => $cleanUser]);
+            $dbUser = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($dbUser && !empty($dbUser['password_hash']) && password_verify($password, $dbUser['password_hash'])) {
+                if (!headers_sent()) {
+                    session_regenerate_id(true);
+                }
+
+                $now = time();
+                $_SESSION['codex_admin_logged'] = true;
+                $_SESSION['codex_admin_user'] = $dbUser['username'] ?? 'admin';
+                $_SESSION['codex_admin_time'] = $now;
+                $_SESSION['codex_admin_last_activity'] = $now;
+                $_SESSION['codex_admin_rotated_at'] = $now;
+                $_SESSION['codex_admin_ip'] = get_client_ip();
+                $_SESSION['codex_admin_ua'] = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255);
+
+                reset_admin_failed_attempts($username);
+                return true;
+            }
+        } catch (\Throwable $e) {
+            // Fallback to env
+        }
+    }
+
+    // 2. Fallback to .env admin credentials
     $validUser = ($cleanUser === strtolower((string)ADMIN_USER) || (ADMIN_ALT_USER !== '' && $cleanUser === strtolower((string)ADMIN_ALT_USER)));
 
     if (!$validUser || ADMIN_PASS_HASH === '' || password_get_info(ADMIN_PASS_HASH)['algo'] === null) {

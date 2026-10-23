@@ -867,8 +867,148 @@
 }
 
 /* --------------------------------------------------------------------------
-   7. Leadership Profile Card
+   7. Leadership Profile Card — Earlier Restored Founder & Co-Founder UI
    -------------------------------------------------------------------------- */
+.founder {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #070b18 0%, #0b1220 100%);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.founder-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 36px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* CARD */
+.founder-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 32px 26px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.founder-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 194, 255, 0.4);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+}
+
+/* IMAGE */
+.founder-card img {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(0, 194, 255, 0.7);
+  padding: 3px;
+  background: linear-gradient(135deg, #00c2ff, #0077ff);
+  margin: 0 auto 16px auto;
+  display: inline-block;
+}
+
+/* NAME */
+.founder-card h3,
+.founder-card .team-name {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+  color: #FFFFFF;
+}
+
+.team-name a {
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: color 0.2s ease;
+}
+
+.team-name a:hover {
+  color: #00c2ff;
+  text-decoration: underline;
+}
+
+/* ROLE WITH ICON */
+.founder-card .role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00c2ff;
+  margin-bottom: 14px;
+}
+
+.role-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* BIO */
+.founder-card p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #b6c0d1;
+  margin-bottom: 22px;
+  max-width: 380px;
+}
+
+/* LINKEDIN & PORTFOLIO BUTTONS */
+.founder-card .btn.primary {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #00c2ff;
+  color: #050914;
+  border: 1px solid #00c2ff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.founder-card .btn.primary:hover {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  color: #030712;
+  box-shadow: 0 10px 25px rgba(0, 194, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.founder-card .btn.secondary,
+.founder-card .btn-founder-linkedin {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(0, 194, 255, 0.6);
+  color: #00c2ff;
+  background: transparent;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.founder-card .btn.secondary:hover,
+.founder-card .btn-founder-linkedin:hover {
+  background: #00c2ff;
+  color: #050914;
+  box-shadow: 0 10px 25px rgba(0, 194, 255, 0.35);
+  transform: translateY(-2px);
+}
+
 .leadership-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -889,8 +1029,8 @@
 
 .leader-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: var(--shadow-lg), 0 0 50px rgba(139, 92, 246, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(56, 189, 248, 0.08);
 }
 
 .leader-img-wrap {

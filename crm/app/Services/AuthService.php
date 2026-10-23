@@ -6,6 +6,7 @@ namespace CRM\Services;
 use CRMEnv;
 
 require_once dirname(__DIR__, 2) . '/config/config.php';
+require_once __DIR__ . '/StorageService.php';
 
 /**
  * CRM authentication for the first internal deployment.
@@ -38,22 +39,52 @@ class AuthService
         return $email !== '' && $hash !== '' && password_get_info($hash)['algo'] !== null;
     }
 
-    public static function attempt(string $email, string $password): bool
+    public static function attempt(string $identifier, string $password): bool
     {
+        $cleanId = strtolower(trim($identifier));
+
+        // 1. Try MySQL Database authentication first
+        $pdo = \CRM\Services\StorageService::getPdo();
+        if ($pdo) {
+            try {
+                $stmt = $pdo->prepare("SELECT * FROM `users` WHERE LOWER(`username`) = :id1 OR LOWER(`email`) = :id2 LIMIT 1");
+                $stmt->execute([':id1' => $cleanId, ':id2' => $cleanId]);
+                $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+                if ($user && !empty($user['password_hash']) && password_verify($password, $user['password_hash'])) {
+                    if (!headers_sent() && session_status() === PHP_SESSION_ACTIVE) {
+                        session_regenerate_id(true);
+                    }
+                    $_SESSION['crm_user'] = [
+                        'name' => $user['name'] ?? 'CodeX404 Admin',
+                        'email' => $user['email'] ?? 'admin@codex404solutions.online',
+                        'roles' => ['founder', 'ceo', 'cto', 'admin']
+                    ];
+                    return true;
+                }
+            } catch (\Throwable $e) {
+                // DB error, fallback to env
+            }
+        }
+
+        // 2. Fallback to configured .env admin credentials
         $configuredEmail = CRMEnv::get('CRM_ADMIN_EMAIL', '');
         $hash = CRMEnv::get('CRM_ADMIN_PASSWORD_HASH', '');
         if ($configuredEmail === '' || $hash === '') {
             return false;
         }
-        if (!hash_equals(strtolower($configuredEmail), strtolower(trim($email))) || !password_verify($password, $hash)) {
+
+        $isMatch = hash_equals(strtolower($configuredEmail), $cleanId) || $cleanId === 'admin';
+        if (!$isMatch || !password_verify($password, $hash)) {
             return false;
         }
 
-        session_regenerate_id(true);
+        if (!headers_sent() && session_status() === PHP_SESSION_ACTIVE) {
+            session_regenerate_id(true);
+        }
         $_SESSION['crm_user'] = [
-            'name' => CRMEnv::get('CRM_ADMIN_NAME', 'CodeX404 Founder'),
+            'name' => CRMEnv::get('CRM_ADMIN_NAME', 'CodeX404 Admin'),
             'email' => $configuredEmail,
-            'roles' => ['founder', 'ceo', 'cto']
+            'roles' => ['founder', 'ceo', 'cto', 'admin']
         ];
         return true;
     }

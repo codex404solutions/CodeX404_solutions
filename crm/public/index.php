@@ -153,8 +153,8 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ======================================================== -->
 <!-- AUTONOMOUS AGENTS VELOCITY SLIDER CAROUSEL               -->
 <!-- ======================================================== -->
-<section class="agent-slider-section mb-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+<section class="agent-slider-section">
+    <div class="agent-slider-header">
         <div>
             <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
                 <i class="bi bi-robot text-info"></i>
@@ -171,10 +171,10 @@ require_once __DIR__ . '/includes/header.php';
                 <i class="bi bi-pause-fill" id="agentSliderAutoIcon"></i>
                 <span id="agentSliderAutoText">Pause Slider</span>
             </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary p-1" id="agentSliderPrevBtn" aria-label="Previous Agent" title="Previous Agent" style="width: 32px; height: 32px; border-radius: 8px;">
+            <button type="button" class="agent-nav-btn" id="agentSliderPrevBtn" aria-label="Previous Agent" title="Previous Agent">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary p-1" id="agentSliderNextBtn" aria-label="Next Agent" title="Next Agent" style="width: 32px; height: 32px; border-radius: 8px;">
+            <button type="button" class="agent-nav-btn" id="agentSliderNextBtn" aria-label="Next Agent" title="Next Agent">
                 <i class="bi bi-chevron-right"></i>
             </button>
         </div>
@@ -184,51 +184,49 @@ require_once __DIR__ . '/includes/header.php';
         <div class="agent-slider-track" id="agentsSliderTrack">
             <?php foreach ($agents as $agentSlug => $ag): ?>
                 <div class="agent-slider-card">
-                    <div class="crm-card p-3 h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="badge text-uppercase px-2 py-1" style="background: rgba(56, 189, 248, 0.12); color: <?= htmlspecialchars($ag['color'] ?? '#38BDF8') ?>; border: 1px solid rgba(56, 189, 248, 0.25); font-size: 0.7rem;">
-                                    <i class="bi <?= htmlspecialchars($ag['icon'] ?? 'bi-robot') ?> me-1"></i><?= htmlspecialchars($ag['badge'] ?? 'Operator') ?>
-                                </span>
-                                <span class="d-inline-flex align-items-center gap-1 text-success small fw-semibold" style="font-size: 0.72rem;">
-                                    <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span> Online
-                                </span>
-                            </div>
-
-                            <h6 class="fw-bold mb-1 text-truncate" title="<?= htmlspecialchars($ag['name']) ?>"><?= htmlspecialchars($ag['name']) ?></h6>
-                            <div class="small text-muted mb-2 text-truncate" style="font-size: 0.78rem;"><?= htmlspecialchars($ag['title'] ?? 'Autonomous Specialist') ?></div>
-
-                            <p class="small text-muted mb-3" style="font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4em;">
-                                <?= htmlspecialchars($ag['description'] ?? 'Autonomous Paperclip specialist running in local runtime.') ?>
-                            </p>
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge text-uppercase px-2 py-1" style="background: rgba(56, 189, 248, 0.12); color: <?= htmlspecialchars($ag['color'] ?? '#38BDF8') ?>; border: 1px solid rgba(56, 189, 248, 0.25); font-size: 0.7rem;">
+                                <i class="bi <?= htmlspecialchars($ag['icon'] ?? 'bi-robot') ?> me-1"></i><?= htmlspecialchars($ag['badge'] ?? 'Operator') ?>
+                            </span>
+                            <span class="d-inline-flex align-items-center gap-1 text-success small fw-semibold" style="font-size: 0.72rem;">
+                                <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span> Online
+                            </span>
                         </div>
 
-                        <div>
-                            <div class="d-flex flex-wrap gap-1 mb-3">
-                                <?php foreach (array_slice((array)($ag['skills'] ?? []), 0, 3) as $sk): ?>
-                                    <span class="badge bg-secondary-subtle text-muted" style="font-size: 0.65rem;"><?= htmlspecialchars($sk) ?></span>
-                                <?php endforeach; ?>
-                            </div>
+                        <h6 class="fw-bold mb-1 text-truncate" title="<?= htmlspecialchars($ag['name']) ?>"><?= htmlspecialchars($ag['name']) ?></h6>
+                        <div class="small text-muted mb-2 text-truncate" style="font-size: 0.78rem;"><?= htmlspecialchars($ag['title'] ?? 'Autonomous Specialist') ?></div>
 
-                            <div class="d-flex align-items-center justify-content-between pt-2 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
-                                <button type="button" 
-                                    class="btn btn-xs btn-outline-info py-1 px-2 d-inline-flex align-items-center gap-1"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalDispatchAgent"
-                                    onclick="document.querySelector('#modalDispatchAgent select[name=agent_slug]').value = '<?= htmlspecialchars($agentSlug) ?>';"
-                                    style="font-size: 0.75rem; border-radius: 6px;">
-                                    <i class="bi bi-send-fill"></i> Dispatch
+                        <p class="small text-muted mb-3" style="font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4em;">
+                            <?= htmlspecialchars($ag['description'] ?? 'Autonomous Paperclip specialist running in local runtime.') ?>
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-wrap gap-1 mb-3">
+                            <?php foreach (array_slice((array)($ag['skills'] ?? []), 0, 3) as $sk): ?>
+                                <span class="badge bg-secondary-subtle text-muted" style="font-size: 0.65rem;"><?= htmlspecialchars($sk) ?></span>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between pt-2 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
+                            <button type="button" 
+                                class="btn btn-xs btn-outline-info py-1 px-2 d-inline-flex align-items-center gap-1"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalDispatchAgent"
+                                onclick="document.querySelector('#modalDispatchAgent select[name=agent_slug]').value = '<?= htmlspecialchars($agentSlug) ?>';"
+                                style="font-size: 0.75rem; border-radius: 6px;">
+                                <i class="bi bi-send-fill"></i> Dispatch
+                            </button>
+                            <form method="POST" class="d-inline">
+                                <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
+                                <input type="hidden" name="action" value="run_routine">
+                                <input type="hidden" name="routine" value="analyze_leads">
+                                <input type="hidden" name="return_url" value="dashboard">
+                                <button type="submit" class="btn btn-xs btn-outline-secondary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;" title="Execute Fast Routine">
+                                    <i class="bi bi-lightning-charge text-warning"></i> Run Routine
                                 </button>
-                                <form method="POST" class="d-inline">
-                                    <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
-                                    <input type="hidden" name="action" value="run_routine">
-                                    <input type="hidden" name="routine" value="analyze_leads">
-                                    <input type="hidden" name="return_url" value="dashboard">
-                                    <button type="submit" class="btn btn-xs btn-outline-secondary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;" title="Execute Fast Routine">
-                                        <i class="bi bi-lightning-charge text-warning"></i> Run Routine
-                                    </button>
-                                </form>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -236,7 +234,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
     </div>
 
-    <div class="d-flex justify-content-center gap-2 mt-2" id="agentsSliderDots"></div>
+    <div class="agent-dots" id="agentsSliderDots"></div>
 </section>
 
 <!-- ======================================================== -->

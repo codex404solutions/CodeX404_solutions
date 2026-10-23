@@ -65,10 +65,13 @@
     RewriteCond public/$1.php -f
     RewriteRule ^(.*)$ public/$1.php [L]
 
+    # Direct access to public assets (css, js, assets, logo)
+    RewriteRule ^(css|js|assets|logo)/(.*)$ public/$1/$2 [L,QSA]
+
     # Direct files in public/ (e.g. assets, static files)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond public/$1 -f
+    RewriteCond %{DOCUMENT_ROOT}/codes/CodeX404_solutions/crm/public/$1 -f
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
