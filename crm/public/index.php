@@ -329,10 +329,11 @@ $csrfToken = CrmSecurity::csrfToken();
 
     <style>
         :root, [data-bs-theme="dark"] {
-            --cx-bg: #0B0F19;
-            --cx-card: #111827;
-            --cx-card-hover: #162032;
-            --cx-border: rgba(56, 189, 248, 0.15);
+            --cx-bg: #040711;
+            --cx-card: #0A0F1D;
+            --cx-card-hover: #0F172A;
+            --cx-nav-bg: #070B14;
+            --cx-border: rgba(56, 189, 248, 0.16);
             --cx-border-active: rgba(56, 189, 248, 0.4);
             --cx-cyan: #38BDF8;
             --cx-emerald: #10B981;
@@ -340,8 +341,8 @@ $csrfToken = CrmSecurity::csrfToken();
             --cx-purple: #818CF8;
             --cx-text-primary: #F8FAFC;
             --cx-text-muted: #94A3B8;
-            --cx-kanban-col: rgba(17, 24, 39, 0.6);
-            --cx-kanban-card: #1A2234;
+            --cx-kanban-col: rgba(10, 15, 29, 0.7);
+            --cx-kanban-card: #111827;
         }
 
         /* ========================================================= */
@@ -377,9 +378,29 @@ $csrfToken = CrmSecurity::csrfToken();
         #mobileSidebar,
         [data-bs-theme="light"] #mobileSidebar,
         [data-bs-theme="combo"] #mobileSidebar {
-            background: #0B0F19 !important;
-            border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+            background: #070B14 !important;
+            border-right: 1px solid rgba(56, 189, 248, 0.16) !important;
             color: #F8FAFC !important;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .crm-sidebar-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .crm-sidebar-section-title {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: var(--cx-text-muted);
+            margin-bottom: 0.45rem;
+            padding: 0 0.4rem;
         }
 
         .crm-sidebar .crm-brand,
@@ -409,34 +430,70 @@ $csrfToken = CrmSecurity::csrfToken();
         .crm-sidebar .rounded-3,
         [data-bs-theme="light"] .crm-sidebar .rounded-3,
         [data-bs-theme="combo"] .crm-sidebar .rounded-3 {
-            background: rgba(255, 255, 255, 0.04) !important;
+            background: rgba(255, 255, 255, 0.03) !important;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
         }
 
-        .crm-sidebar .crm-nav-link,
-        [data-bs-theme="light"] .crm-sidebar .crm-nav-link,
-        [data-bs-theme="combo"] .crm-sidebar .crm-nav-link,
-        #mobileSidebar .crm-nav-link,
-        [data-bs-theme="light"] #mobileSidebar .crm-nav-link,
-        [data-bs-theme="combo"] #mobileSidebar .crm-nav-link {
-            color: #94A3B8 !important;
+        .crm-nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.48rem 0.7rem;
+            border-radius: 8px;
+            color: var(--cx-text-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            margin-bottom: 0.25rem;
         }
 
+        .crm-nav-link:hover,
         .crm-sidebar .crm-nav-link:hover,
-        .crm-sidebar .crm-nav-link.active,
         [data-bs-theme="light"] .crm-sidebar .crm-nav-link:hover,
-        [data-bs-theme="light"] .crm-sidebar .crm-nav-link.active,
         [data-bs-theme="combo"] .crm-sidebar .crm-nav-link:hover,
-        [data-bs-theme="combo"] .crm-sidebar .crm-nav-link.active,
-        #mobileSidebar .crm-nav-link:hover,
-        #mobileSidebar .crm-nav-link.active,
-        [data-bs-theme="light"] #mobileSidebar .crm-nav-link:hover,
-        [data-bs-theme="light"] #mobileSidebar .crm-nav-link.active,
-        [data-bs-theme="combo"] #mobileSidebar .crm-nav-link:hover,
-        [data-bs-theme="combo"] #mobileSidebar .crm-nav-link.active {
-            background: rgba(56, 189, 248, 0.12) !important;
+        #mobileSidebar .crm-nav-link:hover {
             color: #38BDF8 !important;
+            background: rgba(56, 189, 248, 0.08) !important;
+        }
+
+        .crm-nav-link.active,
+        .crm-sidebar .crm-nav-link.active,
+        [data-bs-theme="light"] .crm-sidebar .crm-nav-link.active,
+        [data-bs-theme="combo"] .crm-sidebar .crm-nav-link.active,
+        #mobileSidebar .crm-nav-link.active {
+            color: #FFFFFF !important;
+            background: rgba(56, 189, 248, 0.14) !important;
             border-left: 3px solid #38BDF8 !important;
+            font-weight: 600;
+        }
+
+        .crm-sidebar-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.42rem 0.65rem;
+            border-radius: 8px;
+            color: var(--cx-text-muted);
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .crm-sidebar-link:hover {
+            color: #38BDF8 !important;
+            background: rgba(56, 189, 248, 0.08) !important;
+            border-color: rgba(56, 189, 248, 0.25) !important;
+            transform: translateX(2px);
+        }
+
+        .crm-sidebar-link.text-danger:hover {
+            color: #F87171 !important;
+            background: rgba(239, 68, 68, 0.08) !important;
+            border-color: rgba(239, 68, 68, 0.25) !important;
         }
 
         .crm-sidebar .badge.bg-dark,
@@ -732,40 +789,13 @@ $csrfToken = CrmSecurity::csrfToken();
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
 
-        /* Sidebar Styling */
-        .crm-sidebar {
-            background: var(--cx-card);
-            border-right: 1px solid var(--cx-border);
-            min-height: 100vh;
-        }
-
         .crm-brand {
             font-size: 1.25rem;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
 
-        .crm-nav-link {
-            color: var(--cx-text-muted);
-            border-radius: 8px;
-            padding: 0.65rem 0.95rem;
-            font-weight: 600;
-            font-size: 0.92rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.15s ease;
-            text-decoration: none;
-            margin-bottom: 0.35rem;
-        }
-
-        .crm-nav-link:hover, .crm-nav-link.active {
-            background: rgba(56, 189, 248, 0.12);
-            color: #FFFFFF;
-            border-left: 3px solid var(--cx-cyan);
-        }
-
-        .crm-nav-link i { font-size: 1.1rem; }
+        .crm-nav-link i { font-size: 1.05rem; }
 
         /* Command Cards */
         .crm-card {
@@ -911,7 +941,7 @@ $csrfToken = CrmSecurity::csrfToken();
 
         html, body {
             max-width: 100%;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         main {
@@ -1351,15 +1381,16 @@ $csrfToken = CrmSecurity::csrfToken();
         /* CRM COMMAND CENTER ENTERPRISE FOOTER SYSTEM               */
         /* ========================================================= */
         .crm-footer {
-            background: rgba(17, 24, 39, 0.75);
+            background: rgba(11, 15, 25, 0.85);
             border: 1px solid var(--cx-border);
             border-radius: 16px;
-            padding: 1.75rem 1.5rem;
+            padding: 1.5rem 1.5rem;
             margin-top: auto;
             position: relative;
             z-index: 5;
             width: 100%;
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(12px);
             transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -1367,13 +1398,14 @@ $csrfToken = CrmSecurity::csrfToken();
         [data-bs-theme="combo"] .crm-footer {
             background: #FFFFFF !important;
             border: 1px solid #E2E8F0 !important;
-            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06) !important;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
         }
 
         [data-bs-theme="dark"] .crm-footer {
-            background: rgba(11, 15, 25, 0.9) !important;
+            background: rgba(11, 15, 25, 0.85) !important;
             border: 1px solid rgba(56, 189, 248, 0.18) !important;
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6) !important;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55) !important;
+            backdrop-filter: blur(12px);
         }
 
         /* Brand Container in CRM Footer */
@@ -1548,82 +1580,83 @@ $csrfToken = CrmSecurity::csrfToken();
         <!-- ======================================================== -->
         <!-- SIDEBAR NAVIGATION (Desktop + Offcanvas Mobile)         -->
         <!-- ======================================================== -->
-        <aside class="col-12 col-lg-2 d-none d-lg-block crm-sidebar p-3 position-sticky top-0" style="height: 100vh; overflow-y: auto;">
-            <!-- Brand with Original Logo -->
-            <div class="mb-4 px-2 pt-2 text-center">
-                <a href="./" class="d-block text-decoration-none">
-                    <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid" style="max-height: 48px; object-fit: contain;">
-                </a>
-                <div class="mt-2 d-flex align-items-center justify-content-center gap-2">
-                    <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.08em;">CRM & AGENT OS</span>
-                </div>
-            </div>
-
-            <!-- User Status Card -->
-            <div class="p-2 mb-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
-                <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span class="fw-bold small text-white"><?= htmlspecialchars($currentUser['name']) ?></span>
-                    <span class="agent-badge-pulse" title="Active Session"></span>
-                </div>
-                <div class="d-flex gap-1 flex-wrap">
-                    <?php foreach ($currentUser['roles'] as $r): ?>
-                        <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;"><?= htmlspecialchars($r) ?></span>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-
-            <!-- Navigation Links -->
-            <nav class="nav flex-column mb-4" id="crmSidebarNav">
-                <a href="#dashboard" class="crm-nav-link active" data-bs-toggle="pill" data-bs-target="#tab-dashboard">
-                    <span><i class="bi bi-grid-1x2-fill me-2 text-info"></i> Dashboard</span>
-                    <span class="badge rounded-pill bg-dark border border-secondary text-muted">Overview</span>
-                </a>
-                <a href="#leads" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-leads">
-                    <span><i class="bi bi-person-lines-fill me-2 text-warning"></i> Inbound Leads</span>
-                    <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"><?= $totalLeads ?></span>
-                </a>
-                <a href="#pipeline" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-pipeline">
-                    <span><i class="bi bi-kanban-fill me-2 text-success"></i> Sales Pipeline</span>
-                    <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle"><?= count($opportunities) ?></span>
-                </a>
-                <a href="#projects" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-projects">
-                    <span><i class="bi bi-rocket-takeoff-fill me-2 text-primary"></i> Client Delivery</span>
-                    <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"><?= count($projects) ?></span>
-                </a>
-                <a href="#paperclip" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-paperclip">
-                    <span><i class="bi bi-robot me-2 text-info"></i> Paperclip Agents</span>
-                    <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle"><?= count($agents) ?></span>
-                </a>
-                <a href="#approvals" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-approvals">
-                    <span><i class="bi bi-shield-check me-2 text-warning"></i> HITL Approvals</span>
-                    <?php if (count($pendingApprovals) > 0): ?>
-                        <span class="badge rounded-pill bg-danger text-white"><?= count($pendingApprovals) ?></span>
-                    <?php else: ?>
-                        <span class="badge rounded-pill bg-secondary text-white">0</span>
-                    <?php endif; ?>
-                </a>
-                <a href="#settings" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-settings">
-                    <span><i class="bi bi-sliders me-2 text-secondary"></i> System & API</span>
-                    <span class="badge rounded-pill bg-dark border border-secondary text-muted">Webhooks</span>
-                </a>
-            </nav>
-
-            <hr style="border-color: rgba(255, 255, 255, 0.1);">
-
-            <!-- Quick External Links -->
-            <div class="px-2">
-                <small class="text-uppercase text-muted fw-bold" style="font-size: 0.68rem; letter-spacing: 0.06em;">Public Fronts</small>
-                <div class="d-grid gap-1 mt-2">
-                    <a href="../website/discovery-call" target="_blank" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center" style="font-size: 0.78rem;">
-                        <span><i class="bi bi-lightning-charge me-1 text-warning"></i> Lead Discovery Form</span>
-                        <i class="bi bi-box-arrow-up-right"></i>
+        <aside class="col-12 col-lg-2 d-none d-lg-block crm-sidebar p-0">
+            <div class="crm-sidebar-inner p-3 position-sticky top-0" style="max-height: 100vh; overflow-y: auto;">
+                <!-- Brand with Original Logo -->
+                <div class="mb-2 px-1 pt-1 text-center">
+                    <a href="./" class="d-block text-decoration-none">
+                        <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid" style="max-height: 32px; object-fit: contain;">
                     </a>
-                    <a href="../website/admin/" target="_blank" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center" style="font-size: 0.78rem;">
-                        <span><i class="bi bi-shield-lock me-1 text-info"></i> Website Admin</span>
-                        <i class="bi bi-box-arrow-up-right"></i>
+                    <div class="mt-1 d-flex align-items-center justify-content-center gap-1">
+                        <span class="badge border text-uppercase" style="font-size: 0.6rem; letter-spacing: 0.08em; background: #0F172A; color: #38BDF8; border-color: rgba(56, 189, 248, 0.3) !important;">CRM &amp; AGENT OS</span>
+                    </div>
+                </div>
+
+                <!-- User Status Card -->
+                <div class="p-2 mb-2 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="agent-badge-pulse" title="Active Session" style="width: 6px; height: 6px;"></span>
+                            <span class="fw-bold small text-white" style="font-size: 0.78rem;"><?= htmlspecialchars($currentUser['name']) ?></span>
+                        </div>
+                        <a href="logout" class="text-danger small text-decoration-none" title="Sign Out" style="font-size: 0.75rem;"><i class="bi bi-box-arrow-left"></i></a>
+                    </div>
+                    <div class="d-flex gap-1 flex-wrap">
+                        <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.58rem;">Admin</span>
+                        <?php foreach (array_slice($currentUser['roles'], 0, 2) as $r): ?>
+                            <span class="badge bg-secondary-subtle text-muted text-uppercase" style="font-size: 0.58rem;"><?= htmlspecialchars($r) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <!-- Navigation Section Title -->
+                <div class="crm-sidebar-section-title">Navigation</div>
+
+                <!-- Navigation Links -->
+                <nav class="nav flex-column mb-2" id="crmSidebarNav">
+                    <a href="#dashboard" class="crm-nav-link active" data-bs-toggle="pill" data-bs-target="#tab-dashboard">
+                        <span><i class="bi bi-grid-1x2-fill me-2 text-info"></i> Dashboard</span>
+                        <span class="badge rounded-pill bg-dark border border-secondary text-muted" style="font-size: 0.62rem;">Top</span>
                     </a>
-                    <a href="logout" class="btn btn-sm btn-outline-danger text-start mt-2" style="font-size: 0.8rem;">
-                        <i class="bi bi-box-arrow-left me-1"></i> Sign Out
+                    <a href="#leads" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-leads">
+                        <span><i class="bi bi-person-lines-fill me-2 text-warning"></i> Inbound Leads</span>
+                        <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle" style="font-size: 0.62rem;"><?= $totalLeads ?></span>
+                    </a>
+                    <a href="#pipeline" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-pipeline">
+                        <span><i class="bi bi-kanban-fill me-2 text-success"></i> Sales Pipeline</span>
+                        <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle" style="font-size: 0.62rem;"><?= count($opportunities) ?></span>
+                    </a>
+                    <a href="#projects" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-projects">
+                        <span><i class="bi bi-rocket-takeoff-fill me-2 text-primary"></i> Client Delivery</span>
+                        <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle" style="font-size: 0.62rem;"><?= count($projects) ?></span>
+                    </a>
+                    <a href="#paperclip" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-paperclip">
+                        <span><i class="bi bi-robot me-2 text-info"></i> Paperclip Agents</span>
+                        <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle" style="font-size: 0.62rem;"><?= count($agents) ?></span>
+                    </a>
+                    <a href="#approvals" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-approvals">
+                        <span><i class="bi bi-shield-check me-2 text-warning"></i> HITL Approvals</span>
+                        <?php if (count($pendingApprovals) > 0): ?>
+                            <span class="badge rounded-pill bg-danger text-white" style="font-size: 0.62rem;"><?= count($pendingApprovals) ?></span>
+                        <?php else: ?>
+                            <span class="badge rounded-pill bg-secondary text-white" style="font-size: 0.62rem;">0</span>
+                        <?php endif; ?>
+                    </a>
+                    <a href="#settings" class="crm-nav-link" data-bs-toggle="pill" data-bs-target="#tab-settings">
+                        <span><i class="bi bi-sliders me-2 text-secondary"></i> System &amp; API</span>
+                        <span class="badge rounded-pill bg-dark border border-secondary text-muted" style="font-size: 0.62rem;">API</span>
+                    </a>
+                </nav>
+
+                <!-- Quick External Bridges Title -->
+                <div class="crm-sidebar-section-title">Platform Bridges</div>
+
+                <div class="d-flex gap-1 mb-2">
+                    <a href="../website/admin/" target="_blank" class="crm-sidebar-link flex-fill text-center justify-content-center py-1" style="font-size: 0.72rem;">
+                        <i class="bi bi-shield-lock me-1 text-info"></i> Admin
+                    </a>
+                    <a href="../website/discovery-call" target="_blank" class="crm-sidebar-link flex-fill text-center justify-content-center py-1" style="font-size: 0.72rem;">
+                        <i class="bi bi-lightning-charge me-1 text-warning"></i> Intake
                     </a>
                 </div>
             </div>
@@ -2995,10 +3028,7 @@ $csrfToken = CrmSecurity::csrfToken();
 
             </div>
 
-            <!-- ======================================================== -->
-            <!-- CRM COMMAND CENTER ENTERPRISE FOOTER                     -->
-            <!-- ======================================================== -->
-            <footer class="crm-footer mt-4 mt-lg-5">
+            <footer class="crm-footer mt-auto pt-4 pb-3">
                 <div class="row g-4 align-items-center">
                     <!-- Brand & Platform Architecture -->
                     <div class="col-12 col-md-5">
