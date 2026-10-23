@@ -42,7 +42,7 @@ if ($projectId !== '') {
         $isEdit = true;
     } else {
         set_admin_flash('error', "Project '{$projectId}' was not found.");
-        header('Location: ' . admin_url());
+        header('Location: ' . admin_url('deliverables'));
         exit;
     }
 }
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $saved = ProjectService::save($saveData);
             set_admin_flash('success', "Project '{$saved['title']}' was successfully " . ($isEdit ? 'updated' : 'created') . '!');
-            header('Location: ' . admin_url());
+            header('Location: ' . admin_url('deliverables'));
             exit;
         } else {
             // Repopulate form with submitted values
@@ -341,9 +341,9 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 </ul>
             </div>
 
-            <a href="<?= admin_url() ?>" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
+            <a href="<?= admin_url('deliverables') ?>" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
                 <i class="bi bi-arrow-left"></i>
-                <span>Back to Dashboard</span>
+                <span>Back to Deliverables</span>
             </a>
         </div>
     </div>
@@ -356,7 +356,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
         <div>
             <div class="d-flex align-items-center gap-2 text-muted small mb-1">
-                <a href="<?= admin_url() ?>" class="text-decoration-none text-muted">Projects</a>
+                <a href="<?= admin_url('deliverables') ?>" class="text-decoration-none text-muted">Deliverables</a>
                 <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
                 <span class="text-info"><?= $isEdit ? 'Edit Deliverable' : 'Upload New' ?></span>
             </div>
@@ -561,7 +561,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 <i class="bi bi-check2-circle fs-5"></i>
                 <span><?= $isEdit ? 'Save Changes' : 'Publish Project Deliverable' ?></span>
             </button>
-            <a href="<?= admin_url() ?>" class="btn btn-outline-secondary btn-lg px-4 py-2" style="border-radius: 10px;">
+            <a href="<?= admin_url('deliverables') ?>" class="btn btn-outline-secondary btn-lg px-4 py-2" style="border-radius: 10px;">
                 Cancel
             </a>
         </div>
@@ -575,7 +575,9 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong> &bull; Enterprise Deliverables Admin Console &bull; All Rights Reserved.
             </div>
             <div class="d-flex align-items-center gap-2 flex-wrap">
-                <a href="<?= admin_url() ?>" class="admin-footer-link"><i class="bi bi-grid-1x2-fill text-info"></i> Dashboard</a>
+                <a href="<?= admin_url() ?>" class="admin-footer-link"><i class="bi bi-grid-1x2-fill text-info"></i> Overview</a>
+                <span>&bull;</span>
+                <a href="<?= admin_url('deliverables') ?>" class="admin-footer-link"><i class="bi bi-collection-play-fill text-warning"></i> Deliverables</a>
                 <span>&bull;</span>
                 <a href="../../crm/" target="_blank" class="admin-footer-link"><i class="bi bi-robot text-warning"></i> CRM Swarm</a>
                 <span>&bull;</span>

@@ -49,6 +49,16 @@
     RewriteRule ^login/?$ public/login.php [L]
     RewriteRule ^logout/?$ public/logout.php [L]
 
+    # Clean multi-page routes
+    RewriteRule ^dashboard/?$ public/index.php [L]
+    RewriteRule ^leads/?$ public/leads.php [L]
+    RewriteRule ^pipeline/?$ public/pipeline.php [L]
+    RewriteRule ^projects/?$ public/projects.php [L]
+    RewriteRule ^paperclip/?$ public/paperclip.php [L]
+    RewriteRule ^agents/?$ public/paperclip.php [L]
+    RewriteRule ^approvals/?$ public/approvals.php [L]
+    RewriteRule ^settings/?$ public/settings.php [L]
+
     # Clean URLs: /leads -> public/leads.php (only when the target file exists)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

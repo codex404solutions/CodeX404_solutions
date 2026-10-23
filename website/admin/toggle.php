@@ -22,5 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-header('Location: ' . admin_url());
+$returnUrl = trim((string)($_POST['return_url'] ?? ''));
+if ($returnUrl !== '' && str_starts_with($returnUrl, '/')) {
+    header('Location: ' . $returnUrl);
+    exit;
+}
+
+header('Location: ' . admin_url('deliverables'));
 exit;
