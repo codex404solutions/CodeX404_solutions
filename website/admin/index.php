@@ -129,7 +129,7 @@ $flash = get_admin_flash();
 
         html, body {
             max-width: 100%;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
@@ -811,6 +811,15 @@ $flash = get_admin_flash();
             background: var(--cx-nav-bg);
             border-right: 1px solid var(--cx-border);
             z-index: 100;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-sidebar-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
         .admin-sidebar-section-title {
@@ -1230,89 +1239,91 @@ $flash = get_admin_flash();
         <!-- ======================================================== -->
         <!-- ADMIN SIDEBAR (Desktop)                                  -->
         <!-- ======================================================== -->
-        <aside class="col-12 col-lg-2 d-none d-lg-block admin-sidebar p-3 position-sticky" style="top: 61px; height: calc(100vh - 61px); overflow-y: auto;">
-            <!-- Admin User Status Card -->
-            <div class="admin-sidebar-user-card">
-                <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span class="fw-bold small"><?= htmlspecialchars((string)($_SESSION['codex_admin_user'] ?? 'admin')) ?></span>
-                    <span class="live-dot" title="Live Session Active"></span>
+        <aside class="col-12 col-lg-2 d-none d-lg-block admin-sidebar p-0">
+            <div class="admin-sidebar-inner p-3 position-sticky" style="top: 61px; max-height: calc(100vh - 61px); overflow-y: auto;">
+                <!-- Admin User Status Card -->
+                <div class="admin-sidebar-user-card">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="fw-bold small"><?= htmlspecialchars((string)($_SESSION['codex_admin_user'] ?? 'admin')) ?></span>
+                        <span class="live-dot" title="Live Session Active"></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-1 flex-wrap">
+                        <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;">Superadmin</span>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.65rem;">Live Sync</span>
+                    </div>
                 </div>
-                <div class="d-flex align-items-center gap-1 flex-wrap">
-                    <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;">Superadmin</span>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.65rem;">Live Sync</span>
+
+                <!-- Upload New Project Quick Action CTA -->
+                <div class="d-grid mb-3">
+                    <a href="<?= admin_url('project-form') ?>" class="btn btn-primary btn-sm fw-bold d-flex align-items-center justify-content-center gap-2 py-2 shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        <span>New Deliverable</span>
+                    </a>
                 </div>
-            </div>
 
-            <!-- Upload New Project Quick Action CTA -->
-            <div class="d-grid mb-3">
-                <a href="<?= admin_url('project-form') ?>" class="btn btn-primary btn-sm fw-bold d-flex align-items-center justify-content-center gap-2 py-2 shadow-sm" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
-                    <i class="bi bi-plus-circle-fill"></i>
-                    <span>New Deliverable</span>
-                </a>
-            </div>
+                <!-- Main Navigation -->
+                <div class="admin-sidebar-section-title">Navigation</div>
+                <nav class="nav flex-column mb-3" id="adminSidebarNav">
+                    <a href="#admin-hero" class="admin-sidebar-link active">
+                        <span><i class="bi bi-speedometer2 me-2 text-info"></i> Overview</span>
+                        <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
+                    </a>
+                    <a href="#portfolio-table" class="admin-sidebar-link">
+                        <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
+                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
+                    </a>
+                    <a href="#showcase-slider" class="admin-sidebar-link">
+                        <span><i class="bi bi-stars me-2 text-primary"></i> Showcase Slider</span>
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
+                    </a>
+                    <a href="#telemetry-ticker" class="admin-sidebar-link">
+                        <span><i class="bi bi-activity me-2 text-success"></i> Telemetry Ticker</span>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
+                    </a>
+                </nav>
 
-            <!-- Main Navigation -->
-            <div class="admin-sidebar-section-title">Navigation</div>
-            <nav class="nav flex-column mb-3" id="adminSidebarNav">
-                <a href="#admin-hero" class="admin-sidebar-link active">
-                    <span><i class="bi bi-speedometer2 me-2 text-info"></i> Overview</span>
-                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
-                </a>
-                <a href="#portfolio-table" class="admin-sidebar-link">
-                    <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
-                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
-                </a>
-                <a href="#showcase-slider" class="admin-sidebar-link">
-                    <span><i class="bi bi-stars me-2 text-primary"></i> Showcase Slider</span>
-                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
-                </a>
-                <a href="#telemetry-ticker" class="admin-sidebar-link">
-                    <span><i class="bi bi-activity me-2 text-success"></i> Telemetry Ticker</span>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
-                </a>
-            </nav>
+                <!-- Quick Filter Shortcuts -->
+                <div class="admin-sidebar-section-title">Filter By Status</div>
+                <div class="d-flex flex-column gap-1 mb-3">
+                    <button type="button" class="admin-sidebar-link sidebar-status-filter active" data-status-filter="all">
+                        <span><i class="bi bi-grid-fill me-2 text-info"></i> All Systems</span>
+                        <span class="badge bg-dark border border-secondary text-white rounded-pill"><?= $totalCount ?></span>
+                    </button>
+                    <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="published">
+                        <span><i class="bi bi-check-circle-fill me-2 text-success"></i> Published Live</span>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><?= $activeCount ?></span>
+                    </button>
+                    <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="draft">
+                        <span><i class="bi bi-shield-lock-fill me-2 text-warning"></i> Staging Drafts</span>
+                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $draftCount ?></span>
+                    </button>
+                </div>
 
-            <!-- Quick Filter Shortcuts -->
-            <div class="admin-sidebar-section-title">Filter By Status</div>
-            <div class="d-flex flex-column gap-1 mb-3">
-                <button type="button" class="admin-sidebar-link sidebar-status-filter active" data-status-filter="all">
-                    <span><i class="bi bi-grid-fill me-2 text-info"></i> All Systems</span>
-                    <span class="badge bg-dark border border-secondary text-white rounded-pill"><?= $totalCount ?></span>
-                </button>
-                <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="published">
-                    <span><i class="bi bi-check-circle-fill me-2 text-success"></i> Published Live</span>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><?= $activeCount ?></span>
-                </button>
-                <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="draft">
-                    <span><i class="bi bi-shield-lock-fill me-2 text-warning"></i> Staging Drafts</span>
-                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $draftCount ?></span>
-                </button>
-            </div>
+                <!-- Platform Bridges -->
+                <div class="admin-sidebar-section-title">Platform Bridges</div>
+                <nav class="nav flex-column mb-3">
+                    <a href="../../crm/" target="_blank" class="admin-sidebar-link">
+                        <span><i class="bi bi-robot me-2 text-warning"></i> CRM &amp; Paperclip</span>
+                        <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                    </a>
+                    <a href="<?= url('#work') ?>" target="_blank" class="admin-sidebar-link">
+                        <span><i class="bi bi-globe2 me-2 text-primary"></i> Public Portfolio</span>
+                        <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                    </a>
+                    <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-sidebar-link">
+                        <span><i class="bi bi-lightning-charge me-2 text-info"></i> Lead Intake Form</span>
+                        <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                    </a>
+                </nav>
 
-            <!-- Platform Bridges -->
-            <div class="admin-sidebar-section-title">Platform Bridges</div>
-            <nav class="nav flex-column mb-3">
-                <a href="../../crm/" target="_blank" class="admin-sidebar-link">
-                    <span><i class="bi bi-robot me-2 text-warning"></i> CRM &amp; Paperclip</span>
-                    <i class="bi bi-box-arrow-up-right small text-muted"></i>
-                </a>
-                <a href="<?= url('#work') ?>" target="_blank" class="admin-sidebar-link">
-                    <span><i class="bi bi-globe2 me-2 text-primary"></i> Public Portfolio</span>
-                    <i class="bi bi-box-arrow-up-right small text-muted"></i>
-                </a>
-                <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-sidebar-link">
-                    <span><i class="bi bi-lightning-charge me-2 text-info"></i> Lead Intake Form</span>
-                    <i class="bi bi-box-arrow-up-right small text-muted"></i>
-                </a>
-            </nav>
+                <hr style="border-color: var(--cx-border);">
 
-            <hr style="border-color: var(--cx-border);">
-
-            <!-- Sign Out -->
-            <div class="d-grid">
-                <a href="<?= admin_url('logout') ?>" class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center gap-2" style="border-radius: 8px;">
-                    <i class="bi bi-box-arrow-left"></i> Sign Out
-                </a>
+                <!-- Sign Out -->
+                <div class="d-grid">
+                    <a href="<?= admin_url('logout') ?>" class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center gap-2" style="border-radius: 8px;">
+                        <i class="bi bi-box-arrow-left"></i> Sign Out
+                    </a>
+                </div>
             </div>
         </aside>
 
