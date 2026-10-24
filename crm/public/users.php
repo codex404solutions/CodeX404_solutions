@@ -601,7 +601,7 @@ require_once __DIR__ . '/includes/header.php';
 <div class="modal fade" id="modalEditUser" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content bg-dark border-secondary text-white shadow-lg">
-            <form method="POST" id="formEditUser">
+            <form method="POST" id="formEditUser" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <input type="hidden" name="action" value="update_user">
                 <input type="hidden" name="user_id" id="editUserId">
@@ -613,6 +613,22 @@ require_once __DIR__ . '/includes/header.php';
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
+                    <!-- User Avatar Change Field -->
+                    <div class="p-3 mb-3 rounded-3 d-flex align-items-center justify-content-between gap-3" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.2);">
+                        <div class="d-flex align-items-center gap-3">
+                            <div id="editUserAvatarPreview">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 44px; height: 44px; background: #0EA5E9; color: #fff;">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="fw-bold text-white small">Display Picture / Avatar</div>
+                                <div class="text-muted" style="font-size: 0.72rem;">Upload a new image file to update this user's avatar.</div>
+                            </div>
+                        </div>
+                        <input type="file" name="avatar_file" class="form-control form-control-sm" accept="image/png, image/jpeg, image/webp, image/svg+xml" style="max-width: 240px;">
+                    </div>
+
                     <div class="row g-3 mb-3">
                         <div class="col-12 col-md-6">
                             <label class="form-label small fw-bold text-muted">Full Name <span class="text-danger">*</span></label>

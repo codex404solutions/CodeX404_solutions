@@ -349,6 +349,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $updated = UserService::update($targetUserId, $updatePayload, $currentUser);
 
+                // Handle optional avatar file upload if provided
+                if (!empty($_FILES['avatar_file']['tmp_name']) && is_uploaded_file($_FILES['avatar_file']['tmp_name'])) {
+                    UserService::uploadAvatar($targetUserId, $_FILES['avatar_file']);
+                    $updated = UserService::getById($targetUserId);
+                }
+
                 if (!empty($updated['approval_required'])) {
                     $_SESSION['flash_message'] = "🛡️ Privilege Escalation Notice: High-authority changes (executive roles/portal access) for '{$updated['user']['name']}' require Founder / Superadmin sign-off. Request has been routed to the Executive HITL Queue.";
                     $_SESSION['flash_type'] = 'warning';
@@ -441,11 +447,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $updated = UserService::update($myId, $myProfileData);
 
+                // Handle optional avatar file upload if provided in profile update
+                if (!empty($_FILES['avatar_file']['tmp_name']) && is_uploaded_file($_FILES['avatar_file']['tmp_name'])) {
+                    UserService::uploadAvatar($myId, $_FILES['avatar_file']);
+                }
+
                 AuthService::refreshSessionUser();
                 $_SESSION['flash_message'] = 'Your personal profile details have been updated!';
                 $_SESSION['flash_type'] = 'success';
             } catch (\Throwable $e) {
                 $_SESSION['flash_message'] = 'Profile update error: ' . $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 18b. UPLOAD AVATAR PHOTO DIRECTLY ---
+        case 'upload_avatar':
+            $myId = $currentUser['id'] ?? '';
+            try {
+                if (empty($_FILES['avatar_file']['tmp_name'])) {
+                    throw new \InvalidArgumentException('Please select an image file to upload.');
+                }
+                UserService::uploadAvatar($myId, $_FILES['avatar_file']);
+                AuthService::refreshSessionUser();
+                $_SESSION['flash_message'] = 'Profile display picture successfully updated!';
+                $_SESSION['flash_type'] = 'success';
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Avatar upload failed: ' . $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 18c. REMOVE AVATAR PHOTO ---
+        case 'remove_avatar':
+            $myId = $currentUser['id'] ?? '';
+            try {
+                UserService::removeAvatar($myId);
+                AuthService::refreshSessionUser();
+                $_SESSION['flash_message'] = 'Profile picture removed. Restored to default initials badge.';
+                $_SESSION['flash_type'] = 'info';
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Avatar removal error: ' . $e->getMessage();
                 $_SESSION['flash_type'] = 'danger';
             }
             break;

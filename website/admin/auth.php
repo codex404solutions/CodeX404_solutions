@@ -564,10 +564,6 @@ function get_admin_flash(): ?array
  */
 function current_admin_profile(): array
 {
-    if (!empty($_SESSION['codex_admin_profile']) && is_array($_SESSION['codex_admin_profile'])) {
-        return $_SESSION['codex_admin_profile'];
-    }
-
     if (class_exists('\\CRM\\Services\\UserService')) {
         $username = (string)($_SESSION['codex_admin_user'] ?? 'admin');
         $user = \CRM\Services\UserService::getByUsernameOrEmail($username);
@@ -575,6 +571,10 @@ function current_admin_profile(): array
             $_SESSION['codex_admin_profile'] = $user;
             return $user;
         }
+    }
+
+    if (!empty($_SESSION['codex_admin_profile']) && is_array($_SESSION['codex_admin_profile'])) {
+        return $_SESSION['codex_admin_profile'];
     }
 
     return [

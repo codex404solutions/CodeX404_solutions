@@ -583,6 +583,93 @@ class UserService
     }
 
     /**
+     * Handle user avatar upload (PNG, JPG, WEBP, SVG up to 3MB).
+     * Saves to crm/public/assets/images/avatars/uploads/ and mirrors to website/assets/images/avatars/uploads/.
+     */
+    public static function uploadAvatar(string $userId, array $file): ?string
+    {
+        if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+            throw new \InvalidArgumentException('No uploaded file detected.');
+        }
+
+        if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
+            throw new \RuntimeException('File upload error code: ' . ($file['error'] ?? 'unknown'));
+        }
+
+        // Limit size to 3MB
+        if (($file['size'] ?? 0) > 3 * 1024 * 1024) {
+            throw new \InvalidArgumentException('Avatar image file must be smaller than 3MB.');
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        $allowed = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/webp' => 'webp',
+            'image/svg+xml' => 'svg'
+        ];
+
+        if (!isset($allowed[$mime])) {
+            throw new \InvalidArgumentException('Invalid image format. Allowed: PNG, JPG, WEBP, SVG.');
+        }
+
+        $ext = $allowed[$mime];
+        $filename = 'dp_' . preg_replace('/[^a-zA-Z0-9_-]/', '', $userId) . '_' . time() . '.' . $ext;
+        $relPath = 'assets/images/avatars/uploads/' . $filename;
+
+        // Base project root
+        $projectRoot = dirname(__DIR__, 3);
+        $crmTarget = $projectRoot . '/crm/public/' . $relPath;
+        $webTarget = $projectRoot . '/website/' . $relPath;
+
+        $crmDir = dirname($crmTarget);
+        if (!is_dir($crmDir)) {
+            @mkdir($crmDir, 0755, true);
+        }
+        $webDir = dirname($webTarget);
+        if (!is_dir($webDir)) {
+            @mkdir($webDir, 0755, true);
+        }
+
+        if (!move_uploaded_file($file['tmp_name'], $crmTarget)) {
+            throw new \RuntimeException('Failed to save uploaded avatar file.');
+        }
+
+        // Mirror to website portal assets
+        @copy($crmTarget, $webTarget);
+
+        // Update user avatar attribute in database and storage
+        self::update($userId, ['avatar' => $relPath]);
+
+        return $relPath;
+    }
+
+    /**
+     * Remove custom avatar, resetting to default initials badge.
+     */
+    public static function removeAvatar(string $userId): bool
+    {
+        $user = self::getById($userId);
+        if (!$user) {
+            return false;
+        }
+
+        $oldAvatar = $user['avatar'] ?? '';
+        // If old avatar was an uploaded file, remove it cleanly
+        if (!empty($oldAvatar) && strpos($oldAvatar, 'assets/images/avatars/uploads/') !== false) {
+            $projectRoot = dirname(__DIR__, 3);
+            @unlink($projectRoot . '/crm/public/' . $oldAvatar);
+            @unlink($projectRoot . '/website/' . $oldAvatar);
+        }
+
+        self::update($userId, ['avatar' => '']);
+        return true;
+    }
+
+    /**
      * Seed initial workforce accounts if user store is completely uninitialized.
      */
     public static function seedDefaultUsersIfEmpty(): void

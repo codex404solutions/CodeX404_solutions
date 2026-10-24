@@ -44,12 +44,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $updateData['avatar'] = trim((string)$_POST['avatar']);
             }
             $updated = UserService::update($myId, $updateData);
+
+            if (!empty($_FILES['avatar_file']['tmp_name']) && is_uploaded_file($_FILES['avatar_file']['tmp_name'])) {
+                UserService::uploadAvatar($myId, $_FILES['avatar_file']);
+                $updated = UserService::getById($myId);
+            }
+
             if ($updated) {
                 $_SESSION['codex_admin_profile'] = $updated;
                 set_admin_flash('success', 'Profile information updated successfully.');
             }
         } catch (\Throwable $e) {
             set_admin_flash('error', 'Profile update failed: ' . $e->getMessage());
+        }
+    } elseif ($action === 'upload_avatar') {
+        try {
+            if (empty($_FILES['avatar_file']['tmp_name'])) {
+                throw new \InvalidArgumentException('Please select an image file to upload.');
+            }
+            UserService::uploadAvatar($myId, $_FILES['avatar_file']);
+            $updated = UserService::getById($myId);
+            if ($updated) {
+                $_SESSION['codex_admin_profile'] = $updated;
+            }
+            set_admin_flash('success', 'Profile display picture successfully updated!');
+        } catch (\Throwable $e) {
+            set_admin_flash('error', 'Avatar upload failed: ' . $e->getMessage());
+        }
+    } elseif ($action === 'remove_avatar') {
+        try {
+            UserService::removeAvatar($myId);
+            $updated = UserService::getById($myId);
+            if ($updated) {
+                $_SESSION['codex_admin_profile'] = $updated;
+            }
+            set_admin_flash('info', 'Profile picture removed. Restored to default initials badge.');
+        } catch (\Throwable $e) {
+            set_admin_flash('error', 'Avatar removal error: ' . $e->getMessage());
         }
     } elseif ($action === 'change_password') {
         $currentPass = (string)($_POST['current_password'] ?? '');
@@ -110,20 +141,50 @@ require_once __DIR__ . '/includes/header.php';
 <div class="p-4 rounded-3 mb-4" style="background: rgba(11, 15, 25, 0.7); border: 1px solid rgba(56, 189, 248, 0.16);">
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-4">
         <div class="d-flex align-items-center gap-4">
-            <div class="position-relative">
-                <?php if (!empty($avatar['image'])): ?>
-                    <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="<?= htmlspecialchars((string)($profile['name'] ?? 'Admin')) ?>"
-                         class="rounded-circle object-fit-cover shadow-lg border"
-                         style="width: 76px; height: 76px; border: 2px solid rgba(56, 189, 248, 0.45) !important;">
-                <?php else: ?>
-                    <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg"
-                         style="width: 76px; height: 76px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1.6rem; border: 2px solid rgba(56, 189, 248, 0.4);">
-                        <?= htmlspecialchars($avatar['initials']) ?>
-                    </div>
-                <?php endif; ?>
-                <span class="position-absolute bottom-0 end-0 p-1.5 rounded-circle border border-dark"
-                      style="width: 18px; height: 18px; background: #10B981;"
-                      title="Active Authenticated Session"></span>
+            <!-- Large Styled Avatar with Upload / Remove Controls -->
+            <div class="position-relative flex-shrink-0" style="width: 82px; height: 82px;">
+                <div class="position-relative w-100 h-100">
+                    <?php if (!empty($avatar['image'])): ?>
+                        <img src="<?= htmlspecialchars(asset($avatar['image'])) ?>" alt="<?= htmlspecialchars((string)($profile['name'] ?? 'Admin')) ?>"
+                             class="rounded-circle object-fit-cover shadow-lg border w-100 h-100"
+                             style="width: 82px; height: 82px; min-width: 82px; min-height: 82px; border: 2px solid rgba(56, 189, 248, 0.45) !important;">
+                    <?php else: ?>
+                        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg w-100 h-100"
+                             style="width: 82px; height: 82px; min-width: 82px; min-height: 82px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1.6rem; border: 2px solid rgba(56, 189, 248, 0.4);">
+                            <?= htmlspecialchars($avatar['initials']) ?>
+                        </div>
+                    <?php endif; ?>
+                    <span class="position-absolute bottom-0 end-0 p-1.5 rounded-circle border border-dark"
+                          style="width: 18px; height: 18px; background: #10B981;"
+                          title="Active Authenticated Session"></span>
+                </div>
+            </div>
+
+            <!-- Avatar Action Controls -->
+            <div class="d-flex flex-column gap-1">
+                <div class="d-flex align-items-center gap-2">
+                    <form method="POST" enctype="multipart/form-data" id="adminFormUploadAvatar" class="d-inline">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generate_csrf_token()) ?>">
+                        <input type="hidden" name="action" value="upload_avatar">
+                        <input type="file" name="avatar_file" id="adminAvatarFileInput" class="d-none" accept="image/png, image/jpeg, image/webp, image/svg+xml" onchange="document.getElementById('adminFormUploadAvatar').submit();">
+                        <button type="button" class="btn btn-sm btn-outline-info d-flex align-items-center gap-1.5 px-2.5 py-1" onclick="document.getElementById('adminAvatarFileInput').click();" title="Upload new display picture">
+                            <i class="bi bi-camera-fill"></i>
+                            <span style="font-size: 0.78rem;">Upload DP</span>
+                        </button>
+                    </form>
+
+                    <?php if (!empty($avatar['image'])): ?>
+                        <form method="POST" class="d-inline" onsubmit="return confirm('Remove custom display picture and reset to initials badge?');">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generate_csrf_token()) ?>">
+                            <input type="hidden" name="action" value="remove_avatar">
+                            <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1 px-2 py-1" title="Remove custom avatar">
+                                <i class="bi bi-trash"></i>
+                                <span style="font-size: 0.78rem;">Remove</span>
+                            </button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+                <small class="text-muted" style="font-size: 0.68rem;">PNG, JPG, WEBP, SVG &bull; Max 3MB</small>
             </div>
 
             <div>

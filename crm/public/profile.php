@@ -37,21 +37,52 @@ require_once __DIR__ . '/includes/header.php';
 <div class="crm-card p-4 mb-4">
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-4">
         <div class="d-flex align-items-center gap-4">
-            <!-- Large Styled Avatar -->
-            <div class="position-relative">
-                <?php if (!empty($avatar['image'])): ?>
-                    <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="<?= htmlspecialchars($currentUser['name'] ?? 'User') ?>"
-                         class="rounded-circle object-fit-cover shadow-lg border"
-                         style="width: 76px; height: 76px; border: 2px solid rgba(56, 189, 248, 0.45) !important;">
-                <?php else: ?>
-                    <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg"
-                         style="width: 76px; height: 76px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1.6rem; border: 2px solid rgba(56, 189, 248, 0.4);">
-                        <?= htmlspecialchars($avatar['initials']) ?>
-                    </div>
-                <?php endif; ?>
-                <span class="position-absolute bottom-0 end-0 p-1.5 rounded-circle border border-dark"
-                      style="width: 18px; height: 18px; background: #10B981;"
-                      title="Session: Authenticated &amp; Active"></span>
+            <!-- Large Styled Avatar with Upload / Remove Controls -->
+            <div class="position-relative group">
+                <div class="position-relative">
+                    <?php if (!empty($avatar['image'])): ?>
+                        <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="<?= htmlspecialchars($currentUser['name'] ?? 'User') ?>"
+                             id="userProfileAvatarPreview"
+                             class="rounded-circle object-fit-cover shadow-lg border"
+                             style="width: 82px; height: 82px; border: 2px solid rgba(56, 189, 248, 0.45) !important;">
+                    <?php else: ?>
+                        <div id="userProfileAvatarPreview"
+                             class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg"
+                             style="width: 82px; height: 82px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1.6rem; border: 2px solid rgba(56, 189, 248, 0.4);">
+                            <?= htmlspecialchars($avatar['initials']) ?>
+                        </div>
+                    <?php endif; ?>
+                    <span class="position-absolute bottom-0 end-0 p-1.5 rounded-circle border border-dark"
+                          style="width: 18px; height: 18px; background: #10B981;"
+                          title="Session: Authenticated &amp; Active"></span>
+                </div>
+            </div>
+
+            <!-- Avatar Action Controls -->
+            <div class="d-flex flex-column gap-1">
+                <div class="d-flex align-items-center gap-2">
+                    <form method="POST" enctype="multipart/form-data" id="formUploadAvatar" class="d-inline">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+                        <input type="hidden" name="action" value="upload_avatar">
+                        <input type="file" name="avatar_file" id="avatarFileInput" class="d-none" accept="image/png, image/jpeg, image/webp, image/svg+xml" onchange="document.getElementById('formUploadAvatar').submit();">
+                        <button type="button" class="btn btn-sm btn-outline-info d-flex align-items-center gap-1.5 px-2.5 py-1" onclick="document.getElementById('avatarFileInput').click();" title="Upload new display picture">
+                            <i class="bi bi-camera-fill"></i>
+                            <span style="font-size: 0.78rem;">Upload DP</span>
+                        </button>
+                    </form>
+
+                    <?php if (!empty($avatar['image'])): ?>
+                        <form method="POST" class="d-inline" onsubmit="return confirm('Remove custom display picture and reset to initials badge?');">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+                            <input type="hidden" name="action" value="remove_avatar">
+                            <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1 px-2 py-1" title="Remove custom avatar">
+                                <i class="bi bi-trash"></i>
+                                <span style="font-size: 0.78rem;">Remove</span>
+                            </button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+                <small class="text-muted" style="font-size: 0.68rem;">PNG, JPG, WEBP, SVG &bull; Max 3MB</small>
             </div>
 
             <div>
@@ -164,12 +195,30 @@ require_once __DIR__ . '/includes/header.php';
 
     <div class="tab-content" id="profileTabsContent">
         <!-- ======================================================== -->
-        <!-- TAB 1: PROFILE INFORMATION FORM                          -->
-        <!-- ======================================================== -->
         <div class="tab-pane fade show active" id="tab-profile-info" role="tabpanel">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <input type="hidden" name="action" value="update_my_profile">
+
+                <!-- Display Picture Quick Field -->
+                <div class="p-3 mb-4 rounded-3 d-flex flex-wrap align-items-center justify-content-between gap-3" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.2);">
+                    <div class="d-flex align-items-center gap-3">
+                        <?php if (!empty($avatar['image'])): ?>
+                            <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="Current Avatar" class="rounded-circle object-fit-cover border" style="width: 48px; height: 48px; border-color: rgba(56, 189, 248, 0.4) !important;">
+                        <?php else: ?>
+                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 48px; height: 48px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1rem;">
+                                <?= htmlspecialchars($avatar['initials']) ?>
+                            </div>
+                        <?php endif; ?>
+                        <div>
+                            <div class="fw-bold text-white small">Profile Display Picture</div>
+                            <div class="text-muted" style="font-size: 0.72rem;">Choose a PNG, JPG, WEBP or SVG photo to represent you across CRM and Website portals.</div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="file" name="avatar_file" class="form-control form-control-sm" accept="image/png, image/jpeg, image/webp, image/svg+xml" style="max-width: 260px;">
+                    </div>
+                </div>
 
                 <div class="row g-3 mb-4">
                     <div class="col-12 col-md-6">

@@ -104,7 +104,14 @@ $flash = get_admin_flash();
                         style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
                         <div class="d-flex align-items-center justify-content-between mb-1">
                             <a href="<?= admin_url('profile') ?>" class="d-flex align-items-center gap-1.5 text-decoration-none">
-                                <span class="live-dot" title="Active Session" style="width: 5px; height: 5px;"></span>
+                                <?php 
+                                $headerAvatar = \CRM\Services\UserService::getAvatarInfo($adminProfile);
+                                if (!empty($headerAvatar['image'])): 
+                                ?>
+                                    <img src="<?= asset($headerAvatar['image']) ?>" alt="<?= htmlspecialchars((string)($adminProfile['name'] ?? 'Admin')) ?>" class="rounded-circle object-fit-cover border" style="width: 20px; height: 20px; border-color: rgba(56, 189, 248, 0.4) !important;">
+                                <?php else: ?>
+                                    <span class="live-dot" title="Active Session" style="width: 5px; height: 5px;"></span>
+                                <?php endif; ?>
                                 <span class="fw-bold small text-white text-truncate"
                                     style="font-size: 0.75rem; max-width: 100px;"><?= htmlspecialchars((string) ($adminProfile['name'] ?? $adminProfile['username'] ?? 'Admin')) ?></span>
                             </a>

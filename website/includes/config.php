@@ -181,7 +181,11 @@ function url(string $path = ''): string {
 
 // Helper for asset URLs
 function asset(string $path = ''): string {
-    return BASE_URL . 'assets/' . ltrim($path, '/');
+    $trimmed = ltrim(str_replace('\\', '/', $path), '/');
+    if (str_starts_with($trimmed, 'assets/')) {
+        $trimmed = substr($trimmed, 7);
+    }
+    return BASE_URL . 'assets/' . $trimmed;
 }
 
 // Helper for admin panel URLs without .php extension

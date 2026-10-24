@@ -346,7 +346,7 @@ require_once __DIR__ . '/includes/header.php';
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="position-relative">
                                         <?php if (!empty($avatar['image'])): ?>
-                                            <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="<?= htmlspecialchars($u['name'] ?? 'User') ?>"
+                                            <img src="<?= htmlspecialchars(asset($avatar['image'])) ?>" alt="<?= htmlspecialchars($u['name'] ?? 'User') ?>"
                                                  class="rounded-circle object-fit-cover shadow-sm border"
                                                  style="width: 46px; height: 46px; border-color: rgba(56, 189, 248, 0.35) !important;">
                                         <?php else: ?>
