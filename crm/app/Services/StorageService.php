@@ -176,6 +176,68 @@ class StorageService
                         ':updated_at' => (int)($records['updated_at'] ?? time())
                     ]);
                     return true;
+                } elseif ($table === 'users' && is_array($records)) {
+                    $stmt = $pdo->prepare("
+                        INSERT INTO `users` (
+                            `id`, `username`, `email`, `password_hash`, `name`, `phone`, `title`, 
+                            `department`, `bio`, `avatar`, `role`, `roles`, `custom_permissions`, 
+                            `status`, `access_scope`, `approval_status`, `pending_payload`, 
+                            `timezone`, `currency`, `last_login`, `last_ip`, `created_at`, `updated_at`
+                        ) VALUES (
+                            :id, :username, :email, :password_hash, :name, :phone, :title, 
+                            :department, :bio, :avatar, :role, :roles, :custom_permissions, 
+                            :status, :access_scope, :approval_status, :pending_payload, 
+                            :timezone, :currency, :last_login, :last_ip, :created_at, NOW()
+                        ) ON DUPLICATE KEY UPDATE 
+                            `username` = VALUES(`username`),
+                            `email` = VALUES(`email`),
+                            `password_hash` = VALUES(`password_hash`),
+                            `name` = VALUES(`name`),
+                            `phone` = VALUES(`phone`),
+                            `title` = VALUES(`title`),
+                            `department` = VALUES(`department`),
+                            `bio` = VALUES(`bio`),
+                            `avatar` = VALUES(`avatar`),
+                            `role` = VALUES(`role`),
+                            `roles` = VALUES(`roles`),
+                            `custom_permissions` = VALUES(`custom_permissions`),
+                            `status` = VALUES(`status`),
+                            `access_scope` = VALUES(`access_scope`),
+                            `approval_status` = VALUES(`approval_status`),
+                            `pending_payload` = VALUES(`pending_payload`),
+                            `timezone` = VALUES(`timezone`),
+                            `currency` = VALUES(`currency`),
+                            `last_login` = VALUES(`last_login`),
+                            `last_ip` = VALUES(`last_ip`),
+                            `updated_at` = NOW()
+                    ");
+                    foreach ($records as $u) {
+                        if (!is_array($u) || empty($u['id'])) continue;
+                        $stmt->execute([
+                            ':id' => $u['id'],
+                            ':username' => strtolower(trim((string)($u['username'] ?? ''))),
+                            ':email' => strtolower(trim((string)($u['email'] ?? ''))),
+                            ':password_hash' => (string)($u['password_hash'] ?? ''),
+                            ':name' => (string)($u['name'] ?? 'User'),
+                            ':phone' => $u['phone'] ?? null,
+                            ':title' => $u['title'] ?? 'Staff Member',
+                            ':department' => $u['department'] ?? 'Operations',
+                            ':bio' => $u['bio'] ?? null,
+                            ':avatar' => $u['avatar'] ?? null,
+                            ':role' => (string)($u['role'] ?? 'viewer'),
+                            ':roles' => json_encode($u['roles'] ?? ['viewer']),
+                            ':custom_permissions' => json_encode($u['custom_permissions'] ?? ['granted' => [], 'denied' => []]),
+                            ':status' => (string)($u['status'] ?? 'active'),
+                            ':access_scope' => (string)($u['access_scope'] ?? 'crm_only'),
+                            ':approval_status' => (string)($u['approval_status'] ?? 'approved'),
+                            ':pending_payload' => !empty($u['pending_payload']) ? json_encode($u['pending_payload']) : null,
+                            ':timezone' => (string)($u['timezone'] ?? 'America/New_York'),
+                            ':currency' => (string)($u['currency'] ?? 'USD'),
+                            ':last_login' => !empty($u['last_login']) ? date('Y-m-d H:i:s', strtotime($u['last_login'])) : null,
+                            ':last_ip' => $u['last_ip'] ?? null,
+                            ':created_at' => !empty($u['created_at']) ? date('Y-m-d H:i:s', strtotime($u['created_at'])) : date('Y-m-d H:i:s')
+                        ]);
+                    }
                 }
             } catch (\Throwable $e) {
                 // Ignore DB error, proceed to file sync
@@ -288,6 +350,77 @@ class StorageService
                         ':output_data' => json_encode($record['output'] ?? $record['output_data'] ?? []),
                         ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
                     ]);
+                } elseif ($table === 'users') {
+                    $rolesArray = (array)($record['roles'] ?? (empty($record['role']) ? ['viewer'] : [(string)$record['role']]));
+                    $customPerms = isset($record['custom_permissions']) && is_array($record['custom_permissions']) 
+                        ? $record['custom_permissions'] 
+                        : ['granted' => [], 'denied' => []];
+
+                    $stmt = $pdo->prepare("
+                        INSERT INTO `users` (
+                            `id`, `username`, `email`, `password_hash`, `name`, `phone`, `title`, 
+                            `department`, `bio`, `avatar`, `role`, `roles`, `custom_permissions`, 
+                            `status`, `access_scope`, `approval_status`, `pending_payload`, 
+                            `timezone`, `currency`, `last_login`, `last_ip`, `created_at`, `updated_at`
+                        ) VALUES (
+                            :id, :username, :email, :password_hash, :name, :phone, :title, 
+                            :department, :bio, :avatar, :role, :roles, :custom_permissions, 
+                            :status, :access_scope, :approval_status, :pending_payload, 
+                            :timezone, :currency, :last_login, :last_ip, :created_at, NOW()
+                        ) ON DUPLICATE KEY UPDATE 
+                            `username` = VALUES(`username`),
+                            `email` = VALUES(`email`),
+                            `name` = VALUES(`name`),
+                            `phone` = VALUES(`phone`),
+                            `title` = VALUES(`title`),
+                            `department` = VALUES(`department`),
+                            `bio` = VALUES(`bio`),
+                            `avatar` = VALUES(`avatar`),
+                            `role` = VALUES(`role`),
+                            `roles` = VALUES(`roles`),
+                            `custom_permissions` = VALUES(`custom_permissions`),
+                            `status` = VALUES(`status`),
+                            `access_scope` = VALUES(`access_scope`),
+                            `approval_status` = VALUES(`approval_status`),
+                            `timezone` = VALUES(`timezone`),
+                            `currency` = VALUES(`currency`),
+                            `updated_at` = NOW()
+                    ");
+                    $stmt->execute([
+                        ':id' => $record['id'],
+                        ':username' => strtolower(trim((string)($record['username'] ?? 'user_' . bin2hex(random_bytes(3))))),
+                        ':email' => strtolower(trim((string)($record['email'] ?? ''))),
+                        ':password_hash' => (string)($record['password_hash'] ?? password_hash('admin@1234', PASSWORD_DEFAULT)),
+                        ':name' => (string)($record['name'] ?? 'User'),
+                        ':phone' => $record['phone'] ?? null,
+                        ':title' => $record['title'] ?? 'Staff Member',
+                        ':department' => $record['department'] ?? 'Operations',
+                        ':bio' => $record['bio'] ?? null,
+                        ':avatar' => $record['avatar'] ?? null,
+                        ':role' => (string)($record['role'] ?? ($rolesArray[0] ?? 'viewer')),
+                        ':roles' => json_encode($rolesArray),
+                        ':custom_permissions' => json_encode($customPerms),
+                        ':status' => (string)($record['status'] ?? 'active'),
+                        ':access_scope' => (string)($record['access_scope'] ?? 'crm_only'),
+                        ':approval_status' => (string)($record['approval_status'] ?? 'approved'),
+                        ':pending_payload' => !empty($record['pending_payload']) ? json_encode($record['pending_payload']) : null,
+                        ':timezone' => (string)($record['timezone'] ?? 'America/New_York'),
+                        ':currency' => (string)($record['currency'] ?? 'USD'),
+                        ':last_login' => !empty($record['last_login']) ? date('Y-m-d H:i:s', strtotime($record['last_login'])) : null,
+                        ':last_ip' => $record['last_ip'] ?? null,
+                        ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
+                    ]);
+
+                    // Sync user_roles junction table
+                    $roleStmt = $pdo->prepare("INSERT IGNORE INTO `user_roles` (`user_id`, `role_id`) VALUES (:user_id, :role_id)");
+                    $roleLookup = $pdo->prepare("SELECT `id` FROM `roles` WHERE `slug` = :slug LIMIT 1");
+                    foreach ($rolesArray as $rSlug) {
+                        $roleLookup->execute([':slug' => strtolower(trim($rSlug))]);
+                        $rRow = $roleLookup->fetch();
+                        if ($rRow) {
+                            $roleStmt->execute([':user_id' => $record['id'], ':role_id' => $rRow['id']]);
+                        }
+                    }
                 }
 
                 unset(self::$cache[$clean]);
@@ -378,6 +511,52 @@ class StorageService
                     }
                     if (!empty($sets)) {
                         $sql = "UPDATE `leads` SET " . implode(', ', $sets) . " WHERE `id` = :id";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute($params);
+                    }
+                } elseif ($table === 'users') {
+                    $sets = [];
+                    $params = [':id' => $id];
+                    $allowedCols = [
+                        'username', 'email', 'name', 'phone', 'title', 'department', 'bio', 
+                        'avatar', 'role', 'status', 'access_scope', 'approval_status', 
+                        'timezone', 'currency', 'last_ip', 'password_hash'
+                    ];
+                    foreach ($updates as $k => $v) {
+                        if (in_array($k, $allowedCols, true)) {
+                            $sets[] = "`{$k}` = :{$k}";
+                            $params[":{$k}"] = $v;
+                        } elseif ($k === 'last_login') {
+                            $sets[] = "`last_login` = :last_login";
+                            $params[':last_login'] = !empty($v) ? date('Y-m-d H:i:s', strtotime($v)) : null;
+                        } elseif ($k === 'roles') {
+                            $rolesJson = json_encode((array)$v);
+                            $sets[] = "`roles` = :roles";
+                            $params[':roles'] = $rolesJson;
+
+                            // Sync user_roles junction table
+                            $delStmt = $pdo->prepare("DELETE FROM `user_roles` WHERE `user_id` = :uid");
+                            $delStmt->execute([':uid' => $id]);
+                            $roleStmt = $pdo->prepare("INSERT IGNORE INTO `user_roles` (`user_id`, `role_id`) VALUES (:user_id, :role_id)");
+                            $roleLookup = $pdo->prepare("SELECT `id` FROM `roles` WHERE `slug` = :slug LIMIT 1");
+                            foreach ((array)$v as $rSlug) {
+                                $roleLookup->execute([':slug' => strtolower(trim($rSlug))]);
+                                $rRow = $roleLookup->fetch();
+                                if ($rRow) {
+                                    $roleStmt->execute([':user_id' => $id, ':role_id' => $rRow['id']]);
+                                }
+                            }
+                        } elseif ($k === 'custom_permissions') {
+                            $sets[] = "`custom_permissions` = :custom_permissions";
+                            $params[':custom_permissions'] = json_encode($v);
+                        } elseif ($k === 'pending_payload') {
+                            $sets[] = "`pending_payload` = :pending_payload";
+                            $params[':pending_payload'] = !empty($v) ? json_encode($v) : null;
+                        }
+                    }
+                    if (!empty($sets)) {
+                        $sets[] = "`updated_at` = NOW()";
+                        $sql = "UPDATE `users` SET " . implode(', ', $sets) . " WHERE `id` = :id";
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute($params);
                     }

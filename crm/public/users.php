@@ -32,59 +32,43 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ======================================================== -->
 <div class="row g-3 mb-4">
     <div class="col-6 col-xl-3">
-        <div class="crm-stat-card p-3 p-md-4">
+        <div class="p-3 p-md-4 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.16);">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="crm-stat-label">Total Workforce</span>
-                <div class="crm-stat-icon bg-info-subtle text-info">
-                    <i class="bi bi-people-fill"></i>
-                </div>
+                <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.05em;">Workforce Total</span>
+                <div class="p-2 rounded bg-info-subtle text-info"><i class="bi bi-people-fill"></i></div>
             </div>
-            <div class="crm-stat-value text-white"><?= count($allUsers) ?></div>
-            <div class="crm-stat-meta text-muted">
-                <span class="text-success"><i class="bi bi-check-circle me-1"></i>Active accounts</span> &bull; Synchronized
-            </div>
+            <div class="h3 fw-bold text-white mb-1"><?= count($allUsers) ?></div>
+            <div class="small text-muted"><span class="text-success"><i class="bi bi-check-circle me-1"></i>Synchronized</span> across CRM &amp; Admin</div>
         </div>
     </div>
     <div class="col-6 col-xl-3">
-        <div class="crm-stat-card p-3 p-md-4">
+        <div class="p-3 p-md-4 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.16);">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="crm-stat-label">Multi-Role Profiles</span>
-                <div class="crm-stat-icon bg-primary-subtle text-primary">
-                    <i class="bi bi-diagram-3-fill"></i>
-                </div>
+                <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.05em;">Multi-Role Users</span>
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-diagram-3-fill"></i></div>
             </div>
-            <div class="crm-stat-value text-primary"><?= $multiRoleCount ?></div>
-            <div class="crm-stat-meta text-muted">
-                <span class="text-info"><?= round(($multiRoleCount / max(1, count($allUsers))) * 100) ?>%</span> holding &ge;2 concurrent roles
-            </div>
+            <div class="h3 fw-bold text-primary mb-1"><?= $multiRoleCount ?></div>
+            <div class="small text-muted"><span class="text-info"><?= round(($multiRoleCount / max(1, count($allUsers))) * 100) ?>%</span> holding multiple roles</div>
         </div>
     </div>
     <div class="col-6 col-xl-3">
-        <div class="crm-stat-card p-3 p-md-4">
+        <div class="p-3 p-md-4 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.16);">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="crm-stat-label">Defined Roles</span>
-                <div class="crm-stat-icon bg-warning-subtle text-warning">
-                    <i class="bi bi-shield-lock-fill"></i>
-                </div>
+                <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.05em;">Defined Roles</span>
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-shield-lock-fill"></i></div>
             </div>
-            <div class="crm-stat-value text-warning"><?= count($allRoles) ?></div>
-            <div class="crm-stat-meta text-muted">
-                <span>21 system roles</span> &bull; Extensible catalog
-            </div>
+            <div class="h3 fw-bold text-warning mb-1"><?= count($allRoles) ?></div>
+            <div class="small text-muted">21 standard roles &bull; Custom extensible</div>
         </div>
     </div>
     <div class="col-6 col-xl-3">
-        <div class="crm-stat-card p-3 p-md-4">
+        <div class="p-3 p-md-4 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.16);">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="crm-stat-label">Granular Permissions</span>
-                <div class="crm-stat-icon bg-success-subtle text-success">
-                    <i class="bi bi-key-fill"></i>
-                </div>
+                <span class="small fw-bold text-uppercase text-muted" style="font-size: 0.68rem; letter-spacing: 0.05em;">System Permissions</span>
+                <div class="p-2 rounded bg-success-subtle text-success"><i class="bi bi-key-fill"></i></div>
             </div>
-            <div class="crm-stat-value text-success"><?= $totalPermissionsCount ?></div>
-            <div class="crm-stat-meta text-muted">
-                Across 9 core functional modules
-            </div>
+            <div class="h3 fw-bold text-success mb-1"><?= $totalPermissionsCount ?></div>
+            <div class="small text-muted">Across 9 functional modules</div>
         </div>
     </div>
 </div>

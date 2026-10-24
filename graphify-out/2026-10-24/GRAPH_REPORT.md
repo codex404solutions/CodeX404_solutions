@@ -1,17 +1,17 @@
 # Graph Report - CodeX404_solutions  (2026-10-24)
 
 ## Corpus Check
-- 154 files · ~169,397 words
+- 154 files · ~171,760 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 22 file(s) not represented in the graph (top: (none) 6, .ico 6, .css 6)
 
 ## Summary
-- 1254 nodes · 1410 edges · 185 communities (100 shown, 85 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 24 edges (avg confidence: 0.85)
+- 1262 nodes · 1418 edges · 185 communities (100 shown, 85 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 25 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `62594732`
+- Built from commit: `012fd233`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -547,7 +547,7 @@ Cohesion: 0.67
 Nodes (3): GDPR Compliance, 🛡️ Security & Compliance, Security Practices
 
 ### Community 127 - "AuthService"
-Cohesion: 0.09
+Cohesion: 0.06
 Nodes (5): CrmSecurity, applyTheme(), getPreferredTheme(), getStoredTheme(), updateThemeUI()
 
 ### Community 128 - "Version Control"
@@ -573,15 +573,15 @@ Nodes (5): 1. Install Local Development Environment (20 min), 2. Create GitHub R
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `CodeX404 Solutions — Website ↔ CRM API Contract` connect `CodeX404 Solutions — Website ↔ CRM API Contract` to `Security Measures`, `Endpoint 1: Create Lead`, `Migration & Versioning`, `Monitoring`, `Idempotency`, `Logging`, `Endpoint 2: Newsletter Subscription (Optional)`, `Endpoint 3: UTM Tracking Pixel (Optional)`, `Error Handling`, `Performance Targets`, `Quick Reference`, `Rate Limiting`, `Webhooks (Future: CRM → Website)`, `Test Cases`?**
-  _High betweenness centrality (0.100) - this node is a cross-community bridge._
+  _High betweenness centrality (0.088) - this node is a cross-community bridge._
 - **Should `Project Maintenance & Tree Generator` be split into smaller, more focused modules?**
   _Cohesion score 0.08902439024390243 - nodes in this community are weakly interconnected._
 - **Why does `CodeX404 Solutions — Deployment Guide` connect `CodeX404 Solutions — Deployment Guide` to `Staging Environment`, `Troubleshooting`, `Local Development Setup`, `Deployment Checklist`, `If Deployment Fails`, `Hostinger Shared Hosting Setup`, `SSL Certificate`, `Deployment Timeline`, `Support Contacts`, `Post-Launch Checklist`, `Backup Strategy`, `Monitoring`?**
-  _High betweenness centrality (0.073) - this node is a cross-community bridge._
+  _High betweenness centrality (0.072) - this node is a cross-community bridge._
 - **Should `Frontend & SEO Helpers` be split into smaller, more focused modules?**
   _Cohesion score 0.1339031339031339 - nodes in this community are weakly interconnected._
 - **Why does `CodeX404 Solutions — Technology Stack` connect `CodeX404 Solutions — Technology Stack` to `Version Control`, `Security Measures`, `Monitoring & Logging`, `Backup Strategy`, `Main Website Stack`, `CRM Stack`, `Deployment Strategy`, `Database`, `Development Environment`, `Migration Path (Future Scalability)`, `Razorpay Integration Specifics`, `Testing Strategy`, `Shared Libraries`, `Performance Optimization`, `Dependencies Management`?**
-  _High betweenness centrality (0.059) - this node is a cross-community bridge._
+  _High betweenness centrality (0.063) - this node is a cross-community bridge._
 - **Should `Security & CSRF Protection` be split into smaller, more focused modules?**
   _Cohesion score 0.11264367816091954 - nodes in this community are weakly interconnected._
 - **Should `CodeX404 Solutions — High-End CRM PRD` be split into smaller, more focused modules?**

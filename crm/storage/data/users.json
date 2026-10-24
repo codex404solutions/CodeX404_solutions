@@ -2,124 +2,131 @@
     {
         "id": "admin",
         "username": "admin",
+        "phone": "+1 (415) 555-0140",
+        "title": "Chief Executive Officer & Founder",
+        "department": "Executive Leadership",
+        "bio": "",
+        "avatar": "",
+        "custom_permissions": {
+            "granted": [],
+            "denied": []
+        },
+        "last_login": "2026-10-24 04:05:11",
         "email": "admin@codex404solutions.online",
         "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
         "name": "Alex Rivera",
         "role": "superadmin",
         "status": "active",
+        "access_scope": "both",
+        "approval_status": "approved",
+        "pending_payload": null,
         "created_at": "2026-10-23 10:03:32",
         "updated_at": "2026-10-23 10:03:32",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "last_ip": "192.168.1.100",
         "roles": [
             "superadmin",
             "founder",
             "ceo",
             "cto"
-        ],
-        "title": "Chief Executive Officer & Founder",
-        "department": "Executive Leadership",
-        "phone": "+1 (415) 555-0140",
-        "custom_permissions": {
-            "granted": [],
-            "denied": []
-        },
-        "bio": "",
-        "avatar": "",
-        "timezone": "America/New_York",
-        "currency": "USD",
-        "access_scope": "both",
-        "approval_status": "approved",
-        "last_login": null,
-        "last_ip": null
-    },
-    {
-        "id": "usr_tech_elena",
-        "username": "elena.tech",
-        "name": "Elena Rostova",
-        "email": "elena@codex404solutions.online",
-        "phone": "+49 30 555-0188",
-        "title": "VP of Engineering & Delivery Lead",
-        "department": "Engineering",
-        "bio": "Directing system architecture, engineering milestone velocity, code reviews, and technical project management.",
-        "avatar": "",
-        "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
-        "roles": [
-            "cto",
-            "lead_developer",
-            "project_manager"
-        ],
-        "access_scope": "both",
-        "approval_status": "approved",
-        "custom_permissions": {
-            "granted": [],
-            "denied": []
-        },
-        "status": "active",
-        "timezone": "Europe/Berlin",
-        "currency": "EUR",
-        "last_login": "2026-10-24 01:06:59",
-        "last_ip": "127.0.0.1",
-        "created_at": "2026-09-29 03:06:59",
-        "updated_at": "2026-10-24 03:06:59"
-    },
-    {
-        "id": "usr_sales_marcus",
-        "username": "marcus.sales",
-        "name": "Marcus Vance",
-        "email": "marcus@codex404solutions.online",
-        "phone": "+44 20 7946 0192",
-        "title": "Head of Business Development & Sales Manager",
-        "department": "Revenue & Growth",
-        "bio": "Leading high-ticket enterprise client acquisitions, discovery calls, scoping proposals, and pipeline progression.",
-        "avatar": "",
-        "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
-        "roles": [
-            "sales_manager",
-            "sales",
-            "bd"
-        ],
-        "access_scope": "crm_only",
-        "approval_status": "approved",
-        "custom_permissions": {
-            "granted": [],
-            "denied": []
-        },
-        "status": "active",
-        "timezone": "Europe/London",
-        "currency": "GBP",
-        "last_login": "2026-10-23 03:06:59",
-        "last_ip": "127.0.0.1",
-        "created_at": "2026-10-04 03:06:59",
-        "updated_at": "2026-10-24 03:06:59"
+        ]
     },
     {
         "id": "usr_ai_sophia",
         "username": "sophia.ai",
-        "name": "Dr. Sophia Chen",
-        "email": "sophia@codex404solutions.online",
         "phone": "+1 (617) 555-0199",
         "title": "Lead AI & Autonomous Systems Engineer",
         "department": "AI & Paperclip Automation",
         "bio": "Engineering Paperclip multi-agent orchestrations, model benchmark routines, and autonomous data pipelines.",
         "avatar": "",
-        "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
-        "roles": [
-            "ai_engineer",
-            "developer"
-        ],
-        "access_scope": "crm_only",
-        "approval_status": "approved",
         "custom_permissions": {
             "granted": [
                 "approvals.view"
             ],
             "denied": []
         },
+        "last_login": "2026-10-23 23:46:12",
+        "email": "sophia@codex404solutions.online",
+        "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
+        "name": "Dr. Sophia Chen",
+        "role": "ai_engineer",
         "status": "active",
+        "access_scope": "crm_only",
+        "approval_status": "approved",
+        "pending_payload": null,
+        "created_at": "2026-10-06 03:46:12",
+        "updated_at": "2026-10-24 03:46:12",
         "timezone": "America/Los_Angeles",
         "currency": "USD",
-        "last_login": "2026-10-23 23:06:59",
         "last_ip": "127.0.0.1",
-        "created_at": "2026-10-06 03:06:59",
-        "updated_at": "2026-10-24 03:06:59"
+        "roles": [
+            "ai_engineer",
+            "developer"
+        ]
+    },
+    {
+        "id": "usr_sales_marcus",
+        "username": "marcus.sales",
+        "phone": "+44 20 7946 0192",
+        "title": "Head of Business Development & Sales Manager",
+        "department": "Revenue & Growth",
+        "bio": "Leading high-ticket enterprise client acquisitions, discovery calls, scoping proposals, and pipeline progression.",
+        "avatar": "",
+        "custom_permissions": {
+            "granted": [],
+            "denied": []
+        },
+        "last_login": "2026-10-23 03:46:12",
+        "email": "marcus@codex404solutions.online",
+        "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
+        "name": "Marcus Vance",
+        "role": "sales_manager",
+        "status": "active",
+        "access_scope": "crm_only",
+        "approval_status": "approved",
+        "pending_payload": null,
+        "created_at": "2026-10-04 03:46:12",
+        "updated_at": "2026-10-24 03:46:12",
+        "timezone": "Europe/London",
+        "currency": "GBP",
+        "last_ip": "127.0.0.1",
+        "roles": [
+            "sales_manager",
+            "sales",
+            "bd"
+        ]
+    },
+    {
+        "id": "usr_tech_elena",
+        "username": "elena.tech",
+        "phone": "+49 30 555-0188",
+        "title": "VP of Engineering & Delivery Lead",
+        "department": "Engineering",
+        "bio": "Directing system architecture, engineering milestone velocity, code reviews, and technical project management.",
+        "avatar": "",
+        "custom_permissions": {
+            "granted": [],
+            "denied": []
+        },
+        "last_login": "2026-10-24 01:46:12",
+        "email": "elena@codex404solutions.online",
+        "password_hash": "$2y$10$Yv8Ajnfiz8az97yFdzqsNu4UGR4SNUMp09M1BNYfl0vDt4Yjn1Boi",
+        "name": "Elena Rostova",
+        "role": "cto",
+        "status": "active",
+        "access_scope": "both",
+        "approval_status": "approved",
+        "pending_payload": null,
+        "created_at": "2026-09-29 03:46:12",
+        "updated_at": "2026-10-24 03:46:12",
+        "timezone": "Europe/Berlin",
+        "currency": "EUR",
+        "last_ip": "127.0.0.1",
+        "roles": [
+            "cto",
+            "lead_developer",
+            "project_manager"
+        ]
     }
 ]

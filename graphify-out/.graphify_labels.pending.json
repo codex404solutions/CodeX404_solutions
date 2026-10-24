@@ -121,7 +121,7 @@
   "151": "ProjectService",
   "152": "README.md",
   "153": "AuthService",
-  "154": "ApprovalService",
+  "154": "ApprovalService.php",
   "155": "admin/includes/footer.php",
   "156": "overview.php",
   "157": "CodeX404 Solutions — Redesign Deployment Record",
@@ -151,5 +151,7 @@
   "181": "founder-section.php",
   "182": "Hour 1: Environment Setup (60 minutes)",
   "183": "crm/profile.php",
-  "184": "crm/users.php"
+  "184": "crm/users.php",
+  "185": "CodeX404 Solutions: Project Rules",
+  "186": "UserService.php"
 }
