@@ -25,4 +25,4 @@ website/storage/
 crm/storage/data/leads.json
 crm/storage/data/opportunities.json
 crm/storage/data/tasks.json
-graphify-out/
+graphify-out/*
