@@ -578,6 +578,9 @@ class RBACService
             foreach ($customRoles as $cr) {
                 if (!empty($cr['slug'])) {
                     $slug = strtolower(trim((string)$cr['slug']));
+                    $isSystem = isset(self::$systemRoles[$slug]);
+                    $baseSystem = self::$systemRoles[$slug] ?? [];
+
                     $merged[$slug] = array_merge(
                         [
                             'slug' => $slug,
@@ -585,11 +588,16 @@ class RBACService
                             'description' => (string)($cr['description'] ?? 'Custom role'),
                             'color' => (string)($cr['color'] ?? 'info'),
                             'icon' => (string)($cr['icon'] ?? 'person-badge'),
-                            'is_system' => false,
-                            'permissions' => (array)($cr['permissions'] ?? [])
+                            'is_system' => $isSystem,
+                            'permissions' => $baseSystem['permissions'] ?? (array)($cr['permissions'] ?? [])
                         ],
                         $cr
                     );
+
+                    // Ensure system role permissions are never overwritten with empty arrays
+                    if ($isSystem && empty($cr['permissions']) && !empty($baseSystem['permissions'])) {
+                        $merged[$slug]['permissions'] = $baseSystem['permissions'];
+                    }
                 }
             }
         }
@@ -681,10 +689,27 @@ class RBACService
      * Rule 3: Direct custom grants allow access even if not in any role.
      * Rule 4: Superadmin role grants all permissions unless explicitly denied.
      */
-    public static function hasPermission(array $userRoles, string $requiredPermission, ?array $customPermissions = null): bool
+    public static function hasPermission(array $userOrRoles, string $requiredPermission, ?array $customPermissions = null): bool
     {
         $req = strtolower(trim($requiredPermission));
-        $cleanRoles = array_map('strtolower', array_map('trim', $userRoles));
+
+        // Detect if a full user record array was passed instead of roles array
+        if (isset($userOrRoles['roles']) || isset($userOrRoles['username']) || isset($userOrRoles['custom_permissions'])) {
+            $userRoles = (array)($userOrRoles['roles'] ?? ['viewer']);
+            if ($customPermissions === null && isset($userOrRoles['custom_permissions'])) {
+                $customPermissions = (array)$userOrRoles['custom_permissions'];
+            }
+        } else {
+            $userRoles = $userOrRoles;
+        }
+
+        // Clean and filter roles array safely
+        $cleanRoles = [];
+        foreach ($userRoles as $r) {
+            if (is_string($r)) {
+                $cleanRoles[] = strtolower(trim($r));
+            }
+        }
 
         // 1. Check Explicit User-Level Denials (Deny > Allow)
         $denied = array_map('strtolower', (array)($customPermissions['denied'] ?? []));

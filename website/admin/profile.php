@@ -85,10 +85,10 @@ $effectivePerms = RBACService::getEffectivePermissions($adminRoles, (array)($pro
 $myScope = $profile['access_scope'] ?? 'crm_only';
 $myTier = RBACService::getAuthorityTier($adminRoles);
 $myTierTitle = RBACService::getTierTitle($myTier);
-$canCreateUsers = RBACService::hasPermission($profile, 'users.create');
-$canEditUsers = RBACService::hasPermission($profile, 'users.edit');
-$canDelegate = RBACService::hasPermission($profile, 'users.delegate') || $canEditUsers;
-$canScope = RBACService::hasPermission($profile, 'users.scope') || $canEditUsers;
+$canCreateUsers = RBACService::hasPermission($adminRoles, 'users.create', (array)($profile['custom_permissions'] ?? null));
+$canEditUsers = RBACService::hasPermission($adminRoles, 'users.edit', (array)($profile['custom_permissions'] ?? null));
+$canDelegate = RBACService::hasPermission($adminRoles, 'users.delegate', (array)($profile['custom_permissions'] ?? null)) || $canEditUsers;
+$canScope = RBACService::hasPermission($adminRoles, 'users.scope', (array)($profile['custom_permissions'] ?? null)) || $canEditUsers;
 
 require_once __DIR__ . '/includes/header.php';
 ?>
