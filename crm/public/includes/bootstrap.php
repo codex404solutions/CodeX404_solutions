@@ -81,13 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $notes = trim((string)($_POST['decision_notes'] ?? ''));
 
             if ($decision === 'approve') {
-                ApprovalService::approve($approvalId, $currentUser['name'], $notes ?: null);
-                $_SESSION['flash_message'] = "Draft approved successfully! Logged by {$currentUser['name']}.";
-                $_SESSION['flash_type'] = 'success';
+                $res = ApprovalService::approve($approvalId, $currentUser['name'], $notes ?: null, $currentUser);
+                $_SESSION['flash_message'] = $res['message'];
+                $_SESSION['flash_type'] = $res['success'] ? 'success' : 'danger';
             } elseif ($decision === 'reject') {
-                ApprovalService::reject($approvalId, $currentUser['name'], $notes ?: null);
-                $_SESSION['flash_message'] = "Draft rejected.";
-                $_SESSION['flash_type'] = 'warning';
+                $res = ApprovalService::reject($approvalId, $currentUser['name'], $notes ?: null, $currentUser);
+                $_SESSION['flash_message'] = $res['message'];
+                $_SESSION['flash_type'] = $res['success'] ? 'warning' : 'danger';
             }
             break;
 
@@ -568,6 +568,109 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['flash_type'] = 'info';
             } else {
                 $_SESSION['flash_message'] = 'Protected system roles cannot be deleted.';
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 22. SAVE APPROVAL RULE ---
+        case 'save_approval_rule':
+            $isSuperadminOrFounder = in_array('superadmin', array_map('strtolower', $userRoles), true) 
+                || in_array('founder', array_map('strtolower', $userRoles), true);
+            if (!$isSuperadminOrFounder) {
+                $_SESSION['flash_message'] = 'Permission Denied: Only Superadmin and Founder can manage company approval rules.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            try {
+                $ruleData = [
+                    'id' => trim((string)($_POST['rule_id'] ?? '')),
+                    'rule_name' => trim((string)($_POST['rule_name'] ?? '')),
+                    'type' => trim((string)($_POST['type'] ?? 'proposal_discount')),
+                    'threshold' => (float)($_POST['threshold'] ?? 0.00),
+                    'required_role' => trim((string)($_POST['required_role'] ?? 'superadmin')),
+                    'description' => trim((string)($_POST['description'] ?? '')),
+                    'is_active' => isset($_POST['is_active']) ? 1 : 0
+                ];
+
+                if ($ruleData['rule_name'] === '') {
+                    throw new \InvalidArgumentException('Rule Name is required.');
+                }
+
+                ApprovalService::saveRule($ruleData, $currentUser);
+                $_SESSION['flash_message'] = "Approval Rule '{$ruleData['rule_name']}' saved successfully!";
+                $_SESSION['flash_type'] = 'success';
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Failed to save approval rule: ' . $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 23. DELETE APPROVAL RULE ---
+        case 'delete_approval_rule':
+            $isSuperadminOrFounder = in_array('superadmin', array_map('strtolower', $userRoles), true) 
+                || in_array('founder', array_map('strtolower', $userRoles), true);
+            if (!$isSuperadminOrFounder) {
+                $_SESSION['flash_message'] = 'Permission Denied: Only Superadmin and Founder can remove approval rules.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $ruleId = trim((string)($_POST['rule_id'] ?? ''));
+            if ($ruleId !== '' && ApprovalService::deleteRule($ruleId, $currentUser)) {
+                $_SESSION['flash_message'] = 'Approval rule removed.';
+                $_SESSION['flash_type'] = 'info';
+            } else {
+                $_SESSION['flash_message'] = 'Failed to delete approval rule.';
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 24. UPDATE USER HIERARCHY & LIMITS (SUPERADMIN / FOUNDER ONLY) ---
+        case 'update_hierarchy':
+            $isSuperadminOrFounder = in_array('superadmin', array_map('strtolower', $userRoles), true) 
+                || in_array('founder', array_map('strtolower', $userRoles), true);
+            if (!$isSuperadminOrFounder) {
+                $_SESSION['flash_message'] = 'Permission Denied: Only Superadmin and Founder can configure organizational hierarchy and approval limits.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $targetUserId = trim((string)($_POST['user_id'] ?? ''));
+            $reportsTo = trim((string)($_POST['reports_to'] ?? ''));
+            $tier = (int)($_POST['authority_tier'] ?? 3);
+            $limit = (float)($_POST['approval_limit'] ?? 0.00);
+
+            try {
+                $targetUser = UserService::getById($targetUserId);
+                if (!$targetUser) {
+                    throw new \InvalidArgumentException('Target user account not found.');
+                }
+
+                // Prevent user reporting to themselves
+                if ($reportsTo === $targetUserId || $reportsTo === ($targetUser['username'] ?? '')) {
+                    throw new \InvalidArgumentException('Circular reporting: A user cannot report to themselves.');
+                }
+
+                UserService::update($targetUserId, [
+                    'reports_to' => $reportsTo ?: null,
+                    'authority_tier' => $tier,
+                    'approval_limit' => $limit
+                ], $currentUser);
+
+                AuditService::log(
+                    'hierarchy_updated',
+                    'user_hierarchy',
+                    $targetUserId,
+                    "Hierarchy updated for '{$targetUser['name']}': Reports to [{$reportsTo}], Tier {$tier}, Limit \${$limit}",
+                    ['reports_to' => $reportsTo, 'authority_tier' => $tier, 'approval_limit' => $limit],
+                    $currentUser
+                );
+
+                $_SESSION['flash_message'] = "Company hierarchy and authority tier for '{$targetUser['name']}' updated successfully!";
+                $_SESSION['flash_type'] = 'success';
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Failed to update hierarchy: ' . $e->getMessage();
                 $_SESSION['flash_type'] = 'danger';
             }
             break;

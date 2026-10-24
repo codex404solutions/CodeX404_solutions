@@ -255,6 +255,9 @@ class UserService
             'phone' => trim((string)($data['phone'] ?? '')),
             'title' => trim((string)($data['title'] ?? 'Team Member')),
             'department' => trim((string)($data['department'] ?? 'General')),
+            'reports_to' => !empty($data['reports_to']) ? (string)$data['reports_to'] : null,
+            'authority_tier' => isset($data['authority_tier']) ? (int)$data['authority_tier'] : RBACService::getAuthorityTier($roles),
+            'approval_limit' => isset($data['approval_limit']) ? (float)$data['approval_limit'] : 0.00,
             'bio' => trim((string)($data['bio'] ?? '')),
             'avatar' => trim((string)($data['avatar'] ?? '')),
             'password_hash' => password_hash($plainPassword, PASSWORD_DEFAULT),
@@ -337,6 +340,15 @@ class UserService
         }
         if (isset($data['department'])) {
             $user['department'] = trim((string)$data['department']);
+        }
+        if (array_key_exists('reports_to', $data)) {
+            $user['reports_to'] = !empty($data['reports_to']) ? trim((string)$data['reports_to']) : null;
+        }
+        if (isset($data['authority_tier'])) {
+            $user['authority_tier'] = (int)$data['authority_tier'];
+        }
+        if (isset($data['approval_limit'])) {
+            $user['approval_limit'] = (float)$data['approval_limit'];
         }
         if (isset($data['bio'])) {
             $user['bio'] = trim((string)$data['bio']);

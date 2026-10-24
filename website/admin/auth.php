@@ -447,8 +447,24 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
             $stmt->execute([':u' => $cleanUser]);
             $dbUser = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($dbUser && !empty($dbUser['password_hash']) && password_verify($password, $dbUser['password_hash'])) {
+                // Strict Portal Access Scope check from shared table
+                $scope = $dbUser['access_scope'] ?? 'crm_only';
+                if ($scope === 'crm_only') {
+                    $errorReason = 'Access Restricted: Your account is provisioned for CRM Portal access only. Contact your executive administrator for Website Admin authorization.';
+                    return false;
+                }
+
                 if (!headers_sent()) {
                     session_regenerate_id(true);
+                }
+
+                // Decode shared roles JSON from users table
+                $userRoles = [];
+                if (!empty($dbUser['roles'])) {
+                    $userRoles = is_string($dbUser['roles']) ? json_decode($dbUser['roles'], true) : (array)$dbUser['roles'];
+                }
+                if (empty($userRoles)) {
+                    $userRoles = !empty($dbUser['role']) ? [(string)$dbUser['role']] : ['employee'];
                 }
 
                 $now = time();
@@ -456,7 +472,7 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
                 $_SESSION['codex_admin_user'] = $dbUser['username'] ?? 'admin';
                 $_SESSION['codex_admin_user_id'] = $dbUser['id'] ?? 'usr_admin';
                 $_SESSION['codex_admin_profile'] = $dbUser;
-                $_SESSION['codex_admin_roles'] = ['superadmin', 'founder', 'ceo', 'cto'];
+                $_SESSION['codex_admin_roles'] = $userRoles;
                 $_SESSION['codex_admin_time'] = $now;
                 $_SESSION['codex_admin_last_activity'] = $now;
                 $_SESSION['codex_admin_rotated_at'] = $now;

@@ -80,6 +80,30 @@ require_once __DIR__ . '/includes/header.php';
                             <?php endif; ?>
                         </div>
 
+                        <?php 
+                        $reqRole = $item['required_role'] ?? '';
+                        $amount = (float)($item['amount'] ?? 0.00);
+                        $isSelf = (!empty($item['requested_user_id']) && $item['requested_user_id'] === ($currentUser['id'] ?? ''))
+                            || (!empty($item['requested_by']) && strtolower(trim((string)$item['requested_by'])) === strtolower(trim((string)($currentUser['username'] ?? ''))));
+                        ?>
+                        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                            <?php if ($reqRole): ?>
+                                <span class="badge bg-info-subtle text-info border border-info-subtle" style="font-size: 0.68rem;">
+                                    <i class="bi bi-person-fill-lock me-1"></i>Requires Role: <strong><?= htmlspecialchars(strtoupper($reqRole)) ?></strong>
+                                </span>
+                            <?php endif; ?>
+                            <?php if ($amount > 0): ?>
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle" style="font-size: 0.68rem;">
+                                    <i class="bi bi-cash-stack me-1"></i>Threshold: <strong>$<?= number_format($amount, 2) ?></strong>
+                                </span>
+                            <?php endif; ?>
+                            <?php if ($isSelf): ?>
+                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle" style="font-size: 0.68rem;">
+                                    <i class="bi bi-shield-slash-fill me-1"></i>Self-Approval Blocked
+                                </span>
+                            <?php endif; ?>
+                        </div>
+
                         <!-- Pre-Formatted Payload Preview -->
                         <div class="p-3 rounded-3 my-3" style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08);">
                             <?php

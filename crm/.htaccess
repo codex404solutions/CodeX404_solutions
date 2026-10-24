@@ -60,6 +60,7 @@
     RewriteRule ^users/?$ public/users.php [L]
     RewriteRule ^profile/?$ public/profile.php [L]
     RewriteRule ^settings/?$ public/settings.php [L]
+    RewriteRule ^hierarchy-settings/?$ public/hierarchy-settings.php [L]
 
     # Clean URLs fallback: /name -> public/name.php (when the target file exists)
     RewriteCond %{REQUEST_FILENAME} !-d

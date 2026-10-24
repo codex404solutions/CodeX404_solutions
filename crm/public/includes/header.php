@@ -140,6 +140,16 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                         <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
                         <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle" style="font-size: 0.62rem;"><?= $totalWorkforceCount ?? 4 ?></span>
                     </a>
+                    <?php 
+                    $userRolesList = array_map('strtolower', (array)($currentUser['roles'] ?? []));
+                    $canAccessHierarchySettings = in_array('superadmin', $userRolesList, true) || in_array('founder', $userRolesList, true);
+                    if ($canAccessHierarchySettings):
+                    ?>
+                        <a href="hierarchy-settings" class="crm-nav-link <?= $currentPage === 'hierarchy-settings' ? 'active' : '' ?>">
+                            <span><i class="bi bi-diagram-3-fill me-2 text-warning"></i> Hierarchy &amp; Rules</span>
+                            <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle" style="font-size: 0.60rem;">Executive</span>
+                        </a>
+                    <?php endif; ?>
                     <a href="settings" class="crm-nav-link <?= $currentPage === 'settings' ? 'active' : '' ?>">
                         <span><i class="bi bi-sliders me-2 text-secondary"></i> System &amp; API</span>
                         <span class="badge rounded-pill bg-dark border border-secondary text-muted" style="font-size: 0.62rem;">API</span>

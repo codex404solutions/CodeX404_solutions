@@ -32,7 +32,9 @@ class StorageService
         'rates_cache' => 'currency_rates',
         'users' => 'users',
         'roles' => 'roles',
-        'permissions' => 'permissions'
+        'permissions' => 'permissions',
+        'approval_rules' => 'approval_rules',
+        'audit_logs' => 'audit_logs'
     ];
 
     public static function init(string $storagePath): void
@@ -321,16 +323,61 @@ class StorageService
                     ]);
                 } elseif ($table === 'approvals') {
                     $stmt = $pdo->prepare("
-                        INSERT INTO `approvals` (`id`, `type`, `title`, `status`, `requested_by`, `payload`, `created_at`, `updated_at`)
-                        VALUES (:id, :type, :title, :status, :requested_by, :payload, :created_at, NOW())
+                        INSERT INTO `approvals` (`id`, `type`, `title`, `amount`, `status`, `requested_by`, `requested_user_id`, `payload`, `rule_id`, `required_role`, `created_at`, `updated_at`)
+                        VALUES (:id, :type, :title, :amount, :status, :requested_by, :requested_user_id, :payload, :rule_id, :required_role, :created_at, NOW())
                     ");
                     $stmt->execute([
                         ':id' => $record['id'],
                         ':type' => $record['type'] ?? 'email_draft',
                         ':title' => $record['title'] ?? '',
+                        ':amount' => (float)($record['amount'] ?? 0.00),
                         ':status' => $record['status'] ?? 'pending',
                         ':requested_by' => $record['requested_by'] ?? 'Agent',
+                        ':requested_user_id' => $record['requested_user_id'] ?? null,
                         ':payload' => json_encode($record['payload'] ?? []),
+                        ':rule_id' => $record['rule_id'] ?? null,
+                        ':required_role' => $record['required_role'] ?? null,
+                        ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
+                    ]);
+                } elseif ($table === 'approval_rules') {
+                    $stmt = $pdo->prepare("
+                        INSERT INTO `approval_rules` (`id`, `rule_name`, `type`, `threshold`, `required_role`, `description`, `is_active`, `created_by`, `created_at`, `updated_at`)
+                        VALUES (:id, :rule_name, :type, :threshold, :required_role, :description, :is_active, :created_by, :created_at, NOW())
+                        ON DUPLICATE KEY UPDATE 
+                            `rule_name` = VALUES(`rule_name`),
+                            `type` = VALUES(`type`),
+                            `threshold` = VALUES(`threshold`),
+                            `required_role` = VALUES(`required_role`),
+                            `description` = VALUES(`description`),
+                            `is_active` = VALUES(`is_active`),
+                            `updated_at` = NOW()
+                    ");
+                    $stmt->execute([
+                        ':id' => $record['id'],
+                        ':rule_name' => (string)($record['rule_name'] ?? 'Custom Rule'),
+                        ':type' => (string)($record['type'] ?? 'proposal_discount'),
+                        ':threshold' => (float)($record['threshold'] ?? 0.00),
+                        ':required_role' => (string)($record['required_role'] ?? 'superadmin'),
+                        ':description' => $record['description'] ?? null,
+                        ':is_active' => isset($record['is_active']) ? (int)$record['is_active'] : 1,
+                        ':created_by' => $record['created_by'] ?? null,
+                        ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
+                    ]);
+                } elseif ($table === 'audit_logs') {
+                    $stmt = $pdo->prepare("
+                        INSERT INTO `audit_logs` (`user_id`, `username`, `action`, `resource_type`, `resource_id`, `details`, `changes`, `ip_address`, `user_agent`, `created_at`)
+                        VALUES (:user_id, :username, :action, :resource_type, :resource_id, :details, :changes, :ip_address, :user_agent, :created_at)
+                    ");
+                    $stmt->execute([
+                        ':user_id' => $record['user_id'] ?? null,
+                        ':username' => $record['username'] ?? null,
+                        ':action' => (string)($record['action'] ?? 'action'),
+                        ':resource_type' => (string)($record['resource_type'] ?? 'system'),
+                        ':resource_id' => $record['resource_id'] ?? null,
+                        ':details' => $record['details'] ?? null,
+                        ':changes' => !empty($record['changes']) ? json_encode($record['changes']) : null,
+                        ':ip_address' => $record['ip_address'] ?? null,
+                        ':user_agent' => $record['user_agent'] ?? null,
                         ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
                     ]);
                 } elseif ($table === 'paperclip_tasks') {
@@ -359,12 +406,12 @@ class StorageService
                     $stmt = $pdo->prepare("
                         INSERT INTO `users` (
                             `id`, `username`, `email`, `password_hash`, `name`, `phone`, `title`, 
-                            `department`, `bio`, `avatar`, `role`, `roles`, `custom_permissions`, 
+                            `department`, `reports_to`, `authority_tier`, `approval_limit`, `bio`, `avatar`, `role`, `roles`, `custom_permissions`, 
                             `status`, `access_scope`, `approval_status`, `pending_payload`, 
                             `timezone`, `currency`, `last_login`, `last_ip`, `created_at`, `updated_at`
                         ) VALUES (
                             :id, :username, :email, :password_hash, :name, :phone, :title, 
-                            :department, :bio, :avatar, :role, :roles, :custom_permissions, 
+                            :department, :reports_to, :authority_tier, :approval_limit, :bio, :avatar, :role, :roles, :custom_permissions, 
                             :status, :access_scope, :approval_status, :pending_payload, 
                             :timezone, :currency, :last_login, :last_ip, :created_at, NOW()
                         ) ON DUPLICATE KEY UPDATE 
@@ -374,6 +421,9 @@ class StorageService
                             `phone` = VALUES(`phone`),
                             `title` = VALUES(`title`),
                             `department` = VALUES(`department`),
+                            `reports_to` = VALUES(`reports_to`),
+                            `authority_tier` = VALUES(`authority_tier`),
+                            `approval_limit` = VALUES(`approval_limit`),
                             `bio` = VALUES(`bio`),
                             `avatar` = VALUES(`avatar`),
                             `role` = VALUES(`role`),
@@ -395,6 +445,9 @@ class StorageService
                         ':phone' => $record['phone'] ?? null,
                         ':title' => $record['title'] ?? 'Staff Member',
                         ':department' => $record['department'] ?? 'Operations',
+                        ':reports_to' => !empty($record['reports_to']) ? (string)$record['reports_to'] : null,
+                        ':authority_tier' => isset($record['authority_tier']) ? (int)$record['authority_tier'] : 3,
+                        ':approval_limit' => isset($record['approval_limit']) ? (float)$record['approval_limit'] : 0.00,
                         ':bio' => $record['bio'] ?? null,
                         ':avatar' => $record['avatar'] ?? null,
                         ':role' => (string)($record['role'] ?? ($rolesArray[0] ?? 'viewer')),
@@ -500,6 +553,21 @@ class StorageService
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute($params);
                     }
+                } elseif ($table === 'approval_rules') {
+                    $sets = [];
+                    $params = [':id' => $id];
+                    foreach ($updates as $k => $v) {
+                        if (in_array($k, ['rule_name', 'type', 'threshold', 'required_role', 'description', 'is_active'], true)) {
+                            $sets[] = "`{$k}` = :{$k}";
+                            $params[":{$k}"] = $v;
+                        }
+                    }
+                    if (!empty($sets)) {
+                        $sets[] = "`updated_at` = NOW()";
+                        $sql = "UPDATE `approval_rules` SET " . implode(', ', $sets) . " WHERE `id` = :id";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute($params);
+                    }
                 } elseif ($table === 'leads') {
                     $sets = [];
                     $params = [':id' => $id];
@@ -518,7 +586,8 @@ class StorageService
                     $sets = [];
                     $params = [':id' => $id];
                     $allowedCols = [
-                        'username', 'email', 'name', 'phone', 'title', 'department', 'bio', 
+                        'username', 'email', 'name', 'phone', 'title', 'department', 'reports_to',
+                        'authority_tier', 'approval_limit', 'bio', 
                         'avatar', 'role', 'status', 'access_scope', 'approval_status', 
                         'timezone', 'currency', 'last_ip', 'password_hash'
                     ];

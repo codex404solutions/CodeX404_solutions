@@ -493,6 +493,14 @@ declare(strict_types=1);
             <a href="users" class="crm-nav-link <?= $currentPage === 'users' ? 'active' : '' ?>">
                 <i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles (<?= $totalWorkforceCount ?? count($allUsers ?? []) ?>)
             </a>
+            <?php 
+            $userRolesListMob = array_map('strtolower', (array)($currentUser['roles'] ?? []));
+            if (in_array('superadmin', $userRolesListMob, true) || in_array('founder', $userRolesListMob, true)):
+            ?>
+                <a href="hierarchy-settings" class="crm-nav-link <?= $currentPage === 'hierarchy-settings' ? 'active' : '' ?>">
+                    <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Hierarchy &amp; Rules
+                </a>
+            <?php endif; ?>
             <a href="profile" class="crm-nav-link <?= $currentPage === 'profile' ? 'active' : '' ?>">
                 <i class="bi bi-person-badge me-2 text-primary"></i> My Full Profile
             </a>
