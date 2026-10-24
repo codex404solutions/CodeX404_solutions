@@ -769,6 +769,120 @@
             }
         }
 
+        /* Dual-Mode Pipeline Switcher & Vertical Funnel Styles */
+        .pipeline-mode-switcher {
+            display: inline-flex;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 9999px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .pipeline-mode-btn {
+            border: none;
+            background: transparent;
+            color: #94A3B8;
+            padding: 6px 14px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .pipeline-mode-btn:hover {
+            color: #F8FAFC;
+        }
+
+        .pipeline-mode-btn.active {
+            background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%);
+            color: #FFFFFF;
+            box-shadow: 0 2px 10px rgba(14, 165, 233, 0.35);
+        }
+
+        [data-bs-theme="light"] .pipeline-mode-switcher,
+        [data-bs-theme="combo"] .pipeline-mode-switcher {
+            background: #F1F5F9;
+            border-color: #CBD5E1;
+        }
+
+        [data-bs-theme="light"] .pipeline-mode-btn,
+        [data-bs-theme="combo"] .pipeline-mode-btn {
+            color: #64748B;
+        }
+
+        [data-bs-theme="light"] .pipeline-mode-btn.active,
+        [data-bs-theme="combo"] .pipeline-mode-btn.active {
+            background: #0284C7;
+            color: #FFFFFF;
+        }
+
+        /* Funnel Waterfall Section */
+        .funnel-stage-card {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .funnel-stage-card:hover {
+            border-color: rgba(56, 189, 248, 0.35);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .funnel-stage-header {
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(30, 41, 59, 0.45);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .funnel-deal-row {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.15s ease;
+        }
+
+        .funnel-deal-row:last-child {
+            border-bottom: none;
+        }
+
+        .funnel-deal-row:hover {
+            background: rgba(56, 189, 248, 0.04);
+        }
+
+        [data-bs-theme="light"] .funnel-stage-card,
+        [data-bs-theme="combo"] .funnel-stage-card {
+            background: #FFFFFF;
+            border-color: #E2E8F0;
+        }
+
+        [data-bs-theme="light"] .funnel-stage-header,
+        [data-bs-theme="combo"] .funnel-stage-header {
+            background: #F8FAFC;
+            border-bottom-color: #E2E8F0;
+        }
+
+        [data-bs-theme="light"] .funnel-deal-row,
+        [data-bs-theme="combo"] .funnel-deal-row {
+            border-bottom-color: #F1F5F9;
+        }
+
+        [data-bs-theme="light"] .funnel-deal-row:hover,
+        [data-bs-theme="combo"] .funnel-deal-row:hover {
+            background: #F0F9FF;
+        }
+
         /* ========================================================= */
         /* AUTONOMOUS AGENT SHOWCASE SLIDER                          */
         /* ========================================================= */

@@ -13,6 +13,15 @@ require_once dirname(__DIR__) . '/includes/security.php';
 require_once dirname(__DIR__) . '/config/Env.php';
 Env::load(dirname(__DIR__) . '/.env');
 
+// Link CRM RBAC & UserService for unified workforce profiling
+$crmServicesDir = dirname(__DIR__, 2) . '/crm/app/Services';
+if (file_exists($crmServicesDir . '/UserService.php')) {
+    require_once $crmServicesDir . '/StorageService.php';
+    require_once $crmServicesDir . '/RBACService.php';
+    require_once $crmServicesDir . '/UserService.php';
+    \CRM\Services\StorageService::init(dirname(__DIR__, 2) . '/crm/storage');
+}
+
 // Configure admin session settings before session starts or enforce if active
 if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
     $isSecure = (defined('IS_SECURE_CONN') && IS_SECURE_CONN)
@@ -351,6 +360,14 @@ function is_admin_logged_in(): bool
         $_SESSION['codex_admin_rotated_at'] = $now;
     }
 
+    // Access Scope verification
+    $profile = current_admin_profile();
+    if (($profile['access_scope'] ?? 'both') === 'crm_only') {
+        admin_logout();
+        set_admin_flash('error', 'Access Restricted: Your account is restricted to CRM Portal access only.');
+        return false;
+    }
+
     // Update last activity timestamp
     $_SESSION['codex_admin_last_activity'] = $now;
 
@@ -374,9 +391,9 @@ function require_admin_auth(): void
 }
 
 /**
- * Authenticate credentials.
+ * Authenticate credentials with portal clearance verification.
  */
-function authenticate_admin(string $username, string $password): bool
+function authenticate_admin(string $username, string $password, ?string &$errorReason = null): bool
 {
     // Check if account or IP is locked out
     if (is_admin_locked_out($username)) {
@@ -385,7 +402,44 @@ function authenticate_admin(string $username, string $password): bool
 
     $cleanUser = trim(strtolower($username));
 
-    // 1. Try MySQL Database authentication first
+    // 1. Try unified UserService (MySQL or StorageService fallback)
+    if (class_exists('\\CRM\\Services\\UserService')) {
+        try {
+            $user = \CRM\Services\UserService::getByUsernameOrEmail($cleanUser);
+            if ($user && ($user['status'] ?? 'active') === 'active' && !empty($user['password_hash']) && password_verify($password, $user['password_hash'])) {
+                // Portal Access Scope Enforcement
+                $scope = $user['access_scope'] ?? 'both';
+                if ($scope === 'crm_only') {
+                    $errorReason = 'Access Restricted: Your account is provisioned for CRM Portal access only. Contact your executive administrator for Website Admin authorization.';
+                    return false;
+                }
+
+                if (!headers_sent()) {
+                    session_regenerate_id(true);
+                }
+
+                $now = time();
+                $_SESSION['codex_admin_logged'] = true;
+                $_SESSION['codex_admin_user'] = $user['username'] ?? 'admin';
+                $_SESSION['codex_admin_user_id'] = $user['id'] ?? 'usr_admin';
+                $_SESSION['codex_admin_profile'] = $user;
+                $_SESSION['codex_admin_roles'] = (array)($user['roles'] ?? ['superadmin']);
+                $_SESSION['codex_admin_time'] = $now;
+                $_SESSION['codex_admin_last_activity'] = $now;
+                $_SESSION['codex_admin_rotated_at'] = $now;
+                $_SESSION['codex_admin_ip'] = get_client_ip();
+                $_SESSION['codex_admin_ua'] = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255);
+
+                \CRM\Services\UserService::recordLogin($user['id']);
+                reset_admin_failed_attempts($username);
+                return true;
+            }
+        } catch (\Throwable $e) {
+            // Fall through to database / env fallback
+        }
+    }
+
+    // 2. Direct MySQL Database authentication fallback
     $pdo = Database::getConnection();
     if ($pdo) {
         try {
@@ -400,6 +454,9 @@ function authenticate_admin(string $username, string $password): bool
                 $now = time();
                 $_SESSION['codex_admin_logged'] = true;
                 $_SESSION['codex_admin_user'] = $dbUser['username'] ?? 'admin';
+                $_SESSION['codex_admin_user_id'] = $dbUser['id'] ?? 'usr_admin';
+                $_SESSION['codex_admin_profile'] = $dbUser;
+                $_SESSION['codex_admin_roles'] = ['superadmin', 'founder', 'ceo', 'cto'];
                 $_SESSION['codex_admin_time'] = $now;
                 $_SESSION['codex_admin_last_activity'] = $now;
                 $_SESSION['codex_admin_rotated_at'] = $now;
@@ -414,7 +471,7 @@ function authenticate_admin(string $username, string $password): bool
         }
     }
 
-    // 2. Fallback to .env admin credentials
+    // 3. Fallback to .env admin credentials
     $validUser = ($cleanUser === strtolower((string)ADMIN_USER) || (ADMIN_ALT_USER !== '' && $cleanUser === strtolower((string)ADMIN_ALT_USER)));
 
     if (!$validUser || ADMIN_PASS_HASH === '' || password_get_info(ADMIN_PASS_HASH)['algo'] === null) {
@@ -423,7 +480,6 @@ function authenticate_admin(string $username, string $password): bool
     }
 
     if (password_verify($password, ADMIN_PASS_HASH)) {
-        // Session fixation protection: regenerate ID on privilege elevation
         if (!headers_sent()) {
             session_regenerate_id(true);
         }
@@ -431,6 +487,20 @@ function authenticate_admin(string $username, string $password): bool
         $now = time();
         $_SESSION['codex_admin_logged'] = true;
         $_SESSION['codex_admin_user'] = ADMIN_USER;
+        $_SESSION['codex_admin_user_id'] = 'usr_admin_alex';
+        $_SESSION['codex_admin_roles'] = ['superadmin', 'founder', 'ceo', 'cto'];
+
+        // Pull full profile if available
+        if (class_exists('\\CRM\\Services\\UserService')) {
+            \CRM\Services\UserService::seedDefaultUsersIfEmpty();
+            $seeded = \CRM\Services\UserService::getByUsernameOrEmail('admin');
+            if ($seeded) {
+                $_SESSION['codex_admin_profile'] = $seeded;
+                $_SESSION['codex_admin_user_id'] = $seeded['id'];
+                $_SESSION['codex_admin_roles'] = $seeded['roles'] ?? ['superadmin'];
+            }
+        }
+
         $_SESSION['codex_admin_time'] = $now;
         $_SESSION['codex_admin_last_activity'] = $now;
         $_SESSION['codex_admin_rotated_at'] = $now;
@@ -488,4 +558,65 @@ function get_admin_flash(): ?array
     }
     return null;
 }
+
+/**
+ * Retrieve the current admin's full profile.
+ */
+function current_admin_profile(): array
+{
+    if (!empty($_SESSION['codex_admin_profile']) && is_array($_SESSION['codex_admin_profile'])) {
+        return $_SESSION['codex_admin_profile'];
+    }
+
+    if (class_exists('\\CRM\\Services\\UserService')) {
+        $username = (string)($_SESSION['codex_admin_user'] ?? 'admin');
+        $user = \CRM\Services\UserService::getByUsernameOrEmail($username);
+        if ($user) {
+            $_SESSION['codex_admin_profile'] = $user;
+            return $user;
+        }
+    }
+
+    return [
+        'id' => 'usr_admin_alex',
+        'username' => (string)($_SESSION['codex_admin_user'] ?? 'admin'),
+        'name' => 'Alex Rivera',
+        'email' => 'admin@codex404solutions.online',
+        'title' => 'Chief Executive Officer & Founder',
+        'department' => 'Executive Leadership',
+        'roles' => (array)($_SESSION['codex_admin_roles'] ?? ['superadmin', 'founder', 'ceo', 'cto']),
+        'status' => 'active',
+        'bio' => 'Founder & Principal Systems Architect at CodeX404 Solutions.'
+    ];
+}
+
+/**
+ * Check if the currently logged-in admin has a permission.
+ */
+function current_admin_can(string $permission): bool
+{
+    $profile = current_admin_profile();
+    $roles = (array)($profile['roles'] ?? ['superadmin']);
+
+    if (class_exists('\\CRM\\Services\\RBACService')) {
+        return \CRM\Services\RBACService::hasPermission(
+            $roles,
+            $permission,
+            (array)($profile['custom_permissions'] ?? null)
+        );
+    }
+
+    return in_array('superadmin', array_map('strtolower', $roles), true);
+}
+
+/**
+ * Check if the currently logged-in admin has a specific role.
+ */
+function current_admin_has_role(string $role): bool
+{
+    $profile = current_admin_profile();
+    $roles = array_map('strtolower', (array)($profile['roles'] ?? []));
+    return in_array(strtolower(trim($role)), $roles, true);
+}
+
 

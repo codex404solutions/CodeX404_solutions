@@ -29,7 +29,10 @@ class StorageService
         'approvals' => 'approvals',
         'paperclip_tasks' => 'paperclip_tasks',
         'currency_rates' => 'currency_rates',
-        'rates_cache' => 'currency_rates'
+        'rates_cache' => 'currency_rates',
+        'users' => 'users',
+        'roles' => 'roles',
+        'permissions' => 'permissions'
     ];
 
     public static function init(string $storagePath): void
@@ -114,6 +117,12 @@ class StorageService
                     }
                     if (isset($row['rates']) && is_string($row['rates'])) {
                         $row['rates'] = json_decode($row['rates'], true) ?: [];
+                    }
+                    if (isset($row['custom_permissions']) && is_string($row['custom_permissions'])) {
+                        $row['custom_permissions'] = json_decode($row['custom_permissions'], true) ?: ['granted' => [], 'denied' => []];
+                    }
+                    if (isset($row['roles']) && is_string($row['roles'])) {
+                        $row['roles'] = json_decode($row['roles'], true) ?: [];
                     }
                 }
                 unset($row);

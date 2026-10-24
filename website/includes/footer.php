@@ -130,9 +130,9 @@ declare(strict_types=1);
 </button>
 
 <!-- Client-side Scripts -->
-<script src="<?= asset('js/main.js') ?>" defer></script>
-<script src="<?= asset('js/forms.js') ?>" defer></script>
-<script src="<?= asset('js/chatbot.js') ?>" defer></script>
+<script src="<?= asset('js/main.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/main.js') ? filemtime(dirname(__DIR__) . '/assets/js/main.js') : '1.0' ?>" defer></script>
+<script src="<?= asset('js/forms.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/forms.js') ? filemtime(dirname(__DIR__) . '/assets/js/forms.js') : '1.0' ?>" defer></script>
+<script src="<?= asset('js/chatbot.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/chatbot.js') ? filemtime(dirname(__DIR__) . '/assets/js/chatbot.js') : '1.0' ?>" defer></script>
 
 </body>
 </html>

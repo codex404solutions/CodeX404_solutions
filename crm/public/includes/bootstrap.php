@@ -15,6 +15,7 @@ use CRM\Services\ProjectService;
 use CRM\Services\ApprovalService;
 use CRM\Services\PaperclipService;
 use CRM\Services\RBACService;
+use CRM\Services\UserService;
 use CRM\Services\AuthService;
 use CRM\Services\CrmSecurity;
 use CRM\Services\CurrencyService;
@@ -27,11 +28,13 @@ require_once $crmRoot . '/app/Services/ProjectService.php';
 require_once $crmRoot . '/app/Services/ApprovalService.php';
 require_once $crmRoot . '/app/Services/PaperclipService.php';
 require_once $crmRoot . '/app/Services/RBACService.php';
+require_once $crmRoot . '/app/Services/UserService.php';
 require_once $crmRoot . '/app/Services/AuthService.php';
 require_once $crmRoot . '/app/Services/CrmSecurity.php';
 require_once $crmRoot . '/app/Services/CurrencyService.php';
 
 StorageService::init($crmRoot . '/storage');
+UserService::seedDefaultUsersIfEmpty();
 AuthService::startSession();
 $currentUser = AuthService::user();
 
@@ -262,6 +265,261 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['flash_type'] = 'danger';
             }
             break;
+
+        // --- 14. CREATE NEW USER ---
+        case 'create_user':
+            try {
+                $grantedPerms = isset($_POST['custom_granted']) && is_array($_POST['custom_granted']) ? $_POST['custom_granted'] : [];
+                $deniedPerms = isset($_POST['custom_denied']) && is_array($_POST['custom_denied']) ? $_POST['custom_denied'] : [];
+                $userAssignedRoles = isset($_POST['roles']) && is_array($_POST['roles']) ? $_POST['roles'] : ['viewer'];
+                $accessScope = trim((string)($_POST['access_scope'] ?? 'crm_only'));
+
+                $createdUser = UserService::create([
+                    'name' => trim((string)($_POST['name'] ?? '')),
+                    'username' => trim((string)($_POST['username'] ?? '')),
+                    'email' => trim((string)($_POST['email'] ?? '')),
+                    'phone' => trim((string)($_POST['phone'] ?? '')),
+                    'title' => trim((string)($_POST['title'] ?? 'Staff Member')),
+                    'department' => trim((string)($_POST['department'] ?? 'Operations')),
+                    'bio' => trim((string)($_POST['bio'] ?? '')),
+                    'password' => (string)($_POST['password'] ?? 'admin@1234'),
+                    'status' => trim((string)($_POST['status'] ?? 'active')),
+                    'access_scope' => $accessScope,
+                    'roles' => $userAssignedRoles,
+                    'custom_permissions' => [
+                        'granted' => $grantedPerms,
+                        'denied' => $deniedPerms
+                    ]
+                ], $currentUser);
+
+                if (!empty($createdUser['approval_required'])) {
+                    $_SESSION['flash_message'] = "🛡️ Privilege Escalation Notice: Account provisioning for '{$createdUser['name']}' requires Founder / Superadmin sign-off. Request has been routed to the Executive HITL Queue.";
+                    $_SESSION['flash_type'] = 'warning';
+                } else {
+                    $scopeTitle = $createdUser['access_scope'] === 'both' ? 'Both Admin & CRM' : ($createdUser['access_scope'] === 'admin_only' ? 'Website Admin Only' : 'CRM Only');
+                    $_SESSION['flash_message'] = "New workforce account created for '{$createdUser['name']}' (@{$createdUser['username']}) with clearance [{$scopeTitle}] and " . count($createdUser['roles']) . " active multi-roles!";
+                    $_SESSION['flash_type'] = 'success';
+                }
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Error creating user: ' . $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 15. UPDATE USER & PERMISSIONS ---
+        case 'update_user':
+            $targetUserId = trim((string)($_POST['user_id'] ?? ''));
+            if ($targetUserId === '') {
+                $_SESSION['flash_message'] = 'Invalid user identifier.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            try {
+                $grantedPerms = isset($_POST['custom_granted']) && is_array($_POST['custom_granted']) ? $_POST['custom_granted'] : [];
+                $deniedPerms = isset($_POST['custom_denied']) && is_array($_POST['custom_denied']) ? $_POST['custom_denied'] : [];
+                $userAssignedRoles = isset($_POST['roles']) && is_array($_POST['roles']) ? $_POST['roles'] : null;
+                $accessScope = isset($_POST['access_scope']) ? trim((string)$_POST['access_scope']) : null;
+
+                $updatePayload = [
+                    'name' => trim((string)($_POST['name'] ?? '')),
+                    'username' => trim((string)($_POST['username'] ?? '')),
+                    'email' => trim((string)($_POST['email'] ?? '')),
+                    'phone' => trim((string)($_POST['phone'] ?? '')),
+                    'title' => trim((string)($_POST['title'] ?? '')),
+                    'department' => trim((string)($_POST['department'] ?? '')),
+                    'bio' => trim((string)($_POST['bio'] ?? '')),
+                    'status' => trim((string)($_POST['status'] ?? 'active')),
+                    'custom_permissions' => [
+                        'granted' => $grantedPerms,
+                        'denied' => $deniedPerms
+                    ]
+                ];
+
+                if ($userAssignedRoles !== null) {
+                    $updatePayload['roles'] = $userAssignedRoles;
+                }
+                if ($accessScope !== null) {
+                    $updatePayload['access_scope'] = $accessScope;
+                }
+
+                $updated = UserService::update($targetUserId, $updatePayload, $currentUser);
+
+                if (!empty($updated['approval_required'])) {
+                    $_SESSION['flash_message'] = "🛡️ Privilege Escalation Notice: High-authority changes (executive roles/portal access) for '{$updated['user']['name']}' require Founder / Superadmin sign-off. Request has been routed to the Executive HITL Queue.";
+                    $_SESSION['flash_type'] = 'warning';
+                } elseif ($updated) {
+                    if (($currentUser['id'] ?? '') === $targetUserId) {
+                        AuthService::refreshSessionUser();
+                    }
+                    $_SESSION['flash_message'] = "Profile & Multi-Role configuration for '{$updated['name']}' successfully updated!";
+                    $_SESSION['flash_type'] = 'success';
+                } else {
+                    $_SESSION['flash_message'] = 'Target user not found.';
+                    $_SESSION['flash_type'] = 'warning';
+                }
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Update failed: ' . $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 16. CHANGE USER PASSWORD ---
+        case 'change_user_password':
+            if (!RBACService::hasPermission($userRoles, 'users.edit', $currentUser['custom_permissions'] ?? null)) {
+                $_SESSION['flash_message'] = 'Permission denied: Cannot reset user credentials.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $targetUserId = trim((string)($_POST['user_id'] ?? ''));
+            $newPass = (string)($_POST['new_password'] ?? '');
+
+            try {
+                if (UserService::updatePassword($targetUserId, $newPass)) {
+                    $_SESSION['flash_message'] = 'Password reset successfully.';
+                    $_SESSION['flash_type'] = 'success';
+                } else {
+                    $_SESSION['flash_message'] = 'Failed to reset password.';
+                    $_SESSION['flash_type'] = 'danger';
+                }
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 17. DELETE USER ---
+        case 'delete_user':
+            if (!RBACService::hasPermission($userRoles, 'users.delete', $currentUser['custom_permissions'] ?? null)) {
+                $_SESSION['flash_message'] = 'Permission denied: Cannot remove team members.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $targetUserId = trim((string)($_POST['user_id'] ?? ''));
+            try {
+                if (UserService::delete($targetUserId, $currentUser['id'] ?? '')) {
+                    $_SESSION['flash_message'] = 'User account deleted permanently.';
+                    $_SESSION['flash_type'] = 'warning';
+                } else {
+                    $_SESSION['flash_message'] = 'Failed to delete user.';
+                    $_SESSION['flash_type'] = 'danger';
+                }
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 18. UPDATE MY OWN PROFILE ---
+        case 'update_my_profile':
+            $myId = $currentUser['id'] ?? '';
+            if ($myId === '') {
+                $_SESSION['flash_message'] = 'Active session error.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            try {
+                $updated = UserService::update($myId, [
+                    'name' => trim((string)($_POST['name'] ?? $currentUser['name'])),
+                    'phone' => trim((string)($_POST['phone'] ?? '')),
+                    'title' => trim((string)($_POST['title'] ?? '')),
+                    'department' => trim((string)($_POST['department'] ?? '')),
+                    'bio' => trim((string)($_POST['bio'] ?? '')),
+                    'timezone' => trim((string)($_POST['timezone'] ?? 'UTC')),
+                    'currency' => trim((string)($_POST['currency'] ?? 'USD'))
+                ]);
+
+                AuthService::refreshSessionUser();
+                $_SESSION['flash_message'] = 'Your personal profile details have been updated!';
+                $_SESSION['flash_type'] = 'success';
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = 'Profile update error: ' . $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 19. CHANGE MY OWN PASSWORD ---
+        case 'change_my_password':
+            $myId = $currentUser['id'] ?? '';
+            $currentPass = (string)($_POST['current_password'] ?? '');
+            $newPass = (string)($_POST['new_password'] ?? '');
+            $confirmPass = (string)($_POST['confirm_password'] ?? '');
+
+            if ($newPass !== $confirmPass) {
+                $_SESSION['flash_message'] = 'New password confirmation does not match.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $userRec = UserService::getById($myId);
+            if (!$userRec || empty($userRec['password_hash']) || !password_verify($currentPass, $userRec['password_hash'])) {
+                $_SESSION['flash_message'] = 'Incorrect current password.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            try {
+                UserService::updatePassword($myId, $newPass);
+                $_SESSION['flash_message'] = 'Your password has been changed successfully!';
+                $_SESSION['flash_type'] = 'success';
+            } catch (\Throwable $e) {
+                $_SESSION['flash_message'] = $e->getMessage();
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
+
+        // --- 20. CREATE / UPDATE CUSTOM ROLE ---
+        case 'save_role':
+            if (!RBACService::hasPermission($userRoles, 'roles.manage', $currentUser['custom_permissions'] ?? null)) {
+                $_SESSION['flash_message'] = 'Permission denied: Cannot manage roles & permissions.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $slug = strtolower(trim((string)($_POST['slug'] ?? '')));
+            $name = trim((string)($_POST['name'] ?? ''));
+            $desc = trim((string)($_POST['description'] ?? ''));
+            $color = trim((string)($_POST['color'] ?? 'info'));
+            $perms = isset($_POST['permissions']) && is_array($_POST['permissions']) ? $_POST['permissions'] : [];
+
+            if ($slug === '' || $name === '') {
+                $_SESSION['flash_message'] = 'Role Slug and Role Name are required.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            RBACService::saveRole([
+                'slug' => $slug,
+                'name' => $name,
+                'description' => $desc,
+                'color' => $color,
+                'permissions' => $perms
+            ]);
+
+            $_SESSION['flash_message'] = "Role '{$name}' saved with " . count($perms) . " permissions configured!";
+            $_SESSION['flash_type'] = 'success';
+            break;
+
+        // --- 21. DELETE CUSTOM ROLE ---
+        case 'delete_role':
+            if (!RBACService::hasPermission($userRoles, 'roles.manage', $currentUser['custom_permissions'] ?? null)) {
+                $_SESSION['flash_message'] = 'Permission denied: Cannot remove roles.';
+                $_SESSION['flash_type'] = 'danger';
+                break;
+            }
+
+            $slug = trim((string)($_POST['slug'] ?? ''));
+            if (RBACService::deleteRole($slug)) {
+                $_SESSION['flash_message'] = "Role '{$slug}' deleted successfully.";
+                $_SESSION['flash_type'] = 'info';
+            } else {
+                $_SESSION['flash_message'] = 'Protected system roles cannot be deleted.';
+                $_SESSION['flash_type'] = 'danger';
+            }
+            break;
     }
 
     header('Location: ' . $returnUrl);
@@ -292,3 +550,15 @@ $activeAgentsCount = count($agents);
 
 $liveExchangeRates = CurrencyService::getRates();
 $csrfToken = CrmSecurity::csrfToken();
+
+// Workforce & RBAC Aggregation
+$allUsers = UserService::getAll();
+$allRoles = RBACService::getAllRoles();
+$allModules = RBACService::getAllModules();
+$effectiveUserPerms = RBACService::getEffectivePermissions(
+    (array)($currentUser['roles'] ?? ['admin']),
+    (array)($currentUser['custom_permissions'] ?? null)
+);
+$totalWorkforceCount = count($allUsers);
+$activeRolesCount = count($allRoles);
+

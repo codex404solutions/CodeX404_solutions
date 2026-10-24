@@ -15,7 +15,9 @@ class ApprovalService
         'email_draft' => 'Outbound Email Draft',
         'social_post' => 'Social Media Post',
         'proposal_discount' => 'Custom Pricing / Discount',
-        'deployment' => 'Production Deployment'
+        'deployment' => 'Production Deployment',
+        'privilege_elevation' => 'Privilege Escalation Request',
+        'user_provisioning_elevation' => 'Elevated Account Provisioning'
     ];
 
     /**
@@ -38,22 +40,49 @@ class ApprovalService
 
     public static function getPending(): array
     {
-        $all = StorageService::read('approvals');
+        $all = StorageService::read('approvals', []);
         return array_values(array_filter($all, fn($item) => ($item['status'] ?? '') === 'pending'));
     }
 
     public static function getAll(): array
     {
-        $all = StorageService::read('approvals');
+        $all = StorageService::read('approvals', []);
         usort($all, fn($a, $b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?? ''));
         return $all;
     }
 
     /**
-     * Approve an item.
+     * Approve an item and execute payload if it is an actionable privilege or deployment request.
      */
     public static function approve(string $id, string $approvedBy, ?string $notes = null): ?array
     {
+        $all = StorageService::read('approvals', []);
+        $target = null;
+        foreach ($all as $item) {
+            if (($item['id'] ?? '') === $id) {
+                $target = $item;
+                break;
+            }
+        }
+
+        if (!$target) {
+            return null;
+        }
+
+        // Automatic Execution Hooks for Approved Privilege / User Actions
+        $type = $target['type'] ?? '';
+        $payload = (array)($target['payload'] ?? []);
+
+        if ($type === 'privilege_elevation' && !empty($payload['user_id'])) {
+            if (class_exists('\\CRM\\Services\\UserService')) {
+                UserService::applyElevatedPrivileges((string)$payload['user_id'], $payload);
+            }
+        } elseif ($type === 'user_provisioning_elevation' && !empty($payload['user_data'])) {
+            if (class_exists('\\CRM\\Services\\UserService')) {
+                UserService::applyApprovedUserCreation((array)$payload['user_data']);
+            }
+        }
+
         return StorageService::update('approvals', $id, [
             'status' => 'approved',
             'approved_by' => $approvedBy,

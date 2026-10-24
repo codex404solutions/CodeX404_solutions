@@ -90,9 +90,9 @@
   "120": "8. Website Information Architecture",
   "121": "Performance Optimization",
   "122": "Dependencies Management",
-  "123": "bootstrap.php",
+  "123": "RBACService",
   "124": "🛡️ Security & Compliance",
-  "125": "🚀 Quick Start",
+  "125": ".write",
   "126": ".read",
   "127": "AuthService",
   "128": "Version Control",
@@ -120,7 +120,7 @@
   "150": "LeadService",
   "151": "ProjectService",
   "152": "README.md",
-  "153": "PaperclipService.php",
+  "153": "AuthService",
   "154": "ApprovalService",
   "155": "admin/includes/footer.php",
   "156": "overview.php",
@@ -148,5 +148,8 @@
   "178": "showcase.php",
   "179": "telemetry.php",
   "180": "crm/js/crm.js",
-  "181": "founder-section.php"
+  "181": "founder-section.php",
+  "182": "Hour 1: Environment Setup (60 minutes)",
+  "183": "crm/profile.php",
+  "184": "crm/users.php"
 }

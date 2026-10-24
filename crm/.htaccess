@@ -57,12 +57,14 @@
     RewriteRule ^paperclip/?$ public/paperclip.php [L]
     RewriteRule ^agents/?$ public/paperclip.php [L]
     RewriteRule ^approvals/?$ public/approvals.php [L]
+    RewriteRule ^users/?$ public/users.php [L]
+    RewriteRule ^profile/?$ public/profile.php [L]
     RewriteRule ^settings/?$ public/settings.php [L]
 
-    # Clean URLs: /leads -> public/leads.php (only when the target file exists)
+    # Clean URLs fallback: /name -> public/name.php (when the target file exists)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond public/$1.php -f
+    RewriteCond %{DOCUMENT_ROOT}/codes/CodeX404_solutions/crm/public/$1.php -f
     RewriteRule ^(.*)$ public/$1.php [L]
 
     # Direct access to public assets (css, js, assets, logo)

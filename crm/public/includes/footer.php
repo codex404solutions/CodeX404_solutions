@@ -490,6 +490,12 @@ declare(strict_types=1);
             <a href="approvals" class="crm-nav-link <?= $currentPage === 'approvals' ? 'active' : '' ?>">
                 <i class="bi bi-shield-check me-2"></i> Approvals (<?= count($pendingApprovals) ?>)
             </a>
+            <a href="users" class="crm-nav-link <?= $currentPage === 'users' ? 'active' : '' ?>">
+                <i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles (<?= $totalWorkforceCount ?? count($allUsers ?? []) ?>)
+            </a>
+            <a href="profile" class="crm-nav-link <?= $currentPage === 'profile' ? 'active' : '' ?>">
+                <i class="bi bi-person-badge me-2 text-primary"></i> My Full Profile
+            </a>
             <a href="settings" class="crm-nav-link <?= $currentPage === 'settings' ? 'active' : '' ?>">
                 <i class="bi bi-sliders me-2"></i> System &amp; API
             </a>

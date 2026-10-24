@@ -2634,15 +2634,99 @@
 
 .project-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1180px) {
+  .project-showcase-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+}
+
+@media (max-width: 840px) {
+  .project-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
   .project-showcase-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+/* ==========================================================================
+   LOAD MORE PROJECTS TOGGLE BUTTON (CYBERPUNK / GLASSMORPHISM)
+   ========================================================================== */
+.projects-load-more-wrap {
+  text-align: center;
+  margin-top: 2.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 2.2rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(10, 22, 40, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.projects-more-btn:hover {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
+  border-color: #38BDF8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.65), 0 0 30px rgba(56, 189, 248, 0.3);
+  color: #FFFFFF;
+}
+
+.projects-more-btn:active {
+  transform: translateY(0);
+}
+
+.projects-more-btn .btn-more-badge {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38BDF8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  transition: all 0.2s ease;
+  line-height: 1.2;
+}
+
+.projects-more-btn:hover .btn-more-badge {
+  background: rgba(56, 189, 248, 0.3);
+  color: #FFFFFF;
+  border-color: #38BDF8;
+}
+
+.projects-more-btn .btn-more-icon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #38BDF8;
+}
+
+.projects-more-btn.is-expanded .btn-more-icon {
+  transform: rotate(180deg);
 }
 
 /* ==========================================================================
@@ -2653,7 +2737,7 @@
   background: rgba(10, 22, 40, 0.75);
   border: 1px solid rgba(56, 189, 248, 0.16);
   border-radius: 0.85rem;
-  padding: 1.25rem 1.35rem;
+  padding: 1.25rem 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2691,7 +2775,9 @@
 }
 
 .project-card.hidden,
-.clean-project-card.hidden {
+.clean-project-card.hidden,
+.project-card.is-overflow-hidden,
+.clean-project-card.is-overflow-hidden {
   display: none !important;
 }
 
@@ -2762,6 +2848,16 @@
   gap: 0.3rem;
   transition: all 0.2s ease;
   line-height: 1.2;
+  max-width: 100%;
+}
+
+.cpc-domain-pill span {
+  display: inline-block;
+  max-width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }
 
 .cpc-domain-pill:hover {

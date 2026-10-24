@@ -31,24 +31,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $remaining = get_admin_lockout_remaining($username);
                 $minutes = max(1, (int)ceil($remaining / 60));
                 $error = "Account or IP temporarily locked due to multiple failed attempts. Please try again in {$minutes} minute(s).";
-            } elseif (authenticate_admin($username, $password)) {
-                $return = (string)($_GET['return'] ?? '');
-                $parsedReturn = parse_url($return);
-                $isLocalReturn = $return !== ''
-                    && str_starts_with($return, '/')
-                    && !str_starts_with($return, '//')
-                    && ($parsedReturn === false || !isset($parsedReturn['scheme'], $parsedReturn['host']));
-                header('Location: ' . ($isLocalReturn ? $return : admin_url()));
-                exit;
             } else {
-                // If this failure triggered a lockout, notify user
-                if (is_admin_locked_out($username)) {
-                    $remaining = get_admin_lockout_remaining($username);
-                    $minutes = max(1, (int)ceil($remaining / 60));
-                    $error = "Too many failed attempts. Access has been temporarily suspended for {$minutes} minute(s).";
+                $authError = null;
+                if (authenticate_admin($username, $password, $authError)) {
+                    $return = (string)($_GET['return'] ?? '');
+                    $parsedReturn = parse_url($return);
+                    $isLocalReturn = $return !== ''
+                        && str_starts_with($return, '/')
+                        && !str_starts_with($return, '//')
+                        && ($parsedReturn === false || !isset($parsedReturn['scheme'], $parsedReturn['host']));
+                    header('Location: ' . ($isLocalReturn ? $return : admin_url()));
+                    exit;
                 } else {
-                    // Generic message prevents username enumeration
-                    $error = 'Invalid credentials. Please verify your username and password.';
+                    if (!empty($authError)) {
+                        $error = $authError;
+                    } elseif (is_admin_locked_out($username)) {
+                        $remaining = get_admin_lockout_remaining($username);
+                        $minutes = max(1, (int)ceil($remaining / 60));
+                        $error = "Too many failed attempts. Access has been temporarily suspended for {$minutes} minute(s).";
+                    } else {
+                        // Generic message prevents username enumeration
+                        $error = 'Invalid credentials. Please verify your username and password.';
+                    }
                 }
             }
         }

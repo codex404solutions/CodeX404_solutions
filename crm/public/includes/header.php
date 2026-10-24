@@ -68,20 +68,31 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                     </div>
                 </div>
 
-                <!-- User Status Card -->
+                <!-- User Status Card with Multi-Role Footprint -->
                 <div class="p-2 mb-2 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
                     <div class="d-flex align-items-center justify-content-between mb-1">
-                        <div class="d-flex align-items-center gap-2">
+                        <a href="profile" class="d-flex align-items-center gap-2 text-decoration-none" title="Open My Account Profile">
                             <span class="agent-badge-pulse" title="Active Session" style="width: 6px; height: 6px;"></span>
-                            <span class="fw-bold small text-white" style="font-size: 0.78rem;"><?= htmlspecialchars($currentUser['name']) ?></span>
+                            <span class="fw-bold small text-white text-truncate" style="font-size: 0.78rem; max-width: 120px;"><?= htmlspecialchars($currentUser['name']) ?></span>
+                        </a>
+                        <div class="d-flex align-items-center gap-1">
+                            <a href="profile" class="text-info small text-decoration-none" title="Full Profiling" style="font-size: 0.75rem;"><i class="bi bi-person-badge"></i></a>
+                            <a href="logout" class="text-danger small text-decoration-none ms-1" title="Sign Out" style="font-size: 0.75rem;"><i class="bi bi-box-arrow-left"></i></a>
                         </div>
-                        <a href="logout" class="text-danger small text-decoration-none" title="Sign Out" style="font-size: 0.75rem;"><i class="bi bi-box-arrow-left"></i></a>
                     </div>
                     <div class="d-flex gap-1 flex-wrap">
-                        <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.58rem;">Admin</span>
-                        <?php foreach (array_slice($currentUser['roles'], 0, 2) as $r): ?>
-                            <span class="badge bg-secondary-subtle text-muted text-uppercase" style="font-size: 0.58rem;"><?= htmlspecialchars($r) ?></span>
+                        <?php 
+                        $userRolesList = (array)($currentUser['roles'] ?? ['admin']);
+                        $displayRoles = array_slice($userRolesList, 0, 3);
+                        foreach ($displayRoles as $r): 
+                            $rInfo = $allRoles[strtolower($r)] ?? null;
+                            $badgeColor = $rInfo['color'] ?? 'info';
+                        ?>
+                            <span class="badge bg-<?= htmlspecialchars($badgeColor) ?>-subtle text-<?= htmlspecialchars($badgeColor) ?> border border-<?= htmlspecialchars($badgeColor) ?>-subtle text-uppercase" style="font-size: 0.55rem; padding: 0.2em 0.4em;"><?= htmlspecialchars($r) ?></span>
                         <?php endforeach; ?>
+                        <?php if (count($userRolesList) > 3): ?>
+                            <a href="profile" class="badge bg-secondary-subtle text-muted text-decoration-none" style="font-size: 0.55rem;">+<?= count($userRolesList) - 3 ?></a>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -118,6 +129,10 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                             <span class="badge rounded-pill bg-secondary text-white" style="font-size: 0.62rem;">0</span>
                         <?php endif; ?>
                     </a>
+                    <a href="users" class="crm-nav-link <?= $currentPage === 'users' ? 'active' : '' ?>">
+                        <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
+                        <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle" style="font-size: 0.62rem;"><?= $totalWorkforceCount ?? 4 ?></span>
+                    </a>
                     <a href="settings" class="crm-nav-link <?= $currentPage === 'settings' ? 'active' : '' ?>">
                         <span><i class="bi bi-sliders me-2 text-secondary"></i> System &amp; API</span>
                         <span class="badge rounded-pill bg-dark border border-secondary text-muted" style="font-size: 0.62rem;">API</span>
@@ -128,9 +143,18 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                 <div class="crm-sidebar-section-title">Platform Bridges</div>
 
                 <div class="d-flex gap-1 mb-2">
-                    <a href="../website/admin/" target="_blank" class="crm-sidebar-link flex-fill text-center justify-content-center py-1" style="font-size: 0.72rem;">
-                        <i class="bi bi-shield-lock me-1 text-info"></i> Admin
-                    </a>
+                    <?php 
+                    $hasAdminClearance = in_array($currentUser['access_scope'] ?? 'crm_only', ['both', 'admin_only'], true);
+                    ?>
+                    <?php if ($hasAdminClearance): ?>
+                        <a href="../website/admin/" target="_blank" class="crm-sidebar-link flex-fill text-center justify-content-center py-1" style="font-size: 0.72rem;" title="Access Website Admin CMS (Authorized)">
+                            <i class="bi bi-shield-lock me-1 text-info"></i> Admin
+                        </a>
+                    <?php else: ?>
+                        <span class="crm-sidebar-link flex-fill text-center justify-content-center py-1 text-muted opacity-50" style="font-size: 0.72rem; cursor: not-allowed;" title="Restricted: Your account is CRM-Only. Dual or Admin clearance required to access Website Admin.">
+                            <i class="bi bi-lock-fill me-1 text-secondary"></i> Admin
+                        </span>
+                    <?php endif; ?>
                     <a href="../website/discovery-call" target="_blank" class="crm-sidebar-link flex-fill text-center justify-content-center py-1" style="font-size: 0.72rem;">
                         <i class="bi bi-lightning-charge me-1 text-warning"></i> Intake
                     </a>
@@ -299,6 +323,9 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNewLead"><i class="bi bi-person-plus me-2 text-warning"></i> Add Inbound Lead</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNewDeal"><i class="bi bi-cash-stack me-2 text-success"></i> Add Pipeline Deal</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNewProject"><i class="bi bi-rocket me-2 text-primary"></i> Create Client Project</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="users"><i class="bi bi-person-plus-fill me-2 text-info"></i> Provision Team User</a></li>
+                            <li><a class="dropdown-item" href="profile"><i class="bi bi-person-badge me-2 text-primary"></i> My Full Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent"><i class="bi bi-robot me-2 text-info"></i> Dispatch Paperclip Agent</a></li>
                         </ul>

@@ -347,7 +347,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section" id="work">
     <div id="projects" style="position: absolute; top: -80px; left: 0;"></div>
 
-    <div class="container">
+    <div class="container container-wide">
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
@@ -399,8 +399,9 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Project Cards Grid with 3D Tilt -->
         <div class="project-showcase-grid">
-            <?php foreach ($homepageProjects as $p): ?>
-                <article class="project-card clean-project-card card-tilt"
+            <?php foreach ($homepageProjects as $idx => $p): ?>
+                <article class="project-card clean-project-card card-tilt<?= $idx >= 8 ? ' is-overflow-hidden' : '' ?>"
+                    data-index="<?= $idx ?>"
                     data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
                     <div>
                         <!-- Header with meta & verified live domain -->
@@ -484,6 +485,17 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </article>
             <?php endforeach; ?>
+        </div>
+
+        <!-- More Projects Toggle Control -->
+        <div class="projects-load-more-wrap" id="projectsLoadMoreWrap">
+            <button type="button" class="projects-more-btn" id="btnToggleMoreProjects" aria-label="Toggle more projects">
+                <span class="btn-more-text">View More Projects</span>
+                <span class="btn-more-badge">+<?= max(0, $countAll - 8) ?> More</span>
+                <svg class="btn-more-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
         </div>
     </div>
 </section>

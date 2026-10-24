@@ -647,31 +647,106 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardSpotlights();
 
   // ======================================================================
-  // 14. Interactive Project Filter Tabs System
+  // 14. Interactive Project Filter Tabs & 2-Row "View More" System
   // ======================================================================
   const initProjectFilters = () => {
     const filterButtons = document.querySelectorAll('.project-filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    if (!filterButtons.length || !projectCards.length) return;
+    const toggleBtn = document.getElementById('btnToggleMoreProjects');
+    const toggleWrap = document.getElementById('projectsLoadMoreWrap');
+    if (!projectCards.length) return;
 
+    const INITIAL_VISIBLE_COUNT = 8; // 4 cards in a row * 2 rows = 8 cards
+    let currentCategory = 'all';
+    let isExpanded = false;
+
+    const updateProjectsVisibility = () => {
+      // Find all cards matching currentCategory
+      const matchingCards = [];
+      projectCards.forEach(card => {
+        const cardCat = card.getAttribute('data-category') || '';
+        const matches = currentCategory === 'all' || cardCat.includes(currentCategory);
+        if (matches) {
+          matchingCards.push(card);
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('is-overflow-hidden');
+        }
+      });
+
+      const totalMatching = matchingCards.length;
+
+      // Handle visibility based on 2-row threshold (8 cards) and expanded state
+      matchingCards.forEach((card, index) => {
+        card.classList.remove('hidden');
+        if (toggleBtn && !isExpanded && index >= INITIAL_VISIBLE_COUNT) {
+          card.classList.add('is-overflow-hidden');
+        } else {
+          card.classList.remove('is-overflow-hidden');
+          card.style.animation = 'fadeIn 0.35s ease forwards';
+        }
+      });
+
+      // Update "View More" button text, count badge, and visibility
+      if (toggleWrap && toggleBtn) {
+        if (totalMatching <= INITIAL_VISIBLE_COUNT) {
+          toggleWrap.style.display = 'none';
+        } else {
+          toggleWrap.style.display = 'flex';
+          const textSpan = toggleBtn.querySelector('.btn-more-text');
+          const badgeSpan = toggleBtn.querySelector('.btn-more-badge');
+
+          if (isExpanded) {
+            toggleBtn.classList.add('is-expanded');
+            if (textSpan) textSpan.textContent = 'Show Less Projects';
+            if (badgeSpan) badgeSpan.style.display = 'none';
+          } else {
+            toggleBtn.classList.remove('is-expanded');
+            const hiddenCount = totalMatching - INITIAL_VISIBLE_COUNT;
+            if (textSpan) textSpan.textContent = 'View More Projects';
+            if (badgeSpan) {
+              badgeSpan.style.display = 'inline-block';
+              badgeSpan.textContent = `+${hiddenCount} More`;
+            }
+          }
+        }
+      }
+    };
+
+    // Category button clicks
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const targetCategory = btn.getAttribute('data-filter') || 'all';
+        currentCategory = btn.getAttribute('data-filter') || 'all';
 
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        projectCards.forEach(card => {
-          const cardCat = card.getAttribute('data-category') || '';
-          if (targetCategory === 'all' || cardCat.includes(targetCategory)) {
-            card.classList.remove('hidden');
-            card.style.animation = 'fadeIn 0.35s ease forwards';
-          } else {
-            card.classList.add('hidden');
-          }
-        });
+        // Reset expanded state when switching category filter
+        isExpanded = false;
+        updateProjectsVisibility();
       });
     });
+
+    // Toggle More button click
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        if (isExpanded) {
+          isExpanded = false;
+          updateProjectsVisibility();
+          // Smoothly scroll back to projects section
+          const projectsSection = document.getElementById('work') || document.getElementById('projects');
+          if (projectsSection) {
+            projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else {
+          isExpanded = true;
+          updateProjectsVisibility();
+        }
+      });
+    }
+
+    // Initial pass to enforce 2-row visibility
+    updateProjectsVisibility();
   };
 
   initProjectFilters();

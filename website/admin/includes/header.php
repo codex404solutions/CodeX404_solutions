@@ -95,23 +95,33 @@ $flash = get_admin_flash();
                         </div>
                     </div>
 
-                    <!-- User Status Card -->
-                    <div class="p-1.5 px-2 mb-1.5 rounded-3"
+                    <!-- User Status Card with Multi-Role Footprint -->
+                    <?php 
+                    $adminProfile = current_admin_profile();
+                    $adminRoles = (array)($adminProfile['roles'] ?? ['superadmin']);
+                    ?>
+                    <div class="p-2 mb-2 rounded-3"
                         style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
                         <div class="d-flex align-items-center justify-content-between mb-1">
-                            <div class="d-flex align-items-center gap-1.5">
+                            <a href="<?= admin_url('profile') ?>" class="d-flex align-items-center gap-1.5 text-decoration-none">
                                 <span class="live-dot" title="Active Session" style="width: 5px; height: 5px;"></span>
-                                <span class="fw-bold small text-white"
-                                    style="font-size: 0.75rem;"><?= htmlspecialchars((string) ($_SESSION['codex_admin_user'] ?? 'admin')) ?></span>
+                                <span class="fw-bold small text-white text-truncate"
+                                    style="font-size: 0.75rem; max-width: 100px;"><?= htmlspecialchars((string) ($adminProfile['name'] ?? $adminProfile['username'] ?? 'Admin')) ?></span>
+                            </a>
+                            <div class="d-flex align-items-center gap-1">
+                                <a href="<?= admin_url('profile') ?>" class="text-info small text-decoration-none" title="My Account Profile" style="font-size: 0.72rem;"><i class="bi bi-person-badge"></i></a>
+                                <a href="<?= admin_url('logout') ?>" class="text-danger small text-decoration-none ms-1"
+                                    title="Sign Out" style="font-size: 0.72rem;"><i class="bi bi-box-arrow-left"></i></a>
                             </div>
-                            <a href="<?= admin_url('logout') ?>" class="text-danger small text-decoration-none"
-                                title="Sign Out" style="font-size: 0.72rem;"><i class="bi bi-box-arrow-left"></i></a>
                         </div>
                         <div class="d-flex gap-1 flex-wrap">
-                            <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase"
-                                style="font-size: 0.55rem; padding: 0.2em 0.4em;">Superadmin</span>
-                            <span class="badge bg-success-subtle text-success border border-success-subtle"
-                                style="font-size: 0.55rem; padding: 0.2em 0.4em;">Live Sync</span>
+                            <?php foreach (array_slice($adminRoles, 0, 2) as $r): ?>
+                                <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase"
+                                    style="font-size: 0.55rem; padding: 0.2em 0.4em;"><?= htmlspecialchars($r) ?></span>
+                            <?php endforeach; ?>
+                            <?php if (count($adminRoles) > 2): ?>
+                                <span class="badge bg-secondary-subtle text-muted" style="font-size: 0.55rem;">+<?= count($adminRoles) - 2 ?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -134,6 +144,11 @@ $flash = get_admin_flash();
                             <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
                             <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"
                                 style="font-size: 0.62rem;"><?= min(6, $totalCount) ?></span>
+                        </a>
+                        <a href="<?= admin_url('users') ?>" class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
+                            <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
+                            <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle"
+                                style="font-size: 0.62rem;">RBAC</span>
                         </a>
                         <a href="<?= admin_url('telemetry') ?>" class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
                             <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
@@ -186,11 +201,21 @@ $flash = get_admin_flash();
                     <!-- Platform Bridges Section Title -->
                     <div class="admin-sidebar-section-title">Platform Bridges</div>
                     <div class="d-flex gap-1 mb-2">
-                        <a href="../../crm/" target="_blank"
-                            class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                            style="font-size: 0.72rem;" title="Company CRM Command">
-                            <i class="bi bi-robot me-1 text-warning"></i> CRM
-                        </a>
+                        <?php 
+                        $hasCrmClearance = in_array($adminProfile['access_scope'] ?? 'crm_only', ['both', 'crm_only'], true);
+                        ?>
+                        <?php if ($hasCrmClearance): ?>
+                            <a href="../../crm/" target="_blank"
+                                class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
+                                style="font-size: 0.72rem;" title="Access Company CRM Command (Authorized)">
+                                <i class="bi bi-robot me-1 text-warning"></i> CRM
+                            </a>
+                        <?php else: ?>
+                            <span class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1 text-muted opacity-50"
+                                style="font-size: 0.72rem; cursor: not-allowed;" title="Restricted: Your account is Admin-Only. Dual or CRM clearance required to access CRM portal.">
+                                <i class="bi bi-lock-fill me-1 text-secondary"></i> CRM
+                            </span>
+                        <?php endif; ?>
                         <a href="<?= url('#work') ?>" target="_blank"
                             class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
                             style="font-size: 0.72rem;" title="Public Portfolio Showcase">

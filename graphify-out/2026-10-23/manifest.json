@@ -30,9 +30,9 @@
     "semantic_hash": ""
   },
   "website/app/Controllers/ContactController.php": {
-    "mtime": 1792507779.114042,
-    "seen": 1792508407.5387325,
-    "ast_hash": "29a9b502bebe83336d0687aba88952c1",
+    "mtime": 1792742000.5766432,
+    "seen": 1792742830.8121073,
+    "ast_hash": "b7b56cc1ab4db97c933efead94c3fc2a",
     "semantic_hash": ""
   },
   "website/app/Controllers/LeadController.php": {
@@ -48,9 +48,9 @@
     "semantic_hash": ""
   },
   "website/app/Services/CRMIntegrationService.php": {
-    "mtime": 1792507883.2084062,
-    "seen": 1792508407.5387325,
-    "ast_hash": "541f9b468b0bd7284a6027be24b6b465",
+    "mtime": 1792742134.9788709,
+    "seen": 1792742830.8141055,
+    "ast_hash": "cde52bf619415ecc43515b323ac71208",
     "semantic_hash": ""
   },
   "website/app/Services/EmailService.php": {
@@ -84,9 +84,9 @@
     "semantic_hash": ""
   },
   "website/case-studies.php": {
-    "mtime": 1792649917.448759,
-    "seen": 1792690441.8879173,
-    "ast_hash": "3f78c3105f7cfebcef4b21f6aa1d44eb",
+    "mtime": 1792741904.1026378,
+    "seen": 1792742830.8210251,
+    "ast_hash": "63dcb2b687690af28f98d83f204c1f62",
     "semantic_hash": ""
   },
   "website/components/cookie-banner.php": {
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "website/includes/navigation.php": {
-    "mtime": 1792741433.242087,
-    "seen": 1792741522.873178,
-    "ast_hash": "d17957589c8999b1d07f5820b8555260",
+    "mtime": 1792742673.8660884,
+    "seen": 1792742830.8293908,
+    "ast_hash": "94a1ca9c6f68a77f7d9e0567c981afe0",
     "semantic_hash": ""
   },
   "website/includes/security.php": {
@@ -180,9 +180,9 @@
     "semantic_hash": "dc89dfe9ae6d51251509e5f77ca398bd"
   },
   "website/index.php": {
-    "mtime": 1792730541.912305,
-    "seen": 1792730920.6784084,
-    "ast_hash": "27cfd920954077f7848a57d615f9eaaf",
+    "mtime": 1792742271.1926157,
+    "seen": 1792742830.8303895,
+    "ast_hash": "8133e3c93eaee1ec4e62f501ce499f65",
     "semantic_hash": ""
   },
   "website/industries.php": {

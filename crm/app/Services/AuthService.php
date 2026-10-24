@@ -7,14 +7,13 @@ use CRMEnv;
 
 require_once dirname(__DIR__, 2) . '/config/config.php';
 require_once __DIR__ . '/StorageService.php';
+require_once __DIR__ . '/UserService.php';
+require_once __DIR__ . '/RBACService.php';
 
 /**
- * CRM authentication for the first internal deployment.
- *
- * Set CRM_ADMIN_EMAIL and CRM_ADMIN_PASSWORD_HASH in crm/.env. The application
- * deliberately has no built-in/default credential and will refuse login until
- * both values are configured. Replace this bootstrap auth with database-backed
- * users + MFA before granting access to additional staff.
+ * AuthService
+ * Secure session authentication, multi-role profiling resolution,
+ * and granular permission enforcement.
  */
 class AuthService
 {
@@ -34,68 +33,195 @@ class AuthService
 
     public static function isConfigured(): bool
     {
+        $users = UserService::getAll();
+        if (!empty($users)) {
+            return true;
+        }
+
         $email = CRMEnv::get('CRM_ADMIN_EMAIL', '');
         $hash = CRMEnv::get('CRM_ADMIN_PASSWORD_HASH', '');
         return $email !== '' && $hash !== '' && password_get_info($hash)['algo'] !== null;
     }
 
-    public static function attempt(string $identifier, string $password): bool
+    /**
+     * Authenticate an inbound credential against UserService and fallback to .env.
+     */
+    public static function attempt(string $identifier, string $password, ?string &$errorReason = null): bool
     {
         $cleanId = strtolower(trim($identifier));
+        if ($cleanId === '') {
+            return false;
+        }
 
-        // 1. Try MySQL Database authentication first
-        $pdo = \CRM\Services\StorageService::getPdo();
-        if ($pdo) {
-            try {
-                $stmt = $pdo->prepare("SELECT * FROM `users` WHERE LOWER(`username`) = :id1 OR LOWER(`email`) = :id2 LIMIT 1");
-                $stmt->execute([':id1' => $cleanId, ':id2' => $cleanId]);
-                $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-                if ($user && !empty($user['password_hash']) && password_verify($password, $user['password_hash'])) {
-                    if (!headers_sent() && session_status() === PHP_SESSION_ACTIVE) {
-                        session_regenerate_id(true);
-                    }
-                    $_SESSION['crm_user'] = [
-                        'name' => $user['name'] ?? 'CodeX404 Admin',
-                        'email' => $user['email'] ?? 'admin@codex404solutions.online',
-                        'roles' => ['founder', 'ceo', 'cto', 'admin']
-                    ];
-                    return true;
+        // 1. Primary: Authenticate through UserService
+        $user = UserService::getByUsernameOrEmail($cleanId);
+
+        if ($user !== null) {
+            // Check status
+            if (($user['status'] ?? 'active') !== 'active') {
+                $errorReason = 'Your workforce account is inactive or suspended. Please contact HR.';
+                return false;
+            }
+
+            // Verify password
+            if (!empty($user['password_hash']) && password_verify($password, $user['password_hash'])) {
+                // Portal Access Scope Enforcement
+                $scope = $user['access_scope'] ?? 'crm_only';
+                if ($scope === 'admin_only') {
+                    $errorReason = "Access Restricted: Your account is provisioned for Website Admin Portal access only. Contact your executive administrator for CRM clearance.";
+                    return false;
                 }
-            } catch (\Throwable $e) {
-                // DB error, fallback to env
+
+                if (!headers_sent() && session_status() === PHP_SESSION_ACTIVE) {
+                    session_regenerate_id(true);
+                }
+
+                $_SESSION['crm_user'] = self::formatSessionUser($user);
+                UserService::recordLogin($user['id']);
+                return true;
             }
         }
 
-        // 2. Fallback to configured .env admin credentials
+        // 2. Fallback: Authenticate against .env admin credentials if matching
         $configuredEmail = CRMEnv::get('CRM_ADMIN_EMAIL', '');
         $hash = CRMEnv::get('CRM_ADMIN_PASSWORD_HASH', '');
-        if ($configuredEmail === '' || $hash === '') {
-            return false;
+
+        if ($configuredEmail !== '' && $hash !== '') {
+            $isMatch = hash_equals(strtolower($configuredEmail), $cleanId) || $cleanId === 'admin';
+            if ($isMatch && password_verify($password, $hash)) {
+                // Ensure default user account exists
+                UserService::seedDefaultUsersIfEmpty();
+                $seededAdmin = UserService::getByUsernameOrEmail('admin');
+
+                if (!headers_sent() && session_status() === PHP_SESSION_ACTIVE) {
+                    session_regenerate_id(true);
+                }
+
+                if ($seededAdmin) {
+                    $_SESSION['crm_user'] = self::formatSessionUser($seededAdmin);
+                    UserService::recordLogin($seededAdmin['id']);
+                } else {
+                    $_SESSION['crm_user'] = [
+                        'id' => 'usr_admin_alex',
+                        'name' => CRMEnv::get('CRM_ADMIN_NAME', 'CodeX404 Admin'),
+                        'username' => 'admin',
+                        'email' => $configuredEmail,
+                        'phone' => '+1 (415) 555-0140',
+                        'title' => 'Chief Executive Officer & Founder',
+                        'department' => 'Executive Leadership',
+                        'bio' => 'Founder & Principal Systems Architect at CodeX404 Solutions.',
+                        'avatar' => '',
+                        'roles' => ['superadmin', 'founder', 'ceo', 'cto'],
+                        'access_scope' => 'both',
+                        'approval_status' => 'approved',
+                        'authority_tier' => 1,
+                        'custom_permissions' => ['granted' => [], 'denied' => []],
+                        'status' => 'active',
+                        'timezone' => 'America/New_York',
+                        'currency' => 'USD',
+                        'logged_in_at' => time()
+                    ];
+                }
+                return true;
+            }
         }
 
-        $isMatch = hash_equals(strtolower($configuredEmail), $cleanId) || $cleanId === 'admin';
-        if (!$isMatch || !password_verify($password, $hash)) {
-            return false;
-        }
-
-        if (!headers_sent() && session_status() === PHP_SESSION_ACTIVE) {
-            session_regenerate_id(true);
-        }
-        $_SESSION['crm_user'] = [
-            'name' => CRMEnv::get('CRM_ADMIN_NAME', 'CodeX404 Admin'),
-            'email' => $configuredEmail,
-            'roles' => ['founder', 'ceo', 'cto', 'admin']
-        ];
-        return true;
+        return false;
     }
 
+    /**
+     * Format a complete user record into an authenticated session structure.
+     */
+    private static function formatSessionUser(array $user): array
+    {
+        $roles = (array)($user['roles'] ?? ['viewer']);
+        return [
+            'id' => $user['id'] ?? 'usr_' . bin2hex(random_bytes(6)),
+            'name' => $user['name'] ?? 'Team Member',
+            'username' => $user['username'] ?? 'user',
+            'email' => $user['email'] ?? '',
+            'phone' => $user['phone'] ?? '',
+            'title' => $user['title'] ?? 'Staff',
+            'department' => $user['department'] ?? 'Operations',
+            'bio' => $user['bio'] ?? '',
+            'avatar' => $user['avatar'] ?? '',
+            'roles' => $roles,
+            'access_scope' => $user['access_scope'] ?? 'crm_only',
+            'approval_status' => $user['approval_status'] ?? 'approved',
+            'authority_tier' => RBACService::getAuthorityTier($roles),
+            'custom_permissions' => (array)($user['custom_permissions'] ?? ['granted' => [], 'denied' => []]),
+            'status' => $user['status'] ?? 'active',
+            'timezone' => $user['timezone'] ?? 'UTC',
+            'currency' => $user['currency'] ?? 'USD',
+            'logged_in_at' => time()
+        ];
+    }
+
+    /**
+     * Retrieve currently logged in user profile.
+     */
     public static function user(): ?array
     {
-        return isset($_SESSION['crm_user']) && is_array($_SESSION['crm_user'])
-            ? $_SESSION['crm_user']
-            : null;
+        if (isset($_SESSION['crm_user']) && is_array($_SESSION['crm_user'])) {
+            if (($_SESSION['crm_user']['access_scope'] ?? 'crm_only') === 'admin_only') {
+                self::logout();
+                return null;
+            }
+            return $_SESSION['crm_user'];
+        }
+        return null;
     }
 
+    /**
+     * Check if currently logged in user has a specific permission.
+     */
+    public static function can(string $permission): bool
+    {
+        $user = self::user();
+        if (!$user) {
+            return false;
+        }
+
+        return RBACService::hasPermission(
+            (array)($user['roles'] ?? []),
+            $permission,
+            (array)($user['custom_permissions'] ?? null)
+        );
+    }
+
+    /**
+     * Check if currently logged in user holds a specific role.
+     */
+    public static function hasRole(string $role): bool
+    {
+        $user = self::user();
+        if (!$user) {
+            return false;
+        }
+
+        $roles = array_map('strtolower', (array)($user['roles'] ?? []));
+        return in_array(strtolower(trim($role)), $roles, true);
+    }
+
+    /**
+     * Refresh the active session profile with latest database/storage values.
+     */
+    public static function refreshSessionUser(): void
+    {
+        $current = self::user();
+        if (!$current || empty($current['id'])) {
+            return;
+        }
+
+        $fresh = UserService::getById($current['id']);
+        if ($fresh) {
+            $_SESSION['crm_user'] = self::formatSessionUser($fresh);
+        }
+    }
+
+    /**
+     * Terminate user session.
+     */
     public static function logout(): void
     {
         unset($_SESSION['crm_user']);

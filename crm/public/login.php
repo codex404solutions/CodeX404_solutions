@@ -18,15 +18,20 @@ if (AuthService::user() !== null) {
 
 $error = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $errorReason = null;
     if (!CrmSecurity::verifyCsrf($_POST['csrf_token'] ?? null)) {
         $error = 'Security validation failed (CSRF token expired). Refresh and try again.';
-    } elseif (AuthService::attempt((string)($_POST['email'] ?? ''), (string)($_POST['password'] ?? ''))) {
+    } elseif (AuthService::attempt((string)($_POST['email'] ?? ''), (string)($_POST['password'] ?? ''), $errorReason)) {
         header('Location: ./');
         exit;
     } else {
-        $error = AuthService::isConfigured()
-            ? 'Invalid credentials. Please verify your email and password.'
-            : 'CRM admin credentials are not configured. Set CRM_ADMIN_EMAIL and CRM_ADMIN_PASSWORD_HASH in crm/.env.';
+        if (!empty($errorReason)) {
+            $error = $errorReason;
+        } else {
+            $error = AuthService::isConfigured()
+                ? 'Invalid credentials. Please verify your email and password.'
+                : 'CRM admin credentials are not configured. Set CRM_ADMIN_EMAIL and CRM_ADMIN_PASSWORD_HASH in crm/.env.';
+        }
     }
 }
 ?><!doctype html>

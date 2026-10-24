@@ -65,17 +65,112 @@ require_once __DIR__ . '/includes/header.php';
                                     &bull; Created: <?= htmlspecialchars(date('M j, g:i a', strtotime($item['created_at'] ?? 'now'))) ?>
                                 </div>
                             </div>
-                            <span class="badge bg-warning text-dark fw-bold text-uppercase" style="font-size: 0.7rem;">
-                                <?= htmlspecialchars($item['type'] ?? 'draft') ?>
-                            </span>
+                            <?php if ($item['type'] === 'privilege_elevation'): ?>
+                                <span class="badge bg-danger text-white fw-bold text-uppercase" style="font-size: 0.7rem;">
+                                    <i class="bi bi-shield-lock-fill me-1"></i>PRIVILEGE ELEVATION GATE
+                                </span>
+                            <?php elseif ($item['type'] === 'user_provisioning_elevation'): ?>
+                                <span class="badge text-white fw-bold text-uppercase" style="font-size: 0.7rem; background: #8B5CF6;">
+                                    <i class="bi bi-person-fill-lock me-1"></i>ELEVATED ACCOUNT GATE
+                                </span>
+                            <?php else: ?>
+                                <span class="badge bg-warning text-dark fw-bold text-uppercase" style="font-size: 0.7rem;">
+                                    <?= htmlspecialchars($item['type'] ?? 'draft') ?>
+                                </span>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Pre-Formatted Payload Preview -->
                         <div class="p-3 rounded-3 my-3" style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08);">
                             <?php
                             $payload = $item['payload'] ?? [];
-                            if (isset($payload['to'], $payload['subject'], $payload['body'])):
+                            if ($item['type'] === 'privilege_elevation'):
                             ?>
+                                <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom border-secondary border-opacity-25">
+                                    <div class="small text-muted">Target Account:</div>
+                                    <div class="text-white fw-bold small">
+                                        <?= htmlspecialchars($payload['target_name'] ?? 'User') ?> 
+                                        <span class="text-info mono">(@<?= htmlspecialchars($payload['target_username'] ?? '') ?>)</span>
+                                    </div>
+                                </div>
+                                <div class="row g-2 mb-2">
+                                    <div class="col-6">
+                                        <div class="small text-muted mb-1" style="font-size: 0.72rem;">Current Scope:</div>
+                                        <span class="badge bg-secondary-subtle text-muted text-uppercase" style="font-size: 0.72rem;">
+                                            <?= htmlspecialchars(strtoupper(str_replace('_', ' ', (string)($payload['current_scope'] ?? 'crm_only')))) ?>
+                                        </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="small text-info mb-1 fw-bold" style="font-size: 0.72rem;">Requested Scope:</div>
+                                        <span class="badge bg-purple text-white text-uppercase fw-bold" style="background: #8B5CF6; font-size: 0.72rem;">
+                                            <i class="bi bi-arrow-up-right-circle me-1"></i><?= htmlspecialchars(strtoupper(str_replace('_', ' ', (string)($payload['requested_scope'] ?? 'both')))) ?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="small text-muted mb-1" style="font-size: 0.72rem;">Requested Roles:</div>
+                                    <div class="d-flex gap-1 flex-wrap">
+                                        <?php foreach ((array)($payload['requested_roles'] ?? []) as $r): ?>
+                                            <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;">
+                                                <?= htmlspecialchars($r) ?>
+                                            </span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <?php if (!empty($payload['reasons'])): ?>
+                                    <div class="mt-2 pt-2 border-top border-secondary border-opacity-25">
+                                        <div class="small text-warning fw-semibold mb-1" style="font-size: 0.72rem;">Escalation Reasons Requiring Executive Sign-Off:</div>
+                                        <ul class="mb-0 ps-3 small text-danger" style="font-size: 0.76rem;">
+                                            <?php foreach ((array)$payload['reasons'] as $rsn): ?>
+                                                <li><?= htmlspecialchars($rsn) ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
+
+                            <?php elseif ($item['type'] === 'user_provisioning_elevation'): ?>
+                                <?php $uData = $payload['user_data'] ?? []; ?>
+                                <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom border-secondary border-opacity-25">
+                                    <div class="small text-muted">Proposed User:</div>
+                                    <div class="text-white fw-bold small">
+                                        <?= htmlspecialchars($uData['name'] ?? '') ?> 
+                                        <span class="text-info mono">(<?= htmlspecialchars($uData['email'] ?? '') ?>)</span>
+                                    </div>
+                                </div>
+                                <div class="row g-2 mb-2">
+                                    <div class="col-6">
+                                        <div class="small text-muted mb-1" style="font-size: 0.72rem;">Portal Clearance:</div>
+                                        <span class="badge bg-primary text-white text-uppercase" style="font-size: 0.72rem;">
+                                            <?= htmlspecialchars(strtoupper(str_replace('_', ' ', (string)($payload['target_scope'] ?? 'crm_only')))) ?>
+                                        </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="small text-muted mb-1" style="font-size: 0.72rem;">Department / Title:</div>
+                                        <div class="small text-white text-truncate"><?= htmlspecialchars($uData['department'] ?? 'Operations') ?> &bull; <?= htmlspecialchars($uData['title'] ?? 'Staff') ?></div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="small text-muted mb-1" style="font-size: 0.72rem;">Assigned Roles:</div>
+                                    <div class="d-flex gap-1 flex-wrap">
+                                        <?php foreach ((array)($payload['target_roles'] ?? []) as $r): ?>
+                                            <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase" style="font-size: 0.65rem;">
+                                                <?= htmlspecialchars($r) ?>
+                                            </span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <?php if (!empty($payload['reasons'])): ?>
+                                    <div class="mt-2 pt-2 border-top border-secondary border-opacity-25">
+                                        <div class="small text-warning fw-semibold mb-1" style="font-size: 0.72rem;">Executive Sign-Off Reasons:</div>
+                                        <ul class="mb-0 ps-3 small text-danger" style="font-size: 0.76rem;">
+                                            <?php foreach ((array)$payload['reasons'] as $rsn): ?>
+                                                <li><?= htmlspecialchars($rsn) ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
+
+                            <?php elseif (isset($payload['to'], $payload['subject'], $payload['body'])): ?>
                                 <div class="small text-muted mb-1">To: <span class="text-white"><?= htmlspecialchars($payload['to']) ?></span></div>
                                 <div class="small text-muted mb-2">Subject: <span class="text-white fw-bold"><?= htmlspecialchars($payload['subject']) ?></span></div>
                                 <div class="small text-light p-2 rounded" style="background: rgba(255,255,255,0.03); white-space: pre-wrap; font-size: 0.84rem;"><?= htmlspecialchars($payload['body']) ?></div>
@@ -93,15 +188,16 @@ require_once __DIR__ . '/includes/header.php';
                         <input type="hidden" name="return_url" value="approvals">
 
                         <div class="input-group input-group-sm mb-2">
-                            <input type="text" name="decision_notes" class="form-control" placeholder="Optional review comment / adjustment notes...">
+                            <input type="text" name="decision_notes" class="form-control" placeholder="Optional review comment / authorization notes...">
                         </div>
 
                         <div class="d-flex gap-2 justify-content-end">
                             <button type="submit" name="decision" value="reject" class="btn btn-sm btn-outline-danger px-3">
-                                <i class="bi bi-x-circle me-1"></i> Reject Draft
+                                <i class="bi bi-x-circle me-1"></i> Reject
                             </button>
                             <button type="submit" name="decision" value="approve" class="btn btn-sm btn-success px-4 fw-bold">
-                                <i class="bi bi-check-circle-fill me-1"></i> Sign-Off &amp; Approve
+                                <i class="bi bi-check-circle-fill me-1"></i>
+                                <?= in_array($item['type'] ?? '', ['privilege_elevation', 'user_provisioning_elevation'], true) ? 'Authorize & Apply Privileges' : 'Sign-Off & Approve' ?>
                             </button>
                         </div>
                     </form>

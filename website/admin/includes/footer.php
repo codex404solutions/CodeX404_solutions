@@ -313,6 +313,14 @@ $currentPage = $currentPage ?? 'overview';
                     <span
                         class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
                 </a>
+                <a href="<?= admin_url('users') ?>" class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
+                    <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
+                    <span
+                        class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">RBAC</span>
+                </a>
+                <a href="<?= admin_url('profile') ?>" class="admin-sidebar-link <?= ($currentPage === 'profile') ? 'active' : '' ?>">
+                    <span><i class="bi bi-person-badge me-2 text-primary"></i> My Profile</span>
+                </a>
                 <a href="<?= admin_url('telemetry') ?>" class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
                     <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
                     <span
