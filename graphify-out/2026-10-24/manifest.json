@@ -540,9 +540,9 @@
     "semantic_hash": ""
   },
   "crm/app/Services/StorageService.php": {
-    "mtime": 1792772426.7684617,
-    "seen": 1792773542.0651197,
-    "ast_hash": "8f059811094264550152298a0359299c",
+    "mtime": 1792807502.9122584,
+    "seen": 1792807547.6257517,
+    "ast_hash": "f54d05ff30a5ca15e6828cae98a3a9a2",
     "semantic_hash": ""
   },
   "crm/config/Env.php": {
@@ -1050,9 +1050,9 @@
     "semantic_hash": ""
   },
   "crm/storage/data/users.json": {
-    "mtime": 1792805456.1515977,
-    "seen": 1792805869.2611966,
-    "ast_hash": "348221e27e4bc20b52a4ae0d52a62c47",
+    "mtime": 1792807511.5704446,
+    "seen": 1792807547.6340396,
+    "ast_hash": "4d39eb49a5894c9416f1c4b600c312ae",
     "semantic_hash": ""
   },
   "crm/users.php": {
@@ -1071,6 +1071,18 @@
     "mtime": 1792799733.1895707,
     "seen": 1792800096.2308853,
     "ast_hash": "ec641ea5f2fa9a092cb7b178a893cd5b",
+    "semantic_hash": ""
+  },
+  "crm/database/import_json_to_mysql.php": {
+    "mtime": 1792807350.8636796,
+    "seen": 1792807547.6267538,
+    "ast_hash": "192730eee348a375654b448fc04ba11d",
+    "semantic_hash": ""
+  },
+  ".agents/rules/codex404.md": {
+    "mtime": 1792806977.872599,
+    "seen": 1792807547.6490395,
+    "ast_hash": "65859f502eb95c89ab204e740f34ae4c",
     "semantic_hash": ""
   }
 }

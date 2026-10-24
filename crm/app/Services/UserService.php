@@ -572,10 +572,13 @@ class UserService
         ];
 
         $idx = abs(crc32($user['email'] ?? $name)) % count($colors);
+        $avatarImg = !empty($user['avatar']) ? trim((string)$user['avatar']) : null;
+
         return [
             'initials' => $initials,
             'background' => $colors[$idx]['bg'],
-            'color' => $colors[$idx]['text']
+            'color' => $colors[$idx]['text'],
+            'image' => $avatarImg
         ];
     }
 
@@ -602,7 +605,7 @@ class UserService
                 'title' => 'Chief Executive Officer & Founder',
                 'department' => 'Executive Leadership',
                 'bio' => 'Founder & Principal Systems Architect at CodeX404 Solutions. Overseeing business strategy, technical execution, and client deliveries.',
-                'avatar' => '',
+                'avatar' => 'assets/images/avatars/alex-rivera.svg',
                 'password_hash' => $hash,
                 'roles' => ['superadmin', 'founder', 'ceo', 'cto'],
                 'access_scope' => 'both',
@@ -625,7 +628,7 @@ class UserService
                 'title' => 'VP of Engineering & Delivery Lead',
                 'department' => 'Engineering',
                 'bio' => 'Directing system architecture, engineering milestone velocity, code reviews, and technical project management.',
-                'avatar' => '',
+                'avatar' => 'assets/images/avatars/elena-rostova.svg',
                 'password_hash' => $hash,
                 'roles' => ['cto', 'lead_developer', 'project_manager'],
                 'access_scope' => 'both',
@@ -648,7 +651,7 @@ class UserService
                 'title' => 'Head of Business Development & Sales Manager',
                 'department' => 'Revenue & Growth',
                 'bio' => 'Leading high-ticket enterprise client acquisitions, discovery calls, scoping proposals, and pipeline progression.',
-                'avatar' => '',
+                'avatar' => 'assets/images/avatars/marcus-vance.svg',
                 'password_hash' => $hash,
                 'roles' => ['sales_manager', 'sales', 'bd'],
                 'access_scope' => 'crm_only',
@@ -671,7 +674,7 @@ class UserService
                 'title' => 'Lead AI & Autonomous Systems Engineer',
                 'department' => 'AI & Paperclip Automation',
                 'bio' => 'Engineering Paperclip multi-agent orchestrations, model benchmark routines, and autonomous data pipelines.',
-                'avatar' => '',
+                'avatar' => 'assets/images/avatars/sophia-chen.svg',
                 'password_hash' => $hash,
                 'roles' => ['ai_engineer', 'developer'],
                 'access_scope' => 'crm_only',

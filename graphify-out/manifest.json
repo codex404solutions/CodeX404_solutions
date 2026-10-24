@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792691943.0864072,
-    "seen": 1792692233.788044,
-    "ast_hash": "0bc1a6ec8b8f7384a12aca9740974c71",
+    "mtime": 1792807708.047892,
+    "seen": 1792808722.0720596,
+    "ast_hash": "964d1d4e8af53e3fa211cd551f60cf28",
     "semantic_hash": ""
   },
   "docs/API_CONTRACT.md": {
@@ -906,9 +906,9 @@
     "semantic_hash": ""
   },
   "crm/public/includes/bootstrap.php": {
-    "mtime": 1792799240.201614,
-    "seen": 1792800096.2149887,
-    "ast_hash": "ce91a43054b28d6923a9376ae80ecacf",
+    "mtime": 1792808679.5176277,
+    "seen": 1792808722.046294,
+    "ast_hash": "5369346ee30723bc6f04d7165da815be",
     "semantic_hash": ""
   },
   "crm/public/includes/footer.php": {
@@ -918,9 +918,9 @@
     "semantic_hash": ""
   },
   "crm/public/includes/header.php": {
-    "mtime": 1792799999.1001897,
-    "seen": 1792800096.2159913,
-    "ast_hash": "45ddfac4dbb5a2235f81675f9946ca3a",
+    "mtime": 1792808605.6976492,
+    "seen": 1792808722.0472953,
+    "ast_hash": "242c1c9bbe1add9fc8a21d6742796685",
     "semantic_hash": ""
   },
   "crm/public/leads.php": {
@@ -1026,9 +1026,9 @@
     "semantic_hash": ""
   },
   "crm/app/Services/UserService.php": {
-    "mtime": 1792799090.791369,
-    "seen": 1792800096.2085626,
-    "ast_hash": "562d6e644478917d508d6fb41baecbd0",
+    "mtime": 1792808565.9789639,
+    "seen": 1792808722.0424592,
+    "ast_hash": "2d840aa768c6e43d86d12ae01d36f956",
     "semantic_hash": ""
   },
   "crm/profile.php": {
@@ -1038,21 +1038,21 @@
     "semantic_hash": ""
   },
   "crm/public/profile.php": {
-    "mtime": 1792799854.5579152,
-    "seen": 1792800096.2198474,
-    "ast_hash": "52679af5d9b8390d257f95478af8fb11",
+    "mtime": 1792808593.6566978,
+    "seen": 1792808722.0492952,
+    "ast_hash": "823892a44ba138f99cf4ef909b8bbeb2",
     "semantic_hash": ""
   },
   "crm/public/users.php": {
-    "mtime": 1792805809.5447114,
-    "seen": 1792805869.2581742,
-    "ast_hash": "0c9defdea1b9a151fea1c02d2e31624c",
+    "mtime": 1792808581.5255234,
+    "seen": 1792808722.0492952,
+    "ast_hash": "63cb43b382c0c97a1f250c77777a3d15",
     "semantic_hash": ""
   },
   "crm/storage/data/users.json": {
-    "mtime": 1792807511.5704446,
-    "seen": 1792807547.6340396,
-    "ast_hash": "4d39eb49a5894c9416f1c4b600c312ae",
+    "mtime": 1792808547.5551481,
+    "seen": 1792808722.052293,
+    "ast_hash": "aa1098fe100e797f4f2d66d9d0caccf3",
     "semantic_hash": ""
   },
   "crm/users.php": {
@@ -1062,15 +1062,15 @@
     "semantic_hash": ""
   },
   "website/admin/profile.php": {
-    "mtime": 1792799945.5065222,
-    "seen": 1792800096.2288735,
-    "ast_hash": "0d39e27644d30533e3004edc69a7bae2",
+    "mtime": 1792808690.1552558,
+    "seen": 1792808722.056306,
+    "ast_hash": "5c3446b90b551e8e88b639db799036cb",
     "semantic_hash": ""
   },
   "website/admin/users.php": {
-    "mtime": 1792799733.1895707,
-    "seen": 1792800096.2308853,
-    "ast_hash": "ec641ea5f2fa9a092cb7b178a893cd5b",
+    "mtime": 1792808618.8848505,
+    "seen": 1792808722.057305,
+    "ast_hash": "0d1ba1c3a16567d28d428a239378ccdf",
     "semantic_hash": ""
   },
   "crm/database/import_json_to_mysql.php": {
@@ -1083,6 +1083,54 @@
     "mtime": 1792806977.872599,
     "seen": 1792807547.6490395,
     "ast_hash": "65859f502eb95c89ab204e740f34ae4c",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/avatars/alex-rivera.svg": {
+    "mtime": 1792808453.1847959,
+    "seen": 1792808722.0849752,
+    "ast_hash": "d954927ba7bc9b1835b9b05f7510f85d",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/avatars/elena-rostova.svg": {
+    "mtime": 1792808468.9842632,
+    "seen": 1792808722.0849752,
+    "ast_hash": "391d901f1577abe1106da8f1c013acfb",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/avatars/marcus-vance.svg": {
+    "mtime": 1792808483.1681688,
+    "seen": 1792808722.0849752,
+    "ast_hash": "d369668ca0ae1180a937ddf80d542b70",
+    "semantic_hash": ""
+  },
+  "crm/public/assets/images/avatars/sophia-chen.svg": {
+    "mtime": 1792808499.341214,
+    "seen": 1792808722.0849752,
+    "ast_hash": "3d326d1a4efe78045e4685d646f2f7ed",
+    "semantic_hash": ""
+  },
+  "website/assets/images/avatars/alex-rivera.svg": {
+    "mtime": 1792808453.1847959,
+    "seen": 1792808722.089975,
+    "ast_hash": "d954927ba7bc9b1835b9b05f7510f85d",
+    "semantic_hash": ""
+  },
+  "website/assets/images/avatars/elena-rostova.svg": {
+    "mtime": 1792808468.9842632,
+    "seen": 1792808722.089975,
+    "ast_hash": "391d901f1577abe1106da8f1c013acfb",
+    "semantic_hash": ""
+  },
+  "website/assets/images/avatars/marcus-vance.svg": {
+    "mtime": 1792808483.1681688,
+    "seen": 1792808722.089975,
+    "ast_hash": "d369668ca0ae1180a937ddf80d542b70",
+    "semantic_hash": ""
+  },
+  "website/assets/images/avatars/sophia-chen.svg": {
+    "mtime": 1792808499.341214,
+    "seen": 1792808722.089975,
+    "ast_hash": "3d326d1a4efe78045e4685d646f2f7ed",
     "semantic_hash": ""
   }
 }

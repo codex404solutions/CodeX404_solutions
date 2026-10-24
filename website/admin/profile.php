@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'update_profile') {
         try {
-            $updated = UserService::update($myId, [
+            $updateData = [
                 'name' => trim((string)($_POST['name'] ?? $profile['name'])),
                 'phone' => trim((string)($_POST['phone'] ?? '')),
                 'title' => trim((string)($_POST['title'] ?? '')),
@@ -39,7 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'bio' => trim((string)($_POST['bio'] ?? '')),
                 'timezone' => trim((string)($_POST['timezone'] ?? 'UTC')),
                 'currency' => trim((string)($_POST['currency'] ?? 'USD'))
-            ]);
+            ];
+            if (isset($_POST['avatar'])) {
+                $updateData['avatar'] = trim((string)$_POST['avatar']);
+            }
+            $updated = UserService::update($myId, $updateData);
             if ($updated) {
                 $_SESSION['codex_admin_profile'] = $updated;
                 set_admin_flash('success', 'Profile information updated successfully.');
@@ -107,10 +111,16 @@ require_once __DIR__ . '/includes/header.php';
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-4">
         <div class="d-flex align-items-center gap-4">
             <div class="position-relative">
-                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg"
-                     style="width: 76px; height: 76px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1.6rem; border: 2px solid rgba(56, 189, 248, 0.4);">
-                    <?= htmlspecialchars($avatar['initials']) ?>
-                </div>
+                <?php if (!empty($avatar['image'])): ?>
+                    <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="<?= htmlspecialchars((string)($profile['name'] ?? 'Admin')) ?>"
+                         class="rounded-circle object-fit-cover shadow-lg border"
+                         style="width: 76px; height: 76px; border: 2px solid rgba(56, 189, 248, 0.45) !important;">
+                <?php else: ?>
+                    <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg"
+                         style="width: 76px; height: 76px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1.6rem; border: 2px solid rgba(56, 189, 248, 0.4);">
+                        <?= htmlspecialchars($avatar['initials']) ?>
+                    </div>
+                <?php endif; ?>
                 <span class="position-absolute bottom-0 end-0 p-1.5 rounded-circle border border-dark"
                       style="width: 18px; height: 18px; background: #10B981;"
                       title="Active Authenticated Session"></span>

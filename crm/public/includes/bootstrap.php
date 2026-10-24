@@ -336,6 +336,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ]
                 ];
 
+                if (isset($_POST['avatar'])) {
+                    $updatePayload['avatar'] = trim((string)$_POST['avatar']);
+                }
+
                 if ($userAssignedRoles !== null) {
                     $updatePayload['roles'] = $userAssignedRoles;
                 }
@@ -422,7 +426,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             try {
-                $updated = UserService::update($myId, [
+                $myProfileData = [
                     'name' => trim((string)($_POST['name'] ?? $currentUser['name'])),
                     'phone' => trim((string)($_POST['phone'] ?? '')),
                     'title' => trim((string)($_POST['title'] ?? '')),
@@ -430,7 +434,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'bio' => trim((string)($_POST['bio'] ?? '')),
                     'timezone' => trim((string)($_POST['timezone'] ?? 'UTC')),
                     'currency' => trim((string)($_POST['currency'] ?? 'USD'))
-                ]);
+                ];
+                if (isset($_POST['avatar'])) {
+                    $myProfileData['avatar'] = trim((string)$_POST['avatar']);
+                }
+
+                $updated = UserService::update($myId, $myProfileData);
 
                 AuthService::refreshSessionUser();
                 $_SESSION['flash_message'] = 'Your personal profile details have been updated!';

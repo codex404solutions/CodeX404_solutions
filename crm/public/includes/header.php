@@ -72,7 +72,14 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                 <div class="p-2 mb-2 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
                     <div class="d-flex align-items-center justify-content-between mb-1">
                         <a href="profile" class="d-flex align-items-center gap-2 text-decoration-none" title="Open My Account Profile">
-                            <span class="agent-badge-pulse" title="Active Session" style="width: 6px; height: 6px;"></span>
+                            <?php 
+                            $sideAvatar = \CRM\Services\UserService::getAvatarInfo($currentUser);
+                            if (!empty($sideAvatar['image'])): 
+                            ?>
+                                <img src="<?= htmlspecialchars($sideAvatar['image']) ?>" alt="<?= htmlspecialchars($currentUser['name']) ?>" class="rounded-circle object-fit-cover border" style="width: 22px; height: 22px; border-color: rgba(56, 189, 248, 0.4) !important;">
+                            <?php else: ?>
+                                <span class="agent-badge-pulse" title="Active Session" style="width: 6px; height: 6px;"></span>
+                            <?php endif; ?>
                             <span class="fw-bold small text-white text-truncate" style="font-size: 0.78rem; max-width: 120px;"><?= htmlspecialchars($currentUser['name']) ?></span>
                         </a>
                         <div class="d-flex align-items-center gap-1">

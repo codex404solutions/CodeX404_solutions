@@ -174,10 +174,16 @@ require_once __DIR__ . '/includes/header.php';
                                 <div class="d-flex align-items-center gap-3">
                                     <!-- Avatar -->
                                     <div class="position-relative">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
-                                             style="width: 48px; height: 48px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1rem;">
-                                            <?= htmlspecialchars($avatar['initials']) ?>
-                                        </div>
+                                        <?php if (!empty($avatar['image'])): ?>
+                                            <img src="<?= htmlspecialchars($avatar['image']) ?>" alt="<?= htmlspecialchars($u['name'] ?? 'User') ?>"
+                                                 class="rounded-circle object-fit-cover shadow-sm border"
+                                                 style="width: 48px; height: 48px; border-color: rgba(56, 189, 248, 0.35) !important;">
+                                        <?php else: ?>
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
+                                                 style="width: 48px; height: 48px; background: <?= $avatar['background'] ?>; color: <?= $avatar['color'] ?>; font-size: 1rem;">
+                                                <?= htmlspecialchars($avatar['initials']) ?>
+                                            </div>
+                                        <?php endif; ?>
                                         <span class="position-absolute bottom-0 end-0 p-1 rounded-circle border border-dark"
                                               style="width: 12px; height: 12px; background: <?= $status === 'active' ? '#10B981' : ($status === 'suspended' ? '#EF4444' : '#6B7280') ?>;"
                                               title="Status: <?= htmlspecialchars(ucfirst($status)) ?>"></span>
