@@ -5,13 +5,17 @@ declare(strict_types=1);
  * CodeX404 Solutions — Admin Deliverables Management Page (Multi-Page)
  */
 
-
+use App\Services\ProjectService;
 
 $currentPage = 'deliverables';
-$pageTitle = 'Production Deliverables Management';
-$pageSubtitle = 'Manage live client solutions, toggle public visibility, edit architecture specs, and monitor key metrics';
+$pageTitle = 'Production Deliverables & Portfolio Governance';
+$pageSubtitle = 'Manage live client solutions, project types, NDA client permissions, architecture specs, and verified metrics';
 
 require_once __DIR__ . '/includes/header.php';
+
+$projectTypes = ProjectService::getProjectTypes();
+$showcaseStatuses = ProjectService::getShowcaseStatuses();
+$permissionStatuses = ProjectService::getPermissionStatuses();
 ?>
 
 <!-- ======================================================== -->
@@ -84,13 +88,13 @@ require_once __DIR__ . '/includes/header.php';
         <div class="position-relative flex-grow-1" style="max-width: 380px;">
             <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
             <input type="text" id="projectSearch" class="form-control form-control-sm ps-5 py-2"
-                placeholder="Search by title, category, host, tag..." style="border-radius: 10px;">
+                placeholder="Search title, client, slug, host, type..." style="border-radius: 10px;">
         </div>
 
         <!-- Filter Pills (Status) -->
         <div class="d-flex align-items-center gap-2 flex-wrap">
             <button type="button" class="filter-pill-btn active" data-filter-status="all">
-                All Systems <span class="badge bg-dark border border-secondary text-white rounded-pill ms-1"><?= $totalCount ?></span>
+                All <span class="badge bg-dark border border-secondary text-white rounded-pill ms-1"><?= $totalCount ?></span>
             </button>
             <button type="button" class="filter-pill-btn" data-filter-status="active">
                 <span class="live-dot me-1" style="width: 6px; height: 6px;"></span>
@@ -101,8 +105,8 @@ require_once __DIR__ . '/includes/header.php';
             </button>
         </div>
 
-        <!-- Category Filter Dropdown & Quick Add -->
-        <div class="d-flex align-items-center gap-2">
+        <!-- Category & Type Dropdowns & Add Button -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
             <select id="categoryFilter" class="form-select form-select-sm" style="border-radius: 8px; width: auto;">
                 <option value="all">All Categories</option>
                 <?php foreach ($categories as $cat): ?>
@@ -113,7 +117,7 @@ require_once __DIR__ . '/includes/header.php';
             <a href="<?= admin_url('project-form') ?>" class="btn btn-sm btn-info fw-bold text-dark d-inline-flex align-items-center gap-1"
                 style="background: #38BDF8; border-color: #38BDF8; border-radius: 8px;">
                 <i class="bi bi-plus-lg"></i>
-                <span class="d-none d-sm-inline">Add Deliverable</span>
+                <span class="d-none d-sm-inline">Create Deliverable</span>
             </a>
         </div>
     </div>
@@ -137,13 +141,14 @@ require_once __DIR__ . '/includes/header.php';
             <table class="table table-admin align-middle" id="projectsTable">
                 <thead>
                     <tr>
-                        <th style="width: 60px;"># Order</th>
-                        <th>Project &amp; Architecture</th>
-                        <th>Category</th>
-                        <th>Status</th>
+                        <th style="width: 50px;"># Order</th>
+                        <th>Project &amp; Client</th>
+                        <th>Type &amp; Format</th>
+                        <th>Client Permission</th>
+                        <th>Publication</th>
                         <th>Interactive Demo</th>
-                        <th>Key Metric</th>
-                        <th style="width: 160px; text-align: right;">Actions</th>
+                        <th>Verified Metric</th>
+                        <th style="width: 170px; text-align: right;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -151,12 +156,21 @@ require_once __DIR__ . '/includes/header.php';
                         <?php
                         $isActive = !empty($p['active']);
                         $category = strtolower((string) ($p['category'] ?? 'software'));
+                        $typeKey = $p['project_type'] ?? 'client';
+                        $type = $projectTypes[$typeKey] ?? $projectTypes['client'];
+                        $statusKey = $p['showcase_status'] ?? 'live_website';
+                        $statusInfo = $showcaseStatuses[$statusKey] ?? $showcaseStatuses['live_website'];
+                        $permKey = $p['client_permission_status'] ?? 'approved';
+                        $perm = $permissionStatuses[$permKey] ?? $permissionStatuses['approved'];
+                        $clientName = !empty($p['client_name']) ? $p['client_name'] : ($p['anonymized_name'] ?? 'Confidential Client');
+
                         $tagsStr = implode(' ', (array) ($p['tags'] ?? []));
-                        $searchBlob = strtolower(($p['title'] ?? '') . ' ' . ($p['id'] ?? '') . ' ' . $category . ' ' . ($p['mockup_host'] ?? '') . ' ' . $tagsStr);
+                        $searchBlob = strtolower(($p['title'] ?? '') . ' ' . ($p['id'] ?? '') . ' ' . $clientName . ' ' . $typeKey . ' ' . $category . ' ' . ($p['mockup_host'] ?? '') . ' ' . $tagsStr);
                         ?>
                         <tr class="project-row" data-search="<?= htmlspecialchars($searchBlob) ?>"
                             data-status="<?= $isActive ? 'active' : 'draft' ?>"
                             data-category="<?= htmlspecialchars($category) ?>"
+                            data-type="<?= htmlspecialchars($typeKey) ?>"
                             id="row-<?= htmlspecialchars($p['id']) ?>">
 
                             <!-- Order -->
@@ -164,10 +178,9 @@ require_once __DIR__ . '/includes/header.php';
                                 <?= (int) ($p['order'] ?? ($idx + 1)) ?>
                             </td>
 
-                            <!-- Title, ID & Host -->
+                            <!-- Title, Client & Host -->
                             <td>
                                 <div class="d-flex align-items-center gap-3">
-                                    <!-- Avatar Icon by Category -->
                                     <div class="rounded-3 d-flex align-items-center justify-content-center text-info fw-bold"
                                         style="width: 40px; height: 40px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.25); flex-shrink: 0;">
                                         <i class="bi <?= $category === 'ai' ? 'bi-cpu' : ($category === 'cloud' ? 'bi-cloud-check' : ($category === 'mobile' ? 'bi-phone' : 'bi-code-square')) ?> fs-5"></i>
@@ -178,33 +191,45 @@ require_once __DIR__ . '/includes/header.php';
                                         </div>
                                         <div class="d-flex align-items-center gap-2 flex-wrap">
                                             <span class="project-id-chip"><?= htmlspecialchars($p['id']) ?></span>
+                                            <span class="text-muted">&bull;</span>
+                                            <span class="text-white-50 small">
+                                                <i class="bi bi-building me-1"></i><?= htmlspecialchars($clientName) ?>
+                                            </span>
                                             <?php if (!empty($p['live_url'])): ?>
                                                 <span class="text-muted">&bull;</span>
                                                 <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank"
                                                     rel="noopener noreferrer"
                                                     class="text-info text-decoration-none small d-inline-flex align-items-center gap-1"
-                                                    style="font-family: var(--font-mono); font-size: 0.76rem;">
+                                                    style="font-family: var(--font-mono); font-size: 0.74rem;">
                                                     <span><?= htmlspecialchars($p['mockup_host'] ?? 'Live URL') ?></span>
                                                     <i class="bi bi-box-arrow-up-right" style="font-size: 0.65rem;"></i>
                                                 </a>
-                                            <?php elseif (!empty($p['mockup_host'])): ?>
-                                                <span class="text-muted">&bull;</span>
-                                                <span class="text-muted small"
-                                                    style="font-family: var(--font-mono); font-size: 0.76rem;"><?= htmlspecialchars($p['mockup_host']) ?></span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </td>
 
-                            <!-- Category -->
+                            <!-- Type & Format -->
                             <td>
-                                <span class="category-chip">
-                                    <i class="bi bi-tag-fill me-1"></i><?= htmlspecialchars($p['category_label'] ?? ucfirst($p['category'])) ?>
+                                <div class="d-flex flex-column gap-1">
+                                    <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: <?= $type['color'] ?>; border: 1px solid rgba(99, 102, 241, 0.3); font-size: 0.7rem; width: fit-content;">
+                                        <?= htmlspecialchars($type['label']) ?>
+                                    </span>
+                                    <span class="text-muted small" style="font-size: 0.75rem;">
+                                        <i class="bi <?= htmlspecialchars($statusInfo['icon']) ?> me-1"></i><?= htmlspecialchars($statusInfo['label']) ?>
+                                    </span>
+                                </div>
+                            </td>
+
+                            <!-- Client Permission Status -->
+                            <td>
+                                <span class="badge <?= htmlspecialchars($perm['badge']) ?>" style="font-size: 0.72rem;">
+                                    <i class="bi <?= htmlspecialchars($perm['icon']) ?> me-1"></i><?= htmlspecialchars($perm['label']) ?>
                                 </span>
                             </td>
 
-                            <!-- Status (Toggle button) -->
+                            <!-- Publication Status (Toggle) -->
                             <td>
                                 <form method="POST" action="<?= admin_url('toggle') ?>" class="d-inline">
                                     <?= csrf_input_field() ?>
@@ -237,7 +262,7 @@ require_once __DIR__ . '/includes/header.php';
                             </td>
 
                             <!-- Key Metric -->
-                            <td style="max-width: 250px;">
+                            <td style="max-width: 220px;">
                                 <div class="small text-muted text-truncate"
                                     title="<?= htmlspecialchars((string) ($p['metric'] ?? '')) ?>">
                                     <i class="bi bi-graph-up-arrow text-success me-1"></i><?= htmlspecialchars((string) ($p['metric'] ?? 'Active System')) ?>
@@ -247,9 +272,16 @@ require_once __DIR__ . '/includes/header.php';
                             <!-- Actions Toolbar -->
                             <td>
                                 <div class="d-flex align-items-center justify-content-end gap-1">
+                                    <!-- Public Detail Page Link -->
+                                    <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" target="_blank"
+                                        class="btn btn-sm btn-outline-info btn-action-icon"
+                                        title="View Public Case Study Page">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+
                                     <!-- Quick Preview Modal Button -->
                                     <button type="button"
-                                        class="btn btn-sm btn-outline-info btn-action-icon btn-preview-project"
+                                        class="btn btn-sm btn-outline-secondary btn-action-icon btn-preview-project"
                                         data-bs-toggle="modal" data-bs-target="#modalProjectPreview"
                                         data-title="<?= htmlspecialchars($p['title']) ?>"
                                         data-category="<?= htmlspecialchars($p['category_label'] ?? $p['category']) ?>"
@@ -265,14 +297,14 @@ require_once __DIR__ . '/includes/header.php';
                                         data-stat3-lbl="<?= htmlspecialchars($p['stat_3_lbl'] ?? '') ?>"
                                         data-live-url="<?= htmlspecialchars($p['live_url'] ?? '') ?>"
                                         data-tags='<?= json_encode($p['tags'] ?? []) ?>'
-                                        title="Live Spec Preview">
+                                        title="Quick Architecture Modal Preview">
                                         <i class="bi bi-eye"></i>
                                     </button>
 
                                     <!-- Edit Project -->
                                     <a href="<?= admin_url('project-form?id=' . urlencode($p['id'])) ?>"
                                         class="btn btn-sm btn-outline-primary btn-action-icon"
-                                        title="Edit Deliverable">
+                                        title="Edit Deliverable Form">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
 

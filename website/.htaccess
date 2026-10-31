@@ -7,6 +7,11 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Clean URL routing for project detail pages: /project/slug -> project.php?id=slug
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^project/([a-zA-Z0-9_-]+)/?$ project.php?id=$1 [L,QSA]
+
     # Block access to hidden files and sensitive directories
     RewriteRule ^(\.git|\.env|storage|app|config) - [F,L]
 

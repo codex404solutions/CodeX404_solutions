@@ -8,16 +8,38 @@ use App\Services\ProjectService;
 
 $projectId = trim((string)($_GET['id'] ?? ''));
 $isEdit = false;
+$projectTypes = ProjectService::getProjectTypes();
+$showcaseStatuses = ProjectService::getShowcaseStatuses();
+$permissionStatuses = ProjectService::getPermissionStatuses();
+
 $project = [
     'id' => '',
     'title' => '',
     'category' => 'software',
     'category_label' => 'Custom Software',
+    'project_type' => 'client',
+    'showcase_status' => 'live_website',
     'badge_text' => 'Production Live',
     'badge_type' => 'live',
     'mockup_host' => 'app.internal.system',
     'mockup_tag1' => '',
     'mockup_tag2' => '',
+    'cover_image' => '',
+    'gallery' => [],
+    'client_name' => '',
+    'client_logo' => '',
+    'anonymized_name' => '',
+    'client_permission_status' => 'approved',
+    'client_permission_restrictions' => [
+        'allow_client_name' => true,
+        'allow_client_logo' => true,
+        'allow_live_link' => true,
+        'allow_case_study' => true,
+        'allow_metrics' => true,
+        'allow_screenshots' => true,
+        'allow_testimonial' => true
+    ],
+    'internal_notes' => '',
     'stat_1_val' => '',
     'stat_1_lbl' => '',
     'stat_2_val' => '',
@@ -26,19 +48,28 @@ $project = [
     'stat_3_lbl' => '',
     'problem' => '',
     'solution' => '',
+    'features' => [],
+    'team_role' => '',
     'metric' => '',
+    'verified_results' => '',
     'tags' => [],
     'demo_key' => 'erp',
+    'demo_url' => '',
+    'video_url' => '',
     'live_url' => '',
     'case_study_url' => 'case-studies',
+    'case_study_content' => '',
     'order' => count(ProjectService::getAll()) + 1,
+    'status' => 'published',
+    'is_featured' => false,
     'active' => true,
 ];
 
 if ($projectId !== '') {
-    $found = ProjectService::getById($projectId);
+    // Pass true so admin can view raw un-sanitized data including private notes
+    $found = ProjectService::getById($projectId, true);
     if ($found) {
-        $project = $found;
+        $project = array_merge($project, $found);
         $isEdit = true;
     } else {
         set_admin_flash('error', "Project '{$projectId}' was not found.");
@@ -69,17 +100,107 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Engineering solution description is required.';
         }
 
+        // Validate URLs if provided
+        $liveUrl = trim((string)($_POST['live_url'] ?? ''));
+        if ($liveUrl !== '' && !filter_var($liveUrl, FILTER_VALIDATE_URL)) {
+            $errors[] = 'Live Production URL is not a valid URL (must start with http:// or https://).';
+        }
+
+        $demoUrl = trim((string)($_POST['demo_url'] ?? ''));
+        if ($demoUrl !== '' && !filter_var($demoUrl, FILTER_VALIDATE_URL)) {
+            $errors[] = 'Demo URL is not a valid URL.';
+        }
+
+        $videoUrl = trim((string)($_POST['video_url'] ?? ''));
+        if ($videoUrl !== '' && !filter_var($videoUrl, FILTER_VALIDATE_URL)) {
+            $errors[] = 'Video Walkthrough URL is not a valid URL.';
+        }
+
+        // Handle File Uploads (Cover Image)
+        $coverImage = trim((string)($_POST['cover_image'] ?? $project['cover_image']));
+        if (!empty($_FILES['cover_image_file']['tmp_name'])) {
+            $uploadResult = ProjectService::handleImageUpload($_FILES['cover_image_file'], 'cover');
+            if ($uploadResult['success']) {
+                $coverImage = $uploadResult['path'];
+            } else {
+                $errors[] = 'Cover Image Upload: ' . $uploadResult['error'];
+            }
+        }
+
+        // Handle File Uploads (Client Logo)
+        $clientLogo = trim((string)($_POST['client_logo'] ?? $project['client_logo']));
+        if (!empty($_FILES['client_logo_file']['tmp_name'])) {
+            $uploadResult = ProjectService::handleImageUpload($_FILES['client_logo_file'], 'logo');
+            if ($uploadResult['success']) {
+                $clientLogo = $uploadResult['path'];
+            } else {
+                $errors[] = 'Client Logo Upload: ' . $uploadResult['error'];
+            }
+        }
+
+        // Handle Gallery
+        $rawGalleryText = trim((string)($_POST['gallery_text'] ?? ''));
+        $gallery = array_values(array_filter(array_map('trim', explode("\n", str_replace("\r", "", $rawGalleryText)))));
+
+        // Handle multi-file uploads for gallery
+        if (!empty($_FILES['gallery_files']['name'][0])) {
+            $totalFiles = count($_FILES['gallery_files']['name']);
+            for ($i = 0; $i < $totalFiles; $i++) {
+                if (!empty($_FILES['gallery_files']['tmp_name'][$i])) {
+                    $singleFile = [
+                        'name' => $_FILES['gallery_files']['name'][$i],
+                        'type' => $_FILES['gallery_files']['type'][$i],
+                        'tmp_name' => $_FILES['gallery_files']['tmp_name'][$i],
+                        'error' => $_FILES['gallery_files']['error'][$i],
+                        'size' => $_FILES['gallery_files']['size'][$i],
+                    ];
+                    $uploadResult = ProjectService::handleImageUpload($singleFile, 'gallery');
+                    if ($uploadResult['success']) {
+                        $gallery[] = $uploadResult['path'];
+                    } else {
+                        $errors[] = "Gallery File {$singleFile['name']}: " . $uploadResult['error'];
+                    }
+                }
+            }
+        }
+
         if (empty($errors)) {
             $rawTags = (string)($_POST['tags'] ?? '');
             $tagsArr = array_values(array_filter(array_map('trim', explode(',', $rawTags))));
+
+            $rawFeatures = (string)($_POST['features'] ?? '');
+            $featuresArr = array_values(array_filter(array_map('trim', explode("\n", str_replace("\r", "", $rawFeatures)))));
+
+            $restrictions = [
+                'allow_client_name' => !empty($_POST['perm_allow_client_name']),
+                'allow_client_logo' => !empty($_POST['perm_allow_client_logo']),
+                'allow_screenshots' => !empty($_POST['perm_allow_screenshots']),
+                'allow_live_link' => !empty($_POST['perm_allow_live_link']),
+                'allow_case_study' => !empty($_POST['perm_allow_case_study']),
+                'allow_metrics' => !empty($_POST['perm_allow_metrics']),
+                'allow_testimonial' => !empty($_POST['perm_allow_testimonial']),
+            ];
+
+            $status = trim((string)($_POST['status'] ?? 'published'));
+            $active = ($status === 'published' || !empty($_POST['active']));
 
             $saveData = [
                 'id' => $isEdit ? $project['id'] : trim((string)($_POST['id'] ?? '')),
                 'title' => $title,
                 'category' => trim((string)($_POST['category'] ?? 'software')),
                 'category_label' => trim((string)($_POST['category_label'] ?? 'Custom Software')),
+                'project_type' => trim((string)($_POST['project_type'] ?? 'client')),
+                'showcase_status' => trim((string)($_POST['showcase_status'] ?? 'live_website')),
                 'badge_text' => trim((string)($_POST['badge_text'] ?? 'Production Live')),
                 'badge_type' => trim((string)($_POST['badge_type'] ?? 'live')),
+                'cover_image' => $coverImage,
+                'gallery' => $gallery,
+                'client_name' => trim((string)($_POST['client_name'] ?? '')),
+                'client_logo' => $clientLogo,
+                'anonymized_name' => trim((string)($_POST['anonymized_name'] ?? '')),
+                'client_permission_status' => trim((string)($_POST['client_permission_status'] ?? 'approved')),
+                'client_permission_restrictions' => $restrictions,
+                'internal_notes' => trim((string)($_POST['internal_notes'] ?? '')),
                 'mockup_host' => trim((string)($_POST['mockup_host'] ?? 'app.internal.system')),
                 'mockup_tag1' => trim((string)($_POST['mockup_tag1'] ?? '')),
                 'mockup_tag2' => trim((string)($_POST['mockup_tag2'] ?? '')),
@@ -91,13 +212,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'stat_3_lbl' => trim((string)($_POST['stat_3_lbl'] ?? '')),
                 'problem' => $problem,
                 'solution' => $solution,
+                'features' => $featuresArr,
+                'team_role' => trim((string)($_POST['team_role'] ?? '')),
                 'metric' => trim((string)($_POST['metric'] ?? '')),
+                'verified_results' => trim((string)($_POST['verified_results'] ?? '')),
                 'tags' => $tagsArr,
                 'demo_key' => trim((string)($_POST['demo_key'] ?? 'erp')),
-                'live_url' => trim((string)($_POST['live_url'] ?? '')),
+                'demo_url' => $demoUrl,
+                'video_url' => $videoUrl,
+                'live_url' => $liveUrl,
                 'case_study_url' => trim((string)($_POST['case_study_url'] ?? 'case-studies')),
+                'case_study_content' => trim((string)($_POST['case_study_content'] ?? '')),
                 'order' => (int)($_POST['order'] ?? 1),
-                'active' => !empty($_POST['active']),
+                'status' => $status,
+                'is_featured' => !empty($_POST['is_featured']),
+                'active' => $active,
             ];
 
             $saved = ProjectService::save($saveData);
@@ -109,19 +238,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $project = array_merge($project, $_POST);
             $rawTags = (string)($_POST['tags'] ?? '');
             $project['tags'] = array_values(array_filter(array_map('trim', explode(',', $rawTags))));
+            $rawFeatures = (string)($_POST['features'] ?? '');
+            $project['features'] = array_values(array_filter(array_map('trim', explode("\n", str_replace("\r", "", $rawFeatures)))));
+            $project['gallery'] = $gallery;
+            $project['cover_image'] = $coverImage;
+            $project['client_logo'] = $clientLogo;
             $project['active'] = !empty($_POST['active']);
+            $project['is_featured'] = !empty($_POST['is_featured']);
         }
     }
 }
 
 $tagsString = implode(', ', $project['tags'] ?? []);
+$featuresString = implode("\n", $project['features'] ?? []);
+$galleryString = implode("\n", $project['gallery'] ?? []);
+$curRestrictions = $project['client_permission_restrictions'] ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="combo">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $isEdit ? 'Edit ' . htmlspecialchars($project['title']) : 'Upload New Deliverable' ?> — CodeX404 Admin</title>
+    <title><?= $isEdit ? 'Edit ' . htmlspecialchars($project['title']) : 'Create New Deliverable' ?> — CodeX404 Admin</title>
     <meta name="robots" content="noindex, nofollow">
 
     <script>
@@ -146,8 +284,6 @@ $tagsString = implode(', ', $project['tags'] ?? []);
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?= asset('images/logo/favicon.ico') ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= asset('images/logo/favicon.ico') ?>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= asset('images/logo/favicon-32x32.png') ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= asset('images/logo/favicon-16x16.png') ?>">
 
     <style>
         :root {
@@ -210,11 +346,6 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             backdrop-filter: blur(16px);
         }
 
-        [data-bs-theme="combo"] .admin-navbar,
-        [data-bs-theme="dark"] .admin-navbar {
-            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
-        }
-
         .admin-brand-pill {
             display: inline-flex;
             align-items: center;
@@ -222,7 +353,6 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             padding: 6px 14px;
             border-radius: 12px;
             border: 1px solid rgba(34, 211, 238, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
             text-decoration: none;
         }
 
@@ -255,62 +385,6 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             color: var(--cx-text-muted);
             margin-bottom: 0.35rem;
         }
-
-        /* ========================================================= */
-        /* ADMIN CONSOLE ENTERPRISE FOOTER SYSTEM                    */
-        /* ========================================================= */
-        .admin-footer {
-            background: var(--cx-bg-card);
-            border: 1px solid var(--cx-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-top: 3rem;
-            box-shadow: var(--cx-card-shadow);
-            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        [data-bs-theme="light"] .admin-footer,
-        [data-bs-theme="combo"] .admin-footer {
-            background: #FFFFFF !important;
-            border-color: #E2E8F0 !important;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
-        }
-
-        [data-bs-theme="dark"] .admin-footer {
-            background: rgba(11, 15, 25, 0.85) !important;
-            border-color: rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55) !important;
-            backdrop-filter: blur(12px);
-        }
-
-        .admin-footer-link {
-            color: var(--cx-text-secondary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.8rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            transition: all 0.15s ease;
-        }
-
-        .admin-footer-link:hover {
-            color: var(--cx-cyan) !important;
-            background: rgba(34, 211, 238, 0.08);
-            transform: translateX(2px);
-        }
-
-        [data-bs-theme="light"] .admin-footer-link,
-        [data-bs-theme="combo"] .admin-footer-link {
-            color: #334155 !important;
-        }
-
-        [data-bs-theme="light"] .admin-footer-link:hover,
-        [data-bs-theme="combo"] .admin-footer-link:hover {
-            color: #0284C7 !important;
-            background: rgba(2, 132, 199, 0.08);
-        }
     </style>
 </head>
 <body>
@@ -322,7 +396,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             <a href="<?= admin_url() ?>" class="admin-brand-pill">
                 <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 30px; object-fit: contain;">
             </a>
-            <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.68rem;">PORTFOLIO EDITOR</span>
+            <span class="badge bg-dark border border-secondary text-info text-uppercase" style="font-size: 0.68rem;">PORTFOLIO ARCHITECT</span>
         </div>
 
         <div class="d-flex align-items-center gap-2">
@@ -330,16 +404,21 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             <div class="dropdown">
                 <button class="btn btn-outline-secondary btn-sm dropdown-toggle d-flex align-items-center gap-2 px-3 py-1" id="bd-theme-admin" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 8px;">
                     <i class="bi bi-circle-half theme-icon-active text-info"></i>
-                    <span class="small d-none d-sm-inline" id="bd-theme-admin-text">Dark &amp; Light</span>
+                    <span class="small d-none d-sm-inline" id="bd-theme-admin-text">Theme</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-admin">
                     <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="combo"><i class="bi bi-circle-half text-primary"></i> Dark &amp; Light Combo</button></li>
                     <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark"><i class="bi bi-moon-stars-fill text-info"></i> Full Dark Mode</button></li>
                     <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="light"><i class="bi bi-sun-fill text-warning"></i> Pure Light Mode</button></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto"><i class="bi bi-laptop text-secondary"></i> System Auto</button></li>
                 </ul>
             </div>
+
+            <?php if ($isEdit): ?>
+                <a href="<?= url('project.php?id=' . urlencode($project['id'])) ?>" target="_blank" class="btn btn-outline-info btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    <span>Preview Public View</span>
+                </a>
+            <?php endif; ?>
 
             <a href="<?= admin_url('deliverables') ?>" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 px-3 py-1" style="border-radius: 8px;">
                 <i class="bi bi-arrow-left"></i>
@@ -350,7 +429,7 @@ $tagsString = implode(', ', $project['tags'] ?? []);
 </nav>
 
 <!-- Main Form Container -->
-<main class="container px-3 px-md-4 py-4" style="max-width: 1000px;">
+<main class="container px-3 px-md-4 py-4" style="max-width: 1040px;">
 
     <!-- Page Title -->
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
@@ -360,8 +439,8 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
                 <span class="text-info"><?= $isEdit ? 'Edit Deliverable' : 'Upload New' ?></span>
             </div>
-            <h1 class="h3 fw-bold mb-1"><?= $isEdit ? 'Edit: ' . htmlspecialchars($project['title']) : 'Upload Production Deliverable' ?></h1>
-            <p class="text-muted small mb-0">Fill in verified technical parameters. Saved changes update live on the website immediately.</p>
+            <h1 class="h3 fw-bold mb-1"><?= $isEdit ? 'Edit: ' . htmlspecialchars($project['title']) : 'Create Production Deliverable' ?></h1>
+            <p class="text-muted small mb-0">Configure project taxonomy, client authorization restrictions, verified results, and media assets.</p>
         </div>
     </div>
 
@@ -377,13 +456,15 @@ $tagsString = implode(', ', $project['tags'] ?? []);
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="<?= admin_url('project-form' . ($isEdit ? '?id=' . urlencode($project['id']) : '')) ?>">
+    <form method="POST" action="<?= admin_url('project-form' . ($isEdit ? '?id=' . urlencode($project['id']) : '')) ?>" enctype="multipart/form-data">
         <?= csrf_input_field() ?>
 
-        <!-- SECTION 1: IDENTITY -->
+        <!-- ======================================================== -->
+        <!-- SECTION 1: IDENTITY & TAXONOMY                           -->
+        <!-- ======================================================== -->
         <div class="admin-card p-4 mb-4">
-            <h2 class="form-section-title text-info"><i class="bi bi-card-heading"></i> 1. Project Identity &amp; Classification</h2>
-            <p class="text-muted small mb-4">Core name, slug identifier, and navigation taxonomy.</p>
+            <h2 class="form-section-title text-info"><i class="bi bi-card-heading"></i> 1. Project Identity, Type &amp; Showcase Status</h2>
+            <p class="text-muted small mb-4">Classify deliverables by project nature and showcase format so visitors immediately recognize authentic client deliverables vs. internal prototypes.</p>
 
             <div class="row g-3 mb-3">
                 <div class="col-12 col-md-8">
@@ -391,16 +472,38 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                     <input type="text" id="title" name="title" class="form-control" value="<?= htmlspecialchars($project['title']) ?>" required placeholder="e.g. Insan Degree College — Official Web Portal">
                 </div>
                 <div class="col-12 col-md-4">
-                    <label class="form-label" for="id">Unique ID / Slug</label>
+                    <label class="form-label" for="id">Unique Slug / ID</label>
                     <input type="text" id="id" name="id" class="form-control" value="<?= htmlspecialchars($project['id']) ?>" <?= $isEdit ? 'readonly style="opacity: 0.7;"' : '' ?> placeholder="auto-generated-if-blank" style="font-family: var(--font-mono);">
                 </div>
             </div>
 
             <div class="row g-3 mb-3">
-                <div class="col-12 col-md-4">
-                    <label class="form-label" for="category">Filter Tab Category *</label>
+                <div class="col-12 col-md-3">
+                    <label class="form-label" for="project_type">Project Type *</label>
+                    <select id="project_type" name="project_type" class="form-select fw-semibold">
+                        <?php foreach ($projectTypes as $tKey => $tVal): ?>
+                            <option value="<?= htmlspecialchars($tKey) ?>" <?= (($project['project_type'] ?? 'client') === $tKey) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($tVal['label']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label class="form-label" for="showcase_status">Showcase Format *</label>
+                    <select id="showcase_status" name="showcase_status" class="form-select fw-semibold">
+                        <?php foreach ($showcaseStatuses as $sKey => $sVal): ?>
+                            <option value="<?= htmlspecialchars($sKey) ?>" <?= (($project['showcase_status'] ?? 'live_website') === $sKey) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($sVal['label']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label class="form-label" for="category">Category Filter Tab *</label>
                     <select id="category" name="category" class="form-select">
-                        <option value="booking" <?= ($project['category'] === 'booking') ? 'selected' : '' ?>>Online Booking &amp; Appointment Systems (booking)</option>
+                        <option value="booking" <?= ($project['category'] === 'booking') ? 'selected' : '' ?>>Booking &amp; Scheduling (booking)</option>
                         <option value="software" <?= ($project['category'] === 'software') ? 'selected' : '' ?>>Custom Software &amp; Portals (software)</option>
                         <option value="ai" <?= ($project['category'] === 'ai') ? 'selected' : '' ?>>AI Agents &amp; Automation (ai)</option>
                         <option value="commerce" <?= ($project['category'] === 'commerce') ? 'selected' : '' ?>>B2B Commerce &amp; Wholesale (commerce)</option>
@@ -408,99 +511,158 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                         <option value="cloud" <?= ($project['category'] === 'cloud') ? 'selected' : '' ?>>Cloud &amp; DevOps (cloud)</option>
                     </select>
                 </div>
-                <div class="col-12 col-md-5">
-                    <label class="form-label" for="category_label">Category Badge Label</label>
-                    <input type="text" id="category_label" name="category_label" class="form-control" value="<?= htmlspecialchars($project['category_label'] ?? '') ?>" placeholder="e.g. Institutional Web Portal">
-                </div>
+
                 <div class="col-12 col-md-3">
-                    <label class="form-label" for="order">Display Order</label>
-                    <input type="number" id="order" name="order" class="form-control" value="<?= (int)($project['order'] ?? 1) ?>" min="1" max="99">
+                    <label class="form-label" for="category_label">Badge Sub-Label</label>
+                    <input type="text" id="category_label" name="category_label" class="form-control" value="<?= htmlspecialchars($project['category_label'] ?? '') ?>" placeholder="e.g. Higher Education Portal">
                 </div>
             </div>
 
-            <div class="form-check form-switch pt-2">
-                <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" value="1" <?= !empty($project['active']) ? 'checked' : '' ?>>
-                <label class="form-check-label fw-bold" for="active">
-                    Published &amp; Active on Website
-                </label>
-                <div class="text-muted small">When checked, this project renders immediately on the public website showcase.</div>
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="status">Publication Lifecycle</label>
+                    <select id="status" name="status" class="form-select">
+                        <option value="published" <?= (($project['status'] ?? 'published') === 'published') ? 'selected' : '' ?>>Published (Live on Website)</option>
+                        <option value="draft" <?= (($project['status'] ?? '') === 'draft') ? 'selected' : '' ?>>Draft (Internal Preview Only)</option>
+                        <option value="archived" <?= (($project['status'] ?? '') === 'archived') ? 'selected' : '' ?>>Archived (Hidden from Catalog)</option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="order">Display Sort Order</label>
+                    <input type="number" id="order" name="order" class="form-control" value="<?= (int)($project['order'] ?? 1) ?>" min="1" max="99">
+                </div>
+
+                <div class="col-12 col-md-4 d-flex align-items-center pt-md-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="is_featured" name="is_featured" value="1" <?= !empty($project['is_featured']) ? 'checked' : '' ?>>
+                        <label class="form-check-label fw-bold" for="is_featured">
+                            Featured Deliverable (Top Carousel)
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- SECTION 2: BROWSER MOCKUP HEADER -->
+        <!-- ======================================================== -->
+        <!-- SECTION 2: CLIENT GOVERNANCE & NDA PERMISSION TRACKING    -->
+        <!-- ======================================================== -->
         <div class="admin-card p-4 mb-4">
-            <h2 class="form-section-title text-success"><i class="bi bi-window"></i> 2. Browser Frame &amp; Status Header</h2>
-            <p class="text-muted small mb-4">Hostname address bar and visual status tags.</p>
+            <h2 class="form-section-title text-warning"><i class="bi bi-shield-lock-fill"></i> 2. Client Governance &amp; NDA Permission Tracking</h2>
+            <p class="text-muted small mb-4">Control what client identity assets can be publicly published. Unauthorized names and logos are automatically withheld or anonymized on public views.</p>
 
             <div class="row g-3 mb-3">
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="mockup_host">Mockup URL / Host Address Bar</label>
-                    <input type="text" id="mockup_host" name="mockup_host" class="form-control" value="<?= htmlspecialchars($project['mockup_host'] ?? '') ?>" placeholder="e.g. portal.insandegreeclg.online" style="font-family: var(--font-mono);">
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="client_name">Client Real Name</label>
+                    <input type="text" id="client_name" name="client_name" class="form-control" value="<?= htmlspecialchars($project['client_name'] ?? '') ?>" placeholder="e.g. Insan Degree College">
                 </div>
-                <div class="col-12 col-md-3">
-                    <label class="form-label" for="badge_text">Status Badge Text</label>
-                    <input type="text" id="badge_text" name="badge_text" class="form-control" value="<?= htmlspecialchars($project['badge_text'] ?? 'Live Production') ?>" placeholder="e.g. Live Production">
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="anonymized_name">Anonymized Name (Fallback under NDA)</label>
+                    <input type="text" id="anonymized_name" name="anonymized_name" class="form-control" value="<?= htmlspecialchars($project['anonymized_name'] ?? '') ?>" placeholder="e.g. Leading Higher Education Institution">
                 </div>
-                <div class="col-12 col-md-3">
-                    <label class="form-label" for="badge_type">Badge Glow Style</label>
-                    <select id="badge_type" name="badge_type" class="form-select">
-                        <option value="live" <?= (($project['badge_type'] ?? '') === 'live') ? 'selected' : '' ?>>Live Green (Production)</option>
-                        <option value="demo" <?= (($project['badge_type'] ?? '') === 'demo') ? 'selected' : '' ?>>Cyan Demo (Sandbox Ready)</option>
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="client_permission_status">Client Permission Status *</label>
+                    <select id="client_permission_status" name="client_permission_status" class="form-select fw-bold">
+                        <?php foreach ($permissionStatuses as $pKey => $pVal): ?>
+                            <option value="<?= htmlspecialchars($pKey) ?>" <?= (($project['client_permission_status'] ?? 'approved') === $pKey) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($pVal['label']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
 
-            <div class="row g-3">
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="mockup_tag1">Screen Top Tag 1</label>
-                    <input type="text" id="mockup_tag1" name="mockup_tag1" class="form-control" value="<?= htmlspecialchars($project['mockup_tag1'] ?? '') ?>" placeholder="e.g. 🎓 Higher Education">
+            <!-- Granular Permission Toggles -->
+            <div class="p-3 rounded-3 mb-3" style="background: rgba(0,0,0,0.02); border: 1px solid var(--cx-border);">
+                <label class="form-label d-block mb-2">Granular Authorization Checklist (For "Approved with Restrictions"):</label>
+                <div class="row g-2">
+                    <div class="col-6 col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="perm_allow_client_name" id="perm_allow_client_name" value="1" <?= !empty($curRestrictions['allow_client_name']) ? 'checked' : '' ?>>
+                            <label class="form-check-label small" for="perm_allow_client_name">Allow Real Client Name</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="perm_allow_client_logo" id="perm_allow_client_logo" value="1" <?= !empty($curRestrictions['allow_client_logo']) ? 'checked' : '' ?>>
+                            <label class="form-check-label small" for="perm_allow_client_logo">Allow Client Logo</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="perm_allow_live_link" id="perm_allow_live_link" value="1" <?= !empty($curRestrictions['allow_live_link']) ? 'checked' : '' ?>>
+                            <label class="form-check-label small" for="perm_allow_live_link">Allow Live Website Link</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="perm_allow_screenshots" id="perm_allow_screenshots" value="1" <?= !empty($curRestrictions['allow_screenshots']) ? 'checked' : '' ?>>
+                            <label class="form-check-label small" for="perm_allow_screenshots">Allow Screenshots / Gallery</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="perm_allow_metrics" id="perm_allow_metrics" value="1" <?= !empty($curRestrictions['allow_metrics']) ? 'checked' : '' ?>>
+                            <label class="form-check-label small" for="perm_allow_metrics">Allow Quantitative Metrics</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="perm_allow_case_study" id="perm_allow_case_study" value="1" <?= !empty($curRestrictions['allow_case_study']) ? 'checked' : '' ?>>
+                            <label class="form-check-label small" for="perm_allow_case_study">Allow In-Depth Case Study</label>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Client Logo Upload / URL -->
+            <div class="row g-3 mb-3">
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="mockup_tag2">Screen Top Tag 2</label>
-                    <input type="text" id="mockup_tag2" name="mockup_tag2" class="form-control" value="<?= htmlspecialchars($project['mockup_tag2'] ?? '') ?>" placeholder="e.g. Sub-200ms TTFB">
+                    <label class="form-label" for="client_logo">Client Logo Path or URL</label>
+                    <input type="text" id="client_logo" name="client_logo" class="form-control mb-1" value="<?= htmlspecialchars($project['client_logo'] ?? '') ?>" placeholder="assets/images/projects/client-logo.png">
+                    <input type="file" id="client_logo_file" name="client_logo_file" class="form-control form-control-sm" accept="image/*">
+                    <div class="text-muted small mt-1">Upload PNG/SVG/WEBP logo or paste existing path.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="internal_notes">Private Internal Permission Notes (ADMIN ONLY)</label>
+                    <textarea id="internal_notes" name="internal_notes" class="form-control" rows="3" placeholder="Contract #, verbal agreement details, NDA clause, or review requirements. STRICTLY PRIVATE — NEVER RENDERED PUBLICLY."><?= htmlspecialchars($project['internal_notes'] ?? '') ?></textarea>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 3: KPI METRICS -->
+        <!-- ======================================================== -->
+        <!-- SECTION 3: MEDIA, COVER & GALLERY                        -->
+        <!-- ======================================================== -->
         <div class="admin-card p-4 mb-4">
-            <h2 class="form-section-title text-warning"><i class="bi bi-speedometer2"></i> 3. Quick KPI Metric Stat Triplets</h2>
-            <p class="text-muted small mb-4">Three standout quantitative metrics displayed inside the project card mockup.</p>
+            <h2 class="form-section-title text-primary"><i class="bi bi-images"></i> 3. Cover Image &amp; Interface Gallery</h2>
+            <p class="text-muted small mb-4">Hero cover visual and screenshot gallery for the project detail page.</p>
 
-            <div class="row g-3">
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.03); border: 1px solid var(--cx-border);">
-                        <label class="form-label" for="stat_1_val">Stat 1 Value</label>
-                        <input type="text" id="stat_1_val" name="stat_1_val" class="form-control mb-2 fw-bold text-success" value="<?= htmlspecialchars($project['stat_1_val'] ?? '') ?>" placeholder="e.g. 100%">
-                        <label class="form-label" for="stat_1_lbl">Stat 1 Label</label>
-                        <input type="text" id="stat_1_lbl" name="stat_1_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_1_lbl'] ?? '') ?>" placeholder="e.g. Mobile Responsive">
-                    </div>
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="cover_image">Cover Image Path / URL</label>
+                    <input type="text" id="cover_image" name="cover_image" class="form-control mb-1" value="<?= htmlspecialchars($project['cover_image'] ?? '') ?>" placeholder="assets/images/projects/cover-insan.webp">
+                    <input type="file" id="cover_image_file" name="cover_image_file" class="form-control form-control-sm" accept="image/*">
+                    <div class="text-muted small mt-1">Hero cover banner for project detail page.</div>
                 </div>
 
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.03); border: 1px solid var(--cx-border);">
-                        <label class="form-label" for="stat_2_val">Stat 2 Value</label>
-                        <input type="text" id="stat_2_val" name="stat_2_val" class="form-control mb-2 fw-bold text-info" value="<?= htmlspecialchars($project['stat_2_val'] ?? '') ?>" placeholder="e.g. Sub-200ms">
-                        <label class="form-label" for="stat_2_lbl">Stat 2 Label</label>
-                        <input type="text" id="stat_2_lbl" name="stat_2_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_2_lbl'] ?? '') ?>" placeholder="e.g. Page Load TTFB">
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.03); border: 1px solid var(--cx-border);">
-                        <label class="form-label" for="stat_3_val">Stat 3 Value</label>
-                        <input type="text" id="stat_3_val" name="stat_3_val" class="form-control mb-2 fw-bold text-primary" value="<?= htmlspecialchars($project['stat_3_val'] ?? '') ?>" placeholder="e.g. 25,000+">
-                        <label class="form-label" for="stat_3_lbl">Stat 3 Label</label>
-                        <input type="text" id="stat_3_lbl" name="stat_3_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_3_lbl'] ?? '') ?>" placeholder="e.g. Monthly Inquiries">
-                    </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="gallery_files">Upload Screenshot Gallery Images</label>
+                    <input type="file" id="gallery_files" name="gallery_files[]" class="form-control form-control-sm mb-2" accept="image/*" multiple>
+                    <label class="form-label" for="gallery_text">Existing Gallery Image URLs (One per line)</label>
+                    <textarea id="gallery_text" name="gallery_text" class="form-control form-control-sm" rows="3" placeholder="assets/images/projects/screen1.webp&#10;assets/images/projects/screen2.webp" style="font-family: var(--font-mono); font-size: 0.8rem;"><?= htmlspecialchars($galleryString) ?></textarea>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 4: PROBLEM & SOLUTION -->
+        <!-- ======================================================== -->
+        <!-- SECTION 4: PROBLEM, SOLUTION & CAPABILITIES              -->
+        <!-- ======================================================== -->
         <div class="admin-card p-4 mb-4">
-            <h2 class="form-section-title text-primary"><i class="bi bi-gear-wide-connected"></i> 4. Problem Statement &amp; Engineering Solution</h2>
-            <p class="text-muted small mb-4">Explain the operational bottleneck and architectural solution engineered by CodeX404.</p>
+            <h2 class="form-section-title text-success"><i class="bi bi-gear-wide-connected"></i> 4. Problem Statement, Engineering Solution &amp; Key Features</h2>
+            <p class="text-muted small mb-4">Detail the operational bottleneck and architectural solution engineered by CodeX404.</p>
 
             <div class="mb-3">
                 <label class="form-label" for="problem">Client Problem / Operational Bottleneck *</label>
@@ -512,28 +674,94 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                 <textarea id="solution" name="solution" class="form-control" rows="3" required placeholder="What technical architecture, caching, or database did CodeX404 engineer to solve it?"><?= htmlspecialchars($project['solution']) ?></textarea>
             </div>
 
-            <div>
-                <label class="form-label" for="metric">Highlighted Impact Metric</label>
+            <div class="mb-3">
+                <label class="form-label" for="features">Key System Capabilities &amp; Features (One per line)</label>
+                <textarea id="features" name="features" class="form-control" rows="4" placeholder="Dynamic Academic Notice Board&#10;Atomic Slot Reservation Engine&#10;Mobile-Responsive UI"><?= htmlspecialchars($featuresString) ?></textarea>
+                <div class="text-muted small mt-1">Rendered as interactive checklist points on project cards and detail pages.</div>
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- SECTION 5: TEAM CONTRIBUTION & VERIFIED OUTCOMES         -->
+        <!-- ======================================================== -->
+        <div class="admin-card p-4 mb-4">
+            <h2 class="form-section-title text-warning"><i class="bi bi-speedometer2"></i> 5. Team Contribution &amp; Verified Business Outcomes</h2>
+            <p class="text-muted small mb-4">Quantifiable results backed by real telemetry. Do not invent metrics.</p>
+
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="team_role">Team Role &amp; Contribution</label>
+                    <textarea id="team_role" name="team_role" class="form-control" rows="3" placeholder="Lead Architecture, Full-Stack PHP Engineering, Database Normalization..."><?= htmlspecialchars($project['team_role'] ?? '') ?></textarea>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="verified_results">Verified Business Results &amp; Telemetry</label>
+                    <textarea id="verified_results" name="verified_results" class="form-control" rows="3" placeholder="Zero downtime across 25,000 monthly portal visits; 65% reduction in administrative overhead..."><?= htmlspecialchars($project['verified_results'] ?? '') ?></textarea>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="metric">Highlighted Impact Metric Strip</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-graph-up text-success"></i></span>
                     <input type="text" id="metric" name="metric" class="form-control" value="<?= htmlspecialchars($project['metric'] ?? '') ?>" placeholder="e.g. Over 25,000 monthly portal visits during admission season with zero downtime">
                 </div>
             </div>
+
+            <!-- Quick Stat Triplets -->
+            <label class="form-label d-block mb-2">Quick Mockup KPI Triplets (Displayed inside Browser Frame):</label>
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.02); border: 1px solid var(--cx-border);">
+                        <label class="form-label" for="stat_1_val">Stat 1 Value</label>
+                        <input type="text" id="stat_1_val" name="stat_1_val" class="form-control mb-2 fw-bold text-success" value="<?= htmlspecialchars($project['stat_1_val'] ?? '') ?>" placeholder="e.g. 100%">
+                        <label class="form-label" for="stat_1_lbl">Stat 1 Label</label>
+                        <input type="text" id="stat_1_lbl" name="stat_1_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_1_lbl'] ?? '') ?>" placeholder="e.g. Mobile Responsive">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.02); border: 1px solid var(--cx-border);">
+                        <label class="form-label" for="stat_2_val">Stat 2 Value</label>
+                        <input type="text" id="stat_2_val" name="stat_2_val" class="form-control mb-2 fw-bold text-info" value="<?= htmlspecialchars($project['stat_2_val'] ?? '') ?>" placeholder="e.g. Sub-200ms">
+                        <label class="form-label" for="stat_2_lbl">Stat 2 Label</label>
+                        <input type="text" id="stat_2_lbl" name="stat_2_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_2_lbl'] ?? '') ?>" placeholder="e.g. TTFB Latency">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3" style="background: rgba(0,0,0,0.02); border: 1px solid var(--cx-border);">
+                        <label class="form-label" for="stat_3_val">Stat 3 Value</label>
+                        <input type="text" id="stat_3_val" name="stat_3_val" class="form-control mb-2 fw-bold text-primary" value="<?= htmlspecialchars($project['stat_3_val'] ?? '') ?>" placeholder="e.g. 25,000+">
+                        <label class="form-label" for="stat_3_lbl">Stat 3 Label</label>
+                        <input type="text" id="stat_3_lbl" name="stat_3_lbl" class="form-control form-control-sm" value="<?= htmlspecialchars($project['stat_3_lbl'] ?? '') ?>" placeholder="e.g. Monthly Inquiries">
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- SECTION 5: TECH STACK & URLS -->
+        <!-- ======================================================== -->
+        <!-- SECTION 6: LINKS, SIMULATOR & CASE STUDY                 -->
+        <!-- ======================================================== -->
         <div class="admin-card p-4 mb-4">
-            <h2 class="form-section-title text-info"><i class="bi bi-link-45deg"></i> 5. Technology Stack &amp; Live Demo Sandbox</h2>
-            <p class="text-muted small mb-4">Tag chips and simulator bindings.</p>
+            <h2 class="form-section-title text-info"><i class="bi bi-link-45deg"></i> 6. Live Links, Interactive Sandbox &amp; Case Study</h2>
+            <p class="text-muted small mb-4">Production URLs, in-browser simulator bindings, video walkthroughs, and case study documentation.</p>
 
             <div class="row g-3 mb-3">
-                <div class="col-12 col-md-8">
-                    <label class="form-label" for="tags">Tech Stack Tags (Comma-Separated)</label>
-                    <input type="text" id="tags" name="tags" class="form-control" value="<?= htmlspecialchars($tagsString) ?>" placeholder="e.g. PHP 8.2, MySQL Relational, Granular RBAC, Sub-200ms TTFB">
-                    <div class="text-muted small mt-1">Separate tags with commas. Rendered as interactive chips.</div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="live_url">Verified Live Production URL</label>
+                    <input type="url" id="live_url" name="live_url" class="form-control" value="<?= htmlspecialchars($project['live_url'] ?? '') ?>" placeholder="https://insandegreeclg.codex404solutions.online">
                 </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="mockup_host">Address Bar Host Name</label>
+                    <input type="text" id="mockup_host" name="mockup_host" class="form-control" value="<?= htmlspecialchars($project['mockup_host'] ?? '') ?>" placeholder="insandegreeclg.codex404solutions.online" style="font-family: var(--font-mono);">
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
                 <div class="col-12 col-md-4">
-                    <label class="form-label" for="demo_key">Interactive Sandbox Binding</label>
+                    <label class="form-label" for="demo_key">In-Browser Simulator Tab</label>
                     <select id="demo_key" name="demo_key" class="form-select">
                         <option value="erp" <?= (($project['demo_key'] ?? '') === 'erp') ? 'selected' : '' ?>>School ERP / Role Simulator (erp)</option>
                         <option value="wa" <?= (($project['demo_key'] ?? '') === 'wa') ? 'selected' : '' ?>>WhatsApp Webhook Simulator (wa)</option>
@@ -541,22 +769,38 @@ $tagsString = implode(', ', $project['tags'] ?? []);
                         <option value="rag" <?= (($project['demo_key'] ?? '') === 'rag') ? 'selected' : '' ?>>Private RAG Knowledge Assistant (rag)</option>
                     </select>
                 </div>
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="demo_url">External Live Demo / Sandbox App URL</label>
+                    <input type="url" id="demo_url" name="demo_url" class="form-control" value="<?= htmlspecialchars($project['demo_url'] ?? '') ?>" placeholder="https://demo.codex404solutions.online/app">
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="video_url">Video Walkthrough URL (YouTube / Vimeo / MP4)</label>
+                    <input type="url" id="video_url" name="video_url" class="form-control" value="<?= htmlspecialchars($project['video_url'] ?? '') ?>" placeholder="https://youtube.com/watch?v=...">
+                </div>
             </div>
 
-            <div class="row g-3">
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="live_url">Verified Live Production URL</label>
-                    <input type="url" id="live_url" name="live_url" class="form-control" value="<?= htmlspecialchars($project['live_url'] ?? '') ?>" placeholder="https://insandegreeclg.codex404solutions.online">
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-md-8">
+                    <label class="form-label" for="tags">Tech Stack Tags (Comma-Separated)</label>
+                    <input type="text" id="tags" name="tags" class="form-control" value="<?= htmlspecialchars($tagsString) ?>" placeholder="PHP 8.2, MySQL Relational, Granular RBAC, Sub-200ms TTFB">
                 </div>
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="case_study_url">Case Study URL / Anchor</label>
-                    <input type="text" id="case_study_url" name="case_study_url" class="form-control" value="<?= htmlspecialchars($project['case_study_url'] ?? 'case-studies') ?>" placeholder="e.g. case-studies">
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="case_study_url">Case Study Anchor / URL</label>
+                    <input type="text" id="case_study_url" name="case_study_url" class="form-control" value="<?= htmlspecialchars($project['case_study_url'] ?? 'case-studies') ?>" placeholder="case-studies">
                 </div>
+            </div>
+
+            <div>
+                <label class="form-label" for="case_study_content">In-Depth Case Study Article / Breakdown</label>
+                <textarea id="case_study_content" name="case_study_content" class="form-control" rows="4" placeholder="Detailed architectural narrative, migration hurdles, concurrency solutions, and performance benchmarking..."><?= htmlspecialchars($project['case_study_content'] ?? '') ?></textarea>
             </div>
         </div>
 
         <!-- ACTION BUTTONS -->
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-3 mb-5">
             <button type="submit" class="btn btn-primary btn-lg fw-bold px-4 py-2 shadow-sm d-inline-flex align-items-center gap-2" style="background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%); border: none; border-radius: 10px;">
                 <i class="bi bi-check2-circle fs-5"></i>
                 <span><?= $isEdit ? 'Save Changes' : 'Publish Project Deliverable' ?></span>
@@ -564,85 +808,29 @@ $tagsString = implode(', ', $project['tags'] ?? []);
             <a href="<?= admin_url('deliverables') ?>" class="btn btn-outline-secondary btn-lg px-4 py-2" style="border-radius: 10px;">
                 Cancel
             </a>
+            <?php if ($isEdit): ?>
+                <a href="<?= url('project.php?id=' . urlencode($project['id'])) ?>" target="_blank" class="btn btn-outline-info ms-auto" style="border-radius: 10px;">
+                    <i class="bi bi-box-arrow-up-right me-1"></i> View Live on Site
+                </a>
+            <?php endif; ?>
         </div>
 
-    <!-- ======================================================== -->
-    <!-- ADMIN FORM FOOTER                                        -->
-    <!-- ======================================================== -->
-    <footer class="admin-footer text-muted small mt-5">
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
-            <div>
-                &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong> &bull; Enterprise Deliverables Admin Console &bull; All Rights Reserved.
-            </div>
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-                <a href="<?= admin_url() ?>" class="admin-footer-link"><i class="bi bi-grid-1x2-fill text-info"></i> Overview</a>
-                <span>&bull;</span>
-                <a href="<?= admin_url('deliverables') ?>" class="admin-footer-link"><i class="bi bi-collection-play-fill text-warning"></i> Deliverables</a>
-                <span>&bull;</span>
-                <a href="../../crm/" target="_blank" class="admin-footer-link"><i class="bi bi-robot text-warning"></i> CRM Swarm</a>
-                <span>&bull;</span>
-                <a href="<?= url('#work') ?>" target="_blank" class="admin-footer-link"><i class="bi bi-box-arrow-up-right text-primary"></i> Public Front</a>
-            </div>
-        </div>
-    </footer>
-
+    </form>
 </main>
 
 <!-- Bootstrap 5.3.3 Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const getStoredTheme = () => localStorage.getItem('codex_admin_theme');
-    const setStoredTheme = theme => localStorage.setItem('codex_admin_theme', theme);
-    const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme();
-        if (storedTheme) return storedTheme;
-        return 'combo';
-    };
-
-    const updateThemeUI = (theme) => {
-        let label = 'Dark & Light';
-        let iconClass = 'bi bi-circle-half text-primary theme-icon-active';
-
-        if (theme === 'combo') {
-            label = 'Dark & Light';
-            iconClass = 'bi bi-circle-half text-primary theme-icon-active';
-        } else if (theme === 'light') {
-            label = 'Light';
-            iconClass = 'bi bi-sun-fill text-warning theme-icon-active';
-        } else if (theme === 'dark') {
-            label = 'Dark';
-            iconClass = 'bi bi-moon-stars-fill text-info theme-icon-active';
-        } else {
-            label = 'Auto';
-            iconClass = 'bi bi-laptop text-secondary theme-icon-active';
-        }
-
-        const textEl = document.getElementById('bd-theme-admin-text');
-        const iconEl = document.querySelector('#bd-theme-admin .theme-icon-active');
-        if (textEl) textEl.textContent = label;
-        if (iconEl) iconEl.className = iconClass;
-    };
-
+    const getStoredTheme = () => localStorage.getItem('codex_admin_theme') || 'combo';
     const applyTheme = (theme) => {
         const effectiveTheme = (theme === 'auto')
             ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'combo' : 'dark')
             : theme;
         document.documentElement.setAttribute('data-bs-theme', effectiveTheme);
-        updateThemeUI(theme);
     };
-
-    applyTheme(getPreferredTheme());
-
-    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const selected = btn.getAttribute('data-bs-theme-value');
-            setStoredTheme(selected);
-            applyTheme(selected);
-        });
-    });
+    applyTheme(getStoredTheme());
 });
 </script>
-
 </body>
 </html>

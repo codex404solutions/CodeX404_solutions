@@ -365,6 +365,8 @@ require_once __DIR__ . '/includes/header.php';
 
         <?php
         $homepageProjects = \App\Services\ProjectService::getActive();
+        $projectTypes = \App\Services\ProjectService::getProjectTypes();
+        $showcaseStatuses = \App\Services\ProjectService::getShowcaseStatuses();
         $countAll = count($homepageProjects);
         $countSoftware = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'software'));
         $countBooking = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'booking'));
@@ -400,18 +402,30 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Project Cards Grid with 3D Tilt -->
         <div class="project-showcase-grid">
             <?php foreach ($homepageProjects as $idx => $p): ?>
+                <?php
+                $typeKey = $p['project_type'] ?? 'client';
+                $type = $projectTypes[$typeKey] ?? $projectTypes['client'];
+                $statusKey = $p['showcase_status'] ?? 'live_website';
+                $status = $showcaseStatuses[$statusKey] ?? $showcaseStatuses['live_website'];
+                $isClient = ($typeKey === 'client');
+                $isAnonymized = !empty($p['is_anonymized']);
+                $clientName = $p['public_client_name'] ?? 'Verified Commercial Client';
+                ?>
                 <article class="project-card clean-project-card card-tilt<?= $idx >= 8 ? ' is-overflow-hidden' : '' ?>"
                     data-index="<?= $idx ?>"
-                    data-category="<?= htmlspecialchars($p['category']) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
+                    data-category="<?= htmlspecialchars($p['category']) ?>"
+                    data-type="<?= htmlspecialchars($typeKey) ?>"
+                    id="project-<?= htmlspecialchars($p['id']) ?>">
                     <div>
-                        <!-- Header with meta & verified live domain -->
-                        <div class="cpc-header">
-                            <div class="cpc-meta">
-                                <span
-                                    class="cpc-category"><?= htmlspecialchars($p['category_label'] ?? 'Custom Software') ?></span>
-                                <span class="cpc-badge">
-                                    <span class="cpc-dot"></span>
-                                    <?= htmlspecialchars($p['badge_text'] ?? 'Production Live') ?>
+                        <!-- Header with Project Type, Status & Domain -->
+                        <div class="cpc-header" style="margin-bottom: 0.75rem;">
+                            <div class="cpc-meta" style="gap: 0.35rem; flex-wrap: wrap;">
+                                <span class="cpc-type-pill <?= htmlspecialchars($type['badge']) ?>">
+                                    <span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor;"></span>
+                                    <span><?= htmlspecialchars($type['label']) ?></span>
+                                </span>
+                                <span class="cpc-status-pill">
+                                    <span><?= htmlspecialchars($status['label']) ?></span>
                                 </span>
                             </div>
                             <?php if (!empty($p['live_url'])): ?>
@@ -425,7 +439,7 @@ require_once __DIR__ . '/includes/header.php';
                                         <line x1="10" y1="14" x2="21" y2="3"></line>
                                     </svg>
                                 </a>
-                            <?php else: ?>
+                            <?php elseif (!empty($p['mockup_host'])): ?>
                                 <span class="cpc-domain-pill">
                                     <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
                                 </span>
@@ -435,13 +449,28 @@ require_once __DIR__ . '/includes/header.php';
                         <!-- Card Body -->
                         <div class="cpc-body">
                             <h3 class="cpc-title">
-                                <?php if (!empty($p['live_url'])): ?>
-                                    <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
-                                        title="Visit <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($p['title']) ?>
-                                <?php endif; ?>
+                                <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>"
+                                    title="View Architecture &amp; Case Study for <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
                             </h3>
+
+                            <!-- Client Attribution Row -->
+                            <div class="cpc-client-row">
+                                <?php if (!empty($p['client_logo'])): ?>
+                                    <img src="<?= asset($p['client_logo']) ?>" alt="<?= htmlspecialchars($clientName) ?>" style="height: 15px; max-width: 50px; object-fit: contain; vertical-align: middle;">
+                                <?php endif; ?>
+                                <?php if ($isClient): ?>
+                                    <?php if ($isAnonymized): ?>
+                                        <span class="cpc-client-anon">🔒 <?= htmlspecialchars($clientName) ?></span>
+                                    <?php else: ?>
+                                        <span class="cpc-client-name">🏢 <?= htmlspecialchars($clientName) ?></span>
+                                    <?php endif; ?>
+                                <?php elseif ($typeKey === 'internal'): ?>
+                                    <span class="cpc-client-name" style="color: var(--cyan);">💡 CodeX404 Proprietary</span>
+                                <?php else: ?>
+                                    <span class="cpc-client-name" style="color: #FBBF24;">⚡ Architecture Prototype</span>
+                                <?php endif; ?>
+                            </div>
+
                             <p class="cpc-description"><?= htmlspecialchars($p['solution'] ?? $p['description'] ?? '') ?>
                             </p>
 
@@ -470,18 +499,17 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="cpc-footer">
                         <?php if (!empty($p['live_url'])): ?>
                             <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
-                                class="cpc-btn cpc-btn-primary">
+                                class="cpc-btn cpc-btn-primary" title="Visit Live Production Site">
                                 <span>Live Site ↗</span>
-                            </a>
-                        <?php else: ?>
-                            <a href="<?= url('discovery-call.php') ?>" class="cpc-btn cpc-btn-primary">
-                                <span>Request Spec</span>
                             </a>
                         <?php endif; ?>
                         <button type="button" class="cpc-btn cpc-btn-secondary btn-demo-trigger"
-                            data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>">
+                            data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>" title="Interactive Demo">
                             <span>⚡ Demo</span>
                         </button>
+                        <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-outline" title="View Architecture Breakdown">
+                            <span>Details →</span>
+                        </a>
                     </div>
                 </article>
             <?php endforeach; ?>
