@@ -17,7 +17,7 @@ Do not start implementation until the documents are understood.
 Completely redesign CodeX404 Solutions into a premium global Software + AI technology website.
 
 Website:
-https://codex404solutions.online/
+https://codex404solutions.com/
 
 Founder LinkedIn:
 https://www.linkedin.com/in/mnoukhej/

@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: ['whatsapp', 'chat directly', 'human', 'person', 'support', 'live person', 'phone', 'contact'],
       reply: `
         <p>Prefer instant messaging? Connect directly with our team on WhatsApp:</p>
-        <p><strong>WhatsApp:</strong> +91 77177 47620<br><strong>Email:</strong> contact@codex404solutions.online</p>
+        <p><strong>WhatsApp:</strong> +91 77177 47620<br><strong>Email:</strong> info@codex404solutions.com</p>
         <p><a href="https://wa.me/917717747620?text=Hi%20CodeX404%20Solutions%2C%20I%20would%20like%20to%20discuss%20a%20software%2Fengineering%20project." target="_blank" rel="noopener" class="btn btn-primary btn-sm chat-btn-action" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-color: #25D366;">
           Open WhatsApp Chat &rarr;
         </a></p>
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <ul>
           <li><strong>Direct WhatsApp:</strong> <a href="https://wa.me/917717747620?text=Hi%20CodeX404%20Solutions%2C%20I%20have%20a%20question%20about%20your%20services" target="_blank" rel="noopener" class="chat-link">+91 77177 47620</a></li>
           <li><strong>Discovery Call:</strong> <a href="discovery-call" class="chat-link">Book a 30-min architecture review</a></li>
-          <li><strong>Email:</strong> <a href="mailto:contact@codex404solutions.online" class="chat-link">contact@codex404solutions.online</a></li>
+          <li><strong>Email:</strong> <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a></li>
         </ul>
         <p>Would you like to explore our <strong>Services</strong>, <strong>Pricing</strong>, or request a <strong>Project Quote</strong>?</p>
       `;
@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `, 200);
       } else {
         appendBotReply(`
-          <p>Thank you! We've captured your note: <em>"${fullText}"</em>. You can also email us directly at <a href="mailto:contact@codex404solutions.online" class="chat-link">contact@codex404solutions.online</a> or message us on WhatsApp at <strong>+91 77177 47620</strong>.</p>
+          <p>Thank you! We've captured your note: <em>"${fullText}"</em>. You can also email us directly at <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a> or message us on WhatsApp at <strong>+91 77177 47620</strong>.</p>
         `, 200);
       }
     } catch (e) {

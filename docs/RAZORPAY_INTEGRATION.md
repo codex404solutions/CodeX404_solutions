@@ -16,7 +16,7 @@ Razorpay will be used for:
 ### Step 1: Create Account
 ```text
 1. Visit: https://razorpay.com/
-2. Sign up with business email: hello@codex404solutions.online
+2. Sign up with business email: info@codex404solutions.com
 3. Verify email and phone
 4. Complete KYC (business documents)
 ```

@@ -484,7 +484,7 @@ Before writing your first line of code:
 - [ ] Logo files ready (or placeholder)
 - [ ] Brand colors documented ✓ (See DESIGN.md)
 - [ ] LinkedIn profile complete ✓
-- [ ] Business email active: hello@codex404solutions.online
+- [ ] Business email active: info@codex404solutions.com
 
 **Technical Ready:**
 - [ ] Local development environment installed

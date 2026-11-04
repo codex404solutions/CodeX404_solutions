@@ -62,7 +62,7 @@ X-Idempotency-Key: {uuid-v4}
   "utm_campaign": "ai-automation-launch",
   "utm_content": "hero-cta",
   "utm_term": null,
-  "page_url": "https://codex404solutions.online/contact",
+  "page_url": "https://codex404solutions.com/contact",
   "referrer": "https://www.linkedin.com/in/mnoukhej/",
   "user_agent": "Mozilla/5.0...",
   "ip_address": "203.0.113.42",
@@ -623,7 +623,7 @@ Notify website when lead status changes
 
 ### Example: Lead Qualified
 ```
-POST https://codex404solutions.online/webhooks/crm/lead-status
+POST https://codex404solutions.com/webhooks/crm/lead-status
 Authorization: Bearer {WEBSITE_WEBHOOK_SECRET}
 
 {
@@ -737,7 +737,7 @@ CRM_API_TIMEOUT=10
 ### CRM Environment Variables
 ```env
 WEBSITE_API_KEY=sk_live_abc123xyz...
-ALLOWED_ORIGINS=https://codex404solutions.online
+ALLOWED_ORIGINS=https://codex404solutions.com
 RATE_LIMIT_PER_MINUTE=100
 ```
 

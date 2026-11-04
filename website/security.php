@@ -122,7 +122,7 @@ require_once __DIR__ . '/includes/header.php';
             We take application security seriously. If you believe you have identified a security vulnerability in any CodeX404 system, please notify our security team directly. We commit to acknowledging receipt within 24 hours.
         </p>
         <div style="font-size: 1rem; color: var(--cyan); font-family: var(--font-mono);">
-            security@codex404solutions.online
+            security@codex404solutions.com
         </div>
     </div>
 </section>

@@ -36,7 +36,7 @@ This package does not authorize agents to send email, publish social posts, appr
 
 ## References
 
-- [CodeX404 Solutions](https://codex404solutions.online/)
+- [CodeX404 Solutions](https://codex404solutions.com/)
 - [Paperclip](https://github.com/paperclipai/paperclip)
 - [Agent Companies specification](https://agentcompanies.io/specification)
 

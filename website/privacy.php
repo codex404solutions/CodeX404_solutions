@@ -27,7 +27,7 @@ require_once __DIR__ . '/includes/header.php';
         <div style="background: var(--bg-surface); padding: 3rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); line-height: 1.8;">
             <h2 style="font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">1. Document Scope & Data Controller</h2>
             <p>
-                This Privacy Policy outlines how <strong>CodeX404 Solutions</strong> ("we", "us", "our") collects, uses, protects, and handles personal data when you interact with our website (<a href="https://codex404solutions.online">codex404solutions.online</a>) or communicate with our engineering team.
+                This Privacy Policy outlines how <strong>CodeX404 Solutions</strong> ("we", "us", "our") collects, uses, protects, and handles personal data when you interact with our website (<a href="https://codex404solutions.com">codex404solutions.com</a>) or communicate with our engineering team.
             </p>
             <p>
                 For data protection inquiries or to exercise your statutory privacy rights, our designated Data Protection Officer can be reached directly at <a href="mailto:<?= PRIVACY_EMAIL ?>"><?= PRIVACY_EMAIL ?></a>.

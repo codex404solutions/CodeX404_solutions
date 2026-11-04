@@ -8,8 +8,8 @@
 
 ## 🌐 Live Websites
 
-- **Production:** [codex404solutions.online](https://codex404solutions.online)
-- **Development:** [dev.codex404solutions.online](https://dev.codex404solutions.online)
+- **Production:** [codex404solutions.com](https://codex404solutions.com)
+- **Development:** [dev.codex404solutions.com](https://dev.codex404solutions.com)
 - **LinkedIn:** [Muhammad Noukhez](https://www.linkedin.com/in/mnoukhej/)
 
 ---
@@ -21,6 +21,7 @@
 ### **Our Services**
 
 #### 💻 Digital Products
+
 - Business Websites
 - E-commerce Platforms
 - Customer Portals
@@ -28,6 +29,7 @@
 - Mobile Applications
 
 #### 🤖 AI Solutions
+
 - AI Chatbots
 - RAG Applications
 - AI Knowledge Bases
@@ -39,6 +41,7 @@
 - AI Agents
 
 #### ⚡ Business Automation
+
 - CRM Automation
 - Email Automation
 - WhatsApp Automation
@@ -49,6 +52,7 @@
 - API Integrations
 
 #### 🏢 Business Software
+
 - Custom CRM Systems
 - ERP Solutions
 - Inventory Management
@@ -58,6 +62,7 @@
 - Reporting & Dashboards
 
 #### 🚀 SaaS Development
+
 - MVP Development
 - Full SaaS Development
 - Multi-tenant Architecture
@@ -123,6 +128,7 @@ CodeX404_solutions/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - **PHP 8.2+**
 - **MySQL 8.0+**
 - **Composer**
@@ -131,17 +137,20 @@ CodeX404_solutions/
 ### Installation
 
 **1. Clone Repository**
+
 ```bash
 git clone https://github.com/codex404solutions/CodeX404_solutions.git
 cd CodeX404_solutions
 ```
 
 **2. Install Dependencies**
+
 ```bash
 composer install
 ```
 
 **3. Setup Website**
+
 ```bash
 cd CodeX404_solutions
 cp .env.example .env
@@ -149,6 +158,7 @@ cp .env.example .env
 ```
 
 **4. Create Database**
+
 ```bash
 mysql -u root -p
 CREATE DATABASE codex404_website;
@@ -156,12 +166,14 @@ exit;
 ```
 
 **5. Start Local Server**
+
 ```bash
 # From website directory
 php -S localhost:8000
 ```
 
 **6. Access Website**
+
 ```
 http://localhost:8000
 ```
@@ -171,21 +183,25 @@ http://localhost:8000
 ## 🔧 Technology Stack
 
 ### Frontend
+
 - HTML5, CSS3, JavaScript
 - Responsive Design
 - Modern UI/UX
 
 ### Backend
+
 - PHP 8.2+
 - MySQL 8.0+
 - RESTful APIs
 
 ### Deployment
+
 - GitHub Actions (CI/CD)
 - Hostinger (Production & Dev)
 - Automated FTP deployment
 
 ### Future (CRM)
+
 - PHP 8.2+
 - MySQL 8.0+
 - Razorpay Integration
@@ -198,11 +214,13 @@ http://localhost:8000
 Comprehensive documentation is available in the `docs/` directory:
 
 ### Getting Started
+
 - 📘 **[Quick Start Guide](docs/QUICK_START_GUIDE.md)** - Start here
 - 🔧 **[Technology Stack](docs/STACK.md)** - Tech decisions
 - 🚀 **[Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment
 
 ### Website Development
+
 - 📋 **[Website PRD](docs/Main-Website/PRD.md)** - Product requirements
 - 🏗️ **[Website Architecture](docs/Main-Website/ARCHITECTURE.md)** - Technical structure
 - 🎨 **[Design System](docs/Main-Website/DESIGN.md)** - Colors, typography, components
@@ -210,11 +228,13 @@ Comprehensive documentation is available in the `docs/` directory:
 - 📏 **[Development Rules](docs/Main-Website/RULES.md)** - Coding standards & GDPR
 
 ### CRM Development (Future)
+
 - 📋 **[CRM PRD](docs/CRM/PRD.md)** - CRM features & requirements
 - 🏗️ **[CRM Architecture](docs/CRM/ARCHITECTURE.md)** - Database & structure
 - 🔐 **[CRM Rules](docs/CRM/RULES.md)** - Multi-role security & permissions
 
 ### Integration & Payments
+
 - 🔗 **[API Contract](docs/API_CONTRACT.md)** - Website ↔ CRM integration
 - 💳 **[Razorpay Integration](docs/RAZORPAY_INTEGRATION.md)** - Payment system
 - 📦 **[Monorepo Structure](docs/MONOREPO_STRUCTURE.md)** - Repository organization
@@ -224,10 +244,12 @@ Comprehensive documentation is available in the `docs/` directory:
 ## 🔄 CI/CD Pipeline
 
 ### Automated Deployment
+
 - **Push to `dev` branch** → Deploys to `dev.codex404solutions.online`
 - **Push to `main` branch** → Deploys to `codex404solutions.online`
 
 ### Workflow Features
+
 - ✅ Automatic deployment on push
 - ✅ Separate dev/production environments
 - ✅ Excludes sensitive files (.env, logs)
@@ -235,6 +257,7 @@ Comprehensive documentation is available in the `docs/` directory:
 - ✅ Deployment status badges
 
 ### Branch Strategy
+
 ```text
 main     → Production (codex404solutions.online)
   ↑
@@ -250,25 +273,28 @@ feature/* → Feature branches (local testing)
 ## 🎨 Design System
 
 ### Brand Colors
+
 ```css
---midnight: #07111F;           /* Dark backgrounds */
---deep-navy: #0B1F3A;          /* Dark sections */
---electric-blue: #2563EB;      /* Primary brand */
---cyan: #22D3EE;               /* Accents */
---violet: #7C3AED;             /* Secondary brand */
---soft-violet: #A78BFA;        /* Light accents */
---white: #FFFFFF;              /* Text on dark */
---slate: #94A3B8;              /* Secondary text */
---light: #F8FAFC;              /* Light backgrounds */
---dark-text: #0F172A;          /* Text on light */
+--midnight: #07111f; /* Dark backgrounds */
+--deep-navy: #0b1f3a; /* Dark sections */
+--electric-blue: #2563eb; /* Primary brand */
+--cyan: #22d3ee; /* Accents */
+--violet: #7c3aed; /* Secondary brand */
+--soft-violet: #a78bfa; /* Light accents */
+--white: #ffffff; /* Text on dark */
+--slate: #94a3b8; /* Secondary text */
+--light: #f8fafc; /* Light backgrounds */
+--dark-text: #0f172a; /* Text on light */
 ```
 
 ### Typography
+
 - **Headings:** Bold, 700 weight
 - **Body:** 16px, 1.6-1.75 line-height
 - **Buttons:** 600 weight, 14-16px
 
 ### Key Components
+
 - Leadership Section ✅ (Created with profile, stats, values)
 - Hero Section
 - Service Cards
@@ -285,6 +311,7 @@ feature/* → Feature branches (local testing)
 **📝 Action Required:** Please provide the following leadership details to complete the website:
 
 #### **Chief Executive Officer (CEO)**
+
 - **Full Name:** [To be provided]
 - **Professional Title:** CEO & Founder / Chief Executive Officer
 - **Professional Photo:** [High-resolution headshot needed]
@@ -297,7 +324,8 @@ feature/* → Feature branches (local testing)
   - Email: [Professional email]
   - Other social profiles: [Twitter, GitHub, etc.]
 
-#### **Managing Director (MD)** *(If different from CEO)*
+#### **Managing Director (MD)** _(If different from CEO)_
+
 - **Full Name:** [To be provided]
 - **Professional Title:** Managing Director / Chief Operating Officer
 - **Professional Photo:** [High-resolution headshot needed]
@@ -314,7 +342,9 @@ feature/* → Feature branches (local testing)
 **📁 Copy the following files to your project folder:**
 
 #### **Company Logos**
+
 Copy to: `website/assets/images/logo/`
+
 - [ ] `logo.svg` - Primary logo (scalable vector)
 - [ ] `logo-horizontal.svg` - Horizontal layout logo
 - [ ] `logo-vertical.svg` - Vertical layout logo
@@ -327,20 +357,26 @@ Copy to: `website/assets/images/logo/`
 - [ ] `favicon-32x32.png` - Standard favicon
 
 #### **Leadership Photos**
+
 Copy to: `website/assets/images/team/`
+
 - [ ] `ceo-photo.jpg` - CEO professional headshot (minimum 800x800px)
 - [ ] `md-photo.jpg` - MD professional headshot (minimum 800x800px)
 - [ ] `team-photo.jpg` - Group photo (if available)
 
 #### **Company Images**
+
 Copy to: `website/assets/images/company/`
+
 - [ ] `office-exterior.jpg` - Office building/workspace exterior
 - [ ] `office-interior.jpg` - Modern office interior shots
 - [ ] `team-working.jpg` - Team collaboration photos
 - [ ] `technology-setup.jpg` - Development environment/tech setup
 
 #### **Marketing Images**
+
 Copy to: `website/assets/images/marketing/`
+
 - [ ] `og-image.jpg` - Social media sharing image (1200x630px)
 - [ ] `hero-background.jpg` - Website hero section background
 - [ ] `about-background.jpg` - About page background image
@@ -349,6 +385,7 @@ Copy to: `website/assets/images/marketing/`
 ### 📝 Content Guidelines
 
 #### **Professional Photo Requirements:**
+
 - **Format:** JPG or PNG
 - **Resolution:** Minimum 800x800px (square format preferred)
 - **Quality:** Professional headshots with good lighting
@@ -357,6 +394,7 @@ Copy to: `website/assets/images/marketing/`
 - **Expression:** Confident, approachable, professional smile
 
 #### **Logo Requirements:**
+
 - **SVG Format:** Scalable vector graphics for crisp display at any size
 - **Multiple Variants:** Different versions for various use cases
 - **Color Consistency:** Maintain brand colors across all variants
@@ -382,18 +420,20 @@ Once you provide the above information and copy the assets:
 
 ### 📞 Current Contact Information
 
-**Muhammad Noukhez** *(Confirmed Details)*
+**Muhammad Noukhez** _(Confirmed Details)_
+
 - 💼 [LinkedIn](https://www.linkedin.com/in/mnoukhej/)
 - 🐙 [GitHub](https://github.com/mnoukhej)
 - 📧 [Email](mailto:mnoukhej@gmail.com)
 
-*Additional leadership details and professional assets needed as outlined above.*
+_Additional leadership details and professional assets needed as outlined above._
 
 ---
 
 ## 🛡️ Security & Compliance
 
 ### Security Practices
+
 - ✅ HTTPS encryption
 - ✅ SQL injection prevention (prepared statements)
 - ✅ XSS protection (output escaping)
@@ -404,6 +444,7 @@ Once you provide the above information and copy the assets:
 - ✅ Audit logging
 
 ### GDPR Compliance
+
 - ✅ Cookie consent
 - ✅ Privacy policy
 - ✅ Data retention policies
@@ -418,6 +459,7 @@ See [RULES.md](docs/Main-Website/RULES.md) for complete security guidelines.
 ## 📊 Development Progress
 
 ### Phase 1: Website (Current)
+
 - [x] Documentation (20 files) ✅
 - [x] Monorepo structure ✅
 - [x] Leadership component ✅
@@ -429,6 +471,7 @@ See [RULES.md](docs/Main-Website/RULES.md) for complete security guidelines.
 - [ ] Production deployment
 
 ### Phase 2: CRM (Future)
+
 - [ ] Authentication & RBAC
 - [ ] Lead management
 - [ ] Sales pipeline
@@ -438,6 +481,7 @@ See [RULES.md](docs/Main-Website/RULES.md) for complete security guidelines.
 - [ ] Website integration
 
 ### Phase 3: SaaS Products (Future)
+
 - [ ] Productized services
 - [ ] SaaS validation
 - [ ] Multi-tenant architecture
@@ -458,6 +502,7 @@ While this is primarily a business project, we follow best practices:
 7. Merge to `main` for production
 
 ### Conventional Commits
+
 ```text
 feat:     New feature
 fix:      Bug fix
@@ -473,18 +518,21 @@ chore:    Maintenance
 ## 🎯 Business Goals
 
 ### Short Term (3 Months)
+
 - ✅ Launch professional website
 - ✅ Establish brand identity
 - 🔄 Acquire first 10 clients
 - 🔄 Generate ₹1 lakh/month revenue
 
 ### Medium Term (6 Months)
+
 - 🔄 Launch CRM system
 - 🔄 Integrate Razorpay payments
 - 🔄 Reach ₹5 lakh/month revenue
 - 🔄 Expand to 3 international markets
 
 ### Long Term (12 Months)
+
 - 🔄 Launch first SaaS product
 - 🔄 Achieve ₹10 lakh/month revenue
 - 🔄 Build team (2-5 developers)
@@ -495,15 +543,18 @@ chore:    Maintenance
 ## 📞 Contact
 
 ### Business Inquiries
-- 🌐 **Website:** [codex404solutions.online](https://codex404solutions.online)
-- 📧 **Email:** hello@codex404solutions.online
+
+- 🌐 **Website:** [codex404solutions.com](https://codex404solutions.com)
+- 📧 **Email:** info@codex404solutions.com
 - 💼 **LinkedIn:** [CodeX404 Solutions](#)
 
 ### Technical Support
-- 📧 **Email:** support@codex404solutions.online
+
+- 📧 **Email:** support@codex404solutions.com
 - 🐛 **Issues:** [GitHub Issues](https://github.com/mnoukhej/CodeX404_solutions/issues)
 
 ### Founder
+
 - **Muhammad Noukhez**
 - 📧 mnoukhej@gmail.com
 - 💼 [LinkedIn](https://www.linkedin.com/in/mnoukhej/)
@@ -543,12 +594,13 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 <p align="center">
   <strong>Transform Your Business with Software & AI</strong>
   <br>
-  <a href="https://codex404solutions.online">Visit Website</a> •
+  <a href="https://codex404solutions.com">Visit Website</a> •
   <a href="https://www.linkedin.com/in/mnoukhej/">Connect on LinkedIn</a> •
-  <a href="mailto:hello@codex404solutions.online">Get in Touch</a>
+  <a href="mailto:info@codex404solutions.com">Get in Touch</a>
 </p>
 
 <!-- TREE_START -->
+
 ```
 ├── README.md
 ├── crm
@@ -1049,4 +1101,5 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── solutions.php
     └── terms.php
 ```
+
 <!-- TREE_END -->

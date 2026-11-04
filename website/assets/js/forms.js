@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (alertContainer) {
           alertContainer.innerHTML = `
             <div class="alert-box alert-danger" role="alert">
-              <div>Network or server error. Please email us directly at <strong>contact@codex404solutions.online</strong>.</div>
+              <div>Network or server error. Please email us directly at <strong>info@codex404solutions.com</strong>.</div>
             </div>
           `;
         }

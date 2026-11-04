@@ -461,10 +461,10 @@ DB_PASS=
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.hostinger.com
 MAIL_PORT=587
-MAIL_USERNAME=hello@codex404solutions.online
+MAIL_USERNAME=info@codex404solutions.com
 MAIL_PASSWORD=
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=hello@codex404solutions.online
+MAIL_FROM_ADDRESS=info@codex404solutions.com
 MAIL_FROM_NAME="CodeX404 Solutions"
 
 # CRM Integration
@@ -736,8 +736,8 @@ codex404-solutions/
 
 ## 📧 Contact
 
-- Website: https://codex404solutions.online
-- Email: hello@codex404solutions.online
+- Website: https://codex404solutions.com
+- Email: info@codex404solutions.com
 - LinkedIn: https://www.linkedin.com/in/mnoukhej/
 ```
 

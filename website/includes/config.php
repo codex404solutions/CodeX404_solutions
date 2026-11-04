@@ -108,8 +108,8 @@ define('APP_CORE_MESSAGE', 'Build. Automate. Scale.');
 define('APP_DESCRIPTION', 'We design, build and automate digital systems that help growing businesses operate smarter, move faster and scale with confidence.');
 
 // ---------------- CONTACT INFORMATION ----------------
-define('COMPANY_EMAIL', 'contact@codex404solutions.online');
-define('PRIVACY_EMAIL', 'privacy@codex404solutions.online');
+define('COMPANY_EMAIL', 'info@codex404solutions.com');
+define('PRIVACY_EMAIL', 'privacy@codex404solutions.com');
 define('COMPANY_LINKEDIN', 'https://www.linkedin.com/company/codex404solutions');
 define('COMPANY_GITHUB', 'https://github.com/codex404solutions');
 define('COMPANY_TWITTER', 'https://x.com/codex404sol');

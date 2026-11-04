@@ -167,7 +167,7 @@ DB_PASS=
 CRM_DB_NAME=codex404_crm
 
 SMTP_HOST=smtp.hostinger.com
-SMTP_USER=hello@codex404solutions.online
+SMTP_USER=info@codex404solutions.com
 SMTP_PASS=
 
 RAZORPAY_KEY_ID=rzp_test_xxx

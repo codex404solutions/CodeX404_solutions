@@ -51,7 +51,7 @@
 CodeX404 Solutions.
 
 Website:
-https://codex404solutions.online/
+https://codex404solutions.com/
 
 ## Positioning
 India-based company serving India and international markets.
@@ -98,7 +98,7 @@ The website should integrate with the future CRM but must not contain the CRM.
 CodeX404 Solutions.
 
 Website:
-https://codex404solutions.online/
+https://codex404solutions.com/
 
 Founder LinkedIn:
 https://www.linkedin.com/in/mnoukhej/

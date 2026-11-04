@@ -4,4 +4,4 @@ Disallow: /storage/
 Disallow: /config/
 Disallow: /app/
 
-Sitemap: https://codex404solutions.online/sitemap.xml
+Sitemap: https://codex404solutions.com/sitemap.xml

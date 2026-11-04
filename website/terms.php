@@ -27,7 +27,7 @@ require_once __DIR__ . '/includes/header.php';
         <div style="background: var(--bg-surface); padding: 3rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); line-height: 1.8;">
             <h2 style="font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">1. Acceptance of Terms</h2>
             <p>
-                By accessing this website (<a href="https://codex404solutions.online">codex404solutions.online</a>) or commissioning engineering services from <strong>CodeX404 Solutions</strong>, you agree to be bound by these Terms of Service and all applicable laws and regulations.
+                By accessing this website (<a href="https://codex404solutions.com">codex404solutions.com</a>) or commissioning engineering services from <strong>CodeX404 Solutions</strong>, you agree to be bound by these Terms of Service and all applicable laws and regulations.
             </p>
 
             <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">2. Scope of Services</h2>

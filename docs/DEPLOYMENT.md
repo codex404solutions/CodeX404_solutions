@@ -120,10 +120,10 @@ DB_PASS=
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.hostinger.com
 MAIL_PORT=587
-MAIL_USERNAME=hello@codex404solutions.online
+MAIL_USERNAME=info@codex404solutions.com
 MAIL_PASSWORD=
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=hello@codex404solutions.online
+MAIL_FROM_ADDRESS=info@codex404solutions.com
 MAIL_FROM_NAME="CodeX404 Solutions"
 
 # CRM Integration
@@ -341,7 +341,7 @@ ErrorDocument 500 /500.php
 
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://codex404solutions.online
+APP_URL=https://codex404solutions.com
 
 DB_HOST=localhost
 DB_NAME=u123456789_website
@@ -352,7 +352,7 @@ CRM_API_URL=https://crm.codex404solutions.online/api/v1
 CRM_API_SECRET=[generate 64-char random string]
 
 MAIL_HOST=smtp.hostinger.com
-MAIL_USERNAME=hello@codex404solutions.online
+MAIL_USERNAME=info@codex404solutions.com
 MAIL_PASSWORD=[actual email password]
 
 SESSION_SECURE=true
@@ -388,7 +388,7 @@ chmod -R 775 storage/sessions/
 ### Step 10: Test Website
 ```bash
 # Test checklist:
-✓ https://codex404solutions.online loads
+✓ https://codex404solutions.com loads
 ✓ All pages load without errors
 ✓ Contact form submits
 ✓ Images load
@@ -602,7 +602,7 @@ echo "Backup completed: $DATE"
 ```text
 Service: UptimeRobot (Free Plan)
 Monitors:
-- https://codex404solutions.online (check every 5 minutes)
+- https://codex404solutions.com (check every 5 minutes)
 - https://crm.codex404solutions.online (check every 5 minutes)
 - https://crm.codex404solutions.online/health (API health check)
 
