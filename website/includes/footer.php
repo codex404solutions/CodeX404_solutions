@@ -94,7 +94,7 @@ declare(strict_types=1);
                     Direct: <a href="mailto:<?= COMPANY_EMAIL ?>"><?= COMPANY_EMAIL ?></a>
                 </p>
                 <p style="font-size: 0.8rem; color: var(--slate-dark);">
-                    WhatsApp: <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener" style="color: var(--cyan); font-weight: 600;"><?= COMPANY_WHATSAPP_NUMBER ?></a>
+                    Inquiries: <a href="<?= url('contact.php') ?>" style="color: var(--cyan); font-weight: 600;">Contact Form &rarr;</a>
                 </p>
             </div>
         </div>

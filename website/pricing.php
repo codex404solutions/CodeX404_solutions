@@ -33,15 +33,11 @@ require_once __DIR__ . '/includes/header.php';
         </p>
 
         <div class="hero-cta-group" style="justify-content: center; gap: 1rem;">
-            <a href="https://wa.me/917717747620?text=Hi%20Muhammad,%20I'd%20like%20to%20discuss%20pricing%20and%20scope%20for%20my%20project." 
-               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.071.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/>
-                </svg>
-                <span>Direct WhatsApp Consultation (+91 77177 47620)</span>
+            <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg">
+                <span>📅 Book a Discovery Call</span>
             </a>
-            <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-lg">
-                <span>Book a Discovery Call 📅</span>
+            <a href="<?= url('contact.php') ?>" class="btn btn-secondary btn-lg">
+                <span>Request Custom Quote &rarr;</span>
             </a>
         </div>
     </div>
@@ -186,8 +182,7 @@ require_once __DIR__ . '/includes/header.php';
                 </ul>
 
                 <div class="price-card-footer">
-                    <a href="https://wa.me/917717747620?text=Hi%20Muhammad,%20I'm%20interested%20in%20a%20Turnkey%20Booking%20System%20(Dental%20/%20Salon%20/%20Spa%20/%20Restaurant)." 
-                       target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; text-align: center;">
+                    <a href="<?= url('contact.php?interest=booking-system') ?>" class="btn btn-primary" style="width: 100%; text-align: center;">
                         <span>Launch Your Booking System 🚀</span>
                     </a>
                 </div>
@@ -265,8 +260,7 @@ require_once __DIR__ . '/includes/header.php';
                 </ul>
 
                 <div class="price-card-footer">
-                    <a href="https://wa.me/917717747620?text=Hi%20Muhammad,%20I%20have%20an%20Enterprise%20Software%20/%20SaaS%20Platform%20project%20to%20discuss." 
-                       target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%; text-align: center;">
+                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary" style="width: 100%; text-align: center;">
                         <span>Scope Enterprise Build</span>
                     </a>
                 </div>
@@ -298,12 +292,11 @@ require_once __DIR__ . '/includes/header.php';
             </p>
 
             <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                <a href="https://wa.me/917717747620?text=Hi%20Muhammad,%20I'd%20like%20to%20discuss%20my%20software%20project%20scope." 
-                   target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-                    <span>💬 WhatsApp Us: +91 77177 47620</span>
+                <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg">
+                    <span>📅 Book Discovery Call</span>
                 </a>
-                <a href="tel:+917717747620" class="btn btn-secondary btn-lg">
-                    <span>📞 Direct Call: +91 77177 47620</span>
+                <a href="<?= url('contact.php') ?>" class="btn btn-secondary btn-lg">
+                    <span>✉️ Send Direct Inquiry</span>
                 </a>
             </div>
         </div>

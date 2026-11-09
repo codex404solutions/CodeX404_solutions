@@ -61,11 +61,11 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">💬</div>
+                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">📅</div>
                         <div>
-                            <strong style="color: var(--white); display: block;">Instant WhatsApp Discussion</strong>
-                            <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
-                                Chat on WhatsApp (<?= COMPANY_WHATSAPP_NUMBER ?>) &rarr;
+                            <strong style="color: var(--white); display: block;">Technical Discovery Call</strong>
+                            <a href="<?= url('discovery-call.php') ?>" style="color: var(--cyan); font-weight: 600;">
+                                Schedule 30-Min Session &rarr;
                             </a>
                         </div>
                     </div>

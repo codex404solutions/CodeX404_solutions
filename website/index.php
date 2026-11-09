@@ -998,8 +998,8 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener" class="btn btn-primary">
-                        <span>Direct WhatsApp: <?= COMPANY_WHATSAPP_NUMBER ?></span>
+                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary">
+                        <span>📅 Book Discovery Call</span>
                     </a>
                     <a href="mailto:<?= COMPANY_EMAIL ?>" class="btn btn-secondary">
                         <span>Email: <?= COMPANY_EMAIL ?></span>

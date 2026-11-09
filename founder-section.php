@@ -73,8 +73,8 @@
                         class="btn btn-secondary btn-sm">
                         <span>LinkedIn</span>
                     </a>
-                    <a href="<?= defined('COMPANY_WHATSAPP_URL') ? COMPANY_WHATSAPP_URL : 'https://wa.me/917717747620' ?>" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-                        <span>Direct Chat</span>
+                    <a href="mailto:<?= COMPANY_EMAIL ?>" class="btn btn-outline btn-sm">
+                        <span>Contact</span>
                     </a>
                 </div>
             </article>

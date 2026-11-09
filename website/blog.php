@@ -109,11 +109,10 @@ require_once __DIR__ . '/includes/header.php';
                 Need Architectural Guidance for Your System?
             </h2>
             <p style="color: var(--slate); font-size: 1.05rem; max-width: 620px; margin: 0 auto 2rem auto; line-height: 1.6;">
-                Reach out to senior engineer Muhammad Noukhez on WhatsApp (+91 77177 47620) for practical system design feedback.
+                Schedule a 30-minute discovery call with senior engineer Muhammad Noukhez for practical system design feedback.
             </p>
-            <a href="https://wa.me/917717747620?text=Hi%20Muhammad,%20I%20read%20your%20engineering%20insights%20and%20want%20to%20discuss%20a%20project." 
-               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-                <span>💬 Connect on WhatsApp (+91 77177 47620)</span>
+            <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg">
+                <span>📅 Book a Discovery Call</span>
             </a>
         </div>
     </div>

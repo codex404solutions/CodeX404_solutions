@@ -76,8 +76,8 @@ declare(strict_types=1);
                         class="btn btn-secondary btn-sm">
                         <span>LinkedIn</span>
                     </a>
-                    <a href="<?= COMPANY_WHATSAPP_URL ?>" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-                        <span>Direct Chat</span>
+                    <a href="mailto:<?= COMPANY_EMAIL ?>" class="btn btn-outline btn-sm">
+                        <span>Contact</span>
                     </a>
                 </div>
             </article>
