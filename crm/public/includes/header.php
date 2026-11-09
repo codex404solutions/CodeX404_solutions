@@ -6,7 +6,7 @@ declare(strict_types=1);
  */
 
 $currentPage = $currentPage ?? 'dashboard';
-$pageTitle = $pageTitle ?? 'Company CRM & Paperclip Command Center';
+$pageTitle = $pageTitle ?? 'Company CRM & Executive Command Center';
 $pageSubtitle = $pageSubtitle ?? 'Autonomous multi-agent pipeline with Human-in-the-Loop governance';
 $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
 ?>
@@ -124,10 +124,6 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                         <span><i class="bi bi-rocket-takeoff-fill me-2 text-primary"></i> Client Delivery</span>
                         <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle" style="font-size: 0.62rem;"><?= count($projects) ?></span>
                     </a>
-                    <a href="paperclip" class="crm-nav-link <?= $currentPage === 'paperclip' ? 'active' : '' ?>">
-                        <span><i class="bi bi-robot me-2 text-info"></i> Paperclip Agents</span>
-                        <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle" style="font-size: 0.62rem;"><?= count($agents) ?></span>
-                    </a>
                     <a href="approvals" class="crm-nav-link <?= $currentPage === 'approvals' ? 'active' : '' ?>">
                         <span><i class="bi bi-shield-check me-2 text-warning"></i> HITL Approvals</span>
                         <?php if (count($pendingApprovals) > 0): ?>
@@ -198,11 +194,6 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                 </div>
 
                 <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <!-- Paperclip Engine Status Badge -->
-                    <div class="badge d-flex align-items-center gap-2 px-3 py-2 rounded-pill" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34D399;">
-                        <span class="agent-badge-pulse"></span>
-                        <span class="fw-semibold">Paperclip Engine: <?= htmlspecialchars($paperclipConn['mode'] ?? 'Local Runtime') ?></span>
-                    </div>
 
                     <!-- Real-Time Live Currency Dropdown -->
                     <div class="dropdown">
@@ -344,7 +335,6 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                             <li><a class="dropdown-item" href="users"><i class="bi bi-person-plus-fill me-2 text-info"></i> Provision Team User</a></li>
                             <li><a class="dropdown-item" href="profile"><i class="bi bi-person-badge me-2 text-primary"></i> My Full Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent"><i class="bi bi-robot me-2 text-info"></i> Dispatch Paperclip Agent</a></li>
                         </ul>
                     </div>
                 </div>
@@ -377,11 +367,6 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                         <div class="crm-marquee-item">
                             <i class="bi bi-cash-stack text-success"></i>
                             <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
-                            <span class="sep">&bull;</span>
-                        </div>
-                        <div class="crm-marquee-item">
-                            <i class="bi bi-robot text-info"></i>
-                            <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
                             <span class="sep">&bull;</span>
                         </div>
                         <div class="crm-marquee-item">
@@ -419,11 +404,6 @@ $htmlTitle = $htmlTitle ?? ($pageTitle . ' — CodeX404 Solutions CRM');
                         <div class="crm-marquee-item">
                             <i class="bi bi-cash-stack text-success"></i>
                             <span>1 USD = <strong>د.إ<?= number_format((float)($liveExchangeRates['AED'] ?? 3.67), 2) ?> AED</strong></span>
-                            <span class="sep">&bull;</span>
-                        </div>
-                        <div class="crm-marquee-item">
-                            <i class="bi bi-robot text-info"></i>
-                            <span>Paperclip Swarm: <strong>7/7 Autonomous Agents Armed</strong></span>
                             <span class="sep">&bull;</span>
                         </div>
                         <div class="crm-marquee-item">

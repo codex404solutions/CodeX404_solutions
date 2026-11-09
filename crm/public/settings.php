@@ -11,45 +11,41 @@ require_once __DIR__ . '/includes/bootstrap.php';
 
 $currentPage = 'settings';
 $pageTitle = 'System Architecture, RBAC & API Ingestion';
-$pageSubtitle = 'Integration parameters, Paperclip endpoints, storage telemetry, and HMAC webhook signature specs';
+$pageSubtitle = 'Integration parameters, storage telemetry, and HMAC webhook signature specs';
 $htmlTitle = 'System & API Settings — CodeX404 Solutions CRM';
 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="row g-4 mb-4">
-    <!-- Paperclip Integration Diagnostic -->
+    <!-- System & Storage Diagnostics -->
     <div class="col-12 col-xl-6">
         <div class="crm-card p-4 h-100">
-            <h6 class="fw-bold text-white mb-3"><i class="bi bi-cpu text-info me-2"></i>Paperclip Daemon Integration Diagnostic</h6>
+            <h6 class="fw-bold text-white mb-3"><i class="bi bi-hdd-network text-info me-2"></i>System & Storage Architecture Diagnostic</h6>
             <div class="table-responsive">
                 <table class="table table-custom mb-3 small">
                     <tr>
-                        <td class="text-muted" style="width: 35%;">Engine Mode</td>
-                        <td class="fw-bold text-info"><?= htmlspecialchars($paperclipConn['mode'] ?? 'local_standalone') ?></td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Target Daemon URL</td>
-                        <td class="mono"><?= htmlspecialchars($paperclipConn['url'] ?? 'http://127.0.0.1:3100') ?></td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Active Specialist Roles</td>
-                        <td><span class="badge bg-success-subtle text-success">7 Agents Registered &amp; Online</span></td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Storage Subsystem</td>
+                        <td class="text-muted" style="width: 35%;">Storage Subsystem</td>
                         <td class="mono small">crm/storage/data/*.json (Deterministic Atomic Locks)</td>
                     </tr>
                     <tr>
                         <td class="text-muted">Multi-Page Architecture</td>
                         <td><span class="badge bg-info-subtle text-info">Enabled (Modular Native PHP Engine)</span></td>
                     </tr>
+                    <tr>
+                        <td class="text-muted">Security Guardrails</td>
+                        <td><span class="badge bg-success-subtle text-success">CSRF, RBAC, Output Encoding Active</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">Multi-Currency Engine</td>
+                        <td><span class="badge bg-success-subtle text-success">Real-time Currency Conversion (USD, INR, EUR, GBP, AED)</span></td>
+                    </tr>
                 </table>
             </div>
             <div class="p-3 rounded-3" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2);">
-                <div class="small text-info fw-bold mb-1"><i class="bi bi-info-circle me-1"></i> Dual-Mode Architecture:</div>
+                <div class="small text-info fw-bold mb-1"><i class="bi bi-info-circle me-1"></i> Architecture Overview:</div>
                 <div class="small text-muted">
-                    The CRM features an embedded autonomous execution runtime capable of running all 7 specialist routines locally, and will seamlessly bridge with any live Paperclip background daemon when <code class="text-info">PAPERCLIP_API_KEY</code> is configured in <code class="text-info">crm/.env</code>.
+                    Modular native PHP architecture with atomic file-level persistence, prepared database bridges, and granular role-based access control.
                 </div>
             </div>
         </div>

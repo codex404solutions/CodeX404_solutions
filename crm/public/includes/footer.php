@@ -20,7 +20,7 @@ declare(strict_types=1);
                             <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold" style="font-size: 0.68rem;">v4.0.4 Enterprise</span>
                         </div>
                         <p class="text-muted small mb-0" style="font-size: 0.78rem; line-height: 1.5;">
-                            Autonomous B2B Customer Relationship Management &amp; Paperclip Multi-Agent Operations Command Center. Powered by deterministic storage locks, real-time multi-currency FX conversions, and human-in-the-loop governance.
+                            Autonomous B2B Customer Relationship Management &amp; Executive Operations Command Center. Powered by deterministic storage locks, real-time multi-currency FX conversions, and human-in-the-loop governance.
                         </p>
                     </div>
 
@@ -36,8 +36,8 @@ declare(strict_types=1);
                                 </div>
                                 <div class="col-4">
                                     <div class="crm-footer-stat-box">
-                                        <div class="fw-bold text-info" style="font-size: 0.95rem;"><?= count($agents) ?></div>
-                                        <div class="crm-footer-stat-label">Paperclip Swarm</div>
+                                        <div class="fw-bold text-info" style="font-size: 0.95rem;"><?= count($projects) ?></div>
+                                        <div class="crm-footer-stat-label">Client Projects</div>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -326,141 +326,6 @@ declare(strict_types=1);
 </div>
 
 <!-- ======================================================== -->
-<!-- MODAL 4: DISPATCH PAPERCLIP AGENT                        -->
-<!-- ======================================================== -->
-<div class="modal fade" id="modalDispatchAgent" tabindex="-1" aria-labelledby="modalDispatchAgentLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form method="POST">
-                <input type="hidden" name="csrf_token" value="<?= \CRM\Services\CrmSecurity::escape($csrfToken) ?>">
-                <input type="hidden" name="action" value="dispatch_paperclip">
-                <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
-
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="modalDispatchAgentLabel"><i class="bi bi-robot text-info me-2"></i>Dispatch Autonomous Specialist Agent</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label small text-muted">Target Specialist Agent *</label>
-                        <select name="agent_slug" id="dispatchAgentSelect" class="form-select">
-                            <?php foreach ($agents as $slug => $ag): ?>
-                                <option value="<?= htmlspecialchars($slug) ?>"><?= htmlspecialchars($ag['name']) ?> (<?= htmlspecialchars($ag['title']) ?>)</option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small text-muted">Task Brief Title *</label>
-                        <input type="text" name="title" class="form-control" placeholder="e.g. Conduct Deep Competitor & Architecture Teardown" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small text-muted">Detailed Instructions / Context Prompt</label>
-                        <textarea name="description" class="form-control" rows="3" placeholder="Provide background constraints, desired output format, or specific technologies to assess..."></textarea>
-                    </div>
-                    <div class="row g-2 mb-0">
-                        <div class="col-6">
-                            <label class="form-label small text-muted">Execution Priority</label>
-                            <select name="priority" class="form-select">
-                                <option value="low">Low</option>
-                                <option value="medium" selected>Medium</option>
-                                <option value="high">High (Immediate)</option>
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label small text-muted">Associated Prospect (Optional)</label>
-                            <select name="lead_id" id="dispatchLeadSelect" class="form-select">
-                                <option value="">-- None / Internal --</option>
-                                <?php foreach ($leads as $l): ?>
-                                    <option value="<?= htmlspecialchars($l['id']) ?>"><?= htmlspecialchars($l['name']) ?> (<?= htmlspecialchars($l['company_name'] ?? 'Co') ?>)</option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info text-dark fw-bold px-4">
-                        <i class="bi bi-send-fill me-1"></i> Dispatch &amp; Execute
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- ======================================================== -->
-<!-- MODAL 5: 1-CLICK AUTONOMOUS AGENT ROUTINES               -->
-<!-- ======================================================== -->
-<div class="modal fade" id="modalAgentRoutines" tabindex="-1" aria-labelledby="modalAgentRoutinesLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form method="POST">
-                <input type="hidden" name="csrf_token" value="<?= \CRM\Services\CrmSecurity::escape($csrfToken) ?>">
-                <input type="hidden" name="action" value="run_routine">
-                <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
-
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="modalAgentRoutinesLabel"><i class="bi bi-lightning-fill text-warning me-2"></i>Execute Autonomous Routine</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="small text-muted mb-3">
-                        Autonomous routines coordinate multiple specialized agents to complete high-impact business workflows without manual prompting.
-                    </p>
-                    <div class="mb-3">
-                        <label class="form-label small text-muted">Select Standard Operating Routine *</label>
-                        <select name="routine" class="form-select" required>
-                            <option value="triage_inbound_lead">1. Inbound Lead Triage &amp; MEDDPICC Qualification</option>
-                            <option value="generate_web_proposal">2. Technical Proposal &amp; Architecture Spec Generation</option>
-                            <option value="senior_code_audit">3. Autonomous Code Review &amp; Security Audit</option>
-                            <option value="delivery_signoff">4. Client Milestone Verification &amp; Delivery Sign-Off</option>
-                        </select>
-                    </div>
-                    <div class="mb-0">
-                        <label class="form-label small text-muted">Context Lead (Optional)</label>
-                        <select name="lead_id" class="form-select">
-                            <option value="">-- Apply to Most Recent Prospect --</option>
-                            <?php foreach ($leads as $l): ?>
-                                <option value="<?= htmlspecialchars($l['id']) ?>"><?= htmlspecialchars($l['name']) ?> (<?= htmlspecialchars($l['company_name'] ?? 'N/A') ?>)</option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-warning fw-bold px-4">
-                        <i class="bi bi-play-circle-fill me-1"></i> Run Routine Now
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- ======================================================== -->
-<!-- MODAL 6: AGENT OUTPUT VIEWER                             -->
-<!-- ======================================================== -->
-<div class="modal fade" id="modalViewOutput" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h5 class="modal-title fw-bold mb-0" id="outputModalTitle">Task Execution Output</h5>
-                    <small class="text-info" id="outputModalAgent">Executed by Specialist Agent</small>
-                </div>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-3">
-                <pre id="outputModalBody" class="mono text-light p-3 rounded mb-0" style="background: rgba(0, 0, 0, 0.4); max-height: 480px; overflow-y: auto; white-space: pre-wrap; font-size: 0.82rem;"></pre>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ======================================================== -->
 <!-- MOBILE OFFCANVAS SIDEBAR (Multi-Page Navigation)         -->
 <!-- ======================================================== -->
 <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar" style="width: 280px;">
@@ -483,9 +348,6 @@ declare(strict_types=1);
             </a>
             <a href="projects" class="crm-nav-link <?= $currentPage === 'projects' ? 'active' : '' ?>">
                 <i class="bi bi-rocket-takeoff-fill me-2"></i> Client Delivery
-            </a>
-            <a href="paperclip" class="crm-nav-link <?= $currentPage === 'paperclip' ? 'active' : '' ?>">
-                <i class="bi bi-robot me-2"></i> Paperclip Agents
             </a>
             <a href="approvals" class="crm-nav-link <?= $currentPage === 'approvals' ? 'active' : '' ?>">
                 <i class="bi bi-shield-check me-2"></i> Approvals (<?= count($pendingApprovals) ?>)

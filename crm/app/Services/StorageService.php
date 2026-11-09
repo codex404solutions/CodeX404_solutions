@@ -27,7 +27,6 @@ class StorageService
         'opportunities' => 'opportunities',
         'projects' => 'crm_projects',
         'approvals' => 'approvals',
-        'paperclip_tasks' => 'paperclip_tasks',
         'currency_rates' => 'currency_rates',
         'rates_cache' => 'currency_rates',
         'users' => 'users',
@@ -378,23 +377,6 @@ class StorageService
                         ':changes' => !empty($record['changes']) ? json_encode($record['changes']) : null,
                         ':ip_address' => $record['ip_address'] ?? null,
                         ':user_agent' => $record['user_agent'] ?? null,
-                        ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
-                    ]);
-                } elseif ($table === 'paperclip_tasks') {
-                    $stmt = $pdo->prepare("
-                        INSERT INTO `paperclip_tasks` (`id`, `agent`, `agent_title`, `task_type`, `title`, `status`, `priority`, `input_data`, `output_data`, `created_at`, `completed_at`)
-                        VALUES (:id, :agent, :agent_title, :task_type, :title, :status, :priority, :input_data, :output_data, :created_at, NOW())
-                    ");
-                    $stmt->execute([
-                        ':id' => $record['id'],
-                        ':agent' => $record['agent'] ?? 'lead-researcher',
-                        ':agent_title' => $record['agent_title'] ?? 'Lead Researcher',
-                        ':task_type' => $record['task_type'] ?? 'general',
-                        ':title' => $record['title'] ?? 'Task',
-                        ':status' => $record['status'] ?? 'completed',
-                        ':priority' => $record['priority'] ?? 'medium',
-                        ':input_data' => json_encode($record['input'] ?? $record['input_data'] ?? []),
-                        ':output_data' => json_encode($record['output'] ?? $record['output_data'] ?? []),
                         ':created_at' => date('Y-m-d H:i:s', strtotime($record['created_at']))
                     ]);
                 } elseif ($table === 'users') {

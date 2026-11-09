@@ -149,7 +149,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="admin-marquee-item">
                 <i class="bi bi-robot text-warning"></i>
-                <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
+                <span>CRM Operations: <strong>Armed &amp; Connected</strong></span>
                 <span class="sep">&bull;</span>
             </div>
             <div class="admin-marquee-item">

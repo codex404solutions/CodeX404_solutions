@@ -83,7 +83,7 @@ $currentPage = $currentPage ?? 'overview';
                                 style="font-size: 0.68rem; letter-spacing: 0.06em;">Platform Bridges</div>
                             <div class="d-flex flex-column gap-1 align-items-md-end">
                                 <a href="../../crm/" target="_blank" class="admin-footer-link text-warning">
-                                    <i class="bi bi-robot"></i> <span>Company CRM &amp; Paperclip</span>
+                                    <i class="bi bi-briefcase"></i> <span>Company CRM</span>
                                 </a>
                                 <a href="<?= url('#work') ?>" target="_blank" class="admin-footer-link">
                                     <i class="bi bi-box-arrow-up-right text-primary"></i> <span>Public Portfolio

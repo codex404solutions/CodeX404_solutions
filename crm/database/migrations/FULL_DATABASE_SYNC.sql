@@ -213,9 +213,9 @@ CREATE TABLE IF NOT EXISTS `audit_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -------------------------------------------------------------
--- 11. PAPERCLIP AUTONOMOUS TASKS
+-- 11. CRM AUTONOMOUS TASKS
 -- -------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `paperclip_tasks` (
+CREATE TABLE IF NOT EXISTS `crm_tasks` (
     `id` VARCHAR(100) NOT NULL PRIMARY KEY,
     `agent` VARCHAR(100) NOT NULL,
     `agent_title` VARCHAR(150) NULL,
@@ -258,7 +258,7 @@ INSERT INTO `roles` (`id`, `slug`, `name`, `description`, `color`, `is_system`, 
 ('role_project_manager', 'project_manager', 'Project Manager', 'Sprint management, delivery schedules, client communications, and milestone tracking', 'emerald', 1, NOW()),
 ('role_lead_developer', 'lead_developer', 'Lead / Senior Engineer', 'Architecture review, code deployments, engineering milestone completion, and technical tasks', 'primary', 1, NOW()),
 ('role_developer', 'developer', 'Software Engineer', 'Assigned project deliverable development and technical task completion', 'blue', 1, NOW()),
-('role_ai_engineer', 'ai_engineer', 'AI & ML Engineer', 'Paperclip autonomous agents, model routines, prompt pipelines, and agent swarm telemetry', 'purple', 1, NOW()),
+('role_ai_engineer', 'ai_engineer', 'AI & ML Engineer', 'Autonomous AI operations, model routines, prompt pipelines, and telemetry', 'purple', 1, NOW()),
 ('role_designer', 'designer', 'UI/UX Designer', 'Product design, user flows, UI assets, and showcase case studies', 'orange', 1, NOW()),
 ('role_qa', 'qa', 'QA & Security Engineer', 'System testing, security scanning, HITL verification gates, and quality telemetry', 'emerald', 1, NOW()),
 ('role_finance', 'finance', 'Finance & Accounts', 'Invoice management, multi-currency live rates, payment tracking, and budget reconciliation', 'success', 1, NOW()),

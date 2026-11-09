@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `opportunities` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `paperclip_tasks` (
+CREATE TABLE IF NOT EXISTS `crm_tasks` (
   `id` varchar(100) NOT NULL,
   `agent` varchar(100) NOT NULL,
   `agent_title` varchar(150) DEFAULT NULL,

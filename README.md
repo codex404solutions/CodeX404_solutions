@@ -616,7 +616,6 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   │       ├── CurrencyService.php
 │   │       ├── LeadService.php
 │   │       ├── OpportunityService.php
-│   │       ├── PaperclipService.php
 │   │       ├── ProjectService.php
 │   │       ├── RBACService.php
 │   │       └── StorageService.php
@@ -660,7 +659,6 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   └── storage
 │       └── data
 │           ├── approvals.json
-│           ├── paperclip_tasks.json
 │           ├── projects.json
 │           └── rates_cache.json.json
 ├── docs
@@ -971,7 +969,6 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 │   ├── favicon.ico
 │   ├── logo.jpg
 │   └── logo.png
-├── paperclip-company
 │   ├── COMPANY.md
 │   ├── LICENSE
 │   ├── README.md

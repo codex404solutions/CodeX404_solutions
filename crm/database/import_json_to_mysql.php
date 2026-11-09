@@ -339,53 +339,6 @@ if (file_exists($apprFile)) {
 }
 
 // -------------------------------------------------------------
-// 6. IMPORT PAPERCLIP TASKS
-// -------------------------------------------------------------
-echo "--> 6. Importing Autonomous Tasks (paperclip_tasks.json)...\n";
-$tasksFile = $dataDir . '/paperclip_tasks.json';
-if (file_exists($tasksFile)) {
-    $raw = json_decode((string)file_get_contents($tasksFile), true) ?: [];
-    $stmt = $pdo->prepare("
-        INSERT INTO `paperclip_tasks` (
-            `id`, `agent`, `agent_title`, `task_type`, `title`, `status`, 
-            `priority`, `input_data`, `output_data`, `created_at`, `completed_at`
-        ) VALUES (
-            :id, :agent, :agent_title, :task_type, :title, :status, 
-            :priority, :input_data, :output_data, :created_at, :completed_at
-        ) ON DUPLICATE KEY UPDATE 
-            `agent` = VALUES(`agent`),
-            `agent_title` = VALUES(`agent_title`),
-            `task_type` = VALUES(`task_type`),
-            `title` = VALUES(`title`),
-            `status` = VALUES(`status`),
-            `priority` = VALUES(`priority`),
-            `input_data` = VALUES(`input_data`),
-            `output_data` = VALUES(`output_data`),
-            `completed_at` = VALUES(`completed_at`)
-    ");
-
-    $tCount = 0;
-    foreach ($raw as $t) {
-        $stmt->execute([
-            ':id' => $t['id'] ?? ('task_' . bin2hex(random_bytes(6))),
-            ':agent' => (string)($t['agent'] ?? 'lead-researcher'),
-            ':agent_title' => $t['agent_title'] ?? null,
-            ':task_type' => $t['task_type'] ?? 'general',
-            ':title' => (string)($t['title'] ?? 'Task'),
-            ':status' => (string)($t['status'] ?? 'completed'),
-            ':priority' => (string)($t['priority'] ?? 'medium'),
-            ':input_data' => json_encode($t['input'] ?? $t['input_data'] ?? []),
-            ':output_data' => json_encode($t['output'] ?? $t['output_data'] ?? []),
-            ':created_at' => !empty($t['created_at']) ? date('Y-m-d H:i:s', strtotime($t['created_at'])) : date('Y-m-d H:i:s'),
-            ':completed_at' => !empty($t['completed_at']) ? date('Y-m-d H:i:s', strtotime($t['completed_at'])) : null
-        ]);
-        $tCount++;
-    }
-    echo "   -> Successfully migrated {$tCount} autonomous tasks into MySQL `paperclip_tasks`.\n";
-    $summary['paperclip_tasks'] = $tCount;
-}
-
-// -------------------------------------------------------------
 // 7. IMPORT CURRENCY RATES CACHE
 // -------------------------------------------------------------
 echo "--> 7. Importing Currency Rates Cache (rates_cache.json.json)...\n";

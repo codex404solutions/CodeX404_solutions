@@ -66,8 +66,7 @@ class LeadService
             'timeline' => trim($data['timeline'] ?? ''),
             'problem_description' => trim($data['problem_description'] ?? ''),
             'status' => 'new',
-            'lead_score' => $score,
-            'paperclip_synced' => false
+            'lead_score' => $score
         ];
 
         return StorageService::insert('leads', $record);

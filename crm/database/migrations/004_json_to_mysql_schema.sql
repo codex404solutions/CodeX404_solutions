@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS `approvals` (
     INDEX `idx_approvals_type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 6. Ensure Table Structure for paperclip_tasks
-CREATE TABLE IF NOT EXISTS `paperclip_tasks` (
+-- 6. Ensure Table Structure for crm_tasks
+CREATE TABLE IF NOT EXISTS `crm_tasks` (
     `id` VARCHAR(100) NOT NULL PRIMARY KEY,
     `agent` VARCHAR(100) NOT NULL,
     `agent_title` VARCHAR(150) NULL,

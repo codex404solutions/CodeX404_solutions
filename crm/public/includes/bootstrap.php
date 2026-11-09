@@ -13,7 +13,6 @@ use CRM\Services\LeadService;
 use CRM\Services\OpportunityService;
 use CRM\Services\ProjectService;
 use CRM\Services\ApprovalService;
-use CRM\Services\PaperclipService;
 use CRM\Services\RBACService;
 use CRM\Services\UserService;
 use CRM\Services\AuthService;
@@ -26,7 +25,6 @@ require_once $crmRoot . '/app/Services/LeadService.php';
 require_once $crmRoot . '/app/Services/OpportunityService.php';
 require_once $crmRoot . '/app/Services/ProjectService.php';
 require_once $crmRoot . '/app/Services/ApprovalService.php';
-require_once $crmRoot . '/app/Services/PaperclipService.php';
 require_once $crmRoot . '/app/Services/RBACService.php';
 require_once $crmRoot . '/app/Services/UserService.php';
 require_once $crmRoot . '/app/Services/AuthService.php';
@@ -225,46 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
 
-        // --- 12. DISPATCH CUSTOM PAPERCLIP TASK ---
-        case 'dispatch_paperclip':
-            $agentSlug = trim((string)($_POST['agent_slug'] ?? 'sales-engineer'));
-            $title = trim((string)($_POST['title'] ?? 'Task Brief'));
-            $description = trim((string)($_POST['description'] ?? ''));
-            $priority = trim((string)($_POST['priority'] ?? 'medium'));
-            $leadId = !empty($_POST['lead_id']) ? trim((string)$_POST['lead_id']) : null;
 
-            $task = PaperclipService::createTask($agentSlug, $title, $description, $priority, $leadId);
-            $_SESSION['flash_message'] = "Dispatched Task #{$task['id']} to {$agentSlug}! Status: Completed/Active.";
-            $_SESSION['flash_type'] = 'success';
-            break;
-
-        // --- 13. EXECUTE PAPERCLIP AUTONOMOUS ROUTINE ---
-        case 'run_routine':
-            $routine = trim((string)($_POST['routine'] ?? ''));
-            $leadId = !empty($_POST['lead_id']) ? trim((string)$_POST['lead_id']) : null;
-            $context = [];
-            if ($leadId) {
-                $lead = LeadService::getById($leadId);
-                if ($lead) {
-                    $context = [
-                        'lead_id' => $lead['id'],
-                        'name' => $lead['name'] ?? 'Prospect',
-                        'company' => $lead['company_name'] ?? 'Prospect Company',
-                        'email' => $lead['email'] ?? '',
-                        'needs' => $lead['problem_description'] ?? $lead['needs'] ?? 'Modern web solution',
-                        'budget' => $lead['budget'] ?? '$15,000+'
-                    ];
-                }
-            }
-            $result = PaperclipService::runRoutine($routine, $context);
-            if (($result['status'] ?? '') === 'success') {
-                $_SESSION['flash_message'] = "⚡ Routine Executed: " . htmlspecialchars($result['message'] ?? 'Done!');
-                $_SESSION['flash_type'] = 'success';
-            } else {
-                $_SESSION['flash_message'] = "Routine error: " . htmlspecialchars($result['message'] ?? 'Failed');
-                $_SESSION['flash_type'] = 'danger';
-            }
-            break;
 
         // --- 14. CREATE NEW USER ---
         case 'create_user':
@@ -688,9 +647,6 @@ $opportunities = OpportunityService::getAll();
 $projects = ProjectService::getAll();
 $pendingApprovals = ApprovalService::getPending();
 $allApprovals = ApprovalService::getAll();
-$agents = PaperclipService::getAgents();
-$paperclipTasks = PaperclipService::getTasks();
-$paperclipConn = PaperclipService::checkConnection();
 
 // KPI Calculations
 $totalLeads = count($leads);
@@ -700,7 +656,6 @@ $pipelineValue = array_sum(array_column($activePipelineDeals, 'value'));
 $closedWonDeals = array_filter($opportunities, fn($o) => ($o['stage'] ?? '') === 'closed_won');
 $closedWonValue = array_sum(array_column($closedWonDeals, 'value'));
 $activeProjectsCount = count(array_filter($projects, fn($p) => ($p['status'] ?? '') === 'in_progress'));
-$activeAgentsCount = count($agents);
 
 $liveExchangeRates = CurrencyService::getRates();
 $csrfToken = CrmSecurity::csrfToken();

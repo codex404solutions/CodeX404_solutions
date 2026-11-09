@@ -38,12 +38,12 @@
         "type": "email_draft",
         "title": "Outreach Email: Dr. Robert Vance (NovaCare Telehealth)",
         "status": "approved",
-        "requested_by": "Sales Engineer Agent (Paperclip)",
+        "requested_by": "Sales Engineer Agent",
         "payload": {
             "to": "r.vance@novacarehealth.io",
             "subject": "CodeX404 Solutions: HIPAA-ready patient onboarding architecture",
             "body": "Hi Dr. Vance,\n\nI reviewed NovaCare's patient intake portal and noticed potential optimization in the automated eligibility verification workflow.\n\nAt CodeX404 Solutions, we construct zero-trust, HIPAA-compliant patient portals with direct EHR integration and automated verification pipelines.\n\nWould you be open to reviewing our technical architecture diagram on a brief 15-minute call this Thursday?\n\nBest regards,\nCodeX404 Solutions Delivery Team",
-            "notes": "Generated automatically by Paperclip Sales Engineer routine for lead #lead_us_novacare_02"
+            "notes": "Generated automatically by Sales Engineer routine for lead #lead_us_novacare_02"
         },
         "decision_notes": null,
         "resolved_at": "2026-10-20T19:20:47+02:00",
@@ -56,7 +56,7 @@
         "type": "proposal_terms",
         "title": "Commercial Proposal: Apex Fleet Telemetry MVP ($38,000)",
         "status": "approved",
-        "requested_by": "Chief of Staff Agent (Paperclip)",
+        "requested_by": "Chief of Staff Agent",
         "payload": {
             "client": "Apex Global Logistics",
             "total_value": "$38,000 USD",

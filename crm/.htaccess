@@ -54,8 +54,6 @@
     RewriteRule ^leads/?$ public/leads.php [L]
     RewriteRule ^pipeline/?$ public/pipeline.php [L]
     RewriteRule ^projects/?$ public/projects.php [L]
-    RewriteRule ^paperclip/?$ public/paperclip.php [L]
-    RewriteRule ^agents/?$ public/paperclip.php [L]
     RewriteRule ^approvals/?$ public/approvals.php [L]
     RewriteRule ^users/?$ public/users.php [L]
     RewriteRule ^profile/?$ public/profile.php [L]

@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="text-center mb-4">
                     <img src="assets/images/logo/logo.png" alt="CodeX404 Solutions" class="img-fluid mb-2" style="max-height: 56px; object-fit: contain;">
                     <h4 class="fw-bold mb-1 text-gradient-rainbow">Company Command Center</h4>
-                    <p class="text-muted small mb-0">Executive CRM &amp; Paperclip Agent Network</p>
+                    <p class="text-muted small mb-0">Executive CRM &amp; Business Intelligence</p>
                 </div>
 
                 <?php if ($error): ?>

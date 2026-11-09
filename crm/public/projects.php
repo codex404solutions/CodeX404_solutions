@@ -38,9 +38,7 @@ require_once __DIR__ . '/includes/header.php';
         <button class="btn btn-primary btn-sm fw-bold px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalNewProject">
             <i class="bi bi-plus-circle me-1"></i> + New Project
         </button>
-        <button class="btn btn-outline-secondary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent">
-            <i class="bi bi-robot text-info me-1"></i> Assign Agent
-        </button>
+
     </div>
 </div>
 

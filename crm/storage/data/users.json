@@ -37,8 +37,8 @@
         "username": "sophia.ai",
         "phone": "+1 (617) 555-0199",
         "title": "Lead AI & Autonomous Systems Engineer",
-        "department": "AI & Paperclip Automation",
-        "bio": "Engineering Paperclip multi-agent orchestrations, model benchmark routines, and autonomous data pipelines.",
+        "department": "AI & Workflow Automation",
+        "bio": "Engineering multi-agent orchestrations, model benchmark routines, and autonomous data pipelines.",
         "avatar": "assets/images/avatars/sophia-chen.svg",
         "custom_permissions": {
             "granted": [

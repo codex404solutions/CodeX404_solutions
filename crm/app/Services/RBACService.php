@@ -234,7 +234,6 @@ class RBACService
                 'opportunities.view', 'opportunities.create', 'opportunities.edit', 'opportunities.advance', 'proposals.create',
                 'projects.view', 'projects.create', 'projects.edit', 'milestones.toggle',
                 'approvals.view', 'approvals.decide', 'approvals.create',
-                'paperclip.view', 'paperclip.dispatch', 'paperclip.execute',
                 'users.view', 'finance.view', 'finance.rates', 'settings.view', 'portfolio.view'
             ]
         ],
@@ -248,7 +247,6 @@ class RBACService
             'permissions' => [
                 'projects.view', 'projects.create', 'projects.edit', 'projects.delete', 'milestones.toggle',
                 'approvals.view', 'approvals.decide', 'approvals.create',
-                'paperclip.view', 'paperclip.dispatch', 'paperclip.execute',
                 'users.view', 'settings.view', 'settings.edit', 'portfolio.view', 'portfolio.edit',
                 'leads.view', 'opportunities.view'
             ]
@@ -262,8 +260,7 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'leads.view', 'opportunities.view', 'projects.view', 'projects.create', 'projects.edit',
-                'milestones.toggle', 'approvals.view', 'approvals.decide', 'paperclip.view',
-                'paperclip.dispatch', 'users.view', 'finance.view'
+                'milestones.toggle', 'approvals.view', 'approvals.decide', 'users.view', 'finance.view'
             ]
         ],
         'sales_manager' => [
@@ -276,8 +273,7 @@ class RBACService
             'permissions' => [
                 'leads.view', 'leads.create', 'leads.edit', 'leads.delete', 'leads.convert', 'leads.assign',
                 'opportunities.view', 'opportunities.create', 'opportunities.edit', 'opportunities.advance', 'opportunities.delete', 'proposals.create',
-                'approvals.view', 'approvals.create', 'paperclip.view', 'paperclip.dispatch',
-                'finance.view', 'finance.rates'
+                'approvals.view', 'approvals.create', 'finance.view', 'finance.rates'
             ]
         ],
         'sales' => [
@@ -290,8 +286,7 @@ class RBACService
             'permissions' => [
                 'leads.view', 'leads.create', 'leads.edit', 'leads.convert',
                 'opportunities.view', 'opportunities.create', 'opportunities.edit', 'opportunities.advance', 'proposals.create',
-                'approvals.view', 'approvals.create', 'paperclip.view', 'paperclip.dispatch'
-            ]
+                'approvals.view', 'approvals.create', ]
         ],
         'bd' => [
             'slug' => 'bd',
@@ -302,8 +297,7 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'leads.view', 'leads.create', 'leads.edit', 'leads.convert',
-                'opportunities.view', 'opportunities.create', 'paperclip.view', 'paperclip.dispatch'
-            ]
+                'opportunities.view', 'opportunities.create', ]
         ],
         'marketing_manager' => [
             'slug' => 'marketing_manager',
@@ -314,7 +308,6 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'leads.view', 'leads.create', 'leads.edit', 'approvals.view', 'approvals.create',
-                'paperclip.view', 'paperclip.dispatch', 'paperclip.execute',
                 'portfolio.view', 'portfolio.edit'
             ]
         ],
@@ -327,7 +320,7 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'leads.view', 'leads.create', 'approvals.view', 'approvals.create',
-                'paperclip.view', 'portfolio.view'
+                'portfolio.view'
             ]
         ],
         'account_manager' => [
@@ -351,8 +344,7 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'projects.view', 'projects.create', 'projects.edit', 'projects.delete',
-                'milestones.toggle', 'approvals.view', 'approvals.create', 'paperclip.view'
-            ]
+                'milestones.toggle', 'approvals.view', 'approvals.create', ]
         ],
         'lead_developer' => [
             'slug' => 'lead_developer',
@@ -363,8 +355,7 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'projects.view', 'projects.edit', 'milestones.toggle', 'approvals.view',
-                'approvals.create', 'paperclip.view', 'paperclip.dispatch',
-                'settings.view', 'portfolio.view', 'portfolio.edit'
+                'approvals.create', 'settings.view', 'portfolio.view', 'portfolio.edit'
             ]
         ],
         'developer' => [
@@ -375,18 +366,17 @@ class RBACService
             'icon' => 'code-slash',
             'is_system' => true,
             'permissions' => [
-                'projects.view', 'milestones.toggle', 'paperclip.view', 'portfolio.view'
+                'projects.view', 'milestones.toggle', 'portfolio.view'
             ]
         ],
         'ai_engineer' => [
             'slug' => 'ai_engineer',
             'name' => 'AI & ML Engineer',
-            'description' => 'Paperclip autonomous agent swarm configuration, prompt engineering, and automation routines.',
+            'description' => 'Autonomous workflow configuration, prompt engineering, and system automation.',
             'color' => 'purple',
             'icon' => 'robot',
             'is_system' => true,
             'permissions' => [
-                'paperclip.view', 'paperclip.dispatch', 'paperclip.execute',
                 'projects.view', 'milestones.toggle', 'settings.view'
             ]
         ],
@@ -410,7 +400,7 @@ class RBACService
             'is_system' => true,
             'permissions' => [
                 'projects.view', 'milestones.toggle', 'approvals.view', 'approvals.create',
-                'paperclip.view', 'settings.view'
+                'settings.view'
             ]
         ],
         'finance' => [
@@ -443,8 +433,7 @@ class RBACService
             'icon' => 'headset',
             'is_system' => true,
             'permissions' => [
-                'leads.view', 'projects.view', 'paperclip.view'
-            ]
+                'leads.view', 'projects.view', ]
         ],
         'viewer' => [
             'slug' => 'viewer',
@@ -454,7 +443,7 @@ class RBACService
             'icon' => 'eye-fill',
             'is_system' => true,
             'permissions' => [
-                'leads.view', 'opportunities.view', 'projects.view', 'paperclip.view', 'portfolio.view', 'settings.view'
+                'leads.view', 'opportunities.view', 'projects.view', 'portfolio.view', 'settings.view'
             ]
         ]
     ];
@@ -511,16 +500,6 @@ class RBACService
                 'approvals.create' => 'Submit drafts and requests into the executive approval queue'
             ]
         ],
-        'paperclip' => [
-            'title' => 'Paperclip Autonomous Agents',
-            'icon' => 'robot',
-            'description' => 'Specialist AI agent fleet, dispatch orchestration, and routine telemetry',
-            'permissions' => [
-                'paperclip.view' => 'Monitor agent status, telemetry, and background execution logs',
-                'paperclip.dispatch' => 'Assign and dispatch ad-hoc tasks to specialist AI routines',
-                'paperclip.execute' => 'Trigger autonomous research, drafting, and analysis sequences'
-            ]
-        ],
         'users' => [
             'title' => 'User Workforce & Multi-Role RBAC',
             'icon' => 'people-fill',
@@ -547,7 +526,7 @@ class RBACService
         'settings' => [
             'title' => 'System & API Ingestion',
             'icon' => 'sliders',
-            'description' => 'Integration diagnostic parameters, Paperclip endpoints, and HMAC keys',
+            'description' => 'Integration diagnostic parameters, webhook endpoints, and HMAC keys',
             'permissions' => [
                 'settings.view' => 'Inspect diagnostic telemetry, storage status, and API routes',
                 'settings.edit' => 'Modify system configurations, API credentials, and webhook keys'

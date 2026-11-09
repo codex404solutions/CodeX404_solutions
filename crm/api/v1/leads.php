@@ -12,7 +12,6 @@ namespace CRM;
 use CRM\Services\StorageService;
 use CRM\Services\LeadService;
 use CRM\Services\OpportunityService;
-use CRM\Services\PaperclipService;
 use CRM\Services\ApprovalService;
 
 $crmRoot = dirname(__DIR__, 2);
@@ -20,7 +19,6 @@ require_once $crmRoot . '/config/config.php';
 require_once $crmRoot . '/app/Services/StorageService.php';
 require_once $crmRoot . '/app/Services/LeadService.php';
 require_once $crmRoot . '/app/Services/OpportunityService.php';
-require_once $crmRoot . '/app/Services/PaperclipService.php';
 require_once $crmRoot . '/app/Services/ApprovalService.php';
 
 StorageService::init($crmRoot . '/storage');
@@ -182,10 +180,7 @@ StorageService::update('leads', $lead['id'], ['idempotency_key' => $idempotencyK
 // 8. Create a Sales Opportunity automatically
 $opportunity = OpportunityService::createFromLead($lead);
 
-// 9. Dispatch task to Paperclip Agent Runtime
-$paperclipResult = PaperclipService::createLeadTask($lead);
-
-// 10. Stage an Email Draft in the Approval Queue (DO NOT SEND AUTOMATICALLY)
+// 9. Stage an Email Draft in the Approval Queue (DO NOT SEND AUTOMATICALLY)
 $draftSubject = "Quick observations on " . (!empty($lead['company_name']) ? $lead['company_name'] : 'your') . "'s website architecture";
 $draftBody = "Hi " . htmlspecialchars($lead['name'] ?: 'there') . ",\n\n"
     . "Thanks for reaching out to CodeX404 Solutions regarding your project.\n\n"
@@ -201,13 +196,12 @@ ApprovalService::submit('email_draft', "Discovery Followup: {$lead['email']}", [
     'lead_id' => $lead['id']
 ], 'Growth Marketer Agent');
 
-// 11. Return response
+// 10. Return response
 http_response_code(201);
 echo json_encode([
     'status' => 'success',
     'lead_id' => $lead['id'],
     'opportunity_id' => $opportunity['id'],
-    'paperclip' => $paperclipResult,
     'approval_staged' => true,
     'message' => 'Lead processed into CRM, Opportunity opened, and Email Draft staged for approval.'
 ]);

@@ -38,9 +38,7 @@ require_once __DIR__ . '/includes/header.php';
         <button class="btn btn-warning btn-sm fw-bold px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalNewLead">
             <i class="bi bi-person-plus-fill me-1"></i> + Add New Lead
         </button>
-        <button class="btn btn-outline-secondary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent">
-            <i class="bi bi-robot text-info me-1"></i> Dispatch Agent to Leads
-        </button>
+
     </div>
 </div>
 
@@ -145,10 +143,6 @@ require_once __DIR__ . '/includes/header.php';
                                         </button>
                                     </form>
 
-                                    <!-- Dispatch to Agent -->
-                                    <button class="btn btn-sm btn-outline-info py-1 px-2" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent" data-lead-id="<?= htmlspecialchars($l['id']) ?>" data-lead-company="<?= htmlspecialchars($l['company_name'] ?? '') ?>" title="Dispatch Agent Routine">
-                                        <i class="bi bi-robot"></i> Agent
-                                    </button>
 
                                     <!-- Delete -->
                                     <form method="POST" class="d-inline" onsubmit="return confirm('Remove this lead permanently from CRM?');">

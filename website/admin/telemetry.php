@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="admin-marquee-item">
                 <i class="bi bi-robot text-warning"></i>
-                <span>Paperclip Multi-Agent OS: <strong>Armed &amp; Connected</strong></span>
+                <span>CRM Operations: <strong>Armed &amp; Connected</strong></span>
                 <span class="sep">&bull;</span>
             </div>
             <div class="admin-marquee-item">
@@ -304,7 +304,7 @@ require_once __DIR__ . '/includes/header.php';
                         <i class="bi bi-robot fs-4 text-warning"></i>
                         <div>
                             <div class="fw-bold small text-white">CodeX404 Executive CRM</div>
-                            <small class="text-muted">Autonomous Multi-Agent Swarm, Leads &amp; Paperclip OS</small>
+                            <small class="text-muted">Executive Leads, Pipeline &amp; Operations</small>
                         </div>
                     </div>
                     <a href="../../crm/" target="_blank" class="btn btn-xs btn-outline-warning py-1 px-2.5" style="border-radius: 6px; font-size: 0.75rem;">

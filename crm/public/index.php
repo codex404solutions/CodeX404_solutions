@@ -18,8 +18,6 @@ if (isset($_GET['page'])) {
         'leads' => 'leads.php',
         'pipeline' => 'pipeline.php',
         'projects' => 'projects.php',
-        'paperclip' => 'paperclip.php',
-        'agents' => 'paperclip.php',
         'approvals' => 'approvals.php',
         'settings' => 'settings.php',
     ];
@@ -31,8 +29,8 @@ if (isset($_GET['page'])) {
 }
 
 $currentPage = 'dashboard';
-$pageTitle = 'Company CRM & Paperclip Command Center';
-$pageSubtitle = 'Autonomous multi-agent pipeline with Human-in-the-Loop governance';
+$pageTitle = 'Company CRM & Executive Command Center';
+$pageSubtitle = 'Enterprise sales pipeline with Human-in-the-Loop governance';
 $htmlTitle = 'Executive Dashboard — CodeX404 Solutions CRM';
 
 require_once __DIR__ . '/includes/header.php';
@@ -103,7 +101,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="crm-banner-content">
         <div class="crm-banner-pill">
             <span class="agent-badge-pulse"></span>
-            <span>Paperclip Autonomous Swarm &bull; Tier-1 Active</span>
+            <span>Executive Operations &bull; Real-Time</span>
         </div>
         <h1 class="crm-banner-title">
             Autonomous Pipeline &amp; <br>
@@ -122,10 +120,6 @@ require_once __DIR__ . '/includes/header.php';
                 <i class="bi bi-plus-circle-fill"></i>
                 <span>New Pipeline Deal</span>
             </button>
-            <button type="button" class="btn btn-outline-secondary btn-sm px-3 py-2 d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalDispatchAgent" style="border-radius: 10px;">
-                <i class="bi bi-robot text-info"></i>
-                <span>Dispatch Agent</span>
-            </button>
             <a href="leads" class="btn btn-outline-warning btn-sm px-3 py-2 d-inline-flex align-items-center gap-2" style="border-radius: 10px;">
                 <i class="bi bi-person-lines-fill"></i>
                 <span>Manage Leads &rarr;</span>
@@ -138,7 +132,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="d-flex align-items-center gap-2 flex-wrap">
             <span class="badge bg-dark border border-secondary text-info px-2 py-1">
-                <i class="bi bi-cpu me-1"></i>7 Agents Synchronized
+                <i class="bi bi-activity me-1"></i>Real-Time Lead Ingestion
             </span>
             <span class="badge bg-dark border border-secondary text-success px-2 py-1">
                 <i class="bi bi-currency-exchange me-1"></i>Live Multi-Currency FX
@@ -148,93 +142,6 @@ require_once __DIR__ . '/includes/header.php';
             </span>
         </div>
     </div>
-</section>
-
-<!-- ======================================================== -->
-<!-- AUTONOMOUS AGENTS VELOCITY SLIDER CAROUSEL               -->
-<!-- ======================================================== -->
-<section class="agent-slider-section">
-    <div class="agent-slider-header">
-        <div>
-            <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
-                <i class="bi bi-robot text-info"></i>
-                <span>Autonomous Agent Swarm Network</span>
-                <span class="badge bg-info-subtle text-info border border-info-subtle" style="font-size: 0.72rem;">7/7 Ready</span>
-            </h5>
-            <p class="text-muted small mb-0">Browse specialized Paperclip AI operators and dispatch automated routines.</p>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-            <a href="paperclip" class="btn btn-sm btn-outline-info me-2 d-none d-md-inline-flex align-items-center gap-1" style="font-size: 0.75rem; border-radius: 8px;">
-                <i class="bi bi-grid-fill"></i> View Full Swarm
-            </a>
-            <button type="button" class="btn btn-xs btn-outline-secondary py-1 px-2 d-none d-sm-inline-flex align-items-center gap-1" id="agentSliderAutoToggle" style="font-size: 0.75rem; border-radius: 8px;">
-                <i class="bi bi-pause-fill" id="agentSliderAutoIcon"></i>
-                <span id="agentSliderAutoText">Pause Slider</span>
-            </button>
-            <button type="button" class="agent-nav-btn" id="agentSliderPrevBtn" aria-label="Previous Agent" title="Previous Agent">
-                <i class="bi bi-chevron-left"></i>
-            </button>
-            <button type="button" class="agent-nav-btn" id="agentSliderNextBtn" aria-label="Next Agent" title="Next Agent">
-                <i class="bi bi-chevron-right"></i>
-            </button>
-        </div>
-    </div>
-
-    <div class="agent-slider-viewport" id="agentsSliderViewport">
-        <div class="agent-slider-track" id="agentsSliderTrack">
-            <?php foreach ($agents as $agentSlug => $ag): ?>
-                <div class="agent-slider-card">
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <span class="badge text-uppercase px-2 py-1" style="background: rgba(56, 189, 248, 0.12); color: <?= htmlspecialchars($ag['color'] ?? '#38BDF8') ?>; border: 1px solid rgba(56, 189, 248, 0.25); font-size: 0.7rem;">
-                                <i class="bi <?= htmlspecialchars($ag['icon'] ?? 'bi-robot') ?> me-1"></i><?= htmlspecialchars($ag['badge'] ?? 'Operator') ?>
-                            </span>
-                            <span class="d-inline-flex align-items-center gap-1 text-success small fw-semibold" style="font-size: 0.72rem;">
-                                <span class="agent-badge-pulse" style="width: 6px; height: 6px;"></span> Online
-                            </span>
-                        </div>
-
-                        <h6 class="fw-bold mb-1 text-truncate" title="<?= htmlspecialchars($ag['name']) ?>"><?= htmlspecialchars($ag['name']) ?></h6>
-                        <div class="small text-muted mb-2 text-truncate" style="font-size: 0.78rem;"><?= htmlspecialchars($ag['title'] ?? 'Autonomous Specialist') ?></div>
-
-                        <p class="small text-muted mb-3" style="font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4em;">
-                            <?= htmlspecialchars($ag['description'] ?? 'Autonomous Paperclip specialist running in local runtime.') ?>
-                        </p>
-                    </div>
-
-                    <div>
-                        <div class="d-flex flex-wrap gap-1 mb-3">
-                            <?php foreach (array_slice((array)($ag['skills'] ?? []), 0, 3) as $sk): ?>
-                                <span class="badge bg-secondary-subtle text-muted" style="font-size: 0.65rem;"><?= htmlspecialchars($sk) ?></span>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <div class="d-flex align-items-center justify-content-between pt-2 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
-                            <button type="button" 
-                                class="btn btn-xs btn-outline-info py-1 px-2 d-inline-flex align-items-center gap-1"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalDispatchAgent"
-                                onclick="document.querySelector('#modalDispatchAgent select[name=agent_slug]').value = '<?= htmlspecialchars($agentSlug) ?>';"
-                                style="font-size: 0.75rem; border-radius: 6px;">
-                                <i class="bi bi-send-fill"></i> Dispatch
-                            </button>
-                            <form method="POST" class="d-inline">
-                                <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
-                                <input type="hidden" name="action" value="run_routine">
-                                <input type="hidden" name="routine" value="analyze_leads">
-                                <input type="hidden" name="return_url" value="dashboard">
-                                <button type="submit" class="btn btn-xs btn-outline-secondary py-1 px-2" style="font-size: 0.75rem; border-radius: 6px;" title="Execute Fast Routine">
-                                    <i class="bi bi-lightning-charge text-warning"></i> Run Routine
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
-    <div class="agent-dots" id="agentsSliderDots"></div>
 </section>
 
 <!-- ======================================================== -->
@@ -342,69 +249,6 @@ require_once __DIR__ . '/includes/header.php';
         <div class="progress-bar bg-warning" style="width: <?= $pctProposal ?>%" title="Proposal: <?= $stagesCount['proposal'] ?>">Proposal (<?= $stagesCount['proposal'] ?>)</div>
         <div class="progress-bar bg-primary" style="width: <?= $pctNegotiation ?>%" title="Negotiation: <?= $stagesCount['negotiation'] ?>">Negotiation (<?= $stagesCount['negotiation'] ?>)</div>
         <div class="progress-bar bg-success" style="width: <?= $pctWon ?>%" title="Won: <?= $stagesCount['closed_won'] ?>">Won (<?= $stagesCount['closed_won'] ?>)</div>
-    </div>
-</div>
-
-<!-- ======================================================== -->
-<!-- 1-CLICK AUTONOMOUS AGENT ROUTINES BANNER                 -->
-<!-- ======================================================== -->
-<div class="crm-card p-3 p-md-4 mb-4" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(129, 140, 248, 0.04) 100%);">
-    <div class="row align-items-center g-3">
-        <div class="col-12 col-xl-5">
-            <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-info text-dark fw-bold">PAPERCLIP AUTONOMOUS ROUTINES</span>
-                <span class="text-muted small">Dual Mode: Live / Local</span>
-            </div>
-            <h5 class="fw-bold mb-1 text-white">Execute Specialist Agent Routines in 1 Click</h5>
-            <p class="text-muted small mb-0">Agents synthesize client audits, draft outreach, and enforce security gates.</p>
-        </div>
-        <div class="col-12 col-xl-7">
-            <div class="d-flex gap-2 flex-wrap justify-content-xl-end">
-                <!-- Routine: Tech Audit -->
-                <form method="POST" class="d-inline">
-                    <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
-                    <input type="hidden" name="action" value="run_routine">
-                    <input type="hidden" name="routine" value="tech_audit">
-                    <input type="hidden" name="return_url" value="dashboard">
-                    <button type="submit" class="btn btn-sm btn-outline-info fw-semibold" title="Dispatches Technical Lead">
-                        <i class="bi bi-cpu me-1"></i> Tech Audit
-                    </button>
-                </form>
-
-                <!-- Routine: Discovery Questions -->
-                <form method="POST" class="d-inline">
-                    <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
-                    <input type="hidden" name="action" value="run_routine">
-                    <input type="hidden" name="routine" value="discovery_questions">
-                    <input type="hidden" name="return_url" value="dashboard">
-                    <button type="submit" class="btn btn-sm btn-outline-warning fw-semibold" title="Dispatches Lead Researcher">
-                        <i class="bi bi-question-diamond me-1"></i> Discovery Brief
-                    </button>
-                </form>
-
-                <!-- Routine: Cold Email (HITL) -->
-                <form method="POST" class="d-inline">
-                    <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
-                    <input type="hidden" name="action" value="run_routine">
-                    <input type="hidden" name="routine" value="draft_email">
-                    <input type="hidden" name="return_url" value="dashboard">
-                    <button type="submit" class="btn btn-sm btn-outline-primary fw-semibold" title="Dispatches Sales Engineer into HITL approval">
-                        <i class="bi bi-envelope-paper me-1"></i> Draft Outreach
-                    </button>
-                </form>
-
-                <!-- Routine: Security Gate -->
-                <form method="POST" class="d-inline">
-                    <input type="hidden" name="csrf_token" value="<?= CrmSecurity::escape($csrfToken) ?>">
-                    <input type="hidden" name="action" value="run_routine">
-                    <input type="hidden" name="routine" value="security_scan">
-                    <input type="hidden" name="return_url" value="dashboard">
-                    <button type="submit" class="btn btn-sm btn-outline-success fw-semibold" title="Dispatches QA & Security Lead">
-                        <i class="bi bi-shield-lock me-1"></i> Security Scan
-                    </button>
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 

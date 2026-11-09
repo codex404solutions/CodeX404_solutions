@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `leads` (
     `status` ENUM('new', 'researching', 'qualified', 'proposal_sent', 'won', 'lost', 'nurture') DEFAULT 'new',
     `lead_score` INT DEFAULT 0,
     `assigned_user_id` VARCHAR(36) NULL,
-    `paperclip_issue_id` VARCHAR(100) NULL,
+    -- issue_id VARCHAR(100) NULL,
     `raw_payload` JSON NULL,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `crm_projects` (
     `name` VARCHAR(200) NOT NULL,
     `status` ENUM('planning', 'in_progress', 'qa', 'delivered', 'retainer') DEFAULT 'planning',
     `budget` DECIMAL(12,2) DEFAULT 0.00,
-    `paperclip_project_id` VARCHAR(100) NULL,
+    -- project_id VARCHAR(100) NULL,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`client_id`) REFERENCES `clients`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
