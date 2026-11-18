@@ -1,279 +1,196 @@
-# CodeX404 Solutions — Main Website Rules
+# CodeX404 Solutions — Engineering and Antigravity Rules
 
-## Brand
-1. Position as a professional technology partner.
-2. Never compete primarily on cheap pricing.
-3. Do not call the company an outsourcing provider unless specifically intended.
-4. Explain business value before technical implementation.
-5. Maintain a premium global tone.
+These rules apply to all implementation phases.
 
-## Claims
-Never invent:
-- clients
-- testimonials
-- awards
-- certifications
-- revenue
-- number of projects
-- ROI
-- team size
-- years of experience
-- partnerships
+---
 
-If a claim is not verified, either remove it or write it as a capability rather than a historical claim.
+## 1. Non-negotiable project rules
 
-## UX
-- Mobile first.
-- Fast navigation.
-- Clear CTA.
-- Consistent spacing.
-- Accessible forms.
-- No dark-pattern UX.
-- No forced popups that block the visitor immediately.
-- No excessive animation.
+1. Read the project documentation before editing code.
+2. Audit the existing codebase before making architectural changes.
+3. Do not assume the current framework, database or hosting setup.
+4. Do not rewrite working features just to use a preferred technology.
+5. Do not delete files, routes, tables or integrations without documenting the impact and obtaining approval.
+6. Do not deploy to production without explicit approval.
+7. Do not modify production data directly.
+8. Never expose credentials, tokens, private keys or customer information.
+9. Do not invent business claims, client results, testimonials or certifications.
+10. Preserve the approved CodeX404 visual identity.
 
-## Technical
-- Validate server-side.
-- Escape output.
-- Prepared SQL.
-- CSRF where applicable.
-- Rate-limit public forms.
-- Never expose secrets.
-- Never expose PHP errors publicly.
-- Use secure upload handling.
+## 2. Brand rules
 
-## SEO
-- One clear H1.
-- Human-readable content.
+Company architecture:
+- BUILD — blue accent.
+- GROW — purple accent.
+- AUTOMATE — green accent.
+
+Shared brand:
+- Dark navy/black technology background.
+- White and light readable text.
+- Existing cyan/blue/purple/magenta gradients.
+- Existing logo asset.
+- Subtle network/grid/particle effects.
+- Rounded cards and restrained glow.
+- Existing typography wherever suitable.
+
+Do not recreate or distort the logo. Do not introduce unrelated theme colors.
+
+## 3. Content rules
+
+- Write in clear, direct English.
+- Explain technical terms in plain language.
+- Write for the customer, not search engines alone.
+- Make each service page genuinely different.
+- State what is included and what depends on scope.
+- Distinguish capabilities from services currently available.
+- Do not guarantee search rankings, AI citations, leads, revenue or uptime.
+- Use case studies only with verified facts and publication permission.
+- Mark demo, internal, experimental and client projects accurately.
+- Do not fabricate reviews or testimonials.
+- Do not publish placeholder text.
+
+## 4. GROW rules
+
+GROW is the digital growth division and includes Digital Marketing.
+
+Service groups:
+1. Search visibility: SEO, AEO, GEO, Local SEO.
+2. Digital marketing: social media, paid campaigns, email marketing and campaign management.
+3. Content and brand growth: content strategy, copywriting, blogs, digital PR.
+4. Conversion and measurement: CRO, landing pages, lead generation, analytics and reporting.
+
+Only publish services that the business can actually deliver. If a service is planned but not currently staffed or operational, keep it out of public claims or clearly label it as a planned capability.
+
+Never guarantee:
+- Google ranking positions.
+- Featured snippets.
+- AI assistant citations.
+- A fixed number of leads.
+- Advertising return on investment.
+- Viral reach.
+
+## 5. Coding rules
+
+- Follow existing repository conventions.
+- Use the existing formatter and linter.
+- Use clear names and small, focused functions.
+- Avoid duplicated logic.
+- Keep UI components reusable.
+- Keep business logic out of presentation components where practical.
+- Validate external and user input.
+- Handle errors explicitly.
+- Avoid swallowing exceptions.
+- Use parameterized database queries or the framework's safe ORM.
+- Avoid unsafe HTML rendering.
+- Do not add dependencies without explaining why.
+- Pin or lock dependencies using the existing package manager.
+- Update documentation when behavior changes.
+
+## 6. Frontend rules
+
+- Mobile-first responsive behavior.
+- Semantic HTML.
+- Accessible labels and controls.
+- Keyboard-accessible navigation and dialogs.
+- Visible focus states.
+- Respect reduced-motion settings.
+- Prevent horizontal overflow.
+- Avoid layout shift.
+- Keep buttons and links visually distinct.
+- Ensure forms show useful validation messages.
+- Do not rely on color alone to communicate state.
+
+## 7. Backend rules
+
+- Validate on the server.
+- Authorize every protected action.
+- Use least privilege.
+- Use safe session and cookie settings.
+- Apply rate limits to public forms and sensitive endpoints.
+- Avoid returning stack traces to visitors.
+- Do not expose internal IDs or private records unnecessarily.
+- Use transactions for multi-step data changes where appropriate.
+- Make migrations reversible where feasible.
+- Log security events without recording secrets.
+
+## 8. Database rules
+
+- Inspect schema before modifying it.
+- Use migrations, never ad hoc production edits.
+- Back up before structural changes.
+- Define indexes based on real query patterns.
+- Use foreign keys where supported and appropriate.
+- Define deletion and retention behavior.
+- Avoid storing data that is not needed.
+- Never store plaintext passwords.
+- Do not put credentials in database seed files.
+- Test migrations on a copy or staging environment.
+
+## 9. Security rules
+
+Follow SECURITY.md. Security review is required for:
+- Authentication.
+- Admin roles.
+- File uploads.
+- Contact forms.
+- Email sending.
+- External API integrations.
+- CMS publishing.
+- Database migrations.
+- Deployment configuration.
+
+## 10. SEO and content rules
+
+- One clear primary heading per page where appropriate.
+- Unique title and description.
+- Canonical URL.
+- Useful internal links.
+- Correct image alt text.
+- Crawlable service content.
+- Redirect old URLs when changed.
 - No keyword stuffing.
-- No hidden SEO text.
-- No fake location pages.
-- No duplicate service pages with superficial changes.
+- No doorway pages.
+- No fake structured data.
+- Use schema only when content meets the relevant guidelines.
+- Keep noindex rules for private or utility pages.
 
-## Content
-Prefer:
-- business problem
-- solution
-- implementation
-- outcome
-- proof
+## 11. Git rules
 
-Avoid:
-- empty buzzwords
-- excessive jargon
-- vague “cutting-edge” claims
-- generic AI promises.
+- Check `git status` before changes.
+- Work on a feature branch.
+- Make small, meaningful commits.
+- Never force-push shared branches without approval.
+- Never commit `.env`, private keys, database dumps or customer exports.
+- Review diffs before committing.
+- Keep production branch protected according to repository policy.
 
-## Design
-Use the defined CodeX404 palette consistently.
-Do not turn every section into a gradient.
-Use motion to communicate hierarchy, not decoration.
+Suggested branch:
+`feature/codex404-build-grow-automate`
 
-## Future CRM
-Do not implement the full CRM in the main website repository.
-Only create clean lead-capture integration points.
+## 12. Antigravity execution protocol
 
----
+For each task:
+1. Read the relevant MD files.
+2. Inspect the affected code.
+3. State the implementation plan.
+4. Identify affected routes, components, tables and integrations.
+5. Implement only the approved scope.
+6. Run relevant tests and checks.
+7. Inspect the diff.
+8. Update documentation.
+9. Report completed work and remaining risks.
+10. Stop and wait for approval before the next phase.
 
-## Data Privacy & GDPR Compliance
+Do not interpret a phase prompt as permission to skip prerequisites.
 
-### GDPR Requirements (EU/UK Customers)
-Since CodeX404 targets UK, Germany, Netherlands, and Ireland, GDPR compliance is mandatory.
+## 13. Completion definition
 
-#### Cookie Consent
-- Display cookie consent banner on first visit
-- Must appear before any non-essential cookies load
-- Allow users to accept/reject non-essential cookies
-- Essential cookies (session) don't require consent
-- Log consent decisions with timestamp
-
-#### Privacy Policy (Required)
-Must clearly explain:
-- What data we collect (name, email, phone, company, IP, UTM parameters)
-- Why we collect it (lead qualification, service delivery, communication)
-- How long we keep it (see retention policy below)
-- Who has access (internal team, no third-party sales)
-- User rights (access, correction, deletion, export)
-- How to exercise rights (email: privacy@codex404solutions.online)
-- Data transfer information (if using US services)
-- Last updated date
-
-#### User Rights
-**Right to Access**
-- Users can request all data we have about them
-- Respond within 30 days
-- Provide in readable format (PDF or JSON)
-
-**Right to Rectification**
-- Users can request correction of incorrect data
-- Update within 30 days
-
-**Right to Erasure ("Right to be Forgotten")**
-- Users can request deletion of their data
-- Exceptions: legal obligations, contract fulfillment
-- Soft delete (mark as deleted, anonymize) rather than hard delete
-- Retain deletion audit log
-
-**Right to Data Portability**
-- Users can request their data in machine-readable format
-- Provide JSON or CSV export
-
-**Right to Object**
-- Users can object to marketing communications
-- Unsubscribe link in every marketing email
-- Honor opt-out immediately
-
-#### Implementation
-```php
-// Contact form consent checkbox (required)
-☑ I agree to the Privacy Policy and consent to CodeX404 Solutions 
-  storing my information for the purpose of responding to my inquiry.
-
-// Newsletter consent checkbox (optional)
-☐ I would like to receive updates about AI, automation, and 
-  software development insights. (You can unsubscribe anytime)
-```
-
-### Data Retention Policy
-
-#### Leads & Contacts
-- **Active leads:** Retain while relationship is active
-- **Inactive leads (no response):** 2 years, then archive
-- **Lost deals:** 1 year, then archive
-- **Archived data:** Anonymize after retention period (keep only aggregated stats)
-
-#### Clients & Projects
-- **Active clients:** Retain indefinitely
-- **Completed projects:** 7 years (financial/legal compliance)
-- **Invoices/payments:** 7 years (tax requirements in India/international)
-
-#### Marketing Data
-- **Email subscribers:** Until unsubscribe + 30 days
-- **UTM/analytics data:** 3 years
-- **IP addresses:** 90 days (security logs)
-
-#### Audit Logs
-- **Security events:** 3 years
-- **Data access logs:** 1 year
-- **Consent logs:** Permanent (proof of consent)
-
-### Data Minimization
-Only collect necessary data:
-- ✅ Name, email, company (required for service)
-- ✅ Phone (optional, for communication preference)
-- ✅ Job title (helpful for qualification)
-- ✅ Problem description (necessary to understand needs)
-- ❌ Date of birth (not needed)
-- ❌ Personal address (not needed for B2B)
-- ❌ Race, religion, political views (illegal to collect)
-
-### Third-Party Data Sharing
-**Current policy: NO THIRD-PARTY SALES OR SHARING**
-
-Exceptions (must disclose in Privacy Policy):
-- Email service provider (for sending emails)
-- Analytics (Google Analytics - anonymize IP)
-- Payment processor (Razorpay - only for transactions)
-- Hosting provider (Hostinger - data storage)
-
-All third-party processors must have GDPR-compliant data processing agreements.
-
-### International Data Transfers
-**India → EU transfers:**
-- Not currently restricted (India not deemed adequate by EU, but transfers allowed with safeguards)
-- Use standard contractual clauses with service providers
-- Encrypt data in transit (HTTPS)
-- Encrypt sensitive data at rest
-
-### Marketing Compliance
-
-#### Email Marketing
-- **Opt-in required:** Explicit consent for marketing emails
-- **Unsubscribe:** Clear unsubscribe link in every email
-- **Sender identification:** Clear "From" name (CodeX404 Solutions)
-- **Physical address:** Include in email footer
-- **Honor opt-outs:** Process within 24 hours
-
-#### Cold Outreach (B2B)
-- Legitimate interest basis (business to business)
-- Must still provide opt-out
-- Must explain how you got their contact
-- No purchased email lists
-
-### Data Security Measures
-- ✅ HTTPS/TLS encryption
-- ✅ Secure password hashing (bcrypt)
-- ✅ SQL injection prevention (prepared statements)
-- ✅ XSS prevention (output escaping)
-- ✅ CSRF protection
-- ✅ Access controls (CRM role-based permissions)
-- ✅ Audit logging
-- ✅ Regular backups
-- ✅ Incident response plan
-
-### Data Breach Protocol
-If personal data breach occurs:
-
-**Within 72 hours:**
-1. Identify scope of breach
-2. Contain the breach
-3. Notify supervisory authority (if EU residents affected)
-4. Document incident
-
-**If high risk to individuals:**
-5. Notify affected individuals directly
-6. Explain what happened
-7. Explain remediation steps
-8. Provide support contact
-
-### Cookies Used
-
-#### Essential Cookies (No consent needed)
-```
-PHPSESSID - Session management
-csrf_token - Security
-```
-
-#### Analytics Cookies (Consent required)
-```
-_ga, _gid - Google Analytics (anonymized IP)
-```
-
-#### Marketing Cookies (Consent required)
-```
-utm_* - Campaign tracking (stored server-side, not cookie)
-```
-
-### Children's Privacy
-- We do not knowingly collect data from anyone under 16
-- B2B service only
-- If discovered, delete immediately
-
-### Privacy Contact
-- **Email:** privacy@codex404solutions.online
-- **Response time:** Within 7 business days
-- **Escalation:** CEO (for serious complaints)
-
-### Compliance Checklist
-Before launch:
-- [ ] Privacy Policy page created
-- [ ] Cookie consent banner implemented
-- [ ] Consent checkboxes on forms
-- [ ] Unsubscribe mechanism in emails
-- [ ] Data retention policy configured in CRM
-- [ ] User rights request workflow documented
-- [ ] Data breach response plan documented
-- [ ] Team trained on privacy obligations
-- [ ] Third-party processor agreements reviewed
-
-### Annual Review
-- Review privacy policy (update if practices change)
-- Audit data retention (delete old data)
-- Review third-party processors
-- Update cookie list if changed
-- Train new team members
-
----
-
-## Legal Disclaimer
-This is guidance for implementing privacy-friendly practices. It is NOT legal advice. Consult a lawyer specializing in data protection law for your specific jurisdiction and business model before processing EU/UK resident data.
+A task is not complete merely because code was generated. It is complete only when:
+- Requirements are implemented.
+- Relevant tests pass.
+- Responsive behavior is checked.
+- Security impact is reviewed.
+- SEO impact is reviewed where applicable.
+- Documentation is updated.
+- No known critical regression remains.
+- The implementation report is provided.

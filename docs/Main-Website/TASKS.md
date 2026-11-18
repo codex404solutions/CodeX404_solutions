@@ -1,122 +1,284 @@
-# CodeX404 Solutions — Main Website Implementation Tasks
+# CodeX404 Solutions — Phase-wise Implementation Plan
 
-## Phase 0 — Research and Inventory
-- [x] Review current website.
-- [x] Inventory logo and brand assets.
-- [x] Inventory portfolio.
-- [x] Verify company details.
-- [x] Verify founder/company LinkedIn links.
-- [x] Verify services.
-- [x] Identify real case studies.
-- [x] Identify real testimonials.
-- [x] Remove unsupported claims.
+**Website:** https://codex404solutions.com/  
+**Email:** info@codex404solutions.com  
+**Project:** BUILD · GROW · AUTOMATE website redesign
 
-## Phase 1 — Foundation
-- [x] Initialize repository.
-- [x] Configure environment.
-- [x] Establish PHP structure.
-- [x] Establish asset pipeline.
-- [x] Establish reusable components.
-- [x] Establish error handling.
-- [x] Establish logging.
+---
 
-## Phase 2 — Design System
-- [x] Color tokens.
-- [x] Typography.
-- [x] Spacing scale.
-- [x] Buttons.
-- [x] Cards.
-- [x] Forms.
-- [x] Navigation.
-- [x] Footer.
-- [x] Responsive breakpoints.
-- [x] Motion rules.
+## 0. Execution policy
 
-## Phase 3 — Pages
-- [x] Home.
-- [x] Solutions.
-- [x] AI Solutions.
-- [x] AI Agents.
-- [x] Automation.
-- [x] Software Development.
-- [x] Mobile Apps.
-- [x] SaaS.
-- [x] Industries.
-- [x] Case Studies.
-- [x] Portfolio.
-- [x] Process.
-- [x] About.
-- [x] Engagement Models.
-- [x] Security.
-- [x] FAQ.
-- [x] Contact.
-- [x] Discovery Call.
-- [x] Privacy.
-- [x] Terms.
-- [x] 404.
+- Work on a feature branch.
+- Back up source, database, uploads and deployment configuration.
+- Do not change production directly.
+- Complete one phase at a time.
+- Run tests after every phase.
+- Report changed files and routes.
+- Wait for approval before proceeding.
+- Do not deploy without explicit approval.
 
-## Phase 4 — Lead Capture
-- [x] Discovery form.
-- [x] Contact form.
-- [x] Audit CTA.
-- [x] Validation.
-- [x] Spam protection.
-- [x] Rate limiting.
-- [x] Email notification.
-- [x] CRM-ready webhook/API.
+Suggested branch:
+`feature/codex404-build-grow-automate`
 
-## Phase 5 — SEO
-- [x] Titles.
-- [x] Meta descriptions.
-- [x] Canonicals.
-- [x] Open Graph.
-- [x] Schema.
-- [x] Sitemap.
-- [x] Robots.
-- [x] Internal links.
-- [x] Alt text.
+## Phase 0 — Discovery and audit
 
-## Phase 6 — Performance
-- [x] Image optimization.
-- [x] WebP/AVIF.
-- [x] Lazy loading.
-- [x] Critical CSS.
-- [x] JS defer.
-- [x] Remove unused dependencies.
-- [x] Core Web Vitals test.
+**Goal:** Understand what exists.
 
-## Phase 7 — Security
-- [x] HTTPS.
-- [x] Security headers.
-- [x] Form security.
-- [x] CSRF where applicable.
-- [x] Input validation.
-- [x] Output escaping.
-- [x] Rate limiting.
-- [x] Secrets management.
+Tasks:
+- [ ] Inspect repository and project structure.
+- [ ] Identify frontend/backend stack and versions.
+- [ ] Inspect database and migrations.
+- [ ] Inventory all routes.
+- [ ] Inventory navigation and footer.
+- [ ] Inspect homepage and existing service pages.
+- [ ] Inspect forms and email flow.
+- [ ] Inspect admin/CMS and authentication.
+- [ ] Inspect integrations.
+- [ ] Inspect hosting and deployment.
+- [ ] Inspect current design tokens and logo assets.
+- [ ] Audit mobile behavior.
+- [ ] Audit SEO and indexed URLs.
+- [ ] Audit security and dependencies.
+- [ ] Verify existing claims and testimonials.
+- [ ] Identify reusable components and features.
 
-## Phase 8 — QA
-- [x] Chrome.
-- [x] Edge.
-- [x] Firefox.
-- [x] Mobile Safari/Chrome.
-- [x] Keyboard.
-- [x] Screen reader basics.
-- [x] Reduced motion.
-- [x] Form errors.
-- [x] Broken links.
-- [x] Console errors.
-- [x] PHP warnings.
+Deliverables:
+- `PROJECT_AUDIT.md`
+- `CURRENT_SITEMAP.md`
+- `EXISTING_ROUTE_INVENTORY.md`
+- `DESIGN_SYSTEM_AUDIT.md`
+- `CONTENT_AUDIT.md`
+- `DATABASE_AUDIT.md`
+- `SEO_AUDIT.md`
+- `SECURITY_AUDIT.md`
+- `CLAIM_VERIFICATION_REGISTER.md`
+- `WEBSITE_IMPLEMENTATION_ROADMAP.md`
 
-## Phase 9 — Launch
-- [ ] Production configuration.
-- [ ] DNS.
-- [ ] HTTPS.
-- [ ] Sitemap submission.
-- [ ] Analytics.
-- [ ] Backup.
-- [ ] Smoke test.
-- [ ] Lead submission test.
+Exit gate: Founder reviews audit and approves the implementation roadmap.
 
-## Definition of Done
-The website must be visually premium, technically clean, responsive, accessible, SEO-ready, secure, fast and conversion-focused.
+## Phase 1 — Repository safety and design foundation
+
+**Goal:** Prepare a safe implementation base and reusable visual system.
+
+Tasks:
+- [ ] Confirm backup and branch.
+- [ ] Confirm no secrets are tracked.
+- [ ] Preserve logo assets.
+- [ ] Map current design tokens.
+- [ ] Refine semantic color tokens only where required.
+- [ ] Refine typography and spacing.
+- [ ] Build or refine reusable buttons and links.
+- [ ] Build or refine cards and section headers.
+- [ ] Refine header and desktop navigation.
+- [ ] Refine mobile navigation.
+- [ ] Refine footer.
+- [ ] Add shared breadcrumbs and CTA patterns.
+- [ ] Test all breakpoints.
+
+Exit gate: Shared components approved; no homepage redesign yet unless explicitly included.
+
+## Phase 2 — Homepage
+
+**Goal:** Explain the full company and its three divisions.
+
+Tasks:
+- [ ] Preserve approved hero visual.
+- [ ] Update hero copy to explain BUILD/GROW/AUTOMATE.
+- [ ] Review terminal panel content for accuracy.
+- [ ] Add capability strip.
+- [ ] Add three division cards.
+- [ ] Add problem/solution section.
+- [ ] Add verified featured projects.
+- [ ] Add company differentiators.
+- [ ] Add industries.
+- [ ] Add process.
+- [ ] Add genuine leadership content.
+- [ ] Add FAQs.
+- [ ] Add final CTA.
+- [ ] Test all links and buttons.
+- [ ] Test mobile hero and floating widgets.
+
+Exit gate: Homepage approved at desktop and mobile sizes.
+
+## Phase 3 — BUILD division
+
+Tasks:
+- [ ] BUILD overview.
+- [ ] Website development page.
+- [ ] Custom software page.
+- [ ] E-commerce page.
+- [ ] SaaS/MVP page.
+- [ ] CRM/ERP page.
+- [ ] Mobile/PWA page.
+- [ ] API integration page.
+- [ ] Connect relevant projects.
+- [ ] Add division-specific FAQs.
+- [ ] Add inquiry routing.
+- [ ] Test internal links and metadata.
+
+Exit gate: BUILD content reviewed and service scope confirmed.
+
+## Phase 4 — GROW division
+
+GROW includes Digital Marketing. Structure it as:
+1. Search visibility.
+2. Digital marketing.
+3. Content and brand growth.
+4. Conversion and measurement.
+
+Tasks:
+- [ ] GROW overview.
+- [ ] Digital marketing overview.
+- [ ] SEO page.
+- [ ] AEO page.
+- [ ] GEO page.
+- [ ] Local SEO page.
+- [ ] Social media marketing page, if deliverable.
+- [ ] Paid advertising page, if deliverable.
+- [ ] Content marketing page.
+- [ ] Email marketing page, if deliverable.
+- [ ] Lead generation page, if deliverable.
+- [ ] Conversion optimization page.
+- [ ] Analytics/reporting page.
+- [ ] Define deliverables and exclusions.
+- [ ] Define reporting approach.
+- [ ] Add realistic FAQs.
+- [ ] Add GROW enquiry routing.
+- [ ] Check claims and avoid guaranteed rankings/citations.
+
+Exit gate: Founder confirms service delivery capability and page content.
+
+## Phase 5 — AUTOMATE division
+
+Tasks:
+- [ ] AUTOMATE overview.
+- [ ] AI automation page.
+- [ ] AI agents page.
+- [ ] AI chatbot page.
+- [ ] RAG page.
+- [ ] Workflow automation page.
+- [ ] WhatsApp/CRM integration page.
+- [ ] Document processing page.
+- [ ] API integrations page, if distinct.
+- [ ] Add genuine demos.
+- [ ] Document human approval and access controls.
+- [ ] Add AUTOMATE enquiry routing.
+- [ ] Test demos and claims.
+
+Exit gate: All examples and integrations verified.
+
+## Phase 6 — Industries, work and case studies
+
+Tasks:
+- [ ] Industry index.
+- [ ] Education page.
+- [ ] Healthcare page.
+- [ ] E-commerce page.
+- [ ] Real estate page.
+- [ ] Professional services page.
+- [ ] SaaS/startups page.
+- [ ] Portfolio index.
+- [ ] Division filters, if usable.
+- [ ] Case-study template.
+- [ ] Convert approved projects to case studies.
+- [ ] Classify client/internal/demo/experimental work.
+- [ ] Confirm screenshot and testimonial permissions.
+- [ ] Organise live demos.
+
+Exit gate: All public project information verified.
+
+## Phase 7 — Company, contact and conversion
+
+Tasks:
+- [ ] About page.
+- [ ] Process page.
+- [ ] Engagement models.
+- [ ] Security page.
+- [ ] FAQ page.
+- [ ] Contact page.
+- [ ] Consultation page.
+- [ ] Contact form.
+- [ ] Server-side validation.
+- [ ] Spam/rate protections.
+- [ ] Email notification to configured mailbox.
+- [ ] Success/error states.
+- [ ] Privacy notice and consent.
+- [ ] Privacy, terms and cookie pages reviewed.
+- [ ] Test email delivery and failure behavior.
+
+Exit gate: Enquiry flow tested end-to-end.
+
+## Phase 8 — SEO, AEO, GEO and analytics
+
+Tasks:
+- [ ] Map old and new URLs.
+- [ ] Implement metadata.
+- [ ] Implement canonical URLs.
+- [ ] Generate sitemap.
+- [ ] Review robots.txt.
+- [ ] Implement redirects.
+- [ ] Check indexability.
+- [ ] Add suitable structured data.
+- [ ] Add breadcrumbs.
+- [ ] Review internal links.
+- [ ] Optimise images and alt text.
+- [ ] Review page speed.
+- [ ] Review accessible HTML.
+- [ ] Verify analytics and Search Console configuration.
+- [ ] Review consent/privacy impact.
+- [ ] Create SEO and discoverability report.
+
+Exit gate: No critical SEO migration issue; redirect map approved.
+
+## Phase 9 — QA and staging release
+
+Tasks:
+- [ ] Functional test all routes.
+- [ ] Test all navigation.
+- [ ] Test contact forms.
+- [ ] Test admin access.
+- [ ] Test existing integrations.
+- [ ] Test responsive breakpoints.
+- [ ] Test keyboard navigation.
+- [ ] Test performance.
+- [ ] Test SEO metadata.
+- [ ] Test redirects.
+- [ ] Test 404 behavior.
+- [ ] Run dependency/security checks.
+- [ ] Test database migration and backup.
+- [ ] Deploy to staging.
+- [ ] Run staging smoke tests.
+- [ ] Prepare rollback plan.
+- [ ] Obtain founder approval.
+
+Exit gate: Written QA approval.
+
+## Phase 10 — Production release
+
+Only after explicit approval:
+- [ ] Confirm final backup.
+- [ ] Confirm release commit.
+- [ ] Confirm environment variables.
+- [ ] Confirm migrations and rollback.
+- [ ] Confirm redirects.
+- [ ] Deploy.
+- [ ] Smoke-test critical routes.
+- [ ] Test contact email.
+- [ ] Check analytics.
+- [ ] Monitor logs.
+- [ ] Record release version and time.
+
+## Phase 11 — Post-launch
+
+- [ ] Monitor 404s and redirect issues.
+- [ ] Monitor enquiry delivery.
+- [ ] Review Search Console.
+- [ ] Review analytics.
+- [ ] Review Core Web Vitals.
+- [ ] Fix discovered regressions.
+- [ ] Publish new content only when ready.
+- [ ] Review conversion performance monthly.
+
+## Definition of done
+
+A phase is done only when its tasks are implemented, tested, documented, reviewed and approved. Code generation alone is not completion.
