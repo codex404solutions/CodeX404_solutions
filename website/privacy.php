@@ -4,10 +4,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Privacy Policy & GDPR Data Protection Notice',
-    'description' => 'CodeX404 Solutions GDPR-compliant Privacy Policy detailing our data collection, lawful processing bases, retention policies, and user rights.',
+    'title' => 'Privacy Policy & Data Protection',
+    'description' => 'Information about the contact details and project information submitted through the CodeX404 Solutions website, optional analytics, and privacy requests.',
     'canonical' => url('privacy.php'),
-    'keywords' => 'privacy policy, GDPR compliance, data retention, user rights, CodeX404 privacy'
+    'keywords' => 'privacy policy, data protection, analytics preferences, CodeX404 privacy'
 ];
 
 require_once __DIR__ . '/includes/header.php';
@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Compliance & Trust</span>
             </div>
             <h1 class="section-title">Privacy Policy & Data Protection</h1>
-            <p style="font-size: 0.9rem; color: var(--slate-dark);">Last updated: October 6, 2026 · Effective immediately</p>
+            <p style="font-size: 0.9rem; color: var(--slate-dark);">Last updated: November 19, 2026</p>
         </div>
 
         <div style="background: var(--bg-surface); padding: 3rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); line-height: 1.8;">
@@ -30,60 +30,54 @@ require_once __DIR__ . '/includes/header.php';
                 This Privacy Policy outlines how <strong>CodeX404 Solutions</strong> ("we", "us", "our") collects, uses, protects, and handles personal data when you interact with our website (<a href="https://codex404solutions.com">codex404solutions.com</a>) or communicate with our engineering team.
             </p>
             <p>
-                For data protection inquiries or to exercise your statutory privacy rights, our designated Data Protection Officer can be reached directly at <a href="mailto:<?= PRIVACY_EMAIL ?>"><?= PRIVACY_EMAIL ?></a>.
+                For privacy questions or requests, contact us at <a href="mailto:<?= PRIVACY_EMAIL ?>"><?= PRIVACY_EMAIL ?></a>. Requests are handled under the privacy laws applicable to your location.
             </p>
 
             <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">2. What Information We Collect</h2>
-            <p>In accordance with data minimization principles, we only collect information necessary to respond to your inquiries and evaluate prospective project scopes:</p>
+            <p>Information submitted through our forms may include:</p>
             <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li><strong>Contact Information:</strong> Full name, professional work email address, telephone number, job title, and company name.</li>
-                <li><strong>Project Scoping Details:</strong> Business problem summaries, target service areas, estimated budget ranges, and project timelines.</li>
-                <li><strong>Technical Telemetry:</strong> IP address (masked for analytics), user-agent string, timestamp, and standard server log headers for security defense.</li>
+                <li><strong>Contact Information:</strong> Full name, email address, telephone number, job title, company name, and country or region when supplied.</li>
+                <li><strong>Project Scoping Details:</strong> Business problem summaries, target service areas, business website, estimated budget ranges, and project timelines.</li>
+                <li><strong>Technical and security information:</strong> Session and request information used to protect forms from abuse. Web server logs may also be handled by the hosting provider under its configuration.</li>
             </ul>
 
-            <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">3. Lawful Basis for Processing (GDPR)</h2>
-            <p>If you reside within the European Union or United Kingdom, we process your personal data under the following legal bases:</p>
+            <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">3. How information is used</h2>
+            <p>We use submitted contact and project details to review and respond to enquiries, discuss possible work, and protect the website from abuse. We do not use contact form details for marketing subscriptions unless you separately opt in.</p>
             <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li><strong>Consent (Article 6(1)(a)):</strong> You have given clear consent via explicit form checkboxes for us to process your information to respond to an inquiry.</li>
-                <li><strong>Contractual Necessity (Article 6(1)(b)):</strong> Processing necessary to take steps at your request prior to entering into a master software development agreement.</li>
-                <li><strong>Legitimate Interests (Article 6(1)(f)):</strong> Defending our digital infrastructure against brute-force attacks, spam bots, and security vulnerabilities.</li>
+                <li>Contact details and the message you submit are used to respond to that enquiry.</li>
+                <li>Security-related request information may be used to detect and limit abusive submissions.</li>
+                <li>Optional analytics is enabled only after you choose “Accept Cookies” in the site banner.</li>
             </ul>
 
             <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">4. Strict No-Sale & Sharing Policy</h2>
             <p>
-                <strong>We do not sell, rent, lease, or monetize your personal information to third parties. Under any circumstances.</strong>
+                <strong>We do not sell personal information submitted through this website.</strong>
             </p>
             <p>
-                Data is shared strictly with trusted operational infrastructure sub-processors necessary to run our service (such as encrypted cloud hosting and transactional email dispatch) under compliant data processing agreements.
+                Information may be handled by the website host, configured CRM endpoint, email transport, or Google Analytics when analytics is enabled. The services used depend on the active website configuration.
             </p>
 
             <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">5. Data Retention Schedule</h2>
-            <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li><strong>Active Inquiries & Client Leads:</strong> Retained for the duration of the commercial relationship.</li>
-                <li><strong>Inactive Discovery Leads:</strong> Retained for a maximum of 2 years from last contact, then cryptographically anonymized or deleted.</li>
-                <li><strong>Financial & Contractual Records:</strong> Retained for 7 years to fulfill statutory accounting and tax compliance regulations.</li>
-                <li><strong>Security & Access Logs:</strong> Retained for 90 days before automated rotation.</li>
-            </ul>
+            <p>Enquiry information is retained while it is needed to respond, manage a potential or active business relationship, and meet applicable recordkeeping requirements. Contact us if you want to request access, correction, or deletion. Web server log retention is controlled by the hosting configuration.</p>
 
             <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">6. Cookie Policy</h2>
-            <p>Our website utilizes a limited number of cookies:</p>
+            <p>Essential session storage supports form security. The site stores your analytics choice in browser local storage. Google Analytics loads only after you accept; choosing “Essential Only” keeps it disabled. Browser storage and any analytics cookies can also be cleared through your browser settings.</p>
             <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li><code>PHPSESSID</code> (Essential): Standard session identifier for CSRF protection and form continuity. Expired upon browser close.</li>
-                <li><code>csrf_token</code> (Essential): Cryptographic defense token guarding form submissions against unauthorized third-party requests.</li>
-                <li><code>codex404_cookie_consent</code> (Essential): Remembers your cookie preference choice.</li>
+                <li><code>PHPSESSID</code> (Essential, when a form session is used): Supports server-side form security.</li>
+                <li><code>codex404_cookie_consent</code> (Browser local storage): Remembers whether optional analytics was accepted or declined.</li>
             </ul>
 
             <h2 style="font-size: 1.5rem; color: var(--white); margin: 2rem 0 1rem;">7. Your Statutory Rights</h2>
-            <p>You possess the following rights regarding your personal information:</p>
+            <p>Depending on your location and applicable law, you may have rights to:</p>
             <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
                 <li><strong>Right to Access:</strong> Request a full copy of the personal information we hold about you.</li>
                 <li><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete contact data.</li>
-                <li><strong>Right to Erasure ("Right to be Forgotten"):</strong> Request immediate permanent deletion of your contact records.</li>
+                <li><strong>Deletion:</strong> Request deletion of personal information, subject to applicable legal exceptions.</li>
                 <li><strong>Right to Data Portability:</strong> Obtain your data in a structured, machine-readable JSON format.</li>
                 <li><strong>Right to Object:</strong> Withdraw consent or object to any non-essential communication at any time.</li>
             </ul>
             <p>
-                To exercise any statutory right, email <a href="mailto:<?= PRIVACY_EMAIL ?>"><?= PRIVACY_EMAIL ?></a>. We respond to all verified requests within 30 days free of charge.
+                To make a privacy request, email <a href="mailto:<?= PRIVACY_EMAIL ?>"><?= PRIVACY_EMAIL ?></a>. We may ask for information needed to verify and process the request.
             </p>
         </div>
     </div>

@@ -3,5 +3,6 @@ Allow: /
 Disallow: /storage/
 Disallow: /config/
 Disallow: /app/
+Disallow: /admin/
 
 Sitemap: https://codex404solutions.com/sitemap.xml

@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
     'title' => 'Enterprise AI Solutions & Private RAG Knowledge Systems',
-    'description' => 'Secure, domain-specific enterprise AI systems: private RAG applications, vector search, document intelligence, and omnichannel AI assistants with strict data privacy and zero hallucinations.',
+    'description' => 'Secure, domain-specific enterprise AI systems: private RAG applications, vector search, document intelligence, and omnichannel AI assistants with strict data privacy and grounded citation thresholds.',
     'canonical' => url('ai-solutions.php'),
     'keywords' => 'enterprise AI solutions, private RAG applications, vector search, Qdrant AI, document OCR intelligence, bespoke AI assistants, self-hosted LLM'
 ];
@@ -32,7 +32,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- 6 Core AI Capability Cards -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Retrieval-Augmented Generation (RAG) -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">📚</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Private Knowledge RAG Systems</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -42,12 +42,12 @@ require_once __DIR__ . '/includes/header.php';
                     <span class="tag-chip">Hybrid Vector Search</span>
                     <span class="tag-chip">Qdrant / pgvector</span>
                     <span class="tag-chip">Direct Citations</span>
-                    <span class="tag-chip">Zero Hallucinations</span>
+                    <span class="tag-chip">Grounded Citations</span>
                 </div>
             </div>
 
             <!-- 2. Document & OCR Intelligence -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">📄</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Document Intelligence & OCR</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 3. Omnichannel AI Customer & Sales Assistants -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">💬</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">24/7 AI Sales & Support Assistants</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -77,7 +77,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Internal Operational Search & Copilots -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">🔍</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Internal Workforce Copilots</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Natural Language Data Analytics -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">📊</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Natural Language SQL Analytics</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. Private & Self-Hosted AI Infrastructure -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🔒</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Self-Hosted VPC Deployments</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -124,7 +124,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<!-- ZERO HALLUCINATIONS ARCHITECTURAL BREAKDOWN -->
+<!-- GROUNDED ARCHITECTURAL RETRIEVAL BREAKDOWN -->
 <section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
         <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
@@ -132,7 +132,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span class="dot"></span>
                 <span>Deterministic Safeguards</span>
             </div>
-            <h2 class="section-title">The 4-Layer Hallucination Prevention Pipeline</h2>
+            <h2 class="section-title">The 4-Layer Grounded Retrieval Pipeline</h2>
             <p class="section-subtitle">
                 How CodeX404 engineers AI systems that business operators can trust with mission-critical customer and financial workflows.
             </p>
@@ -159,7 +159,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">LAYER 3</span>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Source Citation Audit</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    Every extracted fact or policy statement includes clickable document citations with exact page numbers, guaranteeing human operators can audit the underlying reference instantaneously.
+                    A retrieval system can include references to source documents so people can review supporting material. Citation accuracy depends on document quality, parsing, retrieval, and implementation choices.
                 </p>
             </div>
 
@@ -181,7 +181,7 @@ require_once __DIR__ . '/includes/header.php';
             <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Interactive Sandbox</span>
             <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 1rem;">Test Our AI RAG Knowledge Retrieval System</h3>
             <p style="font-size: 1rem; color: var(--slate); max-width: 650px; margin: 0 auto 2rem auto; line-height: 1.6;">
-                Ask questions against our pre-indexed product catalog and documentation in real time to see zero-hallucination semantic grounding in action.
+                Ask questions against our pre-indexed product catalog and documentation in real time to see grounded semantic retrieval and citation matching in action.
             </p>
             <a href="<?= url('index.php#projects') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch AI RAG Simulator ⚡</a>
         </div>

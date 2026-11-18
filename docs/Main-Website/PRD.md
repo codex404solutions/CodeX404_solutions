@@ -56,23 +56,29 @@ Do not publish internal metrics as public marketing claims unless they are verif
 ## 4. Target audiences
 
 ### 4.1 Small and medium businesses
+
 Need professional websites, better visibility, lead generation, integrations and operational efficiency.
 
 ### 4.2 Startups and founders
+
 Need MVPs, SaaS products, product engineering, technical consulting and launch support.
 
 ### 4.3 Established organisations
+
 Need custom software, system integration, data workflows, AI knowledge assistants and process automation.
 
 ### 4.4 Local businesses
+
 Need local search visibility, websites, Google Business Profile support, social campaigns and enquiry conversion.
 
 ### 4.5 Marketing and operations teams
+
 Need campaign support, content systems, analytics, CRM integration and automation.
 
 ## 5. Positioning and messaging
 
 ### Company-level message
+
 **Build. Grow. Automate.**
 
 Suggested supporting message:
@@ -98,6 +104,7 @@ Supporting copy should explain all three divisions rather than implying the comp
 Overview: `/build/`
 
 Candidate service pages:
+
 - `/build/website-development/`
 - `/build/custom-software/`
 - `/build/ecommerce/`
@@ -108,6 +115,7 @@ Candidate service pages:
 - `/build/maintenance-support/` (only if actively offered)
 
 Service capabilities may include:
+
 - Business websites and landing pages.
 - E-commerce stores.
 - Web applications and dashboards.
@@ -127,6 +135,7 @@ GROW is the complete digital growth division. Digital Marketing belongs under GR
 Organise GROW into four service groups:
 
 **A. Search visibility**
+
 - Search Engine Optimization (SEO).
 - Answer Engine Optimization (AEO).
 - Generative Engine Optimization (GEO).
@@ -135,6 +144,7 @@ Organise GROW into four service groups:
 - E-commerce SEO.
 
 **B. Digital marketing**
+
 - Social media strategy and management.
 - Paid search and paid social campaign management.
 - Email marketing and lifecycle campaigns.
@@ -143,6 +153,7 @@ Organise GROW into four service groups:
 - Digital PR and reputation support.
 
 **C. Content and brand growth**
+
 - Content strategy.
 - SEO content and blog writing.
 - Website copywriting.
@@ -151,6 +162,7 @@ Organise GROW into four service groups:
 - Creative campaign coordination.
 
 **D. Conversion and measurement**
+
 - Conversion rate optimization (CRO).
 - Landing page optimization.
 - Analytics and reporting.
@@ -159,6 +171,7 @@ Organise GROW into four service groups:
 - Lead funnel improvement.
 
 Candidate pages:
+
 - `/grow/digital-marketing/`
 - `/grow/seo/`
 - `/grow/aeo/`
@@ -179,6 +192,7 @@ Do not publish all pages automatically. Create a page only when CodeX404 has a c
 Overview: `/automate/`
 
 Candidate service pages:
+
 - `/automate/ai-automation/`
 - `/automate/ai-agents/`
 - `/automate/ai-chatbots/`
@@ -189,6 +203,7 @@ Candidate service pages:
 - `/automate/api-integrations/`
 
 Capabilities may include:
+
 - Workflow and business process automation.
 - AI assistants and chatbots.
 - Tool-using AI agents with appropriate human oversight.
@@ -200,6 +215,7 @@ Capabilities may include:
 ## 7. Sitemap and navigation
 
 Primary navigation:
+
 - Home
 - BUILD
 - GROW
@@ -207,11 +223,11 @@ Primary navigation:
 - Industries
 - Our Work
 - Company
-- Resources
 - Contact
-- Start Your Project (CTA)
+- Book a Discovery Call
 
 Suggested secondary pages:
+
 - `/industries/`
 - `/industries/education/`
 - `/industries/healthcare/`
@@ -261,6 +277,7 @@ Hero content should communicate all three divisions. Preserve the existing dark 
 ## 9. Page requirements
 
 Every division overview page should include:
+
 - Clear positioning and audience.
 - Problems addressed.
 - Service categories.
@@ -270,6 +287,7 @@ Every division overview page should include:
 - Strong CTA.
 
 Every service detail page should include:
+
 - Unique title and description.
 - Service explanation in plain language.
 - Suitable customer and use cases.
@@ -285,11 +303,13 @@ Do not create pages that differ only by keyword substitution.
 ## 10. Portfolio and case studies
 
 Portfolio categories:
+
 - BUILD
 - GROW
 - AUTOMATE
 
 Project classification must distinguish:
+
 - Client project.
 - Internal product.
 - Demonstration project.
@@ -297,6 +317,7 @@ Project classification must distinguish:
 - Open-source project.
 
 A case study should include:
+
 - Context and challenge.
 - Objectives.
 - Scope.
@@ -311,10 +332,12 @@ If a result cannot be substantiated, omit the metric and describe the work accur
 ## 11. Contact and lead generation
 
 Contact details:
+
 - Website: `https://codex404solutions.com/`
 - Email: `info@codex404solutions.com`
 
 Project enquiry fields:
+
 - Name (required).
 - Business email (required).
 - Company (optional or required according to business preference).
@@ -328,6 +351,7 @@ Project enquiry fields:
 - Consent to privacy notice (required where applicable).
 
 Functional requirements:
+
 - Server-side validation.
 - Safe input handling.
 - CSRF protection where applicable.
@@ -348,6 +372,7 @@ Audit whether an admin/CMS already exists.
 If one exists, improve it only where needed. If none exists, propose the smallest practical content management approach compatible with the existing stack.
 
 Potential manageable content:
+
 - Pages and service content.
 - Blog/insights.
 - Portfolio entries.
@@ -377,6 +402,7 @@ Use role-based permissions. Public visitors must never access administrative dat
 ## 14. SEO, AEO and GEO requirements
 
 SEO:
+
 - Unique page titles and meta descriptions.
 - Canonical URLs.
 - XML sitemap and robots.txt.
@@ -388,6 +414,7 @@ SEO:
 - Search Console and analytics verification.
 
 AEO:
+
 - Clear answers to genuine customer questions.
 - Helpful FAQ and how-to content.
 - Logical headings and semantic structure.
@@ -395,6 +422,7 @@ AEO:
 - Structured data only where eligible and appropriate.
 
 GEO:
+
 - Original, useful, evidence-based content.
 - Clear company and author identity.
 - Consistent entity information.
@@ -406,6 +434,7 @@ Do not promise rankings, featured snippets, AI citations or placement in any ans
 ## 15. Acceptance criteria
 
 The project is acceptable when:
+
 - The three divisions are obvious across the site.
 - The approved visual identity is preserved.
 - Existing routes and useful features are accounted for.

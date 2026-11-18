@@ -9,14 +9,13 @@ declare(strict_types=1);
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Leadership & Technical Pedigree</span>
+                <span>Company Leadership</span>
             </div>
             <h2 class="section-title">
-                Senior Engineering Led by <span class="text-gradient gradient-text-animated">Real Practitioners</span>
+                Leadership Across Technology and Operations
             </h2>
             <p class="section-subtitle">
-                No intermediate account-managers. You communicate directly with systems architects who have engineered
-                solutions for enterprise giants.
+                Meet the people who guide the company's technical direction, operations, and client work.
             </p>
         </div>
 
@@ -36,7 +35,7 @@ declare(strict_types=1);
                 </h3>
                 <div
                     style="font-size: 0.85rem; color: #38BDF8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
-                    <?= FOUNDER_ROLE ?> • 7+ Yrs TCS Enterprise Specialist
+                    <?= FOUNDER_ROLE ?> • Senior Systems Architect
                 </div>
                 <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.6; margin-bottom: 1.5rem;">
                     <?= FOUNDER_BIO ?> Specialized in high-throughput Python architecture, Azure OpenAI & RAG systems,

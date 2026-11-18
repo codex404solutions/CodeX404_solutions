@@ -41,7 +41,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Solutions Grid (6 Core Pillars) -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Custom Web Applications & Internal Portals -->
-            <div class="card" data-category="software" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card card-tilt reveal-on-scroll" data-category="software" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div class="card-icon">💻</div>
                     <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Bespoke Web Applications & Portals</h2>
@@ -62,28 +62,28 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 2. Applied AI & Private Enterprise RAG -->
-            <div class="card" data-category="ai" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" data-category="ai" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div class="card-icon">🧠</div>
                     <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Enterprise AI & Private RAG</h2>
                     <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
-                        Deploy domain-specific AI assistants grounded entirely in your company’s verified documentation, manuals, catalogs, and databases. Zero external model training, zero hallucination risk, and cryptographic data privacy.
+                        Build domain-specific assistants that retrieve relevant material from approved company sources. Model data use, access controls, hosting, and answer validation depend on the selected services and implementation.
                     </p>
                     <div class="card-tags" style="margin-bottom: 1.5rem;">
                         <span class="tag-chip">Vector Search (Qdrant)</span>
-                        <span class="tag-chip">Zero Hallucination</span>
+                        <span class="tag-chip">Grounded Retrieval</span>
                         <span class="tag-chip">Strict Schema Outputs</span>
                         <span class="tag-chip">Self-Hosted VPC</span>
                     </div>
                 </div>
                 <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                     <a href="<?= url('ai-solutions.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore AI RAG →</a>
-                    <span style="font-size: 0.8rem; color: var(--slate-dark);">100% Private</span>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">Private & Isolated</span>
                 </div>
             </div>
 
             <!-- 3. Autonomous AI Agents -->
-            <div class="card" data-category="ai" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" data-category="ai" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div class="card-icon">⚡</div>
                     <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Autonomous AI Agents</h2>
@@ -104,7 +104,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Workflow & Process Automation -->
-            <div class="card" data-category="automation" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card card-tilt reveal-on-scroll" data-category="automation" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div class="card-icon">🔄</div>
                     <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Workflow & Process Automation</h2>
@@ -120,12 +120,12 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
                 <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                     <a href="<?= url('automation.php') ?>" class="card-arrow-link" style="font-weight: 600; color: var(--cyan);">Explore Automation →</a>
-                    <span style="font-size: 0.8rem; color: var(--slate-dark);">&lt; 3 Min Response</span>
+                    <span style="font-size: 0.8rem; color: var(--slate-dark);">Direct Routing</span>
                 </div>
             </div>
 
             <!-- 5. Cross-Platform Mobile Applications -->
-            <div class="card" data-category="software" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" data-category="software" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div class="card-icon">📱</div>
                     <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">Mobile Applications & PWAs</h2>
@@ -146,18 +146,18 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. SaaS & Rapid MVP Development -->
-            <div class="card" data-category="saas" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" data-category="saas" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div class="card-icon">🚀</div>
                     <h2 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.75rem;">SaaS Product Engineering & MVPs</h2>
                     <p class="card-description" style="font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
-                        Transform software concepts into market-tested, revenue-generating SaaS platforms in 4 to 8 weeks. Includes multi-tenant data isolation, turnkey subscription billing (Stripe/Razorpay), and founder superadmin analytics.
+                        Scope and develop SaaS products around the intended users, business model, data boundaries, and operational needs. Integrations and delivery milestones are agreed for each engagement.
                     </p>
                     <div class="card-tags" style="margin-bottom: 1.5rem;">
-                        <span class="tag-chip">4-8 Week Delivery</span>
+                        <span class="tag-chip">Scoped Delivery Plan</span>
                         <span class="tag-chip">Multi-Tenancy RLS</span>
                         <span class="tag-chip">Recurring Billing</span>
-                        <span class="tag-chip">100% IP Handover</span>
+                        <span class="tag-chip">Written Ownership Terms</span>
                     </div>
                 </div>
                 <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
@@ -201,7 +201,7 @@ require_once __DIR__ . '/includes/header.php';
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
                         <span style="color: #F87171; font-weight: bold;">✕</span>
-                        <span><strong>Zero IP Ownership:</strong> You pay rent every month forever; you build zero enterprise equity or company valuation.</span>
+                        <span><strong>Ownership terms:</strong> Confirm licenses, source code handoff, and ownership in the project agreement.</span>
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
                         <span style="color: #F87171; font-weight: bold;">✕</span>
@@ -223,11 +223,11 @@ require_once __DIR__ . '/includes/header.php';
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
                         <span style="color: #34D399; font-weight: bold;">✓</span>
-                        <span><strong>Built Around Your Workflow:</strong> The software conforms 100% to how your business operates, cutting training time to zero.</span>
+                        <span><strong>Built Around Your Workflow:</strong> Define user workflows and training needs during discovery and reflect them in the agreed scope.</span>
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
                         <span style="color: #34D399; font-weight: bold;">✓</span>
-                        <span><strong>100% Intellectual Property Ownership:</strong> You own the source code, databases, design assets, and deployment keys permanently.</span>
+                        <span><strong>Written ownership terms:</strong> Agree on source code, assets, licenses, and handoff responsibilities in the project agreement.</span>
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
                         <span style="color: #34D399; font-weight: bold;">✓</span>
@@ -274,7 +274,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 1.75rem; color: var(--cyan); font-weight: 800; margin-bottom: 0.75rem;">03</div>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.5rem;">Deterministic Speed</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    Optimized database indexing, minimal script overhead, and intelligent caching achieve sub-200ms page loads and instantaneous API responses.
+                    Optimized database indexing, minimal script overhead, and caching strategies designed to minimize page latency and maximize Core Web Vitals.
                 </p>
             </div>
 

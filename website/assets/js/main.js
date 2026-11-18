@@ -15,14 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleNav = (openState) => {
       const willOpen = typeof openState === 'boolean' ? openState : !navMenu.classList.contains('open');
       navToggleBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      navToggleBtn.setAttribute('aria-label', willOpen ? 'Close navigation menu' : 'Open navigation menu');
       if (willOpen) {
         navMenu.classList.add('open');
         document.body.classList.add('nav-open');
         navToggleBtn.innerHTML = closeSvg;
+        const firstLink = navMenu.querySelector('a[href], button:not(:disabled)');
+        if (firstLink) requestAnimationFrame(() => firstLink.focus());
       } else {
+        const focusWasInMenu = navMenu.contains(document.activeElement);
         navMenu.classList.remove('open');
         document.body.classList.remove('nav-open');
         navToggleBtn.innerHTML = hamburgerSvg;
+        if (focusWasInMenu) navToggleBtn.focus();
       }
     };
 
@@ -50,6 +55,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navMenu.classList.contains('open')) {
         toggleNav(false);
+        return;
+      }
+
+      if (e.key === 'Tab' && navMenu.classList.contains('open')) {
+        const focusableItems = Array.from(navMenu.querySelectorAll('a[href], button:not(:disabled), [tabindex]:not([tabindex="-1"])'))
+          .filter(item => item.getClientRects().length > 0);
+        if (!focusableItems.length) {
+          e.preventDefault();
+          navToggleBtn.focus();
+          return;
+        }
+
+        const firstItem = focusableItems[0];
+        const lastItem = focusableItems[focusableItems.length - 1];
+        if (e.shiftKey && document.activeElement === firstItem) {
+          e.preventDefault();
+          lastItem.focus();
+        } else if (!e.shiftKey && document.activeElement === lastItem) {
+          e.preventDefault();
+          firstItem.focus();
+        }
       }
     });
   }
@@ -109,27 +135,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4. Cookie Consent Management (GDPR Compliance)
+  // 4. Cookie and optional analytics preference management
   const cookieBanner = document.getElementById('cookieBanner');
   const acceptCookieBtn = document.getElementById('acceptCookiesBtn');
   const declineCookieBtn = document.getElementById('declineCookiesBtn');
 
   if (cookieBanner) {
-    const consent = localStorage.getItem('codex404_cookie_consent');
-    if (!consent) {
+    let consent = null;
+    try {
+      consent = localStorage.getItem('codex404_cookie_consent');
+    } catch (error) {
       cookieBanner.style.display = 'block';
     }
+    if (!consent) cookieBanner.style.display = 'block';
 
     if (acceptCookieBtn) {
       acceptCookieBtn.addEventListener('click', () => {
-        localStorage.setItem('codex404_cookie_consent', 'accepted');
+        try { localStorage.setItem('codex404_cookie_consent', 'accepted'); } catch (error) {}
         cookieBanner.style.display = 'none';
+        if (typeof window.loadCodeX404Analytics === 'function') {
+          window.loadCodeX404Analytics();
+        }
       });
     }
 
     if (declineCookieBtn) {
       declineCookieBtn.addEventListener('click', () => {
-        localStorage.setItem('codex404_cookie_consent', 'declined');
+        try { localStorage.setItem('codex404_cookie_consent', 'declined'); } catch (error) {}
         cookieBanner.style.display = 'none';
       });
     }
@@ -475,6 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Auto-cycle through terminal tabs every 6 seconds unless user manually clicked
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     autoCycleTimer = setInterval(() => {
       if (!userInteracted) {
         const nextIndex = (activeIndex + 1) % tabButtons.length;
@@ -822,10 +855,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const ragChips = document.querySelectorAll('.rag-chip');
 
     const cannedRagAnswers = {
-      'ip': 'Under CodeX404 standard engineering contracts, all source code, database architectures, APIs, and IP are 100% owned by the client upon project delivery. We enforce zero vendor lock-in and provide full repository transfer.',
-      'pipeline': 'The multi-channel lead ingestion pipeline operates via serverless webhooks listening to WhatsApp Cloud API and web forms. Messages undergo PII sanitization and deduplication before being queued to CRM endpoints within 1.8 seconds.',
-      'erp': 'The School ERP platform is built on PHP 8.4 and MySQL with strict role-based access control (RBAC). It isolates student academic records, fee ledgers, and staff payroll while processing thousands of concurrent transactions.',
-      'default': 'CodeX404 Solutions designs, builds, and automates high-performance systems with a strict zero-bug engineering policy, senior-only technical leadership, and transparent milestones.'
+      'ip': 'Ownership, licensing, and handoff terms are defined in the signed agreement for each engagement.',
+      'pipeline': 'In production deployments, multi-channel lead ingestion pipelines can integrate WhatsApp Cloud API and web forms with PII sanitization, deduplication, and CRM endpoint routing.',
+      'erp': 'The School ERP platform is built on PHP and MySQL with strict role-based access control (RBAC). It isolates student academic records, fee ledgers, and staff payroll.',
+      'default': 'CodeX404 Solutions designs, builds, and automates high-performance software systems across our three core divisions: BUILD, GROW, and AUTOMATE.'
     };
 
     const sendRagMessage = (text) => {
@@ -855,8 +888,8 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (lower.includes('erp') || lower.includes('school') || lower.includes('student')) answer = cannedRagAnswers.erp;
 
         aiBubble.innerHTML = `
-          <div style="margin-bottom: 0.4rem; color: #34D399; font-weight: 600; font-size: 0.75rem;">
-            ● Vector Match: 99.4% confidence (latency: 142ms)
+          <div style="margin-bottom: 0.4rem; color: #38BDF8; font-weight: 600; font-size: 0.75rem;">
+            ◈ Semantic Vector Simulation (Sample Match)
           </div>
           <div>${answer}</div>
           <div style="margin-top: 0.5rem; font-size: 0.72rem; color: var(--slate-dark); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.35rem;">
@@ -917,7 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <strong style="color: #38BDF8;">Custom CRM Inquiry #${1040 + leadCount}</strong>
               <span style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px;">QUALIFIED</span>
             </div>
-            <div style="color: var(--slate); font-size: 0.75rem;">Source: WhatsApp Cloud API &nbsp;•&nbsp; Latency: 1.1s</div>
+            <div style="color: var(--slate); font-size: 0.75rem;">Channel: Simulated Inbound Lead &nbsp;•&nbsp; Status: Mock Payload Captured</div>
           `;
           crmLeadList.prepend(crmItem);
           leadCount++;
@@ -954,12 +987,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!el) return;
 
     const phrases = [
-      'Enterprise AI & RAG Architectures',
-      'Zero-Defect Web Systems & Portals',
-      'Autonomous Multi-Tool AI Agents',
-      'High-Throughput FastAPI & Node.js',
-      'SaaS MVP Engineering & Scale'
+      'Web platforms · BUILD',
+      'Digital marketing · GROW',
+      'AI automation · AUTOMATE'
     ];
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = 'BUILD · GROW · AUTOMATE';
+      return;
+    }
 
     let phraseIndex = 0;
     let charIndex = 0;
@@ -1101,10 +1137,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const savedHours = Math.round(totalHoursWasted * 0.75);
       const dollarSavings = Math.round(savedHours * 45);
 
-      if (hoursSavedVal) hoursSavedVal.textContent = `${savedHours.toLocaleString()} hrs / yr`;
-      if (savingsVal) savingsVal.textContent = `$${dollarSavings.toLocaleString()}`;
+      if (hoursSavedVal) hoursSavedVal.textContent = `~${savedHours.toLocaleString()} hrs / yr*`;
+      if (savingsVal) savingsVal.textContent = `~$${dollarSavings.toLocaleString()}*`;
       if (timelineVal) {
-        timelineVal.textContent = team > 25 ? '3 - 5 Sprints' : '2 - 3 Sprints';
+        timelineVal.textContent = 'Milestone Scoped';
       }
     };
 

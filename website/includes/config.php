@@ -109,7 +109,7 @@ define('APP_DESCRIPTION', 'We design, build and automate digital systems that he
 
 // ---------------- CONTACT INFORMATION ----------------
 define('COMPANY_EMAIL', 'info@codex404solutions.com');
-define('PRIVACY_EMAIL', 'privacy@codex404solutions.com');
+define('PRIVACY_EMAIL', COMPANY_EMAIL);
 define('COMPANY_LINKEDIN', 'https://www.linkedin.com/company/codex404solutions');
 define('COMPANY_GITHUB', 'https://github.com/codex404solutions');
 define('COMPANY_TWITTER', 'https://x.com/codex404sol');

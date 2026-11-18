@@ -4,10 +4,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Security, Data Privacy & GDPR Compliance',
-    'description' => 'Our comprehensive engineering security standards: zero-trust architecture, parameterized queries, CSRF validation, encryption at rest and in transit, and GDPR compliance.',
+    'title' => 'Security and Data Protection',
+    'description' => 'Discuss application security, privacy, access, and recovery requirements for your software project with CodeX404 Solutions.',
     'canonical' => url('security.php'),
-    'keywords' => 'software security, GDPR compliance, data privacy, secure engineering, OWASP security'
+    'keywords' => 'software security, data protection, application security, secure engineering'
 ];
 
 require_once __DIR__ . '/includes/header.php';
@@ -18,96 +18,94 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Defense in Depth</span>
+                <span>Project security considerations</span>
             </div>
-            <h1 class="section-title">Security & Data Privacy Engineered into Every Layer</h1>
+            <h1 class="section-title">Plan security and data protection for your system</h1>
             <p class="section-subtitle">
-                We believe security cannot be an afterthought bolted on before launch. Our software engineering practices adhere strictly to OWASP guidelines, zero-trust network boundaries, and international data protection laws.
+                Controls depend on the application, data, hosting, and applicable requirements. We discuss these constraints during scoping and document the agreed responsibilities and controls for each engagement.
             </p>
         </div>
 
         <div class="grid grid-cols-3">
             <!-- 1. Application Layer Security -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">🛡️</div>
                 <h2 class="card-title">Application Layer Defenses</h2>
                 <p class="card-description">
-                    All database interactions utilize PDO prepared statements with strict parameterization to eliminate SQL injection risks. Outputs are contextual HTML escaped to neutralize Cross-Site Scripting (XSS).
+                    The public enquiry workflow validates input, checks a CSRF token, and uses rate limits and a honeypot. Other application endpoints require a separate implementation review.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">Prepared Queries</span>
-                    <span class="tag-chip">CSRF Tokens</span>
-                    <span class="tag-chip">Contextual Escaping</span>
+                    <span class="tag-chip">Form validation</span>
+                    <span class="tag-chip">CSRF validation</span>
+                    <span class="tag-chip">Rate limits</span>
                 </div>
             </div>
 
             <!-- 2. Encryption Everywhere -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">🔒</div>
-                <h2 class="card-title">End-to-End Encryption</h2>
+                <h2 class="card-title">Transport and data storage</h2>
                 <p class="card-description">
-                    All data in transit is encrypted using TLS 1.3 with strict HTTP Strict Transport Security (HSTS) headers. Sensitive database columns, API tokens, and credentials are encrypted at rest using AES-256.
+                    Transport security, encryption, backup, and secret handling depend on the selected hosting and services. Confirm the required controls and their owners before implementation.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">TLS 1.3 Only</span>
-                    <span class="tag-chip">AES-256 At Rest</span>
-                    <span class="tag-chip">HSTS Preload</span>
+                    <span class="tag-chip">Hosting review</span>
+                    <span class="tag-chip">Data classification</span>
+                    <span class="tag-chip">Secret handling</span>
                 </div>
             </div>
 
             <!-- 3. Authentication & RBAC -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🔑</div>
                 <h2 class="card-title">Identity & Access Control</h2>
                 <p class="card-description">
-                    Passwords are systematically hashed using industry-standard bcrypt / Argon2id with high work factors. Granular Role-Based Access Control (RBAC) ensures users can only access their authorized scope.
+                    Authentication and authorization should match user roles and the sensitivity of the system. Identify administrative accounts, access boundaries, and recovery needs in the design.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">Bcrypt / Argon2id</span>
-                    <span class="tag-chip">Granular RBAC</span>
-                    <span class="tag-chip">Session Invalidation</span>
+                    <span class="tag-chip">Access boundaries</span>
+                    <span class="tag-chip">Role requirements</span>
+                    <span class="tag-chip">Account recovery</span>
                 </div>
             </div>
 
             <!-- 4. GDPR & EU Data Protection -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">🇪🇺</div>
-                <h2 class="card-title">GDPR & UK DPA Compliance</h2>
+                <h2 class="card-title">Privacy and data protection</h2>
                 <p class="card-description">
-                    Engineered for clients serving European and UK customers. We implement explicit cookie consent mechanisms, data minimization, automated data export, and cryptographic erasure workflows.
+                    Data protection requirements depend on the project, jurisdiction, and systems involved. We discuss applicable handling, access, retention, and deletion requirements during scoping.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">Consent Logs</span>
-                    <span class="tag-chip">Right to Erasure</span>
-                    <span class="tag-chip">Data Portability</span>
+                    <span class="tag-chip">Data minimization</span>
+                    <span class="tag-chip">Retention needs</span>
+                    <span class="tag-chip">Access and deletion</span>
                 </div>
             </div>
 
             <!-- 5. Rate Limiting & Abuse Defense -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">⏱️</div>
                 <h2 class="card-title">Rate Limiting & Anti-Abuse</h2>
                 <p class="card-description">
-                    Public endpoints and login forms are protected with IP and session-based rate limits, cryptographic honeypots, and token validation to thwart credential stuffing and automated bot scraping.
+                    Contact and discovery submissions use request validation, rate limiting, CSRF checks, and a honeypot. Review other public endpoints separately for their own abuse controls.
                 </p>
                 <div class="card-tags">
-                    <span class="tag-chip">Leaky Bucket Limits</span>
-                    <span class="tag-chip">Honeypot Traps</span>
-                    <span class="tag-chip">Bot Mitigation</span>
+                    <span class="tag-chip">Form protections</span>
+                    <span class="tag-chip">Abuse monitoring</span>
+                    <span class="tag-chip">Endpoint review</span>
                 </div>
             </div>
 
             <!-- 6. Automated Backups & Disaster Recovery -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">💾</div>
                 <h2 class="card-title">Resilience & Backups</h2>
-                <p class="card-description">
-                    Automated off-site database snapshots, transaction write-ahead logs, and tested disaster recovery failover procedures guarantee minimal Recovery Point (RPO) and Recovery Time (RTO) objectives.
-                </p>
+                <p class="card-description">Backup and recovery requirements are defined for each system based on its hosting, data, and availability needs. Confirm the operational owner and restore process before launch.</p>
                 <div class="card-tags">
-                    <span class="tag-chip">Automated Snapshots</span>
-                    <span class="tag-chip">Off-Site Storage</span>
-                    <span class="tag-chip">Tested Restores</span>
+                    <span class="tag-chip">Backup ownership</span>
+                    <span class="tag-chip">Restore procedure</span>
+                    <span class="tag-chip">Recovery objectives</span>
                 </div>
             </div>
         </div>
@@ -119,7 +117,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container container-narrow" style="text-align: center;">
         <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">Responsible Vulnerability Disclosure</h2>
         <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
-            We take application security seriously. If you believe you have identified a security vulnerability in any CodeX404 system, please notify our security team directly. We commit to acknowledging receipt within 24 hours.
+            If you believe you have identified a security vulnerability in a CodeX404 system, please email our security team with enough detail to reproduce the issue. We will review the report and follow up.
         </p>
         <div style="font-size: 1rem; color: var(--cyan); font-family: var(--font-mono);">
             security@codex404solutions.com

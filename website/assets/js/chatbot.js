@@ -63,14 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
       label: '💰 How does pricing work?',
       keywords: ['price', 'pricing', 'cost', 'how much', 'rate', 'rates', 'fees', 'quote', 'package', 'budget', 'expensive', 'cheap'],
       reply: `
-        <p>We believe in <strong>100% transparent engineering pricing</strong> with zero recurring seat fees:</p>
-        <ul>
-          <li><strong>Sprint-Based Delivery:</strong> Starting at <strong>$3,800 / 2-week dedicated sprint</strong>.</li>
-          <li><strong>Turnkey MVP Packages:</strong> Fixed-scope MVPs typically range from <strong>$4,500 to $12,000</strong> with guaranteed deliverables in 2 to 4 weeks.</li>
-          <li><strong>Enterprise Architecture Audits:</strong> <strong>$1,200</strong> full security, performance & database refactoring blueprint.</li>
-        </ul>
-        <p><em>You retain 100% intellectual property ownership with zero vendor lock-in.</em></p>
-        <p><a href="pricing" class="chat-link">View Full Pricing Guide &rarr;</a></p>
+        <p>Project pricing depends on scope, integrations, delivery constraints, and support needs. We review the requirements and provide an estimate for discussion before work begins.</p>
+        <p><a href="pricing" class="chat-link">Review engagement and estimate details &rarr;</a> or <a href="contact" class="chat-link">send us your requirements</a>.</p>
       `
     },
     {
@@ -78,14 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
       label: '🚀 Live demos & portfolio',
       keywords: ['portfolio', 'demo', 'demos', 'examples', 'case study', 'case studies', 'sample', 'work', 'projects'],
       reply: `
-        <p>You can test our production engineering right now:</p>
-        <ul>
-          <li><strong>School ERP Management:</strong> Grade books, fee archives, and student tracking for 5,000+ pupils.</li>
-          <li><strong>B2B Wholesale Portal:</strong> Bulk catalog ordering, invoice reconciliation, and credit tiers.</li>
-          <li><strong>Meta WhatsApp Pipeline:</strong> Instant webhook routing from customer chats into CRM.</li>
-          <li><strong>Private AI RAG Retrieval:</strong> Document question answering with source citations.</li>
-        </ul>
-        <p><a href="portfolio" class="chat-link">Explore Portfolio & Live Demos &rarr;</a></p>
+        <p>Browse the work and project descriptions currently published on the website. Each project is described according to the information available for publication.</p>
+        <p><a href="portfolio" class="chat-link">Explore the portfolio &rarr;</a></p>
       `
     },
     {
@@ -94,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: ['discovery', 'book', 'call', 'meeting', 'schedule', 'talk', 'consultation', 'discuss'],
       reply: `
         <p>We'd love to discuss your technical architecture or MVP scope! Our discovery calls are direct with senior engineering leads — no sales reps.</p>
-        <p>We review your data models, security requirements, and budget constraints, then produce an actionable roadmap in 48 hours.</p>
+        <p>We can discuss your goals, existing systems, constraints, and the next steps needed to define a project scope.</p>
         <p><a href="discovery-call" class="btn btn-primary btn-sm chat-btn-action">Book 30-Min Discovery Call &rarr;</a></p>
       `
     },
@@ -142,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
       reply: `
         <p>Our agile engineering process is optimized for high velocity:</p>
         <ul>
-          <li><strong>MVP Launches:</strong> Working, production-grade MVPs are typically delivered in <strong>2 to 4 weeks</strong>.</li>
-          <li><strong>Bi-Weekly Sprints:</strong> Continuous feature releases every 2 weeks with staging preview environments.</li>
-          <li><strong>Daily Updates:</strong> Loom video walk-throughs and direct communication over Slack or WhatsApp.</li>
+          <li><strong>Scope:</strong> Agree on features, dependencies, and delivery milestones after reviewing the requirements.</li>
+          <li><strong>Review cadence:</strong> Choose progress reviews and communication channels with the project team.</li>
+          <li><strong>Dependencies:</strong> Account for access, integrations, approvals, and third-party services in the plan.</li>
         </ul>
         <p><a href="process" class="chat-link">Explore Our 5-Stage Process &rarr;</a></p>
       `

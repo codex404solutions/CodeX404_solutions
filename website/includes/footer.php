@@ -16,7 +16,7 @@ declare(strict_types=1);
                 </p>
                 <div class="system-status-indicator">
                     <span class="status-pulse"></span>
-                    <span>All client systems operational</span>
+                    <span>BUILD · GROW · AUTOMATE</span>
                 </div>
 
                 <!-- Official Social Media Channels (Non-floating) -->
@@ -46,6 +46,9 @@ declare(strict_types=1);
             <div class="footer-col">
                 <h4>Solutions</h4>
                 <ul class="footer-links">
+                    <li><a href="<?= url('build.php') ?>">BUILD Overview</a></li>
+                    <li><a href="<?= url('grow.php') ?>">GROW Overview</a></li>
+                    <li><a href="<?= url('automate.php') ?>">AUTOMATE Overview</a></li>
                     <li><a href="<?= url('software-development.php') ?>">Custom Software</a></li>
                     <li><a href="<?= url('ai-solutions.php') ?>">Enterprise AI</a></li>
                     <li><a href="<?= url('ai-agents.php') ?>">AI Agents</a></li>
@@ -57,13 +60,14 @@ declare(strict_types=1);
 
             <!-- Col 3: Company -->
             <div class="footer-col">
-                <h4>Company</h4>
+                <h4>Company & Work</h4>
                 <ul class="footer-links">
                     <li><a href="<?= url('about.php') ?>">About Us</a></li>
-                    <li><a href="<?= url('process.php') ?>">Engineering Process</a></li>
-                    <li><a href="<?= url('engagement-models.php') ?>">Engagement Models</a></li>
+                    <li><a href="<?= url('industries.php') ?>">Industries Served</a></li>
                     <li><a href="<?= url('case-studies.php') ?>">Case Studies</a></li>
                     <li><a href="<?= url('portfolio.php') ?>">Portfolio</a></li>
+                    <li><a href="<?= url('process.php') ?>">Engineering Process</a></li>
+                    <li><a href="<?= url('engagement-models.php') ?>">Engagement Models</a></li>
                     <li><a href="<?= url('security.php') ?>">Security & Compliance</a></li>
                     <li><a href="<?= url('faq.php') ?>">FAQ</a></li>
                 </ul>
@@ -73,7 +77,7 @@ declare(strict_types=1);
             <div class="footer-col">
                 <h4>Trust & Legal</h4>
                 <ul class="footer-links">
-                    <li><a href="<?= url('privacy.php') ?>">Privacy Policy (GDPR)</a></li>
+                    <li><a href="<?= url('privacy.php') ?>">Privacy Policy</a></li>
                     <li><a href="<?= url('terms.php') ?>">Terms of Service</a></li>
                     <li><a href="<?= FOUNDER_LINKEDIN ?>" target="_blank" rel="noopener noreferrer">Founder LinkedIn</a></li>
                     <li><a href="<?= COFOUNDER_LINKEDIN ?>" target="_blank" rel="noopener noreferrer">Co-Founder LinkedIn</a></li>
@@ -101,7 +105,7 @@ declare(strict_types=1);
 
         <div class="footer-bottom">
             <div>
-                &copy; <?= date('Y') ?> <?= APP_NAME ?>. All rights reserved.
+                &copy; <?= date('Y') ?> <?= APP_NAME ?>. All rights reserved. • Developed by <a href="https://codex404solutions.com" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; vertical-align: middle; margin-left: 0.25rem;"><img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" style="height: 18px; width: auto; vertical-align: middle;"></a>
             </div>
             <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
                 <a href="<?= url('privacy.php') ?>">Privacy</a>
@@ -131,6 +135,7 @@ declare(strict_types=1);
 
 <!-- Client-side Scripts -->
 <script src="<?= asset('js/main.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/main.js') ? filemtime(dirname(__DIR__) . '/assets/js/main.js') : '1.0' ?>" defer></script>
+<script src="<?= asset('js/scroll-engine.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/scroll-engine.js') ? filemtime(dirname(__DIR__) . '/assets/js/scroll-engine.js') : '1.0' ?>" defer></script>
 <script src="<?= asset('js/forms.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/forms.js') ? filemtime(dirname(__DIR__) . '/assets/js/forms.js') : '1.0' ?>" defer></script>
 <script src="<?= asset('js/chatbot.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/chatbot.js') ? filemtime(dirname(__DIR__) . '/assets/js/chatbot.js') : '1.0' ?>" defer></script>
 

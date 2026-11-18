@@ -7,8 +7,8 @@ class Sanitizer {
     /**
      * Clean and escape single-line or multi-line text with length restriction and null-byte stripping.
      */
-    public static function cleanString(?string $val, int $maxLength = 5000): string {
-        if ($val === null) {
+    public static function cleanString(mixed $val, int $maxLength = 5000): string {
+        if (!is_string($val)) {
             return '';
         }
         $stripped = str_replace("\0", '', $val);
@@ -19,8 +19,8 @@ class Sanitizer {
     /**
      * Sanitize and format email addresses up to RFC maximum length (254 characters).
      */
-    public static function cleanEmail(?string $val, int $maxLength = 254): string {
-        if ($val === null) {
+    public static function cleanEmail(mixed $val, int $maxLength = 254): string {
+        if (!is_string($val)) {
             return '';
         }
         $stripped = str_replace(["\0", "\r", "\n"], '', trim($val));
@@ -34,8 +34,8 @@ class Sanitizer {
     /**
      * Sanitize phone numbers, retaining only valid dialing characters.
      */
-    public static function cleanPhone(?string $val, int $maxLength = 30): string {
-        if ($val === null) {
+    public static function cleanPhone(mixed $val, int $maxLength = 30): string {
+        if (!is_string($val)) {
             return '';
         }
         $stripped = str_replace("\0", '', trim($val));

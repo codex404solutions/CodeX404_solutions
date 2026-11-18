@@ -6,23 +6,23 @@ require_once __DIR__ . '/includes/config.php';
 $faqs = [
     [
         'q' => 'Who owns the intellectual property (IP) and source code created during a project?',
-        'a' => 'You do — 100%. Upon settlement of project milestones, all intellectual property, source code repositories, design assets, and database architecture belong exclusively to your company. We never retain proprietary rights, license back doors, or vendor lock-in.'
+        'a' => 'Ownership, licenses, and handoff terms depend on the project agreement. We document those terms before work begins so both parties understand what is delivered and how it may be used.'
     ],
     [
         'q' => 'How does CodeX404 collaborate across international timezones?',
-        'a' => 'While headquartered in India, our engineers operate on overlapping schedules with North American (EST/PST), UK/European (GMT/CET), and Middle Eastern (GST/AST) business hours. We combine clear daily asynchronous progress summaries with scheduled video sprint syncs.'
+        'a' => 'We agree communication channels, review cadence, and meeting times during project planning so they fit the people and time zones involved.'
     ],
     [
         'q' => 'What is the typical timeline for an MVP or custom software deliverable?',
-        'a' => 'A focused Minimum Viable Product (MVP) or custom internal portal is typically delivered within 4 to 8 weeks. Larger enterprise systems or multi-module ERP platforms are structured into two-week agile release sprints with working software deployed to staging at every step.'
+        'a' => 'Timing depends on scope, dependencies, and availability. We review the requirements and agree on milestones and a delivery plan before work begins.'
     ],
     [
         'q' => 'Do you sign Non-Disclosure Agreements (NDAs) before discussing project details?',
-        'a' => 'Yes, absolutely. We routinely sign bilateral NDAs before reviewing proprietary workflows, product designs, or customer datasets. Your business concepts and operational models remain strictly confidential.'
+        'a' => 'Please raise NDA requirements before sharing sensitive material. Any confidentiality terms need to be agreed in writing before that information is exchanged.'
     ],
     [
         'q' => 'How do you handle post-launch maintenance, bug fixes, and system scaling?',
-        'a' => 'Every deliverable includes a 30-day post-launch warranty covering any bugs or discrepancies against approved specifications. Afterwards, we offer flexible dedicated support retainers or on-demand feature development sprints.'
+        'a' => 'Support, warranty coverage, and maintenance options depend on the project agreement. We document the applicable coverage and response process as part of the scope.'
     ],
     [
         'q' => 'How do you prevent hallucinations and data leaks when implementing enterprise AI?',
@@ -32,7 +32,7 @@ $faqs = [
 
 $pageMeta = [
     'title' => 'Frequently Asked Questions (FAQ) — Engineering & Partnerships',
-    'description' => 'Get clear answers to common questions regarding CodeX404 Solutions: intellectual property ownership, international timezones, pricing, AI safeguards, and SLAs.',
+    'description' => 'Get clear answers to common questions regarding CodeX404 Solutions: intellectual property ownership, international timezones, pricing, AI safeguards, and engagement models.',
     'canonical' => url('faq.php'),
     'keywords' => 'software development FAQ, IP ownership, AI security FAQ, dedicated team questions',
     'faq' => $faqs

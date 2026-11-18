@@ -5,7 +5,7 @@ declare(strict_types=1);
     <div class="cookie-content">
         <strong>Privacy & Cookie Preferences</strong>
         <p style="margin: 6px 0 0; font-size: 0.825rem; color: var(--slate);">
-            We use essential cookies to maintain security and anonymous analytics to understand site performance. No third-party marketing cookies are loaded without your consent. Read our <a href="<?= url('privacy.php') ?>" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a>.
+            Essential storage supports security. Optional Google Analytics loads only if you accept. Choose “Essential Only” to keep analytics disabled. Read our <a href="<?= url('privacy.php') ?>" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a>.
         </p>
     </div>
     <div class="cookie-actions">

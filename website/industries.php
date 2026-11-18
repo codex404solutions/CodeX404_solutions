@@ -22,7 +22,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Vertical Engineering Capabilities</span>
             </div>
             <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Engineered for Your Industry's <span class="gradient-text">Operational Realities</span>
+                Engineered for Your Industry's <span class="gradient-text gradient-text-animated">Operational Realities</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
                 While business models vary across sectors, the fundamental operational friction — manual spreadsheet transcription, disconnected software, and lost lead revenue — is universal. Here is how we apply our defensive engineering to specific verticals.
@@ -31,7 +31,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Education & Institutions -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll" id="industry-education">
                 <div class="card-icon">🎓</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Education & EdTech</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -46,7 +46,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 2. B2B Commerce & Wholesale Distribution -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" id="industry-commerce">
                 <div class="card-icon">🛒</div>
                 <h2 class="card-title">B2B Commerce & Wholesale</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -61,11 +61,11 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 3. Professional & Legal Services -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" id="industry-legal">
                 <div class="card-icon">⚖️</div>
                 <h2 class="card-title">Legal & Professional Services</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Equip attorneys and consultants with self-hosted private RAG document intelligence, automated contract clause review, and client onboarding vaults with zero external data leakage.
+                    Explore document search and review workflows with access, hosting, and data handling requirements defined for the systems and information involved.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Confidential Document RAG</span>
@@ -76,7 +76,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Logistics & Supply Chain -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll" id="industry-logistics">
                 <div class="card-icon">🚚</div>
                 <h2 class="card-title">Logistics & Field Dispatch</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -91,7 +91,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Real Estate & Property Management -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" id="industry-realestate">
                 <div class="card-icon">🏢</div>
                 <h2 class="card-title">Real Estate & Property Portals</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -106,7 +106,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. Healthcare & Clinical Operations -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" id="industry-healthcare">
                 <div class="card-icon">🩺</div>
                 <h2 class="card-title">Healthcare & Clinic Operations</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -115,7 +115,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="card-tags">
                     <span class="tag-chip">Encrypted Booking</span>
                     <span class="tag-chip">Appointment Reminders</span>
-                    <span class="tag-chip">AES-256 at Rest</span>
+                    <span class="tag-chip">Data protection scoped to requirements</span>
                     <span class="tag-chip">GDPR / HIPAA Alignment</span>
                 </div>
             </div>

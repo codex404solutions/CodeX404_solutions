@@ -4,6 +4,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/security.php';
 
+$divisionServiceOptions = \App\Validators\FormValidator::serviceOptions();
+
 $pageMeta = [
     'title' => 'Software & AI that moves your business forward | CodeX404 Solutions',
     'description' => 'CodeX404 Solutions designs, builds, and automates custom software, enterprise AI, autonomous agents, and workflow systems for growing businesses globally.',
@@ -31,15 +33,15 @@ require_once __DIR__ . '/includes/header.php';
             </h1>
 
             <!-- Dynamic Rotating Typewriter Headline -->
-            <div class="hero-typewriter-box" aria-live="polite">
+            <div class="hero-typewriter-box" aria-live="off">
                 <span class="type-prefix">Specialized in:</span>
-                <span class="typewriter-text" id="typewriter">Enterprise AI & RAG Architectures</span>
+                <span class="typewriter-text" id="typewriter">BUILD · GROW · AUTOMATE</span>
                 <span class="typewriter-cursor"></span>
             </div>
 
             <p class="hero-description">
-                We design, build, and automate high-performance software systems — zero bugs, production-grade cloud
-                architectures, autonomous multi-tool AI pipelines, and 100% client IP ownership.
+                We build digital products, support online growth, and automate business workflows. Project scope,
+                responsibilities, ownership, and handoff terms are agreed in writing for each engagement.
             </p>
 
             <div class="hero-cta-group">
@@ -54,27 +56,26 @@ require_once __DIR__ . '/includes/header.php';
                 <a href="#contact-section" class="btn btn-secondary btn-lg">
                     <span>Start Your Project 🚀</span>
                 </a>
-
             </div>
 
-            <!-- Value / Capability Stats Strip -->
+            <!-- Value / Capability Stats Strip (Progressive Enhancement) -->
             <div class="hero-stats-strip">
                 <div class="stat-item">
-                    <strong>100%</strong>
-                    <span>Senior Direct Engineering</span>
+                    <strong>Clear Scope</strong>
+                    <span>Milestones & Acceptance Criteria</span>
                 </div>
                 <div class="stat-item">
-                    <strong>0 Bugs</strong>
-                    <span>Where Bugs Meet Their Match</span>
+                    <strong data-counter-target="3" data-counter-suffix=" Divisions">3 Divisions</strong>
+                    <span>BUILD · GROW · AUTOMATE</span>
                 </div>
                 <div class="stat-item">
-                    <strong>Zero Lock-in</strong>
-                    <span>Full IP & Code Ownership</span>
+                    <strong>Transparent IP</strong>
+                    <span>Milestone-Based Assignment</span>
                 </div>
             </div>
         </div>
 
-        <!-- Interactive Multi-Tab Hero Terminal -->
+        <!-- Interactive Multi-Tab Hero Terminal (Architectural Simulation) -->
         <div class="hero-visual">
             <div class="tech-frame">
                 <div class="tech-frame-header">
@@ -90,56 +91,57 @@ require_once __DIR__ . '/includes/header.php';
                             🚀 deploy
                         </button>
                         <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="audit">
-                            🐛 zero-bugs
+                            🧪 quality-check
                         </button>
                         <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="agent">
                             🤖 ai-agent
                         </button>
                     </div>
 
-                    <div style="font-size: 0.725rem; color: #34D399; font-family: var(--font-mono); font-weight: 600;">●
-                        LIVE SYSTEM</div>
+                    <div style="font-size: 0.725rem; color: #FBBF24; font-family: var(--font-mono); font-weight: 600;">
+                        ● ARCHITECTURE SIMULATION
+                    </div>
                 </div>
 
                 <div class="tech-frame-body">
                     <!-- Pane 1: Deploy -->
                     <div class="terminal-pane active" id="pane-deploy">
-                        <div class="code-comment">// Production Zero-Downtime Deployment</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> deploy --env
-                            production --fast</div>
+                        <div class="code-comment">// Continuous Integration Pipeline Simulation</div>
+                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> build --env
+                            staging --verify</div>
                         <div style="color: var(--slate); margin-top: 0.35rem;">
-                            &rarr; Running automated test suites (128/128 passed)...<br>
-                            &rarr; Building hardened Docker container image...<br>
-                            &rarr; Verifying TLS 1.3 encryption & rate-limiting...
+                            &rarr; Running automated regression test suite...<br>
+                            &rarr; Compiling containerized production package...<br>
+                            &rarr; Verifying TLS configuration & rate-limiting policies...
                         </div>
                         <div style="color: #34D399; margin-top: 0.5rem; font-weight: 500;">
-                            ✔ Lighthouse Performance Score: 99/100 ⚡<br>
-                            ✔ API p99 Latency: 42ms<br>
-                            ✔ Production deployment healthy (zero downtime)
+                            ✔ Static analysis checks satisfied<br>
+                            ✔ Automated test assertions completed<br>
+                            ✔ Staging deployment package verified
                         </div>
                         <div class="pipeline-badge">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
-                            Production Pipeline: 99.99% Availability
+                            Continuous Integration Workflow
                         </div>
                     </div>
 
-                    <!-- Pane 2: Audit & Zero Bugs -->
+                    <!-- Pane 2: Audit & Quality -->
                     <div class="terminal-pane" id="pane-audit">
-                        <div class="code-comment">// Deep Security & Bug Elimination Scan</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> audit --deep
-                            --zero-bugs</div>
+                        <div class="code-comment">// Defensive Architecture & Type-Safety Scan</div>
+                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> test
+                            --type-safety
+                            --audit</div>
                         <div style="color: var(--slate); margin-top: 0.35rem;">
-                            &rarr; Scanning 48,200 lines across backend & UI...<br>
-                            &rarr; Memory leaks: <span style="color: #34D399; font-weight: bold;">0 detected</span><br>
-                            &rarr; OWASP Top 10 vulnerabilities: <span style="color: #34D399; font-weight: bold;">0
-                                found</span>
+                            &rarr; Type-checking codebase with strict compilation standards...<br>
+                            &rarr; Auditing route authorization and CSRF protections...<br>
+                            &rarr; Scanning dependencies for security advisories...
                         </div>
                         <div style="color: #38BDF8; margin-top: 0.5rem; font-weight: 600;">
-                            🎯 Where Bugs Meet Their Match — 100% Quality Assurance<br>
-                            ✔ Strict type-safety & automated idempotency checks
+                            🎯 Where Bugs Meet Their Match — Defensive Code Architecture<br>
+                            ✔ Automated parameter validation and error logging enforced
                         </div>
                         <div class="pipeline-badge"
                             style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; border-color: rgba(56, 189, 248, 0.25);">
@@ -148,23 +150,23 @@ require_once __DIR__ . '/includes/header.php';
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <polyline points="12 6 12 12 14 14"></polyline>
                             </svg>
-                            Deterministic Zero-Defect Guarantee
+                            Automated Quality Assurance
                         </div>
                     </div>
 
                     <!-- Pane 3: AI Agent Workflow -->
                     <div class="terminal-pane" id="pane-agent">
-                        <div class="code-comment">// Autonomous Enterprise AI & RAG Pipeline</div>
+                        <div class="code-comment">// Autonomous Enterprise AI & RAG Pipeline Simulation</div>
                         <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> agent
-                            --pipeline rag-sync --stream</div>
+                            --pipeline rag-workflow --simulate</div>
                         <div style="color: var(--slate); margin-top: 0.35rem;">
-                            &rarr; Connecting private Qdrant vector index...<br>
-                            &rarr; Synchronizing 14,000 corporate policy files...<br>
-                            &rarr; Executing multi-tool agentic resolution loop...
+                            &rarr; Initializing grounded vector index simulator...<br>
+                            &rarr; Parsing enterprise document schemas...<br>
+                            &rarr; Evaluating multi-tool agent resolution logic...
                         </div>
                         <div style="color: #F472B6; margin-top: 0.5rem; font-weight: 500;">
-                            ✔ Inbound inquiry auto-resolved in 1.8s<br>
-                            ✔ Webhook sync dispatched to CRM & WhatsApp API
+                            ✔ Simulated query routed with audit logging<br>
+                            ✔ Dispatch event prepared for webhook pipeline
                         </div>
                         <div class="pipeline-badge"
                             style="background: rgba(236, 72, 153, 0.12); color: #F472B6; border-color: rgba(236, 72, 153, 0.25);">
@@ -172,7 +174,7 @@ require_once __DIR__ . '/includes/header.php';
                                 stroke-width="2">
                                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                             </svg>
-                            Autonomous Execution with Audit Trail
+                            Simulated Agentic Workflow
                         </div>
                     </div>
                 </div>
@@ -220,8 +222,8 @@ require_once __DIR__ . '/includes/header.php';
             <div class="tech-pill-item"><span class="tech-pill-icon">📱</span> Progressive Web Apps (PWA)</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Payment Gateways</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🔄</span> CI/CD GitHub Actions</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Zero-Defect Hardening</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> 7+ Yrs Enterprise TCS Pedigree</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Security Hardening</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> Enterprise Engineering Pedigree</div>
             <!-- Seamless Duplicate Loop -->
             <div class="tech-pill-item"><span class="tech-pill-icon">☁️</span> AWS Cloud Architecture</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis Distributed Cache</div>
@@ -230,8 +232,8 @@ require_once __DIR__ . '/includes/header.php';
             <div class="tech-pill-item"><span class="tech-pill-icon">📱</span> Progressive Web Apps (PWA)</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Payment Gateways</div>
             <div class="tech-pill-item"><span class="tech-pill-icon">🔄</span> CI/CD GitHub Actions</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Zero-Defect Hardening</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> 7+ Yrs Enterprise TCS Pedigree</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Security Hardening</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> Enterprise Engineering Pedigree</div>
         </div>
     </div>
 </section>
@@ -247,12 +249,12 @@ require_once __DIR__ . '/includes/header.php';
                 <span>The CodeX404 Engineering Flow</span>
             </div>
             <h2 class="section-title">
-                From Complex Constraints to <span class="text-gradient gradient-text-animated">Flawless
-                    Production</span>
+                From Complex Constraints to <span class="text-gradient gradient-text-animated">Production
+                    Excellence</span>
             </h2>
             <p class="section-subtitle">
-                A deterministic pipeline built on senior engineering, automated type-safety, and enterprise AI
-                orchestration.
+                A structured engineering pipeline built on architectural discovery, automated testing, and intelligent
+                systems design.
             </p>
         </div>
 
@@ -293,12 +295,12 @@ require_once __DIR__ . '/includes/header.php';
                     <text x="90" y="52" fill="#00F0FF" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
                         text-anchor="middle">🎯</text>
                     <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">1. Client Objective</text>
+                        font-weight="700" text-anchor="middle">1. Discovery</text>
                     <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Scope & Bottleneck</text>
+                        text-anchor="middle">Scope & Bottlenecks</text>
                 </g>
 
-                <!-- Flow Step 2: AI & Agentic RAG -->
+                <!-- Flow Step 2: AI & Architecture -->
                 <g transform="translate(310, 50)">
                     <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#8B5CF6" stroke-width="1.5" />
                     <circle cx="90" cy="45" r="24" fill="rgba(139, 92, 246, 0.15)" stroke="#8B5CF6"
@@ -306,9 +308,9 @@ require_once __DIR__ . '/includes/header.php';
                     <text x="90" y="52" fill="#A78BFA" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
                         text-anchor="middle">🧠</text>
                     <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">2. AI & Architecture</text>
+                        font-weight="700" text-anchor="middle">2. Architecture</text>
                     <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Multi-Agent & Vector</text>
+                        text-anchor="middle">Systems & AI Design</text>
                 </g>
 
                 <!-- Flow Step 3: Hardened Build -->
@@ -319,9 +321,9 @@ require_once __DIR__ . '/includes/header.php';
                     <text x="90" y="52" fill="#F472B6" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
                         text-anchor="middle">🛡️</text>
                     <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">3. Zero-Bug Build</text>
+                        font-weight="700" text-anchor="middle">3. Reviewed Build</text>
                     <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Type-Safe & Scaled</text>
+                        text-anchor="middle">Type-Safe & Tested</text>
                 </g>
 
                 <!-- Flow Step 4: Production -->
@@ -334,9 +336,300 @@ require_once __DIR__ . '/includes/header.php';
                     <text x="70" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
                         font-weight="700" text-anchor="middle">4. Live Asset</text>
                     <text x="70" y="122" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">100% Owned IP</text>
+                        text-anchor="middle">Transferred IP</text>
                 </g>
             </svg>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     THE THREE DIVISIONS — BUILD · GROW · AUTOMATE
+     ========================================================================== -->
+<section class="section" id="divisions" aria-label="Company Divisions">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>One Unified Engineering & Growth Partner</span>
+            </div>
+            <h2 class="section-title">
+                Three Focused Divisions. <span class="text-gradient gradient-text-animated">One High-Standard
+                    Team.</span>
+            </h2>
+            <p class="section-subtitle">
+                Whether you need to engineer custom platforms, expand search and audience discovery, or automate manual
+                workflows, CodeX404 provides direct technical leadership.
+            </p>
+        </div>
+
+        <div class="divisions-grid">
+            <!-- Division 1: BUILD -->
+            <article class="division-card build card-tilt reveal-on-scroll" id="division-build">
+                <div>
+                    <div class="division-badge-pill badge-build">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
+                        <span>BUILD — Engineering & Apps</span>
+                    </div>
+                    <h3 class="division-title">
+                        <span>💻</span> Build Software That Scales
+                    </h3>
+                    <p class="division-desc">
+                        Turn core workflows and product visions into reliable web platforms, SaaS architectures, mobile
+                        applications, and high-load backend APIs.
+                    </p>
+                    <ul class="division-feature-list">
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                            <span>Custom Web Applications & Enterprise Dashboards</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                            <span>SaaS MVP Engineering & Multi-Tenant Setup</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                            <span>Cross-Platform Mobile & Progressive Web Apps</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                            <span>Payment Gateways & REST/GraphQL API Integration</span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="<?= url('build.php') ?>" class="division-cta-link text-build">
+                    <span>Explore BUILD Capabilities</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </article>
+
+            <!-- Division 2: GROW -->
+            <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1" id="division-grow">
+                <div>
+                    <div class="division-badge-pill badge-grow">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
+                        <span>GROW — Visibility & Growth</span>
+                    </div>
+                    <h3 class="division-title">
+                        <span>📈</span> Grow Reach & Discovery
+                    </h3>
+                    <p class="division-desc">
+                        Help audiences discover and trust your platform through search engine optimization,
+                        answer-engine readiness (AEO/GEO), digital marketing, and conversion design.
+                    </p>
+                    <ul class="division-feature-list">
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                            <span>Search Engine Optimization (SEO & Technical Audits)</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                            <span>Answer Engine & Generative Discovery (AEO & GEO)</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                            <span>Digital Marketing Campaigns & Paid Traffic Guidance</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                            <span>Conversion Rate Optimization (CRO) & Funnel Analytics</span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="<?= url('grow.php') ?>" class="division-cta-link text-grow">
+                    <span>Explore GROW Capabilities</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </article>
+
+            <!-- Division 3: AUTOMATE -->
+            <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2" id="division-automate">
+                <div>
+                    <div class="division-badge-pill badge-automate">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
+                        <span>AUTOMATE — AI & Operations</span>
+                    </div>
+                    <h3 class="division-title">
+                        <span>⚡</span> Automate Manual Toil
+                    </h3>
+                    <p class="division-desc">
+                        Connect disjointed systems and streamline operations using autonomous multi-tool AI agents,
+                        private RAG knowledge bases, and real-time messaging pipelines.
+                    </p>
+                    <ul class="division-feature-list">
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                            <span>Autonomous Multi-Tool Agentic Resolution Loops</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                            <span>Enterprise RAG & Grounded Vector Documentation Search</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                            <span>WhatsApp Cloud API & Real-time CRM Sync Webhooks</span>
+                        </li>
+                        <li class="division-feature-item">
+                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                            <span>Document Extraction & Event-Driven Process Automation</span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="<?= url('automate.php') ?>" class="division-cta-link text-automate">
+                    <span>Explore AUTOMATE Capabilities</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     INTERACTIVE INDUSTRY & USE-CASE TOUCH SLIDER
+     ========================================================================== -->
+<section class="section industry-slider-section" aria-label="Industries and Use Cases">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>Contextual Industry Workflows</span>
+            </div>
+            <h2 class="section-title">
+                Engineered for <span class="text-gradient gradient-text-animated">Real Operational Demands</span>
+            </h2>
+            <p class="section-subtitle">
+                Explore how our modular systems adapt to different sector requirements — with responsive swipe controls
+                and auto-scrolling.
+            </p>
+        </div>
+
+        <div class="industry-slider-wrap">
+            <div class="industry-slider-track" tabindex="0" aria-label="Industry solutions carousel">
+                <!-- Slide 1: Healthcare -->
+                <div class="industry-slider-card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏥</div>
+                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Healthcare & Clinics</h3>
+                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+                            Patient booking portals, clinic schedule coordination, automated visit notifications, and
+                            structured medical intake.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #60A5FA; font-weight: 600;">
+                        Focus: Privacy & Automated Scheduling &rarr;
+                    </div>
+                </div>
+
+                <!-- Slide 2: Education -->
+                <div class="industry-slider-card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏫</div>
+                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Schools & Institutions
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+                            Institutional web portals, fee voucher processing, admission workflows, and role-based
+                            faculty record systems.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #38BDF8; font-weight: 600;">
+                        Focus: High-Concurrency Portals &rarr;
+                    </div>
+                </div>
+
+                <!-- Slide 3: E-Commerce -->
+                <div class="industry-slider-card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🛍️</div>
+                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">E-Commerce & Retail</h3>
+                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+                            Fast product catalog browsing, checkout integrations, real-time inventory updates, and
+                            abandoned cart automations.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #C084FC; font-weight: 600;">
+                        Focus: Sub-Second TTFB & Checkout &rarr;
+                    </div>
+                </div>
+
+                <!-- Slide 4: Appointments -->
+                <div class="industry-slider-card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">📅</div>
+                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Appointment Workflows
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+                            Direct reservation engines for salons, spas, dental offices, and dining without marketplace
+                            middleman fees.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #34D399; font-weight: 600;">
+                        Focus: Direct Client Ownership &rarr;
+                    </div>
+                </div>
+
+                <!-- Slide 5: Real Estate -->
+                <div class="industry-slider-card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
+                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Real Estate & Agencies
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+                            Dynamic property search, interactive floor plans, broker inquiry funnels, and CRM automated
+                            assignment.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #FBBF24; font-weight: 600;">
+                        Focus: High-Intent Lead Routing &rarr;
+                    </div>
+                </div>
+
+                <!-- Slide 6: SaaS MVPs -->
+                <div class="industry-slider-card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🚀</div>
+                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">SaaS & Early Founders
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+                            Multi-tenant architecture, Stripe customer portals, user authentication, and maintainable
+                            cloud deployments.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #F472B6; font-weight: 600;">
+                        Focus: Rapid Milestone Validation &rarr;
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Controls (Navigation Arrows & Pagination Dots) -->
+            <div class="slider-controls-row">
+                <div class="slider-nav-btns">
+                    <button type="button" class="slider-nav-btn slider-nav-prev" aria-label="Previous industry slide">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button type="button" class="slider-nav-btn slider-nav-next" aria-label="Next industry slide">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="slider-pagination-dots" role="tablist" aria-label="Slider pagination"></div>
+            </div>
         </div>
     </div>
 </section>
@@ -351,11 +644,10 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Verified Deliverables & Live Working Demos</span>
+                <span>Selected Work & Live Demos</span>
             </div>
             <h2 class="section-title">
-                Our Work — Systems Built for <span class="text-gradient gradient-text-animated">Real Business
-                    Impact</span>
+                Our Work — Selected Projects and Demonstrations
             </h2>
             <p class="section-subtitle">
                 Explore real software platforms, institutional web portals, automation pipelines, and AI systems
@@ -412,16 +704,15 @@ require_once __DIR__ . '/includes/header.php';
                 $clientName = $p['public_client_name'] ?? 'Verified Commercial Client';
                 ?>
                 <article class="project-card clean-project-card card-tilt<?= $idx >= 8 ? ' is-overflow-hidden' : '' ?>"
-                    data-index="<?= $idx ?>"
-                    data-category="<?= htmlspecialchars($p['category']) ?>"
-                    data-type="<?= htmlspecialchars($typeKey) ?>"
-                    id="project-<?= htmlspecialchars($p['id']) ?>">
+                    data-index="<?= $idx ?>" data-category="<?= htmlspecialchars($p['category']) ?>"
+                    data-type="<?= htmlspecialchars($typeKey) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
                     <div>
                         <!-- Header with Project Type, Status & Domain -->
                         <div class="cpc-header" style="margin-bottom: 0.75rem;">
                             <div class="cpc-meta" style="gap: 0.35rem; flex-wrap: wrap;">
                                 <span class="cpc-type-pill <?= htmlspecialchars($type['badge']) ?>">
-                                    <span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor;"></span>
+                                    <span
+                                        style="width: 5px; height: 5px; border-radius: 50%; background: currentColor;"></span>
                                     <span><?= htmlspecialchars($type['label']) ?></span>
                                 </span>
                                 <span class="cpc-status-pill">
@@ -456,7 +747,8 @@ require_once __DIR__ . '/includes/header.php';
                             <!-- Client Attribution Row -->
                             <div class="cpc-client-row">
                                 <?php if (!empty($p['client_logo'])): ?>
-                                    <img src="<?= asset($p['client_logo']) ?>" alt="<?= htmlspecialchars($clientName) ?>" style="height: 15px; max-width: 50px; object-fit: contain; vertical-align: middle;">
+                                    <img src="<?= asset($p['client_logo']) ?>" alt="<?= htmlspecialchars($clientName) ?>"
+                                        style="height: 15px; max-width: 50px; object-fit: contain; vertical-align: middle;">
                                 <?php endif; ?>
                                 <?php if ($isClient): ?>
                                     <?php if ($isAnonymized): ?>
@@ -507,7 +799,8 @@ require_once __DIR__ . '/includes/header.php';
                             data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>" title="Interactive Demo">
                             <span>⚡ Demo</span>
                         </button>
-                        <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-outline" title="View Architecture Breakdown">
+                        <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-outline"
+                            title="View Architecture Breakdown">
                             <span>Details →</span>
                         </a>
                     </div>
@@ -517,10 +810,12 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- More Projects Toggle Control -->
         <div class="projects-load-more-wrap" id="projectsLoadMoreWrap">
-            <button type="button" class="projects-more-btn" id="btnToggleMoreProjects" aria-label="Toggle more projects">
+            <button type="button" class="projects-more-btn" id="btnToggleMoreProjects"
+                aria-label="Toggle more projects">
                 <span class="btn-more-text">View More Projects</span>
                 <span class="btn-more-badge">+<?= max(0, $countAll - 8) ?> More</span>
-                <svg class="btn-more-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <svg class="btn-more-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
             </button>
@@ -529,7 +824,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     INTERACTIVE LIVE DEMO SIMULATORS
+     INTERACTIVE ARCHITECTURAL SIMULATORS (SIMULATION ONLY)
      ========================================================================== -->
 <section class="section" id="simulators"
     style="background: rgba(10, 22, 40, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
@@ -537,14 +832,14 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Live In-Browser Simulators</span>
+                <span>Interactive Architectural Simulators</span>
             </div>
             <h2 class="section-title">
-                Experience Our Software & AI <span class="text-gradient gradient-text-animated">In Action</span>
+                Experience System Workflows <span class="text-gradient gradient-text-animated">In Action</span>
             </h2>
             <p class="section-subtitle">
-                Don't take our word for it. Test real working interactive prototypes of our Enterprise AI RAG assistant
-                and WhatsApp CRM automation directly in your browser.
+                Interactive prototypes demonstrating vector retrieval logic and webhook ingestion flows directly in your
+                browser.
             </p>
         </div>
 
@@ -559,11 +854,9 @@ require_once __DIR__ . '/includes/header.php';
                             <span>🤖</span> Enterprise AI RAG Assistant
                         </h3>
                         <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Multi-source grounded
-                            vector search with audit citations</p>
+                            vector search simulation with sample citations</p>
                     </div>
-                    <span
-                        style="background: rgba(16, 185, 129, 0.15); color: #34D399; font-size: 0.72rem; padding: 3px 8px; border-radius: 999px; font-weight: 700;">LIVE
-                        SIMULATOR</span>
+                    <span class="sim-badge">Simulated Sandbox</span>
                 </div>
 
                 <!-- Prompt Chips -->
@@ -586,7 +879,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div
                         style="background: rgba(59, 130, 246, 0.12); border-left: 3px solid #38BDF8; padding: 8px 12px; border-radius: 4px; color: var(--slate);">
                         <strong style="color: #38BDF8;">CodeX404 AI Agent:</strong> Welcome! Ask any technical question
-                        about our software architecture, zero-bug policy, or IP ownership.
+                        about our software architecture, engineering standards, or technology stack.
                     </div>
                 </div>
 
@@ -607,8 +900,8 @@ require_once __DIR__ . '/includes/header.php';
                         <h3 style="font-size: 1.2rem; color: #FFFFFF; display: flex; align-items: center; gap: 0.5rem;">
                             <span>💬</span> WhatsApp Cloud & CRM Pipeline
                         </h3>
-                        <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Sub-second webhook
-                            ingestion with auto-qualification</p>
+                        <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Architectural webhook
+                            simulation with mock event qualification</p>
                     </div>
                     <button type="button" id="waSimulateBtn" class="btn btn-secondary btn-sm"
                         style="font-size: 0.75rem; border-color: #10B981; color: #34D399;">
@@ -621,10 +914,10 @@ require_once __DIR__ . '/includes/header.php';
                     <div style="background: #0B141B; border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 0.75rem; height: 260px; overflow-y: auto;"
                         id="waChatLog">
                         <div style="font-size: 0.72rem; color: #8696A0; text-align: center; margin-bottom: 0.5rem;">
-                            WhatsApp Cloud API Stream</div>
+                            WhatsApp Cloud API Simulator Stream</div>
                         <div
                             style="background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; margin-left: auto; max-width: 90%;">
-                            System live and listening for inbound inquiries.
+                            Simulator listening for sample inbound events.
                         </div>
                     </div>
 
@@ -633,7 +926,7 @@ require_once __DIR__ . '/includes/header.php';
                         id="crmLeadList">
                         <div
                             style="font-size: 0.72rem; color: var(--slate-dark); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700;">
-                            Live CRM Ingestion</div>
+                            Simulated Ingestion Flow</div>
                         <div
                             style="background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 8px; font-size: 0.78rem;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -641,13 +934,19 @@ require_once __DIR__ . '/includes/header.php';
                                 <span
                                     style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;">SYNCED</span>
                             </div>
-                            <div style="color: var(--slate); font-size: 0.72rem; margin-top: 4px;">Source: Webhook •
-                                Latency: 42ms</div>
+                            <div style="color: var(--slate); font-size: 0.72rem; margin-top: 4px;">Source: Ingestion
+                                Simulator • Status: Mock Stream</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <p class="sim-disclaimer" style="text-align: center; margin-top: 1.25rem;">
+            * Note: The panels above are interactive architectural simulations demonstrating vector retrieval logic and
+            webhook event dispatching. They are not connected to active production databases or live third-party cloud
+            messaging endpoints.
+        </p>
     </div>
 </section>
 
@@ -665,7 +964,7 @@ require_once __DIR__ . '/includes/header.php';
                 One Senior Partner from <span class="text-gradient gradient-text-animated">Architecture to Scale</span>
             </h2>
             <p class="section-subtitle">
-                Engineered for speed, strict security standards, and zero vendor lock-in.
+                Explore software, digital growth, and automation work scoped around business requirements.
             </p>
         </div>
 
@@ -689,8 +988,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Enterprise AI & RAG</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Connect private company documents, policies, and SQL databases to intelligent LLMs with verified
-                    vector citations.
+                    Explore assistants that retrieve relevant information from approved company sources, with data handling and answer review planned for the system.
                 </p>
                 <a href="<?= url('ai-solutions.php') ?>" class="text-violet"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -717,8 +1015,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Workflow & API Automation</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Eliminate repetitive manual data entry. Synchronize WhatsApp Cloud API, Stripe billing, and CRM
-                    databases in real-time.
+                    Connect business systems to reduce repetitive data entry. Integrations, permissions, and failure handling depend on the selected services.
                 </p>
                 <a href="<?= url('automation.php') ?>" class="text-blue"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -731,8 +1028,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">SaaS MVP Development</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Launch your SaaS product in weeks with multi-tenant security, Stripe subscription billing, and a
-                    clean maintainable foundation.
+                    Scope a SaaS product around its users, data model, business workflows, and required integrations.
                 </p>
                 <a href="<?= url('saas.php') ?>" class="text-emerald"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -745,8 +1041,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Mobile & PWA Apps</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Fast, responsive mobile applications that install natively on iOS and Android devices with offline
-                    caching and push notifications.
+                    Plan mobile applications and progressive web experiences around target devices, browser support, offline needs, and notifications.
                 </p>
                 <a href="<?= url('mobile-apps.php') ?>" class="text-amber"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -758,21 +1053,20 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     INTERACTIVE ROI & SYSTEM EFFICIENCY CALCULATOR
+     ILLUSTRATIVE OPERATIONAL EFFICIENCY ESTIMATOR (SIMULATION)
      ========================================================================== -->
 <section class="section" style="background: rgba(6, 11, 24, 0.6);">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>System Efficiency Calculator</span>
+                <span>Operational Efficiency Estimator</span>
             </div>
             <h2 class="section-title">
-                Quantify Your <span class="text-gradient gradient-text-animated">Automation & Software ROI</span>
+                Illustrative Operational Efficiency <span class="text-gradient gradient-text-animated">Estimator</span>
             </h2>
             <p class="section-subtitle">
-                Calculate how much operational budget and engineering bandwidth your business recovers by replacing
-                manual bottlenecks.
+                Model potential time and administrative effort recovered by replacing manual and fragmented workflows.
             </p>
         </div>
 
@@ -789,7 +1083,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Slider 2: Hours wasted per person -->
             <div class="roi-slider-group">
                 <div class="roi-slider-header">
-                    <label for="roiHoursSlider">Hours Wasted Weekly on Repetitive Work (per person)</label>
+                    <label for="roiHoursSlider">Hours Spent Weekly on Repetitive Work (per person)</label>
                     <span class="roi-slider-badge" id="roiHoursVal">10 hrs / week / person</span>
                 </div>
                 <input type="range" id="roiHoursSlider" class="roi-slider" min="2" max="25" value="10" step="1">
@@ -798,16 +1092,16 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Computed Outcomes Grid -->
             <div class="roi-results-grid">
                 <div class="roi-result-item">
-                    <div class="label">Hours Recovered Annually</div>
-                    <div class="val" id="roiHoursSavedVal">4,500 hrs / yr</div>
+                    <div class="label">Estimated Hours Reclaimed Annually</div>
+                    <div class="val" id="roiHoursSavedVal">~4,500 hrs / yr*</div>
                 </div>
                 <div class="roi-result-item">
-                    <div class="label">Estimated Annual Capital Saved</div>
-                    <div class="val" id="roiSavingsVal">$202,500</div>
+                    <div class="label">Illustrative Modeled Value</div>
+                    <div class="val" id="roiSavingsVal">~$202,500*</div>
                 </div>
                 <div class="roi-result-item">
-                    <div class="label">Estimated Time-to-Delivery</div>
-                    <div class="val" id="roiTimelineVal" style="color: #38BDF8;">2 - 3 Sprints</div>
+                    <div class="label">Scope Complexity</div>
+                    <div class="val" id="roiTimelineVal" style="color: #38BDF8;">Milestone Scoped</div>
                 </div>
             </div>
 
@@ -816,6 +1110,12 @@ require_once __DIR__ . '/includes/header.php';
                     <span>Discuss Custom Automation Architecture &rarr;</span>
                 </a>
             </div>
+
+            <p class="sim-disclaimer" style="text-align: center; margin-top: 1.25rem;">
+                * Disclaimer: The calculations above represent illustrative estimation models based on user-selected
+                inputs, not guaranteed returns or fixed delivery timelines. Actual impact and schedules depend on scoped
+                requirements and existing system architecture.
+            </p>
         </div>
     </div>
 </section>
@@ -827,7 +1127,7 @@ require_once __DIR__ . '/includes/header.php';
 
 
 <!-- ==========================================================================
-     ENGINEERING DELIVERY PROCESS
+     ENGINEERING DELIVERY PROCESS (NOTE: DO NOT EDIT process.php)
      ========================================================================== -->
 <section class="section" id="process" style="background: rgba(10, 22, 40, 0.3);">
     <div class="container">
@@ -840,7 +1140,7 @@ require_once __DIR__ . '/includes/header.php';
                 Clarity Before Velocity. <span class="text-gradient gradient-text-animated">Scope Before Build.</span>
             </h2>
             <p class="section-subtitle">
-                We eliminate guesswork through transparent technical milestones and continuous verification.
+                We reduce uncertainty by discussing constraints, agreeing on scope, and reviewing the work as it progresses.
             </p>
         </div>
 
@@ -868,17 +1168,15 @@ require_once __DIR__ . '/includes/header.php';
                     style="color: var(--soft-violet); font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
                     03</div>
                 <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Hardened Build</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Ship verified code every 2 weeks with live preview
-                    staging and automated regression tests.</p>
+                <p style="font-size: 0.875rem; color: var(--slate);">Review implementation progress and test the agreed requirements during delivery.</p>
             </div>
 
             <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
                 <div
                     style="color: #34D399; font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
                     04</div>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Handoff & 100% IP</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Complete repository transfer, operating manuals,
-                    and production credentials ownership.</p>
+                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Handoff & Ownership Terms</h3>
+                <p style="font-size: 0.875rem; color: var(--slate);">Document repository access, materials, operating notes, and handoff responsibilities in the agreement.</p>
             </div>
         </div>
     </div>
@@ -909,9 +1207,7 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-1-answer">
-                    <p>You do — 100%. Upon project milestone completion and delivery, all source code, database
-                        architectures, documentation, and cloud configurations belong exclusively to your business. We
-                        enforce zero vendor lock-in.</p>
+                    <p>Ownership, licensing, repository access, and handoff terms depend on the project agreement. We document the applicable terms before work begins.</p>
                 </div>
             </div>
 
@@ -924,9 +1220,7 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-2-answer">
-                    <p>It represents our senior-led engineering discipline. We build with strict type-safety, automated
-                        unit & integration test coverage, idempotency checks, and pre-deployment vulnerability scans so
-                        issues are eliminated before production.</p>
+                    <p>It is a brand slogan, not a promise of defect-free software. Testing and review activities are selected and documented according to the project's scope.</p>
                 </div>
             </div>
 
@@ -939,23 +1233,20 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-3-answer">
-                    <p>Focused MVPs and automation systems typically launch in 2 to 4 weeks. Because our leadership
-                        writes and reviews the architecture directly without management bloat, decision velocity is
-                        exceptionally fast.</p>
+                    <p>Timing depends on scope, dependencies, and technical complexity. We discuss milestones and delivery assumptions before work begins.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button type="button" class="faq-question" id="faq-4" aria-expanded="false">
-                    <span>Do you offer post-launch support and SLA guarantees?</span>
+                    <span>Do you offer post-launch support and retainers?</span>
                     <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-4-answer">
-                    <p>Yes. Every launch includes a 30-day warranty period for bug fixes and stability monitoring. We
-                        also provide ongoing sprint retainers with guaranteed SLA uptime for scaling businesses.</p>
+                    <p>Support, warranty coverage, and maintenance options depend on the project agreement. Confirm the coverage and response process before work begins.</p>
                 </div>
             </div>
         </div>
@@ -978,14 +1269,14 @@ require_once __DIR__ . '/includes/header.php';
                         delivers?</span>
                 </h2>
                 <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">
-                    Tell us what your current digital system or workflow cannot do. We will review your requirements and
-                    provide an architectural blueprint within 24 business hours.
+                    Tell us what your current digital system or workflow cannot do. Our engineering leads will review
+                    your requirements and follow up to discuss scope and possible next steps.
                 </p>
 
                 <div class="trust-badge-list">
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <div>Direct access to Senior Architects (No sales runaround)</div>
+                        <div>Discuss requirements with the project team</div>
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
@@ -993,7 +1284,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <div>Guaranteed 100% intellectual property ownership</div>
+                        <div>Ownership and handoff terms documented in the agreement</div>
                     </div>
                 </div>
 
@@ -1010,7 +1301,8 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Inbound Form Card -->
             <div class="card form-card"
                 style="background: rgba(17, 29, 58, 0.9); border: 1px solid rgba(59, 130, 246, 0.35);">
-                <form id="projectInquiryForm" action="<?= url('contact.php') ?>" method="POST" class="ajax-form" novalidate>
+                <form id="projectInquiryForm" action="<?= url('contact.php') ?>" method="POST" class="ajax-form"
+                    novalidate>
                     <?= csrf_input_field() ?>
 
                     <!-- Honeypot -->
@@ -1043,42 +1335,83 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div style="margin-bottom: 1.25rem;">
-                        <label for="service_interest"
+                        <label for="contact_company" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Company / Organization (optional)</label>
+                        <input type="text" id="contact_company" name="company" class="form-control" maxlength="120" placeholder="Business or organization name"
+                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
+                    </div>
+
+                    <div style="margin-bottom: 1.25rem;">
+                        <label for="division_select"
                             style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Primary
-                            Area of Interest</label>
+                            Division *</label>
+                        <select id="division_select" name="division" class="form-control" required
+                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
+                            <option value="">Choose a division</option>
+                            <?php foreach ($divisionServiceOptions as $code => $_services): ?>
+                                <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars(match ($code) {
+                                    'BUILD' => 'Software and digital products',
+                                    'GROW' => 'Digital marketing and discoverability',
+                                    default => 'Workflows, integrations, and AI',
+                                }, ENT_QUOTES, 'UTF-8') ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 1.25rem;">
+                        <label for="service_interest"
+                            style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Area
+                            of Specific Interest</label>
                         <select id="service_interest" name="service" class="form-control"
                             style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
-                            <option value="booking_system">Turnkey Booking System (Dental / Salon / Spa / Restaurant)</option>
-                            <option value="custom_software">Custom Web Platform / Internal Portal</option>
-                            <option value="enterprise_ai">Enterprise AI & RAG Pipeline</option>
-                            <option value="ai_agents">Autonomous AI Agents</option>
-                            <option value="workflow_automation">Workflow Automation (WhatsApp/CRM/APIs)</option>
-                            <option value="saas_mvp">SaaS MVP Engineering</option>
-                            <option value="mobile_app">Mobile Application (iOS / Android)</option>
+                            <option value="">Choose a service (optional)</option>
+                            <?php foreach ($divisionServiceOptions as $code => $services): ?>
+                                <optgroup label="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" data-division="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>">
+                                    <?php foreach ($services as $serviceCode => $serviceLabel): ?>
+                                        <option value="<?= htmlspecialchars($serviceCode, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($serviceLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
                         </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <label for="contact_country" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Country / Region (optional)</label>
+                            <input type="text" id="contact_country" name="country" class="form-control" maxlength="100" autocomplete="country-name" placeholder="e.g. India"
+                                style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
+                        </div>
+                        <div>
+                            <label for="contact_website" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Business Website (optional)</label>
+                            <input type="url" id="contact_website" name="website" class="form-control" maxlength="255" placeholder="https://example.com"
+                                style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
+                        </div>
                     </div>
 
                     <div style="margin-bottom: 1.25rem;">
                         <label for="contact_details"
                             style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Project
-                            Context & Current Friction *</label>
+                            Context & Current Bottleneck *</label>
                         <textarea id="contact_details" name="message" rows="4" required class="form-control"
                             placeholder="Describe the business bottleneck, key user workflows, or integrations required..."
                             style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF; font-family: inherit; resize: vertical;"></textarea>
                     </div>
 
                     <div style="margin-bottom: 1.5rem;">
-                        <label style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: var(--slate); cursor: pointer;">
-                            <input type="checkbox" name="privacy_consent" value="1" checked required style="margin-top: 3px; accent-color: var(--cyan);">
-                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and consent to have CodeX404 Solutions review my project details.</span>
+                        <label
+                            style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: var(--slate); cursor: pointer;">
+                            <input type="checkbox" name="privacy_consent" value="1" required
+                                style="margin-top: 3px; accent-color: var(--cyan);">
+                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank"
+                                    style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and
+                                consent to have CodeX404 Solutions review my project details.</span>
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block btn-lg" style="width: 100%;">
-                        <span>Request Architecture Blueprint & Estimate &rarr;</span>
+                        <span>Request Technical Scoping Review &rarr;</span>
                     </button>
                     <div style="font-size: 0.75rem; color: var(--slate-dark); text-align: center; margin-top: 0.75rem;">
-                        🔒 Confidential • Zero spam • Response within 24 business hours
+                        Your enquiry will be handled as described in the Privacy Policy.
                     </div>
                 </form>
             </div>
@@ -1094,7 +1427,8 @@ require_once __DIR__ . '/includes/header.php';
                 <span style="font-size: 1.4rem;">⚡</span>
                 <div>
                     <h3 style="font-size: 1.15rem; margin: 0; color: #FFFFFF;">Interactive Systems Sandbox</h3>
-                    <div style="font-size: 0.75rem; color: var(--slate-dark);">Test real CodeX404 modules live</div>
+                    <div style="font-size: 0.75rem; color: var(--slate-dark);">Interactive UI/UX Architecture
+                        Simulations</div>
                 </div>
             </div>
             <button type="button" class="demo-close-btn" aria-label="Close demo simulator">&times;</button>
@@ -1109,28 +1443,29 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Pane 1: RAG -->
             <div class="demo-simulator-pane active" id="demo-pane-rag">
                 <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">
-                    This sandbox runs our grounded multi-source vector pipeline. Try asking about data encryption,
-                    client IP ownership, or API latency.
+                    This sandbox simulates a grounded multi-source vector retrieval interface. Test sample prompts for
+                    contract terms, architecture, and engineering workflows.
                 </p>
                 <div
                     style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; color: var(--slate); font-size: 0.85rem;">
-                    <div style="color: #34D399; font-weight: 700; margin-bottom: 0.5rem;">✔ Vector Store Connected:
-                        Qdrant Index</div>
-                    <div>Grounded with 14,000 corporate spec tokens. Strict zero-hallucination threshold applied.</div>
+                    <div style="color: #38BDF8; font-weight: 700; margin-bottom: 0.5rem;">◈ Vector Retrieval Simulation:
+                        Mock Schema</div>
+                    <div>Architectural simulation modeled for semantic context search and citation referencing.</div>
                 </div>
             </div>
 
             <!-- Pane 2: ERP -->
             <div class="demo-simulator-pane" id="demo-pane-erp">
                 <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">
-                    Institutional grade school management portal. Process student admissions, fee voucher generation,
-                    and faculty circulars.
+                    Modular educational administration architecture covering student records, automated fee
+                    reconciliation, and role-based staff portals.
                 </p>
                 <div
                     style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; color: var(--slate); font-size: 0.85rem;">
-                    <div style="color: #38BDF8; font-weight: 700; margin-bottom: 0.5rem;">🏫 Live Production Reference:
-                        Ali Public School & Insan Degree College</div>
-                    <div>Processes thousands of daily active queries with sub-200ms TTFB response.</div>
+                    <div style="color: #38BDF8; font-weight: 700; margin-bottom: 0.5rem;">🏫 Architectural Case Study:
+                        Campus ERP Model</div>
+                    <div>Engineered with isolated database schemas, prepared PDO transactions, and strict role-based
+                        access control.</div>
                 </div>
             </div>
         </div>

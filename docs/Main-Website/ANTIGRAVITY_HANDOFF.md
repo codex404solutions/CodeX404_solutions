@@ -1,32 +1,50 @@
-# Antigravity ↔ ChatGPT handoff
+# Antigravity ↔ Codex Handoff
 
-This file is the shared handoff point for Antigravity work on the Main Website. The repository is open in both Antigravity and Codex, so saved files are visible in both workspaces. Conversation history is not automatically shared.
+## Current status
 
-## Project context reviewed by ChatGPT
+- Work is on `feature/codex404-build-grow-automate`.
+- Phase 0 audit artifacts and Phases 1–9 website redesign deliverables are complete in the working tree.
+- Local implementation includes:
+  - Exact PRD §7 primary navigation (`Home`, `BUILD`, `GROW`, `AUTOMATE`, `Industries`, `Our Work`, `Company`, `Contact`, `Book a Discovery Call`).
+  - BUILD, GROW, and AUTOMATE dedicated overview routes (`build.php`, `grow.php`, `automate.php`) and homepage anchors (`#division-build`, `#division-grow`, `#division-automate`).
+  - Shared hardware-accelerated animations (`animations.css`) with Aurora Midnight tokens, SVG architecture flow visualizer, dual-speed tech marquee, and progressive enhancement scroll engine (`scroll-engine.js`).
+  - `.card-tilt` and `.reveal-on-scroll` micro-motion extended across all division pages and capability cards (`software-development.php`, `saas.php`, `mobile-apps.php`, `solutions.php`, `ai-solutions.php`, `ai-agents.php`, `automation.php`, `pricing.php`, `case-studies.php`, `portfolio.php`).
+  - Site-wide strict claim cleanup: zero-defect, fixed turnaround times, SLA uptime percentages, unverified percentage savings, and ungrounded guarantees removed across all pages.
+  - Interactive simulations (RAG assistant, WhatsApp CRM webhook, ROI estimator) explicitly labeled as simulations.
+  - Division-routed inquiry flow (`contact.php`, `discovery-call.php`) with CSRF protection, rate limiting, and honeypot validation.
+  - Part L Developer Attribution in footer (`Developed by CodeX404 Solutions` linked with logo).
+  - Clean XML sitemap and robots.txt.
+- Changes remain unstaged and uncommitted. No deployment or database migration was performed.
+- `website/process.php` was kept in its approved state without edits.
 
-- Specification folder: `docs/Main-Website/` (PRD, architecture, design, database, security, rules, tasks, memory, and prompts).
-- The specifications describe a proposed redesign; verify technical and business facts against the current repository before acting.
-- Preserve the approved dark engineering visual identity and current hero composition.
-- Present the company as BUILD, GROW, AUTOMATE. Digital Marketing is part of GROW.
-- Do not invent service availability, metrics, client work, testimonials, or other public claims.
-- The project documents require Phase 0 to be a read-only audit. Proceed one phase at a time and stop at each approval gate.
-- Production deployment, DNS changes, and production data changes require explicit approval.
+## PRD §7 navigation
 
-## Review handoff protocol
+The primary navigation order is Home, BUILD, GROW, AUTOMATE, Industries, Our Work, Company, Contact, with a separate Book a Discovery Call CTA. The three top-level division links point to homepage card anchors (`#division-build`, `#division-grow`, and `#division-automate`); each dropdown has a link to its new overview route (`/build`, `/grow`, `/automate`) and retains existing service routes. Our Work includes Case Studies and Portfolio. Company includes About, Process, Engagement Models, Security, and FAQ.
 
-At the end of each phase, update this file with:
+The header uses a labeled primary navigation region, buttons with `aria-expanded` and `aria-controls`, and a mobile drawer with expandable route groups. The stylesheet provides keyboard focus visibility through `:focus-within`, and the mobile drawer has a no-JavaScript fallback that exposes its links.
 
-1. Phase and status.
-2. Summary of work and decisions.
-3. Files/routes/database/dependencies changed.
-4. Commands and checks run, with actual results.
-5. Responsive, accessibility, security, and SEO checks performed.
-6. Open questions, risks, and the exact next approval needed.
+## Homepage and audit corrections
 
-Keep the report factual. Do not start the next phase until the user has reviewed the phase report and approved it. ChatGPT can review this file and the linked diffs from the shared repository when asked.
+- Removed or qualified unverified experience, response-time, delivery, IP ownership, security, pricing, outcome, process, launch, and support claims on the homepage and reviewed public pages.
+- Kept the RAG, WhatsApp, and terminal examples labeled as simulations; removed sample latency and uptime claims.
+- Kept the estimator explicitly illustrative, with a disclaimer and no guaranteed outcomes.
+- Restricted homepage project metrics to records explicitly marked as evidence-verified.
+- Updated sitemap, route inventory, roadmap, task status, content, SEO, security, and claim audit documents to distinguish historical findings from current implementation.
 
-## Current handoff status
+## Verification
 
-- No implementation work has been performed by ChatGPT in this session.
-- ChatGPT has read the ten documents in `docs/Main-Website/` and is ready to review Antigravity's Phase 0 findings.
-- Next step: Antigravity should follow `DEVELOPMENT_PROMPT.md` and `TASKS.md`, perform Phase 0 only, then update this handoff and stop for review.
+- `php -l` passed for all 63 PHP files.
+- `node --check` passed for `main.js`, `chatbot.js`, and `scroll-engine.js`.
+- Local GET requests returned 200 for the homepage, the three overview routes, contact, discovery-call, pricing, privacy, security, sitemap, and robots. `/build/` redirects to the clean `/build` URL.
+- After the process-page update, all 25 public PHP routes returned 200 with no PHP warning/error text; the updated process copy rendered with its scoped-delivery language.
+- Sitemap XML parsed, and all 24 listed public routes have matching files.
+- Contact and discovery validators accepted valid data and rejected missing division or privacy consent.
+- `git diff --check` passed. Git emitted line-ending conversion warnings; no files are staged.
+- Local browser inspection showed the desktop navigation and CTA at 1280 px, and the drawer plus a working division accordion at 975 px. Tab focus was visible on a dropdown link.
+- Homepage screenshots at 320 px and 375 px showed the mobile menu control, wrapped hero copy, and cookie choices within the viewport. Narrow-screen safeguards were added to the shared responsive stylesheet. This is a homepage sample, not full route-by-route breakpoint QA.
+- Antigravity reported a stale-buffer conflict while editing `website/index.php`. The newer disk version was retained and its division anchor IDs were confirmed in the working tree.
+- End-to-end email and CRM delivery, database-backed form behavior, other responsive widths and routes, complete breakpoint QA, and screen-reader testing remain open. Do not treat the interface as formally accessibility-certified.
+
+## Release boundary
+
+The requested implementation and local verification are complete for this pass. Staging and production release, production database changes, and publication of project material without verified permissions remain gated. No commit or deployment was made.

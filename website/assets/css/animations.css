@@ -1,0 +1,262 @@
+/* ==========================================================================
+   CodeX404 Solutions — Core Animation & Motion Framework
+   Hardware-Accelerated CSS Transitions, Shimmers, Glows & Keyframes
+   Strictly compliant with WCAG 2.1 prefers-reduced-motion
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Animated Colorful Gradient Text
+   -------------------------------------------------------------------------- */
+.text-gradient {
+  background: var(--gradient-text, linear-gradient(135deg, #FFFFFF 10%, #A78BFA 40%, #EC4899 65%, #06D6A0 100%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(
+    120deg,
+    #00F0FF 0%,
+    #3B82F6 20%,
+    #8B5CF6 40%,
+    #EC4899 60%,
+    #06D6A0 80%,
+    #00F0FF 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 8s ease-in-out infinite;
+}
+
+.text-gradient-build {
+  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-grow {
+  background: linear-gradient(135deg, #C084FC 0%, #8B5CF6 50%, #6D28D9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-automate {
+  background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --------------------------------------------------------------------------
+   2. Division Semantic Accent Tokens & Badges
+   -------------------------------------------------------------------------- */
+:root {
+  --color-build: #3B82F6;
+  --color-build-glow: rgba(59, 130, 246, 0.25);
+  --color-build-border: rgba(59, 130, 246, 0.4);
+
+  --color-grow: #8B5CF6;
+  --color-grow-glow: rgba(139, 92, 246, 0.25);
+  --color-grow-border: rgba(139, 92, 246, 0.4);
+
+  --color-automate: #10B981;
+  --color-automate-glow: rgba(16, 185, 129, 0.25);
+  --color-automate-border: rgba(16, 185, 129, 0.4);
+}
+
+.badge-build {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60A5FA;
+  border: 1px solid var(--color-build-border);
+}
+
+.badge-grow {
+  background: rgba(139, 92, 246, 0.12);
+  color: #C084FC;
+  border: 1px solid var(--color-grow-border);
+}
+
+.badge-automate {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34D399;
+  border: 1px solid var(--color-automate-border);
+}
+
+/* --------------------------------------------------------------------------
+   3. Hardware-Accelerated Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    border-color: rgba(139, 92, 246, 0.6);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmerSheen {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeScrollReverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Scroll Reveal Utilities & Progressive Enhancement
+   -------------------------------------------------------------------------- */
+/* By default, elements are completely visible (Progressive Enhancement).
+   Only when JavaScript is confirmed active (.js class on <html>) do we
+   enable scroll-driven reveal transitions. */
+.reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+html.js .reveal-on-scroll:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+html.js .reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child items */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* --------------------------------------------------------------------------
+   5. Floating & Pulse Micro-Interactions
+   -------------------------------------------------------------------------- */
+.animate-float {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.shimmer-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+}
+
+.shimmer-button:hover::after {
+  animation: shimmerSheen 1.2s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   6. Accessibility: prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .gradient-text-animated {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+
+  html.js .reveal-on-scroll:not(.is-revealed),
+  html.js .reveal-on-scroll.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .tech-marquee-track {
+    animation: none !important;
+    overflow-x: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse-glow {
+    animation: none !important;
+  }
+}

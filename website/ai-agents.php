@@ -32,7 +32,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Capability Grid -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Tool & API Calling -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">⚙️</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Function & API Tool Calling</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -47,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 2. Multi-Agent Orchestration -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">👥</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Multi-Agent Orchestrations</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 3. Human-in-the-Loop Safety -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🛡️</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Human-in-the-Loop Safeguards</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -77,7 +77,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Long-Term State & Memory -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">💾</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Long-Term Context & Memory</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Self-Healing & Dynamic Retries -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">🔄</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Self-Healing Workflows</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. Complete Audit & Observability -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">📜</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Immutable Action Audit Logs</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -139,7 +139,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="grid grid-cols-4" style="gap: 1.5rem;">
-            <div class="card" style="padding: 2rem;">
+            <div class="card card-tilt reveal-on-scroll" style="padding: 2rem;">
                 <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">01</span>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Intent & Constraint Parsing</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
@@ -147,7 +147,7 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
             </div>
 
-            <div class="card" style="padding: 2rem;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="padding: 2rem;">
                 <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">02</span>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Dynamic Tool Planning</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
@@ -155,7 +155,7 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
             </div>
 
-            <div class="card" style="padding: 2rem;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="padding: 2rem;">
                 <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">03</span>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Sandboxed Tool Execution</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
@@ -163,7 +163,7 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
             </div>
 
-            <div class="card" style="padding: 2rem;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-3" style="padding: 2rem;">
                 <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">04</span>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Verification & Audit Commit</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
@@ -189,28 +189,28 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="grid grid-cols-3" style="gap: 2rem;">
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Autonomous Lead Triage Agent</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">
                     Monitors website inquiries and WhatsApp messages 24/7. Validates company domain, extracts estimated budget and requirements, enriches contact details via LinkedIn, and routes qualified leads directly onto account executive calendars.
                 </p>
-                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Saves 12+ Sales Hours Weekly</span>
+                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Automated Ingestion &amp; Triage</span>
             </div>
 
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Invoice Reconciliation Agent</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">
                     Extracts line items from incoming vendor PDF invoices, cross-references purchase orders in the ERP, flags mathematical or price discrepancies, and queues valid invoices for accountant sign-off in one click.
                 </p>
-                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Zero Human Data Entry</span>
+                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Human review where needed</span>
             </div>
 
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Technical Support Escalation Agent</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">
                     Answers customer bug reports by querying error logs, reproducing test cases from documentation, drafting precise patch recommendations for engineers, and notifying the client once resolved.
                 </p>
-                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">70% Faster First Resolution</span>
+                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Structured Escalation</span>
             </div>
         </div>
     </div>

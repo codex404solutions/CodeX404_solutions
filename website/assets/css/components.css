@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 1.75rem;
+  gap: clamp(0.55rem, 1.1vw, 1.35rem);
 }
 
 /* Mobile-only CTA in drawer - hidden on desktop */
@@ -77,14 +77,15 @@
 
 .nav-link {
   color: var(--slate);
-  font-size: 0.925rem;
+  font-size: 0.885rem;
   font-weight: 500;
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem 0.2rem;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.25rem;
   transition: color var(--transition-fast);
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -128,6 +129,28 @@
 
 .nav-dropdown-toggle:hover {
   color: var(--white);
+}
+
+.nav-dropdown-toggle svg {
+  transition: transform var(--transition-fast);
+}
+
+.nav-item-dropdown:hover .nav-dropdown-toggle svg,
+.nav-dropdown-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+#division-build,
+#division-grow,
+#division-automate,
+#divisions,
+#industry-education,
+#industry-commerce,
+#industry-legal,
+#industry-logistics,
+#industry-realestate,
+#industry-healthcare {
+  scroll-margin-top: 84px;
 }
 
 /* Nav Dropdown */
@@ -3640,6 +3663,111 @@
   letter-spacing: -0.02em;
 }
 
+.price-amount-custom {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  letter-spacing: 0;
+}
+
+.section-alt {
+  background: rgba(11, 31, 58, 0.3);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.division-context-grid {
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.division-context-card h2,
+.division-example-card h3 {
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.division-context-card p,
+.division-example-card p {
+  color: var(--slate);
+  line-height: 1.65;
+}
+
+.division-bullet-list {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1.25rem;
+  color: var(--slate);
+  line-height: 1.55;
+}
+
+.division-faq-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.division-faq-item {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: rgba(11, 20, 38, 0.76);
+}
+
+.division-faq-item summary {
+  color: var(--white);
+  cursor: pointer;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.division-faq-item summary:focus-visible {
+  outline: 2px solid var(--cyan-bright);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.division-faq-item p {
+  margin-top: 0.85rem;
+  color: var(--slate);
+  line-height: 1.65;
+}
+
+.division-steps {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.division-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.division-step-number {
+  display: grid;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.division-steps h3 {
+  margin: 0 0 0.35rem;
+  color: var(--white);
+  font-size: 1.05rem;
+}
+
+.division-steps p {
+  margin: 0;
+  color: var(--slate);
+}
+
 .price-card-modern.featured .price-amount-val {
   color: var(--cyan);
   text-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
@@ -3714,6 +3842,275 @@
   font-size: 0.85rem;
   color: var(--slate);
   line-height: 1.5;
+}
+
+/* ==========================================================================
+   Three Canonical Division Showcase Cards (BUILD · GROW · AUTOMATE)
+   ========================================================================== */
+.divisions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 1024px) {
+  .divisions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.division-card {
+  position: relative;
+  background: rgba(17, 29, 58, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.division-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.division-card.build::before {
+  background: linear-gradient(90deg, #3B82F6, #60A5FA);
+}
+
+.division-card.grow::before {
+  background: linear-gradient(90deg, #8B5CF6, #C084FC);
+}
+
+.division-card.automate::before {
+  background: linear-gradient(90deg, #10B981, #34D399);
+}
+
+.division-card:hover {
+  transform: translateY(-6px);
+}
+
+.division-card.build:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.15);
+}
+
+.division-card.grow:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 16px 40px rgba(139, 92, 246, 0.15);
+}
+
+.division-card.automate:hover {
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 16px 40px rgba(16, 185, 129, 0.15);
+}
+
+.division-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.division-title {
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.division-desc {
+  font-size: 0.95rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.division-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.division-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--slate);
+}
+
+.division-feature-bullet {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.division-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: auto;
+  transition: gap var(--transition-fast);
+}
+
+.division-cta-link:hover {
+  gap: 10px;
+}
+
+/* ==========================================================================
+   Horizontal Industry & Use Case Slider
+   ========================================================================== */
+.industry-slider-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.industry-slider-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.industry-slider-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem 0.25rem 1.5rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+.industry-slider-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.industry-slider-card {
+  flex: 0 0 320px;
+  max-width: 320px;
+  scroll-snap-align: start;
+  background: rgba(17, 29, 58, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.industry-slider-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+@media (max-width: 480px) {
+  .industry-slider-card {
+    flex: 0 0 85vw;
+    max-width: 85vw;
+  }
+}
+
+.slider-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.slider-nav-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.slider-nav-btn {
+  background: rgba(17, 29, 58, 0.85);
+  border: 1px solid var(--border-subtle);
+  color: var(--white);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.slider-nav-btn:hover {
+  background: var(--electric-blue);
+  border-color: var(--electric-blue);
+}
+
+.slider-pagination-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.slider-dot.active {
+  width: 22px;
+  border-radius: 999px;
+  background: var(--electric-blue);
+}
+
+/* ==========================================================================
+   Simulation Badges & Clarification Banners
+   ========================================================================== */
+.sim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(245, 158, 11, 0.15);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.sim-disclaimer {
+  font-size: 0.75rem;
+  color: var(--slate-dark);
+  line-height: 1.5;
+  margin-top: 0.75rem;
+  font-style: italic;
 }
 
 

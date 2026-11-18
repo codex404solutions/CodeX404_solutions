@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
     'title' => 'SaaS Product Engineering & Rapid MVP Development',
-    'description' => 'Turn your software vision into a revenue-generating, scalable SaaS platform in 4 to 8 weeks. Multi-tenant architecture, automated subscription billing, and 100% IP ownership.',
+    'description' => 'Plan and build SaaS products around your users, business model, data boundaries, and operational requirements.',
     'canonical' => url('saas.php'),
     'keywords' => 'SaaS product development, MVP development, multi-tenant SaaS architecture, subscription billing Stripe Razorpay, B2B SaaS engineering, rapid MVP launch'
 ];
@@ -25,16 +25,16 @@ require_once __DIR__ . '/includes/header.php';
                 From Vision to Scalable <span class="gradient-text">Recurring-Revenue SaaS</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                We partner with ambitious founders and forward-thinking enterprises to design, engineer, and launch production-ready Software-as-a-Service products in 4 to 8 weeks — built with multi-tenant security, automated billing, and 100% IP ownership.
+                We work with founders and organizations to scope and build Software-as-a-Service products around their users, workflows, data boundaries, and operational needs. Timeline, integrations, and ownership terms are agreed for each engagement.
             </p>
         </div>
 
         <!-- 6 Core SaaS Capability Cards -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Rapid MVP Framework -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">⚡</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">4 to 8 Week MVP Framework</h2>
+                <h2 class="card-title" style="font-size: 1.3rem;">Focused MVP Scope</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
                     Launch a production-grade Minimum Viable Product quickly to validate market demand with real paying customers. We ruthlessly prune non-essential feature bloat to focus entirely on core value.
                 </p>
@@ -47,11 +47,11 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 2. Multi-Tenant Architecture -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">🏢</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Multi-Tenant Data Isolation</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Engineered with rigorous tenant segregation models (Row-Level Security or schema-per-tenant). Guarantees zero cross-customer data leakage and effortless horizontal scaling as user counts soar.
+                    Choose tenant boundaries based on the data model, threat model, and expected operational needs. Isolation should be reviewed and tested as part of the agreed system scope.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Row-Level Security</span>
@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 3. Automated Subscription Billing -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">💳</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Subscription Billing & Monetization</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -77,7 +77,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Granular RBAC & Teams -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">👥</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Team Management & RBAC</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Superadmin Control Plane -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">📊</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Superadmin Control Plane</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. Embedded AI Differentiators -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🤖</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Embedded AI & Defensible Moats</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -134,7 +134,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <h2 class="section-title">Built for Real Enterprise Scale From Day One</h2>
             <p class="section-subtitle">
-                We handle the critical infrastructure scaffolding so you can direct 100% of your energy toward customer acquisition and growth.
+                We handle the critical infrastructure scaffolding so you can direct your energy toward customer acquisition and growth.
             </p>
         </div>
 
@@ -170,15 +170,15 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<!-- FULL IP OWNERSHIP COMMITMENT -->
+<!-- OWNERSHIP TERMS -->
 <section class="section">
     <div class="container">
         <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
             <div style="max-width: 620px;">
-                <span class="tag-chip" style="margin-bottom: 0.75rem; color: #34D399; border-color: rgba(52, 211, 153, 0.4);">100% Intellectual Property Handover</span>
-                <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 0.75rem;">You Own Every Single Line of Code</h3>
+                <span class="tag-chip" style="margin-bottom: 0.75rem; color: #34D399; border-color: rgba(52, 211, 153, 0.4);">Ownership and licensing</span>
+                <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 0.75rem;">Agree on the project handoff</h3>
                 <p style="font-size: 0.95rem; line-height: 1.6; color: var(--slate);">
-                    Unlike agencies that try to lock you into proprietary platforms or retain repository ownership, we transfer 100% of code, design files, deployment configurations, and credentials to your company Git organization upon delivery.
+                    Agree in writing on the ownership, license, repository access, deployment materials, and credentials that are part of the project handoff.
                 </p>
             </div>
             <div>

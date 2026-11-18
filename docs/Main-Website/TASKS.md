@@ -11,11 +11,22 @@
 - Work on a feature branch.
 - Back up source, database, uploads and deployment configuration.
 - Do not change production directly.
-- Complete one phase at a time.
-- Run tests after every phase.
+- Complete work in reviewable phases and keep this status document current.
+- Run local checks that do not contact production services or change production data.
 - Report changed files and routes.
-- Wait for approval before proceeding.
-- Do not deploy without explicit approval.
+- The current user instruction authorizes implementation and local QA across the project.
+- Do not deploy to staging or production without explicit approval.
+
+## Current status — 2026-11-19
+
+- Phase 0 source audits and supporting reports are present in this folder.
+- Phases 1–2 contain prior implementation work; not every planned viewport or accessibility check has been completed.
+- Division overview routes for BUILD, GROW, and AUTOMATE are implemented; optional service pages remain gated by the PRD's evidence and distinct-content rule.
+- Contact form now requires an explicit division and privacy consent. Local enquiry persistence and notification handling were tightened; production email/CRM delivery is not verified.
+- Sitemap, robots rules, and opt-in analytics loading were updated.
+- Industry and work routes are preserved. Client publication permissions and case-study evidence remain unverified.
+- The user approved updating `website/process.php`; its unsupported delivery, testing, launch, and support promises were removed, and the seven stages now state that activities and deliverables depend on project scope.
+- Staging, production deployment, database migration, and commit steps remain unperformed.
 
 Suggested branch:
 `feature/codex404-build-grow-automate`

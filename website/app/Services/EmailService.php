@@ -6,7 +6,9 @@ namespace App\Services;
 class EmailService {
     public function sendLeadNotification(array $leadData): bool {
         $to = COMPANY_EMAIL;
-        $subject = "[New Lead] " . ($leadData['name'] ?? 'Website Inquiry') . " - " . ($leadData['company'] ?? 'CodeX404');
+        $name = trim(str_replace(["\r", "\n"], ' ', (string)($leadData['name'] ?? 'Website Inquiry')));
+        $company = trim(str_replace(["\r", "\n"], ' ', (string)($leadData['company'] ?? 'CodeX404')));
+        $subject = '[New Lead] ' . $name . ' - ' . $company;
 
         $body = "New Lead Submission received on CodeX404 Solutions Website:\n\n";
         foreach ($leadData as $k => $v) {
@@ -15,22 +17,30 @@ class EmailService {
             $body .= "{$label}: {$v}\n";
         }
         $body .= "\nTime: " . date('Y-m-d H:i:s T') . "\n";
-        $body .= "IP: " . ($_SERVER['REMOTE_ADDR'] ?? '127.0.0.1') . "\n";
 
         $headers = "From: " . COMPANY_EMAIL . "\r\n" .
                    "Reply-To: " . ($leadData['email'] ?? COMPANY_EMAIL) . "\r\n" .
                    "X-Mailer: PHP/" . phpversion();
 
-        // Attempt mail send if configured
-        if (ENVIRONMENT === 'production' && function_exists('mail')) {
-            @mail($to, $subject, $body, $headers);
+        // Only report delivery when the configured PHP mail transport accepts it.
+        if (ENVIRONMENT !== 'production' || !function_exists('mail')) {
+            $this->logDelivery(false);
+            return false;
         }
 
-        // Always log notification
-        $logFile = LOGS_PATH . '/app.log';
-        $logMsg = "[" . date('Y-m-d H:i:s') . "] Notification queued for " . ($leadData['email'] ?? 'unknown') . PHP_EOL;
-        @file_put_contents($logFile, $logMsg, FILE_APPEND);
+        $sent = @mail($to, $subject, $body, $headers);
+        $this->logDelivery($sent);
 
-        return true;
+        return $sent;
+    }
+
+    private function logDelivery(bool $sent): void {
+        $logFile = LOGS_PATH . '/app.log';
+        $status = $sent ? 'accepted_by_transport' : 'not_sent';
+        @file_put_contents(
+            $logFile,
+            '[' . date('Y-m-d H:i:s') . '] lead_notification=' . $status . PHP_EOL,
+            FILE_APPEND | LOCK_EX
+        );
     }
 }

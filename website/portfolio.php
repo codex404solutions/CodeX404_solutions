@@ -41,7 +41,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Verified Deliverables &amp; Live Systems</span>
             </div>
             <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Engineered Deliverables &amp; <span class="gradient-text">Interactive Systems</span>
+                Engineered Deliverables &amp; <span class="gradient-text gradient-text-animated">Interactive Systems</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
                 Explore production platforms, commercial client systems, proprietary internal engines, and working architectural concepts engineered by CodeX404 Solutions.

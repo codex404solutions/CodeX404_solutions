@@ -4,8 +4,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'About CodeX404 Solutions — Global Software & AI Engineering Partner',
-    'description' => 'Learn about CodeX404 Solutions: an India-based engineering partner serving growing enterprises across the US, UK, UAE, and India with senior-level accountability, zero technical debt, and 100% IP ownership.',
+    'title' => 'About CodeX404 Solutions — Build, Grow, Automate',
+    'description' => 'Learn about CodeX404 Solutions, a technology and digital growth company working across software development, digital marketing, and business automation.',
     'canonical' => url('about.php'),
     'keywords' => 'about CodeX404 Solutions, software engineering company, Muhammad Noukhez, Yousuf Ansari, engineering partner, global software development'
 ];
@@ -22,7 +22,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Our Engineering Identity</span>
             </div>
             <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                An Engineering Partner That Treats <span class="gradient-text">Your Code Like Our Own</span>
+                An Engineering Partner That Treats <span class="gradient-text gradient-text-animated">Your Code Like Our Own</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
                 CodeX404 Solutions was founded on a simple principle: growing businesses deserve world-class software engineering, transparent communication, and senior-level technical accountability without bloated agency bureaucracy or freelance fragility.
@@ -38,7 +38,7 @@ require_once __DIR__ . '/includes/header.php';
                     Too many growing businesses get burned by one of two extremes: overpriced agencies that bill enterprise rates while secretly handing off work to junior trainees, or low-cost freelancers who write brittle, unmaintainable code that breaks under real production loads.
                 </p>
                 <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate);">
-                    CodeX404 bridges this gap. Based in India with a global engineering mindset, we partner directly with ambitious companies across the US, UK, UAE, Europe, and India to build, automate, and scale mission-critical software systems that last for years.
+                    CodeX404 Solutions helps organizations plan and deliver software, digital growth, and automation work. Engagement scope, responsibilities, and delivery terms are agreed with each client.
                 </p>
             </div>
 
@@ -62,15 +62,15 @@ require_once __DIR__ . '/includes/header.php';
                     <li style="display: flex; gap: 1rem; align-items: flex-start;">
                         <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">03</span>
                         <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">100% Intellectual Property Ownership</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">From day one, you own all Git repositories, cloud deployment keys, architecture diagrams, and design assets. Absolutely zero vendor lock-in.</span>
+                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Clear Ownership Terms</strong>
+                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Ownership, licenses, and handoff of project materials are set out in the applicable written agreement.</span>
                         </div>
                     </li>
                     <li style="display: flex; gap: 1rem; align-items: flex-start;">
                         <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">04</span>
                         <div>
                             <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Milestone-Based Transparency</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Clear sprint deliverables, weekly staging previews, and automated test coverage ensure there are no surprises or missed deadlines.</span>
+                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Agree deliverables, review cadence, and testing expectations before work begins.</span>
                         </div>
                     </li>
                 </ul>
@@ -100,28 +100,28 @@ require_once __DIR__ . '/includes/header.php';
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">North America</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    United States & Canada. Overlapping EST / PST check-in hours, weekly sprint demonstrations, and contract compliance.
+                    Time zone overlap, meeting schedules, and review cadence are agreed with each project team.
                 </p>
             </div>
 
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">United Kingdom & Europe</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    UK, Germany, Netherlands, Ireland. Full GDPR compliance, clean data privacy agreements, and European working hours alignment.
+                    Privacy requirements depend on the applicable jurisdiction, data, and services. We agree responsibilities and controls during project scoping.
                 </p>
             </div>
 
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Middle East & GCC</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    UAE, Saudi Arabia, Qatar, Oman. Seamless Gulf timezone overlap, rapid turnarounds, and localized payment options.
+                    Project schedules and payment terms are discussed and documented before work begins.
                 </p>
             </div>
 
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">India & APAC</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    India, Singapore, Australia. High-velocity development cycles, on-demand architectural reviews, and localized business systems.
+                    Remote collaboration practices are selected to fit the team, stakeholders, and delivery needs.
                 </p>
             </div>
         </div>

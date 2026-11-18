@@ -28,7 +28,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="grid grid-cols-3">
             <!-- Model 1 -->
-            <div class="card" style="border-top: 4px solid var(--electric-blue);">
+            <div class="card card-tilt reveal-on-scroll" style="border-top: 4px solid var(--electric-blue);">
                 <span class="tag-chip" style="margin-bottom: 1rem; width: fit-content; color: var(--cyan);">Turnkey Delivery</span>
                 <h2 class="card-title">Fixed-Scope Milestone Project</h2>
                 <p class="card-description">
@@ -36,10 +36,10 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
                 <div style="margin: 1.5rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
                     <ul class="transform-list">
-                        <li><span style="color: #34D399;">✓</span> Guaranteed delivery milestones</li>
-                        <li><span style="color: #34D399;">✓</span> Fixed pricing with zero surprise add-ons</li>
-                        <li><span style="color: #34D399;">✓</span> Includes 30-day post-launch warranty</li>
-                        <li><span style="color: #34D399;">✓</span> Complete documentation & handoff</li>
+                        <li><span style="color: #34D399;">✓</span> Milestones and acceptance criteria agreed in writing</li>
+                        <li><span style="color: #34D399;">✓</span> Estimate based on documented scope and assumptions</li>
+                        <li><span style="color: #34D399;">✓</span> Support and warranty terms agreed per project</li>
+                        <li><span style="color: #34D399;">✓</span> Documentation and handoff requirements agreed in scope</li>
                     </ul>
                 </div>
                 <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">
@@ -48,7 +48,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- Model 2 -->
-            <div class="card" style="border-top: 4px solid var(--cyan); background: var(--bg-surface-elevated); box-shadow: var(--shadow-md);">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="border-top: 4px solid var(--cyan); background: var(--bg-surface-elevated); box-shadow: var(--shadow-md);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                     <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Most Popular</span>
                     <span style="font-size: 0.75rem; color: #34D399; font-weight: 700;">HIGH VELOCITY</span>
@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
                         <li><span style="color: #34D399;">✓</span> Full-stack developers, QA & architect</li>
                         <li><span style="color: #34D399;">✓</span> Direct Slack / Teams daily integration</li>
                         <li><span style="color: #34D399;">✓</span> Bi-weekly sprint demos & planning</li>
-                        <li><span style="color: #34D399;">✓</span> Scale up or down with 30-day notice</li>
+                        <li><span style="color: #34D399;">✓</span> Agree any capacity changes and notice terms in the project agreement</li>
                     </ul>
                 </div>
                 <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm" style="width: 100%; margin-top: auto;">
@@ -71,7 +71,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- Model 3 -->
-            <div class="card" style="border-top: 4px solid var(--violet);">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="border-top: 4px solid var(--violet);">
                 <span class="tag-chip" style="margin-bottom: 1rem; width: fit-content; color: var(--soft-violet);">Strategic Leadership</span>
                 <h2 class="card-title">Fractional CTO & AI Architect</h2>
                 <p class="card-description">

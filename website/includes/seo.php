@@ -64,9 +64,7 @@ function render_json_ld_organization(): void {
             COMPANY_LINKEDIN,
             FOUNDER_LINKEDIN
         ],
-        'areaServed' => [
-            'India', 'United States', 'United Kingdom', 'United Arab Emirates', 'Saudi Arabia', 'Canada', 'Australia'
-        ],
+        'areaServed' => ['India'],
         'knowsAbout' => [
             'Software Development', 'Artificial Intelligence', 'AI Agents', 'Business Automation', 'SaaS Development', 'CRM Development'
         ]

@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
     'title' => 'Business Process & Workflow Automation Engineering',
-    'description' => 'Eliminate manual operational friction. Custom automations across CRM, Meta WhatsApp Business API, automated billing, and cross-platform API integrations with zero data leakage.',
+    'description' => 'Plan workflow automations and integrations across business tools, CRM, messaging, billing, and APIs with appropriate data handling controls.',
     'canonical' => url('automation.php'),
     'keywords' => 'workflow automation, CRM automation, WhatsApp Business API automation, business process automation, API integrations, spreadsheet migration'
 ];
@@ -32,7 +32,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Automation Capabilities Grid -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Zero-Leakage Lead Capture -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">⚡</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Zero-Leakage Lead Ingestion</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -47,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 2. WhatsApp Business Cloud API Pipelines -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">💬</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">WhatsApp Business Cloud API</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 3. Automated Invoicing & Payment Reconciliation -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">💳</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Automated Invoicing & Payments</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -77,7 +77,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Custom API Orchestration Middleware -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">🔗</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Multi-System API Orchestration</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Automated Executive Reporting & Alerts -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">📈</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Scheduled Telemetry & Reports</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. Spreadsheet to Relational Migrations -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🛠️</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Spreadsheet-to-System Modernization</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -139,27 +139,27 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="grid grid-cols-3" style="gap: 2rem;">
-            <div class="card" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">&lt; 3 mins</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Lead Response Time</h3>
+            <div class="card card-tilt reveal-on-scroll" style="text-align: center; padding: 2.5rem;">
+                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">Fast</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Lead Response Routing</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Leads receive immediate, personalized validation over WhatsApp and email, converting prospects while purchase intent is at its absolute peak.
+                    A connected workflow can route enquiries to selected systems and notify the appropriate team, subject to approved integrations and service availability.
                 </p>
             </div>
 
-            <div class="card" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">15+ hrs</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Saved Weekly Per Team</h3>
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="text-align: center; padding: 2.5rem;">
+                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">Less</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Manual Re-entry</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Staff completely stop manually transcribing data across accounting, CRM, and inventory portals, redirecting attention to revenue-generating activities.
+                    Integrations can reduce repetitive copying between systems. The actual time saved depends on the process and implementation.
                 </p>
             </div>
 
-            <div class="card" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">99.9%</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Data Accuracy Guarantee</h3>
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="text-align: center; padding: 2.5rem;">
+                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">Checks</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Validation and Review</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Rigorous server-side schema validation permanently eliminates typos, duplicate invoicing records, and corrupted client details.
+                    Validation and exception handling can help catch malformed or duplicate data. Requirements and review steps should be defined for each workflow.
                 </p>
             </div>
         </div>

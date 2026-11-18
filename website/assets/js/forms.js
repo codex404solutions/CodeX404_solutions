@@ -4,6 +4,30 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('form').forEach(form => {
+    const divisionSelect = form.querySelector('[name="division"]');
+    const serviceSelect = form.querySelector('[name="service"], [name="service_interest"]');
+    if (!divisionSelect || !serviceSelect) return;
+
+    const serviceGroups = Array.from(serviceSelect.querySelectorAll('optgroup[data-division]'));
+    if (!serviceGroups.length) return;
+
+    const updateServices = () => {
+      const division = divisionSelect.value.toUpperCase();
+      serviceGroups.forEach(group => {
+        group.disabled = group.dataset.division !== division;
+      });
+
+      const selectedOption = serviceSelect.selectedOptions[0];
+      const selectedGroup = serviceGroups.find(group => selectedOption && group.contains(selectedOption));
+      if (selectedGroup && selectedGroup.disabled) serviceSelect.value = '';
+    };
+
+    divisionSelect.addEventListener('change', updateServices);
+    form.addEventListener('reset', () => requestAnimationFrame(updateServices));
+    updateServices();
+  });
+
   const ajaxForms = document.querySelectorAll('.ajax-form');
 
   ajaxForms.forEach(form => {
@@ -15,7 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Submit';
 
       // Reset prior error states
-      form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+      form.querySelectorAll('.is-invalid').forEach(el => {
+        el.classList.remove('is-invalid');
+        el.removeAttribute('aria-invalid');
+        el.removeAttribute('aria-describedby');
+      });
       form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
       if (alertContainer) alertContainer.innerHTML = '';
 
@@ -45,15 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result.status === 'success') {
           if (alertContainer) {
-            alertContainer.innerHTML = `
-              <div class="alert-box alert-success" role="alert">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                <div>
-                  <strong>Success!</strong> ${result.message}
-                  ${result.ref ? `<div style="font-size: 0.8rem; margin-top: 4px; opacity: 0.85;">Reference Code: ${result.ref}</div>` : ''}
-                </div>
-              </div>
-            `;
+            const alert = document.createElement('div');
+            alert.className = 'alert-box alert-success';
+            alert.setAttribute('role', 'alert');
+            const message = document.createElement('div');
+            const heading = document.createElement('strong');
+            heading.textContent = 'Success! ';
+            message.append(heading, document.createTextNode(String(result.message || 'Your request was received.')));
+            alert.appendChild(message);
+            if (result.ref) {
+              const reference = document.createElement('div');
+              reference.style.cssText = 'font-size: 0.8rem; margin-top: 4px; opacity: 0.85;';
+              reference.textContent = `Reference Code: ${String(result.ref)}`;
+              alert.appendChild(reference);
+            }
+            alertContainer.replaceChildren(alert);
           }
           form.reset();
         } else {
@@ -81,12 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           if (alertContainer) {
-            alertContainer.innerHTML = `
-              <div class="alert-box alert-danger" role="alert">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                <div>${result.message || 'An error occurred during submission. Please check the fields and try again.'}</div>
-              </div>
-            `;
+            const alert = document.createElement('div');
+            alert.className = 'alert-box alert-danger';
+            alert.setAttribute('role', 'alert');
+            alert.textContent = String(result.message || 'An error occurred during submission. Please check the fields and try again.');
+            alertContainer.replaceChildren(alert);
           }
         }
       } catch (err) {

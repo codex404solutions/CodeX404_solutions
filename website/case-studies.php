@@ -22,7 +22,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Verifiable Evidence of Execution</span>
             </div>
             <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Real Systems. Real Constraints. <span class="gradient-text">Measurable Impact.</span>
+                Real Systems. Real Constraints. <span class="gradient-text gradient-text-animated">Measurable Impact.</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
                 We believe in verifiable engineering facts over inflated claims. Below are detailed breakdowns of actual production systems designed, engineered, and deployed by our senior team.
@@ -31,7 +31,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div style="display: flex; flex-direction: column; gap: 3rem;">
             <!-- CASE STUDY 1: INSAN DEGREE COLLEGE ERP -->
-            <div class="card" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
+            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                     <div>
                         <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Higher Education & Institutional Operations</span>
@@ -69,16 +69,16 @@ require_once __DIR__ . '/includes/header.php';
                         <span class="tag-chip">Fee Reconciliation</span>
                         <span class="tag-chip">Granular RBAC</span>
                         <span class="tag-chip">PDF Generation</span>
-                        <span class="tag-chip">Zero Data Collision</span>
+                        <span class="tag-chip">Data validation and isolation</span>
                     </div>
                     <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
-                        ✓ Reconciliation time dropped from 10 days to under 15 minutes
+                        ✓ Automated fee reconciliation with instant ledger reporting and PDF voucher generation
                     </div>
                 </div>
             </div>
 
             <!-- CASE STUDY 2: CENTRAL MEDICAL CLINIC -->
-            <div class="card" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
+            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                     <div>
                         <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Healthcare Systems & Clinical Operations</span>
@@ -116,13 +116,13 @@ require_once __DIR__ . '/includes/header.php';
                         <span class="tag-chip">SMS Automation</span>
                     </div>
                     <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
-                        ✓ Zero appointment collisions; front-desk wait times reduced by 50%
+                        ✓ Elimination of double-booked appointment slots via atomic database reservation locks
                     </div>
                 </div>
             </div>
 
             <!-- CASE STUDY 3: TENDER APPLIANCES -->
-            <div class="card" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
+            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                     <div>
                         <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Commerce & Wholesale Engine</span>
@@ -160,13 +160,13 @@ require_once __DIR__ . '/includes/header.php';
                         <span class="tag-chip">Mobile First</span>
                     </div>
                     <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
-                        ✓ Zero stock discrepancies; order checkout turnaround reduced by 75%
+                        ✓ Real-time inventory synchronization with automated GST invoicing workflows
                     </div>
                 </div>
             </div>
 
             <!-- CASE STUDY 4: WHEELCRAFT AUTOMOTIVE -->
-            <div class="card" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
+            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                     <div>
                         <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Automotive Products & Wholesale Catalog</span>
@@ -201,16 +201,16 @@ require_once __DIR__ . '/includes/header.php';
                         <span class="tag-chip">Vehicle Fitment Engine</span>
                         <span class="tag-chip">Alloy Catalog</span>
                         <span class="tag-chip">Wholesale Inquiries</span>
-                        <span class="tag-chip">Sub-150ms Response</span>
+                        <span class="tag-chip">Indexed Search</span>
                     </div>
                     <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
-                        ✓ 100% fitment accuracy; inquiry conversions increased by 85%
+                        ✓ Interactive vehicle fitment matrix with instant dealer inquiry routing
                     </div>
                 </div>
             </div>
 
             <!-- CASE STUDY 5: TURNKEY BOOKING & APPOINTMENT SYSTEMS -->
-            <div class="card" style="padding: 2.75rem; border-color: rgba(6, 214, 160, 0.35); box-shadow: 0 10px 30px rgba(6, 214, 160, 0.08);">
+            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(6, 214, 160, 0.35); box-shadow: 0 10px 30px rgba(6, 214, 160, 0.08);">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                     <div>
                         <span class="tag-chip" style="color: #06D6A0; border-color: rgba(6, 214, 160, 0.4);">Healthcare, Wellness & Hospitality Automation</span>
@@ -247,10 +247,10 @@ require_once __DIR__ . '/includes/header.php';
                         <span class="tag-chip">Doctor / Chair Allocation</span>
                         <span class="tag-chip">Interactive Floor Plan</span>
                         <span class="tag-chip">WhatsApp Alerts</span>
-                        <span class="tag-chip">Sub-30s Booking Flow</span>
+                        <span class="tag-chip">Streamlined Booking Flow</span>
                     </div>
                     <div style="color: #34D399; font-weight: 700; font-size: 0.95rem;">
-                        ✓ Zero double-bookings; 98.7% verified customer arrival rate
+                        ✓ Real-time appointment scheduling with automated multi-channel customer reminders
                     </div>
                 </div>
             </div>

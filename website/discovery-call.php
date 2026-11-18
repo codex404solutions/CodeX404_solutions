@@ -6,6 +6,11 @@ require_once __DIR__ . '/includes/security.php';
 require_once __DIR__ . '/app/Controllers/LeadController.php';
 
 use App\Controllers\LeadController;
+use App\Validators\FormValidator;
+
+$divisionServiceOptions = FormValidator::serviceOptions();
+$requestedDivision = is_string($_GET['division'] ?? null) ? strtoupper(trim($_GET['division'])) : '';
+$selectedDivision = isset($divisionServiceOptions[$requestedDivision]) ? $requestedDivision : '';
 
 $leadResult = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageMeta = [
-    'title' => 'Book a Technical Discovery Call — Architecture & Strategy',
-    'description' => 'Schedule a 30-minute discovery consultation with a CodeX404 Solutions Architect. Review feasibility, system architecture, timelines, and budgets.',
+    'title' => 'Request a Technical Discovery Call — CodeX404 Solutions',
+    'description' => 'Request a discovery call about software, digital growth, or workflow automation. Share the project context so the team can review suitable next steps.',
     'canonical' => url('discovery-call.php'),
     'keywords' => 'book discovery call, software consultation, AI architecture session, software scoping'
 ];
@@ -34,11 +39,11 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Direct Technical Scoping</span>
+                <span>Project Discovery Request</span>
             </div>
-            <h1 class="section-title">Book a 30-Minute Technical Discovery Call</h1>
+            <h1 class="section-title">Request a Technical Discovery Call</h1>
             <p class="section-subtitle">
-                Meet directly with a Solutions Architect. We will deconstruct your business problem, evaluate technical feasibility, and sketch out an actionable engineering roadmap.
+                Tell us about your project, current systems, and constraints. We’ll review the request and follow up by email about arranging a suitable conversation.
             </p>
         </div>
 
@@ -74,8 +79,8 @@ require_once __DIR__ . '/includes/header.php';
 
                 <div class="grid grid-cols-3" style="gap: 1.25rem;">
                     <div class="form-group">
-                        <label for="company" class="form-label">Company Name <span class="required">*</span></label>
-                        <input type="text" id="company" name="company" class="form-control" placeholder="Acme Logistics" required>
+                        <label for="company" class="form-label">Company Name (optional)</label>
+                        <input type="text" id="company" name="company" class="form-control" placeholder="Acme Logistics">
                     </div>
 
                     <div class="form-group">
@@ -89,41 +94,62 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </div>
 
+                    <div class="form-group">
+                        <label for="division" class="form-label">Division <span class="required">*</span></label>
+                        <select id="division" name="division" class="form-select" required>
+                            <option value="">Choose a division...</option>
+                            <?php foreach ($divisionServiceOptions as $code => $_services): ?>
+                                <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $selectedDivision === $code ? 'selected' : '' ?>><?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars(match ($code) {
+                                    'BUILD' => 'Software and digital products',
+                                    'GROW' => 'Digital marketing and discoverability',
+                                    default => 'Workflows, integrations, and AI',
+                                }, ENT_QUOTES, 'UTF-8') ?></option>
+                            <?php endforeach; ?>
+                    </select>
+                </div>
+
                 <div class="grid grid-cols-3" style="gap: 1.25rem;">
                     <div class="form-group">
                         <label for="service_interest" class="form-label">Primary Solution Area <span class="required">*</span></label>
                         <select id="service_interest" name="service_interest" class="form-select" required>
-                            <option value="">Select an area...</option>
-                            <option value="Custom Software">Custom Software / Web Application</option>
-                            <option value="Enterprise AI">Enterprise AI / RAG Knowledge Base</option>
-                            <option value="AI Agents">Autonomous AI Agents</option>
-                            <option value="Workflow Automation">Workflow / CRM Automation</option>
-                            <option value="Mobile Applications">Cross-Platform Mobile App</option>
-                            <option value="SaaS MVP">SaaS MVP Engineering</option>
-                            <option value="Other">Other / Full Digital Transformation</option>
+                            <option value="">Select a service area...</option>
+                            <?php foreach ($divisionServiceOptions as $code => $services): ?>
+                                <optgroup label="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" data-division="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>">
+                                    <?php foreach ($services as $serviceCode => $serviceLabel): ?>
+                                        <option value="<?= htmlspecialchars($serviceCode, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($serviceLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="budget" class="form-label">Estimated Budget</label>
                         <select id="budget" name="budget" class="form-select">
-                            <option value="Under $5k">Under $5,000</option>
-                            <option value="$5k - $15k" selected>$5,000 – $15,000</option>
-                            <option value="$15k - $50k">$15,000 – $50,000</option>
-                            <option value="$50k+">$50,000+</option>
-                            <option value="Flexible / Need Guidance">Flexible / Need Architecture Guidance</option>
+                            <option value="">Prefer not to say</option>
+                            <option value="under_5k">Under $5,000</option>
+                            <option value="5k_15k">$5,000–$15,000</option>
+                            <option value="15k_50k">$15,000–$50,000</option>
+                            <option value="50k_plus">$50,000+</option>
+                            <option value="flexible">Flexible / need guidance</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="timeline" class="form-label">Target Timeline</label>
                         <select id="timeline" name="timeline" class="form-select">
-                            <option value="Immediately (< 1 month)">Immediately (&lt; 1 month)</option>
-                            <option value="1 - 3 months" selected>1 – 3 months</option>
-                            <option value="3 - 6 months">3 – 6 months</option>
-                            <option value="Exploratory">Exploratory / Roadmap Phase</option>
+                            <option value="">Not decided</option>
+                            <option value="under_1_month">Under 1 month</option>
+                            <option value="1_3_months">1–3 months</option>
+                            <option value="3_6_months">3–6 months</option>
+                            <option value="exploratory">Exploratory / planning</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="website" class="form-label">Business Website (optional)</label>
+                    <input type="url" id="website" name="website" class="form-control" maxlength="255" placeholder="https://example.com">
                 </div>
 
                 <div class="form-group">
@@ -135,18 +161,18 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="form-group">
                     <label class="form-checkbox-label">
                         <input type="checkbox" name="privacy_consent" value="1" required>
-                        <span>I consent to CodeX404 Solutions storing this information for the purpose of scheduling and conducting this discovery consultation under the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a>.</span>
+                        <span>I consent to CodeX404 Solutions processing my contact and project details to review this request and follow up under the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a>.</span>
                     </label>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-                    Confirm Discovery Call Request
+                    Send Discovery Call Request
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
             </form>
 
             <div style="margin-top: 1.75rem; text-align: center; font-size: 0.85rem; color: var(--slate-dark);">
-                🔒 Zero spam guarantee. We never share, sell, or disclose your contact information to third parties.
+                We use form protections to limit automated submissions. See the Privacy Policy for how enquiry information is handled.
             </div>
         </div>
     </div>

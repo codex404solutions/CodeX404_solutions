@@ -32,9 +32,16 @@ class ContactController {
             ];
         }
 
-        $rawSubject = !empty($_POST['subject']) 
-            ? (string)$_POST['subject'] 
-            : (!empty($_POST['service']) ? 'Inquiry: ' . (string)$_POST['service'] : 'General Inquiry');
+        $division = strtoupper(Sanitizer::cleanString($_POST['division'] ?? '', 20));
+        $serviceCode = Sanitizer::cleanString($_POST['service'] ?? '', 80);
+        $serviceLabel = FormValidator::serviceLabel($division, $serviceCode);
+        $rawSubject = Sanitizer::cleanString($_POST['subject'] ?? '', 120);
+        if ($rawSubject === '') {
+            $rawSubject = $serviceLabel !== '' ? $serviceLabel : 'General Inquiry';
+        }
+        if ($division !== '') {
+            $rawSubject = $division . ': ' . $rawSubject;
+        }
 
         // Sanitize with strict field length bounds
         $data = [
@@ -43,10 +50,15 @@ class ContactController {
             'email' => Sanitizer::cleanEmail($_POST['email'] ?? '', 254),
             'phone' => Sanitizer::cleanPhone($_POST['phone'] ?? '', 25),
             'company' => Sanitizer::cleanString($_POST['company'] ?? '', 120),
+            'country' => Sanitizer::cleanString($_POST['country'] ?? '', 100),
+            'website' => Sanitizer::cleanString($_POST['website'] ?? '', 255),
+            'division' => $division,
+            'service' => $serviceCode,
+            'budget' => Sanitizer::cleanString($_POST['budget'] ?? '', 30),
+            'timeline' => Sanitizer::cleanString($_POST['timeline'] ?? '', 30),
             'subject' => Sanitizer::cleanString($rawSubject, 150),
             'message' => Sanitizer::cleanString($_POST['message'] ?? '', 5000),
-            'privacy_consent' => !empty($_POST['privacy_consent']) || !empty($_POST['service']),
-            'newsletter' => !empty($_POST['newsletter']),
+            'privacy_consent' => ($_POST['privacy_consent'] ?? null) === '1',
             '_gotcha' => Sanitizer::cleanString($_POST['_gotcha'] ?? '', 100)
         ];
 
@@ -60,8 +72,29 @@ class ContactController {
             ];
         }
 
+        $data['service'] = FormValidator::serviceLabel($data['division'], $data['service']);
+        $data['budget'] = FormValidator::budgetLabel($data['budget']);
+        $data['timeline'] = FormValidator::timelineLabel($data['timeline']);
+
+        $messageLines = ['Project details: ' . $data['message']];
+        foreach ([
+            'Company' => $data['company'],
+            'Phone' => $data['phone'],
+            'Country' => $data['country'],
+            'Website' => $data['website'],
+            'Service' => $data['service'],
+            'Budget' => $data['budget'],
+            'Timeline' => $data['timeline'],
+        ] as $label => $value) {
+            if ($value !== '') {
+                $messageLines[] = $label . ': ' . $value;
+            }
+        }
+        $persistedMessage = implode("\n", $messageLines);
+
         // 1. Try DB insertion if DB available
         $pdo = Database::getConnection();
+        $dbSaved = false;
         if ($pdo) {
             try {
                 $stmt = $pdo->prepare("
@@ -72,8 +105,9 @@ class ContactController {
                     ':name' => $data['name'],
                     ':email' => $data['email'],
                     ':subject' => $data['subject'],
-                    ':message' => $data['message']
+                    ':message' => $persistedMessage
                 ]);
+                $dbSaved = true;
             } catch (\Throwable $e) {
                 // Non-fatal, fallback to file storage; log code only to avoid information leakage
                 @file_put_contents(
@@ -88,12 +122,19 @@ class ContactController {
         $crmService = new CRMIntegrationService();
         $crmResult = $crmService->dispatchLead($data);
 
+        if (($crmResult['status'] ?? '') === 'unavailable' && !$dbSaved) {
+            return [
+                'status' => 'error',
+                'message' => 'We could not save your inquiry. Please email ' . COMPANY_EMAIL . ' directly.'
+            ];
+        }
+
         $emailService = new EmailService();
         $emailService->sendLeadNotification($data);
 
         return [
             'status' => 'success',
-            'message' => 'Thank you for reaching out! Our engineering team will review your inquiry and respond within 24 hours.',
+            'message' => 'Thank you for reaching out. Your inquiry has been saved for follow-up. If you need to add details, email ' . COMPANY_EMAIL . '.',
             'ref' => $crmResult['idempotency_key'] ?? null
         ];
     }

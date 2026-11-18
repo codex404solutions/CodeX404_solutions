@@ -16,14 +16,29 @@ $pageMeta = $pageMeta ?? [];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z1079KLQE9"></script>
+    <!-- Optional analytics loads only after the visitor accepts cookies. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Z1079KLQE9');
+      window.loadCodeX404Analytics = function () {
+        if (window.codeX404AnalyticsLoaded) return;
+        window.codeX404AnalyticsLoaded = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z1079KLQE9';
+        script.onload = function () {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){ window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-Z1079KLQE9');
+        };
+        document.head.appendChild(script);
+      };
+      try {
+        if (window.localStorage.getItem('codex404_cookie_consent') === 'accepted') {
+          window.loadCodeX404Analytics();
+        }
+      } catch (error) {
+        // Keep optional analytics disabled when browser storage is unavailable.
+      }
     </script>
     <link rel="icon" type="image/x-icon" href="<?= asset('images/logo/favicon.ico') ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= asset('images/logo/favicon.ico') ?>">
@@ -45,6 +60,7 @@ $pageMeta = $pageMeta ?? [];
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="<?= asset('css/main.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/main.css') ? filemtime(dirname(__DIR__) . '/assets/css/main.css') : '1.0' ?>">
+    <link rel="stylesheet" href="<?= asset('css/animations.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/animations.css') ? filemtime(dirname(__DIR__) . '/assets/css/animations.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/components.css') ? filemtime(dirname(__DIR__) . '/assets/css/components.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/responsive.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/responsive.css') ? filemtime(dirname(__DIR__) . '/assets/css/responsive.css') : '1.0' ?>">
 </head>
@@ -65,7 +81,7 @@ $pageMeta = $pageMeta ?? [];
             <div class="top-announcement-left">
                 <span class="status-indicator" aria-hidden="true"></span>
                 <span class="top-announcement-text">
-                    <span class="status-label-bold">Available for Q4/2026</span>
+                    <span class="status-label-bold">BUILD · GROW · AUTOMATE</span>
                     <span class="status-divider" aria-hidden="true">•</span>
                     <span class="status-subtext">Senior Engineering Studio</span>
                 </span>

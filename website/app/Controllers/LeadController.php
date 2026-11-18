@@ -38,13 +38,15 @@ class LeadController {
             'email' => Sanitizer::cleanEmail($_POST['email'] ?? '', 254),
             'phone' => Sanitizer::cleanPhone($_POST['phone'] ?? '', 25),
             'company' => Sanitizer::cleanString($_POST['company'] ?? '', 120),
-            'country' => Sanitizer::cleanString($_POST['country'] ?? 'Global', 100),
+            'division' => strtoupper(Sanitizer::cleanString($_POST['division'] ?? '', 20)),
+            'country' => Sanitizer::cleanString($_POST['country'] ?? '', 100),
+            'website' => Sanitizer::cleanString($_POST['website'] ?? '', 255),
             'job_title' => Sanitizer::cleanString($_POST['job_title'] ?? '', 100),
             'service_interest' => Sanitizer::cleanString($_POST['service_interest'] ?? '', 100),
-            'budget' => Sanitizer::cleanString($_POST['budget'] ?? 'Flexible', 50),
-            'timeline' => Sanitizer::cleanString($_POST['timeline'] ?? '1-3 months', 50),
+            'budget' => Sanitizer::cleanString($_POST['budget'] ?? '', 50),
+            'timeline' => Sanitizer::cleanString($_POST['timeline'] ?? '', 50),
             'problem_description' => Sanitizer::cleanString($_POST['problem_description'] ?? '', 5000),
-            'privacy_consent' => !empty($_POST['privacy_consent']),
+            'privacy_consent' => ($_POST['privacy_consent'] ?? null) === '1',
             '_gotcha' => Sanitizer::cleanString($_POST['_gotcha'] ?? '', 100)
         ];
 
@@ -58,23 +60,29 @@ class LeadController {
             ];
         }
 
+        $data['service_interest'] = FormValidator::serviceLabel($data['division'], $data['service_interest']);
+        $data['budget'] = FormValidator::budgetLabel($data['budget']);
+        $data['timeline'] = FormValidator::timelineLabel($data['timeline']);
+
         // Dispatch
         $crmService = new CRMIntegrationService();
         $crmResult = $crmService->dispatchLead($data);
 
+        if (($crmResult['status'] ?? '') === 'unavailable') {
+            return [
+                'status' => 'error',
+                'message' => 'We could not save your request. Please email ' . COMPANY_EMAIL . ' directly.'
+            ];
+        }
+
         $emailService = new EmailService();
         $emailService->sendLeadNotification($data);
 
-        $crmStatus = $crmResult['status'] ?? 'stored_locally';
-        $crmMessage = $crmStatus === 'synced'
-            ? 'Discovery Call request confirmed and synced to CRM. A Solutions Architect will review your requirements and coordinate a meeting schedule.'
-            : 'Discovery Call request confirmed and saved locally for CRM follow-up.';
-
         return [
             'status' => 'success',
-            'message' => $crmMessage,
+            'message' => 'Your Discovery Call request has been saved for follow-up. We’ll contact you by email to coordinate next steps.',
             'ref' => $crmResult['idempotency_key'] ?? null,
-            'crm_sync' => $crmStatus
+            'crm_sync' => $crmResult['status'] ?? 'stored_locally'
         ];
     }
 }

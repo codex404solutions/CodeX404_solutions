@@ -26,21 +26,25 @@ class CRMIntegrationService
             'idempotency_key' => $idempotencyKey,
             'timestamp' => $timestamp,
             'source' => 'codex404_website',
-            'environment' => ENVIRONMENT,
-            'lead' => $leadData,
-            'client_ip' => $_SERVER['REMOTE_ADDR'] ?? '',
-            'user_agent' => substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500)
+            'lead' => $leadData
         ];
 
-        @mkdir($this->storagePath, 0700, true);
-        @mkdir(dirname($this->logPath), 0700, true);
+        if (!is_dir($this->storagePath) && !@mkdir($this->storagePath, 0700, true) && !is_dir($this->storagePath)) {
+            return ['status' => 'unavailable'];
+        }
+        if (!is_dir(dirname($this->logPath))) {
+            @mkdir(dirname($this->logPath), 0700, true);
+        }
         $jsonPayload = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
         if (!is_string($jsonPayload)) {
-            return ['status' => 'stored_locally', 'idempotency_key' => $idempotencyKey];
+            return ['status' => 'unavailable'];
         }
 
         $fileName = $this->storagePath . '/' . date('Y-m-d_His') . '_' . $idempotencyKey . '.json';
-        @file_put_contents($fileName, $jsonPayload, LOCK_EX);
+        $storedBytes = @file_put_contents($fileName, $jsonPayload, LOCK_EX);
+        if ($storedBytes === false || $storedBytes !== strlen($jsonPayload)) {
+            return ['status' => 'unavailable'];
+        }
         @chmod($fileName, 0600);
 
         // Avoid logging contact details or complete remote responses.

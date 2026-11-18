@@ -32,22 +32,22 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Mobile Capabilities Grid -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Cross-Platform Single Codebase -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">📱</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Cross-Platform Efficiency</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Deploy to both Apple App Store and Google Play from a single shared codebase without sacrificing silky 60fps animations or native device platform features. Cut long-term maintenance costs in half.
+                    Deploy to both Apple App Store and Google Play from a single shared codebase without sacrificing smooth animations or native device platform features, streamlining long-term maintenance.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">iOS & Android</span>
                     <span class="tag-chip">Single Codebase</span>
-                    <span class="tag-chip">Native Feel</span>
-                    <span class="tag-chip">50% Lower TCO</span>
+                    <span class="tag-chip">Native Experience</span>
+                    <span class="tag-chip">Unified Maintenance</span>
                 </div>
             </div>
 
             <!-- 2. Offline-First Resilience -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">📶</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Offline-First Architecture</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -57,12 +57,12 @@ require_once __DIR__ . '/includes/header.php';
                     <span class="tag-chip">Local SQLite / IndexedDB</span>
                     <span class="tag-chip">Background Sync</span>
                     <span class="tag-chip">Conflict Resolution</span>
-                    <span class="tag-chip">Zero Data Loss</span>
+                    <span class="tag-chip">Data handling requirements</span>
                 </div>
             </div>
 
             <!-- 3. Push Notifications & Alerts -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🔔</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Transactional Push Notifications</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -77,11 +77,11 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Biometric & Secure Storage -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">🔒</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Biometric & Vault Security</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Protect confidential enterprise records using native FaceID / TouchID biometric authentication, AES-256 encrypted keychain storage, SSL certificate pinning, and short-lived JWT authorization tokens.
+                    Mobile security controls such as biometric authentication, encrypted local storage, certificate validation, and short-lived sessions should be selected for the target platform and reviewed against the application threat model.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">FaceID & TouchID</span>
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Hardware Sensors & Camera Integration -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">📷</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Hardware & Sensor Hooks</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. Store Submission & Maintenance -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">🚀</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">App Store Launch & Governance</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -139,21 +139,21 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="grid grid-cols-3" style="gap: 2rem;">
-            <div class="card" style="padding: 2.25rem;">
+            <div class="card card-tilt reveal-on-scroll" style="padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Optimistic UI Updates</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
                     Interfaces update instantly upon user interaction before network roundtrips complete. If a network packet fails, background workers reconcile state smoothly without freezing the UI.
                 </p>
             </div>
 
-            <div class="card" style="padding: 2.25rem;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Battery-Conscious Sync</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
                     Geolocation tracking and data polling adapt intelligently to device battery state, Wi-Fi connectivity, and user motion to prevent rapid phone battery drain in the field.
                 </p>
             </div>
 
-            <div class="card" style="padding: 2.25rem;">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Compressed Payload APIs</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
                     Mobile APIs return lightweight, gzip-compressed JSON payloads tailored specifically for mobile viewports, saving cellular data and ensuring fast loading on 3G/4G connections.

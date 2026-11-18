@@ -5,8 +5,8 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/security.php';
 
 $pageMeta = [
-    'title' => 'Transparent Engineering & Booking System Pricing | CodeX404 Solutions',
-    'description' => 'Clear, milestone-based investment tiers for custom software, turnkey booking & appointment platforms (Dental, Salon, Beauty, Restaurant), and enterprise AI systems.',
+    'title' => 'Project Pricing and Estimates | CodeX404 Solutions',
+    'description' => 'Project estimates depend on requirements, integrations, delivery constraints, and support needs. Discuss scope with CodeX404 Solutions.',
     'canonical' => url('pricing.php'),
     'keywords' => 'custom software pricing, booking system cost, dental appointment system pricing, salon booking software, restaurant reservation system, web development rates'
 ];
@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container" style="max-width: 900px; margin: 0 auto;">
         <div class="hero-pill" style="margin: 0 auto 1.5rem auto;">
             <span class="dot"></span>
-            <span>Transparent Investment • Zero Hidden Hourly Fees</span>
+            <span>Project estimates by scope</span>
         </div>
 
         <h1 class="hero-headline" style="font-size: clamp(2.25rem, 4.2vw, 3.5rem); margin-bottom: 1.25rem;">
@@ -29,7 +29,7 @@ require_once __DIR__ . '/includes/header.php';
         </h1>
 
         <p class="hero-description" style="margin: 0 auto 2.25rem auto; font-size: 1.15rem; color: var(--slate); max-width: 720px; line-height: 1.7;">
-            Milestone-based delivery, 100% intellectual property ownership, and direct senior engineering pedigree. No surprise billable hours, no junior handoffs.
+            Pricing depends on requirements, integrations, delivery constraints, and support needs. We discuss scope and provide a written estimate before work begins.
         </p>
 
         <div class="hero-cta-group" style="justify-content: center; gap: 1rem;">
@@ -44,7 +44,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     CORE GUARANTEES STRIP
+     ENGAGEMENT PRINCIPLES
      ========================================================================== -->
 <section class="section" style="padding-top: 0; padding-bottom: 2rem;">
     <div class="container">
@@ -52,29 +52,29 @@ require_once __DIR__ . '/includes/header.php';
             <div class="guarantee-item">
                 <span class="guarantee-icon">🛡️</span>
                 <div>
-                    <h3 class="guarantee-title">100% Client IP Ownership</h3>
-                    <p class="guarantee-desc">All source code, Docker configs, databases, and schemas belong entirely to you from day one.</p>
+                    <h3 class="guarantee-title">Written scope</h3>
+                    <p class="guarantee-desc">Deliverables, dependencies, and acceptance criteria are documented for each engagement.</p>
                 </div>
             </div>
             <div class="guarantee-item">
                 <span class="guarantee-icon">🎯</span>
                 <div>
-                    <h3 class="guarantee-title">Zero Hidden Hourly Bills</h3>
-                    <p class="guarantee-desc">Milestone-based fixed quotes tied to concrete functional deliverables, not open-ended clock ticking.</p>
+                    <h3 class="guarantee-title">Clear estimate</h3>
+                    <p class="guarantee-desc">Review the expected effort, payment terms, and assumptions before approving work.</p>
                 </div>
             </div>
             <div class="guarantee-item">
                 <span class="guarantee-icon">⚡</span>
                 <div>
-                    <h3 class="guarantee-title">Where Bugs Meet Their Match</h3>
-                    <p class="guarantee-desc">Automated CI/CD pipelines, strict type-checking, and enterprise-grade performance optimization.</p>
+                    <h3 class="guarantee-title">Reviewable delivery</h3>
+                    <p class="guarantee-desc">Agree on a review cadence and how deliverables will be assessed.</p>
                 </div>
             </div>
             <div class="guarantee-item">
                 <span class="guarantee-icon">📱</span>
                 <div>
-                    <h3 class="guarantee-title">Fluid Mobile Responsiveness</h3>
-                    <p class="guarantee-desc">Every view tested across modern phones, tablets, and desktops with zero horizontal scroll.</p>
+                    <h3 class="guarantee-title">Responsive requirements</h3>
+                    <p class="guarantee-desc">Set target devices and acceptance requirements as part of the project scope.</p>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="pricing-grid-modern">
 
             <!-- Tier 1: Diagnostic & Architecture -->
-            <article class="price-card-modern">
+            <article class="price-card-modern card-tilt reveal-on-scroll">
                 <div class="price-card-top">
                     <span class="price-category-tag">🔍 Assessment</span>
                     <h3 class="price-card-title">System Diagnostic</h3>
@@ -110,8 +110,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="price-amount-box">
-                    <span class="price-amount-val">$750</span>
-                    <span class="price-amount-period">/ fixed audit</span>
+                    <span class="price-amount-val price-amount-custom">By project scope</span>
                 </div>
 
                 <ul class="price-feature-list">
@@ -141,7 +140,7 @@ require_once __DIR__ . '/includes/header.php';
             </article>
 
             <!-- Tier 2: Turnkey Booking Systems (FEATURED) -->
-            <article class="price-card-modern featured">
+            <article class="price-card-modern featured card-tilt reveal-on-scroll reveal-delay-1">
                 <span class="price-pill-badge">Most In-Demand</span>
                 <div class="price-card-top">
                     <span class="price-category-tag">📅 Turnkey Booking</span>
@@ -150,7 +149,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="price-amount-box">
-                    <span class="price-amount-val">$2,500 – $6,500</span>
+                    <span class="price-amount-val price-amount-custom">By project scope</span>
                     <span class="price-amount-period">/ 2–4 weeks turnkey</span>
                 </div>
 
@@ -177,7 +176,7 @@ require_once __DIR__ . '/includes/header.php';
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Zero double-booking guarantee via transactional DB locks</span>
+                        <span>Booking and concurrency controls defined for the agreed scope</span>
                     </li>
                 </ul>
 
@@ -189,7 +188,7 @@ require_once __DIR__ . '/includes/header.php';
             </article>
 
             <!-- Tier 3: Conversion Sprint / Custom Portal -->
-            <article class="price-card-modern">
+            <article class="price-card-modern card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="price-card-top">
                     <span class="price-category-tag">⚡ High Velocity</span>
                     <h3 class="price-card-title">Conversion Sprint</h3>
@@ -197,7 +196,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="price-amount-box">
-                    <span class="price-amount-val">$5k – $12k</span>
+                    <span class="price-amount-val price-amount-custom">By project scope</span>
                     <span class="price-amount-period">/ 3–5 weeks</span>
                 </div>
 
@@ -208,7 +207,7 @@ require_once __DIR__ . '/includes/header.php';
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>100% mobile responsive & sub-second load times</span>
+                        <span>Fully responsive mobile layout with optimized asset delivery</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -228,7 +227,7 @@ require_once __DIR__ . '/includes/header.php';
             </article>
 
             <!-- Tier 4: Enterprise Platform / SaaS Build -->
-            <article class="price-card-modern">
+            <article class="price-card-modern card-tilt reveal-on-scroll">
                 <div class="price-card-top">
                     <span class="price-category-tag">🏢 Custom Architecture</span>
                     <h3 class="price-card-title">Full Enterprise SaaS</h3>
@@ -236,7 +235,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="price-amount-box">
-                    <span class="price-amount-val">$15k – $45k</span>
+                    <span class="price-amount-val price-amount-custom">By project scope</span>
                     <span class="price-amount-period">/ 6–12 weeks</span>
                 </div>
 
@@ -288,7 +287,7 @@ require_once __DIR__ . '/includes/header.php';
             </h2>
 
             <p style="font-size: 1.1rem; color: var(--slate); max-width: 650px; margin: 0 auto 2rem auto; line-height: 1.6;">
-                Message senior lead engineer Muhammad Noukhez directly. We will review your workflow, clarify timelines, and provide an honest architectural estimate within 24 hours.
+                Share your requirements and constraints. We’ll review the information and follow up to discuss scope, timelines, and an estimate.
             </p>
 
             <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
@@ -335,7 +334,7 @@ require_once __DIR__ . '/includes/header.php';
                     <span style="color: var(--cyan); font-size: 1.25rem;">+</span>
                 </summary>
                 <p style="color: var(--slate); margin-top: 1rem; line-height: 1.7; font-size: 0.95rem;">
-                    You do — 100%. Upon completion and milestone settlement, you receive complete access to the Git repository, Docker containers, database dumps, and deployment configs. There is zero vendor lock-in.
+                    Ownership, licensing, and access to repositories, deployment materials, and data exports are governed by the written agreement for each project.
                 </p>
             </details>
 

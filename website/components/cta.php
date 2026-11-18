@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 $ctaHeading = $ctaHeading ?? 'Have a business problem software can solve?';
-$ctaSubtitle = $ctaSubtitle ?? 'Let’s turn operational friction, manual workflows, or unvalidated SaaS ideas into resilient, production-ready software.';
+$ctaSubtitle = $ctaSubtitle ?? 'Let’s discuss your operational challenges, software requirements, or product ideas and identify a practical next step.';
 $ctaPrimaryText = $ctaPrimaryText ?? 'Book a Discovery Call';
 $ctaPrimaryUrl = $ctaPrimaryUrl ?? url('discovery-call.php');
 $ctaSecondaryText = $ctaSecondaryText ?? 'Get a Technology Audit';
@@ -29,7 +29,7 @@ $ctaSecondaryUrl = $ctaSecondaryUrl ?? url('contact.php');
             </div>
 
             <div style="margin-top: 2rem; font-size: 0.85rem; color: var(--slate-dark);">
-                ✓ Direct consultation with Solutions Architect &nbsp;·&nbsp; ✓ Zero pushy sales tactics &nbsp;·&nbsp; ✓ Response within 24 business hours
+                ✓ Discuss the project with our team &nbsp;·&nbsp; ✓ Scope before implementation &nbsp;·&nbsp; ✓ Agree on delivery terms in writing
             </div>
         </div>
     </div>

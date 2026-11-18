@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
     'title' => 'Custom Software Development & Enterprise Web Engineering',
-    'description' => 'Bespoke web applications, internal operational control planes, customer portals, custom CRM/ERP engines, and high-throughput APIs engineered for zero technical debt and full IP ownership.',
+    'description' => 'Plan and build bespoke web applications, internal tools, customer portals, CRM/ERP systems, and APIs around your business requirements.',
     'canonical' => url('software-development.php'),
     'keywords' => 'custom software development, bespoke web applications, enterprise ERP, custom CRM systems, partner portals, PHP enterprise engineering, Python FastAPI'
 ];
@@ -25,20 +25,20 @@ require_once __DIR__ . '/includes/header.php';
                 Custom Software Built Exactly for Your <span class="gradient-text">Operational Workflow</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                Off-the-shelf software forces your business into someone else’s rigid constraints while charging you monthly per-seat penalties. We engineer bespoke web platforms, administrative engines, and customer portals that adapt 100% to how you work.
+                Off-the-shelf software forces your business into someone else’s rigid constraints while charging you monthly per-seat penalties. We engineer bespoke web platforms, administrative engines, and customer portals that adapt directly to how you work.
             </p>
         </div>
 
         <!-- Problem / Solution Callout Cards -->
         <div class="grid grid-cols-2" style="gap: 2rem; margin-bottom: 4rem;">
-            <div class="card" style="border-left: 4px solid #F87171; background: rgba(239, 68, 68, 0.03);">
+            <div class="card card-tilt reveal-on-scroll" style="border-left: 4px solid #F87171; background: rgba(239, 68, 68, 0.03);">
                 <span style="font-size: 0.85rem; font-weight: 700; color: #F87171; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem;">The Operational Bottleneck</span>
                 <h3 style="font-size: 1.25rem; color: var(--white); margin-bottom: 0.75rem;">The Fragile Spreadsheet Trap</h3>
                 <p style="font-size: 0.925rem; line-height: 1.6; color: var(--slate);">
                     Growing companies often rely on multi-tab Google Sheets or Excel files to manage orders, inventory, staff assignments, and billing. As order volume increases, files corrupt, formulas break, permissions fail, and staff spend hours manually reconciling duplicate rows.
                 </p>
             </div>
-            <div class="card" style="border-left: 4px solid var(--cyan); background: rgba(34, 211, 238, 0.03);">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="border-left: 4px solid var(--cyan); background: rgba(34, 211, 238, 0.03);">
                 <span style="font-size: 0.85rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem;">The CodeX404 Solution</span>
                 <h3 style="font-size: 1.25rem; color: var(--white); margin-bottom: 0.75rem;">Centralized Web Control Plane</h3>
                 <p style="font-size: 0.925rem; line-height: 1.6; color: var(--slate);">
@@ -50,11 +50,11 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Capabilities Grid -->
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 1. Enterprise Web Apps -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">💻</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Full-Stack Web Applications</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Responsive, high-throughput cloud applications with clean architectural patterns, strict relational database design, and sub-200ms page response times for demanding operational environments.
+                    Responsive, high-throughput cloud applications with clean architectural patterns, strict relational database design, and lightweight assets tuned for demanding operational environments.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Modern PHP 8.2+</span>
@@ -65,7 +65,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 2. Client & Partner Portals -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">🛡️</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Secure Client & Vendor Portals</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -80,7 +80,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 3. Bespoke CRM Engines -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">📊</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Proprietary CRM Systems</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -95,7 +95,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 4. Operational ERP Platforms -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll">
                 <div class="card-icon">🏢</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">Internal ERP & Operations Engines</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -110,7 +110,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 5. Specialized B2B Commerce Engines -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon">🛍️</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">B2B Wholesale Commerce</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
@@ -125,7 +125,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- 6. High-Throughput Microservices & APIs -->
-            <div class="card">
+            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon">⚡</div>
                 <h2 class="card-title" style="font-size: 1.3rem;">High-Speed APIs & Microservices</h2>
                 <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
