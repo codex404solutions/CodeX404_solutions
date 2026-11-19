@@ -98,7 +98,7 @@ Tasks:
 - [ ] Review terminal panel content for accuracy.
 - [ ] Add capability strip.
 - [ ] Add three division cards.
-- [ ] Add problem/solution section.
+- [x] Add problem/solution section with BUILD, GROW and AUTOMATE routing.
 - [ ] Add verified featured projects.
 - [ ] Add company differentiators.
 - [ ] Add industries.

@@ -25,6 +25,7 @@ The header uses a labeled primary navigation region, buttons with `aria-expanded
 
 ## Homepage and audit corrections
 
+- Added a problem-first homepage section after the division cards, with separate BUILD, GROW, and AUTOMATE paths linking to their overview routes.
 - Removed or qualified unverified experience, response-time, delivery, IP ownership, security, pricing, outcome, process, launch, and support claims on the homepage and reviewed public pages.
 - Kept the RAG, WhatsApp, and terminal examples labeled as simulations; removed sample latency and uptime claims.
 - Kept the estimator explicitly illustrative, with a disclaimer and no guaranteed outcomes.

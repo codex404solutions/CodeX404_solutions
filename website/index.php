@@ -18,8 +18,9 @@ require_once __DIR__ . '/includes/header.php';
      HERO SECTION (High-Impact Motions, Typewriter & Interactive Terminal)
      ========================================================================== -->
 <section class="hero-section">
-    <div class="container hero-grid">
-        <div class="hero-content">
+    <div class="container hero-container-flex">
+        <div class="hero-grid">
+            <div class="hero-content">
             <div class="hero-pill">
                 <span class="dot"></span>
                 <span>Where Bugs Meet Their Match • Senior Engineering Studio</span>
@@ -30,16 +31,40 @@ require_once __DIR__ . '/includes/header.php';
                     class="text-gradient gradient-text-animated">forward.</span>
             </h1>
 
-            <!-- Dynamic Rotating Typewriter Headline -->
-            <div class="hero-typewriter-box" aria-live="polite">
-                <span class="type-prefix">Specialized in:</span>
-                <span class="typewriter-text" id="typewriter">BUILD · GROW · AUTOMATE</span>
-                <span class="typewriter-cursor"></span>
+            <!-- Brand Divisions Emblem (BUILD · GROW · AUTOMATE) -->
+            <div class="bga-hero-pill-wrap">
+                <div class="bga-hero-pill" role="region" aria-label="Core Agency Divisions">
+                    <div class="bga-hero-pill-inner">
+                        <a href="#division-build" class="bga-pill-segment bga-build" title="Explore BUILD Division">
+                            <svg class="bga-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                                <line x1="14" y1="4" x2="10" y2="20"></line>
+                            </svg>
+                            <span class="bga-label">BUILD</span>
+                        </a>
+                        <span class="bga-divider" aria-hidden="true"></span>
+                        <a href="#division-grow" class="bga-pill-segment bga-grow" title="Explore GROW Division">
+                            <svg class="bga-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <rect x="3" y="14" width="4" height="8" rx="1"></rect>
+                                <rect x="10" y="8" width="4" height="14" rx="1"></rect>
+                                <rect x="17" y="3" width="4" height="19" rx="1"></rect>
+                            </svg>
+                            <span class="bga-label">GROW</span>
+                        </a>
+                        <span class="bga-divider" aria-hidden="true"></span>
+                        <a href="#division-automate" class="bga-pill-segment bga-automate" title="Explore AUTOMATE Division">
+                            <svg class="bga-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                            </svg>
+                            <span class="bga-label">AUTOMATE</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <p class="hero-description">
-                We architect, build, and automate high-performance software systems — disciplined engineering standards,
-                cloud-native architectures, autonomous AI pipelines, and clear IP assignment upon milestone delivery.
+                Build digital products, grow your online visibility, and automate repetitive work. We help you define the challenge and choose a practical next step.
             </p>
 
             <div class="hero-cta-group">
@@ -54,22 +79,6 @@ require_once __DIR__ . '/includes/header.php';
                 <a href="#contact-section" class="btn btn-secondary btn-lg">
                     <span>Start Your Project 🚀</span>
                 </a>
-            </div>
-
-            <!-- Value / Capability Stats Strip (Progressive Enhancement) -->
-            <div class="hero-stats-strip">
-                <div class="stat-item">
-                    <strong data-counter-target="7" data-counter-suffix="+ Yrs">7+ Yrs</strong>
-                    <span>Enterprise Leadership</span>
-                </div>
-                <div class="stat-item">
-                    <strong data-counter-target="3" data-counter-suffix=" Divisions">3 Divisions</strong>
-                    <span>BUILD · GROW · AUTOMATE</span>
-                </div>
-                <div class="stat-item">
-                    <strong>Transparent IP</strong>
-                    <span>Milestone-Based Assignment</span>
-                </div>
             </div>
         </div>
 
@@ -178,6 +187,22 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
         </div>
+
+        <!-- Full-Width Grounding Stats Strip -->
+        <div class="hero-stats-strip">
+            <div class="stat-item">
+                <strong>Clear project scope</strong>
+                <span>Agree on needs before work begins</span>
+            </div>
+            <div class="stat-item">
+                <strong>Reviewable milestones</strong>
+                <span>Know what is planned for each stage</span>
+            </div>
+            <div class="stat-item">
+                <strong>Documented handoff</strong>
+                <span>Handoff details defined for your project</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -258,7 +283,6 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="divisions-grid">
             <!-- Division 1: BUILD -->
-            <article class="division-card build card-tilt reveal-on-scroll">
                 <article class="division-card build card-tilt reveal-on-scroll" id="division-build">
                     <div>
                         <div class="division-badge-pill badge-build">
@@ -303,7 +327,6 @@ require_once __DIR__ . '/includes/header.php';
                 </article>
 
                 <!-- Division 2: GROW -->
-                <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1">
                     <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1" id="division-grow">
                         <div>
                             <div class="division-badge-pill badge-grow">
@@ -347,7 +370,6 @@ require_once __DIR__ . '/includes/header.php';
                     </article>
 
                     <!-- Division 3: AUTOMATE -->
-                    <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2">
                         <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2"
                             id="division-automate">
                             <div>
@@ -392,6 +414,36 @@ require_once __DIR__ . '/includes/header.php';
                                 </svg>
                             </a>
                         </article>
+        </div>
+    </div>
+</section>
+
+<section class="section problem-paths-section" aria-labelledby="problem-paths-title">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag"><span class="dot"></span><span>Find Your Next Step</span></div>
+            <h2 class="section-title" id="problem-paths-title">What are you trying to <span class="text-gradient gradient-text-animated">solve?</span></h2>
+            <p class="section-subtitle">Start with the challenge. We’ll help you find the right place to begin.</p>
+        </div>
+        <div class="grid grid-cols-3 problem-paths-grid">
+            <article class="problem-path-card build">
+                <span class="problem-path-label">BUILD</span>
+                <h3>I need to build or improve a digital product</h3>
+                <p>Plan a website, web platform, SaaS product, or mobile experience around your users and business needs.</p>
+                <a href="<?= url('build.php') ?>" class="problem-path-link">Explore BUILD <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="problem-path-card grow">
+                <span class="problem-path-label">GROW</span>
+                <h3>I need to improve discoverability or conversions</h3>
+                <p>Strengthen search visibility, digital marketing, content, and the path from visitor to enquiry.</p>
+                <a href="<?= url('grow.php') ?>" class="problem-path-link">Explore GROW <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="problem-path-card automate">
+                <span class="problem-path-label">AUTOMATE</span>
+                <h3>I want to reduce repetitive manual work</h3>
+                <p>Connect your tools and map practical workflow or AI-assisted automation for everyday tasks.</p>
+                <a href="<?= url('automate.php') ?>" class="problem-path-link">Explore AUTOMATE <span aria-hidden="true">→</span></a>
+            </article>
         </div>
     </div>
 </section>

@@ -15,12 +15,23 @@
     text-align: center;
   }
 
+  .hero-section {
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-container-flex {
+    min-height: auto;
+    gap: 2rem;
+  }
+
   .hero-cta-group {
     justify-content: center;
   }
 
   .hero-stats-strip {
-    justify-content: center;
+    padding: 1rem 1.5rem;
   }
 
   .footer-grid {
@@ -443,9 +454,13 @@
   }
 
   .hero-stats-strip {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 1.25rem;
-    align-items: center;
+    padding: 1.25rem 1rem;
+  }
+
+  .stat-item:not(:last-child)::after {
+    display: none;
   }
 
   .form-card {
