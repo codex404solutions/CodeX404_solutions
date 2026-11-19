@@ -8,9 +8,10 @@ $isHomeActive = ($currentScript === 'index.php');
 $isBuildActive = in_array($currentScript, ['build.php', 'software-development.php', 'saas.php', 'mobile-apps.php']);
 $isGrowActive = in_array($currentScript, ['grow.php', 'solutions.php']);
 $isAutomateActive = in_array($currentScript, ['automate.php', 'ai-solutions.php', 'ai-agents.php', 'automation.php']);
-$isIndustriesActive = ($currentScript === 'industries.php');
-$isWorkActive = in_array($currentScript, ['case-studies.php', 'portfolio.php', 'project.php']);
-$isCompanyActive = in_array($currentScript, ['about.php', 'process.php', 'engagement-models.php', 'security.php', 'faq.php']);
+$isServicesActive = ($isBuildActive || $isGrowActive || $isAutomateActive || $currentScript === 'solutions.php');
+$isWorkActive = in_array($currentScript, ['our-work.php', 'case-studies.php', 'portfolio.php', 'project.php']);
+$isAboutActive = in_array($currentScript, ['about.php', 'process.php', 'engagement-models.php', 'security.php', 'faq.php']);
+$isCompanyActive = $isAboutActive;
 $isContactActive = ($currentScript === 'contact.php');
 ?>
 <header class="site-header">
@@ -28,243 +29,115 @@ $isContactActive = ($currentScript === 'contact.php');
                     <a href="<?= url('index.php') ?>" class="nav-link <?= $isHomeActive ? 'active' : '' ?>">Home</a>
                 </li>
 
-                <!-- 2. BUILD Division -->
-                <li class="nav-item nav-item-dropdown">
+                <!-- 2. Services Dropdown (BUILD · GROW · AUTOMATE 3-Column Mega Menu) -->
+                <li class="nav-item nav-item-dropdown nav-item-mega">
                     <div class="nav-link-group">
-                        <a href="<?= url('build.php') ?>" class="nav-link <?= $isBuildActive ? 'active' : '' ?>">BUILD</a>
-                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle BUILD division menu" aria-expanded="false" aria-controls="buildMenu">
+                        <a href="<?= url('build.php') ?>" class="nav-link <?= $isServicesActive ? 'active' : '' ?>">Services</a>
+                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Services menu" aria-expanded="false" aria-controls="servicesMenu">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <path d="M6 9l6 6 6-6" />
                             </svg>
                         </button>
                     </div>
-                    <ul class="nav-dropdown" id="buildMenu" style="min-width: 285px;">
-                        <li style="padding: 0.4rem 0.85rem 0.2rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #60A5FA; display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
-                            <span>BUILD — Engineering & Apps</span>
-                        </li>
-                        <li>
-                            <a href="<?= url('build.php') ?>" class="dropdown-link">
-                                <strong>BUILD Division Overview</strong>
-                                <span>Digital products, SaaS & software engineering</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('software-development.php') ?>" class="dropdown-link">
-                                <strong>Custom Software & Web</strong>
-                                <span>Business platforms, web apps & portals</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('saas.php') ?>" class="dropdown-link">
-                                <strong>SaaS MVP Engineering</strong>
-                                <span>Multi-tenant platforms & subscription billing</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('mobile-apps.php') ?>" class="dropdown-link">
-                                <strong>Mobile Applications</strong>
-                                <span>iOS, Android & Progressive Web Apps</span>
-                            </a>
-                        </li>
-                        <li style="border-top: 1px solid rgba(255, 255, 255, 0.06); margin-top: 0.35rem; padding-top: 0.35rem;">
-                            <a href="<?= url('index.php#division-build') ?>" class="dropdown-link" style="color: #60A5FA;">
-                                <strong>Homepage Section Jump &rarr;</strong>
-                                <span>Featured BUILD specifications & tech stack</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="nav-dropdown nav-dropdown-mega" id="servicesMenu" role="region" aria-label="Services Mega Menu">
+                        <div class="mega-grid">
+                            <!-- Column 1: BUILD -->
+                            <div class="mega-col col-build">
+                                <a href="<?= url('build.php') ?>" class="mega-col-header text-build">
+                                    <div class="mega-col-header-left">
+                                        <span class="mega-dot dot-build"></span>
+                                        <strong class="mega-col-title">BUILD</strong>
+                                    </div>
+                                    <span class="mega-header-sub">/build &rarr;</span>
+                                </a>
+                                <ul class="mega-links-list">
+                                    <li><a href="<?= url('build.php') ?>#custom-web-apps" class="mega-link">Custom Web Application Development</a></li>
+                                    <li><a href="<?= url('build.php') ?>#school-erp" class="mega-link">School ERP &amp; Institutional Portals</a></li>
+                                    <li><a href="<?= url('build.php') ?>#custom-crm" class="mega-link">Custom CRM Development</a></li>
+                                    <li><a href="<?= url('build.php') ?>#ecommerce" class="mega-link">E-Commerce &amp; Checkout Platforms</a></li>
+                                    <li><a href="<?= url('build.php') ?>#saas-mvp" class="mega-link">SaaS MVP &amp; Multi-Tenant Setup</a></li>
+                                    <li><a href="<?= url('build.php') ?>#mobile-apps" class="mega-link">Cross-Platform Mobile &amp; PWA</a></li>
+                                    <li><a href="<?= url('build.php') ?>#api-development" class="mega-link">API Development &amp; Integrations</a></li>
+                                    <li><a href="<?= url('build.php') ?>#website-redesign" class="mega-link">Website Redesign &amp; Modernization</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Column 2: GROW -->
+                            <div class="mega-col col-grow">
+                                <a href="<?= url('grow.php') ?>" class="mega-col-header text-grow">
+                                    <div class="mega-col-header-left">
+                                        <span class="mega-dot dot-grow"></span>
+                                        <strong class="mega-col-title">GROW</strong>
+                                    </div>
+                                    <span class="mega-header-sub">/grow &rarr;</span>
+                                </a>
+                                <ul class="mega-links-list">
+                                    <li><a href="<?= url('grow.php') ?>#seo" class="mega-link">Search Engine Optimization (SEO)</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#aeo-geo" class="mega-link">Answer Engine &amp; AI Search (AEO/GEO)</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#ppc-ads" class="mega-link">PPC Advertising &amp; Google Ads</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#social-media" class="mega-link">Social Media Management &amp; Marketing</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#conversion-rate" class="mega-link">Conversion Rate Optimization (CRO)</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#content-writing" class="mega-link">Content Writing &amp; Copywriting</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#maintenance" class="mega-link">Website Maintenance &amp; Support</a></li>
+                                    <li><a href="<?= url('grow.php') ?>#growth-audits" class="mega-link">SEO &amp; Digital Growth Audits</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Column 3: AUTOMATE -->
+                            <div class="mega-col col-automate">
+                                <a href="<?= url('automate.php') ?>" class="mega-col-header text-automate">
+                                    <div class="mega-col-header-left">
+                                        <span class="mega-dot dot-automate"></span>
+                                        <strong class="mega-col-title">AUTOMATE</strong>
+                                    </div>
+                                    <span class="mega-header-sub">/automate &rarr;</span>
+                                </a>
+                                <ul class="mega-links-list">
+                                    <li><a href="<?= url('automate.php') ?>#ai-agents" class="mega-link">24/7 AI Customer Support Agents</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#whatsapp-crm" class="mega-link">WhatsApp Cloud API &amp; CRM Pipelines</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#enterprise-rag" class="mega-link">Enterprise RAG &amp; Knowledge Bases</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#workflow-automation" class="mega-link">Automated Invoicing &amp; Workflows</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#event-webhooks" class="mega-link">Event-Driven Webhooks &amp; Sync</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#document-extraction" class="mega-link">Document Data Extraction &amp; OCR</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#multi-agent" class="mega-link">Multi-Agent Autonomous Systems</a></li>
+                                    <li><a href="<?= url('automate.php') ?>#lead-capture" class="mega-link">Real-Time Lead Capture &amp; Routing</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Mega Menu Footer Bar -->
+                        <div class="mega-footer-bar">
+                            <div class="mega-footer-text">
+                                <span>⚡ Need a custom architecture tailored to your business?</span>
+                            </div>
+                            <div class="mega-footer-links">
+                                <a href="<?= url('discovery-call.php') ?>" class="mega-footer-cta">
+                                    <span>Book a Discovery Call &rarr;</span>
+                                </a>
+                                <a href="<?= url('index.php#divisions') ?>" class="mega-footer-sublink">
+                                    <span>Compare All Offerings &rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
-                <!-- 3. GROW Division -->
-                <li class="nav-item nav-item-dropdown">
-                    <div class="nav-link-group">
-                        <a href="<?= url('grow.php') ?>" class="nav-link <?= $isGrowActive ? 'active' : '' ?>">GROW</a>
-                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle GROW division menu" aria-expanded="false" aria-controls="growMenu">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </button>
-                    </div>
-                    <ul class="nav-dropdown" id="growMenu" style="min-width: 285px;">
-                        <li style="padding: 0.4rem 0.85rem 0.2rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #C084FC; display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
-                            <span>GROW — Visibility & Growth</span>
-                        </li>
-                        <li>
-                            <a href="<?= url('grow.php') ?>" class="dropdown-link">
-                                <strong>GROW Division Overview</strong>
-                                <span>Digital marketing, search & conversion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('solutions.php') ?>" class="dropdown-link">
-                                <strong>Search Visibility & SEO/AEO</strong>
-                                <span>Structured discovery & content positioning</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('contact.php?division=grow') ?>" class="dropdown-link">
-                                <strong>Digital Marketing & Campaigns</strong>
-                                <span>Audience-focused growth & acquisition</span>
-                            </a>
-                        </li>
-                        <li style="border-top: 1px solid rgba(255, 255, 255, 0.06); margin-top: 0.35rem; padding-top: 0.35rem;">
-                            <a href="<?= url('index.php#division-grow') ?>" class="dropdown-link" style="color: #C084FC;">
-                                <strong>Homepage Section Jump &rarr;</strong>
-                                <span>Featured GROW capabilities & proof</span>
-                            </a>
-                        </li>
-                    </ul>
+                <!-- 3. Our Work -->
+                <li class="nav-item">
+                    <a href="<?= url('our-work.php') ?>" class="nav-link <?= $isWorkActive ? 'active' : '' ?>">Our Work</a>
                 </li>
 
-                <!-- 4. AUTOMATE Division -->
+                <!-- 4. About Dropdown (About, Process, Engagement Models, Security, FAQ) -->
                 <li class="nav-item nav-item-dropdown">
                     <div class="nav-link-group">
-                        <a href="<?= url('automate.php') ?>" class="nav-link <?= $isAutomateActive ? 'active' : '' ?>">AUTOMATE</a>
-                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle AUTOMATE division menu" aria-expanded="false" aria-controls="automateMenu">
+                        <a href="<?= url('about.php') ?>" class="nav-link <?= $isAboutActive ? 'active' : '' ?>">About</a>
+                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle About menu" aria-expanded="false" aria-controls="aboutMenu">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <path d="M6 9l6 6 6-6" />
                             </svg>
                         </button>
                     </div>
-                    <ul class="nav-dropdown" id="automateMenu" style="min-width: 295px;">
-                        <li style="padding: 0.4rem 0.85rem 0.2rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #34D399; display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
-                            <span>AUTOMATE — AI & Workflows</span>
-                        </li>
-                        <li>
-                            <a href="<?= url('automate.php') ?>" class="dropdown-link">
-                                <strong>AUTOMATE Division Overview</strong>
-                                <span>Integrations, workflows & practical AI</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('ai-solutions.php') ?>" class="dropdown-link">
-                                <strong>Enterprise AI & Knowledge RAG</strong>
-                                <span>Private documentation retrieval & search</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('ai-agents.php') ?>" class="dropdown-link">
-                                <strong>Autonomous AI Agents</strong>
-                                <span>Multi-tool agentic resolution workflows</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('automation.php') ?>" class="dropdown-link">
-                                <strong>Workflow & API Pipelines</strong>
-                                <span>WhatsApp Cloud, CRM sync & API automations</span>
-                            </a>
-                        </li>
-                        <li style="border-top: 1px solid rgba(255, 255, 255, 0.06); margin-top: 0.35rem; padding-top: 0.35rem;">
-                            <a href="<?= url('index.php#division-automate') ?>" class="dropdown-link" style="color: #34D399;">
-                                <strong>Homepage Section Jump &rarr;</strong>
-                                <span>Featured AUTOMATE pipelines & simulations</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- 5. Industries Dropdown -->
-                <li class="nav-item nav-item-dropdown">
-                    <div class="nav-link-group">
-                        <a href="<?= url('industries.php') ?>" class="nav-link <?= $isIndustriesActive ? 'active' : '' ?>">Industries</a>
-                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Industries menu" aria-expanded="false" aria-controls="industriesMenu">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </button>
-                    </div>
-                    <ul class="nav-dropdown" id="industriesMenu" style="min-width: 275px;">
-                        <li>
-                            <a href="<?= url('industries.php') ?>" class="dropdown-link">
-                                <strong>All Industries Overview</strong>
-                                <span>Vertical engineering capabilities</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('industries.php#industry-education') ?>" class="dropdown-link">
-                                <strong>Education & EdTech</strong>
-                                <span>School ERPs, student portals & fees</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('industries.php#industry-healthcare') ?>" class="dropdown-link">
-                                <strong>Healthcare & Clinics</strong>
-                                <span>Patient portals & booking systems</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('industries.php#industry-commerce') ?>" class="dropdown-link">
-                                <strong>B2B Commerce & Retail</strong>
-                                <span>Inventory sync & wholesale portals</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('industries.php#industry-realestate') ?>" class="dropdown-link">
-                                <strong>Real Estate & Property</strong>
-                                <span>Tenant portals & lead routing</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('industries.php#industry-logistics') ?>" class="dropdown-link">
-                                <strong>Logistics & Dispatch</strong>
-                                <span>Field dispatch & tracking workflows</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('industries.php#industry-legal') ?>" class="dropdown-link">
-                                <strong>Professional & Legal Services</strong>
-                                <span>Confidential document RAG & portals</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- 6. Our Work Dropdown -->
-                <li class="nav-item nav-item-dropdown">
-                    <div class="nav-link-group">
-                        <a href="<?= url('case-studies.php') ?>" class="nav-link <?= $isWorkActive ? 'active' : '' ?>">Our Work</a>
-                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Our Work menu" aria-expanded="false" aria-controls="workMenu">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </button>
-                    </div>
-                    <ul class="nav-dropdown" id="workMenu" style="min-width: 260px;">
-                        <li>
-                            <a href="<?= url('case-studies.php') ?>" class="dropdown-link">
-                                <strong>Case Studies</strong>
-                                <span>In-depth business problems solved</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('portfolio.php') ?>" class="dropdown-link">
-                                <strong>Portfolio</strong>
-                                <span>Selected engineering deliverables & systems</span>
-                            </a>
-                        </li>
-                        <li style="border-top: 1px solid rgba(255, 255, 255, 0.06); margin-top: 0.35rem; padding-top: 0.35rem;">
-                            <a href="<?= url('index.php#projects') ?>" class="dropdown-link" style="color: var(--cyan);">
-                                <strong>Featured Project Demos &rarr;</strong>
-                                <span>Interactive sandbox modules & mockups</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- 7. Company Dropdown (About, Process, Engagement Models, Security, FAQ) -->
-                <li class="nav-item nav-item-dropdown">
-                    <div class="nav-link-group">
-                        <a href="<?= url('about.php') ?>" class="nav-link <?= $isCompanyActive ? 'active' : '' ?>">Company</a>
-                        <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Company menu" aria-expanded="false" aria-controls="companyMenu">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </button>
-                    </div>
-                    <ul class="nav-dropdown" id="companyMenu" style="min-width: 275px;">
+                    <ul class="nav-dropdown" id="aboutMenu" style="min-width: 275px;">
                         <li>
                             <a href="<?= url('about.php') ?>" class="dropdown-link">
                                 <strong>About CodeX404</strong>
@@ -298,7 +171,7 @@ $isContactActive = ($currentScript === 'contact.php');
                     </ul>
                 </li>
 
-                <!-- 8. Contact -->
+                <!-- 5. Contact -->
                 <li class="nav-item">
                     <a href="<?= url('contact.php') ?>" class="nav-link <?= $isContactActive ? 'active' : '' ?>">Contact</a>
                 </li>

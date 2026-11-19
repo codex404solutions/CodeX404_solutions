@@ -21,186 +21,260 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container hero-container-flex">
         <div class="hero-grid">
             <div class="hero-content">
-            <div class="hero-pill">
-                <span class="dot"></span>
-                <span>Where Bugs Meet Their Match • Senior Engineering Studio</span>
-            </div>
-
-            <h1 class="hero-headline">
-                Software & AI that moves your business <span
-                    class="text-gradient gradient-text-animated">forward.</span>
-            </h1>
-
-            <!-- Brand Divisions Emblem (BUILD · GROW · AUTOMATE) -->
-            <div class="bga-hero-pill-wrap">
-                <div class="bga-hero-pill" role="region" aria-label="Core Agency Divisions">
-                    <div class="bga-hero-pill-inner">
-                        <a href="#division-build" class="bga-pill-segment bga-build" title="Explore BUILD Division">
-                            <svg class="bga-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="16 18 22 12 16 6"></polyline>
-                                <polyline points="8 6 2 12 8 18"></polyline>
-                                <line x1="14" y1="4" x2="10" y2="20"></line>
-                            </svg>
-                            <span class="bga-label">BUILD</span>
-                        </a>
-                        <span class="bga-divider" aria-hidden="true"></span>
-                        <a href="#division-grow" class="bga-pill-segment bga-grow" title="Explore GROW Division">
-                            <svg class="bga-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <rect x="3" y="14" width="4" height="8" rx="1"></rect>
-                                <rect x="10" y="8" width="4" height="14" rx="1"></rect>
-                                <rect x="17" y="3" width="4" height="19" rx="1"></rect>
-                            </svg>
-                            <span class="bga-label">GROW</span>
-                        </a>
-                        <span class="bga-divider" aria-hidden="true"></span>
-                        <a href="#division-automate" class="bga-pill-segment bga-automate" title="Explore AUTOMATE Division">
-                            <svg class="bga-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-                            </svg>
-                            <span class="bga-label">AUTOMATE</span>
-                        </a>
-                    </div>
+                <div class="hero-pill" role="status" aria-label="Where Bugs Meet Their Match">
+                    <span class="hero-pill-radar" aria-hidden="true">
+                        <span class="hero-pill-ping"></span>
+                        <span class="hero-pill-core"></span>
+                    </span>
+                    <span class="hero-pill-text">Where Bugs Meet Their Match</span>
+                    <span class="hero-pill-target" aria-hidden="true" title="Precision Engineering">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="22" y1="12" x2="18" y2="12"></line>
+                            <line x1="6" y1="12" x2="2" y2="12"></line>
+                            <line x1="12" y1="6" x2="12" y2="2"></line>
+                            <line x1="12" y1="22" x2="12" y2="18"></line>
+                        </svg>
+                    </span>
                 </div>
-            </div>
 
-            <p class="hero-description">
-                Build digital products, grow your online visibility, and automate repetitive work. We help you define the challenge and choose a practical next step.
-            </p>
+                <h1 class="hero-headline">
+                    We Build, Grow & Automate Systems That <span class="text-gradient gradient-text-animated">Scale Your Business</span>
+                </h1>
 
-            <div class="hero-cta-group">
-                <a href="#work" class="btn btn-primary btn-lg">
-                    <span>Explore Deliverables & Demos</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <polyline points="19 12 12 19 5 12"></polyline>
-                    </svg>
-                </a>
-                <a href="#contact-section" class="btn btn-secondary btn-lg">
-                    <span>Start Your Project 🚀</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Interactive Multi-Tab Hero Terminal (Architectural Simulation) -->
-        <div class="hero-visual">
-            <div class="tech-frame">
-                <div class="tech-frame-header">
-                    <div class="window-dots">
-                        <span class="dot-red"></span>
-                        <span class="dot-yellow"></span>
-                        <span class="dot-green"></span>
-                    </div>
-
-                    <!-- Interactive Terminal Tabs -->
-                    <div class="terminal-tabs" role="tablist" aria-label="Terminal Environments">
-                        <button class="terminal-tab-btn active" role="tab" aria-selected="true" data-tab="deploy">
-                            🚀 deploy
-                        </button>
-                        <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="audit">
-                            🧪 quality-check
-                        </button>
-                        <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="agent">
-                            🤖 ai-agent
-                        </button>
-                    </div>
-
-                    <div style="font-size: 0.725rem; color: #FBBF24; font-family: var(--font-mono); font-weight: 600;">
-                        ● ARCHITECTURE SIMULATION
+                <!-- Brand Divisions Emblem (BUILD · GROW · AUTOMATE) -->
+                <div class="bga-hero-pill-wrap">
+                    <div class="bga-hero-pill" role="region" aria-label="Core Agency Divisions">
+                        <div class="bga-hero-pill-inner">
+                            <a href="#division-build" class="bga-pill-segment bga-build" title="Explore BUILD Division">
+                                <svg class="bga-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                    <line x1="14" y1="4" x2="10" y2="20"></line>
+                                </svg>
+                                <span class="bga-label">BUILD</span>
+                            </a>
+                            <span class="bga-divider" aria-hidden="true"></span>
+                            <a href="#division-grow" class="bga-pill-segment bga-grow" title="Explore GROW Division">
+                                <svg class="bga-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <rect x="3" y="14" width="4" height="8" rx="1"></rect>
+                                    <rect x="10" y="8" width="4" height="14" rx="1"></rect>
+                                    <rect x="17" y="3" width="4" height="19" rx="1"></rect>
+                                </svg>
+                                <span class="bga-label">GROW</span>
+                            </a>
+                            <span class="bga-divider" aria-hidden="true"></span>
+                            <a href="#division-automate" class="bga-pill-segment bga-automate"
+                                title="Explore AUTOMATE Division">
+                                <svg class="bga-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path
+                                        d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                                </svg>
+                                <span class="bga-label">AUTOMATE</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="tech-frame-body">
-                    <!-- Pane 1: Deploy -->
-                    <div class="terminal-pane active" id="pane-deploy">
-                        <div class="code-comment">// Continuous Integration Pipeline Simulation</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> build --env
-                            staging --verify</div>
-                        <div style="color: var(--slate); margin-top: 0.35rem;">
-                            &rarr; Running automated regression test suite...<br>
-                            &rarr; Compiling containerized production package...<br>
-                            &rarr; Verifying TLS configuration & rate-limiting policies...
+                <p class="hero-description">
+                    From custom web applications and CRM/ERP systems to high-ROI digital marketing and AI workflow
+                    automations — CodeX404 engineers solutions that drive measurable revenue and eliminate operational
+                    friction.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#what-we-offer" class="btn btn-primary btn-lg">
+                        <span>Explore Services & Solutions</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#contact-section" class="btn btn-secondary btn-lg">
+                        <span>Book a Discovery Call 🚀</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interactive Multi-Tab Hero Terminal (Business & Tech Showcase) -->
+            <div class="hero-visual">
+                <div class="tech-frame">
+                    <div class="tech-frame-header">
+                        <div class="window-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
                         </div>
-                        <div style="color: #34D399; margin-top: 0.5rem; font-weight: 500;">
-                            ✔ Static analysis checks satisfied<br>
-                            ✔ Automated test assertions completed<br>
-                            ✔ Staging deployment package verified
+
+                        <!-- Interactive Terminal Tabs matching BUILD · GROW · AUTOMATE -->
+                        <div class="terminal-tabs" role="tablist" aria-label="Solutions Showcase">
+                            <button class="terminal-tab-btn active" role="tab" aria-selected="true" data-tab="build">
+                                🛠️ BUILD
+                            </button>
+                            <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="grow">
+                                📈 GROW
+                            </button>
+                            <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="automate">
+                                ⚡ AUTOMATE
+                            </button>
                         </div>
-                        <div class="pipeline-badge">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Continuous Integration Workflow
+
+                        <div class="terminal-live-badge" title="Live Solutions Showcase">
+                            <span class="live-dot-wrap">
+                                <span class="live-dot-ping"></span>
+                                <span class="live-dot-core"></span>
+                            </span>
+                            <span>LIVE PREVIEW</span>
                         </div>
                     </div>
 
-                    <!-- Pane 2: Audit & Quality -->
-                    <div class="terminal-pane" id="pane-audit">
-                        <div class="code-comment">// Defensive Architecture & Type-Safety Scan</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> test
-                            --type-safety
-                            --audit</div>
-                        <div style="color: var(--slate); margin-top: 0.35rem;">
-                            &rarr; Type-checking codebase with strict compilation standards...<br>
-                            &rarr; Auditing route authorization and CSRF protections...<br>
-                            &rarr; Scanning dependencies for security advisories...
-                        </div>
-                        <div style="color: #38BDF8; margin-top: 0.5rem; font-weight: 600;">
-                            🎯 Where Bugs Meet Their Match — Defensive Code Architecture<br>
-                            ✔ Automated parameter validation and error logging enforced
-                        </div>
-                        <div class="pipeline-badge"
-                            style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; border-color: rgba(56, 189, 248, 0.25);">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 14 14"></polyline>
-                            </svg>
-                            Automated Quality Assurance
-                        </div>
-                    </div>
+                    <div class="tech-frame-body">
+                        <!-- Pane 1: BUILD -->
+                        <div class="terminal-pane active" id="pane-build">
+                            <div class="showcase-content">
+                                <div class="showcase-header">
+                                    <span class="showcase-pill showcase-pill-build">
+                                        <span class="showcase-dot"></span>
+                                        DIVISION 01 &bull; BUILD
+                                    </span>
+                                    <h3 class="showcase-title">Custom Software &amp; Business Portals</h3>
+                                    <p class="showcase-desc">Bespoke platforms engineered around your exact operations &bull; No recurring SaaS rent.</p>
+                                </div>
 
-                    <!-- Pane 3: AI Agent Workflow -->
-                    <div class="terminal-pane" id="pane-agent">
-                        <div class="code-comment">// Autonomous Enterprise AI & RAG Pipeline Simulation</div>
-                        <div><span class="code-keyword">$</span> <span class="code-accent">codex404</span> agent
-                            --pipeline rag-workflow --simulate</div>
-                        <div style="color: var(--slate); margin-top: 0.35rem;">
-                            &rarr; Initializing grounded vector index simulator...<br>
-                            &rarr; Parsing enterprise document schemas...<br>
-                            &rarr; Evaluating multi-tool agent resolution logic...
+                                <div class="showcase-features">
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-build">💻</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>Custom Portals:</strong> Client dashboards, booking &amp; CRM built for your team.
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-build">🔒</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>Enterprise Reliability:</strong> Sub-second speeds, bank-grade encryption &amp; zero crashes.
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-build">📦</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>100% IP Ownership:</strong> Full source code handed over &bull; Zero vendor lock-in.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="showcase-footer footer-build">
+                                    <div class="showcase-outcome">
+                                        <span class="showcase-check">✓</span>
+                                        <span>Zero SaaS Rent &bull; 100% Code Ownership</span>
+                                    </div>
+                                    <a href="#division-build" class="showcase-link link-build">
+                                        Explore BUILD <span>&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div style="color: #F472B6; margin-top: 0.5rem; font-weight: 500;">
-                            ✔ Simulated query routed with audit logging<br>
-                            ✔ Dispatch event prepared for webhook pipeline
+
+                        <!-- Pane 2: GROW -->
+                        <div class="terminal-pane" id="pane-grow">
+                            <div class="showcase-content">
+                                <div class="showcase-header">
+                                    <span class="showcase-pill showcase-pill-grow">
+                                        <span class="showcase-dot"></span>
+                                        DIVISION 02 &bull; GROW
+                                    </span>
+                                    <h3 class="showcase-title">Search Visibility &amp; Customer Acquisition</h3>
+                                    <p class="showcase-desc">Attract ready-to-buy clients and turn online traffic into confirmed bookings.</p>
+                                </div>
+
+                                <div class="showcase-features">
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-grow">🎯</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>Google &amp; AI Search:</strong> Rank top where ready-to-buy clients actively search.
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-grow">📈</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>High-Converting Funnels:</strong> Fast pages engineered to turn clicks into booked calls.
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-grow">💰</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>High-ROI Ad Campaigns:</strong> Laser-targeted Google &amp; Meta ads with 0 wasted spend.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="showcase-footer footer-grow">
+                                    <div class="showcase-outcome">
+                                        <span class="showcase-check">✓</span>
+                                        <span>+240% Inbound Leads &bull; 3.8x Target ROAS</span>
+                                    </div>
+                                    <a href="#division-grow" class="showcase-link link-grow">
+                                        Explore GROW <span>&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="pipeline-badge"
-                            style="background: rgba(236, 72, 153, 0.12); color: #F472B6; border-color: rgba(236, 72, 153, 0.25);">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
-                            Simulated Agentic Workflow
+
+                        <!-- Pane 3: AUTOMATE -->
+                        <div class="terminal-pane" id="pane-automate">
+                            <div class="showcase-content">
+                                <div class="showcase-header">
+                                    <span class="showcase-pill showcase-pill-automate">
+                                        <span class="showcase-dot"></span>
+                                        DIVISION 03 &bull; AUTOMATE
+                                    </span>
+                                    <h3 class="showcase-title">24/7 Smart AI Agents &amp; Workflows</h3>
+                                    <p class="showcase-desc">Put repetitive chores on autopilot and deploy 24/7 instant client assistants.</p>
+                                </div>
+
+                                <div class="showcase-features">
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-automate">🤖</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>24/7 AI Assistants:</strong> Instant replies, lead qualification &amp; automatic scheduling.
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-automate">⚡</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>Zero-Manual Data Sync:</strong> Invoices, WhatsApp &amp; CRM records update with 0 error.
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-feature-item">
+                                        <span class="showcase-feature-icon icon-automate">⏱️</span>
+                                        <div class="showcase-feature-body">
+                                            <strong>Reclaim 20+ Hours:</strong> Stop wasting staff hours on manual spreadsheets &amp; forms.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="showcase-footer footer-automate">
+                                    <div class="showcase-outcome">
+                                        <span class="showcase-check">✓</span>
+                                        <span>20+ Hours Saved Weekly &bull; 99.9% Accuracy</span>
+                                    </div>
+                                    <a href="#division-automate" class="showcase-link link-automate">
+                                        Explore AUTOMATE <span>&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Full-Width Grounding Stats Strip -->
-        <div class="hero-stats-strip">
-            <div class="stat-item">
-                <strong>Clear project scope</strong>
-                <span>Agree on needs before work begins</span>
-            </div>
-            <div class="stat-item">
-                <strong>Reviewable milestones</strong>
-                <span>Know what is planned for each stage</span>
-            </div>
-            <div class="stat-item">
-                <strong>Documented handoff</strong>
-                <span>Handoff details defined for your project</span>
             </div>
         </div>
     </div>
@@ -262,516 +336,535 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     THE THREE DIVISIONS — BUILD · GROW · AUTOMATE
+     WHAT WE OFFER — BUILD · GROW · AUTOMATE
      ========================================================================== -->
 <section class="section" id="divisions" aria-label="Company Divisions">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>One Unified Engineering & Growth Partner</span>
+                <span>Core Capabilities</span>
             </div>
             <h2 class="section-title">
-                Three Focused Divisions. <span class="text-gradient gradient-text-animated">One High-Standard
-                    Team.</span>
+                WHAT WE <span class="text-gradient gradient-text-animated">OFFER</span>
             </h2>
             <p class="section-subtitle">
-                Whether you need to engineer custom platforms, expand search and audience discovery, or automate manual
-                workflows, CodeX404 provides direct technical leadership.
+                Three focused engineering and growth divisions delivering custom platforms, search visibility, and
+                autonomous AI.
             </p>
         </div>
 
-        <div class="divisions-grid">
+        <div class="services-stack">
             <!-- Division 1: BUILD -->
-                <article class="division-card build card-tilt reveal-on-scroll" id="division-build">
-                    <div>
-                        <div class="division-badge-pill badge-build">
-                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
-                            <span>BUILD — Engineering & Apps</span>
-                        </div>
-                        <h3 class="division-title">
-                            <span>💻</span> Build Software That Scales
-                        </h3>
-                        <p class="division-desc">
-                            Turn core workflows and product visions into reliable web platforms, SaaS architectures,
-                            mobile
-                            applications, and high-load backend APIs.
-                        </p>
-                        <ul class="division-feature-list">
-                            <li class="division-feature-item">
-                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                                <span>Custom Web Applications & Enterprise Dashboards</span>
-                            </li>
-                            <li class="division-feature-item">
-                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                                <span>SaaS MVP Engineering & Multi-Tenant Setup</span>
-                            </li>
-                            <li class="division-feature-item">
-                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                                <span>Cross-Platform Mobile & Progressive Web Apps</span>
-                            </li>
-                            <li class="division-feature-item">
-                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                                <span>Payment Gateways & REST/GraphQL API Integration</span>
-                            </li>
-                        </ul>
+            <article class="service-row-card build card-tilt reveal-on-scroll" id="division-build">
+                <span class="service-row-watermark" aria-hidden="true">01</span>
+                <div class="service-row-left">
+                    <div class="service-row-badge badge-build">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
+                        <span>DIVISION 01 · BUILD — Engineering & Apps</span>
                     </div>
-                    <a href="<?= url('solutions.php#build') ?>" class="division-cta-link text-build">
-                        <span>Explore BUILD Capabilities</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
+                    <h3 class="service-row-title">
+                        <span>💻</span> Build Software That Scales
+                    </h3>
+                    <p class="service-row-desc">
+                        Turn core workflows and product visions into reliable web platforms, SaaS architectures, mobile
+                        applications, and high-load backend APIs. Built cleanly with zero template bloat.
+                    </p>
+                    <div class="service-row-tags">
+                        <span class="service-row-tag">Custom Web Applications</span>
+                        <span class="service-row-tag">SaaS MVP Engineering</span>
+                        <span class="service-row-tag">Cross-Platform Mobile</span>
+                        <span class="service-row-tag">Payment Gateways & APIs</span>
+                    </div>
+                </div>
+                <div class="service-row-right">
+                    <div class="service-row-metric">
+                        <div class="metric-highlight" style="color: #60A5FA;">⚡ 99/100</div>
+                        <div class="metric-caption">Core Vitals Performance</div>
+                    </div>
+                    <a href="<?= url('solutions.php#build') ?>" class="service-row-btn btn-build"
+                        aria-label="Explore BUILD Capabilities">
+                        <span>Explore BUILD</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
                         </svg>
                     </a>
-                </article>
-
-                <!-- Division 2: GROW -->
-                    <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1" id="division-grow">
-                        <div>
-                            <div class="division-badge-pill badge-grow">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
-                                <span>GROW — Visibility & Growth</span>
-                            </div>
-                            <h3 class="division-title">
-                                <span>📈</span> Grow Reach & Discovery
-                            </h3>
-                            <p class="division-desc">
-                                Help audiences discover and trust your platform through search engine optimization,
-                                answer-engine readiness (AEO/GEO), digital marketing, and conversion design.
-                            </p>
-                            <ul class="division-feature-list">
-                                <li class="division-feature-item">
-                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                                    <span>Search Engine Optimization (SEO & Technical Audits)</span>
-                                </li>
-                                <li class="division-feature-item">
-                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                                    <span>Answer Engine & Generative Discovery (AEO & GEO)</span>
-                                </li>
-                                <li class="division-feature-item">
-                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                                    <span>Digital Marketing Campaigns & Paid Traffic Guidance</span>
-                                </li>
-                                <li class="division-feature-item">
-                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                                    <span>Conversion Rate Optimization (CRO) & Funnel Analytics</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="<?= url('solutions.php#grow') ?>" class="division-cta-link text-grow">
-                            <span>Explore GROW Capabilities</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
-                    </article>
-
-                    <!-- Division 3: AUTOMATE -->
-                        <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2"
-                            id="division-automate">
-                            <div>
-                                <div class="division-badge-pill badge-automate">
-                                    <span
-                                        style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
-                                    <span>AUTOMATE — AI & Operations</span>
-                                </div>
-                                <h3 class="division-title">
-                                    <span>⚡</span> Automate Manual Toil
-                                </h3>
-                                <p class="division-desc">
-                                    Connect disjointed systems and streamline operations using autonomous multi-tool AI
-                                    agents,
-                                    private RAG knowledge bases, and real-time messaging pipelines.
-                                </p>
-                                <ul class="division-feature-list">
-                                    <li class="division-feature-item">
-                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                                        <span>Autonomous Multi-Tool Agentic Resolution Loops</span>
-                                    </li>
-                                    <li class="division-feature-item">
-                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                                        <span>Enterprise RAG & Grounded Vector Documentation Search</span>
-                                    </li>
-                                    <li class="division-feature-item">
-                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                                        <span>WhatsApp Cloud API & Real-time CRM Sync Webhooks</span>
-                                    </li>
-                                    <li class="division-feature-item">
-                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                                        <span>Document Extraction & Event-Driven Process Automation</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a href="<?= url('solutions.php#automate') ?>" class="division-cta-link text-automate">
-                                <span>Explore AUTOMATE Capabilities</span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg>
-                            </a>
-                        </article>
-        </div>
-    </div>
-</section>
-
-<section class="section problem-paths-section" aria-labelledby="problem-paths-title">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag"><span class="dot"></span><span>Find Your Next Step</span></div>
-            <h2 class="section-title" id="problem-paths-title">What are you trying to <span class="text-gradient gradient-text-animated">solve?</span></h2>
-            <p class="section-subtitle">Start with the challenge. We’ll help you find the right place to begin.</p>
-        </div>
-        <div class="grid grid-cols-3 problem-paths-grid">
-            <article class="problem-path-card build">
-                <span class="problem-path-label">BUILD</span>
-                <h3>I need to build or improve a digital product</h3>
-                <p>Plan a website, web platform, SaaS product, or mobile experience around your users and business needs.</p>
-                <a href="<?= url('build.php') ?>" class="problem-path-link">Explore BUILD <span aria-hidden="true">→</span></a>
+                </div>
             </article>
-            <article class="problem-path-card grow">
-                <span class="problem-path-label">GROW</span>
-                <h3>I need to improve discoverability or conversions</h3>
-                <p>Strengthen search visibility, digital marketing, content, and the path from visitor to enquiry.</p>
-                <a href="<?= url('grow.php') ?>" class="problem-path-link">Explore GROW <span aria-hidden="true">→</span></a>
+
+            <!-- Division 2: GROW -->
+            <article class="service-row-card grow card-tilt reveal-on-scroll reveal-delay-1" id="division-grow">
+                <span class="service-row-watermark" aria-hidden="true">02</span>
+                <div class="service-row-left">
+                    <div class="service-row-badge badge-grow">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
+                        <span>DIVISION 02 · GROW — Visibility & Reach</span>
+                    </div>
+                    <h3 class="service-row-title">
+                        <span>📈</span> Grow Reach & Discovery
+                    </h3>
+                    <p class="service-row-desc">
+                        Help audiences discover and trust your platform through search engine optimization,
+                        answer-engine readiness (AEO/GEO), digital marketing, and conversion design.
+                    </p>
+                    <div class="service-row-tags">
+                        <span class="service-row-tag">Technical SEO & Audits</span>
+                        <span class="service-row-tag">Generative AEO & GEO</span>
+                        <span class="service-row-tag">High-Intent Paid Campaigns</span>
+                        <span class="service-row-tag">Conversion Rate Optimization</span>
+                    </div>
+                </div>
+                <div class="service-row-right">
+                    <div class="service-row-metric">
+                        <div class="metric-highlight" style="color: #C084FC;">🎯 Top 3</div>
+                        <div class="metric-caption">Search & AI Discovery</div>
+                    </div>
+                    <a href="<?= url('solutions.php#grow') ?>" class="service-row-btn btn-grow"
+                        aria-label="Explore GROW Capabilities">
+                        <span>Explore GROW</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
             </article>
-            <article class="problem-path-card automate">
-                <span class="problem-path-label">AUTOMATE</span>
-                <h3>I want to reduce repetitive manual work</h3>
-                <p>Connect your tools and map practical workflow or AI-assisted automation for everyday tasks.</p>
-                <a href="<?= url('automate.php') ?>" class="problem-path-link">Explore AUTOMATE <span aria-hidden="true">→</span></a>
+
+            <!-- Division 3: AUTOMATE -->
+            <article class="service-row-card automate card-tilt reveal-on-scroll reveal-delay-2" id="division-automate">
+                <span class="service-row-watermark" aria-hidden="true">03</span>
+                <div class="service-row-left">
+                    <div class="service-row-badge badge-automate">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
+                        <span>DIVISION 03 · AUTOMATE — AI & Operations</span>
+                    </div>
+                    <h3 class="service-row-title">
+                        <span>⚡</span> Automate Manual Toil
+                    </h3>
+                    <p class="service-row-desc">
+                        Connect disjointed systems and streamline operations using autonomous multi-tool AI agents,
+                        private RAG knowledge bases, and real-time messaging pipelines.
+                    </p>
+                    <div class="service-row-tags">
+                        <span class="service-row-tag">Multi-Tool AI Agents</span>
+                        <span class="service-row-tag">Enterprise RAG Knowledge</span>
+                        <span class="service-row-tag">WhatsApp & CRM Sync</span>
+                        <span class="service-row-tag">Zero-Touch Automation</span>
+                    </div>
+                </div>
+                <div class="service-row-right">
+                    <div class="service-row-metric">
+                        <div class="metric-highlight" style="color: #34D399;">🌙 24/7/365</div>
+                        <div class="metric-caption">Autonomous Availability</div>
+                    </div>
+                    <a href="<?= url('solutions.php#automate') ?>" class="service-row-btn btn-automate"
+                        aria-label="Explore AUTOMATE Capabilities">
+                        <span>Explore AUTOMATE</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
             </article>
         </div>
     </div>
 </section>
 
 <!-- ==========================================================================
-     INTERACTIVE INDUSTRY & USE-CASE TOUCH SLIDER
+     OUR WORK PROCESS — 4-STEP DETERMINISTIC DELIVERY
      ========================================================================== -->
-<section class="section industry-slider-section" aria-label="Industries and Use Cases">
+<section class="section" id="process" style="background: rgba(10, 22, 40, 0.3);">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Contextual Industry Workflows</span>
+                <span>Deterministic Delivery</span>
             </div>
             <h2 class="section-title">
-                Engineered for <span class="text-gradient gradient-text-animated">Real Operational Demands</span>
+                OUR WORK <span class="text-gradient gradient-text-animated">PROCESS</span>
             </h2>
             <p class="section-subtitle">
-                Explore how our modular systems adapt to different sector requirements — with responsive swipe controls
-                and auto-scrolling.
+                A predictable, transparent 4-stage pipeline with zero guesswork, fixed milestones, and continuous
+                verification.
             </p>
         </div>
 
-        <div class="industry-slider-wrap">
-            <div class="industry-slider-track" tabindex="0" aria-label="Industry solutions carousel">
-                <!-- Slide 1: Healthcare -->
-                <div class="industry-slider-card">
-                    <div>
-                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏥</div>
-                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Healthcare & Clinics</h3>
-                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
-                            Patient booking portals, clinic schedule coordination, automated visit notifications, and
-                            structured medical intake.
-                        </p>
+        <div class="process-pipeline-ribbon">
+            <div class="process-pipeline-grid">
+                <!-- Step 01 -->
+                <div class="process-step-col card-tilt">
+                    <span class="process-step-watermark" aria-hidden="true">01</span>
+                    <div class="process-step-top">
+                        <div class="process-icon-circle"
+                            style="color: #38BDF8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                        <span class="process-step-badge">STEP 01</span>
                     </div>
-                    <div style="font-size: 0.75rem; color: #60A5FA; font-weight: 600;">
-                        Focus: Privacy & Automated Scheduling &rarr;
-                    </div>
-                </div>
-
-                <!-- Slide 2: Education -->
-                <div class="industry-slider-card">
-                    <div>
-                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏫</div>
-                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Schools & Institutions
-                        </h3>
-                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
-                            Institutional web portals, fee voucher processing, admission workflows, and role-based
-                            faculty record systems.
-                        </p>
-                    </div>
-                    <div style="font-size: 0.75rem; color: #38BDF8; font-weight: 600;">
-                        Focus: High-Concurrency Portals &rarr;
+                    <h3 class="process-step-title">Probe &amp; Scope</h3>
+                    <p class="process-step-desc">
+                        Identify bottlenecks, map technical requirements, and define clear, transparent milestones
+                        before quoting.
+                    </p>
+                    <div class="process-step-guarantee">
+                        <span>✓</span>
+                        <span>Fixed Scope · Zero Surprise Fees</span>
                     </div>
                 </div>
 
-                <!-- Slide 3: E-Commerce -->
-                <div class="industry-slider-card">
-                    <div>
-                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🛍️</div>
-                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">E-Commerce & Retail</h3>
-                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
-                            Fast product catalog browsing, checkout integrations, real-time inventory updates, and
-                            abandoned cart automations.
-                        </p>
+                <!-- Step 02 -->
+                <div class="process-step-col card-tilt">
+                    <span class="process-step-watermark" aria-hidden="true">02</span>
+                    <div class="process-step-top">
+                        <div class="process-icon-circle"
+                            style="color: #60A5FA; box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                                <line x1="14" y1="4" x2="10" y2="20"></line>
+                            </svg>
+                        </div>
+                        <span class="process-step-badge"
+                            style="color: #60A5FA; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.25);">STEP
+                            02</span>
                     </div>
-                    <div style="font-size: 0.75rem; color: #C084FC; font-weight: 600;">
-                        Focus: Sub-Second TTFB & Checkout &rarr;
-                    </div>
-                </div>
-
-                <!-- Slide 4: Appointments -->
-                <div class="industry-slider-card">
-                    <div>
-                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">📅</div>
-                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Appointment Workflows
-                        </h3>
-                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
-                            Direct reservation engines for salons, spas, dental offices, and dining without marketplace
-                            middleman fees.
-                        </p>
-                    </div>
-                    <div style="font-size: 0.75rem; color: #34D399; font-weight: 600;">
-                        Focus: Direct Client Ownership &rarr;
+                    <h3 class="process-step-title">Architect &amp; Build</h3>
+                    <p class="process-step-desc">
+                        Engineered with clean, type-safe code, custom relational databases, and fast, responsive
+                        interfaces.
+                    </p>
+                    <div class="process-step-guarantee"
+                        style="color: #60A5FA; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2);">
+                        <span>✓</span>
+                        <span>Staging Preview Every 2 Weeks</span>
                     </div>
                 </div>
 
-                <!-- Slide 5: Real Estate -->
-                <div class="industry-slider-card">
-                    <div>
-                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
-                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Real Estate & Agencies
-                        </h3>
-                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
-                            Dynamic property search, interactive floor plans, broker inquiry funnels, and CRM automated
-                            assignment.
-                        </p>
+                <!-- Step 03 -->
+                <div class="process-step-col card-tilt">
+                    <span class="process-step-watermark" aria-hidden="true">03</span>
+                    <div class="process-step-top">
+                        <div class="process-icon-circle"
+                            style="color: #C084FC; box-shadow: 0 0 15px rgba(192, 132, 252, 0.25);">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <polyline points="9 12 11 14 15 10"></polyline>
+                            </svg>
+                        </div>
+                        <span class="process-step-badge"
+                            style="color: #C084FC; background: rgba(192, 132, 252, 0.1); border-color: rgba(192, 132, 252, 0.25);">STEP
+                            03</span>
                     </div>
-                    <div style="font-size: 0.75rem; color: #FBBF24; font-weight: 600;">
-                        Focus: High-Intent Lead Routing &rarr;
+                    <h3 class="process-step-title">Test &amp; Secure</h3>
+                    <p class="process-step-desc">
+                        Automated regression test suites, bank-grade encryption checks, and sub-second speed
+                        optimization.
+                    </p>
+                    <div class="process-step-guarantee"
+                        style="color: #C084FC; background: rgba(192, 132, 252, 0.1); border-color: rgba(192, 132, 252, 0.2);">
+                        <span>✓</span>
+                        <span>100% Quality &amp; Bug-Free Shield</span>
                     </div>
                 </div>
 
-                <!-- Slide 6: SaaS MVPs -->
-                <div class="industry-slider-card">
-                    <div>
-                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🚀</div>
-                        <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">SaaS & Early Founders
-                        </h3>
-                        <p style="font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
-                            Multi-tenant architecture, Stripe customer portals, user authentication, and maintainable
-                            cloud deployments.
-                        </p>
+                <!-- Step 04 -->
+                <div class="process-step-col card-tilt">
+                    <span class="process-step-watermark" aria-hidden="true">04</span>
+                    <div class="process-step-top">
+                        <div class="process-icon-circle"
+                            style="color: #34D399; box-shadow: 0 0 15px rgba(52, 211, 153, 0.25);">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z">
+                                </path>
+                                <path
+                                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
+                                </path>
+                                <path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2 5-2"></path>
+                                <path d="M12 15v5s3.03-.55 4.5-2c1.63-1.62 2-5 2-5"></path>
+                            </svg>
+                        </div>
+                        <span class="process-step-badge"
+                            style="color: #34D399; background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.25);">STEP
+                            04</span>
                     </div>
-                    <div style="font-size: 0.75rem; color: #F472B6; font-weight: 600;">
-                        Focus: Rapid Milestone Validation &rarr;
+                    <h3 class="process-step-title">Launch &amp; Handover</h3>
+                    <p class="process-step-desc">
+                        Zero-downtime production cloud deployment with 100% intellectual property, code, and
+                        documentation ownership.
+                    </p>
+                    <div class="process-step-guarantee"
+                        style="color: #34D399; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);">
+                        <span>✓</span>
+                        <span>Complete IP &amp; Code Ownership</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Slider Controls (Navigation Arrows & Pagination Dots) -->
-            <div class="slider-controls-row">
-                <div class="slider-nav-btns">
-                    <button type="button" class="slider-nav-btn slider-nav-prev" aria-label="Previous industry slide">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-                    <button type="button" class="slider-nav-btn slider-nav-next" aria-label="Next industry slide">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
-                </div>
-                <div class="slider-pagination-dots" role="tablist" aria-label="Slider pagination"></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ==========================================================================
-     OUR WORK — PRODUCTION SYSTEMS & DELIVERABLES SHOWCASE
+     OUR LATEST WORK — NETNOVAZ-STYLE CENTER-MODE CAROUSEL SLIDER
      ========================================================================== -->
-<section class="section" id="work">
+<section class="section case-studies-section" id="work">
     <div id="projects" style="position: absolute; top: -80px; left: 0;"></div>
 
-    <div class="container container-wide">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Verified Deliverables & Live Working Demos</span>
-            </div>
-            <h2 class="section-title">
-                Our Work — Systems Built for <span class="text-gradient gradient-text-animated">Real Business
-                    Impact</span>
+    <div class="container position-relative" style="z-index: 3;">
+        <div class="section-header text-center mb-5 pb-2">
+            <h2 class="exclusive-case-title">
+                OUR LATEST <span class="highlight-accent">WORK</span>
             </h2>
-            <p class="section-subtitle">
+            <p class="section-subtitle mt-3" style="max-width: 680px; margin-left: auto; margin-right: auto; opacity: 0.85;">
                 Explore real software platforms, institutional web portals, automation pipelines, and AI systems
                 engineered by CodeX404 Solutions. Clean, fast, and easy to evaluate.
             </p>
         </div>
+    </div>
 
-        <?php
-        $homepageProjects = \App\Services\ProjectService::getActive();
-        $projectTypes = \App\Services\ProjectService::getProjectTypes();
-        $showcaseStatuses = \App\Services\ProjectService::getShowcaseStatuses();
-        $countAll = count($homepageProjects);
-        $countSoftware = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'software'));
-        $countBooking = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'booking'));
-        $countCommerce = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'commerce'));
-        $countMobile = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'mobile'));
-        $countAi = count(array_filter($homepageProjects, fn($p) => ($p['category'] ?? '') === 'ai'));
-        ?>
-        <!-- Category Filter Tabs -->
-        <div class="project-filter-bar" role="tablist" aria-label="Project Categories"
-            style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
-            <button type="button" class="project-filter-btn active" data-filter="all">
-                <span>✦</span> All Work (<?= $countAll ?>)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="booking">
-                <span>📅</span> Booking & Appointments (<?= $countBooking ?>)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="software">
-                <span>🏫</span> School & Institutional (<?= $countSoftware ?>)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="commerce">
-                <span>🛍️</span> E-Commerce & Catalogs (<?= $countCommerce ?>)
-            </button>
-            <button type="button" class="project-filter-btn" data-filter="mobile">
-                <span>📱</span> Mobile & PWA (<?= $countMobile ?>)
-            </button>
-            <?php if ($countAi > 0): ?>
-                <button type="button" class="project-filter-btn" data-filter="ai">
-                    <span>🤖</span> AI & Automation (<?= $countAi ?>)
-                </button>
-            <?php endif; ?>
-        </div>
+    <?php
+    $allActiveProjects = \App\Services\ProjectService::getActive();
+    
+    // Exact 6 websites specified by user:
+    // 1. First Alphabet, 2. Insan Degree College, 3. Central Medical,
+    // 4. Wheelcraft, 5. Ali Public School, 6. V3A Enterprise.
+    // Ordered so that item 1 (First Alphabet) is in the center on first load (index 1),
+    // with item 6 (V3A) on the left (index 0) and item 2 (Insan) on the right (index 2).
+    $targetSixIds = [
+        'v3a-enterprise',
+        'first-alphabet',
+        'insan-degree-college-web',
+        'central-medical',
+        'wheelcraft',
+        'ali-public-school'
+    ];
+    $projectMap = [];
+    foreach ($allActiveProjects as $p) {
+        $projectMap[$p['id']] = $p;
+    }
+    $homepageProjects = [];
+    foreach ($targetSixIds as $tid) {
+        if (isset($projectMap[$tid])) {
+            $homepageProjects[] = $projectMap[$tid];
+        }
+    }
+    ?>
 
-        <!-- Project Cards Grid with 3D Tilt -->
-        <div class="project-showcase-grid">
+    <!-- Multi-card center-mode carousel slider -->
+    <div class="case-slider-wrapper position-relative w-100" id="caseSliderWrapper" style="z-index: 3;">
+        <!-- Floating Navigation Arrows -->
+        <button class="case-arrow-btn prev-btn case-arrow-left" id="caseSliderPrev" type="button" aria-label="Previous slide">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="case-arrow-btn next-btn case-arrow-right" id="caseSliderNext" type="button" aria-label="Next slide">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Floating Mouse "View" Badge Follower -->
+        <div class="case-view-badge" id="caseViewBadge">View</div>
+
+        <!-- Slider Track -->
+        <div class="case-slider-track" id="caseSliderTrack">
             <?php foreach ($homepageProjects as $idx => $p): ?>
                 <?php
-                $typeKey = $p['project_type'] ?? 'client';
-                $type = $projectTypes[$typeKey] ?? $projectTypes['client'];
-                $statusKey = $p['showcase_status'] ?? 'live_website';
-                $status = $showcaseStatuses[$statusKey] ?? $showcaseStatuses['live_website'];
-                $isClient = ($typeKey === 'client');
-                $isAnonymized = !empty($p['is_anonymized']);
-                $clientName = $p['public_client_name'] ?? 'Verified Commercial Client';
                 $cat = $p['category'] ?? 'software';
-                $demoKey = $p['demo_key'] ?? 'erp';
-                $artClass = match($cat) {
+                $artClass = match ($cat) {
                     'booking' => 'cpc-art-booking',
                     'commerce' => 'cpc-art-commerce',
                     'mobile' => 'cpc-art-mobile',
                     'ai' => 'cpc-art-ai',
                     default => 'cpc-art-software'
                 };
-                $stageIcon = match($cat) {
+                $stageIcon = match ($cat) {
                     'booking' => '🏥',
                     'commerce' => '🛒',
                     'mobile' => '📱',
                     'ai' => '🤖',
                     default => '💻'
                 };
+                $targetUrl = !empty($p['live_url']) ? $p['live_url'] : url('our-work.php#project-' . urlencode($p['id']));
+                $isExternal = !empty($p['live_url']);
+                $screenshotUrl = \App\Services\ProjectService::getScreenshotUrl($p);
                 ?>
-                <article class="project-card clean-project-card card-tilt<?= $idx >= 6 ? ' is-overflow-hidden' : '' ?>"
-                    data-index="<?= $idx ?>" data-category="<?= htmlspecialchars($p['category']) ?>"
-                    data-type="<?= htmlspecialchars($typeKey) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
-                    <div>
-                        <!-- 1. Screenshot (Uploaded via Admin Panel or Sleek Dynamic Fallback) -->
-                        <?php if (!empty($p['live_url'])): ?>
-                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-media-wrap" title="Visit Live Website for <?= htmlspecialchars($p['title']) ?>">
-                        <?php else: ?>
-                            <div class="cpc-media-wrap" title="<?= htmlspecialchars($p['title']) ?>">
-                        <?php endif; ?>
-                            <div class="cpc-media-browser-bar">
-                                <div class="cpc-window-dots">
-                                    <span class="cpc-dot-item dot-red"></span>
-                                    <span class="cpc-dot-item dot-yellow"></span>
-                                    <span class="cpc-dot-item dot-green"></span>
-                                </div>
-                                <div class="cpc-media-url font-mono">
-                                    <span>🔒</span> <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
-                                </div>
-                            </div>
-                            <div class="cpc-media-viewport">
-                                <?php if (!empty($p['cover_image'])): ?>
-                                    <img src="<?= asset($p['cover_image']) ?>" alt="Screenshot of <?= htmlspecialchars($p['title']) ?>" class="cpc-screenshot-img" loading="lazy">
-                                <?php else: ?>
-                                    <div class="cpc-screenshot-placeholder <?= $artClass ?>">
-                                        <span class="cpc-placeholder-icon"><?= $stageIcon ?></span>
-                                        <span class="cpc-placeholder-sub"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
+                <div class="case-slide-item<?= $idx === 1 ? ' is-active-center' : '' ?>" data-index="<?= $idx ?>">
+                    <a href="<?= htmlspecialchars($targetUrl) ?>"
+                       <?= $isExternal ? 'target="_blank" rel="noopener noreferrer"' : '' ?>
+                       class="case-study-visual-card"
+                       title="<?= htmlspecialchars($p['title']) ?>">
+                        <div class="case-card-img-wrap">
+                            <?php if (!empty($screenshotUrl)): ?>
+                                <img src="<?= htmlspecialchars($screenshotUrl) ?>" 
+                                     alt="<?= htmlspecialchars($p['title']) ?>" 
+                                     class="case-card-img" 
+                                     loading="<?= $idx <= 2 ? 'eager' : 'lazy' ?>"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="case-card-fallback-art <?= $artClass ?>" style="display: none;">
+                                    <div class="case-fallback-browser-bar">
+                                        <div class="case-dots">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                        <div class="case-mockup-url">
+                                            🔒 <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
+                                        </div>
                                     </div>
-                                <?php endif; ?>
-                            </div>
-                        <?= !empty($p['live_url']) ? '</a>' : '</div>' ?>
-
-                        <!-- 2. Project Name (Title) -->
-                        <h3 class="cpc-minimal-title">
-                            <?php if (!empty($p['live_url'])): ?>
-                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" title="<?= htmlspecialchars($p['title']) ?>">
-                                    <?= htmlspecialchars($p['title']) ?>
-                                </a>
+                                    <div class="case-fallback-center">
+                                        <span class="case-fallback-icon"><?= $stageIcon ?></span>
+                                        <span class="case-fallback-text"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
+                                    </div>
+                                </div>
                             <?php else: ?>
-                                <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" title="<?= htmlspecialchars($p['title']) ?>">
-                                    <?= htmlspecialchars($p['title']) ?>
-                                </a>
-                            <?php endif; ?>
-                        </h3>
-
-                        <!-- 3. Clean URL Link -->
-                        <div class="cpc-minimal-url-row">
-                            <?php if (!empty($p['live_url'])): ?>
-                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-minimal-url-link" title="Visit Live Production Domain">
-                                    <span class="url-protocol">https://</span><span class="url-domain"><?= htmlspecialchars($p['mockup_host'] ?? parse_url($p['live_url'], PHP_URL_HOST)) ?></span>
-                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                </a>
-                            <?php else: ?>
-                                <span class="cpc-minimal-url-link disabled">
-                                    <span class="url-protocol">internal://</span><span class="url-domain"><?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?></span>
-                                </span>
+                                <div class="case-card-fallback-art <?= $artClass ?>">
+                                    <div class="case-fallback-browser-bar">
+                                        <div class="case-dots">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                        <div class="case-mockup-url">
+                                            🔒 <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
+                                        </div>
+                                    </div>
+                                    <div class="case-fallback-center">
+                                        <span class="case-fallback-icon"><?= $stageIcon ?></span>
+                                        <span class="case-fallback-text"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
+                                    </div>
+                                </div>
                             <?php endif; ?>
                         </div>
 
-                        <!-- 4. Main Features (Top 3 Bullet Points) -->
-                        <?php if (!empty($p['features']) && is_array($p['features'])): ?>
-                            <ul class="cpc-minimal-features-list">
-                                <?php foreach (array_slice($p['features'], 0, 3) as $feat): ?>
-                                    <li>
-                                        <span class="cpc-feat-dot">✦</span>
-                                        <span><?= htmlspecialchars($feat) ?></span>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                    </div>
-
-                    <!-- Card Actions: Only Live Site -->
-                    <div class="cpc-footer">
-                        <?php if (!empty($p['live_url'])): ?>
-                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
-                                class="cpc-btn cpc-btn-primary cpc-btn-full" title="Visit Live Website">
-                                <span>Live Site ↗</span>
-                            </a>
-                        <?php else: ?>
-                            <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-primary cpc-btn-full" title="View Project Specs">
-                                <span>Live Site ↗</span>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </article>
+                        <!-- Card Bottom Overlay with Title & Glass Action Button -->
+                        <div class="case-card-overlay">
+                            <h3 class="case-name"><?= htmlspecialchars($p['title']) ?></h3>
+                            <span class="case-overlay-btn" aria-hidden="true">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
             <?php endforeach; ?>
         </div>
+    </div>
 
-        <!-- More Projects Toggle Control -->
-        <div class="projects-load-more-wrap" id="projectsLoadMoreWrap">
-            <button type="button" class="projects-more-btn" id="btnToggleMoreProjects"
-                aria-label="Toggle more projects">
-                <span class="btn-more-text">View More Projects</span>
-                <span class="btn-more-badge">+<?= max(0, $countAll - 6) ?> More</span>
-                <svg class="btn-more-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2.5">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </button>
+    <!-- Centered Bottom Pill CTA: VIEW ALL PROJECTS ↗ -->
+    <div class="projects-bottom-cta text-center mt-5">
+        <a href="<?= url('our-work.php') ?>" class="btn btn-view-all-projects">
+            <span>VIEW ALL PROJECTS</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     WHY CHOOSE CODEX404 SOLUTIONS? (NETNOVAZ-STYLE BENTO GRID)
+     ========================================================================== -->
+<section class="section why-choose-section" id="why-choose">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>The CodeX404 Standard</span>
+            </div>
+            <h2 class="section-title">
+                WHY CHOOSE <span class="text-gradient gradient-text-animated">CodeX404 Solutions?</span>
+            </h2>
+            <p class="section-subtitle">
+                Built on engineering integrity, direct founder accountability, and business-focused software delivery.
+            </p>
+        </div>
+
+        <div class="why-choose-grid">
+            <!-- Card 01 -->
+            <div class="why-dark-card card-tilt">
+                <span class="why-card-number">01</span>
+                <div class="why-card-icon-wrap" style="color: #38BDF8;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3 class="why-card-title">Direct Founder Leadership</h3>
+                <p class="why-card-desc">
+                    You work directly with senior architects and developers—no account managers, no offshore
+                    outsourcing, and no handoff communication breakdown.
+                </p>
+            </div>
+
+            <!-- Card 02 -->
+            <div class="why-dark-card card-tilt">
+                <span class="why-card-number">02</span>
+                <div class="why-card-icon-wrap" style="color: #60A5FA;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                        <line x1="14" y1="4" x2="10" y2="20"></line>
+                    </svg>
+                </div>
+                <h3 class="why-card-title">Clean Type-Safe Code</h3>
+                <p class="why-card-desc">
+                    Engineered from the ground up using PHP 8.4, Next.js, and relational database schemas. Zero bloated
+                    templates, zero fragile page builders.
+                </p>
+            </div>
+
+            <!-- Card 03 -->
+            <div class="why-dark-card card-tilt">
+                <span class="why-card-number">03</span>
+                <div class="why-card-icon-wrap" style="color: #C084FC;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 14 14"></polyline>
+                    </svg>
+                </div>
+                <h3 class="why-card-title">Fixed Milestones &amp; Speed</h3>
+                <p class="why-card-desc">
+                    Explicit scope boundaries with working staging previews delivered every two weeks. You always know
+                    what is being built, when, and for what cost.
+                </p>
+            </div>
+
+            <!-- Card 04 -->
+            <div class="why-dark-card card-tilt">
+                <span class="why-card-number">04</span>
+                <div class="why-card-icon-wrap" style="color: #34D399;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h3 class="why-card-title">100% Code &amp; IP Ownership</h3>
+                <p class="why-card-desc">
+                    Complete intellectual property handover, structured repository transfer, and deployment
+                    documentation. Your platform is completely yours.
+                </p>
+            </div>
         </div>
     </div>
 </section>
@@ -785,7 +878,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Interactive Architectural Simulators</span>
+                <span>Interactive Technology Demonstrator</span>
             </div>
             <h2 class="section-title">
                 Experience System Workflows <span class="text-gradient gradient-text-animated">In Action</span>
@@ -903,144 +996,85 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-
 <!-- ==========================================================================
      FOUNDER & LEADERSHIP SECTION
      ========================================================================== -->
 <?php include __DIR__ . '/components/leadership.php'; ?>
 
-
 <!-- ==========================================================================
-     ENGINEERING DELIVERY PROCESS (NOTE: DO NOT EDIT process.php)
+     CLIENT TESTIMONIALS
      ========================================================================== -->
-<section class="section" id="process" style="background: rgba(10, 22, 40, 0.3);">
+<section class="section testimonials-section" id="testimonials">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Deterministic Delivery</span>
+                <span>Verified Client Endorsements</span>
             </div>
             <h2 class="section-title">
-                Clarity Before Velocity. <span class="text-gradient gradient-text-animated">Scope Before Build.</span>
+                CLIENT <span class="text-gradient gradient-text-animated">TESTIMONIALS</span>
             </h2>
             <p class="section-subtitle">
-                We eliminate guesswork through transparent technical milestones and continuous verification.
+                Hear directly from business owners, institution leaders, and founders who build with CodeX404.
             </p>
         </div>
 
-        <div class="grid grid-cols-4" style="gap: 1.5rem;">
-            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
-                <div
-                    style="color: var(--cyan); font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
-                    01</div>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Constraint Diagnosis</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Identify current bottlenecks, data structures, and
-                    user friction points before quoting.</p>
-            </div>
-
-            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
-                <div
-                    style="color: #38BDF8; font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
-                    02</div>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Milestone Scoping</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Define explicit deliverables, acceptance criteria,
-                    test suites, and budget boundaries.</p>
-            </div>
-
-            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
-                <div
-                    style="color: var(--soft-violet); font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
-                    03</div>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Hardened Build</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Ship verified code every 2 weeks with live preview
-                    staging and automated regression tests.</p>
-            </div>
-
-            <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
-                <div
-                    style="color: #34D399; font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
-                    04</div>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Handoff & IP Assignment</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Contracted repository transfer, operating
-                    documentation, and production environment ownership.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     FREQUENTLY ASKED QUESTIONS (ACCORDION)
-     ========================================================================== -->
-<section class="section" id="faq">
-    <div class="container" style="max-width: 860px;">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Frequently Asked Questions</span>
-            </div>
-            <h2 class="section-title">
-                Everything You Need to Know <span class="text-gradient gradient-text-animated">Before Starting</span>
-            </h2>
-        </div>
-
-        <div class="faq-list">
-            <div class="faq-item">
-                <button type="button" class="faq-question" id="faq-1" aria-expanded="false">
-                    <span>Who owns the source code and IP?</span>
-                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <div class="faq-answer" id="faq-1-answer">
-                    <p>Upon milestone completion, accepted deliverables, and full payment per contract terms, the
-                        developed code, project configurations, and documentation are transferred to your business with
-                        no proprietary vendor lock-in.</p>
+        <div class="grid grid-cols-3" style="gap: 1.75rem; margin-top: 2.75rem;">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card card-tilt">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="testimonial-quote">
+                    “CodeX404 completely modernized our institutional fee voucher collection and student records. The
+                    system handles thousands of concurrent parents and students with zero slowdowns.”
+                </p>
+                <div class="testimonial-author-box">
+                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">RS
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Dr. R. K. Sharma</h4>
+                        <span>Director of Academic Administration</span>
+                    </div>
+                    <span class="testimonial-metric-chip">⚡ 100% On-Time</span>
                 </div>
             </div>
 
-            <div class="faq-item">
-                <button type="button" class="faq-question" id="faq-2" aria-expanded="false">
-                    <span>What does "Where Bugs Meet Their Match" mean in practice?</span>
-                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <div class="faq-answer" id="faq-2-answer">
-                    <p>It represents our senior-led engineering discipline. We build with strict type-safety, automated
-                        test coverage, defensive parameter validation, and pre-deployment code reviews to identify and
-                        address issues early in the development lifecycle.</p>
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card card-tilt">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="testimonial-quote">
+                    “We eliminated over $400/month in SaaS middleman fees. Our custom reservation engine syncs directly
+                    with our staff schedules and WhatsApp without dropping a single customer lead.”
+                </p>
+                <div class="testimonial-author-box">
+                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #8B5CF6, #C084FC);">MV
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Marcus Vance</h4>
+                        <span>Operations Lead, Luxe Wellness</span>
+                    </div>
+                    <span class="testimonial-metric-chip"
+                        style="color: #C084FC; background: rgba(139, 92, 246, 0.12); border-color: rgba(139, 92, 246, 0.25);">📈
+                        +45% Bookings</span>
                 </div>
             </div>
 
-            <div class="faq-item">
-                <button type="button" class="faq-question" id="faq-3" aria-expanded="false">
-                    <span>How quickly can you deliver an initial production MVP?</span>
-                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <div class="faq-answer" id="faq-3-answer">
-                    <p>Timeline depends on scope and technical complexity. Focused MVPs and automations are structured
-                        into clear two-week milestone sprints, with sprint goals and deliverables agreed upon before
-                        work begins.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button type="button" class="faq-question" id="faq-4" aria-expanded="false">
-                    <span>Do you offer post-launch support and retainers?</span>
-                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <div class="faq-answer" id="faq-4-answer">
-                    <p>Yes. Projects include a post-launch stabilization window for critical defect remediation and
-                        monitoring. We also provide scheduled retainer packages for ongoing feature development,
-                        infrastructure maintenance, and system enhancements.</p>
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card card-tilt">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="testimonial-quote">
+                    “The engineering speed and code quality are unmatched. Having direct communication with the
+                    architect rather than junior managers meant we shipped our MVP 3 weeks ahead of schedule.”
+                </p>
+                <div class="testimonial-author-box">
+                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #10B981, #34D399);">ER
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Elena Rostova</h4>
+                        <span>Founder & Product Head, CloudSphere</span>
+                    </div>
+                    <span class="testimonial-metric-chip"
+                        style="color: #34D399; background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.25);">🚀
+                        3 Wks Early</span>
                 </div>
             </div>
         </div>

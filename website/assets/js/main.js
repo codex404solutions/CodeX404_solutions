@@ -1497,6 +1497,206 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initMobileDropdowns();
 
+  // ======================================================================
+  // 23. NetNovaz-Style Center-Mode Work Slider
+  // ======================================================================
+  const initCaseSlider = () => {
+    const wrapper = document.getElementById('caseSliderWrapper');
+    const track = document.getElementById('caseSliderTrack');
+    const prevBtn = document.getElementById('caseSliderPrev');
+    const nextBtn = document.getElementById('caseSliderNext');
+    const badge = document.getElementById('caseViewBadge');
+
+    if (!wrapper || !track) return;
+
+    const slides = Array.from(track.querySelectorAll('.case-slide-item'));
+    if (!slides.length) return;
+
+    let currentIndex = 1; // Center card active on first load (symmetrical peeking on both sides)
+
+    const updateActiveSlide = (index) => {
+      slides.forEach((s, idx) => {
+        if (idx === index) {
+          s.classList.add('is-active-center');
+        } else {
+          s.classList.remove('is-active-center');
+        }
+      });
+    };
+
+    const scrollToSlide = (index, smooth = true) => {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentIndex = index;
+
+      const targetSlide = slides[currentIndex];
+      if (!targetSlide) return;
+
+      const trackWidth = track.clientWidth;
+      const slideLeft = targetSlide.offsetLeft;
+      const slideWidth = targetSlide.offsetWidth;
+      const targetScroll = slideLeft - (trackWidth / 2) + (slideWidth / 2);
+
+      track.scrollTo({
+        left: targetScroll,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+
+      updateActiveSlide(currentIndex);
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToSlide(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToSlide(currentIndex + 1);
+      });
+    }
+
+    // Click on slide to center it
+    slides.forEach((slide, idx) => {
+      slide.addEventListener('click', (e) => {
+        if (currentIndex !== idx) {
+          e.preventDefault();
+          scrollToSlide(idx);
+        }
+      });
+    });
+
+    // Mouse Drag to Scroll
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasMoved = false;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      hasMoved = false;
+      track.classList.add('is-dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      if (!isDown) return;
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) hasMoved = true;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent following links while dragging
+    track.querySelectorAll('a').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        if (hasMoved) {
+          e.preventDefault();
+        }
+      });
+    });
+
+    // Detect active slide when scrolling stops
+    let scrollTimer = null;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const trackCenter = track.scrollLeft + (track.clientWidth / 2);
+        let closestIndex = 0;
+        let minDistance = Infinity;
+
+        slides.forEach((slide, idx) => {
+          const slideCenter = slide.offsetLeft + (slide.offsetWidth / 2);
+          const distance = Math.abs(trackCenter - slideCenter);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIndex = idx;
+          }
+        });
+
+        currentIndex = closestIndex;
+        updateActiveSlide(currentIndex);
+      }, 50);
+    }, { passive: true });
+
+    // Initial alignment on center slide (immediate on load)
+    const alignInitial = () => {
+      const targetSlide = slides[1] || slides[0];
+      if (targetSlide) {
+        const trackWidth = track.clientWidth;
+        const targetScroll = targetSlide.offsetLeft - (trackWidth / 2) + (targetSlide.offsetWidth / 2);
+        track.scrollLeft = targetScroll;
+        updateActiveSlide(1);
+      }
+    };
+
+    alignInitial();
+    setTimeout(alignInitial, 60);
+    setTimeout(() => { scrollToSlide(1, false); }, 200);
+    window.addEventListener('resize', alignInitial, { passive: true });
+
+    // Interactive Mouse View Badge Follower
+    if (badge) {
+      let mouseX = 0, mouseY = 0;
+      let currentX = 0, currentY = 0;
+      let isHovered = false;
+      let rAF = null;
+
+      const lerp = (start, end, factor) => start + (end - start) * factor;
+
+      const animate = () => {
+        currentX = lerp(currentX, mouseX, 0.18);
+        currentY = lerp(currentY, mouseY, 0.18);
+
+        const scale = isHovered ? (isDown ? 0.88 : 1) : 0;
+        badge.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${scale})`;
+
+        if (!isHovered && Math.abs(currentX - mouseX) < 0.2 && Math.abs(currentY - mouseY) < 0.2) {
+          cancelAnimationFrame(rAF);
+          rAF = null;
+          return;
+        }
+
+        rAF = requestAnimationFrame(animate);
+      };
+
+      wrapper.addEventListener('mouseenter', () => {
+        isHovered = true;
+        if (!rAF) rAF = requestAnimationFrame(animate);
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        isHovered = false;
+      });
+
+      wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        if (!rAF) rAF = requestAnimationFrame(animate);
+      });
+    }
+  };
+
+  initCaseSlider();
+
   initDemoModal();
 });
 

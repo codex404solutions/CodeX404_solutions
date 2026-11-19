@@ -83,7 +83,7 @@ $pageMeta = $pageMeta ?? [];
                 <span class="top-announcement-text">
                     <span class="status-label-bold">BUILD · GROW · AUTOMATE</span>
                     <span class="status-divider" aria-hidden="true">•</span>
-                    <span class="status-subtext">Senior Engineering Studio</span>
+                    <span class="status-subtext">Where Bugs Meet Their Match</span>
                 </span>
             </div>
 

@@ -657,6 +657,16 @@ class ProjectService
         }
 
         self::writeAll($updatedAll);
+
+        // Auto-fetch and cache screenshot if live_url is set and no manual cover was uploaded
+        if (!empty($record['live_url']) && empty($record['cover_image'])) {
+            try {
+                self::fetchAndCacheScreenshot($record['id'], $record['live_url']);
+            } catch (\Throwable $e) {
+                // Non-blocking
+            }
+        }
+
         return $record;
     }
 
@@ -767,6 +777,115 @@ class ProjectService
             'success' => true,
             'path' => 'assets/images/projects/' . $filename
         ];
+    }
+
+    /**
+     * Get screenshot or preview image URL for a project.
+     * Always auto-fetches live snapshot if no manual cover image is uploaded.
+     * Tied to the URL hash so if the website URL is changed later, it automatically
+     * invalidates old cache and fetches the fresh screenshot.
+     *
+     * Priority:
+     * 1. Manual cover_image (uploaded file or external URL).
+     * 2. Locally cached auto-fetched screenshot matching this exact URL hash.
+     * 3. Locally cached legacy snapshot (if valid).
+     * 4. Dynamic live auto-fetch screenshot URL via WordPress mshots CDN.
+     *
+     * @param array<string, mixed> $project
+     * @param int $width
+     * @return string
+     */
+    public static function getScreenshotUrl(array $project, int $width = 1200): string
+    {
+        // 1. Manual cover image
+        $cover = trim((string)($project['cover_image'] ?? ''));
+        if (!empty($cover)) {
+            if (str_starts_with($cover, 'http://') || str_starts_with($cover, 'https://')) {
+                return $cover;
+            }
+            return function_exists('asset') ? asset($cover) : $cover;
+        }
+
+        $id = trim((string)($project['id'] ?? ''));
+        $liveUrl = trim((string)($project['live_url'] ?? ''));
+
+        if (empty($liveUrl) || !filter_var($liveUrl, FILTER_VALIDATE_URL)) {
+            return '';
+        }
+
+        // 2. Check URL-hashed cache so any URL change later auto-refreshes screenshot
+        $urlHash = substr(md5(strtolower(rtrim($liveUrl, '/'))), 0, 8);
+        $localRelHashed = 'assets/images/projects/' . $id . '-' . $urlHash . '.jpg';
+        $localAbsHashed = dirname(__DIR__, 2) . '/' . $localRelHashed;
+
+        // Threshold of 15000 bytes prevents serving WordPress mshots "Generating Preview..." placeholder (8,737 bytes)
+        if (file_exists($localAbsHashed) && filesize($localAbsHashed) > 15000) {
+            return function_exists('asset') ? asset($localRelHashed) : $localRelHashed;
+        }
+
+        // Check legacy cache file
+        $localRelLegacy = 'assets/images/projects/' . $id . '.jpg';
+        $localAbsLegacy = dirname(__DIR__, 2) . '/' . $localRelLegacy;
+        if (file_exists($localAbsLegacy) && filesize($localAbsLegacy) > 15000) {
+            return function_exists('asset') ? asset($localRelLegacy) : $localRelLegacy;
+        }
+
+        // 3. Dynamic live auto-fetch from live link via mshots (always reflects current URL)
+        return 'https://s0.wp.com/mshots/v1/' . rawurlencode($liveUrl) . '?w=' . $width;
+    }
+
+    /**
+     * Download and cache screenshot locally on server for a project URL.
+     * Automatically invalidates whenever the URL changes.
+     *
+     * @param string $id Project ID / Slug
+     * @param string $url Live Website URL
+     * @return string|null Relative image path if successful, null on failure
+     */
+    public static function fetchAndCacheScreenshot(string $id, string $url): ?string
+    {
+        $id = trim($id);
+        $url = trim($url);
+        if (empty($id) || empty($url) || !filter_var($url, FILTER_VALIDATE_URL)) {
+            return null;
+        }
+
+        $targetDir = dirname(__DIR__, 2) . '/assets/images/projects';
+        if (!is_dir($targetDir)) {
+            @mkdir($targetDir, 0755, true);
+        }
+
+        $urlHash = substr(md5(strtolower(rtrim($url, '/'))), 0, 8);
+        $targetPath = $targetDir . '/' . $id . '-' . $urlHash . '.jpg';
+        $legacyPath = $targetDir . '/' . $id . '.jpg';
+
+        $mshotsUrl = 'https://s0.wp.com/mshots/v1/' . rawurlencode($url) . '?w=1200';
+
+        $opts = [
+            'http' => [
+                'method' => 'GET',
+                'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\r\n" .
+                            "Referer: https://codex404solutions.com\r\n",
+                'timeout' => 15,
+                'follow_location' => 1
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false
+            ]
+        ];
+
+        $context = stream_context_create($opts);
+        $data = @file_get_contents($mshotsUrl, false, $context);
+
+        // Check if real website screenshot data (greater than 15000 bytes, avoiding placeholder)
+        if ($data && strlen($data) > 15000) {
+            @file_put_contents($targetPath, $data);
+            @file_put_contents($legacyPath, $data); // Keep legacy in sync
+            return 'assets/images/projects/' . $id . '-' . $urlHash . '.jpg';
+        }
+
+        return null;
     }
 
     /**
