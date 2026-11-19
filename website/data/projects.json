@@ -183,7 +183,7 @@
             "Healthcare Architecture",
             "PHP 8.2"
         ],
-        "demo_key": "erp",
+        "demo_key": "booking",
         "demo_url": "",
         "video_url": "",
         "live_url": "https://centralmedicall.com",
@@ -642,7 +642,7 @@
             "Treatment Catalog",
             "Responsive Web App"
         ],
-        "demo_key": "wa",
+        "demo_key": "booking",
         "demo_url": "",
         "video_url": "",
         "live_url": "https://smiledental.codex404solutions.online",

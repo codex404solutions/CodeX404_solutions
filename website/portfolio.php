@@ -84,6 +84,22 @@ require_once __DIR__ . '/includes/header.php';
                 $isClient = ($typeKey === 'client');
                 $isAnonymized = !empty($p['is_anonymized']);
                 $clientName = $p['public_client_name'] ?? 'Verified Commercial Client';
+                $cat = $p['category'] ?? 'software';
+                $demoKey = $p['demo_key'] ?? 'erp';
+                $artClass = match($cat) {
+                    'booking' => 'cpc-art-booking',
+                    'commerce' => 'cpc-art-commerce',
+                    'mobile' => 'cpc-art-mobile',
+                    'ai' => 'cpc-art-ai',
+                    default => 'cpc-art-software'
+                };
+                $stageIcon = match($cat) {
+                    'booking' => '🏥',
+                    'commerce' => '🛒',
+                    'mobile' => '📱',
+                    'ai' => '🤖',
+                    default => '💻'
+                };
                 ?>
                 <article class="project-card clean-project-card card-tilt"
                     data-category="<?= htmlspecialchars($p['category']) ?>"
@@ -91,119 +107,85 @@ require_once __DIR__ . '/includes/header.php';
                     id="project-<?= htmlspecialchars($p['id']) ?>">
                     
                     <div>
-                        <!-- Header with Project Type, Status, & Domain -->
-                        <div class="cpc-header" style="margin-bottom: 0.85rem;">
-                            <div class="cpc-meta" style="gap: 0.4rem; flex-wrap: wrap;">
-                                <!-- Project Type Visual Label -->
-                                <span class="cpc-type-pill <?= htmlspecialchars($type['badge']) ?>" title="<?= htmlspecialchars($type['desc']) ?>">
-                                    <span style="width: 6px; height: 6px; border-radius: 50%; background: currentColor;"></span>
-                                    <span><?= htmlspecialchars($type['label']) ?></span>
-                                </span>
-
-                                <!-- Showcase Status Label -->
-                                <span class="cpc-status-pill">
-                                    <span><?= htmlspecialchars($status['label']) ?></span>
-                                </span>
+                        <!-- 1. Screenshot (Uploaded via Admin Panel or Sleek Dynamic Fallback) -->
+                        <?php if (!empty($p['live_url'])): ?>
+                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-media-wrap" title="Visit Live Website for <?= htmlspecialchars($p['title']) ?>">
+                        <?php else: ?>
+                            <div class="cpc-media-wrap" title="<?= htmlspecialchars($p['title']) ?>">
+                        <?php endif; ?>
+                            <div class="cpc-media-browser-bar">
+                                <div class="cpc-window-dots">
+                                    <span class="cpc-dot-item dot-red"></span>
+                                    <span class="cpc-dot-item dot-yellow"></span>
+                                    <span class="cpc-dot-item dot-green"></span>
+                                </div>
+                                <div class="cpc-media-url font-mono">
+                                    <span>🔒</span> <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
+                                </div>
                             </div>
+                            <div class="cpc-media-viewport">
+                                <?php if (!empty($p['cover_image'])): ?>
+                                    <img src="<?= asset($p['cover_image']) ?>" alt="Screenshot of <?= htmlspecialchars($p['title']) ?>" class="cpc-screenshot-img" loading="lazy">
+                                <?php else: ?>
+                                    <div class="cpc-screenshot-placeholder <?= $artClass ?>">
+                                        <span class="cpc-placeholder-icon"><?= $stageIcon ?></span>
+                                        <span class="cpc-placeholder-sub"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?= !empty($p['live_url']) ? '</a>' : '</div>' ?>
 
-                            <!-- Live Host Domain Pill -->
+                        <!-- 2. Project Name (Title) -->
+                        <h3 class="cpc-minimal-title">
                             <?php if (!empty($p['live_url'])): ?>
-                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-domain-pill" title="Visit Live Production Domain">
-                                    <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                </a>
-                            <?php elseif (!empty($p['mockup_host'])): ?>
-                                <span class="cpc-domain-pill">
-                                    <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-
-                        <!-- Card Body -->
-                        <div class="cpc-body">
-                            <!-- Title (Linked to detail view) -->
-                            <h3 class="cpc-title">
-                                <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" title="View Architecture &amp; Case Study for <?= htmlspecialchars($p['title']) ?>">
+                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" title="<?= htmlspecialchars($p['title']) ?>">
                                     <?= htmlspecialchars($p['title']) ?>
                                 </a>
-                            </h3>
-
-                            <!-- Client Attribution Row (Only when authorized / non-confidential) -->
-                            <div class="cpc-client-row">
-                                <?php if (!empty($p['client_logo'])): ?>
-                                    <img src="<?= asset($p['client_logo']) ?>" alt="<?= htmlspecialchars($clientName) ?>" style="height: 16px; max-width: 60px; object-fit: contain; vertical-align: middle;">
-                                <?php endif; ?>
-                                
-                                <?php if ($isClient): ?>
-                                    <?php if ($isAnonymized): ?>
-                                        <span class="cpc-client-anon" title="Client name protected under NDA">🔒 <?= htmlspecialchars($clientName) ?></span>
-                                    <?php else: ?>
-                                        <span class="cpc-client-name">🏢 <?= htmlspecialchars($clientName) ?></span>
-                                    <?php endif; ?>
-                                <?php elseif ($typeKey === 'internal'): ?>
-                                    <span class="cpc-client-name" style="color: var(--cyan);">💡 CodeX404 Proprietary</span>
-                                <?php else: ?>
-                                    <span class="cpc-client-name" style="color: #FBBF24;">⚡ Architectural Prototype</span>
-                                <?php endif; ?>
-                            </div>
-
-                            <!-- Description -->
-                            <p class="cpc-description">
-                                <?= htmlspecialchars(!empty($p['solution']) ? $p['solution'] : ($p['problem'] ?? '')) ?>
-                            </p>
-                            
-                            <!-- Key Features Preview (Top 2 Bullets) -->
-                            <?php if (!empty($p['features'])): ?>
-                                <div class="cpc-features-preview">
-                                    <?php foreach (array_slice($p['features'], 0, 2) as $feat): ?>
-                                        <div class="cpc-feature-bullet">
-                                            <span class="dot">✦</span>
-                                            <span class="text-truncate"><?= htmlspecialchars($feat) ?></span>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
+                            <?php else: ?>
+                                <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" title="<?= htmlspecialchars($p['title']) ?>">
+                                    <?= htmlspecialchars($p['title']) ?>
+                                </a>
                             <?php endif; ?>
+                        </h3>
 
-                            <!-- Verified Business Outcome Metric (Only if verified) -->
-                            <?php if (!empty($p['metric'])): ?>
-                                <div class="cpc-metric" title="Verified Quantitative Performance Outcome">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    <span class="text-truncate"><?= htmlspecialchars($p['metric']) ?></span>
-                                </div>
-                            <?php endif; ?>
-
-                            <!-- Tech Stack Tags -->
-                            <?php if (!empty($p['tags'])): ?>
-                                <div class="cpc-tags">
-                                    <?php foreach (array_slice($p['tags'], 0, 3) as $tag): ?>
-                                        <span class="cpc-tag"><?= htmlspecialchars($tag) ?></span>
-                                    <?php endforeach; ?>
-                                </div>
+                        <!-- 3. Clean URL Link -->
+                        <div class="cpc-minimal-url-row">
+                            <?php if (!empty($p['live_url'])): ?>
+                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-minimal-url-link" title="Visit Live Production Domain">
+                                    <span class="url-protocol">https://</span><span class="url-domain"><?= htmlspecialchars($p['mockup_host'] ?? parse_url($p['live_url'], PHP_URL_HOST)) ?></span>
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            <?php else: ?>
+                                <span class="cpc-minimal-url-link disabled">
+                                    <span class="url-protocol">internal://</span><span class="url-domain"><?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?></span>
+                                </span>
                             <?php endif; ?>
                         </div>
+
+                        <!-- 4. Main Features (Top 3 Bullet Points) -->
+                        <?php if (!empty($p['features']) && is_array($p['features'])): ?>
+                            <ul class="cpc-minimal-features-list">
+                                <?php foreach (array_slice($p['features'], 0, 3) as $feat): ?>
+                                    <li>
+                                        <span class="cpc-feat-dot">✦</span>
+                                        <span><?= htmlspecialchars($feat) ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </div>
 
-                    <!-- Actions Footer (Buttons rendered only if respective link/demo exists) -->
+                    <!-- Actions Footer: Only Live Site -->
                     <div class="cpc-footer">
                         <?php if (!empty($p['live_url'])): ?>
-                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-btn cpc-btn-primary" title="Visit Live Production Website">
+                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-btn cpc-btn-primary cpc-btn-full" title="Visit Live Production Website">
+                                <span>Live Site ↗</span>
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-primary cpc-btn-full" title="View Project Specs">
                                 <span>Live Site ↗</span>
                             </a>
                         <?php endif; ?>
-
-                        <?php if (!empty($p['demo_url'])): ?>
-                            <a href="<?= htmlspecialchars($p['demo_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-btn cpc-btn-secondary" title="Interactive Simulator">
-                                <span>⚡ Demo</span>
-                            </a>
-                        <?php elseif (!empty($p['demo_key'])): ?>
-                            <a href="<?= url('index.php#project-' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-secondary btn-demo-trigger" data-demo="<?= htmlspecialchars($p['demo_key']) ?>" title="Launch In-Browser Simulator">
-                                <span>⚡ Demo</span>
-                            </a>
-                        <?php endif; ?>
-
-                        <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-outline" title="View Full Architecture &amp; Case Study">
-                            <span>Details →</span>
-                        </a>
                     </div>
                 </article>
             <?php endforeach; ?>
@@ -230,5 +212,8 @@ $ctaHeading = "Ready to Engineer Your Next Proprietary Digital Asset?";
 $ctaSubtitle = "Schedule a technical scoping session to review your requirements, specifications, and architecture directly with our founding engineers.";
 include __DIR__ . '/components/cta.php';
 ?>
+
+<!-- Interactive Live Demo Modal Overlay (For Trigger Buttons) -->
+<?php include __DIR__ . '/components/demo-modal.php'; ?>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

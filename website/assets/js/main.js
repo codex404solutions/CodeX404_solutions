@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleWrap = document.getElementById('projectsLoadMoreWrap');
     if (!projectCards.length) return;
 
-    const INITIAL_VISIBLE_COUNT = 8; // 4 cards in a row * 2 rows = 8 cards
+    const INITIAL_VISIBLE_COUNT = 6; // 3 columns * 2 rows = 6 cards
     let currentCategory = 'all';
     let isExpanded = false;
 
@@ -796,33 +796,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const panes = modalOverlay.querySelectorAll('.demo-simulator-pane');
     const triggers = document.querySelectorAll('.btn-demo-trigger');
 
-    const openModal = (demoKey) => {
+    const normalizeTarget = (raw) => {
+      if (!raw) return 'erp';
+      const key = String(raw).toLowerCase().trim();
+      if (key === 'healthcare' || key === 'medical' || key === 'clinic') return 'booking';
+      if (key === 'commerce' || key === 'catalog' || key === 'ecommerce') return 'b2b';
+      if (key === 'ai' || key === 'chat') return 'rag';
+      if (key === 'automation' || key === 'webhook' || key === 'crm') return 'wa';
+      return key;
+    };
+
+    const openModal = (targetKey) => {
+      const demoKey = normalizeTarget(targetKey);
       modalOverlay.classList.add('active');
+      modalOverlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
       // Switch to targeted tab
-      if (demoKey) {
-        navTabs.forEach(tab => {
-          const isTarget = tab.getAttribute('data-demo-target') === demoKey;
-          tab.classList.toggle('active', isTarget);
-        });
-        panes.forEach(pane => {
-          const isTarget = pane.id === `demo-pane-${demoKey}`;
-          pane.classList.toggle('active', isTarget);
-        });
-      }
+      navTabs.forEach(tab => {
+        const isTarget = tab.getAttribute('data-demo-target') === demoKey;
+        tab.classList.toggle('active', isTarget);
+        tab.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      });
+      panes.forEach(pane => {
+        const isTarget = pane.id === `demo-pane-${demoKey}`;
+        pane.classList.toggle('active', isTarget);
+      });
     };
 
     const closeModal = () => {
       modalOverlay.classList.remove('active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     };
 
     triggers.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const demoKey = btn.getAttribute('data-demo') || 'rag';
+        const demoKey = btn.getAttribute('data-demo') || 'erp';
         openModal(demoKey);
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const demoKey = btn.getAttribute('data-demo') || 'erp';
+          openModal(demoKey);
+        }
       });
     });
 
@@ -842,62 +861,366 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navTabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        const target = tab.getAttribute('data-demo-target');
-        navTabs.forEach(t => t.classList.toggle('active', t === tab));
+        const target = normalizeTarget(tab.getAttribute('data-demo-target'));
+        navTabs.forEach(t => {
+          const isMatch = t === tab;
+          t.classList.toggle('active', isMatch);
+          t.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+        });
         panes.forEach(p => p.classList.toggle('active', p.id === `demo-pane-${target}`));
       });
     });
 
-    // --- Simulator 1: AI RAG Assistant Sandbox ---
+    // -------------------------------------------------------------
+    // SIMULATOR 1: SCHOOL & CAMPUS ERP (demo_key = 'erp')
+    // -------------------------------------------------------------
+    const erpStudentSelect = document.getElementById('erpStudentSelect');
+    const erpTuitionDisplay = document.getElementById('erpTuitionDisplay');
+    const erpLabDisplay = document.getElementById('erpLabDisplay');
+    const erpExamDisplay = document.getElementById('erpExamDisplay');
+    const erpTotalDue = document.getElementById('erpTotalDue');
+    const erpGenerateVoucherBtn = document.getElementById('erpGenerateVoucherBtn');
+    const erpDownloadVoucherBtn = document.getElementById('erpDownloadVoucherBtn');
+    const erpVoucherSheet = document.getElementById('erpVoucherSheet');
+
+    const updateErpFeePreview = () => {
+      if (!erpStudentSelect) return;
+      const opt = erpStudentSelect.options[erpStudentSelect.selectedIndex];
+      if (!opt) return;
+
+      const tuition = Number(opt.getAttribute('data-tuition') || 12000);
+      const lab = Number(opt.getAttribute('data-lab') || 3500);
+      const exam = Number(opt.getAttribute('data-exam') || 1500);
+      const total = tuition + lab + exam;
+
+      if (erpTuitionDisplay) erpTuitionDisplay.textContent = `₹${tuition.toLocaleString('en-IN')}`;
+      if (erpLabDisplay) erpLabDisplay.textContent = `₹${lab.toLocaleString('en-IN')}`;
+      if (erpExamDisplay) erpExamDisplay.textContent = `₹${exam.toLocaleString('en-IN')}`;
+      if (erpTotalDue) erpTotalDue.textContent = `₹${total.toLocaleString('en-IN')}`;
+    };
+
+    if (erpStudentSelect) {
+      erpStudentSelect.addEventListener('change', updateErpFeePreview);
+    }
+
+    if (erpGenerateVoucherBtn && erpStudentSelect) {
+      erpGenerateVoucherBtn.addEventListener('click', () => {
+        const opt = erpStudentSelect.options[erpStudentSelect.selectedIndex];
+        if (!opt) return;
+
+        const name = opt.getAttribute('data-name') || 'Student';
+        const id = opt.getAttribute('data-id') || 'STU-001';
+        const grade = opt.getAttribute('data-grade') || 'Grade 11';
+        const tuition = Number(opt.getAttribute('data-tuition') || 12000);
+        const lab = Number(opt.getAttribute('data-lab') || 3500);
+        const exam = Number(opt.getAttribute('data-exam') || 1500);
+        const total = tuition + lab + exam;
+        const randToken = '#VCH-' + Math.floor(100000 + Math.random() * 900000);
+
+        const vName = document.getElementById('vStudentName');
+        const vId = document.getElementById('vStudentId');
+        const vGrade = document.getElementById('vStudentGrade');
+        const vToken = document.getElementById('vToken');
+        const vTuition = document.getElementById('vRowTuition');
+        const vLab = document.getElementById('vRowLab');
+        const vExam = document.getElementById('vRowExam');
+        const vTotal = document.getElementById('vRowTotal');
+
+        if (vName) vName.textContent = name;
+        if (vId) vId.textContent = id;
+        if (vGrade) vGrade.textContent = grade;
+        if (vToken) vToken.textContent = randToken;
+        if (vTuition) vTuition.textContent = `₹${tuition.toLocaleString('en-IN')}.00`;
+        if (vLab) vLab.textContent = `₹${lab.toLocaleString('en-IN')}.00`;
+        if (vExam) vExam.textContent = `₹${exam.toLocaleString('en-IN')}.00`;
+        if (vTotal) vTotal.textContent = `₹${total.toLocaleString('en-IN')}.00`;
+
+        if (erpVoucherSheet) {
+          erpVoucherSheet.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
+          erpVoucherSheet.style.transform = 'scale(1.02)';
+          erpVoucherSheet.style.boxShadow = '0 0 25px rgba(56, 189, 248, 0.4)';
+          setTimeout(() => {
+            erpVoucherSheet.style.transform = '';
+            erpVoucherSheet.style.boxShadow = '';
+          }, 400);
+        }
+
+        const origBtnText = erpGenerateVoucherBtn.innerHTML;
+        erpGenerateVoucherBtn.innerHTML = '<span>✓ Official Fee Slip Generated!</span>';
+        setTimeout(() => {
+          erpGenerateVoucherBtn.innerHTML = origBtnText;
+        }, 1800);
+      });
+    }
+
+    if (erpDownloadVoucherBtn) {
+      erpDownloadVoucherBtn.addEventListener('click', () => {
+        const origText = erpDownloadVoucherBtn.innerHTML;
+        erpDownloadVoucherBtn.innerHTML = '<span>✓ Voucher Slip Ready (Print Simulated)</span>';
+        setTimeout(() => {
+          erpDownloadVoucherBtn.innerHTML = origText;
+        }, 1800);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // SIMULATOR 2: HEALTHCARE CLINICAL OPD (demo_key = 'booking')
+    // -------------------------------------------------------------
+    const docCards = modalOverlay.querySelectorAll('.doctor-card');
+    const slotBtns = modalOverlay.querySelectorAll('.slot-picker-grid .slot-btn');
+    const medConfirmBtn = document.getElementById('medConfirmBookingBtn');
+    const medPassCard = document.getElementById('medPassCard');
+
+    let currentDoctor = { name: 'Dr. Aris Thorne', dept: 'Cardiology', room: 'OPD Suite 402', fee: '₹800' };
+    let currentSlot = '11:00 AM';
+
+    docCards.forEach(card => {
+      card.addEventListener('click', () => {
+        docCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        currentDoctor = {
+          name: card.getAttribute('data-doctor') || 'Specialist Doctor',
+          dept: card.getAttribute('data-dept') || 'OPD Specialist',
+          room: card.getAttribute('data-room') || 'Suite 101',
+          fee: card.getAttribute('data-fee') || '₹800'
+        };
+      });
+    });
+
+    slotBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled || btn.classList.contains('disabled')) return;
+        slotBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSlot = btn.getAttribute('data-slot') || btn.textContent.trim();
+      });
+    });
+
+    if (medConfirmBtn) {
+      medConfirmBtn.addEventListener('click', () => {
+        const patientInput = document.getElementById('medPatientName');
+        const phoneInput = document.getElementById('medPatientPhone');
+        const patientName = (patientInput && patientInput.value.trim()) ? patientInput.value.trim() : 'Priya Deshmukh';
+        const patientPhone = (phoneInput && phoneInput.value.trim()) ? phoneInput.value.trim() : '+91 98201-44021';
+
+        const randToken = '#OPD-' + Math.floor(100 + Math.random() * 900);
+        const passToken = document.getElementById('medTokenNum');
+        const passDoctor = document.getElementById('medPassDoctor');
+        const passSlot = document.getElementById('medPassSlot');
+        const passPatient = document.getElementById('medPassPatient');
+        const passRoom = document.getElementById('medPassRoom');
+        const passFee = document.getElementById('medPassFee');
+        const passPhone = document.getElementById('medPassPhone');
+
+        if (passToken) passToken.textContent = randToken;
+        if (passDoctor) passDoctor.textContent = `${currentDoctor.name} (${currentDoctor.dept})`;
+        if (passSlot) passSlot.textContent = `Today • ${currentSlot}`;
+        if (passPatient) passPatient.textContent = patientName;
+        if (passRoom) passRoom.textContent = currentDoctor.room;
+        if (passFee) passFee.textContent = `${currentDoctor.fee} (Paid at Counter)`;
+        if (passPhone) passPhone.textContent = patientPhone;
+
+        if (medPassCard) {
+          medPassCard.style.transition = 'transform 0.25s ease, box-shadow 0.25s ease';
+          medPassCard.style.transform = 'scale(1.02)';
+          medPassCard.style.boxShadow = '0 0 25px rgba(16, 185, 129, 0.45)';
+          setTimeout(() => {
+            medPassCard.style.transform = '';
+            medPassCard.style.boxShadow = '';
+          }, 450);
+        }
+
+        const origBtn = medConfirmBtn.innerHTML;
+        medConfirmBtn.innerHTML = '<span>✓ Atomic Slot Locked & Ticket Dispatched!</span>';
+        setTimeout(() => {
+          medConfirmBtn.innerHTML = origBtn;
+        }, 2000);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // SIMULATOR 3: AUTOMOTIVE WHEEL FITMENT (demo_key = 'b2b')
+    // -------------------------------------------------------------
+    const fitMake = document.getElementById('fitMake');
+    const fitModel = document.getElementById('fitModel');
+    const fitBolt = document.getElementById('fitBolt');
+    const fitCb = document.getElementById('fitCb');
+    const fitOffset = document.getElementById('fitOffset');
+    const fitQueryBtn = document.getElementById('fitQueryBtn');
+    const fitResultsList = document.getElementById('fitResultsList');
+
+    const fitCatalog = {
+      bmw: [
+        { model: 'M4 Competition (G82 Chassis)', bolt: '5x112', cb: '66.6 mm', offset: 'ET20 / ET25', wheels: [
+          { name: 'ApexForged Apex-GT 2-Piece Monoblock', specs: 'Front: 19x9.5 ET20 • Rear: 20x10.5 ET25', price: '₹1,85,000', tags: ['TUV Certified', 'Aviation Alloy', 'In Stock (4 Sets)'] },
+          { name: 'TrackSpec Competition Lightweight RS', specs: 'Front: 19x9.5 ET20 • Rear: 20x10.5 ET25', price: '₹2,10,000', tags: ['8.9 kg Ultra-Light', 'Satin Carbon Black', 'In Stock (2 Sets)'] }
+        ]},
+        { model: 'M3 Sedan (G80 Chassis)', bolt: '5x112', cb: '66.6 mm', offset: 'ET20 / ET25', wheels: [
+          { name: 'ApexForged Apex-GT 2-Piece Monoblock', specs: 'Front: 19x9.5 ET20 • Rear: 20x10.5 ET25', price: '₹1,85,000', tags: ['TUV Certified', 'In Stock'] },
+          { name: 'EvoSport Forged CS Series', specs: 'Front: 19x9.5 ET20 • Rear: 20x10.5 ET25', price: '₹1,98,000', tags: ['Forged T6-6061', 'Bronze Gold'] }
+        ]},
+        { model: 'M2 Coupe (G87 Chassis)', bolt: '5x112', cb: '66.6 mm', offset: 'ET20 / ET20', wheels: [
+          { name: 'ApexForged SprintLine Ultra', specs: 'Front: 19x9.5 ET20 • Rear: 20x10.0 ET20', price: '₹1,75,000', tags: ['CNC Machined', 'Gunmetal'] }
+        ]}
+      ],
+      porsche: [
+        { model: '911 GT3 (992 Chassis)', bolt: 'Centerlock', cb: '71.6 mm', offset: 'ET45 / ET50', wheels: [
+          { name: 'CupRacer Forged Magnesium Centerlock', specs: 'Front: 20x9.5 ET45 • Rear: 21x12.0 ET50', price: '₹3,40,000', tags: ['FIA Compliant', 'Magnesium Core', 'Track Ready'] },
+          { name: 'Stuttgart AeroDesign Monoblock', specs: 'Front: 20x9.0 ET45 • Rear: 21x11.5 ET50', price: '₹2,75,000', tags: ['Aerodisc Option', 'Gloss Silver'] }
+        ]},
+        { model: 'Cayman GT4 RS (718 Chassis)', bolt: 'Centerlock', cb: '71.6 mm', offset: 'ET50 / ET45', wheels: [
+          { name: 'Weissach Motorsport Ultra-Light', specs: 'Front: 20x8.5 ET50 • Rear: 20x11.0 ET45', price: '₹2,95,000', tags: ['Motorsport Spec', 'Forged'] }
+        ]}
+      ],
+      audi: [
+        { model: 'RS6 Avant (C8 Chassis)', bolt: '5x112', cb: '66.6 mm', offset: 'ET22 / ET22', wheels: [
+          { name: 'Ingolstadt Sport Dynamic V-Spoke', specs: 'All Corners: 22x10.5 ET22 Monoblock', price: '₹2,20,000', tags: ['SUV / Avant Load Rated', 'Titanium Matt'] }
+        ]}
+      ],
+      mercedes: [
+        { model: 'AMG GT 63 S (X290)', bolt: '5x112', cb: '66.6 mm', offset: 'ET25 / ET38', wheels: [
+          { name: 'Affalterbach Multi-Spoke Forged Edition', specs: 'Front: 21x10.0 ET25 • Rear: 21x11.5 ET38', price: '₹2,60,000', tags: ['High Load Rated', 'Diamond Cut Polish'] }
+        ]}
+      ]
+    };
+
+    const renderFitmentResults = () => {
+      if (!fitMake || !fitModel || !fitResultsList) return;
+      const makeKey = fitMake.value;
+      const makeList = fitCatalog[makeKey] || fitCatalog.bmw;
+      const selectedIndex = fitModel.selectedIndex >= 0 ? fitModel.selectedIndex : 0;
+      const vehicle = makeList[selectedIndex] || makeList[0];
+
+      if (fitBolt) fitBolt.textContent = vehicle.bolt;
+      if (fitCb) fitCb.textContent = vehicle.cb;
+      if (fitOffset) fitOffset.textContent = vehicle.offset;
+
+      fitResultsList.innerHTML = vehicle.wheels.map(w => `
+        <div class="wheel-result-card">
+          <div class="wheel-icon">🛞</div>
+          <div class="wheel-info">
+            <strong>${w.name}</strong>
+            <div class="wheel-sub font-mono">${w.specs}</div>
+            <div class="wheel-tags">
+              ${w.tags.map(t => `<span class="w-tag ${t.includes('Stock') ? 'green' : ''}">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="wheel-pricing">
+            <span class="price-val font-mono">${w.price}</span>
+            <span class="price-unit">per set of 4</span>
+          </div>
+        </div>
+      `).join('');
+    };
+
+    if (fitMake && fitModel) {
+      fitMake.addEventListener('change', () => {
+        const makeKey = fitMake.value;
+        const list = fitCatalog[makeKey] || [];
+        fitModel.innerHTML = list.map((v, i) => `<option value="${i}">${v.model}</option>`).join('');
+        renderFitmentResults();
+      });
+
+      fitModel.addEventListener('change', renderFitmentResults);
+    }
+
+    if (fitQueryBtn) {
+      fitQueryBtn.addEventListener('click', () => {
+        if (fitResultsList) {
+          fitResultsList.style.opacity = '0.4';
+          fitResultsList.style.transform = 'translateY(6px)';
+          setTimeout(() => {
+            renderFitmentResults();
+            fitResultsList.style.transition = 'all 0.25s ease';
+            fitResultsList.style.opacity = '1';
+            fitResultsList.style.transform = 'translateY(0)';
+          }, 300);
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // SIMULATOR 4: ENTERPRISE AI RAG (demo_key = 'rag')
+    // -------------------------------------------------------------
     const ragSendBtn = document.getElementById('ragSendBtn');
     const ragInput = document.getElementById('ragInput');
     const ragChatBox = document.getElementById('ragChatBox');
-    const ragChips = document.querySelectorAll('.rag-chip');
+    const ragChips = modalOverlay.querySelectorAll('.rag-chip');
 
     const cannedRagAnswers = {
-      'ip': 'Ownership, licensing, and handoff terms are defined in the signed agreement for each engagement.',
-      'pipeline': 'In production deployments, multi-channel lead ingestion pipelines can integrate WhatsApp Cloud API and web forms with PII sanitization, deduplication, and CRM endpoint routing.',
-      'erp': 'The School ERP platform is built on PHP and MySQL with strict role-based access control (RBAC). It isolates student academic records, fee ledgers, and staff payroll.',
-      'default': 'CodeX404 Solutions designs, builds, and automates high-performance software systems across our three core divisions: BUILD, GROW, and AUTOMATE.'
+      'ip': 'All proprietary application code, database schemas, and intellectual property developed for your engagement are transferred under the terms of your contract with zero proprietary vendor lock-in.',
+      'pipeline': 'In production environments, multi-channel lead ingestion pipes integrate WhatsApp Cloud API with HMAC webhook validation, PII anonymization, and transactional MySQL CRM persistence with sub-second execution.',
+      'erp': 'The School & Campus ERP architecture uses normalized relational schemas, prepared PDO transactions, and strict role-based access control (RBAC) to ensure tamper-proof student ledgers and instant fee reconciliation.',
+      'tech': 'CodeX404 standardizes on PHP 8.2+, MySQL (PDO prepared statements), vanilla CSS tokens, and modern JavaScript with zero heavy runtime overhead, ensuring high Core Web Vitals and zero build bloat.',
+      'booking': 'Clinical appointment scheduling implements atomic database row locks (SELECT ... FOR UPDATE) during the booking reservation window to physically prevent concurrent double-booking collisions.',
+      'default': 'CodeX404 Solutions engineers bespoke digital assets, web portals, and automation pipelines across three specialized divisions: BUILD (Web & Portals), GROW (Custom CRM & Ingestion), and AUTOMATE (APIs & AI Pipelines).'
     };
 
     const sendRagMessage = (text) => {
-      if (!text.trim() || !ragChatBox) return;
+      if (!text || !text.trim() || !ragChatBox) return;
+      const clean = text.trim();
 
-      // Add user bubble
-      const userBubble = document.createElement('div');
-      userBubble.className = 'chat-bubble user';
-      userBubble.textContent = text;
-      ragChatBox.appendChild(userBubble);
+      // User Bubble
+      const userRow = document.createElement('div');
+      userRow.className = 'rag-message-row user';
+      userRow.innerHTML = `
+        <div class="rag-avatar" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">👤</div>
+        <div class="rag-msg-bubble user">
+          <p>${clean.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+        </div>
+      `;
+      ragChatBox.appendChild(userRow);
       ragChatBox.scrollTop = ragChatBox.scrollHeight;
 
       if (ragInput) ragInput.value = '';
 
-      // Add loading state
-      const aiBubble = document.createElement('div');
-      aiBubble.className = 'chat-bubble ai';
-      aiBubble.innerHTML = '<span style="color: #38BDF8;">🤖 Searching private enterprise vectors...</span>';
-      ragChatBox.appendChild(aiBubble);
+      // AI Loading State
+      const aiRow = document.createElement('div');
+      aiRow.className = 'rag-message-row ai';
+      aiRow.innerHTML = `
+        <div class="rag-avatar">🤖</div>
+        <div class="rag-msg-bubble">
+          <div class="rag-msg-meta">Vector Search Pipeline &bull; Cosine Similarity Match</div>
+          <p style="color: #38BDF8; font-family: var(--font-mono); font-size: 0.8rem;">⟳ Retrieving verified enterprise chunks...</p>
+        </div>
+      `;
+      ragChatBox.appendChild(aiRow);
       ragChatBox.scrollTop = ragChatBox.scrollHeight;
 
       setTimeout(() => {
         let answer = cannedRagAnswers.default;
-        const lower = text.toLowerCase();
-        if (lower.includes('ip') || lower.includes('ownership')) answer = cannedRagAnswers.ip;
-        else if (lower.includes('pipeline') || lower.includes('lead') || lower.includes('whatsapp')) answer = cannedRagAnswers.pipeline;
-        else if (lower.includes('erp') || lower.includes('school') || lower.includes('student')) answer = cannedRagAnswers.erp;
+        let sourceRef = 'docs/specs/codex404-architecture.spec.md (L42-60)';
+        const lower = clean.toLowerCase();
 
-        aiBubble.innerHTML = `
-          <div style="margin-bottom: 0.4rem; color: #38BDF8; font-weight: 600; font-size: 0.75rem;">
-            ◈ Semantic Vector Simulation (Sample Match)
-          </div>
-          <div>${answer}</div>
-          <div style="margin-top: 0.5rem; font-size: 0.72rem; color: var(--slate-dark); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.35rem;">
-            Source: <code>docs/architecture/client-ip-and-security.spec.md (L14-29)</code>
+        if (lower.includes('ip') || lower.includes('intellectual') || lower.includes('ownership')) {
+          answer = cannedRagAnswers.ip;
+          sourceRef = 'contracts/ip-assignment-standard.clause.md (§4.1)';
+        } else if (lower.includes('pipeline') || lower.includes('whatsapp') || lower.includes('webhook')) {
+          answer = cannedRagAnswers.pipeline;
+          sourceRef = 'docs/architecture/whatsapp-ingestion-pipeline.spec.md (L18-35)';
+        } else if (lower.includes('erp') || lower.includes('school') || lower.includes('campus') || lower.includes('student')) {
+          answer = cannedRagAnswers.erp;
+          sourceRef = 'docs/architecture/campus-erp-relational-schema.md (L88-112)';
+        } else if (lower.includes('tech') || lower.includes('stack') || lower.includes('database') || lower.includes('php')) {
+          answer = cannedRagAnswers.tech;
+          sourceRef = 'docs/standards/engineering-principles.md (L12-30)';
+        } else if (lower.includes('lock') || lower.includes('booking') || lower.includes('doctor') || lower.includes('appointment')) {
+          answer = cannedRagAnswers.booking;
+          sourceRef = 'docs/architecture/concurrency-slot-locks.spec.md (L5-22)';
+        }
+
+        aiRow.innerHTML = `
+          <div class="rag-avatar">🤖</div>
+          <div class="rag-msg-bubble">
+            <div class="rag-msg-meta">Grounded Response &bull; Token Match: 98.4%</div>
+            <p>${answer}</p>
+            <div style="margin-top: 0.5rem; font-size: 0.72rem; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.4rem; font-family: var(--font-mono);">
+              📄 Grounded Source: <code style="color: #38BDF8;">${sourceRef}</code>
+            </div>
           </div>
         `;
         ragChatBox.scrollTop = ragChatBox.scrollHeight;
-      }, 750);
+      }, 650);
     };
 
     if (ragSendBtn && ragInput) {
@@ -912,49 +1235,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ragChips.forEach(chip => {
       chip.addEventListener('click', () => {
-        const query = chip.getAttribute('data-prompt') || chip.textContent;
+        const query = chip.getAttribute('data-prompt') || chip.textContent.trim();
         sendRagMessage(query);
       });
     });
 
-    // --- Simulator 2: WhatsApp Lead Pipeline Sandbox ---
+    // -------------------------------------------------------------
+    // SIMULATOR 5: WHATSAPP CRM & WEBHOOK (demo_key = 'wa')
+    // -------------------------------------------------------------
     const waSimulateBtn = document.getElementById('waSimulateBtn');
     const waChatLog = document.getElementById('waChatLog');
     const crmLeadList = document.getElementById('crmLeadList');
 
     if (waSimulateBtn && waChatLog && crmLeadList) {
-      let leadCount = 1;
+      let waCycle = 0;
+      const waScenarios = [
+        {
+          inbound: 'Hi, we operate a clinic with 4 doctors. Can your booking portal prevent overlapping appointments and send WhatsApp reminders?',
+          outbound: '👋 Absolutely! Our clinical scheduler incorporates atomic database row-locks (preventing concurrent slot claims) with automated WhatsApp dispatch.',
+          ticket: 'CX-8843',
+          intent: 'clinical_booking_inquiry',
+          endpoint: 'POST /api/webhooks/whatsapp/booking',
+          routing: 'Healthcare Systems Desk'
+        },
+        {
+          inbound: 'We need an automated fee voucher and student report card portal for a school with 1,500 students. What is your implementation timeframe?',
+          outbound: '🏫 Yes, our Campus ERP engine automates roll numbers, fee breakdown slips, and parent circulars. A solutions architect will share our architecture spec shortly.',
+          ticket: 'CX-8844',
+          intent: 'campus_erp_scoping',
+          endpoint: 'POST /api/webhooks/whatsapp/erp',
+          routing: 'Institutional Engineering Desk'
+        },
+        {
+          inbound: 'We need a high-speed automotive wheel catalog with Year/Make/Model PCD fitment filters for our wholesale dealership network.',
+          outbound: '🏎️ Understood! Our automotive catalog platform features dynamic vehicle PCD/Offset matrix calculations with real-time stock checks.',
+          ticket: 'CX-8845',
+          intent: 'b2b_catalog_inquiry',
+          endpoint: 'POST /api/webhooks/whatsapp/catalog',
+          routing: 'Commerce & Fitment Desk'
+        }
+      ];
+
       waSimulateBtn.addEventListener('click', () => {
+        const scenario = waScenarios[waCycle % waScenarios.length];
+        waCycle++;
         const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        // Add inbound message
+
+        // Inbound Bubble
         const inMsg = document.createElement('div');
-        inMsg.style.cssText = 'background: #202C33; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%;';
-        inMsg.innerHTML = `<strong>Lead #${leadCount}:</strong> Hi, we need a custom CRM + AI customer support for our 35-person sales team. Can you quote? <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">${timeNow}</div>`;
+        inMsg.className = 'wa-msg inbound';
+        inMsg.innerHTML = `<p>${scenario.inbound}</p><span class="wa-time">${timeNow}</span>`;
         waChatLog.appendChild(inMsg);
         waChatLog.scrollTop = waChatLog.scrollHeight;
 
-        // Auto automated reply after 900ms
+        // Automated Outbound
         setTimeout(() => {
           const outMsg = document.createElement('div');
-          outMsg.style.cssText = 'background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; max-width: 85%; margin-left: auto;';
-          outMsg.innerHTML = `<strong>CodeX404 Auto-Agent:</strong> Thank you! We received your custom CRM inquiry. Our solutions architect is reviewing your requirements and will reply shortly. Reference: #LD-${1040 + leadCount}. <div style="font-size: 0.7rem; color: #8696A0; text-align: right;">${timeNow}</div>`;
+          outMsg.className = 'wa-msg outbound';
+          outMsg.innerHTML = `<p>${scenario.outbound}</p><p style="margin-top: 4px;">Ticket: <strong>#${scenario.ticket}</strong></p><span class="wa-time">${timeNow} • ✓✓</span>`;
           waChatLog.appendChild(outMsg);
           waChatLog.scrollTop = waChatLog.scrollHeight;
 
-          // Add to CRM board
-          const crmItem = document.createElement('div');
-          crmItem.style.cssText = 'background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 10px; margin-bottom: 8px; font-size: 0.8rem;';
-          crmItem.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <strong style="color: #38BDF8;">Custom CRM Inquiry #${1040 + leadCount}</strong>
-              <span style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px;">QUALIFIED</span>
+          // Prepend Webhook Ingestion Telemetry
+          const wpCard = document.createElement('div');
+          wpCard.className = 'webhook-payload-item';
+          wpCard.innerHTML = `
+            <div class="wp-top">
+              <span class="wp-endpoint">${scenario.endpoint}</span>
+              <span class="wp-status font-mono">200 OK &bull; 14ms</span>
             </div>
-            <div style="color: var(--slate); font-size: 0.75rem;">Channel: Simulated Inbound Lead &nbsp;•&nbsp; Status: Mock Payload Captured</div>
+            <pre class="wp-code font-mono"><code>{
+  "event": "messages.received",
+  "ticket_id": "${scenario.ticket}",
+  "sender": {
+    "phone": "+91 98201-XXXXX",
+    "channel": "WhatsApp Cloud API"
+  },
+  "intent": "${scenario.intent}",
+  "crm_status": "LEAD_INGESTED",
+  "routing": "${scenario.routing}",
+  "timestamp": "${new Date().toISOString()}"
+}</code></pre>
           `;
-          crmLeadList.prepend(crmItem);
-          leadCount++;
-        }, 900);
+          crmLeadList.prepend(wpCard);
+        }, 750);
       });
     }
   };

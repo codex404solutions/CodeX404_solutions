@@ -237,111 +237,6 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     INTERACTIVE SVG ARCHITECTURE & FLOW BANNER
-     ========================================================================== -->
-<section class="arch-flow-section" aria-label="System Architecture Flow">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>The CodeX404 Engineering Flow</span>
-            </div>
-            <h2 class="section-title">
-                From Complex Constraints to <span class="text-gradient gradient-text-animated">Production
-                    Excellence</span>
-            </h2>
-            <p class="section-subtitle">
-                A structured engineering pipeline built on architectural discovery, automated testing, and intelligent
-                systems design.
-            </p>
-        </div>
-
-        <div class="arch-svg-banner">
-            <svg viewBox="0 0 1000 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-                aria-label="CodeX404 Architecture Diagram">
-                <defs>
-                    <linearGradient id="gradPath" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#00F0FF" />
-                        <stop offset="50%" stop-color="#8B5CF6" />
-                        <stop offset="100%" stop-color="#34D399" />
-                    </linearGradient>
-                    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#111D3A" />
-                        <stop offset="100%" stop-color="#0A1628" />
-                    </linearGradient>
-                    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="6" result="blur" />
-                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                </defs>
-
-                <!-- Connecting Flow Lines -->
-                <path d="M 200 120 L 330 120" stroke="url(#gradPath)" stroke-width="3" stroke-dasharray="6 4">
-                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.5s" repeatCount="indefinite" />
-                </path>
-                <path d="M 470 120 L 600 120" stroke="url(#gradPath)" stroke-width="3" stroke-dasharray="6 4">
-                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.5s" repeatCount="indefinite" />
-                </path>
-                <path d="M 740 120 L 870 120" stroke="url(#gradPath)" stroke-width="3" stroke-dasharray="6 4">
-                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.5s" repeatCount="indefinite" />
-                </path>
-
-                <!-- Flow Step 1: Input -->
-                <g transform="translate(40, 50)">
-                    <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#00F0FF" stroke-width="1.5" />
-                    <circle cx="90" cy="45" r="24" fill="rgba(0, 240, 255, 0.15)" stroke="#00F0FF" stroke-width="1.5" />
-                    <text x="90" y="52" fill="#00F0FF" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
-                        text-anchor="middle">🎯</text>
-                    <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">1. Discovery</text>
-                    <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Scope & Bottlenecks</text>
-                </g>
-
-                <!-- Flow Step 2: AI & Architecture -->
-                <g transform="translate(310, 50)">
-                    <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#8B5CF6" stroke-width="1.5" />
-                    <circle cx="90" cy="45" r="24" fill="rgba(139, 92, 246, 0.15)" stroke="#8B5CF6"
-                        stroke-width="1.5" />
-                    <text x="90" y="52" fill="#A78BFA" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
-                        text-anchor="middle">🧠</text>
-                    <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">2. Architecture</text>
-                    <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Systems & AI Design</text>
-                </g>
-
-                <!-- Flow Step 3: Hardened Build -->
-                <g transform="translate(580, 50)">
-                    <rect width="180" height="140" rx="14" fill="url(#cardGrad1)" stroke="#EC4899" stroke-width="1.5" />
-                    <circle cx="90" cy="45" r="24" fill="rgba(236, 72, 153, 0.15)" stroke="#EC4899"
-                        stroke-width="1.5" />
-                    <text x="90" y="52" fill="#F472B6" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
-                        text-anchor="middle">🛡️</text>
-                    <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">3. Verified Build</text>
-                    <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Type-Safe & Tested</text>
-                </g>
-
-                <!-- Flow Step 4: Production -->
-                <g transform="translate(850, 50)">
-                    <rect width="140" height="140" rx="14" fill="url(#cardGrad1)" stroke="#34D399" stroke-width="1.5" />
-                    <circle cx="70" cy="45" r="24" fill="rgba(52, 211, 153, 0.15)" stroke="#34D399"
-                        stroke-width="1.5" />
-                    <text x="70" y="52" fill="#34D399" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
-                        text-anchor="middle">🚀</text>
-                    <text x="70" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">4. Live Asset</text>
-                    <text x="70" y="122" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="11"
-                        text-anchor="middle">Transferred IP</text>
-                </g>
-            </svg>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
      THE THREE DIVISIONS — BUILD · GROW · AUTOMATE
      ========================================================================== -->
 <section class="section" id="divisions" aria-label="Company Divisions">
@@ -708,107 +603,107 @@ require_once __DIR__ . '/includes/header.php';
                 $isClient = ($typeKey === 'client');
                 $isAnonymized = !empty($p['is_anonymized']);
                 $clientName = $p['public_client_name'] ?? 'Verified Commercial Client';
+                $cat = $p['category'] ?? 'software';
+                $demoKey = $p['demo_key'] ?? 'erp';
+                $artClass = match($cat) {
+                    'booking' => 'cpc-art-booking',
+                    'commerce' => 'cpc-art-commerce',
+                    'mobile' => 'cpc-art-mobile',
+                    'ai' => 'cpc-art-ai',
+                    default => 'cpc-art-software'
+                };
+                $stageIcon = match($cat) {
+                    'booking' => '🏥',
+                    'commerce' => '🛒',
+                    'mobile' => '📱',
+                    'ai' => '🤖',
+                    default => '💻'
+                };
                 ?>
-                <article class="project-card clean-project-card card-tilt<?= $idx >= 8 ? ' is-overflow-hidden' : '' ?>"
+                <article class="project-card clean-project-card card-tilt<?= $idx >= 6 ? ' is-overflow-hidden' : '' ?>"
                     data-index="<?= $idx ?>" data-category="<?= htmlspecialchars($p['category']) ?>"
                     data-type="<?= htmlspecialchars($typeKey) ?>" id="project-<?= htmlspecialchars($p['id']) ?>">
                     <div>
-                        <!-- Header with Project Type, Status & Domain -->
-                        <div class="cpc-header" style="margin-bottom: 0.75rem;">
-                            <div class="cpc-meta" style="gap: 0.35rem; flex-wrap: wrap;">
-                                <span class="cpc-type-pill <?= htmlspecialchars($type['badge']) ?>">
-                                    <span
-                                        style="width: 5px; height: 5px; border-radius: 50%; background: currentColor;"></span>
-                                    <span><?= htmlspecialchars($type['label']) ?></span>
-                                </span>
-                                <span class="cpc-status-pill">
-                                    <span><?= htmlspecialchars($status['label']) ?></span>
-                                </span>
+                        <!-- 1. Screenshot (Uploaded via Admin Panel or Sleek Dynamic Fallback) -->
+                        <?php if (!empty($p['live_url'])): ?>
+                            <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-media-wrap" title="Visit Live Website for <?= htmlspecialchars($p['title']) ?>">
+                        <?php else: ?>
+                            <div class="cpc-media-wrap" title="<?= htmlspecialchars($p['title']) ?>">
+                        <?php endif; ?>
+                            <div class="cpc-media-browser-bar">
+                                <div class="cpc-window-dots">
+                                    <span class="cpc-dot-item dot-red"></span>
+                                    <span class="cpc-dot-item dot-yellow"></span>
+                                    <span class="cpc-dot-item dot-green"></span>
+                                </div>
+                                <div class="cpc-media-url font-mono">
+                                    <span>🔒</span> <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
+                                </div>
                             </div>
-                            <?php if (!empty($p['live_url'])): ?>
-                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
-                                    class="cpc-domain-pill" title="Visit Live Website">
-                                    <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
-                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                                    </svg>
-                                </a>
-                            <?php elseif (!empty($p['mockup_host'])): ?>
-                                <span class="cpc-domain-pill">
-                                    <span><?= htmlspecialchars($p['mockup_host'] ?? '') ?></span>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-
-                        <!-- Card Body -->
-                        <div class="cpc-body">
-                            <h3 class="cpc-title">
-                                <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>"
-                                    title="View Architecture &amp; Case Study for <?= htmlspecialchars($p['title']) ?>"><?= htmlspecialchars($p['title']) ?></a>
-                            </h3>
-
-                            <!-- Client Attribution Row -->
-                            <div class="cpc-client-row">
-                                <?php if (!empty($p['client_logo'])): ?>
-                                    <img src="<?= asset($p['client_logo']) ?>" alt="<?= htmlspecialchars($clientName) ?>"
-                                        style="height: 15px; max-width: 50px; object-fit: contain; vertical-align: middle;">
-                                <?php endif; ?>
-                                <?php if ($isClient): ?>
-                                    <?php if ($isAnonymized): ?>
-                                        <span class="cpc-client-anon">🔒 <?= htmlspecialchars($clientName) ?></span>
-                                    <?php else: ?>
-                                        <span class="cpc-client-name">🏢 <?= htmlspecialchars($clientName) ?></span>
-                                    <?php endif; ?>
-                                <?php elseif ($typeKey === 'internal'): ?>
-                                    <span class="cpc-client-name" style="color: var(--cyan);">💡 CodeX404 Proprietary</span>
+                            <div class="cpc-media-viewport">
+                                <?php if (!empty($p['cover_image'])): ?>
+                                    <img src="<?= asset($p['cover_image']) ?>" alt="Screenshot of <?= htmlspecialchars($p['title']) ?>" class="cpc-screenshot-img" loading="lazy">
                                 <?php else: ?>
-                                    <span class="cpc-client-name" style="color: #FBBF24;">⚡ Architecture Prototype</span>
+                                    <div class="cpc-screenshot-placeholder <?= $artClass ?>">
+                                        <span class="cpc-placeholder-icon"><?= $stageIcon ?></span>
+                                        <span class="cpc-placeholder-sub"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
+                                    </div>
                                 <?php endif; ?>
                             </div>
+                        <?= !empty($p['live_url']) ? '</a>' : '</div>' ?>
 
-                            <p class="cpc-description"><?= htmlspecialchars($p['solution'] ?? $p['description'] ?? '') ?>
-                            </p>
-
-                            <?php if (!empty($p['metric'])): ?>
-                                <div class="cpc-metric">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    <span><?= htmlspecialchars($p['metric']) ?></span>
-                                </div>
+                        <!-- 2. Project Name (Title) -->
+                        <h3 class="cpc-minimal-title">
+                            <?php if (!empty($p['live_url'])): ?>
+                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" title="<?= htmlspecialchars($p['title']) ?>">
+                                    <?= htmlspecialchars($p['title']) ?>
+                                </a>
+                            <?php else: ?>
+                                <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" title="<?= htmlspecialchars($p['title']) ?>">
+                                    <?= htmlspecialchars($p['title']) ?>
+                                </a>
                             <?php endif; ?>
+                        </h3>
 
-                            <!-- Tags -->
-                            <?php if (!empty($p['tags']) && is_array($p['tags'])): ?>
-                                <div class="cpc-tags">
-                                    <?php foreach (array_slice($p['tags'], 0, 3) as $tag): ?>
-                                        <span class="cpc-tag"><?= htmlspecialchars($tag) ?></span>
-                                    <?php endforeach; ?>
-                                </div>
+                        <!-- 3. Clean URL Link -->
+                        <div class="cpc-minimal-url-row">
+                            <?php if (!empty($p['live_url'])): ?>
+                                <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="cpc-minimal-url-link" title="Visit Live Production Domain">
+                                    <span class="url-protocol">https://</span><span class="url-domain"><?= htmlspecialchars($p['mockup_host'] ?? parse_url($p['live_url'], PHP_URL_HOST)) ?></span>
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            <?php else: ?>
+                                <span class="cpc-minimal-url-link disabled">
+                                    <span class="url-protocol">internal://</span><span class="url-domain"><?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?></span>
+                                </span>
                             <?php endif; ?>
                         </div>
+
+                        <!-- 4. Main Features (Top 3 Bullet Points) -->
+                        <?php if (!empty($p['features']) && is_array($p['features'])): ?>
+                            <ul class="cpc-minimal-features-list">
+                                <?php foreach (array_slice($p['features'], 0, 3) as $feat): ?>
+                                    <li>
+                                        <span class="cpc-feat-dot">✦</span>
+                                        <span><?= htmlspecialchars($feat) ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </div>
 
-                    <!-- Card Actions -->
+                    <!-- Card Actions: Only Live Site -->
                     <div class="cpc-footer">
                         <?php if (!empty($p['live_url'])): ?>
                             <a href="<?= htmlspecialchars($p['live_url']) ?>" target="_blank" rel="noopener noreferrer"
-                                class="cpc-btn cpc-btn-primary" title="Visit Live Production Site">
+                                class="cpc-btn cpc-btn-primary cpc-btn-full" title="Visit Live Website">
+                                <span>Live Site ↗</span>
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-primary cpc-btn-full" title="View Project Specs">
                                 <span>Live Site ↗</span>
                             </a>
                         <?php endif; ?>
-                        <button type="button" class="cpc-btn cpc-btn-secondary btn-demo-trigger"
-                            data-demo="<?= htmlspecialchars($p['demo_key'] ?? 'rag') ?>" title="Interactive Demo">
-                            <span>⚡ Demo</span>
-                        </button>
-                        <a href="<?= url('project.php?id=' . urlencode($p['id'])) ?>" class="cpc-btn cpc-btn-outline"
-                            title="View Architecture Breakdown">
-                            <span>Details →</span>
-                        </a>
                     </div>
                 </article>
             <?php endforeach; ?>
@@ -819,7 +714,7 @@ require_once __DIR__ . '/includes/header.php';
             <button type="button" class="projects-more-btn" id="btnToggleMoreProjects"
                 aria-label="Toggle more projects">
                 <span class="btn-more-text">View More Projects</span>
-                <span class="btn-more-badge">+<?= max(0, $countAll - 8) ?> More</span>
+                <span class="btn-more-badge">+<?= max(0, $countAll - 6) ?> More</span>
                 <svg class="btn-more-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -956,111 +851,6 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<!-- ==========================================================================
-     CORE SOLUTIONS & CAPABILITIES GRID
-     ========================================================================== -->
-<section class="section" id="solutions">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Our Core Capabilities</span>
-            </div>
-            <h2 class="section-title">
-                One Senior Partner from <span class="text-gradient gradient-text-animated">Architecture to Scale</span>
-            </h2>
-            <p class="section-subtitle">
-                Engineered for speed, strict security standards, and zero vendor lock-in.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-3" style="gap: 1.75rem;">
-            <!-- Capability 1 -->
-            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">💻</div>
-                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Custom Web Applications</h3>
-                <p style="font-size: 0.925rem; color: var(--slate);">
-                    Internal business portals, customer dashboards, and high-load web systems shaped around your
-                    specific team workflows.
-                </p>
-                <a href="<?= url('software-development.php') ?>" class="text-cyan"
-                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
-                    Learn about Web Platforms &rarr;
-                </a>
-            </article>
-
-            <!-- Capability 2 -->
-            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
-                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Enterprise AI & RAG</h3>
-                <p style="font-size: 0.925rem; color: var(--slate);">
-                    Connect private company documents, policies, and SQL databases to intelligent LLMs with verified
-                    vector citations.
-                </p>
-                <a href="<?= url('ai-solutions.php') ?>" class="text-violet"
-                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
-                    Explore Enterprise AI &rarr;
-                </a>
-            </article>
-
-            <!-- Capability 3 -->
-            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
-                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Autonomous AI Agents</h3>
-                <p style="font-size: 0.925rem; color: var(--slate);">
-                    Multi-tool autonomous agents that read email threads, resolve customer support inquiries, and
-                    trigger CRM updates.
-                </p>
-                <a href="<?= url('ai-agents.php') ?>" class="text-pink"
-                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
-                    Discover AI Agents &rarr;
-                </a>
-            </article>
-
-            <!-- Capability 4 -->
-            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
-                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Workflow & API Automation</h3>
-                <p style="font-size: 0.925rem; color: var(--slate);">
-                    Eliminate repetitive manual data entry. Synchronize WhatsApp Cloud API, Stripe billing, and CRM
-                    databases in real-time.
-                </p>
-                <a href="<?= url('automation.php') ?>" class="text-blue"
-                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
-                    See Automation Pipelines &rarr;
-                </a>
-            </article>
-
-            <!-- Capability 5 -->
-            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
-                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">SaaS MVP Development</h3>
-                <p style="font-size: 0.925rem; color: var(--slate);">
-                    Launch your SaaS product in weeks with multi-tenant security, Stripe subscription billing, and a
-                    clean maintainable foundation.
-                </p>
-                <a href="<?= url('saas.php') ?>" class="text-emerald"
-                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
-                    Explore SaaS Roadmaps &rarr;
-                </a>
-            </article>
-
-            <!-- Capability 6 -->
-            <article class="card card-tilt" style="background: rgba(17, 29, 58, 0.75);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
-                <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Mobile & PWA Apps</h3>
-                <p style="font-size: 0.925rem; color: var(--slate);">
-                    Fast, responsive mobile applications that install natively on iOS and Android devices with offline
-                    caching and push notifications.
-                </p>
-                <a href="<?= url('mobile-apps.php') ?>" class="text-amber"
-                    style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
-                    Learn about Mobile Apps &rarr;
-                </a>
-            </article>
-        </div>
-    </div>
-</section>
 
 <!-- ==========================================================================
      FOUNDER & LEADERSHIP SECTION
@@ -1348,56 +1138,6 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Interactive Live Demo Modal Overlay (For Trigger Buttons) -->
-<div class="demo-modal-overlay" id="projectDemoModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="demo-modal-container">
-        <div class="demo-modal-header">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span style="font-size: 1.4rem;">⚡</span>
-                <div>
-                    <h3 style="font-size: 1.15rem; margin: 0; color: #FFFFFF;">Interactive Systems Sandbox</h3>
-                    <div style="font-size: 0.75rem; color: var(--slate-dark);">Interactive UI/UX Architecture
-                        Simulations</div>
-                </div>
-            </div>
-            <button type="button" class="demo-close-btn" aria-label="Close demo simulator">&times;</button>
-        </div>
-
-        <div class="demo-modal-body">
-            <div class="demo-nav-tabs">
-                <button type="button" class="demo-nav-tab active" data-demo-target="rag">🤖 AI RAG Assistant</button>
-                <button type="button" class="demo-nav-tab" data-demo-target="erp">🏫 School Portal & ERP</button>
-            </div>
-
-            <!-- Pane 1: RAG -->
-            <div class="demo-simulator-pane active" id="demo-pane-rag">
-                <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">
-                    This sandbox simulates a grounded multi-source vector retrieval interface. Test sample prompts for
-                    contract terms, architecture, and engineering workflows.
-                </p>
-                <div
-                    style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; color: var(--slate); font-size: 0.85rem;">
-                    <div style="color: #38BDF8; font-weight: 700; margin-bottom: 0.5rem;">◈ Vector Retrieval Simulation:
-                        Mock Schema</div>
-                    <div>Architectural simulation modeled for semantic context search and citation referencing.</div>
-                </div>
-            </div>
-
-            <!-- Pane 2: ERP -->
-            <div class="demo-simulator-pane" id="demo-pane-erp">
-                <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">
-                    Modular educational administration architecture covering student records, automated fee
-                    reconciliation, and role-based staff portals.
-                </p>
-                <div
-                    style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; color: var(--slate); font-size: 0.85rem;">
-                    <div style="color: #38BDF8; font-weight: 700; margin-bottom: 0.5rem;">🏫 Architectural Case Study:
-                        Campus ERP Model</div>
-                    <div>Engineered with isolated database schemas, prepared PDO transactions, and strict role-based
-                        access control.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include __DIR__ . '/components/demo-modal.php'; ?>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
