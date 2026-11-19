@@ -21,7 +21,6 @@ https://codex404solutions.com/
 │   ├── Project Showcase (verify evidence and permissions before making claims)
 │   ├── Interactive Architecture Simulations (RAG & WhatsApp)
 │   ├── Core Capabilities (Web, AI, Agents, Workflows, SaaS, Mobile)
-│   ├── Illustrative Operational Efficiency Estimator
 │   ├── Founder & Senior Leadership
 │   ├── 4-Step Engineering Delivery Process
 │   ├── FAQs (Accordion)

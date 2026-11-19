@@ -4,8 +4,6 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/security.php';
 
-$divisionServiceOptions = \App\Validators\FormValidator::serviceOptions();
-
 $pageMeta = [
     'title' => 'Software & AI that moves your business forward | CodeX404 Solutions',
     'description' => 'CodeX404 Solutions designs, builds, and automates custom software, enterprise AI, autonomous agents, and workflow systems for growing businesses globally.',
@@ -33,15 +31,15 @@ require_once __DIR__ . '/includes/header.php';
             </h1>
 
             <!-- Dynamic Rotating Typewriter Headline -->
-            <div class="hero-typewriter-box" aria-live="off">
+            <div class="hero-typewriter-box" aria-live="polite">
                 <span class="type-prefix">Specialized in:</span>
                 <span class="typewriter-text" id="typewriter">BUILD · GROW · AUTOMATE</span>
                 <span class="typewriter-cursor"></span>
             </div>
 
             <p class="hero-description">
-                We build digital products, support online growth, and automate business workflows. Project scope,
-                responsibilities, ownership, and handoff terms are agreed in writing for each engagement.
+                We architect, build, and automate high-performance software systems — disciplined engineering standards,
+                cloud-native architectures, autonomous AI pipelines, and clear IP assignment upon milestone delivery.
             </p>
 
             <div class="hero-cta-group">
@@ -61,8 +59,8 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Value / Capability Stats Strip (Progressive Enhancement) -->
             <div class="hero-stats-strip">
                 <div class="stat-item">
-                    <strong>Clear Scope</strong>
-                    <span>Milestones & Acceptance Criteria</span>
+                    <strong data-counter-target="7" data-counter-suffix="+ Yrs">7+ Yrs</strong>
+                    <span>Enterprise Leadership</span>
                 </div>
                 <div class="stat-item">
                     <strong data-counter-target="3" data-counter-suffix=" Divisions">3 Divisions</strong>
@@ -321,7 +319,7 @@ require_once __DIR__ . '/includes/header.php';
                     <text x="90" y="52" fill="#F472B6" font-family="'Plus Jakarta Sans', sans-serif" font-size="20"
                         text-anchor="middle">🛡️</text>
                     <text x="90" y="100" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="14"
-                        font-weight="700" text-anchor="middle">3. Reviewed Build</text>
+                        font-weight="700" text-anchor="middle">3. Verified Build</text>
                     <text x="90" y="122" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11"
                         text-anchor="middle">Type-Safe & Tested</text>
                 </g>
@@ -365,133 +363,140 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="divisions-grid">
             <!-- Division 1: BUILD -->
-            <article class="division-card build card-tilt reveal-on-scroll" id="division-build">
-                <div>
-                    <div class="division-badge-pill badge-build">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
-                        <span>BUILD — Engineering & Apps</span>
+            <article class="division-card build card-tilt reveal-on-scroll">
+                <article class="division-card build card-tilt reveal-on-scroll" id="division-build">
+                    <div>
+                        <div class="division-badge-pill badge-build">
+                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
+                            <span>BUILD — Engineering & Apps</span>
+                        </div>
+                        <h3 class="division-title">
+                            <span>💻</span> Build Software That Scales
+                        </h3>
+                        <p class="division-desc">
+                            Turn core workflows and product visions into reliable web platforms, SaaS architectures,
+                            mobile
+                            applications, and high-load backend APIs.
+                        </p>
+                        <ul class="division-feature-list">
+                            <li class="division-feature-item">
+                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                                <span>Custom Web Applications & Enterprise Dashboards</span>
+                            </li>
+                            <li class="division-feature-item">
+                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                                <span>SaaS MVP Engineering & Multi-Tenant Setup</span>
+                            </li>
+                            <li class="division-feature-item">
+                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                                <span>Cross-Platform Mobile & Progressive Web Apps</span>
+                            </li>
+                            <li class="division-feature-item">
+                                <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
+                                <span>Payment Gateways & REST/GraphQL API Integration</span>
+                            </li>
+                        </ul>
                     </div>
-                    <h3 class="division-title">
-                        <span>💻</span> Build Software That Scales
-                    </h3>
-                    <p class="division-desc">
-                        Turn core workflows and product visions into reliable web platforms, SaaS architectures, mobile
-                        applications, and high-load backend APIs.
-                    </p>
-                    <ul class="division-feature-list">
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                            <span>Custom Web Applications & Enterprise Dashboards</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                            <span>SaaS MVP Engineering & Multi-Tenant Setup</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                            <span>Cross-Platform Mobile & Progressive Web Apps</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #60A5FA;">✓</span>
-                            <span>Payment Gateways & REST/GraphQL API Integration</span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="<?= url('build.php') ?>" class="division-cta-link text-build">
-                    <span>Explore BUILD Capabilities</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </article>
+                    <a href="<?= url('solutions.php#build') ?>" class="division-cta-link text-build">
+                        <span>Explore BUILD Capabilities</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </article>
 
-            <!-- Division 2: GROW -->
-            <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1" id="division-grow">
-                <div>
-                    <div class="division-badge-pill badge-grow">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
-                        <span>GROW — Visibility & Growth</span>
-                    </div>
-                    <h3 class="division-title">
-                        <span>📈</span> Grow Reach & Discovery
-                    </h3>
-                    <p class="division-desc">
-                        Help audiences discover and trust your platform through search engine optimization,
-                        answer-engine readiness (AEO/GEO), digital marketing, and conversion design.
-                    </p>
-                    <ul class="division-feature-list">
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                            <span>Search Engine Optimization (SEO & Technical Audits)</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                            <span>Answer Engine & Generative Discovery (AEO & GEO)</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                            <span>Digital Marketing Campaigns & Paid Traffic Guidance</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
-                            <span>Conversion Rate Optimization (CRO) & Funnel Analytics</span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="<?= url('grow.php') ?>" class="division-cta-link text-grow">
-                    <span>Explore GROW Capabilities</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </article>
+                <!-- Division 2: GROW -->
+                <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1">
+                    <article class="division-card grow card-tilt reveal-on-scroll reveal-delay-1" id="division-grow">
+                        <div>
+                            <div class="division-badge-pill badge-grow">
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
+                                <span>GROW — Visibility & Growth</span>
+                            </div>
+                            <h3 class="division-title">
+                                <span>📈</span> Grow Reach & Discovery
+                            </h3>
+                            <p class="division-desc">
+                                Help audiences discover and trust your platform through search engine optimization,
+                                answer-engine readiness (AEO/GEO), digital marketing, and conversion design.
+                            </p>
+                            <ul class="division-feature-list">
+                                <li class="division-feature-item">
+                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                                    <span>Search Engine Optimization (SEO & Technical Audits)</span>
+                                </li>
+                                <li class="division-feature-item">
+                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                                    <span>Answer Engine & Generative Discovery (AEO & GEO)</span>
+                                </li>
+                                <li class="division-feature-item">
+                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                                    <span>Digital Marketing Campaigns & Paid Traffic Guidance</span>
+                                </li>
+                                <li class="division-feature-item">
+                                    <span class="division-feature-bullet" style="color: #C084FC;">✓</span>
+                                    <span>Conversion Rate Optimization (CRO) & Funnel Analytics</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="<?= url('solutions.php#grow') ?>" class="division-cta-link text-grow">
+                            <span>Explore GROW Capabilities</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </article>
 
-            <!-- Division 3: AUTOMATE -->
-            <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2" id="division-automate">
-                <div>
-                    <div class="division-badge-pill badge-automate">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
-                        <span>AUTOMATE — AI & Operations</span>
-                    </div>
-                    <h3 class="division-title">
-                        <span>⚡</span> Automate Manual Toil
-                    </h3>
-                    <p class="division-desc">
-                        Connect disjointed systems and streamline operations using autonomous multi-tool AI agents,
-                        private RAG knowledge bases, and real-time messaging pipelines.
-                    </p>
-                    <ul class="division-feature-list">
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                            <span>Autonomous Multi-Tool Agentic Resolution Loops</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                            <span>Enterprise RAG & Grounded Vector Documentation Search</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                            <span>WhatsApp Cloud API & Real-time CRM Sync Webhooks</span>
-                        </li>
-                        <li class="division-feature-item">
-                            <span class="division-feature-bullet" style="color: #34D399;">✓</span>
-                            <span>Document Extraction & Event-Driven Process Automation</span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="<?= url('automate.php') ?>" class="division-cta-link text-automate">
-                    <span>Explore AUTOMATE Capabilities</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </article>
+                    <!-- Division 3: AUTOMATE -->
+                    <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2">
+                        <article class="division-card automate card-tilt reveal-on-scroll reveal-delay-2"
+                            id="division-automate">
+                            <div>
+                                <div class="division-badge-pill badge-automate">
+                                    <span
+                                        style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
+                                    <span>AUTOMATE — AI & Operations</span>
+                                </div>
+                                <h3 class="division-title">
+                                    <span>⚡</span> Automate Manual Toil
+                                </h3>
+                                <p class="division-desc">
+                                    Connect disjointed systems and streamline operations using autonomous multi-tool AI
+                                    agents,
+                                    private RAG knowledge bases, and real-time messaging pipelines.
+                                </p>
+                                <ul class="division-feature-list">
+                                    <li class="division-feature-item">
+                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                                        <span>Autonomous Multi-Tool Agentic Resolution Loops</span>
+                                    </li>
+                                    <li class="division-feature-item">
+                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                                        <span>Enterprise RAG & Grounded Vector Documentation Search</span>
+                                    </li>
+                                    <li class="division-feature-item">
+                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                                        <span>WhatsApp Cloud API & Real-time CRM Sync Webhooks</span>
+                                    </li>
+                                    <li class="division-feature-item">
+                                        <span class="division-feature-bullet" style="color: #34D399;">✓</span>
+                                        <span>Document Extraction & Event-Driven Process Automation</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a href="<?= url('solutions.php#automate') ?>" class="division-cta-link text-automate">
+                                <span>Explore AUTOMATE Capabilities</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </article>
         </div>
     </div>
 </section>
@@ -644,10 +649,11 @@ require_once __DIR__ . '/includes/header.php';
         <div class="section-header">
             <div class="section-tag">
                 <span class="dot"></span>
-                <span>Selected Work & Live Demos</span>
+                <span>Verified Deliverables & Live Working Demos</span>
             </div>
             <h2 class="section-title">
-                Our Work — Selected Projects and Demonstrations
+                Our Work — Systems Built for <span class="text-gradient gradient-text-animated">Real Business
+                    Impact</span>
             </h2>
             <p class="section-subtitle">
                 Explore real software platforms, institutional web portals, automation pipelines, and AI systems
@@ -964,7 +970,7 @@ require_once __DIR__ . '/includes/header.php';
                 One Senior Partner from <span class="text-gradient gradient-text-animated">Architecture to Scale</span>
             </h2>
             <p class="section-subtitle">
-                Explore software, digital growth, and automation work scoped around business requirements.
+                Engineered for speed, strict security standards, and zero vendor lock-in.
             </p>
         </div>
 
@@ -988,7 +994,8 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Enterprise AI & RAG</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Explore assistants that retrieve relevant information from approved company sources, with data handling and answer review planned for the system.
+                    Connect private company documents, policies, and SQL databases to intelligent LLMs with verified
+                    vector citations.
                 </p>
                 <a href="<?= url('ai-solutions.php') ?>" class="text-violet"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -1015,7 +1022,8 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Workflow & API Automation</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Connect business systems to reduce repetitive data entry. Integrations, permissions, and failure handling depend on the selected services.
+                    Eliminate repetitive manual data entry. Synchronize WhatsApp Cloud API, Stripe billing, and CRM
+                    databases in real-time.
                 </p>
                 <a href="<?= url('automation.php') ?>" class="text-blue"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -1028,7 +1036,8 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">SaaS MVP Development</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Scope a SaaS product around its users, data model, business workflows, and required integrations.
+                    Launch your SaaS product in weeks with multi-tenant security, Stripe subscription billing, and a
+                    clean maintainable foundation.
                 </p>
                 <a href="<?= url('saas.php') ?>" class="text-emerald"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
@@ -1041,81 +1050,14 @@ require_once __DIR__ . '/includes/header.php';
                 <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
                 <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Mobile & PWA Apps</h3>
                 <p style="font-size: 0.925rem; color: var(--slate);">
-                    Plan mobile applications and progressive web experiences around target devices, browser support, offline needs, and notifications.
+                    Fast, responsive mobile applications that install natively on iOS and Android devices with offline
+                    caching and push notifications.
                 </p>
                 <a href="<?= url('mobile-apps.php') ?>" class="text-amber"
                     style="font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 1rem;">
                     Learn about Mobile Apps &rarr;
                 </a>
             </article>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     ILLUSTRATIVE OPERATIONAL EFFICIENCY ESTIMATOR (SIMULATION)
-     ========================================================================== -->
-<section class="section" style="background: rgba(6, 11, 24, 0.6);">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Operational Efficiency Estimator</span>
-            </div>
-            <h2 class="section-title">
-                Illustrative Operational Efficiency <span class="text-gradient gradient-text-animated">Estimator</span>
-            </h2>
-            <p class="section-subtitle">
-                Model potential time and administrative effort recovered by replacing manual and fragmented workflows.
-            </p>
-        </div>
-
-        <div class="roi-calculator-card">
-            <!-- Slider 1: Team Size -->
-            <div class="roi-slider-group">
-                <div class="roi-slider-header">
-                    <label for="roiTeamSlider">Your Current Team / Operations Size</label>
-                    <span class="roi-slider-badge" id="roiTeamVal">12 Engineers / Staff</span>
-                </div>
-                <input type="range" id="roiTeamSlider" class="roi-slider" min="3" max="100" value="12" step="1">
-            </div>
-
-            <!-- Slider 2: Hours wasted per person -->
-            <div class="roi-slider-group">
-                <div class="roi-slider-header">
-                    <label for="roiHoursSlider">Hours Spent Weekly on Repetitive Work (per person)</label>
-                    <span class="roi-slider-badge" id="roiHoursVal">10 hrs / week / person</span>
-                </div>
-                <input type="range" id="roiHoursSlider" class="roi-slider" min="2" max="25" value="10" step="1">
-            </div>
-
-            <!-- Computed Outcomes Grid -->
-            <div class="roi-results-grid">
-                <div class="roi-result-item">
-                    <div class="label">Estimated Hours Reclaimed Annually</div>
-                    <div class="val" id="roiHoursSavedVal">~4,500 hrs / yr*</div>
-                </div>
-                <div class="roi-result-item">
-                    <div class="label">Illustrative Modeled Value</div>
-                    <div class="val" id="roiSavingsVal">~$202,500*</div>
-                </div>
-                <div class="roi-result-item">
-                    <div class="label">Scope Complexity</div>
-                    <div class="val" id="roiTimelineVal" style="color: #38BDF8;">Milestone Scoped</div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="#contact-section" class="btn btn-primary btn-lg">
-                    <span>Discuss Custom Automation Architecture &rarr;</span>
-                </a>
-            </div>
-
-            <p class="sim-disclaimer" style="text-align: center; margin-top: 1.25rem;">
-                * Disclaimer: The calculations above represent illustrative estimation models based on user-selected
-                inputs, not guaranteed returns or fixed delivery timelines. Actual impact and schedules depend on scoped
-                requirements and existing system architecture.
-            </p>
         </div>
     </div>
 </section>
@@ -1140,7 +1082,7 @@ require_once __DIR__ . '/includes/header.php';
                 Clarity Before Velocity. <span class="text-gradient gradient-text-animated">Scope Before Build.</span>
             </h2>
             <p class="section-subtitle">
-                We reduce uncertainty by discussing constraints, agreeing on scope, and reviewing the work as it progresses.
+                We eliminate guesswork through transparent technical milestones and continuous verification.
             </p>
         </div>
 
@@ -1168,15 +1110,17 @@ require_once __DIR__ . '/includes/header.php';
                     style="color: var(--soft-violet); font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
                     03</div>
                 <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Hardened Build</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Review implementation progress and test the agreed requirements during delivery.</p>
+                <p style="font-size: 0.875rem; color: var(--slate);">Ship verified code every 2 weeks with live preview
+                    staging and automated regression tests.</p>
             </div>
 
             <div class="card card-tilt" style="background: rgba(17, 29, 58, 0.7); position: relative;">
                 <div
                     style="color: #34D399; font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem;">
                     04</div>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Handoff & Ownership Terms</h3>
-                <p style="font-size: 0.875rem; color: var(--slate);">Document repository access, materials, operating notes, and handoff responsibilities in the agreement.</p>
+                <h3 style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 0.5rem;">Handoff & IP Assignment</h3>
+                <p style="font-size: 0.875rem; color: var(--slate);">Contracted repository transfer, operating
+                    documentation, and production environment ownership.</p>
             </div>
         </div>
     </div>
@@ -1207,7 +1151,9 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-1-answer">
-                    <p>Ownership, licensing, repository access, and handoff terms depend on the project agreement. We document the applicable terms before work begins.</p>
+                    <p>Upon milestone completion, accepted deliverables, and full payment per contract terms, the
+                        developed code, project configurations, and documentation are transferred to your business with
+                        no proprietary vendor lock-in.</p>
                 </div>
             </div>
 
@@ -1220,7 +1166,9 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-2-answer">
-                    <p>It is a brand slogan, not a promise of defect-free software. Testing and review activities are selected and documented according to the project's scope.</p>
+                    <p>It represents our senior-led engineering discipline. We build with strict type-safety, automated
+                        test coverage, defensive parameter validation, and pre-deployment code reviews to identify and
+                        address issues early in the development lifecycle.</p>
                 </div>
             </div>
 
@@ -1233,7 +1181,9 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-3-answer">
-                    <p>Timing depends on scope, dependencies, and technical complexity. We discuss milestones and delivery assumptions before work begins.</p>
+                    <p>Timeline depends on scope and technical complexity. Focused MVPs and automations are structured
+                        into clear two-week milestone sprints, with sprint goals and deliverables agreed upon before
+                        work begins.</p>
                 </div>
             </div>
 
@@ -1246,7 +1196,9 @@ require_once __DIR__ . '/includes/header.php';
                     </svg>
                 </button>
                 <div class="faq-answer" id="faq-4-answer">
-                    <p>Support, warranty coverage, and maintenance options depend on the project agreement. Confirm the coverage and response process before work begins.</p>
+                    <p>Yes. Projects include a post-launch stabilization window for critical defect remediation and
+                        monitoring. We also provide scheduled retainer packages for ongoing feature development,
+                        infrastructure maintenance, and system enhancements.</p>
                 </div>
             </div>
         </div>
@@ -1270,13 +1222,13 @@ require_once __DIR__ . '/includes/header.php';
                 </h2>
                 <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">
                     Tell us what your current digital system or workflow cannot do. Our engineering leads will review
-                    your requirements and follow up to discuss scope and possible next steps.
+                    your requirements and follow up promptly with initial technical scoping.
                 </p>
 
                 <div class="trust-badge-list">
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <div>Discuss requirements with the project team</div>
+                        <div>Direct access to Senior Architects (No sales runaround)</div>
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
@@ -1284,7 +1236,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <div>Ownership and handoff terms documented in the agreement</div>
+                        <div>Clear contractual IP assignment upon milestone delivery</div>
                     </div>
                 </div>
 
@@ -1335,25 +1287,14 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div style="margin-bottom: 1.25rem;">
-                        <label for="contact_company" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Company / Organization (optional)</label>
-                        <input type="text" id="contact_company" name="company" class="form-control" maxlength="120" placeholder="Business or organization name"
-                            style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
-                    </div>
-
-                    <div style="margin-bottom: 1.25rem;">
                         <label for="division_select"
                             style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Primary
                             Division *</label>
-                        <select id="division_select" name="division" class="form-control" required
+                        <select id="division_select" name="division" class="form-control"
                             style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
-                            <option value="">Choose a division</option>
-                            <?php foreach ($divisionServiceOptions as $code => $_services): ?>
-                                <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars(match ($code) {
-                                    'BUILD' => 'Software and digital products',
-                                    'GROW' => 'Digital marketing and discoverability',
-                                    default => 'Workflows, integrations, and AI',
-                                }, ENT_QUOTES, 'UTF-8') ?></option>
-                            <?php endforeach; ?>
+                            <option value="build">BUILD — Software, Web Platforms, SaaS, Mobile Apps</option>
+                            <option value="grow">GROW — Search Visibility, AEO/GEO, Digital Marketing</option>
+                            <option value="automate">AUTOMATE — AI Agents, RAG Knowledge, Workflow Pipelines</option>
                         </select>
                     </div>
 
@@ -1363,28 +1304,15 @@ require_once __DIR__ . '/includes/header.php';
                             of Specific Interest</label>
                         <select id="service_interest" name="service" class="form-control"
                             style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
-                            <option value="">Choose a service (optional)</option>
-                            <?php foreach ($divisionServiceOptions as $code => $services): ?>
-                                <optgroup label="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" data-division="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>">
-                                    <?php foreach ($services as $serviceCode => $serviceLabel): ?>
-                                        <option value="<?= htmlspecialchars($serviceCode, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($serviceLabel, ENT_QUOTES, 'UTF-8') ?></option>
-                                    <?php endforeach; ?>
-                                </optgroup>
-                            <?php endforeach; ?>
+                            <option value="custom_software">Custom Web Platform / Internal Portal (BUILD)</option>
+                            <option value="saas_mvp">SaaS MVP Engineering (BUILD)</option>
+                            <option value="mobile_app">Mobile Application (BUILD)</option>
+                            <option value="search_visibility">Search Engine Visibility & AEO/GEO (GROW)</option>
+                            <option value="digital_marketing">Digital Marketing Campaigns (GROW)</option>
+                            <option value="enterprise_ai">Enterprise AI & Knowledge RAG (AUTOMATE)</option>
+                            <option value="ai_agents">Autonomous AI Agents (AUTOMATE)</option>
+                            <option value="workflow_automation">Workflow Automation & WhatsApp API (AUTOMATE)</option>
                         </select>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
-                        <div>
-                            <label for="contact_country" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Country / Region (optional)</label>
-                            <input type="text" id="contact_country" name="country" class="form-control" maxlength="100" autocomplete="country-name" placeholder="e.g. India"
-                                style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
-                        </div>
-                        <div>
-                            <label for="contact_website" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate);">Business Website (optional)</label>
-                            <input type="url" id="contact_website" name="website" class="form-control" maxlength="255" placeholder="https://example.com"
-                                style="width: 100%; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #FFFFFF;">
-                        </div>
                     </div>
 
                     <div style="margin-bottom: 1.25rem;">
@@ -1399,7 +1327,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div style="margin-bottom: 1.5rem;">
                         <label
                             style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: var(--slate); cursor: pointer;">
-                            <input type="checkbox" name="privacy_consent" value="1" required
+                            <input type="checkbox" name="privacy_consent" value="1" checked required
                                 style="margin-top: 3px; accent-color: var(--cyan);">
                             <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank"
                                     style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and
@@ -1411,7 +1339,7 @@ require_once __DIR__ . '/includes/header.php';
                         <span>Request Technical Scoping Review &rarr;</span>
                     </button>
                     <div style="font-size: 0.75rem; color: var(--slate-dark); text-align: center; margin-top: 0.75rem;">
-                        Your enquiry will be handled as described in the Privacy Policy.
+                        🔒 Confidential • Zero spam • Prompt review during business hours
                     </div>
                 </form>
             </div>

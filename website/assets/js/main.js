@@ -1112,46 +1112,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
 
   // ======================================================================
-  // 21. Interactive ROI & System Efficiency Calculator
-  // ======================================================================
-  const initRoiCalculator = () => {
-    const teamSlider = document.getElementById('roiTeamSlider');
-    const hoursSlider = document.getElementById('roiHoursSlider');
-    const teamVal = document.getElementById('roiTeamVal');
-    const hoursVal = document.getElementById('roiHoursVal');
-    const savingsVal = document.getElementById('roiSavingsVal');
-    const hoursSavedVal = document.getElementById('roiHoursSavedVal');
-    const timelineVal = document.getElementById('roiTimelineVal');
-
-    if (!teamSlider || !hoursSlider) return;
-
-    const calculate = () => {
-      const team = parseInt(teamSlider.value, 10) || 12;
-      const hours = parseInt(hoursSlider.value, 10) || 10;
-
-      if (teamVal) teamVal.textContent = `${team} Engineers / Staff`;
-      if (hoursVal) hoursVal.textContent = `${hours} hrs / week / person`;
-
-      // 50 working weeks/year, average blended wage $45/hr, 75% automated recovery
-      const totalHoursWasted = team * hours * 50;
-      const savedHours = Math.round(totalHoursWasted * 0.75);
-      const dollarSavings = Math.round(savedHours * 45);
-
-      if (hoursSavedVal) hoursSavedVal.textContent = `~${savedHours.toLocaleString()} hrs / yr*`;
-      if (savingsVal) savingsVal.textContent = `~$${dollarSavings.toLocaleString()}*`;
-      if (timelineVal) {
-        timelineVal.textContent = 'Milestone Scoped';
-      }
-    };
-
-    teamSlider.addEventListener('input', calculate);
-    hoursSlider.addEventListener('input', calculate);
-    calculate();
-  };
-
-  initRoiCalculator();
-
-  // ======================================================================
   // 22. Mobile Navigation Dropdown Accordions
   // ======================================================================
   const initMobileDropdowns = () => {
