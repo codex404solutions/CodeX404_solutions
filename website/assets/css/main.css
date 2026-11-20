@@ -488,15 +488,14 @@ main:target {
 .top-founder-link {
   color: var(--cyan);
   font-weight: 700;
-  text-decoration: underline dashed;
-  text-underline-offset: 3px;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
 .top-founder-link:hover {
   color: #FFFFFF;
   text-shadow: 0 0 8px var(--cyan);
-  text-decoration: underline solid;
+  text-decoration: none;
 }
 
 .top-announcement-right {

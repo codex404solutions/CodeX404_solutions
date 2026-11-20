@@ -29,13 +29,10 @@ declare(strict_types=1);
                     <span
                         style="position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; background: #10B981; border: 3px solid #060B18; border-radius: 50%; box-shadow: 0 0 8px #10B981;"></span>
                 </div>
-                <h3 style="font-size: 1.4rem; color: #FFFFFF; margin-bottom: 0.35rem;">
-                    <a href="https://mnoukhej.github.io/portfolio/" target="_blank" rel="noopener"
-                        class="top-founder-link"><?= FOUNDER_NAME ?></a>
-                </h3>
+                <h3 style="font-size: 1.4rem; color: #FFFFFF; margin-bottom: 0.35rem;"><?= FOUNDER_NAME ?></h3>
                 <div
                     style="font-size: 0.85rem; color: #38BDF8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
-                    <?= FOUNDER_ROLE ?> • Senior Systems Architect
+                    <?= FOUNDER_ROLE ?>
                 </div>
                 <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.6; margin-bottom: 1.5rem;">
                     <?= FOUNDER_BIO ?> Specialized in high-throughput Python architecture, Azure OpenAI & RAG systems,
