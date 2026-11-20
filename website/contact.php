@@ -56,6 +56,13 @@ require_once __DIR__ . '/includes/header.php';
                     Tell us whether your enquiry is about BUILD, GROW, or AUTOMATE. Scope, next steps, and the people involved are confirmed for each project.
                 </p>
 
+                <div style="background: rgba(34, 211, 238, 0.05); border: 1px solid rgba(34, 211, 238, 0.25); border-radius: var(--radius-md); padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
+                    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 10px #34D399;"></span>
+                    <span style="font-size: 0.85rem; color: var(--white); font-weight: 600;">
+                        Engineers Active: Mon–Fri (9:00 AM – 8:00 PM IST • Overlapping EST &amp; GMT)
+                    </span>
+                </div>
+
                 <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">✉️</div>
@@ -70,7 +77,7 @@ require_once __DIR__ . '/includes/header.php';
                         <div>
                             <strong style="color: var(--white); display: block;">Technical Discovery Call</strong>
                             <a href="<?= url('discovery-call.php') ?>" style="color: var(--cyan); font-weight: 600;">
-                                Request a Discovery Call &rarr;
+                                Request a 30-Min Architecture Session &rarr;
                             </a>
                         </div>
                     </div>
@@ -78,16 +85,16 @@ require_once __DIR__ . '/includes/header.php';
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">🌐</div>
                         <div>
-                            <strong style="color: var(--white); display: block;">Global Delivery</strong>
-                            <span>Dedicated timezone support across North America, UK/Europe, GCC, and APAC.</span>
+                            <strong style="color: var(--white); display: block;">Global Engineering Delivery</strong>
+                            <span>Dedicated timezone support across North America (EST/PST), UK/Europe (GMT/CET), GCC, and APAC.</span>
                         </div>
                     </div>
 
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">⏱️</div>
                         <div>
-                            <strong style="color: var(--white); display: block;">Fast Response</strong>
-                            <span>Direct technical reply from our founders within 24 hours.</span>
+                            <strong style="color: var(--white); display: block;">Guaranteed Response Time</strong>
+                            <span>Direct technical reply from our founding engineers within 24 hours.</span>
                         </div>
                     </div>
                 </div>

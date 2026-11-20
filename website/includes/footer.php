@@ -68,6 +68,7 @@ declare(strict_types=1);
                     <li><a href="<?= url('case-studies.php') ?>">Case Studies</a></li>
                     <li><a href="<?= url('process.php') ?>">Engineering Process</a></li>
                     <li><a href="<?= url('engagement-models.php') ?>">Engagement Models</a></li>
+                    <li><a href="<?= url('careers.php') ?>">Careers &amp; Culture</a></li>
                     <li><a href="<?= url('security.php') ?>">Security & Compliance</a></li>
                     <li><a href="<?= url('faq.php') ?>">FAQ</a></li>
                 </ul>

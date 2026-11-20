@@ -95,6 +95,42 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </article>
 
+            <article class="clean-project-card card-tilt" style="padding: 2.25rem;">
+                <div class="cpc-header" style="margin-bottom: 1rem;">
+                    <span class="cpc-category">Enterprise AI</span>
+                    <span class="cpc-badge"><span class="cpc-dot"></span>9 min read</span>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.85rem; line-height: 1.35;">
+                    Enterprise RAG: Benchmarking Vector Stores (Qdrant vs pgvector) for Sovereign AI
+                </h3>
+                <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                    A deep dive into high-dimension vector indexing, hybrid lexical search, semantic distance thresholds, and memory budgeting when connecting LLMs to private corporate manuals.
+                </p>
+                <div class="cpc-tags" style="margin-top: auto;">
+                    <span class="cpc-tag">Qdrant Vector DB</span>
+                    <span class="cpc-tag">pgvector</span>
+                    <span class="cpc-tag">Hybrid Search</span>
+                </div>
+            </article>
+
+            <article class="clean-project-card card-tilt" style="padding: 2.25rem;">
+                <div class="cpc-header" style="margin-bottom: 1rem;">
+                    <span class="cpc-category">API Engineering</span>
+                    <span class="cpc-badge"><span class="cpc-dot"></span>6 min read</span>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.85rem; line-height: 1.35;">
+                    Official Meta WhatsApp Cloud API vs Unofficial Scrapers: Enterprise Reliability
+                </h3>
+                <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                    Why third-party browser automation scripts inevitably get banned, and how official Meta Cloud webhooks guarantee end-to-end encryption, 99.9% deliverability, and Green Tick compliance.
+                </p>
+                <div class="cpc-tags" style="margin-top: auto;">
+                    <span class="cpc-tag">Meta Cloud API</span>
+                    <span class="cpc-tag">Webhooks</span>
+                    <span class="cpc-tag">Security</span>
+                </div>
+            </article>
+
         </div>
     </div>
 </section>

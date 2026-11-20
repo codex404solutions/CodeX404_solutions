@@ -854,7 +854,7 @@ require_once __DIR__ . '/includes/header.php';
      INTERACTIVE ARCHITECTURAL SIMULATORS (SIMULATION ONLY)
      ========================================================================== -->
 <section class="section" id="simulators"
-    style="background: rgba(10, 22, 40, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    style="background: radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.12) 0%, rgba(6, 11, 24, 0.95) 70%); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); position: relative;">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
@@ -865,115 +865,144 @@ require_once __DIR__ . '/includes/header.php';
                 Experience System Workflows <span class="text-gradient gradient-text-animated">In Action</span>
             </h2>
             <p class="section-subtitle">
-                Interactive prototypes demonstrating vector retrieval logic and webhook ingestion flows directly in your
-                browser.
+                Explore real architectural prototypes running directly in your browser. Query our grounded AI vector
+                retrieval assistant or simulate synchronous WhatsApp CRM webhook ingestion.
             </p>
         </div>
 
-        <div class="grid grid-cols-2" style="gap: 2rem;">
+        <div class="grid grid-cols-2" style="gap: 2rem; align-items: stretch;">
             <!-- Simulator 1: Enterprise AI RAG Assistant -->
             <div class="card card-tilt"
-                style="background: rgba(17, 29, 58, 0.8); border: 1px solid rgba(59, 130, 246, 0.35);">
-                <div
-                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                style="background: rgba(13, 23, 48, 0.75); border: 1px solid rgba(56, 189, 248, 0.28); display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 0.75rem;">
                     <div>
-                        <h3 style="font-size: 1.2rem; color: #FFFFFF; display: flex; align-items: center; gap: 0.5rem;">
-                            <span>🤖</span> Enterprise AI RAG Assistant
-                        </h3>
-                        <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Multi-source grounded
-                            vector search simulation with sample citations</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                            <span style="font-size: 1.3rem;">🤖</span>
+                            <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 700; margin: 0;">Enterprise AI RAG Assistant</h3>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--slate); margin: 0;">Multi-source grounded vector search with source citations</p>
                     </div>
-                    <span class="sim-badge">Simulated Sandbox</span>
+                    <span class="live-tag-pill green" style="flex-shrink: 0;">● Vector DB Online</span>
                 </div>
 
-                <!-- Prompt Chips -->
-                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem;">
-                    <button type="button" class="rag-chip" data-prompt="What is CodeX404 client IP ownership policy?"
-                        style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--slate); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px; cursor: pointer;">💡
-                        IP Ownership?</button>
-                    <button type="button" class="rag-chip"
-                        data-prompt="How does the WhatsApp lead pipeline automate CRM?"
-                        style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--slate); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px; cursor: pointer;">⚡
-                        WhatsApp Pipeline?</button>
-                    <button type="button" class="rag-chip" data-prompt="Tell me about the School ERP architecture"
-                        style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--slate); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px; cursor: pointer;">🏫
-                        School ERP?</button>
+                <!-- Quick Prompt Chips -->
+                <div class="rag-prompt-chips-bar" style="margin-bottom: 1rem;">
+                    <span class="chips-label">Try Asking:</span>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Who owns the source code and IP after completion?">💡 IP Ownership Terms?</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="How does the WhatsApp lead pipeline automate CRM?">⚡ WhatsApp Pipeline?</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Explain how patient appointment double-booking is prevented.">🔒 Concurrency Locks?</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Tell me about the School ERP architecture">🏫 Campus ERP?</button>
                 </div>
 
-                <!-- Simulated Chat Box -->
-                <div id="ragChatBox"
-                    style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 1rem; height: 220px; overflow-y: auto; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem;">
-                    <div
-                        style="background: rgba(59, 130, 246, 0.12); border-left: 3px solid #38BDF8; padding: 8px 12px; border-radius: 4px; color: var(--slate);">
-                        <strong style="color: #38BDF8;">CodeX404 AI Agent:</strong> Welcome! Ask any technical question
-                        about our software architecture, engineering standards, or technology stack.
+                <!-- Chat Stream Viewport -->
+                <div class="rag-chat-stream" id="onpageRagChatBox" style="height: 275px; flex: 1;">
+                    <div class="rag-message-row ai">
+                        <div class="rag-avatar">🤖</div>
+                        <div class="rag-msg-bubble">
+                            <div class="rag-msg-meta">CodeX404 Grounded RAG Agent &bull; Isolated Context</div>
+                            <p>Welcome to the CodeX404 Architecture Demonstrator. Ask any question regarding our software engineering standards, relational schemas, or deployment pipelines.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Input Box -->
-                <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-                    <input type="text" id="ragInput" placeholder="Type a technical question or click a chip..."
-                        style="flex: 1; background: #060B18; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #FFFFFF; font-size: 0.85rem;">
-                    <button type="button" id="ragSendBtn" class="btn btn-primary btn-sm">Ask</button>
+                <!-- Input Bar -->
+                <div class="rag-input-bar" style="margin-top: 1rem;">
+                    <input type="text" id="onpageRagInput" placeholder="Ask a technical or architectural question..." autocomplete="off">
+                    <button type="button" id="onpageRagSendBtn" class="btn btn-primary btn-sm">
+                        <span>Query &rarr;</span>
+                    </button>
                 </div>
             </div>
 
             <!-- Simulator 2: WhatsApp CRM Automation -->
             <div class="card card-tilt"
-                style="background: rgba(17, 29, 58, 0.8); border: 1px solid rgba(16, 185, 129, 0.35);">
-                <div
-                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                style="background: rgba(13, 23, 48, 0.75); border: 1px solid rgba(16, 185, 129, 0.28); display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 0.75rem;">
                     <div>
-                        <h3 style="font-size: 1.2rem; color: #FFFFFF; display: flex; align-items: center; gap: 0.5rem;">
-                            <span>💬</span> WhatsApp Cloud & CRM Pipeline
-                        </h3>
-                        <p style="font-size: 0.825rem; color: var(--slate-dark); margin: 0;">Architectural webhook
-                            simulation with mock event qualification</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                            <span style="font-size: 1.3rem;">💬</span>
+                            <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 700; margin: 0;">WhatsApp Cloud &amp; CRM Pipeline</h3>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--slate); margin: 0;">Synchronous webhook ingestion with automated qualification</p>
                     </div>
-                    <button type="button" id="waSimulateBtn" class="btn btn-secondary btn-sm"
-                        style="font-size: 0.75rem; border-color: #10B981; color: #34D399;">
-                        Simulate Inbound Lead ⚡
-                    </button>
+                    <span class="live-tag-pill green" style="flex-shrink: 0;">● HMAC Webhook Active</span>
                 </div>
 
-                <div class="wa-simulator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <!-- Phone View -->
-                    <div style="background: #0B141B; border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 0.75rem; height: 260px; overflow-y: auto;"
-                        id="waChatLog">
-                        <div style="font-size: 0.72rem; color: #8696A0; text-align: center; margin-bottom: 0.5rem;">
-                            WhatsApp Cloud API Simulator Stream</div>
-                        <div
-                            style="background: #005C4B; color: #E9EDEF; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; margin-left: auto; max-width: 90%;">
-                            Simulator listening for sample inbound events.
+                <!-- Dual-Column Interactive Frame -->
+                <div class="onpage-wa-grid" style="flex: 1;">
+                    <!-- Left: Smartphone WhatsApp Frame -->
+                    <div class="phone-simulator-frame">
+                        <div class="phone-notch">
+                            <span class="phone-speaker"></span>
+                            <span class="phone-camera"></span>
+                        </div>
+
+                        <div class="wa-header">
+                            <div class="wa-avatar">404</div>
+                            <div class="wa-contact-info">
+                                <strong>CodeX404 Solutions</strong>
+                                <span class="wa-verified">✓ Official Business Account</span>
+                            </div>
+                        </div>
+
+                        <div class="wa-chat-canvas" id="onpageWaChatLog" style="height: 195px;">
+                            <div class="wa-msg inbound">
+                                <p>Hi CodeX404, we are planning a custom B2B wholesale platform for 100+ dealers. Can we discuss technical feasibility?</p>
+                                <span class="wa-time">10:42 AM</span>
+                            </div>
+                            <div class="wa-msg outbound">
+                                <p>👋 Hello! Thank you for reaching out to CodeX404. We specialize in B2B commerce and custom enterprise platforms.</p>
+                                <p style="margin-top: 4px;">Ticket: <strong>#CX-8842</strong>.</p>
+                                <span class="wa-time">10:42 AM &bull; ✓✓</span>
+                            </div>
+                        </div>
+
+                        <div class="wa-action-bar">
+                            <button type="button" id="onpageWaSimulateBtn" class="btn btn-primary btn-sm" style="width: 100%;">
+                                <span>⚡ Trigger Next Simulated Message</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- CRM Board View -->
-                    <div style="background: #060B18; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 0.75rem; height: 260px; overflow-y: auto;"
-                        id="crmLeadList">
-                        <div
-                            style="font-size: 0.72rem; color: var(--slate-dark); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700;">
-                            Simulated Ingestion Flow</div>
-                        <div
-                            style="background: rgba(11, 20, 38, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 8px; font-size: 0.78rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <strong style="color: #38BDF8;">Enterprise Portal Lead</strong>
-                                <span
-                                    style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;">SYNCED</span>
+                    <!-- Right: Real-Time Webhook JSON Payload -->
+                    <div class="demo-card-box" style="padding: 1rem;">
+                        <div class="demo-box-header" style="margin-bottom: 0.5rem; padding-bottom: 0.4rem;">
+                            <div style="display: flex; align-items: center; gap: 0.35rem;">
+                                <span class="box-icon" style="font-size: 0.9rem;">⚡</span>
+                                <h4 style="font-size: 0.82rem; margin: 0;">Ingestion Telemetry</h4>
                             </div>
-                            <div style="color: var(--slate); font-size: 0.72rem; margin-top: 4px;">Source: Ingestion
-                                Simulator • Status: Mock Stream</div>
+                            <span class="live-tag-pill green" style="font-size: 0.65rem;">200 OK</span>
+                        </div>
+
+                        <div class="webhook-telemetry-feed" id="onpageCrmLeadList" style="max-height: 245px;">
+                            <div class="webhook-payload-item">
+                                <div class="wp-top">
+                                    <span class="wp-endpoint">POST /api/webhooks/whatsapp/inbound</span>
+                                    <span class="wp-status font-mono">18ms</span>
+                                </div>
+                                <pre class="wp-code font-mono"><code>{
+  "event": "messages.received",
+  "ticket_id": "CX-8842",
+  "sender": "+91 98201-XXXXX",
+  "intent": "b2b_wholesale_inquiry",
+  "crm_status": "LEAD_INGESTED",
+  "routing": "Enterprise Architecture Desk",
+  "timestamp": "2026-11-20T10:42:00Z"
+}</code></pre>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <p class="sim-disclaimer" style="text-align: center; margin-top: 1.25rem;">
-            * Note: The panels above are interactive architectural simulations demonstrating vector retrieval logic and
-            webhook event dispatching. They are not connected to active production databases or live third-party cloud
-            messaging endpoints.
-        </p>
+        <!-- Bottom Engineering Sandbox Disclaimer -->
+        <div style="margin-top: 2rem; background: rgba(17, 29, 58, 0.4); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; text-align: center;">
+            <span style="color: var(--cyan); font-size: 1.1rem;">🔒</span>
+            <p style="margin: 0; font-size: 0.825rem; color: var(--slate-dark); line-height: 1.5;">
+                <strong style="color: var(--slate);">Interactive Architectural Demonstrators:</strong> These panels run client-side vector search matching and webhook ingestion simulations. In production, our systems connect directly with Qdrant Vector DB, Meta Cloud API, and secure MySQL CRM tables.
+            </p>
+        </div>
     </div>
 </section>
 

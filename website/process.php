@@ -26,6 +26,38 @@ require_once __DIR__ . '/includes/header.php';
             </p>
         </div>
 
+        <!-- Enterprise Compliance & Methodology Badges -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 980px; margin: 0 auto 3.5rem auto;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.85rem;">
+                <span style="font-size: 1.5rem;">⏱️</span>
+                <div>
+                    <strong style="color: var(--white); font-size: 0.9rem; display: block;">Bi-Weekly Scrum</strong>
+                    <span style="font-size: 0.8rem; color: var(--slate);">Live demo every 14 days</span>
+                </div>
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.85rem;">
+                <span style="font-size: 1.5rem;">🛡️</span>
+                <div>
+                    <strong style="color: var(--white); font-size: 0.9rem; display: block;">OWASP Top 10</strong>
+                    <span style="font-size: 0.8rem; color: var(--slate);">Defensive vulnerability guard</span>
+                </div>
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.85rem;">
+                <span style="font-size: 1.5rem;">🇪🇺</span>
+                <div>
+                    <strong style="color: var(--white); font-size: 0.9rem; display: block;">GDPR Aligned</strong>
+                    <span style="font-size: 0.8rem; color: var(--slate);">Data privacy &amp; audit trails</span>
+                </div>
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.85rem;">
+                <span style="font-size: 1.5rem;">🌿</span>
+                <div>
+                    <strong style="color: var(--white); font-size: 0.9rem; display: block;">Atomic CI/CD</strong>
+                    <span style="font-size: 0.8rem; color: var(--slate);">Zero-downtime Git releases</span>
+                </div>
+            </div>
+        </div>
+
         <div style="display: flex; flex-direction: column; gap: 2.5rem; max-width: 980px; margin: 0 auto;">
             <!-- Step 1 -->
             <div class="card" style="padding: 2.25rem;">

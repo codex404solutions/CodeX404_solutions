@@ -5389,6 +5389,18 @@
   margin: 0;
 }
 
+.onpage-wa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.12fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1250px) {
+  .onpage-wa-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Homepage Contact Section Enhancement */
 .home-contact-section {
   position: relative;

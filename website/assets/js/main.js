@@ -1142,9 +1142,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // SIMULATOR 4: ENTERPRISE AI RAG (demo_key = 'rag')
     // -------------------------------------------------------------
-    const ragSendBtn = document.getElementById('ragSendBtn');
-    const ragInput = document.getElementById('ragInput');
-    const ragChatBox = document.getElementById('ragChatBox');
+    const ragSendBtn = modalOverlay.querySelector('#ragSendBtn');
+    const ragInput = modalOverlay.querySelector('#ragInput');
+    const ragChatBox = modalOverlay.querySelector('#ragChatBox');
     const ragChips = modalOverlay.querySelectorAll('.rag-chip');
 
     const cannedRagAnswers = {
@@ -1243,9 +1243,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // SIMULATOR 5: WHATSAPP CRM & WEBHOOK (demo_key = 'wa')
     // -------------------------------------------------------------
-    const waSimulateBtn = document.getElementById('waSimulateBtn');
-    const waChatLog = document.getElementById('waChatLog');
-    const crmLeadList = document.getElementById('crmLeadList');
+    const waSimulateBtn = modalOverlay.querySelector('#waSimulateBtn');
+    const waChatLog = modalOverlay.querySelector('#waChatLog');
+    const crmLeadList = modalOverlay.querySelector('#crmLeadList');
 
     if (waSimulateBtn && waChatLog && crmLeadList) {
       let waCycle = 0;
@@ -1695,8 +1695,193 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // ======================================================================
+  // 15b. On-Page System Workflow Simulators (#simulators section)
+  // ======================================================================
+  const initOnpageSimulators = () => {
+    const section = document.getElementById('simulators');
+    if (!section) return;
+
+    // --- On-Page RAG Simulator ---
+    const ragSendBtn = document.getElementById('onpageRagSendBtn');
+    const ragInput = document.getElementById('onpageRagInput');
+    const ragChatBox = document.getElementById('onpageRagChatBox');
+    const ragChips = section.querySelectorAll('.onpage-rag-chip');
+
+    const cannedRagAnswers = {
+      'ip': 'All proprietary application code, database schemas, and intellectual property developed for your engagement are transferred under the terms of your contract with zero proprietary vendor lock-in.',
+      'pipeline': 'In production environments, multi-channel lead ingestion pipes integrate WhatsApp Cloud API with HMAC webhook validation, PII anonymization, and transactional MySQL CRM persistence with sub-second execution.',
+      'erp': 'The School & Campus ERP architecture uses normalized relational schemas, prepared PDO transactions, and strict role-based access control (RBAC) to ensure tamper-proof student ledgers and instant fee reconciliation.',
+      'tech': 'CodeX404 standardizes on PHP 8.2+, MySQL (PDO prepared statements), vanilla CSS tokens, and modern JavaScript with zero heavy runtime overhead, ensuring high Core Web Vitals and zero build bloat.',
+      'booking': 'Clinical appointment scheduling implements atomic database row locks (SELECT ... FOR UPDATE) during the booking reservation window to physically prevent concurrent double-booking collisions.',
+      'default': 'CodeX404 Solutions engineers bespoke digital assets, web portals, and automation pipelines across three specialized divisions: BUILD (Web & Portals), GROW (Custom CRM & Ingestion), and AUTOMATE (APIs & AI Pipelines).'
+    };
+
+    const sendOnpageRagMessage = (text) => {
+      if (!text || !text.trim() || !ragChatBox) return;
+      const clean = text.trim();
+
+      // User Message Bubble
+      const userRow = document.createElement('div');
+      userRow.className = 'rag-message-row user';
+      userRow.innerHTML = `
+        <div class="rag-avatar" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">👤</div>
+        <div class="rag-msg-bubble user">
+          <p>${clean.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+        </div>
+      `;
+      ragChatBox.appendChild(userRow);
+      ragChatBox.scrollTop = ragChatBox.scrollHeight;
+
+      if (ragInput) ragInput.value = '';
+
+      // AI Thinking State
+      const aiRow = document.createElement('div');
+      aiRow.className = 'rag-message-row ai';
+      aiRow.innerHTML = `
+        <div class="rag-avatar">🤖</div>
+        <div class="rag-msg-bubble">
+          <div class="rag-msg-meta">Vector Search Pipeline &bull; Cosine Similarity Match</div>
+          <p style="color: #38BDF8; font-family: var(--font-mono); font-size: 0.8rem;">⟳ Retrieving verified enterprise chunks...</p>
+        </div>
+      `;
+      ragChatBox.appendChild(aiRow);
+      ragChatBox.scrollTop = ragChatBox.scrollHeight;
+
+      setTimeout(() => {
+        let answer = cannedRagAnswers.default;
+        let sourceRef = 'docs/specs/codex404-architecture.spec.md (L42-60)';
+        const lower = clean.toLowerCase();
+
+        if (lower.includes('ip') || lower.includes('intellectual') || lower.includes('ownership')) {
+          answer = cannedRagAnswers.ip;
+          sourceRef = 'contracts/ip-assignment-standard.clause.md (§4.1)';
+        } else if (lower.includes('pipeline') || lower.includes('whatsapp') || lower.includes('webhook')) {
+          answer = cannedRagAnswers.pipeline;
+          sourceRef = 'docs/architecture/whatsapp-ingestion-pipeline.spec.md (L18-35)';
+        } else if (lower.includes('erp') || lower.includes('school') || lower.includes('campus') || lower.includes('student')) {
+          answer = cannedRagAnswers.erp;
+          sourceRef = 'docs/architecture/campus-erp-relational-schema.md (L88-112)';
+        } else if (lower.includes('tech') || lower.includes('stack') || lower.includes('database') || lower.includes('php')) {
+          answer = cannedRagAnswers.tech;
+          sourceRef = 'docs/standards/engineering-principles.md (L12-30)';
+        } else if (lower.includes('lock') || lower.includes('booking') || lower.includes('doctor') || lower.includes('appointment')) {
+          answer = cannedRagAnswers.booking;
+          sourceRef = 'docs/architecture/concurrency-slot-locks.spec.md (L5-22)';
+        }
+
+        aiRow.innerHTML = `
+          <div class="rag-avatar">🤖</div>
+          <div class="rag-msg-bubble">
+            <div class="rag-msg-meta">Grounded Response &bull; Token Match: 98.4%</div>
+            <p>${answer}</p>
+            <div style="margin-top: 0.5rem; font-size: 0.72rem; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.4rem; font-family: var(--font-mono);">
+              📄 Grounded Source: <code style="color: #38BDF8;">${sourceRef}</code>
+            </div>
+          </div>
+        `;
+        ragChatBox.scrollTop = ragChatBox.scrollHeight;
+      }, 500);
+    };
+
+    if (ragSendBtn && ragInput) {
+      ragSendBtn.addEventListener('click', () => sendOnpageRagMessage(ragInput.value));
+      ragInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendOnpageRagMessage(ragInput.value);
+        }
+      });
+    }
+
+    ragChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const query = chip.getAttribute('data-prompt') || chip.textContent.trim();
+        sendOnpageRagMessage(query);
+      });
+    });
+
+    // --- On-Page WhatsApp CRM Simulator ---
+    const waSimulateBtn = document.getElementById('onpageWaSimulateBtn');
+    const waChatLog = document.getElementById('onpageWaChatLog');
+    const crmLeadList = document.getElementById('onpageCrmLeadList');
+
+    if (waSimulateBtn && waChatLog && crmLeadList) {
+      let waCycle = 0;
+      const waScenarios = [
+        {
+          inbound: 'Hi, we operate a clinic with 4 doctors. Can your booking portal prevent overlapping appointments and send WhatsApp reminders?',
+          outbound: '👋 Absolutely! Our clinical scheduler incorporates atomic database row-locks (preventing concurrent slot claims) with automated WhatsApp dispatch.',
+          ticket: 'CX-8843',
+          intent: 'clinical_booking_inquiry',
+          endpoint: 'POST /api/webhooks/whatsapp/booking',
+          routing: 'Healthcare Systems Desk'
+        },
+        {
+          inbound: 'We need an automated fee voucher and student report card portal for a school with 1,500 students. What is your implementation timeframe?',
+          outbound: '🏫 Yes, our Campus ERP engine automates roll numbers, fee breakdown slips, and parent circulars. A solutions architect will share our architecture spec shortly.',
+          ticket: 'CX-8844',
+          intent: 'campus_erp_scoping',
+          endpoint: 'POST /api/webhooks/whatsapp/erp',
+          routing: 'Institutional Engineering Desk'
+        },
+        {
+          inbound: 'We need a high-speed automotive wheel catalog with Year/Make/Model PCD fitment filters for our wholesale dealership network.',
+          outbound: '🏎️ Understood! Our automotive catalog platform features dynamic vehicle PCD/Offset matrix calculations with real-time stock checks.',
+          ticket: 'CX-8845',
+          intent: 'b2b_catalog_inquiry',
+          endpoint: 'POST /api/webhooks/whatsapp/catalog',
+          routing: 'Commerce & Fitment Desk'
+        }
+      ];
+
+      waSimulateBtn.addEventListener('click', () => {
+        const scenario = waScenarios[waCycle % waScenarios.length];
+        waCycle++;
+        const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Inbound Bubble
+        const inMsg = document.createElement('div');
+        inMsg.className = 'wa-msg inbound';
+        inMsg.innerHTML = `<p>${scenario.inbound}</p><span class="wa-time">${timeNow}</span>`;
+        waChatLog.appendChild(inMsg);
+        waChatLog.scrollTop = waChatLog.scrollHeight;
+
+        // Automated Outbound
+        setTimeout(() => {
+          const outMsg = document.createElement('div');
+          outMsg.className = 'wa-msg outbound';
+          outMsg.innerHTML = `<p>${scenario.outbound}</p><p style="margin-top: 4px;">Ticket: <strong>#${scenario.ticket}</strong></p><span class="wa-time">${timeNow} &bull; ✓✓</span>`;
+          waChatLog.appendChild(outMsg);
+          waChatLog.scrollTop = waChatLog.scrollHeight;
+
+          // Prepend Webhook Ingestion Telemetry
+          const wpCard = document.createElement('div');
+          wpCard.className = 'webhook-payload-item';
+          wpCard.innerHTML = `
+            <div class="wp-top">
+              <span class="wp-endpoint">${scenario.endpoint}</span>
+              <span class="wp-status font-mono">200 OK &bull; 14ms</span>
+            </div>
+            <pre class="wp-code font-mono"><code>{
+  "event": "messages.received",
+  "ticket_id": "${scenario.ticket}",
+  "sender": "+91 98201-XXXXX",
+  "intent": "${scenario.intent}",
+  "crm_status": "LEAD_INGESTED",
+  "routing": "${scenario.routing}",
+  "timestamp": "${new Date().toISOString()}"
+}</code></pre>
+          `;
+          crmLeadList.prepend(wpCard);
+        }, 550);
+      });
+    }
+  };
+
   initCaseSlider();
 
   initDemoModal();
+  initOnpageSimulators();
 });
 

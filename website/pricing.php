@@ -270,6 +270,190 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
+     INTERACTIVE PROJECT SCOPE & MILESTONE ESTIMATOR
+     ========================================================================== -->
+<section class="section" id="estimator" style="background: rgba(11, 31, 58, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 5rem 0;">
+    <div class="container">
+        <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem auto;">
+            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+                <span class="dot"></span>
+                <span>Self-Serve Architecture Planning</span>
+            </div>
+            <h2 class="section-title">
+                Interactive Project <span class="text-gradient gradient-text-animated">Scope &amp; Estimator</span>
+            </h2>
+            <p class="section-subtitle">
+                Select your system requirements, target modules, and delivery cadence for an instant milestone roadmap calculation.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2" style="gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto;">
+            <!-- Controls Column -->
+            <div style="background: var(--bg-surface); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+                <form id="scopeEstimatorForm">
+                    <!-- Step 1: System Type -->
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; color: var(--white); font-weight: 700; margin-bottom: 0.75rem; font-size: 1.05rem;">
+                            1. Select System Type
+                        </label>
+                        <select id="estimatorSystemType" class="form-select" style="width: 100%; padding: 0.85rem; background: var(--bg-surface-elevated); color: var(--white); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                            <option value="custom_erp" data-sprints="3" data-name="Custom Web Platform / ERP">Custom Web Platform / Institutional ERP</option>
+                            <option value="saas_mvp" data-sprints="4" data-name="Multi-Tenant SaaS MVP">Multi-Tenant SaaS MVP</option>
+                            <option value="ai_rag" data-sprints="3" data-name="Enterprise AI RAG Knowledge System">Enterprise AI RAG Knowledge System</option>
+                            <option value="booking_engine" data-sprints="2" data-name="Turnkey Booking &amp; Reservation Engine">Turnkey Booking &amp; Reservation Engine</option>
+                            <option value="automation_pipeline" data-sprints="2" data-name="WhatsApp &amp; Workflow Automation Pipeline">WhatsApp &amp; Workflow Automation Pipeline</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Key Modules -->
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; color: var(--white); font-weight: 700; margin-bottom: 0.75rem; font-size: 1.05rem;">
+                            2. Core Functional Modules
+                        </label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+                            <label style="display: flex; gap: 0.6rem; align-items: center; font-size: 0.875rem; color: var(--slate); cursor: pointer;">
+                                <input type="checkbox" class="estimator-module" value="rbac" data-weight="0.5" checked>
+                                <span>Granular RBAC &amp; Auth</span>
+                            </label>
+                            <label style="display: flex; gap: 0.6rem; align-items: center; font-size: 0.875rem; color: var(--slate); cursor: pointer;">
+                                <input type="checkbox" class="estimator-module" value="payment" data-weight="0.5" checked>
+                                <span>Stripe / Razorpay Payments</span>
+                            </label>
+                            <label style="display: flex; gap: 0.6rem; align-items: center; font-size: 0.875rem; color: var(--slate); cursor: pointer;">
+                                <input type="checkbox" class="estimator-module" value="whatsapp" data-weight="0.5">
+                                <span>WhatsApp Cloud API</span>
+                            </label>
+                            <label style="display: flex; gap: 0.6rem; align-items: center; font-size: 0.875rem; color: var(--slate); cursor: pointer;">
+                                <input type="checkbox" class="estimator-module" value="pdf" data-weight="0.5">
+                                <span>Automated PDF Invoices</span>
+                            </label>
+                            <label style="display: flex; gap: 0.6rem; align-items: center; font-size: 0.875rem; color: var(--slate); cursor: pointer;">
+                                <input type="checkbox" class="estimator-module" value="analytics" data-weight="0.5">
+                                <span>Admin KPI Dashboard</span>
+                            </label>
+                            <label style="display: flex; gap: 0.6rem; align-items: center; font-size: 0.875rem; color: var(--slate); cursor: pointer;">
+                                <input type="checkbox" class="estimator-module" value="rag" data-weight="1">
+                                <span>Private Vector Search (RAG)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Delivery Cadence -->
+                    <div>
+                        <label style="display: block; color: var(--white); font-weight: 700; margin-bottom: 0.75rem; font-size: 1.05rem;">
+                            3. Target Delivery Cadence
+                        </label>
+                        <div style="display: flex; gap: 1rem;">
+                            <label style="flex: 1; display: flex; align-items: center; gap: 0.5rem; background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); cursor: pointer; font-size: 0.875rem; color: var(--slate);">
+                                <input type="radio" name="estimatorCadence" value="standard" checked>
+                                <span>Standard Agile Sprints</span>
+                            </label>
+                            <label style="flex: 1; display: flex; align-items: center; gap: 0.5rem; background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); cursor: pointer; font-size: 0.875rem; color: var(--slate);">
+                                <input type="radio" name="estimatorCadence" value="accelerated">
+                                <span>Fast-Track Sprint Focus</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Dynamic Output Column -->
+            <div style="background: linear-gradient(135deg, rgba(16, 29, 58, 0.95) 0%, rgba(10, 22, 40, 0.98) 100%); padding: 2.75rem; border-radius: var(--radius-lg); border: 1px solid rgba(34, 211, 238, 0.35); box-shadow: 0 0 35px rgba(34, 211, 238, 0.08);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem;">
+                    <div>
+                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Estimated Delivery Blueprint</span>
+                    </div>
+                    <span id="outputSprintBadge" style="font-size: 0.8rem; font-weight: 700; color: #34D399; font-family: var(--font-mono);">
+                        2-WEEK SPRINT CADENCE
+                    </span>
+                </div>
+
+                <h3 id="outputSystemName" style="font-size: 1.45rem; color: var(--white); margin-bottom: 1.25rem;">
+                    Custom Web Platform / Institutional ERP
+                </h3>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem;">
+                    <div style="background: rgba(7, 17, 31, 0.6); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                        <span style="font-size: 0.8rem; color: var(--slate-dark); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.25rem;">Estimated Timeline</span>
+                        <strong id="outputTimeline" style="font-size: 1.35rem; color: var(--cyan); font-family: var(--font-mono);">4–6 Weeks</strong>
+                    </div>
+
+                    <div style="background: rgba(7, 17, 31, 0.6); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                        <span style="font-size: 0.8rem; color: var(--slate-dark); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.25rem;">Live Staging Demos</span>
+                        <strong id="outputDemos" style="font-size: 1.35rem; color: #34D399; font-family: var(--font-mono);">2 Working Demos</strong>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <span style="font-size: 0.85rem; color: var(--slate); display: block; margin-bottom: 0.75rem; font-weight: 600;">Standard Guarantees Included:</span>
+                    <ul class="transform-list" style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--slate);">
+                        <li><span style="color: #34D399;">✓</span> Fixed-milestone agreement &amp; transparent roadmaps</li>
+                        <li><span style="color: #34D399;">✓</span> 100% intellectual property &amp; source code ownership</li>
+                        <li><span style="color: #34D399;">✓</span> 30-day post-launch warranty with zero defect guarantee</li>
+                        <li><span style="color: #34D399;">✓</span> Direct Slack / Teams daily standup integration</li>
+                    </ul>
+                </div>
+
+                <a id="estimatorCtaLink" href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg" style="width: 100%; text-align: center;">
+                    <span>Schedule Discovery Call with this Scope &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const systemSelect = document.getElementById('estimatorSystemType');
+    const moduleCheckboxes = document.querySelectorAll('.estimator-module');
+    const cadenceRadios = document.querySelectorAll('input[name="estimatorCadence"]');
+    
+    const outputSystemName = document.getElementById('outputSystemName');
+    const outputTimeline = document.getElementById('outputTimeline');
+    const outputDemos = document.getElementById('outputDemos');
+    const ctaLink = document.getElementById('estimatorCtaLink');
+
+    function calculateEstimate() {
+        if (!systemSelect) return;
+        const selectedOption = systemSelect.options[systemSelect.selectedIndex];
+        const baseSprints = parseFloat(selectedOption.getAttribute('data-sprints') || 3);
+        const systemName = selectedOption.getAttribute('data-name');
+
+        let moduleWeight = 0;
+        moduleCheckboxes.forEach(cb => {
+            if (cb.checked) {
+                moduleWeight += parseFloat(cb.getAttribute('data-weight') || 0.5);
+            }
+        });
+
+        let isAccelerated = false;
+        cadenceRadios.forEach(radio => {
+            if (radio.checked && radio.value === 'accelerated') isAccelerated = true;
+        });
+
+        const totalWeeks = Math.max(3, Math.round(baseSprints * 1.5 + moduleWeight * 1.2));
+        const minWeeks = Math.max(3, totalWeeks - 1);
+        const maxWeeks = totalWeeks + 2;
+        const totalDemos = Math.max(2, Math.floor(totalWeeks / 2));
+
+        if (outputSystemName) outputSystemName.textContent = systemName;
+        if (outputTimeline) outputTimeline.textContent = `${minWeeks}–${maxWeeks} Weeks`;
+        if (outputDemos) outputDemos.textContent = `${totalDemos} Staging Demos`;
+
+        if (ctaLink) {
+            const encodedSystem = encodeURIComponent(systemName);
+            ctaLink.href = `<?= url('discovery-call.php') ?>?scope=${encodedSystem}&timeline=${minWeeks}-${maxWeeks}w`;
+        }
+    }
+
+    if (systemSelect) systemSelect.addEventListener('change', calculateEstimate);
+    moduleCheckboxes.forEach(cb => cb.addEventListener('change', calculateEstimate));
+    cadenceRadios.forEach(r => r.addEventListener('change', calculateEstimate));
+    calculateEstimate();
+});
+</script>
+
+<!-- ==========================================================================
      DIRECT CALL TO ACTION BANNER
      ========================================================================== -->
 <section class="section" style="padding-top: 0; padding-bottom: 4rem;">
