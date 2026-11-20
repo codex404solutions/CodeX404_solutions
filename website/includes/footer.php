@@ -64,8 +64,8 @@ declare(strict_types=1);
                 <ul class="footer-links">
                     <li><a href="<?= url('about.php') ?>">About Us</a></li>
                     <li><a href="<?= url('industries.php') ?>">Industries Served</a></li>
+                    <li><a href="<?= url('our-work.php') ?>">Our Work</a></li>
                     <li><a href="<?= url('case-studies.php') ?>">Case Studies</a></li>
-                    <li><a href="<?= url('portfolio.php') ?>">Portfolio</a></li>
                     <li><a href="<?= url('process.php') ?>">Engineering Process</a></li>
                     <li><a href="<?= url('engagement-models.php') ?>">Engagement Models</a></li>
                     <li><a href="<?= url('security.php') ?>">Security & Compliance</a></li>

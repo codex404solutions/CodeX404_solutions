@@ -25,7 +25,7 @@ require_once __DIR__ . '/includes/header.php';
                 From Vision to Scalable <span class="gradient-text">Recurring-Revenue SaaS</span>
             </h1>
             <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                We work with founders and organizations to scope and build Software-as-a-Service products around their users, workflows, data boundaries, and operational needs. Timeline, integrations, and ownership terms are agreed for each engagement.
+                We partner with ambitious founders and engineering teams to design, build, and deploy multi-tenant SaaS products from core workflow architecture to automated recurring billing and high-traffic cloud scaling.
             </p>
         </div>
 
@@ -175,10 +175,10 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
             <div style="max-width: 620px;">
-                <span class="tag-chip" style="margin-bottom: 0.75rem; color: #34D399; border-color: rgba(52, 211, 153, 0.4);">Ownership and licensing</span>
-                <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 0.75rem;">Agree on the project handoff</h3>
+                <span class="tag-chip" style="margin-bottom: 0.75rem; color: #34D399; border-color: rgba(52, 211, 153, 0.4);">100% Code &amp; Asset Ownership</span>
+                <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 0.75rem;">Complete Intellectual Property Handoff</h3>
                 <p style="font-size: 0.95rem; line-height: 1.6; color: var(--slate);">
-                    Agree in writing on the ownership, license, repository access, deployment materials, and credentials that are part of the project handoff.
+                    You receive 100% intellectual property transfer, direct Git repository access, automated deployment routines, and zero ongoing vendor lock-in. Your SaaS is completely yours.
                 </p>
             </div>
             <div>

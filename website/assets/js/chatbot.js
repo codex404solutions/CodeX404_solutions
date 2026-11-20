@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Custom ERP & School Systems:</strong> Institutional platforms with attendance, fee collection, and grade books.</li>
           <li><strong>Workflow & WhatsApp Automation:</strong> Cloud API pipelines that eliminate manual data entry.</li>
         </ul>
-        <p><a href="solutions" class="chat-link">Explore Solutions &rarr;</a> &nbsp;|&nbsp; <a href="discovery-call" class="chat-link">Book Free Discovery &rarr;</a></p>
+        <p><a href="solutions.php" class="chat-link">Explore Solutions &rarr;</a> &nbsp;|&nbsp; <a href="discovery-call.php" class="chat-link">Book Free Discovery &rarr;</a></p>
       `
     },
     {
@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
       label: '💰 How does pricing work?',
       keywords: ['price', 'pricing', 'cost', 'how much', 'rate', 'rates', 'fees', 'quote', 'package', 'budget', 'expensive', 'cheap'],
       reply: `
-        <p>Project pricing depends on scope, integrations, delivery constraints, and support needs. We review the requirements and provide an estimate for discussion before work begins.</p>
-        <p><a href="pricing" class="chat-link">Review engagement and estimate details &rarr;</a> or <a href="contact" class="chat-link">send us your requirements</a>.</p>
+        <p>We work on transparent fixed-milestone pricing with bi-weekly working staging previews. You always know what is being built, when, and for what cost—with zero surprise invoices.</p>
+        <p><a href="pricing.php" class="chat-link">Explore Pricing Tiers &rarr;</a> &nbsp;|&nbsp; <a href="contact.php" class="chat-link">Request a Custom Quote &rarr;</a></p>
       `
     },
     {
@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
       label: '🚀 Live demos & portfolio',
       keywords: ['portfolio', 'demo', 'demos', 'examples', 'case study', 'case studies', 'sample', 'work', 'projects'],
       reply: `
-        <p>Browse the work and project descriptions currently published on the website. Each project is described according to the information available for publication.</p>
-        <p><a href="portfolio" class="chat-link">Explore the portfolio &rarr;</a></p>
+        <p>Explore our verified production deliverables, institutional ERPs, booking platforms, and interactive in-browser project demos.</p>
+        <p><a href="our-work.php" class="chat-link">Explore Our Work &rarr;</a> &nbsp;|&nbsp; <a href="case-studies.php" class="chat-link">Read Case Studies &rarr;</a></p>
       `
     },
     {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reply: `
         <p>We'd love to discuss your technical architecture or MVP scope! Our discovery calls are direct with senior engineering leads — no sales reps.</p>
         <p>We can discuss your goals, existing systems, constraints, and the next steps needed to define a project scope.</p>
-        <p><a href="discovery-call" class="btn btn-primary btn-sm chat-btn-action">Book 30-Min Discovery Call &rarr;</a></p>
+        <p><a href="discovery-call.php" class="btn btn-primary btn-sm chat-btn-action">Book 30-Min Discovery Call &rarr;</a></p>
       `
     },
     {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reply: `
         <p>Prefer direct communication? Connect directly with our engineering team:</p>
         <p><strong>Email:</strong> <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a></p>
-        <p><a href="discovery-call" class="btn btn-primary btn-sm chat-btn-action">
+        <p><a href="discovery-call.php" class="btn btn-primary btn-sm chat-btn-action">
           Book 30-Min Discovery Call &rarr;
         </a></p>
       `
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reply: `
         <p>Let's get you a tailored estimate! Please type your <strong>work email or phone</strong> along with a brief description of what you're building (e.g., <em>"Web app for logistics, email: name@company.com"</em>), and our team will prepare a scope analysis.</p>
         <p>Or jump straight to our structured inquiry form:</p>
-        <p><a href="contact" class="chat-link">Submit Detailed Inquiry Form &rarr;</a></p>
+        <p><a href="contact.php" class="chat-link">Submit Detailed Inquiry Form &rarr;</a></p>
       `
     },
     {
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><strong>Data & Storage:</strong> PostgreSQL, MySQL, Redis caching, SQLite embedded engines.</li>
           <li><strong>Infrastructure & AI:</strong> Docker, Nginx, Meta WhatsApp Cloud API, LangChain / LlamaIndex, OpenAI / Claude / Gemini API connectors.</li>
         </ul>
-        <p><a href="solutions" class="chat-link">Read Architecture Standards &rarr;</a></p>
+        <p><a href="solutions.php" class="chat-link">Read Architecture Standards &rarr;</a></p>
       `
     },
     {
@@ -128,13 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
       label: '⏱️ How fast can you deliver?',
       keywords: ['timeline', 'turnaround', 'how long', 'how fast', 'deadline', 'delivery', 'weeks', 'days', 'speed'],
       reply: `
-        <p>Our agile engineering process is optimized for high velocity:</p>
+        <p>Our agile delivery framework is engineered for predictability and speed:</p>
         <ul>
-          <li><strong>Scope:</strong> Agree on features, dependencies, and delivery milestones after reviewing the requirements.</li>
-          <li><strong>Review cadence:</strong> Choose progress reviews and communication channels with the project team.</li>
-          <li><strong>Dependencies:</strong> Account for access, integrations, approvals, and third-party services in the plan.</li>
+          <li><strong>Production MVPs:</strong> Typically 6 to 10 weeks delivered in focused two-week sprints.</li>
+          <li><strong>Bi-Weekly Demos:</strong> Live staging environments updated every two weeks for testing.</li>
+          <li><strong>Guaranteed Roadmaps:</strong> Explicit scope boundaries with 30-day post-launch warranty.</li>
         </ul>
-        <p><a href="process" class="chat-link">Explore Our 5-Stage Process &rarr;</a></p>
+        <p><a href="process.php" class="chat-link">Explore Our 7-Stage Delivery Framework &rarr;</a></p>
       `
     }
   ];

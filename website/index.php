@@ -494,123 +494,106 @@ require_once __DIR__ . '/includes/header.php';
             </p>
         </div>
 
-        <div class="process-pipeline-ribbon">
-            <div class="process-pipeline-grid">
+        <div class="process-card-container">
+            <!-- Process Steps Grid (4 Columns with Dividers) -->
+            <div class="process-steps-row">
                 <!-- Step 01 -->
-                <div class="process-step-col card-tilt">
-                    <span class="process-step-watermark" aria-hidden="true">01</span>
-                    <div class="process-step-top">
-                        <div class="process-icon-circle"
-                            style="color: #38BDF8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                <line x1="11" y1="8" x2="11" y2="14"></line>
-                                <line x1="8" y1="11" x2="14" y2="11"></line>
-                            </svg>
+                <div class="process-col">
+                    <div class="process-step-item">
+                        <span class="step-badge">STEP 01</span>
+                        <p class="step-desc">
+                            STRATEGIC RESEARCH, AUDIENCE ANALYSIS, AND KEYWORD PLANNING FOR SCALABLE DIGITAL GROWTH.
+                        </p>
+                        <div class="process-pill-box">
+                            <div class="pill-icon-glow">
+                                <div class="icon-circle">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <path d="M11 8v6"></path>
+                                        <path d="M8 11h6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="pill-title">PROBE &amp; PLAN</h4>
                         </div>
-                        <span class="process-step-badge">STEP 01</span>
-                    </div>
-                    <h3 class="process-step-title">Probe &amp; Scope</h3>
-                    <p class="process-step-desc">
-                        Identify bottlenecks, map technical requirements, and define clear, transparent milestones
-                        before quoting.
-                    </p>
-                    <div class="process-step-guarantee">
-                        <span>✓</span>
-                        <span>Fixed Scope · Zero Surprise Fees</span>
                     </div>
                 </div>
 
                 <!-- Step 02 -->
-                <div class="process-step-col card-tilt">
-                    <span class="process-step-watermark" aria-hidden="true">02</span>
-                    <div class="process-step-top">
-                        <div class="process-icon-circle"
-                            style="color: #60A5FA; box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="16 18 22 12 16 6"></polyline>
-                                <polyline points="8 6 2 12 8 18"></polyline>
-                                <line x1="14" y1="4" x2="10" y2="20"></line>
-                            </svg>
+                <div class="process-col">
+                    <div class="process-step-item">
+                        <span class="step-badge">STEP 02</span>
+                        <p class="step-desc">
+                            HIGH-PERFORMANCE WEBSITES BUILT WITH OPTIMIZED DESIGN, SPEED, SEO, AND USABILITY.
+                        </p>
+                        <div class="process-pill-box">
+                            <div class="pill-icon-glow">
+                                <div class="icon-circle">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M9 18h6"></path>
+                                        <path d="M10 22h4"></path>
+                                        <path
+                                            d="M12 2a7 7 0 0 0-7 7c0 2.4 1.2 4.5 3 5.7V17h8v-2.3c1.8-1.2 3-3.3 3-5.7a7 7 0 0 0-7-7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="pill-title">BUILD &amp; OPTIMIZE</h4>
                         </div>
-                        <span class="process-step-badge"
-                            style="color: #60A5FA; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.25);">STEP
-                            02</span>
-                    </div>
-                    <h3 class="process-step-title">Architect &amp; Build</h3>
-                    <p class="process-step-desc">
-                        Engineered with clean, type-safe code, custom relational databases, and fast, responsive
-                        interfaces.
-                    </p>
-                    <div class="process-step-guarantee"
-                        style="color: #60A5FA; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2);">
-                        <span>✓</span>
-                        <span>Staging Preview Every 2 Weeks</span>
                     </div>
                 </div>
 
                 <!-- Step 03 -->
-                <div class="process-step-col card-tilt">
-                    <span class="process-step-watermark" aria-hidden="true">03</span>
-                    <div class="process-step-top">
-                        <div class="process-icon-circle"
-                            style="color: #C084FC; box-shadow: 0 0 15px rgba(192, 132, 252, 0.25);">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                <polyline points="9 12 11 14 15 10"></polyline>
-                            </svg>
+                <div class="process-col">
+                    <div class="process-step-item">
+                        <span class="step-badge">STEP 03</span>
+                        <p class="step-desc">
+                            LAUNCH, SEO, AND DIGITAL MARKETING STRATEGIES TO MAXIMIZE ONLINE VISIBILITY.
+                        </p>
+                        <div class="process-pill-box">
+                            <div class="pill-icon-glow">
+                                <div class="icon-circle">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <path
+                                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="pill-title">PUBLISH &amp; PROMOTE</h4>
                         </div>
-                        <span class="process-step-badge"
-                            style="color: #C084FC; background: rgba(192, 132, 252, 0.1); border-color: rgba(192, 132, 252, 0.25);">STEP
-                            03</span>
-                    </div>
-                    <h3 class="process-step-title">Test &amp; Secure</h3>
-                    <p class="process-step-desc">
-                        Automated regression test suites, bank-grade encryption checks, and sub-second speed
-                        optimization.
-                    </p>
-                    <div class="process-step-guarantee"
-                        style="color: #C084FC; background: rgba(192, 132, 252, 0.1); border-color: rgba(192, 132, 252, 0.2);">
-                        <span>✓</span>
-                        <span>100% Quality &amp; Bug-Free Shield</span>
                     </div>
                 </div>
 
                 <!-- Step 04 -->
-                <div class="process-step-col card-tilt">
-                    <span class="process-step-watermark" aria-hidden="true">04</span>
-                    <div class="process-step-top">
-                        <div class="process-icon-circle"
-                            style="color: #34D399; box-shadow: 0 0 15px rgba(52, 211, 153, 0.25);">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z">
-                                </path>
-                                <path
-                                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
-                                </path>
-                                <path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2 5-2"></path>
-                                <path d="M12 15v5s3.03-.55 4.5-2c1.63-1.62 2-5 2-5"></path>
-                            </svg>
+                <div class="process-col">
+                    <div class="process-step-item">
+                        <span class="step-badge">STEP 04</span>
+                        <p class="step-desc">
+                            MONITOR PERFORMANCE, ANALYZE DATA, AND CONTINUOUSLY IMPROVE DIGITAL RESULTS.
+                        </p>
+                        <div class="process-pill-box">
+                            <div class="pill-icon-glow">
+                                <div class="icon-circle">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="pill-title">TRACK &amp; REFINE</h4>
                         </div>
-                        <span class="process-step-badge"
-                            style="color: #34D399; background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.25);">STEP
-                            04</span>
-                    </div>
-                    <h3 class="process-step-title">Launch &amp; Handover</h3>
-                    <p class="process-step-desc">
-                        Zero-downtime production cloud deployment with 100% intellectual property, code, and
-                        documentation ownership.
-                    </p>
-                    <div class="process-step-guarantee"
-                        style="color: #34D399; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);">
-                        <span>✓</span>
-                        <span>Complete IP &amp; Code Ownership</span>
                     </div>
                 </div>
             </div>
@@ -626,8 +609,12 @@ require_once __DIR__ . '/includes/header.php';
 
     <div class="container position-relative" style="z-index: 3;">
         <div class="section-header text-center mb-5 pb-2">
-            <h2 class="exclusive-case-title">
-                OUR LATEST <span class="highlight-accent">WORK</span>
+            <div class="section-tag">
+                <span class="dot"></span>
+                <span>Featured Portfolio</span>
+            </div>
+            <h2 class="section-title exclusive-case-title">
+                OUR <span class="text-gradient gradient-text-animated">LATEST WORK</span>
             </h2>
             <p class="section-subtitle mt-3" style="max-width: 680px; margin-left: auto; margin-right: auto; opacity: 0.85;">
                 Explore real software platforms, institutional web portals, automation pipelines, and AI systems
@@ -790,7 +777,7 @@ require_once __DIR__ . '/includes/header.php';
                 WHY CHOOSE <span class="text-gradient gradient-text-animated">CodeX404 Solutions?</span>
             </h2>
             <p class="section-subtitle">
-                Built on engineering integrity, direct founder accountability, and business-focused software delivery.
+                High-performance custom software, direct founder leadership, and zero vendor lock-in.
             </p>
         </div>
 
@@ -807,10 +794,9 @@ require_once __DIR__ . '/includes/header.php';
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
                 </div>
-                <h3 class="why-card-title">Direct Founder Leadership</h3>
+                <h3 class="why-card-title">Proven Multi-Industry Experience</h3>
                 <p class="why-card-desc">
-                    You work directly with senior architects and developers—no account managers, no offshore
-                    outsourcing, and no handoff communication breakdown.
+                    Battle-tested platforms delivered across higher education, clinical healthcare, e-commerce, and enterprise operations.
                 </p>
             </div>
 
@@ -820,15 +806,12 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="why-card-icon-wrap" style="color: #60A5FA;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
-                        <line x1="14" y1="4" x2="10" y2="20"></line>
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                     </svg>
                 </div>
-                <h3 class="why-card-title">Clean Type-Safe Code</h3>
+                <h3 class="why-card-title">Scalable &amp; Secure Web Architecture</h3>
                 <p class="why-card-desc">
-                    Engineered from the ground up using PHP 8.4, Next.js, and relational database schemas. Zero bloated
-                    templates, zero fragile page builders.
+                    Engineered for sub-second page loads, bank-grade data security, and seamless stability under high-traffic surges.
                 </p>
             </div>
 
@@ -838,14 +821,13 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="why-card-icon-wrap" style="color: #C084FC;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 14 14"></polyline>
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
                 </div>
-                <h3 class="why-card-title">Fixed Milestones &amp; Speed</h3>
+                <h3 class="why-card-title">Transparent Delivery &amp; Timely Milestones</h3>
                 <p class="why-card-desc">
-                    Explicit scope boundaries with working staging previews delivered every two weeks. You always know
-                    what is being built, when, and for what cost.
+                    Direct collaboration with technical leads, fixed milestone roadmaps, and working staging previews every two weeks.
                 </p>
             </div>
 
@@ -859,10 +841,9 @@ require_once __DIR__ . '/includes/header.php';
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                     </svg>
                 </div>
-                <h3 class="why-card-title">100% Code &amp; IP Ownership</h3>
+                <h3 class="why-card-title">Data-Driven Growth &amp; Automations</h3>
                 <p class="why-card-desc">
-                    Complete intellectual property handover, structured repository transfer, and deployment
-                    documentation. Your platform is completely yours.
+                    Search-optimized architectures, conversion-focused user journeys, and automated pipelines designed to scale your business.
                 </p>
             </div>
         </div>

@@ -78,16 +78,16 @@ require_once __DIR__ . '/includes/header.php';
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">🌐</div>
                         <div>
-                            <strong style="color: var(--white); display: block;">Serving</strong>
-                            <span>Organizations in India and other markets by arrangement.</span>
+                            <strong style="color: var(--white); display: block;">Global Delivery</strong>
+                            <span>Dedicated timezone support across North America, UK/Europe, GCC, and APAC.</span>
                         </div>
                     </div>
 
                     <div style="display: flex; align-items: flex-start; gap: 1rem;">
                         <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">⏱️</div>
                         <div>
-                            <strong style="color: var(--white); display: block;">Response</strong>
-                            <span>We’ll review your message and follow up by email.</span>
+                            <strong style="color: var(--white); display: block;">Fast Response</strong>
+                            <span>Direct technical reply from our founders within 24 hours.</span>
                         </div>
                     </div>
                 </div>
@@ -96,23 +96,23 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="trust-badge-list" style="margin-bottom: 2rem;">
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <span><strong>Clear project terms:</strong> Scope, deliverables, and ownership are agreed in writing for each engagement.</span>
+                        <span><strong>Fixed Scope & Transparent Pricing:</strong> Clear delivery roadmaps, bi-weekly demo previews, and zero surprise charges.</span>
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <span><strong>Confidentiality:</strong> Raise any NDA requirements before sharing sensitive project information.</span>
+                        <span><strong>Strict NDA & IP Protection:</strong> Mutual non-disclosure agreements and complete data confidentiality from day one.</span>
                     </div>
                     <div class="trust-badge-item">
                         <div class="trust-badge-icon">✓</div>
-                        <span><strong>Project handoff:</strong> Agree documentation, access, and handoff requirements as part of the scope.</span>
+                        <span><strong>100% Code & Asset Handoff:</strong> Full repository ownership, deployment guides, and zero ongoing vendor lock-in.</span>
                     </div>
                 </div>
 
                 <div style="background: rgba(11, 31, 58, 0.4); padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--cyan);">Prefer to discuss the project?</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--slate);">Send a discovery request and we’ll follow up by email about suitable next steps.</p>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--cyan);">Prefer a Direct Architecture Call?</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--slate);">Discuss your scope, tech stack, and timeline directly with our founding engineers.</p>
                     <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm">
-                        Book a Discovery Call Instead &rarr;
+                        Schedule a Discovery Call Instead &rarr;
                     </a>
                 </div>
             </div>

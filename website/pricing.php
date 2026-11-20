@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container" style="max-width: 900px; margin: 0 auto;">
         <div class="hero-pill" style="margin: 0 auto 1.5rem auto;">
             <span class="dot"></span>
-            <span>Project estimates by scope</span>
+            <span>Transparent Investment &amp; Fixed Milestones</span>
         </div>
 
         <h1 class="hero-headline" style="font-size: clamp(2.25rem, 4.2vw, 3.5rem); margin-bottom: 1.25rem;">
@@ -29,7 +29,7 @@ require_once __DIR__ . '/includes/header.php';
         </h1>
 
         <p class="hero-description" style="margin: 0 auto 2.25rem auto; font-size: 1.15rem; color: var(--slate); max-width: 720px; line-height: 1.7;">
-            Pricing depends on requirements, integrations, delivery constraints, and support needs. We discuss scope and provide a written estimate before work begins.
+            Fixed-milestone pricing, guaranteed delivery roadmaps, and 100% code ownership. We agree on explicit technical scope upfront—no surprise costs, no vendor lock-in.
         </p>
 
         <div class="hero-cta-group" style="justify-content: center; gap: 1rem;">
@@ -52,29 +52,29 @@ require_once __DIR__ . '/includes/header.php';
             <div class="guarantee-item">
                 <span class="guarantee-icon">🛡️</span>
                 <div>
-                    <h3 class="guarantee-title">Written scope</h3>
-                    <p class="guarantee-desc">Deliverables, dependencies, and acceptance criteria are documented for each engagement.</p>
+                    <h3 class="guarantee-title">Guaranteed Fixed Pricing</h3>
+                    <p class="guarantee-desc">Strict milestone boundaries with transparent roadmaps and zero surprise invoices.</p>
                 </div>
             </div>
             <div class="guarantee-item">
                 <span class="guarantee-icon">🎯</span>
                 <div>
-                    <h3 class="guarantee-title">Clear estimate</h3>
-                    <p class="guarantee-desc">Review the expected effort, payment terms, and assumptions before approving work.</p>
+                    <h3 class="guarantee-title">Bi-Weekly Staging Demos</h3>
+                    <p class="guarantee-desc">Review working, testable deployments every two weeks throughout development.</p>
                 </div>
             </div>
             <div class="guarantee-item">
                 <span class="guarantee-icon">⚡</span>
                 <div>
-                    <h3 class="guarantee-title">Reviewable delivery</h3>
-                    <p class="guarantee-desc">Agree on a review cadence and how deliverables will be assessed.</p>
+                    <h3 class="guarantee-title">Sub-Second Performance</h3>
+                    <p class="guarantee-desc">Clean, type-safe architecture engineered for sub-second speeds and 99.9% uptime.</p>
                 </div>
             </div>
             <div class="guarantee-item">
                 <span class="guarantee-icon">📱</span>
                 <div>
-                    <h3 class="guarantee-title">Responsive requirements</h3>
-                    <p class="guarantee-desc">Set target devices and acceptance requirements as part of the project scope.</p>
+                    <h3 class="guarantee-title">100% Code &amp; IP Ownership</h3>
+                    <p class="guarantee-desc">Full repository transfer, database schemas, and zero ongoing platform rent.</p>
                 </div>
             </div>
         </div>

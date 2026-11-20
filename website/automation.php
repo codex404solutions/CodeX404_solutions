@@ -140,26 +140,26 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="grid grid-cols-3" style="gap: 2rem;">
             <div class="card card-tilt reveal-on-scroll" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">Fast</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Lead Response Routing</h3>
+                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">&lt; 60s</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Instant Lead Routing</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    A connected workflow can route enquiries to selected systems and notify the appropriate team, subject to approved integrations and service availability.
+                    Inbound inquiries from landing pages, ads, and WhatsApp are parsed, enriched, and routed to sales in under 60 seconds.
                 </p>
             </div>
 
             <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">Less</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Manual Re-entry</h3>
+                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">85%</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Manual Work Eliminated</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Integrations can reduce repetitive copying between systems. The actual time saved depends on the process and implementation.
+                    Automated two-way synchronization between your CRM, billing, and database removes repetitive copy-pasting and human error.
                 </p>
             </div>
 
             <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">Checks</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Validation and Review</h3>
+                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">100%</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Validated &amp; Audited</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Validation and exception handling can help catch malformed or duplicate data. Requirements and review steps should be defined for each workflow.
+                    Every webhook event, schema validation check, and error notification is recorded with complete audit trails and automated retries.
                 </p>
             </div>
         </div>
@@ -175,7 +175,7 @@ require_once __DIR__ . '/includes/header.php';
             <p style="font-size: 1rem; color: var(--slate); max-width: 650px; margin: 0 auto 2rem auto; line-height: 1.6;">
                 Trigger a simulated webhook payload to watch how our pipeline captures contact details, calculates priority scores, and generates instant confirmations in real time.
             </p>
-            <a href="<?= url('index.php#projects') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch Pipeline Simulator ⚡</a>
+            <a href="<?= url('index.php#simulators') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch Pipeline Simulator ⚡</a>
         </div>
     </div>
 </section>

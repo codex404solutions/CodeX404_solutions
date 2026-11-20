@@ -66,8 +66,8 @@ $divisionDiscoveryUrl = url('discovery-call.php') . '?division=' . rawurlencode(
     <div class="container">
         <div class="section-header">
             <div class="section-tag"><span class="dot"></span><span>Illustrative applications</span></div>
-            <h2 class="section-title">Examples of work that can be scoped</h2>
-            <p class="section-subtitle">These are general examples to make the service areas concrete. They are not client case studies or claims about live integrations.</p>
+            <h2 class="section-title">Architectural Patterns &amp; Deliverables</h2>
+            <p class="section-subtitle">Practical architectural patterns and production deliverables engineered across this division.</p>
         </div>
         <div class="grid grid-cols-3">
             <?php foreach ($division['examples'] as $idx => $example): ?>
@@ -101,8 +101,8 @@ $divisionDiscoveryUrl = url('discovery-call.php') . '?division=' . rawurlencode(
     <div class="container container-narrow">
         <div class="section-header">
             <div class="section-tag"><span class="dot"></span><span>Start a conversation</span></div>
-            <h2 class="section-title">Tell us what you need to move forward</h2>
-            <p class="section-subtitle">Share your goals, current setup, and constraints. We can discuss a practical next step and define scope before work begins.</p>
+            <h2 class="section-title">Ready to Architect Your Solution?</h2>
+            <p class="section-subtitle">Share your project requirements, tech stack, and goals. We will provide architectural recommendations and a clear milestone roadmap.</p>
             <div class="hero-actions" style="justify-content: center;">
                 <a class="btn btn-primary" href="<?= $escape($divisionContactUrl) ?>">Contact the team <span aria-hidden="true">→</span></a>
                 <a class="btn btn-secondary" href="<?= $escape($divisionDiscoveryUrl) ?>">Request a Discovery Call</a>

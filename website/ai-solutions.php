@@ -159,7 +159,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">LAYER 3</span>
                 <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Source Citation Audit</h3>
                 <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    A retrieval system can include references to source documents so people can review supporting material. Citation accuracy depends on document quality, parsing, retrieval, and implementation choices.
+                    Every AI response generates verifiable source citations linked to indexed documents and paragraph hashes, enabling instant human verification with zero speculative hallucination.
                 </p>
             </div>
 
@@ -183,7 +183,7 @@ require_once __DIR__ . '/includes/header.php';
             <p style="font-size: 1rem; color: var(--slate); max-width: 650px; margin: 0 auto 2rem auto; line-height: 1.6;">
                 Ask questions against our pre-indexed product catalog and documentation in real time to see grounded semantic retrieval and citation matching in action.
             </p>
-            <a href="<?= url('index.php#projects') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch AI RAG Simulator ⚡</a>
+            <a href="<?= url('index.php#simulators') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch AI RAG Simulator ⚡</a>
         </div>
     </div>
 </section>

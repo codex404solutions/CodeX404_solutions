@@ -51,14 +51,14 @@ $isContactActive = ($currentScript === 'contact.php');
                                     <span class="mega-header-sub">/build &rarr;</span>
                                 </a>
                                 <ul class="mega-links-list">
-                                    <li><a href="<?= url('build.php') ?>#custom-web-apps" class="mega-link">Custom Web Application Development</a></li>
-                                    <li><a href="<?= url('build.php') ?>#school-erp" class="mega-link">School ERP &amp; Institutional Portals</a></li>
-                                    <li><a href="<?= url('build.php') ?>#custom-crm" class="mega-link">Custom CRM Development</a></li>
-                                    <li><a href="<?= url('build.php') ?>#ecommerce" class="mega-link">E-Commerce &amp; Checkout Platforms</a></li>
-                                    <li><a href="<?= url('build.php') ?>#saas-mvp" class="mega-link">SaaS MVP &amp; Multi-Tenant Setup</a></li>
-                                    <li><a href="<?= url('build.php') ?>#mobile-apps" class="mega-link">Cross-Platform Mobile &amp; PWA</a></li>
-                                    <li><a href="<?= url('build.php') ?>#api-development" class="mega-link">API Development &amp; Integrations</a></li>
-                                    <li><a href="<?= url('build.php') ?>#website-redesign" class="mega-link">Website Redesign &amp; Modernization</a></li>
+                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">Custom Web Application Development</a></li>
+                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">School ERP &amp; Institutional Portals</a></li>
+                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">Custom CRM Development</a></li>
+                                    <li><a href="<?= url('saas.php') ?>" class="mega-link">E-Commerce &amp; Checkout Platforms</a></li>
+                                    <li><a href="<?= url('saas.php') ?>" class="mega-link">SaaS MVP &amp; Multi-Tenant Setup</a></li>
+                                    <li><a href="<?= url('mobile-apps.php') ?>" class="mega-link">Cross-Platform Mobile &amp; PWA</a></li>
+                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">API Development &amp; Integrations</a></li>
+                                    <li><a href="<?= url('build.php') ?>" class="mega-link">Website Redesign &amp; Modernization</a></li>
                                 </ul>
                             </div>
 
@@ -72,14 +72,14 @@ $isContactActive = ($currentScript === 'contact.php');
                                     <span class="mega-header-sub">/grow &rarr;</span>
                                 </a>
                                 <ul class="mega-links-list">
-                                    <li><a href="<?= url('grow.php') ?>#seo" class="mega-link">Search Engine Optimization (SEO)</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#aeo-geo" class="mega-link">Answer Engine &amp; AI Search (AEO/GEO)</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#ppc-ads" class="mega-link">PPC Advertising &amp; Google Ads</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#social-media" class="mega-link">Social Media Management &amp; Marketing</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#conversion-rate" class="mega-link">Conversion Rate Optimization (CRO)</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#content-writing" class="mega-link">Content Writing &amp; Copywriting</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#maintenance" class="mega-link">Website Maintenance &amp; Support</a></li>
-                                    <li><a href="<?= url('grow.php') ?>#growth-audits" class="mega-link">SEO &amp; Digital Growth Audits</a></li>
+                                    <li><a href="<?= url('solutions.php') ?>" class="mega-link">Search Engine Optimization (SEO)</a></li>
+                                    <li><a href="<?= url('solutions.php') ?>" class="mega-link">Answer Engine &amp; AI Search (AEO/GEO)</a></li>
+                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">PPC Advertising &amp; Google Ads</a></li>
+                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Social Media Management &amp; Marketing</a></li>
+                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Conversion Rate Optimization (CRO)</a></li>
+                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Content Writing &amp; Copywriting</a></li>
+                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Website Maintenance &amp; Support</a></li>
+                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">SEO &amp; Digital Growth Audits</a></li>
                                 </ul>
                             </div>
 
@@ -93,14 +93,14 @@ $isContactActive = ($currentScript === 'contact.php');
                                     <span class="mega-header-sub">/automate &rarr;</span>
                                 </a>
                                 <ul class="mega-links-list">
-                                    <li><a href="<?= url('automate.php') ?>#ai-agents" class="mega-link">24/7 AI Customer Support Agents</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#whatsapp-crm" class="mega-link">WhatsApp Cloud API &amp; CRM Pipelines</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#enterprise-rag" class="mega-link">Enterprise RAG &amp; Knowledge Bases</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#workflow-automation" class="mega-link">Automated Invoicing &amp; Workflows</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#event-webhooks" class="mega-link">Event-Driven Webhooks &amp; Sync</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#document-extraction" class="mega-link">Document Data Extraction &amp; OCR</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#multi-agent" class="mega-link">Multi-Agent Autonomous Systems</a></li>
-                                    <li><a href="<?= url('automate.php') ?>#lead-capture" class="mega-link">Real-Time Lead Capture &amp; Routing</a></li>
+                                    <li><a href="<?= url('ai-agents.php') ?>" class="mega-link">24/7 AI Customer Support Agents</a></li>
+                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">WhatsApp Cloud API &amp; CRM Pipelines</a></li>
+                                    <li><a href="<?= url('ai-solutions.php') ?>" class="mega-link">Enterprise RAG &amp; Knowledge Bases</a></li>
+                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">Automated Invoicing &amp; Workflows</a></li>
+                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">Event-Driven Webhooks &amp; Sync</a></li>
+                                    <li><a href="<?= url('ai-solutions.php') ?>" class="mega-link">Document Data Extraction &amp; OCR</a></li>
+                                    <li><a href="<?= url('ai-agents.php') ?>" class="mega-link">Multi-Agent Autonomous Systems</a></li>
+                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">Real-Time Lead Capture &amp; Routing</a></li>
                                 </ul>
                             </div>
                         </div>

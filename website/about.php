@@ -38,7 +38,7 @@ require_once __DIR__ . '/includes/header.php';
                     Too many growing businesses get burned by one of two extremes: overpriced agencies that bill enterprise rates while secretly handing off work to junior trainees, or low-cost freelancers who write brittle, unmaintainable code that breaks under real production loads.
                 </p>
                 <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate);">
-                    CodeX404 Solutions helps organizations plan and deliver software, digital growth, and automation work. Engagement scope, responsibilities, and delivery terms are agreed with each client.
+                    CodeX404 Solutions operates as an agile engineering extension of your team. We architect secure web applications, high-converting digital storefronts, and automated workflows with end-to-end transparency, fixed milestone roadmaps, and complete client code ownership.
                 </p>
             </div>
 
@@ -62,15 +62,15 @@ require_once __DIR__ . '/includes/header.php';
                     <li style="display: flex; gap: 1rem; align-items: flex-start;">
                         <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">03</span>
                         <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Clear Ownership Terms</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Ownership, licenses, and handoff of project materials are set out in the applicable written agreement.</span>
+                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">100% Code & Asset Ownership</strong>
+                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Complete intellectual property transfer upon milestone completion. You own your code, databases, credentials, and architecture—zero recurring platform rent.</span>
                         </div>
                     </li>
                     <li style="display: flex; gap: 1rem; align-items: flex-start;">
                         <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">04</span>
                         <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Milestone-Based Transparency</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Agree deliverables, review cadence, and testing expectations before work begins.</span>
+                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Bi-Weekly Working Demos</strong>
+                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Live staging environments updated every two weeks. You test actual functioning software throughout development, backed by guaranteed delivery roadmaps.</span>
                         </div>
                     </li>
                 </ul>
@@ -100,28 +100,28 @@ require_once __DIR__ . '/includes/header.php';
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">North America</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Time zone overlap, meeting schedules, and review cadence are agreed with each project team.
+                    4–5 hours of guaranteed daily EST/PST overlap, sprint planning via Slack/Teams, and asynchronous video walkthroughs.
                 </p>
             </div>
 
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">United Kingdom & Europe</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Privacy requirements depend on the applicable jurisdiction, data, and services. We agree responsibilities and controls during project scoping.
+                    Full afternoon GMT/CET overlap, GDPR-compliant engineering practices, and direct founder-level communication.
                 </p>
             </div>
 
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Middle East & GCC</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Project schedules and payment terms are discussed and documented before work begins.
+                    Near-complete GST/AST business hour alignment, rapid bi-weekly delivery cycles, and multi-currency billing.
                 </p>
             </div>
 
             <div class="card" style="text-align: center; padding: 2.25rem;">
                 <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">India & APAC</h3>
                 <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Remote collaboration practices are selected to fit the team, stakeholders, and delivery needs.
+                    Full-day real-time collaboration, rapid same-day deployments, and high-velocity engineering for growing enterprises.
                 </p>
             </div>
         </div>

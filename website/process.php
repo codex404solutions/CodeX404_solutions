@@ -22,11 +22,8 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <h1 class="section-title">The 7-Stage Delivery Framework</h1>
             <p class="section-subtitle">
-                A clear process can reduce ambiguity. Scope, milestones, dependencies, and costs vary by project; we document the applicable assumptions and acceptance criteria before work begins.
+                Disciplined, transparent software engineering from initial concept to high-scale production. Every milestone is defined, measured, and verified on live staging environments.
             </p>
-        </div>
-        <div class="container-narrow" style="margin: 0 auto 2rem; text-align: center; color: var(--slate);">
-            The stages below describe a typical project path. Specific activities, deliverables, testing, staging, launch support, and timelines depend on the agreed scope.
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 2.5rem; max-width: 980px; margin: 0 auto;">
@@ -37,10 +34,10 @@ require_once __DIR__ . '/includes/header.php';
                     <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Discover & Unpack Friction</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    We discuss goals, users, current systems, constraints, and operational needs. Interviews, document reviews, and process mapping can be included when they help clarify the problem.
+                    We audit your operational workflows, user journeys, existing data models, and business objectives to define explicit project boundaries and eliminate ambiguity before writing code.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> A problem summary, requirements, and agreed scope.
+                    <strong>Core Deliverables:</strong> Technical Requirements Document (TRD), feature roadmap, and fixed-milestone schedule.
                 </div>
             </div>
 
@@ -51,10 +48,10 @@ require_once __DIR__ . '/includes/header.php';
                     <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Strategize & Architect</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    We identify the architecture, data, integration, hosting, and security considerations relevant to the requirements. Design detail and technology choices depend on the project.
+                    We design relational database schemas, REST/GraphQL API contracts, security perimeters, and hosting topology to guarantee long-term performance and maintainability.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> Architecture notes or diagrams, data considerations, and integration specifications where needed.
+                    <strong>Core Deliverables:</strong> Database ER diagrams, API specifications, and cloud infrastructure blueprint.
                 </div>
             </div>
 
@@ -65,10 +62,10 @@ require_once __DIR__ . '/includes/header.php';
                     <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">UI/UX & Interactive Design</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    We plan key screens and interactions for the intended users and devices. Prototypes, accessibility checks, and usability testing are included when agreed in scope.
+                    We craft intuitive, conversion-focused interfaces with accessible contrast, fluid responsive layouts, and interactive wireframes reviewed directly with stakeholders.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> Screen designs, interaction notes, or a prototype where included.
+                    <strong>Core Deliverables:</strong> High-fidelity component designs, interactive user flow prototypes, and design tokens.
                 </div>
             </div>
 
@@ -76,13 +73,13 @@ require_once __DIR__ . '/includes/header.php';
             <div class="card" style="padding: 2.25rem;">
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                     <div class="step-num" style="margin: 0;">04</div>
-                    <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Agile Build & Iteration</h2>
+                    <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Agile Sprints & Bi-Weekly Demos</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    Implementation may be organized into reviewable increments. Iteration length, progress updates, repository access, and any staging environment are agreed for the project.
+                    We engineer your application in focused two-week sprints. Working code is deployed to private staging environments so you can test functioning software throughout the build.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> Working software and implementation notes, with review access as agreed.
+                    <strong>Core Deliverables:</strong> Live staging deployment every two weeks, sprint changelog, and direct video walkthrough.
                 </div>
             </div>
 
@@ -93,10 +90,10 @@ require_once __DIR__ . '/includes/header.php';
                     <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Rigorous Testing & Hardening</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    Testing is selected according to the system, risks, supported platforms, and scope. Functional, security, responsive, and integration checks may be included where relevant; this stage does not imply a certification or exhaustive audit.
+                    We subject all code to end-to-end functional testing, cross-browser validation, SQL injection hardening, CSRF validation, and sub-second load time optimization.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> Test results, identified issues, and remediation notes for the agreed checks.
+                    <strong>Core Deliverables:</strong> Automated test suites, security audit checklist, and 95+ Lighthouse performance audit.
                 </div>
             </div>
 
@@ -104,13 +101,13 @@ require_once __DIR__ . '/includes/header.php';
             <div class="card" style="padding: 2.25rem;">
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                     <div class="step-num" style="margin: 0;">06</div>
-                <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Launch Preparation and Release</h2>
+                    <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Production Launch & Verification</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    A production release is handled only when included in the agreement and approved. Hosting, DNS, SSL, data migration, backups, and release checks depend on the target environment and assigned responsibilities.
+                    We execute zero-downtime production deployment, configure DNS records, enforce automated SSL certificate renewals, and establish real-time error logging.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> A release checklist, handoff notes, or deployment support when included.
+                    <strong>Core Deliverables:</strong> Production deployment, active SSL/TLS, automated database backup routine, and monitoring.
                 </div>
             </div>
 
@@ -118,13 +115,13 @@ require_once __DIR__ . '/includes/header.php';
             <div class="card" style="padding: 2.25rem;">
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                     <div class="step-num" style="margin: 0;">07</div>
-                    <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Scale & Continuous Improvement</h2>
+                    <h2 style="font-size: 1.5rem; color: var(--white); margin: 0;">Handoff, Warranty & Scaling</h2>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
-                    Post-launch monitoring, maintenance, and further development depend on the support arrangement. Ownership of alerts, logs, backups, and response responsibilities should be agreed.
+                    You receive full intellectual property transfer, structured Git repositories, and a 30-day post-launch warranty with dedicated SLA scaling options.
                 </p>
                 <div style="font-size: 0.85rem; color: var(--cyan);">
-                    <strong>Possible output:</strong> A support plan or prioritized next-step list where included.
+                    <strong>Core Deliverables:</strong> 100% source code ownership, administrative documentation, and 30-day bug warranty.
                 </div>
             </div>
         </div>

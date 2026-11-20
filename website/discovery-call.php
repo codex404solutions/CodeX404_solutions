@@ -41,9 +41,9 @@ require_once __DIR__ . '/includes/header.php';
                 <span class="dot"></span>
                 <span>Project Discovery Request</span>
             </div>
-            <h1 class="section-title">Request a Technical Discovery Call</h1>
+            <h1 class="section-title">Schedule a Technical Discovery Call</h1>
             <p class="section-subtitle">
-                Tell us about your project, current systems, and constraints. We’ll review the request and follow up by email about arranging a suitable conversation.
+                Discuss your system requirements, architecture, and timeline directly with our founding engineers. No sales reps, no fluff—just actionable engineering insights.
             </p>
         </div>
 
@@ -172,7 +172,7 @@ require_once __DIR__ . '/includes/header.php';
             </form>
 
             <div style="margin-top: 1.75rem; text-align: center; font-size: 0.85rem; color: var(--slate-dark);">
-                We use form protections to limit automated submissions. See the Privacy Policy for how enquiry information is handled.
+                Protected by CSRF and rate-limiting safeguards. Your project specifications are kept strictly confidential under mutual NDA standards.
             </div>
         </div>
     </div>

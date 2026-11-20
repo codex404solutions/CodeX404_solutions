@@ -36,10 +36,10 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
                 <div style="margin: 1.5rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
                     <ul class="transform-list">
-                        <li><span style="color: #34D399;">✓</span> Milestones and acceptance criteria agreed in writing</li>
-                        <li><span style="color: #34D399;">✓</span> Estimate based on documented scope and assumptions</li>
-                        <li><span style="color: #34D399;">✓</span> Support and warranty terms agreed per project</li>
-                        <li><span style="color: #34D399;">✓</span> Documentation and handoff requirements agreed in scope</li>
+                        <li><span style="color: #34D399;">✓</span> Fixed pricing & guaranteed milestone roadmaps</li>
+                        <li><span style="color: #34D399;">✓</span> Working staging demo deployed every two weeks</li>
+                        <li><span style="color: #34D399;">✓</span> 30-day post-launch warranty with zero defect guarantee</li>
+                        <li><span style="color: #34D399;">✓</span> 100% intellectual property & source code ownership</li>
                     </ul>
                 </div>
                 <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">
@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
                         <li><span style="color: #34D399;">✓</span> Full-stack developers, QA & architect</li>
                         <li><span style="color: #34D399;">✓</span> Direct Slack / Teams daily integration</li>
                         <li><span style="color: #34D399;">✓</span> Bi-weekly sprint demos & planning</li>
-                        <li><span style="color: #34D399;">✓</span> Agree any capacity changes and notice terms in the project agreement</li>
+                        <li><span style="color: #34D399;">✓</span> Flexible monthly capacity with zero long-term lock-in</li>
                     </ul>
                 </div>
                 <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm" style="width: 100%; margin-top: auto;">

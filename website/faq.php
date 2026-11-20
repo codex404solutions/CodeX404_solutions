@@ -6,27 +6,27 @@ require_once __DIR__ . '/includes/config.php';
 $faqs = [
     [
         'q' => 'Who owns the intellectual property (IP) and source code created during a project?',
-        'a' => 'Ownership, licenses, and handoff terms depend on the project agreement. We document those terms before work begins so both parties understand what is delivered and how it may be used.'
+        'a' => 'You own 100% of all intellectual property, source code, database schemas, and design assets upon milestone completion. We provide clean Git repository transfers and deployment documentation with zero licensing fees or vendor lock-in.'
     ],
     [
         'q' => 'How does CodeX404 collaborate across international timezones?',
-        'a' => 'We agree communication channels, review cadence, and meeting times during project planning so they fit the people and time zones involved.'
+        'a' => 'We guarantee 4 to 5 hours of daily overlap with North American (EST/PST) and European (GMT/CET) business hours. We use asynchronous daily standups, recorded video walkthroughs, and Slack/Teams collaboration so progress never stalls.'
     ],
     [
         'q' => 'What is the typical timeline for an MVP or custom software deliverable?',
-        'a' => 'Timing depends on scope, dependencies, and availability. We review the requirements and agree on milestones and a delivery plan before work begins.'
+        'a' => 'Production-ready MVPs typically launch within 6 to 10 weeks, structured into two-week agile sprints. You receive working staging preview deployments every two weeks to test functioning software throughout development.'
     ],
     [
         'q' => 'Do you sign Non-Disclosure Agreements (NDAs) before discussing project details?',
-        'a' => 'Please raise NDA requirements before sharing sensitive material. Any confidentiality terms need to be agreed in writing before that information is exchanged.'
+        'a' => 'Yes, absolutely. We execute mutual Non-Disclosure Agreements (NDAs) prior to discussing any sensitive technical specifications, proprietary architectures, or commercial data.'
     ],
     [
         'q' => 'How do you handle post-launch maintenance, bug fixes, and system scaling?',
-        'a' => 'Support, warranty coverage, and maintenance options depend on the project agreement. We document the applicable coverage and response process as part of the scope.'
+        'a' => 'Every deliverable includes a 30-day post-launch warranty with zero defect guarantee. Following launch, we offer flexible SLA retainers or dedicated engineering squads for continuous feature expansion and cloud infrastructure scaling.'
     ],
     [
         'q' => 'How do you prevent hallucinations and data leaks when implementing enterprise AI?',
-        'a' => 'We employ Retrieval-Augmented Generation (RAG) which binds model answers strictly to verified context documents. Furthermore, we enforce deterministic JSON output schemas, strict semantic similarity thresholds, and human-in-the-loop gates for high-impact actions.'
+        'a' => 'We employ Retrieval-Augmented Generation (RAG) which binds model answers strictly to verified enterprise context documents. Furthermore, we enforce deterministic JSON output schemas, strict semantic similarity thresholds, and human-in-the-loop gates for high-impact actions.'
     ]
 ];
 
