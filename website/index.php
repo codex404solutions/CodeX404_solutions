@@ -786,7 +786,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>The CodeX404 Standard</span>
             </div>
             <h2 class="section-title">
-                WHY CHOOSE <span class="text-gradient gradient-text-animated">CodeX404 Solutions?</span>
+                WHY CHOOSE <span class="text-amber">CodeX404 Solutions?</span>
             </h2>
             <p class="section-subtitle">
                 High-performance custom software, direct founder leadership, and zero vendor lock-in.
@@ -830,7 +830,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Card 03 -->
             <div class="why-dark-card card-tilt">
                 <span class="why-card-number">03</span>
-                <div class="why-card-icon-wrap" style="color: #F97316;">
+                <div class="why-card-icon-wrap" style="color: #FFB547;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -1034,7 +1034,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Verified Client Endorsements</span>
             </div>
             <h2 class="section-title">
-                CLIENT <span class="text-gradient gradient-text-animated">TESTIMONIALS</span>
+                CLIENT <span class="text-amber">TESTIMONIALS</span>
             </h2>
             <p class="section-subtitle">
                 Hear directly from business owners, institution leaders, and founders who build with CodeX404.
@@ -1115,7 +1115,7 @@ require_once __DIR__ . '/includes/header.php';
                     <span>Start Your Project</span>
                 </div>
                 <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.2; margin-bottom: 1.25rem;">
-                    Ready to build software that <span class="text-gradient gradient-text-animated">actually
+                    Ready to build software that <span class="text-amber">actually
                         delivers?</span>
                 </h2>
                 <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">

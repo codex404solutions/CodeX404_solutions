@@ -1,8 +1,8 @@
 /* ==========================================================================
    CodeX404 Solutions — Precision Engineering & 3D Spatial Architecture
    85% Clean Architectural Structure + 15% Ambient Blue Lighting & Depth
-   Brand Palette: Royal Blue (#0B5ED7), Dark Navy (#07111F / #0B1220),
-                  White (#FFFFFF), Light Gray (#E5E7EB), Selective Orange (#F97316)
+   Brand Palette: Dark Navy (#07111F), Royal Blue (#0B5ED7),
+                  Electric Cyan (#22D3EE), Warm Amber (#FFB547), White (#FFFFFF)
    ========================================================================== */
 
 :root {
@@ -20,9 +20,10 @@
   --obs-key: #0B5ED7;
   --obs-key-deep: #0948A6;
   --obs-key-base: #062C6B;
-  --obs-ice: #38BDF8;
+  --obs-ice: #22D3EE;
+  --obs-cyan: #22D3EE;
+  --obs-amber: #FFB547;
   --obs-emerald: #10B981;
-  --obs-orange: #F97316;
   --obs-text-1: #FFFFFF;
   --obs-text-2: #E5E7EB;
   --obs-text-3: #94A3B8;
@@ -124,9 +125,15 @@ h1, h2, h3, h4,
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
   -webkit-text-fill-color: currentColor !important;
-  color: var(--obs-ice) !important;
+  color: var(--obs-cyan) !important;
   animation: none !important;
-  text-shadow: 0 2px 20px rgba(11, 94, 215, 0.28);
+  text-shadow: 0 2px 20px rgba(34, 211, 238, 0.22);
+}
+
+/* Selective Warm Amber Keyword Highlight */
+.text-amber {
+  color: var(--obs-amber) !important;
+  -webkit-text-fill-color: var(--obs-amber) !important;
 }
 
 /* Clean Structural Section Tags (Override legacy violet shine) */
@@ -686,9 +693,22 @@ textarea:focus-visible {
   color: var(--obs-text-2);
 }
 
+.service-row-watermark {
+  color: rgba(255, 181, 71, 0.12) !important;
+  transition: color 0.25s ease;
+}
+
+.service-row-card:hover .service-row-watermark {
+  color: rgba(255, 181, 71, 0.26) !important;
+}
+
 /* ==========================================================================
    4. PIPELINE DELIVERY TRACK (#process)
    ========================================================================== */
+.step-badge {
+  color: var(--obs-amber) !important;
+  letter-spacing: 0.1em;
+}
 .process-card-container {
   background: linear-gradient(180deg, rgba(14, 24, 44, 0.88) 0%, rgba(7, 17, 31, 0.92) 100%) !important;
   border: 1px solid rgba(229, 231, 235, 0.14) !important;
@@ -845,10 +865,10 @@ textarea:focus-visible {
 .case-slide-counter {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--obs-text-2);
+  font-weight: 700;
+  color: var(--obs-amber);
   background: #0B1220;
-  border: 1px solid rgba(229, 231, 235, 0.16);
+  border: 1px solid rgba(255, 181, 71, 0.28);
   padding: 0.35rem 0.85rem;
   border-radius: 8px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.55);
@@ -895,11 +915,20 @@ textarea:focus-visible {
     0 6px 14px rgba(0, 0, 0, 0.38);
 }
 
+.why-card-number {
+  color: rgba(255, 181, 71, 0.24) !important;
+  transition: color 0.24s ease;
+}
+
+.why-dark-card:hover .why-card-number {
+  color: rgba(255, 181, 71, 0.48) !important;
+}
+
 /* Distinct Editorial Quote Presentation for Client Testimonials */
 .testimonial-card {
   position: relative;
   background:
-    radial-gradient(340px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(56, 189, 248, 0.07), transparent 55%),
+    radial-gradient(340px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.06), transparent 55%),
     linear-gradient(175deg, rgba(12, 21, 38, 0.9) 0%, rgba(7, 14, 27, 0.96) 100%) !important;
   border: 1px solid rgba(229, 231, 235, 0.12) !important;
   border-left: 3px solid rgba(11, 94, 215, 0.6) !important;
@@ -910,12 +939,12 @@ textarea:focus-visible {
 
 .testimonial-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(56, 189, 248, 0.3) !important;
-  border-left-color: var(--obs-ice) !important;
+  border-color: rgba(255, 181, 71, 0.32) !important;
+  border-left-color: var(--obs-amber) !important;
 }
 
 .testimonial-stars {
-  color: var(--obs-orange) !important;
+  color: var(--obs-amber) !important;
   letter-spacing: 0.12em;
 }
 

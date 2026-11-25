@@ -320,12 +320,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const colors = is3DStage
       ? [
-          { r: 56, g: 189, b: 248 },  // ice cyan (#38BDF8)
+          { r: 34, g: 211, b: 238 },  // electric cyan (#22D3EE)
           { r: 11, g: 94, b: 215 },   // CodeX404 royal blue (#0B5ED7)
           { r: 96, g: 165, b: 250 },  // steel sky (#60A5FA)
-          { r: 229, g: 231, b: 235 }, // crisp light gray starlight (#E5E7EB)
-          { r: 16, g: 185, b: 129 },  // precision emerald (#10B981)
-          { r: 249, g: 115, b: 22 }   // selective brand orange star (#F97316)
+          { r: 229, g: 231, b: 235 }, // crisp starlight (#E5E7EB)
+          { r: 34, g: 211, b: 238 },  // electric cyan weighted
+          { r: 255, g: 181, b: 71 }   // selective warm amber star (#FFB547)
         ]
       : [
           { r: 6, g: 214, b: 160 },   // cyan-green (#06D6A0)
