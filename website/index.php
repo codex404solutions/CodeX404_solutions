@@ -292,50 +292,50 @@ require_once __DIR__ . '/includes/header.php';
     <div class="tech-marquee-wrapper">
         <!-- Row 1: Forward Infinite Scroll -->
         <div class="tech-marquee-track">
-            <div class="tech-pill-item"><span class="tech-pill-icon">PY</span> Python 3.12 Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">PHP</span> PHP 8.4 &amp; MySQL</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">UI</span> React &amp; Next.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">AI</span> Azure OpenAI &amp; LLMs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">TS</span> TypeScript &amp; Node.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">DK</span> Docker Containers</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">API</span> FastAPI Microservices</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">CV</span> YOLOv8 Computer Vision</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">GQL</span> REST &amp; GraphQL APIs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">404</span> CodeX404 Solutions</div>
+            <div class="tech-pill-item">Python 3.12 Architecture</div>
+            <div class="tech-pill-item">PHP 8.4 &amp; MySQL</div>
+            <div class="tech-pill-item">React &amp; Next.js</div>
+            <div class="tech-pill-item">Azure OpenAI &amp; LLMs</div>
+            <div class="tech-pill-item">TypeScript &amp; Node.js</div>
+            <div class="tech-pill-item">Docker Containers</div>
+            <div class="tech-pill-item">FastAPI Microservices</div>
+            <div class="tech-pill-item">YOLOv8 Computer Vision</div>
+            <div class="tech-pill-item">REST &amp; GraphQL APIs</div>
+            <div class="tech-pill-item">CodeX404 Solutions</div>
             <!-- Seamless Duplicate Loop -->
-            <div class="tech-pill-item"><span class="tech-pill-icon">PY</span> Python 3.12 Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">PHP</span> PHP 8.4 &amp; MySQL</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">UI</span> React &amp; Next.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">AI</span> Azure OpenAI &amp; LLMs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">TS</span> TypeScript &amp; Node.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">DK</span> Docker Containers</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">API</span> FastAPI Microservices</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">CV</span> YOLOv8 Computer Vision</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">GQL</span> REST &amp; GraphQL APIs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">404</span> CodeX404 Solutions</div>
+            <div class="tech-pill-item">Python 3.12 Architecture</div>
+            <div class="tech-pill-item">PHP 8.4 &amp; MySQL</div>
+            <div class="tech-pill-item">React &amp; Next.js</div>
+            <div class="tech-pill-item">Azure OpenAI &amp; LLMs</div>
+            <div class="tech-pill-item">TypeScript &amp; Node.js</div>
+            <div class="tech-pill-item">Docker Containers</div>
+            <div class="tech-pill-item">FastAPI Microservices</div>
+            <div class="tech-pill-item">YOLOv8 Computer Vision</div>
+            <div class="tech-pill-item">REST &amp; GraphQL APIs</div>
+            <div class="tech-pill-item">CodeX404 Solutions</div>
         </div>
 
         <!-- Row 2: Reverse Infinite Scroll -->
         <div class="tech-marquee-track reverse">
-            <div class="tech-pill-item"><span class="tech-pill-icon">AWS</span> AWS Cloud Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">MEM</span> Redis Distributed Cache</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">MAS</span> Autonomous Multi-Agent AI</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">RAG</span> LangChain &amp; Qdrant RAG</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">PWA</span> Progressive Web Apps</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">PAY</span> Stripe &amp; Payment Gateways</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">CI</span> CI/CD GitHub Actions</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">SEC</span> OWASP Security Hardening</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">SLA</span> Enterprise Engineering Pedigree</div>
+            <div class="tech-pill-item">AWS Cloud Architecture</div>
+            <div class="tech-pill-item">Redis Distributed Cache</div>
+            <div class="tech-pill-item">Autonomous Multi-Agent AI</div>
+            <div class="tech-pill-item">LangChain &amp; Qdrant RAG</div>
+            <div class="tech-pill-item">Progressive Web Apps</div>
+            <div class="tech-pill-item">Stripe &amp; Payment Gateways</div>
+            <div class="tech-pill-item">CI/CD GitHub Actions</div>
+            <div class="tech-pill-item">OWASP Security Hardening</div>
+            <div class="tech-pill-item">Enterprise Engineering Pedigree</div>
             <!-- Seamless Duplicate Loop -->
-            <div class="tech-pill-item"><span class="tech-pill-icon">AWS</span> AWS Cloud Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">MEM</span> Redis Distributed Cache</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">MAS</span> Autonomous Multi-Agent AI</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">RAG</span> LangChain &amp; Qdrant RAG</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">PWA</span> Progressive Web Apps</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">PAY</span> Stripe &amp; Payment Gateways</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">CI</span> CI/CD GitHub Actions</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">SEC</span> OWASP Security Hardening</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">SLA</span> Enterprise Engineering Pedigree</div>
+            <div class="tech-pill-item">AWS Cloud Architecture</div>
+            <div class="tech-pill-item">Redis Distributed Cache</div>
+            <div class="tech-pill-item">Autonomous Multi-Agent AI</div>
+            <div class="tech-pill-item">LangChain &amp; Qdrant RAG</div>
+            <div class="tech-pill-item">Progressive Web Apps</div>
+            <div class="tech-pill-item">Stripe &amp; Payment Gateways</div>
+            <div class="tech-pill-item">CI/CD GitHub Actions</div>
+            <div class="tech-pill-item">OWASP Security Hardening</div>
+            <div class="tech-pill-item">Enterprise Engineering Pedigree</div>
         </div>
     </div>
 </section>
@@ -351,7 +351,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Core Capabilities</span>
             </div>
             <h2 class="section-title">
-                WHAT WE <span class="text-gradient gradient-text-animated">OFFER</span>
+                WHAT WE <span class="text-amber">OFFER</span>
             </h2>
             <p class="section-subtitle">
                 Three focused engineering and growth divisions delivering custom platforms, search visibility, and
@@ -494,7 +494,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Deterministic Delivery</span>
             </div>
             <h2 class="section-title">
-                OUR WORK <span class="text-gradient gradient-text-animated">PROCESS</span>
+                OUR WORK <span class="text-amber">PROCESS</span>
             </h2>
             <p class="section-subtitle">
                 A predictable, transparent 4-stage pipeline with zero guesswork, fixed milestones, and continuous
@@ -622,7 +622,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Featured Portfolio</span>
             </div>
             <h2 class="section-title exclusive-case-title">
-                OUR <span class="text-gradient gradient-text-animated">LATEST WORK</span>
+                OUR <span class="text-amber">LATEST WORK</span>
             </h2>
             <p class="section-subtitle mt-3" style="max-width: 680px; margin-left: auto; margin-right: auto; opacity: 0.85;">
                 Explore real software platforms, institutional web portals, automation pipelines, and AI systems
@@ -874,7 +874,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span>Interactive Technology Demonstrator</span>
             </div>
             <h2 class="section-title">
-                Experience System Workflows <span class="text-gradient gradient-text-animated">In Action</span>
+                EXPERIENCE <span class="text-amber">SYSTEM WORKFLOWS</span>
             </h2>
             <p class="section-subtitle">
                 Explore real architectural prototypes running directly in your browser. Query our grounded AI vector
