@@ -19,7 +19,7 @@ $csrfToken = generate_csrf_token();
     <div class="chatbot-launcher-container" id="chatbotLauncherContainer">
         <!-- Floating Prompt Bubble / Tooltip -->
         <div class="chatbot-launcher-tooltip" id="chatbotLauncherTooltip" role="tooltip">
-            <span>👋 Need an estimate or have questions?</span>
+            <span>Need an estimate or architecture review?</span>
             <button type="button" class="tooltip-dismiss" id="chatbotTooltipDismiss" aria-label="Dismiss message">&times;</button>
         </div>
 

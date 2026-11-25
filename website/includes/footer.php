@@ -136,6 +136,7 @@ declare(strict_types=1);
 
 <!-- Client-side Scripts -->
 <script src="<?= asset('js/main.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/main.js') ? filemtime(dirname(__DIR__) . '/assets/js/main.js') : '1.0' ?>" defer></script>
+<script src="<?= asset('js/scene3d.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/scene3d.js') ? filemtime(dirname(__DIR__) . '/assets/js/scene3d.js') : '1.0' ?>" defer></script>
 <script src="<?= asset('js/scroll-engine.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/scroll-engine.js') ? filemtime(dirname(__DIR__) . '/assets/js/scroll-engine.js') : '1.0' ?>" defer></script>
 <script src="<?= asset('js/forms.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/forms.js') ? filemtime(dirname(__DIR__) . '/assets/js/forms.js') : '1.0' ?>" defer></script>
 <script src="<?= asset('js/chatbot.js') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/js/chatbot.js') ? filemtime(dirname(__DIR__) . '/assets/js/chatbot.js') : '1.0' ?>" defer></script>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/security.php';
 
+$bodyClass = 'has-hero-3d';
 $pageMeta = [
     'title' => 'Software & AI that moves your business forward | CodeX404 Solutions',
     'description' => 'CodeX404 Solutions designs, builds, and automates custom software, enterprise AI, autonomous agents, and workflow systems for growing businesses globally.',
@@ -18,6 +19,7 @@ require_once __DIR__ . '/includes/header.php';
      HERO SECTION (High-Impact Motions, Typewriter & Interactive Terminal)
      ========================================================================== -->
 <section class="hero-section">
+    <canvas id="hero3dCanvas" aria-hidden="true"></canvas>
     <div class="container hero-container-flex">
         <div class="hero-grid">
             <div class="hero-content">
@@ -95,7 +97,7 @@ require_once __DIR__ . '/includes/header.php';
                         </svg>
                     </a>
                     <a href="#contact-section" class="btn btn-secondary btn-lg">
-                        <span>Book a Discovery Call 🚀</span>
+                        <span>Book a Discovery Call</span>
                     </a>
                 </div>
             </div>
@@ -113,13 +115,16 @@ require_once __DIR__ . '/includes/header.php';
                         <!-- Interactive Terminal Tabs matching BUILD · GROW · AUTOMATE -->
                         <div class="terminal-tabs" role="tablist" aria-label="Solutions Showcase">
                             <button class="terminal-tab-btn active" role="tab" aria-selected="true" data-tab="build">
-                                🛠️ BUILD
+                                <svg class="icon-svg-inline" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                <span>BUILD</span>
                             </button>
                             <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="grow">
-                                📈 GROW
+                                <svg class="icon-svg-inline" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                <span>GROW</span>
                             </button>
                             <button class="terminal-tab-btn" role="tab" aria-selected="false" data-tab="automate">
-                                ⚡ AUTOMATE
+                                <svg class="icon-svg-inline" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                <span>AUTOMATE</span>
                             </button>
                         </div>
 
@@ -147,21 +152,21 @@ require_once __DIR__ . '/includes/header.php';
 
                                 <div class="showcase-features">
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-build">💻</span>
+                                        <span class="showcase-feature-icon icon-build" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>Custom Portals:</strong> Client dashboards, booking &amp; CRM built for your team.
                                         </div>
                                     </div>
 
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-build">🔒</span>
+                                        <span class="showcase-feature-icon icon-build" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>Enterprise Reliability:</strong> Sub-second speeds, bank-grade encryption &amp; zero crashes.
                                         </div>
                                     </div>
 
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-build">📦</span>
+                                        <span class="showcase-feature-icon icon-build" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>100% IP Ownership:</strong> Full source code handed over &bull; Zero vendor lock-in.
                                         </div>
@@ -170,7 +175,7 @@ require_once __DIR__ . '/includes/header.php';
 
                                 <div class="showcase-footer footer-build">
                                     <div class="showcase-outcome">
-                                        <span class="showcase-check">✓</span>
+                                        <span class="showcase-check">&#10003;</span>
                                         <span>Zero SaaS Rent &bull; 100% Code Ownership</span>
                                     </div>
                                     <a href="#division-build" class="showcase-link link-build">
@@ -194,21 +199,21 @@ require_once __DIR__ . '/includes/header.php';
 
                                 <div class="showcase-features">
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-grow">🎯</span>
+                                        <span class="showcase-feature-icon icon-grow" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>Google &amp; AI Search:</strong> Rank top where ready-to-buy clients actively search.
                                         </div>
                                     </div>
 
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-grow">📈</span>
+                                        <span class="showcase-feature-icon icon-grow" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>High-Converting Funnels:</strong> Fast pages engineered to turn clicks into booked calls.
                                         </div>
                                     </div>
 
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-grow">💰</span>
+                                        <span class="showcase-feature-icon icon-grow" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>High-ROI Ad Campaigns:</strong> Laser-targeted Google &amp; Meta ads with 0 wasted spend.
                                         </div>
@@ -217,7 +222,7 @@ require_once __DIR__ . '/includes/header.php';
 
                                 <div class="showcase-footer footer-grow">
                                     <div class="showcase-outcome">
-                                        <span class="showcase-check">✓</span>
+                                        <span class="showcase-check">&#10003;</span>
                                         <span>+240% Inbound Leads &bull; 3.8x Target ROAS</span>
                                     </div>
                                     <a href="#division-grow" class="showcase-link link-grow">
@@ -241,21 +246,21 @@ require_once __DIR__ . '/includes/header.php';
 
                                 <div class="showcase-features">
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-automate">🤖</span>
+                                        <span class="showcase-feature-icon icon-automate" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>24/7 AI Assistants:</strong> Instant replies, lead qualification &amp; automatic scheduling.
                                         </div>
                                     </div>
 
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-automate">⚡</span>
+                                        <span class="showcase-feature-icon icon-automate" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>Zero-Manual Data Sync:</strong> Invoices, WhatsApp &amp; CRM records update with 0 error.
                                         </div>
                                     </div>
 
                                     <div class="showcase-feature-item">
-                                        <span class="showcase-feature-icon icon-automate">⏱️</span>
+                                        <span class="showcase-feature-icon icon-automate" aria-hidden="true"><svg class="icon-svg-inline" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
                                         <div class="showcase-feature-body">
                                             <strong>Reclaim 20+ Hours:</strong> Stop wasting staff hours on manual spreadsheets &amp; forms.
                                         </div>
@@ -264,7 +269,7 @@ require_once __DIR__ . '/includes/header.php';
 
                                 <div class="showcase-footer footer-automate">
                                     <div class="showcase-outcome">
-                                        <span class="showcase-check">✓</span>
+                                        <span class="showcase-check">&#10003;</span>
                                         <span>20+ Hours Saved Weekly &bull; 99.9% Accuracy</span>
                                     </div>
                                     <a href="#division-automate" class="showcase-link link-automate">
@@ -287,50 +292,50 @@ require_once __DIR__ . '/includes/header.php';
     <div class="tech-marquee-wrapper">
         <!-- Row 1: Forward Infinite Scroll -->
         <div class="tech-marquee-track">
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐍</span> Python 3.12 Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PHP 8.4 & MySQL</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚛️</span> React & Next.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🧠</span> Azure OpenAI & LLMs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📘</span> TypeScript & Node.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐳</span> Docker Containers</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> FastAPI Microservices</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">👁️</span> YOLOv8 Computer Vision</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🔌</span> REST & GraphQL APIs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🚀</span> CodeX404 Solutions</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PY</span> Python 3.12 Architecture</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PHP</span> PHP 8.4 &amp; MySQL</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">UI</span> React &amp; Next.js</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">AI</span> Azure OpenAI &amp; LLMs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">TS</span> TypeScript &amp; Node.js</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">DK</span> Docker Containers</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">API</span> FastAPI Microservices</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">CV</span> YOLOv8 Computer Vision</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">GQL</span> REST &amp; GraphQL APIs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">404</span> CodeX404 Solutions</div>
             <!-- Seamless Duplicate Loop -->
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐍</span> Python 3.12 Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐘</span> PHP 8.4 & MySQL</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚛️</span> React & Next.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🧠</span> Azure OpenAI & LLMs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📘</span> TypeScript & Node.js</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🐳</span> Docker Containers</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> FastAPI Microservices</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">👁️</span> YOLOv8 Computer Vision</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🔌</span> REST & GraphQL APIs</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🚀</span> CodeX404 Solutions</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PY</span> Python 3.12 Architecture</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PHP</span> PHP 8.4 &amp; MySQL</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">UI</span> React &amp; Next.js</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">AI</span> Azure OpenAI &amp; LLMs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">TS</span> TypeScript &amp; Node.js</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">DK</span> Docker Containers</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">API</span> FastAPI Microservices</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">CV</span> YOLOv8 Computer Vision</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">GQL</span> REST &amp; GraphQL APIs</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">404</span> CodeX404 Solutions</div>
         </div>
 
         <!-- Row 2: Reverse Infinite Scroll -->
         <div class="tech-marquee-track reverse">
-            <div class="tech-pill-item"><span class="tech-pill-icon">☁️</span> AWS Cloud Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis Distributed Cache</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🤖</span> Autonomous Multi-Agent AI</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📊</span> LangChain & Qdrant RAG</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📱</span> Progressive Web Apps (PWA)</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Payment Gateways</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🔄</span> CI/CD GitHub Actions</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Security Hardening</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> Enterprise Engineering Pedigree</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">AWS</span> AWS Cloud Architecture</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">MEM</span> Redis Distributed Cache</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">MAS</span> Autonomous Multi-Agent AI</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">RAG</span> LangChain &amp; Qdrant RAG</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PWA</span> Progressive Web Apps</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PAY</span> Stripe &amp; Payment Gateways</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">CI</span> CI/CD GitHub Actions</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">SEC</span> OWASP Security Hardening</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">SLA</span> Enterprise Engineering Pedigree</div>
             <!-- Seamless Duplicate Loop -->
-            <div class="tech-pill-item"><span class="tech-pill-icon">☁️</span> AWS Cloud Architecture</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">⚡</span> Redis Distributed Cache</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🤖</span> Autonomous Multi-Agent AI</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📊</span> LangChain & Qdrant RAG</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">📱</span> Progressive Web Apps (PWA)</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💳</span> Stripe & Payment Gateways</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🔄</span> CI/CD GitHub Actions</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">🛡️</span> OWASP Security Hardening</div>
-            <div class="tech-pill-item"><span class="tech-pill-icon">💼</span> Enterprise Engineering Pedigree</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">AWS</span> AWS Cloud Architecture</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">MEM</span> Redis Distributed Cache</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">MAS</span> Autonomous Multi-Agent AI</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">RAG</span> LangChain &amp; Qdrant RAG</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PWA</span> Progressive Web Apps</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">PAY</span> Stripe &amp; Payment Gateways</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">CI</span> CI/CD GitHub Actions</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">SEC</span> OWASP Security Hardening</div>
+            <div class="tech-pill-item"><span class="tech-pill-icon">SLA</span> Enterprise Engineering Pedigree</div>
         </div>
     </div>
 </section>
@@ -361,10 +366,11 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="service-row-left">
                     <div class="service-row-badge badge-build">
                         <span style="width: 6px; height: 6px; border-radius: 50%; background: #3B82F6;"></span>
-                        <span>DIVISION 01 · BUILD — Engineering & Apps</span>
+                        <span>DIVISION 01 · BUILD — Engineering &amp; Apps</span>
                     </div>
                     <h3 class="service-row-title">
-                        <span>💻</span> Build Software That Scales
+                        <svg class="icon-svg-inline" style="width:20px;height:20px;color:#60A5FA;" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <span>Build Software That Scales</span>
                     </h3>
                     <p class="service-row-desc">
                         Turn core workflows and product visions into reliable web platforms, SaaS architectures, mobile
@@ -374,12 +380,12 @@ require_once __DIR__ . '/includes/header.php';
                         <span class="service-row-tag">Custom Web Applications</span>
                         <span class="service-row-tag">SaaS MVP Engineering</span>
                         <span class="service-row-tag">Cross-Platform Mobile</span>
-                        <span class="service-row-tag">Payment Gateways & APIs</span>
+                        <span class="service-row-tag">Payment Gateways &amp; APIs</span>
                     </div>
                 </div>
                 <div class="service-row-right">
                     <div class="service-row-metric">
-                        <div class="metric-highlight" style="color: #60A5FA;">⚡ 99/100</div>
+                        <div class="metric-highlight" style="color: #60A5FA;">99/100</div>
                         <div class="metric-caption">Core Vitals Performance</div>
                     </div>
                     <a href="<?= url('solutions.php#build') ?>" class="service-row-btn btn-build"
@@ -399,27 +405,28 @@ require_once __DIR__ . '/includes/header.php';
                 <span class="service-row-watermark" aria-hidden="true">02</span>
                 <div class="service-row-left">
                     <div class="service-row-badge badge-grow">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #8B5CF6;"></span>
-                        <span>DIVISION 02 · GROW — Visibility & Reach</span>
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #38BDF8;"></span>
+                        <span>DIVISION 02 · GROW — Visibility &amp; Reach</span>
                     </div>
                     <h3 class="service-row-title">
-                        <span>📈</span> Grow Reach & Discovery
+                        <svg class="icon-svg-inline" style="width:20px;height:20px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        <span>Grow Reach &amp; Discovery</span>
                     </h3>
                     <p class="service-row-desc">
                         Help audiences discover and trust your platform through search engine optimization,
                         answer-engine readiness (AEO/GEO), digital marketing, and conversion design.
                     </p>
                     <div class="service-row-tags">
-                        <span class="service-row-tag">Technical SEO & Audits</span>
-                        <span class="service-row-tag">Generative AEO & GEO</span>
+                        <span class="service-row-tag">Technical SEO &amp; Audits</span>
+                        <span class="service-row-tag">Generative AEO &amp; GEO</span>
                         <span class="service-row-tag">High-Intent Paid Campaigns</span>
                         <span class="service-row-tag">Conversion Rate Optimization</span>
                     </div>
                 </div>
                 <div class="service-row-right">
                     <div class="service-row-metric">
-                        <div class="metric-highlight" style="color: #C084FC;">🎯 Top 3</div>
-                        <div class="metric-caption">Search & AI Discovery</div>
+                        <div class="metric-highlight" style="color: #38BDF8;">Top 3</div>
+                        <div class="metric-caption">Search &amp; AI Discovery</div>
                     </div>
                     <a href="<?= url('solutions.php#grow') ?>" class="service-row-btn btn-grow"
                         aria-label="Explore GROW Capabilities">
@@ -439,10 +446,11 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="service-row-left">
                     <div class="service-row-badge badge-automate">
                         <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981;"></span>
-                        <span>DIVISION 03 · AUTOMATE — AI & Operations</span>
+                        <span>DIVISION 03 · AUTOMATE — AI &amp; Operations</span>
                     </div>
                     <h3 class="service-row-title">
-                        <span>⚡</span> Automate Manual Toil
+                        <svg class="icon-svg-inline" style="width:20px;height:20px;color:#34D399;" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <span>Automate Manual Toil</span>
                     </h3>
                     <p class="service-row-desc">
                         Connect disjointed systems and streamline operations using autonomous multi-tool AI agents,
@@ -451,13 +459,13 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="service-row-tags">
                         <span class="service-row-tag">Multi-Tool AI Agents</span>
                         <span class="service-row-tag">Enterprise RAG Knowledge</span>
-                        <span class="service-row-tag">WhatsApp & CRM Sync</span>
+                        <span class="service-row-tag">WhatsApp &amp; CRM Sync</span>
                         <span class="service-row-tag">Zero-Touch Automation</span>
                     </div>
                 </div>
                 <div class="service-row-right">
                     <div class="service-row-metric">
-                        <div class="metric-highlight" style="color: #34D399;">🌙 24/7/365</div>
+                        <div class="metric-highlight" style="color: #34D399;">24/7/365</div>
                         <div class="metric-caption">Autonomous Availability</div>
                     </div>
                     <a href="<?= url('solutions.php#automate') ?>" class="service-row-btn btn-automate"
@@ -681,11 +689,11 @@ require_once __DIR__ . '/includes/header.php';
                     default => 'cpc-art-software'
                 };
                 $stageIcon = match ($cat) {
-                    'booking' => '🏥',
-                    'commerce' => '🛒',
-                    'mobile' => '📱',
-                    'ai' => '🤖',
-                    default => '💻'
+                    'booking' => 'HC',
+                    'commerce' => 'B2B',
+                    'mobile' => 'APP',
+                    'ai' => 'AI',
+                    default => 'SYS'
                 };
                 $targetUrl = !empty($p['live_url']) ? $p['live_url'] : url('our-work.php#project-' . urlencode($p['id']));
                 $isExternal = !empty($p['live_url']);
@@ -709,11 +717,11 @@ require_once __DIR__ . '/includes/header.php';
                                             <span></span><span></span><span></span>
                                         </div>
                                         <div class="case-mockup-url">
-                                            🔒 <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
+                                            <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
                                         </div>
                                     </div>
                                     <div class="case-fallback-center">
-                                        <span class="case-fallback-icon"><?= $stageIcon ?></span>
+                                        <span class="case-fallback-icon font-mono" style="font-size:1.5rem;font-weight:700;color:#38BDF8;"><?= $stageIcon ?></span>
                                         <span class="case-fallback-text"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
                                     </div>
                                 </div>
@@ -724,18 +732,18 @@ require_once __DIR__ . '/includes/header.php';
                                             <span></span><span></span><span></span>
                                         </div>
                                         <div class="case-mockup-url">
-                                            🔒 <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
+                                            <?= htmlspecialchars($p['mockup_host'] ?? 'app.codex404solutions.online') ?>
                                         </div>
                                     </div>
                                     <div class="case-fallback-center">
-                                        <span class="case-fallback-icon"><?= $stageIcon ?></span>
+                                        <span class="case-fallback-icon font-mono" style="font-size:1.5rem;font-weight:700;color:#38BDF8;"><?= $stageIcon ?></span>
                                         <span class="case-fallback-text"><?= htmlspecialchars($p['category_label'] ?? 'Software Platform') ?></span>
                                     </div>
                                 </div>
                             <?php endif; ?>
                         </div>
 
-                        <!-- Card Bottom Overlay with Title & Glass Action Button -->
+                        <!-- Card Bottom Overlay with Title & Action Button -->
                         <div class="case-card-overlay">
                             <h3 class="case-name"><?= htmlspecialchars($p['title']) ?></h3>
                             <span class="case-overlay-btn" aria-hidden="true">
@@ -751,8 +759,12 @@ require_once __DIR__ . '/includes/header.php';
         </div>
     </div>
 
-    <!-- Centered Bottom Pill CTA: VIEW ALL PROJECTS ↗ -->
-    <div class="projects-bottom-cta text-center mt-5">
+    <div class="case-slider-meta-bar">
+        <span class="case-slide-counter" id="caseSlideCounter">02 / 06</span>
+    </div>
+
+    <!-- Centered Bottom CTA: VIEW ALL PROJECTS -->
+    <div class="projects-bottom-cta text-center mt-4">
         <a href="<?= url('our-work.php') ?>" class="btn btn-view-all-projects">
             <span>VIEW ALL PROJECTS</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -818,7 +830,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Card 03 -->
             <div class="why-dark-card card-tilt">
                 <span class="why-card-number">03</span>
-                <div class="why-card-icon-wrap" style="color: #C084FC;">
+                <div class="why-card-icon-wrap" style="color: #F97316;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -854,7 +866,7 @@ require_once __DIR__ . '/includes/header.php';
      INTERACTIVE ARCHITECTURAL SIMULATORS (SIMULATION ONLY)
      ========================================================================== -->
 <section class="section" id="simulators"
-    style="background: radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.12) 0%, rgba(6, 11, 24, 0.95) 70%); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); position: relative;">
+    style="border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); position: relative;">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
@@ -873,31 +885,31 @@ require_once __DIR__ . '/includes/header.php';
         <div class="grid grid-cols-2" style="gap: 2rem; align-items: stretch;">
             <!-- Simulator 1: Enterprise AI RAG Assistant -->
             <div class="card card-tilt"
-                style="background: rgba(13, 23, 48, 0.75); border: 1px solid rgba(56, 189, 248, 0.28); display: flex; flex-direction: column;">
+                style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 0.75rem;">
                     <div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                            <span style="font-size: 1.3rem;">🤖</span>
+                        <div style="display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.25rem;">
+                            <svg class="icon-svg-inline" style="width:19px;height:19px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path></svg>
                             <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 700; margin: 0;">Enterprise AI RAG Assistant</h3>
                         </div>
                         <p style="font-size: 0.85rem; color: var(--slate); margin: 0;">Multi-source grounded vector search with source citations</p>
                     </div>
-                    <span class="live-tag-pill green" style="flex-shrink: 0;">● Vector DB Online</span>
+                    <span class="live-tag-pill green" style="flex-shrink: 0;">Vector DB Online</span>
                 </div>
 
                 <!-- Quick Prompt Chips -->
                 <div class="rag-prompt-chips-bar" style="margin-bottom: 1rem;">
                     <span class="chips-label">Try Asking:</span>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Who owns the source code and IP after completion?">💡 IP Ownership Terms?</button>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="How does the WhatsApp lead pipeline automate CRM?">⚡ WhatsApp Pipeline?</button>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Explain how patient appointment double-booking is prevented.">🔒 Concurrency Locks?</button>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Tell me about the School ERP architecture">🏫 Campus ERP?</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Who owns the source code and IP after completion?">IP Ownership Terms</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="How does the WhatsApp lead pipeline automate CRM?">WhatsApp Pipeline</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Explain how patient appointment double-booking is prevented.">Concurrency Locks</button>
+                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Tell me about the School ERP architecture">Campus ERP</button>
                 </div>
 
                 <!-- Chat Stream Viewport -->
                 <div class="rag-chat-stream" id="onpageRagChatBox" style="height: 275px; flex: 1;">
                     <div class="rag-message-row ai">
-                        <div class="rag-avatar">🤖</div>
+                        <div class="rag-avatar font-mono" style="font-size:0.72rem;font-weight:700;">RAG</div>
                         <div class="rag-msg-bubble">
                             <div class="rag-msg-meta">CodeX404 Grounded RAG Agent &bull; Isolated Context</div>
                             <p>Welcome to the CodeX404 Architecture Demonstrator. Ask any question regarding our software engineering standards, relational schemas, or deployment pipelines.</p>
@@ -916,16 +928,16 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- Simulator 2: WhatsApp CRM Automation -->
             <div class="card card-tilt"
-                style="background: rgba(13, 23, 48, 0.75); border: 1px solid rgba(16, 185, 129, 0.28); display: flex; flex-direction: column;">
+                style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 0.75rem;">
                     <div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                            <span style="font-size: 1.3rem;">💬</span>
+                        <div style="display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.25rem;">
+                            <svg class="icon-svg-inline" style="width:19px;height:19px;color:#34D399;" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 700; margin: 0;">WhatsApp Cloud &amp; CRM Pipeline</h3>
                         </div>
                         <p style="font-size: 0.85rem; color: var(--slate); margin: 0;">Synchronous webhook ingestion with automated qualification</p>
                     </div>
-                    <span class="live-tag-pill green" style="flex-shrink: 0;">● HMAC Webhook Active</span>
+                    <span class="live-tag-pill green" style="flex-shrink: 0;">HMAC Webhook Active</span>
                 </div>
 
                 <!-- Dual-Column Interactive Frame -->
@@ -941,7 +953,7 @@ require_once __DIR__ . '/includes/header.php';
                             <div class="wa-avatar">404</div>
                             <div class="wa-contact-info">
                                 <strong>CodeX404 Solutions</strong>
-                                <span class="wa-verified">✓ Official Business Account</span>
+                                <span class="wa-verified">Verified Business Account</span>
                             </div>
                         </div>
 
@@ -951,15 +963,15 @@ require_once __DIR__ . '/includes/header.php';
                                 <span class="wa-time">10:42 AM</span>
                             </div>
                             <div class="wa-msg outbound">
-                                <p>👋 Hello! Thank you for reaching out to CodeX404. We specialize in B2B commerce and custom enterprise platforms.</p>
+                                <p>Hello. Thank you for reaching out to CodeX404. We specialize in B2B commerce and custom enterprise platforms.</p>
                                 <p style="margin-top: 4px;">Ticket: <strong>#CX-8842</strong>.</p>
-                                <span class="wa-time">10:42 AM &bull; ✓✓</span>
+                                <span class="wa-time">10:42 AM</span>
                             </div>
                         </div>
 
                         <div class="wa-action-bar">
                             <button type="button" id="onpageWaSimulateBtn" class="btn btn-primary btn-sm" style="width: 100%;">
-                                <span>⚡ Trigger Next Simulated Message</span>
+                                <span>Trigger Next Simulated Message</span>
                             </button>
                         </div>
                     </div>
@@ -967,8 +979,8 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Right: Real-Time Webhook JSON Payload -->
                     <div class="demo-card-box" style="padding: 1rem;">
                         <div class="demo-box-header" style="margin-bottom: 0.5rem; padding-bottom: 0.4rem;">
-                            <div style="display: flex; align-items: center; gap: 0.35rem;">
-                                <span class="box-icon" style="font-size: 0.9rem;">⚡</span>
+                            <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                <svg class="icon-svg-inline" style="width:14px;height:14px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                                 <h4 style="font-size: 0.82rem; margin: 0;">Ingestion Telemetry</h4>
                             </div>
                             <span class="live-tag-pill green" style="font-size: 0.65rem;">200 OK</span>
@@ -997,8 +1009,8 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Bottom Engineering Sandbox Disclaimer -->
-        <div style="margin-top: 2rem; background: rgba(17, 29, 58, 0.4); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; text-align: center;">
-            <span style="color: var(--cyan); font-size: 1.1rem;">🔒</span>
+        <div style="margin-top: 2rem; background: rgba(11, 18, 32, 0.72); border: 1px solid rgba(148, 163, 184, 0.14); border-radius: 10px; padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; text-align: center;">
+            <svg class="icon-svg-inline" style="width:17px;height:17px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             <p style="margin: 0; font-size: 0.825rem; color: var(--slate-dark); line-height: 1.5;">
                 <strong style="color: var(--slate);">Interactive Architectural Demonstrators:</strong> These panels run client-side vector search matching and webhook ingestion simulations. In production, our systems connect directly with Qdrant Vector DB, Meta Cloud API, and secure MySQL CRM tables.
             </p>
@@ -1044,7 +1056,7 @@ require_once __DIR__ . '/includes/header.php';
                         <h4>Dr. R. K. Sharma</h4>
                         <span>Director of Academic Administration</span>
                     </div>
-                    <span class="testimonial-metric-chip">⚡ 100% On-Time</span>
+                    <span class="testimonial-metric-chip">100% On-Time</span>
                 </div>
             </div>
 
@@ -1056,14 +1068,14 @@ require_once __DIR__ . '/includes/header.php';
                     with our staff schedules and WhatsApp without dropping a single customer lead.”
                 </p>
                 <div class="testimonial-author-box">
-                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #8B5CF6, #C084FC);">MV
+                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, #0284C7, #38BDF8);">MV
                     </div>
                     <div class="testimonial-info">
                         <h4>Marcus Vance</h4>
                         <span>Operations Lead, Luxe Wellness</span>
                     </div>
                     <span class="testimonial-metric-chip"
-                        style="color: #C084FC; background: rgba(139, 92, 246, 0.12); border-color: rgba(139, 92, 246, 0.25);">📈
+                        style="color: #38BDF8; background: rgba(14, 165, 233, 0.12); border-color: rgba(56, 189, 248, 0.25);">
                         +45% Bookings</span>
                 </div>
             </div>
@@ -1083,7 +1095,7 @@ require_once __DIR__ . '/includes/header.php';
                         <span>Founder & Product Head, CloudSphere</span>
                     </div>
                     <span class="testimonial-metric-chip"
-                        style="color: #34D399; background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.25);">🚀
+                        style="color: #34D399; background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.25);">
                         3 Wks Early</span>
                 </div>
             </div>
@@ -1113,22 +1125,22 @@ require_once __DIR__ . '/includes/header.php';
 
                 <div class="trust-badge-list">
                     <div class="trust-badge-item">
-                        <div class="trust-badge-icon">✓</div>
+                        <div class="trust-badge-icon">&#10003;</div>
                         <div>Direct access to Senior Architects (No sales runaround)</div>
                     </div>
                     <div class="trust-badge-item">
-                        <div class="trust-badge-icon">✓</div>
+                        <div class="trust-badge-icon">&#10003;</div>
                         <div>Fixed-scope milestone estimates with clear acceptance criteria</div>
                     </div>
                     <div class="trust-badge-item">
-                        <div class="trust-badge-icon">✓</div>
+                        <div class="trust-badge-icon">&#10003;</div>
                         <div>Clear contractual IP assignment upon milestone delivery</div>
                     </div>
                 </div>
 
                 <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                     <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary">
-                        <span>📅 Book Discovery Call</span>
+                        <span>Book Discovery Call</span>
                     </a>
                     <a href="mailto:<?= COMPANY_EMAIL ?>" class="btn btn-secondary">
                         <span>Email: <?= COMPANY_EMAIL ?></span>
@@ -1137,8 +1149,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- Inbound Form Card -->
-            <div class="card form-card"
-                style="background: rgba(17, 29, 58, 0.9); border: 1px solid rgba(59, 130, 246, 0.35);">
+            <div class="card form-card">
                 <form id="projectInquiryForm" action="<?= url('contact.php') ?>" method="POST" class="ajax-form"
                     novalidate>
                     <?= csrf_input_field() ?>
@@ -1225,7 +1236,7 @@ require_once __DIR__ . '/includes/header.php';
                         <span>Request Technical Scoping Review &rarr;</span>
                     </button>
                     <div style="font-size: 0.75rem; color: var(--slate-dark); text-align: center; margin-top: 0.75rem;">
-                        🔒 Confidential • Zero spam • Prompt review during business hours
+                        Confidential &bull; Zero spam &bull; Prompt review during business hours
                     </div>
                 </form>
             </div>

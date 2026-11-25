@@ -194,11 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Scroll-Triggered Fade-In Animations (IntersectionObserver)
   // ======================================================================
   const animateElements = () => {
-    // Animate sections, cards, steps, and other key elements
+    // Keep primary interactive cards (.card, .form-card, .leader-card) and .section-header immediately visible
     const targets = document.querySelectorAll(
-      '.card, .process-step, .leader-card, .transform-box, .form-card, ' +
-      '.section-header, .hero-content, .hero-visual, .faq-item, ' +
-      '.page-banner, .cta-section-wrap'
+      '.process-step, .transform-box, .faq-item, .page-banner, .cta-section-wrap'
     );
 
     if (!targets.length) return;
@@ -214,23 +212,29 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Set initial state
+    // Set initial state only for elements strictly below the current viewport
+    const vh = window.innerHeight || 800;
     targets.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < vh + 40) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        return;
+      }
       el.style.opacity = '0';
-      el.style.transform = 'translateY(28px)';
-      el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s cubic-bezier(0.16, 1, 0.3, 1)';
     });
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add stagger delay for siblings
           const parent = entry.target.parentElement;
-          const siblings = parent ? Array.from(parent.children).filter(c => 
+          const siblings = parent ? Array.from(parent.children).filter(c =>
             targets[Symbol.iterator] ? [...targets].includes(c) : false
           ) : [];
           const siblingIndex = siblings.indexOf(entry.target);
-          const delay = siblingIndex >= 0 ? siblingIndex * 80 : 0;
+          const delay = siblingIndex >= 0 ? Math.min(siblingIndex * 60, 180) : 0;
 
           setTimeout(() => {
             entry.target.style.opacity = '1';
@@ -241,11 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.01,
+      rootMargin: '80px 0px 80px 0px'
     });
 
-    targets.forEach(el => observer.observe(el));
+    targets.forEach(el => {
+      if (el.style.opacity !== '1') observer.observe(el);
+    });
   };
 
   // Run scroll animations
@@ -309,30 +315,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', resize);
 
-    const particleCount = Math.min(Math.floor((width * height) / 18000), 75);
+    const is3DStage = document.body.classList.contains('has-hero-3d');
+    const particleCount = Math.min(Math.floor((width * height) / (is3DStage ? 13200 : 18000)), is3DStage ? 105 : 75);
 
-    const colors = [
-      { r: 6, g: 214, b: 160 },   // cyan-green (#06D6A0)
-      { r: 59, g: 130, b: 246 },  // electric blue (#3B82F6)
-      { r: 139, g: 92, b: 246 },  // violet (#8B5CF6)
-      { r: 56, g: 189, b: 248 },  // sky blue (#38BDF8)
-      { r: 236, g: 72, b: 153 }   // pink (#EC4899)
-    ];
+    const colors = is3DStage
+      ? [
+          { r: 56, g: 189, b: 248 },  // ice cyan (#38BDF8)
+          { r: 11, g: 94, b: 215 },   // CodeX404 royal blue (#0B5ED7)
+          { r: 96, g: 165, b: 250 },  // steel sky (#60A5FA)
+          { r: 229, g: 231, b: 235 }, // crisp light gray starlight (#E5E7EB)
+          { r: 16, g: 185, b: 129 },  // precision emerald (#10B981)
+          { r: 249, g: 115, b: 22 }   // selective brand orange star (#F97316)
+        ]
+      : [
+          { r: 6, g: 214, b: 160 },   // cyan-green (#06D6A0)
+          { r: 59, g: 130, b: 246 },  // electric blue (#3B82F6)
+          { r: 139, g: 92, b: 246 },  // violet (#8B5CF6)
+          { r: 56, g: 189, b: 248 },  // sky blue (#38BDF8)
+          { r: 236, g: 72, b: 153 }   // pink (#EC4899)
+        ];
 
     class Particle {
-      constructor() {
+      constructor(idx) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.65;
-        this.vy = (Math.random() - 0.5) * 0.65;
-        this.baseRadius = Math.random() * 2 + 1;
+        const speedScale = is3DStage ? 0.42 : 0.65;
+        this.vx = (Math.random() - 0.5) * speedScale;
+        this.vy = (Math.random() - 0.5) * speedScale;
+        this.isBeacon = is3DStage && idx % 5 === 0;
+        this.baseRadius = this.isBeacon ? (Math.random() * 1.4 + 2.0) : (Math.random() * 1.6 + 0.9);
         this.radius = this.baseRadius;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.phase = Math.random() * Math.PI * 2;
+        this.twinkleSpeed = 0.018 + Math.random() * 0.025;
+        // Keep brand orange rare (~1 in 12 particles) and cool blues/starlight dominant
+        this.color = (is3DStage && idx % 12 === 0)
+          ? colors[5]
+          : colors[Math.floor(Math.random() * (is3DStage ? 5 : colors.length))];
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
+        this.phase += this.twinkleSpeed;
 
         // Bounce off screen boundaries
         if (this.x < 0 || this.x > width) this.vx = -this.vx;
@@ -347,9 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (dist < mouse.radius) {
             const angle = Math.atan2(dy, dx);
             const force = (mouse.radius - dist) / mouse.radius;
-            this.x -= Math.cos(angle) * force * 2.8;
-            this.y -= Math.sin(angle) * force * 2.8;
-            this.radius = this.baseRadius * 1.5;
+            this.x -= Math.cos(angle) * force * 2.4;
+            this.y -= Math.sin(angle) * force * 2.4;
+            this.radius = this.baseRadius * 1.55;
           } else {
             this.radius = this.baseRadius;
           }
@@ -357,20 +381,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       draw() {
+        const twinkle = is3DStage ? (0.78 + 0.22 * Math.sin(this.phase)) : 1;
+
+        if (this.isBeacon) {
+          const haloRadius = this.radius * 6.2;
+          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, haloRadius);
+          grad.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${(0.52 * twinkle).toFixed(3)})`);
+          grad.addColorStop(0.42, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${(0.18 * twinkle).toFixed(3)})`);
+          grad.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, haloRadius, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+        }
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.5)`;
+        ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${twinkle.toFixed(3)})`;
+        ctx.shadowBlur = is3DStage ? (this.isBeacon ? 16 : 9) : 12;
+        ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${is3DStage ? '0.78' : '0.5'})`;
         ctx.fill();
       }
     }
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+      particles.push(new Particle(i));
     }
 
     const connectParticles = () => {
+      ctx.shadowBlur = 0;
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
@@ -378,10 +417,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const opacity = (1 - dist / maxDistance) * 0.28;
+            const opacity = (1 - dist / maxDistance) * (is3DStage ? 0.3 : 0.28);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
-            ctx.lineWidth = 0.75;
+            ctx.strokeStyle = is3DStage
+              ? `rgba(56, 189, 248, ${opacity.toFixed(3)})`
+              : `rgba(59, 130, 246, ${opacity})`;
+            ctx.lineWidth = is3DStage ? 0.8 : 0.75;
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
             ctx.stroke();
@@ -439,10 +480,10 @@ document.addEventListener('DOMContentLoaded', () => {
   animateCounters();
 
   // ======================================================================
-  // 9. Smooth Parallax on Hero Visual
+  // 9. Smooth Parallax on Hero Visual (disabled when 3D WebGL stage active)
   // ======================================================================
   const heroVisual = document.querySelector('.hero-visual');
-  if (heroVisual) {
+  if (heroVisual && !document.body.classList.contains('has-hero-3d')) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!prefersReducedMotion) {
       window.addEventListener('scroll', () => {
@@ -1210,12 +1251,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         aiRow.innerHTML = `
-          <div class="rag-avatar">🤖</div>
+          <div class="rag-avatar font-mono" style="font-size:0.72rem;font-weight:700;">RAG</div>
           <div class="rag-msg-bubble">
             <div class="rag-msg-meta">Grounded Response &bull; Token Match: 98.4%</div>
             <p>${answer}</p>
             <div style="margin-top: 0.5rem; font-size: 0.72rem; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.4rem; font-family: var(--font-mono);">
-              📄 Grounded Source: <code style="color: #38BDF8;">${sourceRef}</code>
+              Grounded Source: <code style="color: #38BDF8;">${sourceRef}</code>
             </div>
           </div>
         `;
@@ -1252,7 +1293,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const waScenarios = [
         {
           inbound: 'Hi, we operate a clinic with 4 doctors. Can your booking portal prevent overlapping appointments and send WhatsApp reminders?',
-          outbound: '👋 Absolutely! Our clinical scheduler incorporates atomic database row-locks (preventing concurrent slot claims) with automated WhatsApp dispatch.',
+          outbound: 'Yes. Our clinical scheduler incorporates atomic database row-locks (preventing concurrent slot claims) with automated WhatsApp dispatch.',
           ticket: 'CX-8843',
           intent: 'clinical_booking_inquiry',
           endpoint: 'POST /api/webhooks/whatsapp/booking',
@@ -1260,7 +1301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
           inbound: 'We need an automated fee voucher and student report card portal for a school with 1,500 students. What is your implementation timeframe?',
-          outbound: '🏫 Yes, our Campus ERP engine automates roll numbers, fee breakdown slips, and parent circulars. A solutions architect will share our architecture spec shortly.',
+          outbound: 'Yes, our Campus ERP engine automates roll numbers, fee breakdown slips, and parent circulars. A solutions architect will share our architecture spec shortly.',
           ticket: 'CX-8844',
           intent: 'campus_erp_scoping',
           endpoint: 'POST /api/webhooks/whatsapp/erp',
@@ -1268,7 +1309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
           inbound: 'We need a high-speed automotive wheel catalog with Year/Make/Model PCD fitment filters for our wholesale dealership network.',
-          outbound: '🏎️ Understood! Our automotive catalog platform features dynamic vehicle PCD/Offset matrix calculations with real-time stock checks.',
+          outbound: 'Understood. Our automotive catalog platform features dynamic vehicle PCD/Offset matrix calculations with real-time stock checks.',
           ticket: 'CX-8845',
           intent: 'b2b_catalog_inquiry',
           endpoint: 'POST /api/webhooks/whatsapp/catalog',
@@ -1725,7 +1766,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const userRow = document.createElement('div');
       userRow.className = 'rag-message-row user';
       userRow.innerHTML = `
-        <div class="rag-avatar" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">👤</div>
+        <div class="rag-avatar font-mono" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); font-size:0.7rem; font-weight:700;">YOU</div>
         <div class="rag-msg-bubble user">
           <p>${clean.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
         </div>
@@ -1739,10 +1780,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const aiRow = document.createElement('div');
       aiRow.className = 'rag-message-row ai';
       aiRow.innerHTML = `
-        <div class="rag-avatar">🤖</div>
+        <div class="rag-avatar font-mono" style="font-size:0.72rem;font-weight:700;">RAG</div>
         <div class="rag-msg-bubble">
           <div class="rag-msg-meta">Vector Search Pipeline &bull; Cosine Similarity Match</div>
-          <p style="color: #38BDF8; font-family: var(--font-mono); font-size: 0.8rem;">⟳ Retrieving verified enterprise chunks...</p>
+          <p style="color: #38BDF8; font-family: var(--font-mono); font-size: 0.8rem;">Retrieving verified enterprise chunks...</p>
         </div>
       `;
       ragChatBox.appendChild(aiRow);
@@ -1771,12 +1812,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         aiRow.innerHTML = `
-          <div class="rag-avatar">🤖</div>
+          <div class="rag-avatar font-mono" style="font-size:0.72rem;font-weight:700;">RAG</div>
           <div class="rag-msg-bubble">
             <div class="rag-msg-meta">Grounded Response &bull; Token Match: 98.4%</div>
             <p>${answer}</p>
             <div style="margin-top: 0.5rem; font-size: 0.72rem; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.4rem; font-family: var(--font-mono);">
-              📄 Grounded Source: <code style="color: #38BDF8;">${sourceRef}</code>
+              Grounded Source: <code style="color: #38BDF8;">${sourceRef}</code>
             </div>
           </div>
         `;
@@ -1811,7 +1852,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const waScenarios = [
         {
           inbound: 'Hi, we operate a clinic with 4 doctors. Can your booking portal prevent overlapping appointments and send WhatsApp reminders?',
-          outbound: '👋 Absolutely! Our clinical scheduler incorporates atomic database row-locks (preventing concurrent slot claims) with automated WhatsApp dispatch.',
+          outbound: 'Yes. Our clinical scheduler incorporates atomic database row-locks (preventing concurrent slot claims) with automated WhatsApp dispatch.',
           ticket: 'CX-8843',
           intent: 'clinical_booking_inquiry',
           endpoint: 'POST /api/webhooks/whatsapp/booking',
@@ -1819,7 +1860,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
           inbound: 'We need an automated fee voucher and student report card portal for a school with 1,500 students. What is your implementation timeframe?',
-          outbound: '🏫 Yes, our Campus ERP engine automates roll numbers, fee breakdown slips, and parent circulars. A solutions architect will share our architecture spec shortly.',
+          outbound: 'Yes, our Campus ERP engine automates roll numbers, fee breakdown slips, and parent circulars. A solutions architect will share our architecture spec shortly.',
           ticket: 'CX-8844',
           intent: 'campus_erp_scoping',
           endpoint: 'POST /api/webhooks/whatsapp/erp',
@@ -1827,7 +1868,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
           inbound: 'We need a high-speed automotive wheel catalog with Year/Make/Model PCD fitment filters for our wholesale dealership network.',
-          outbound: '🏎️ Understood! Our automotive catalog platform features dynamic vehicle PCD/Offset matrix calculations with real-time stock checks.',
+          outbound: 'Understood. Our automotive catalog platform features dynamic vehicle PCD/Offset matrix calculations with real-time stock checks.',
           ticket: 'CX-8845',
           intent: 'b2b_catalog_inquiry',
           endpoint: 'POST /api/webhooks/whatsapp/catalog',

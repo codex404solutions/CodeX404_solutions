@@ -58,14 +58,15 @@ $pageMeta = $pageMeta ?? [];
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="<?= asset('css/main.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/main.css') ? filemtime(dirname(__DIR__) . '/assets/css/main.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/animations.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/animations.css') ? filemtime(dirname(__DIR__) . '/assets/css/animations.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/components.css') ? filemtime(dirname(__DIR__) . '/assets/css/components.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/responsive.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/responsive.css') ? filemtime(dirname(__DIR__) . '/assets/css/responsive.css') : '1.0' ?>">
+    <link rel="stylesheet" href="<?= asset('css/depth3d.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/depth3d.css') ? filemtime(dirname(__DIR__) . '/assets/css/depth3d.css') : '1.0' ?>">
 </head>
 
-<body>
+<body class="<?= htmlspecialchars((string)($bodyClass ?? ''), ENT_QUOTES, 'UTF-8') ?>">
     <!-- Reading Progress Bar -->
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
 
