@@ -1056,10 +1056,8 @@ textarea:focus-visible {
   background: linear-gradient(90deg, transparent, rgba(11, 94, 215, 0.6), transparent) !important;
 }
 
-.footer-social-link {
-  background: linear-gradient(180deg, #13203A 0%, #0B1220 100%) !important;
-  border: 1px solid rgba(229, 231, 235, 0.16) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 0 #040812;
+.footer-links a:hover {
+  color: var(--obs-ice);
 }
 
 /* ==========================================================================
