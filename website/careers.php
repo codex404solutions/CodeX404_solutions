@@ -234,7 +234,7 @@ require_once __DIR__ . '/includes/header.php';
                             </div>
 
                             <div
-                                style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center;gap:0.75rem;">
+                                style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
                                 <span
                                     style="font-size:0.78rem;color:#94A3B8;"><?= htmlspecialchars((string) $job['category_name']) ?></span>
                                 <a href="<?= url('careers/' . urlencode((string) $job['slug'])) ?>"

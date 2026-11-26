@@ -144,6 +144,7 @@
 #division-grow,
 #division-automate,
 #divisions,
+#what-we-offer,
 #industry-education,
 #industry-commerce,
 #industry-legal,
@@ -2327,84 +2328,187 @@
 }
 
 /* --------------------------------------------------------------------------
-   16. Infinite Dual Tech Stack Marquee Slider
+   16. Curated Engineering & Technology Stack Marquee
    -------------------------------------------------------------------------- */
 .tech-marquee-section {
-  padding: 1.25rem 0;
+  --marquee-gap: 0.75rem;
+  padding: 1.45rem 0 1.65rem;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(6, 11, 24, 0.4) 0%, rgba(10, 22, 40, 0.7) 50%, rgba(6, 11, 24, 0.4) 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 100%;
+  background:
+    radial-gradient(ellipse 64% 78% at 50% 54%, rgba(11, 94, 215, 0.11), transparent 72%),
+    linear-gradient(180deg, rgba(7, 17, 31, 0.94) 0%, rgba(9, 20, 38, 0.98) 50%, rgba(7, 17, 31, 0.96) 100%);
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.tech-marquee-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.95rem;
+}
+
+.tech-marquee-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #E2E8F0;
+}
+
+.tech-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF8A00;
+  box-shadow: 0 0 8px rgba(255, 138, 0, 0.65);
+}
+
+.tech-marquee-caption {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #94A3B8;
+}
+
+.tech-marquee-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
 .tech-marquee-wrapper {
   position: relative;
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
 }
 
 .tech-marquee-track {
   display: flex;
-  gap: 1.25rem;
   width: max-content;
-  animation: marqueeScroll 35s linear infinite;
-  padding: 0.5rem 0;
+  will-change: transform;
+  animation: marqueeScroll 38s linear infinite;
 }
 
 .tech-marquee-track.reverse {
-  animation: marqueeScrollReverse 40s linear infinite;
-  margin-top: 0.75rem;
+  animation: marqueeScrollReverse 44s linear infinite;
 }
 
-.tech-marquee-wrapper:hover .tech-marquee-track {
+.tech-marquee-wrapper:hover .tech-marquee-track,
+.tech-marquee-wrapper:focus-within .tech-marquee-track {
   animation-play-state: paused;
 }
 
+.tech-marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--marquee-gap);
+  padding: 0.15rem var(--marquee-gap) 0.15rem 0;
+  margin: 0;
+  list-style: none;
+}
+
 @keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes marqueeScrollReverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
-.tech-pill-item {
+.tech-stack-card {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  background: rgba(17, 29, 58, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.6rem 1.15rem;
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
+  gap: 0.55rem;
+  height: 38px;
+  padding: 0 0.95rem;
+  background: rgba(11, 23, 44, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  font-size: 0.84rem;
   font-weight: 500;
-  color: var(--white);
+  letter-spacing: 0.01em;
+  color: #E2E8F0;
   white-space: nowrap;
-  backdrop-filter: blur(10px);
-  transition: all var(--transition-normal);
-  cursor: default;
+  user-select: text;
+  transition: border-color 0.22s ease, background-color 0.22s ease, color 0.22s ease;
 }
 
-.tech-pill-item:hover {
-  transform: translateY(-2px);
-  background: rgba(30, 45, 80, 0.9);
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
-  color: #38BDF8;
+.tech-stack-card:hover {
+  background: rgba(16, 33, 62, 0.96);
+  border-color: rgba(11, 94, 215, 0.55);
+  color: #FFFFFF;
 }
 
-.tech-pill-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
+.tech-card-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.tech-card-dot.is-blue { background: #0B5ED7; }
+.tech-card-dot.is-cyan { background: #22D3EE; }
+.tech-card-dot.is-orange { background: #FF8A00; }
+
+@media (max-width: 1024px) {
+  .tech-marquee-section {
+    --marquee-gap: 0.6rem;
+    padding: 1.25rem 0 1.4rem;
+  }
+
+  .tech-stack-card {
+    height: 36px;
+    padding: 0 0.82rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-marquee-section {
+    --marquee-gap: 0.5rem;
+    padding: 1.1rem 0 1.25rem;
+  }
+
+  .tech-marquee-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .tech-marquee-caption {
+    font-size: 0.75rem;
+  }
+
+  .tech-marquee-wrapper {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  }
+
+  .tech-marquee-track {
+    animation-duration: 28s;
+  }
+
+  .tech-marquee-track.reverse {
+    animation-duration: 32s;
+  }
+
+  .tech-stack-card {
+    height: 34px;
+    padding: 0 0.75rem;
+    font-size: 0.78rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -3677,8 +3781,18 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.25rem;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   transition: opacity 0.2s ease;
+}
+
+.cpc-minimal-url-link > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .cpc-minimal-url-link:hover {

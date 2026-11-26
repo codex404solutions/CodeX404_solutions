@@ -227,7 +227,18 @@ html.js .reveal-on-scroll.is-revealed {
 
   .tech-marquee-track {
     animation: none !important;
-    overflow-x: auto !important;
+    width: 100% !important;
+    will-change: auto !important;
+  }
+
+  .tech-marquee-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .tech-marquee-group[aria-hidden="true"] {
+    display: none !important;
   }
 
   .animate-float,

@@ -90,8 +90,8 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
 
                 <div class="hero-cta-group">
-                    <a href="#what-we-offer" class="btn btn-primary btn-lg">
-                        <span>Explore Services & Solutions</span>
+                    <a href="#divisions" class="btn btn-primary btn-lg">
+                        <span>Explore Services &amp; Solutions</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -409,56 +409,82 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ==========================================================================
-     INFINITE DUAL-SPEED TECH STACK MARQUEE SCROLLER
+     CURATED ENGINEERING & TECHNOLOGY STACK MARQUEE
      ========================================================================== -->
 <section class="tech-marquee-section" aria-label="Supported Engineering Technologies">
-    <div class="tech-marquee-wrapper">
-        <!-- Row 1: Forward Infinite Scroll -->
-        <div class="tech-marquee-track">
-            <div class="tech-pill-item">Python 3.12 Architecture</div>
-            <div class="tech-pill-item">PHP 8.4 &amp; MySQL</div>
-            <div class="tech-pill-item">React &amp; Next.js</div>
-            <div class="tech-pill-item">Azure OpenAI &amp; LLMs</div>
-            <div class="tech-pill-item">TypeScript &amp; Node.js</div>
-            <div class="tech-pill-item">Docker Containers</div>
-            <div class="tech-pill-item">FastAPI Microservices</div>
-            <div class="tech-pill-item">YOLOv8 Computer Vision</div>
-            <div class="tech-pill-item">REST &amp; GraphQL APIs</div>
-            <div class="tech-pill-item">CodeX404 Solutions</div>
-            <!-- Seamless Duplicate Loop -->
-            <div class="tech-pill-item">Python 3.12 Architecture</div>
-            <div class="tech-pill-item">PHP 8.4 &amp; MySQL</div>
-            <div class="tech-pill-item">React &amp; Next.js</div>
-            <div class="tech-pill-item">Azure OpenAI &amp; LLMs</div>
-            <div class="tech-pill-item">TypeScript &amp; Node.js</div>
-            <div class="tech-pill-item">Docker Containers</div>
-            <div class="tech-pill-item">FastAPI Microservices</div>
-            <div class="tech-pill-item">YOLOv8 Computer Vision</div>
-            <div class="tech-pill-item">REST &amp; GraphQL APIs</div>
-            <div class="tech-pill-item">CodeX404 Solutions</div>
+    <div class="container">
+        <div class="tech-marquee-header">
+            <span class="tech-marquee-eyebrow">
+                <span class="tech-eyebrow-dot" aria-hidden="true"></span>
+                <span>Core Engineering Stack</span>
+            </span>
+            <p class="tech-marquee-caption">AI systems, full-stack applications &amp; production infrastructure</p>
+        </div>
+    </div>
+
+    <div class="tech-marquee-stack">
+        <!-- Row 1: AI & Application Development (Right to Left) -->
+        <div class="tech-marquee-wrapper" role="region" aria-label="AI and Application Development">
+            <div class="tech-marquee-track">
+                <ul class="tech-marquee-group">
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>Python</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>FastAPI</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>Flask</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>Generative AI</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>LLMs</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>RAG</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>AI Agents</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan" aria-hidden="true"></span><span>Computer Vision</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan" aria-hidden="true"></span><span>React</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>Next.js</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>TypeScript</span></li>
+                </ul>
+                <ul class="tech-marquee-group" aria-hidden="true">
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>Python</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>FastAPI</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>Flask</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>Generative AI</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>LLMs</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>RAG</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>AI Agents</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan"></span><span>Computer Vision</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan"></span><span>React</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>Next.js</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>TypeScript</span></li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Row 2: Reverse Infinite Scroll -->
-        <div class="tech-marquee-track reverse">
-            <div class="tech-pill-item">AWS Cloud Architecture</div>
-            <div class="tech-pill-item">Redis Distributed Cache</div>
-            <div class="tech-pill-item">Autonomous Multi-Agent AI</div>
-            <div class="tech-pill-item">LangChain &amp; Qdrant RAG</div>
-            <div class="tech-pill-item">Progressive Web Apps</div>
-            <div class="tech-pill-item">Stripe &amp; Payment Gateways</div>
-            <div class="tech-pill-item">CI/CD GitHub Actions</div>
-            <div class="tech-pill-item">OWASP Security Hardening</div>
-            <div class="tech-pill-item">Enterprise Engineering Pedigree</div>
-            <!-- Seamless Duplicate Loop -->
-            <div class="tech-pill-item">AWS Cloud Architecture</div>
-            <div class="tech-pill-item">Redis Distributed Cache</div>
-            <div class="tech-pill-item">Autonomous Multi-Agent AI</div>
-            <div class="tech-pill-item">LangChain &amp; Qdrant RAG</div>
-            <div class="tech-pill-item">Progressive Web Apps</div>
-            <div class="tech-pill-item">Stripe &amp; Payment Gateways</div>
-            <div class="tech-pill-item">CI/CD GitHub Actions</div>
-            <div class="tech-pill-item">OWASP Security Hardening</div>
-            <div class="tech-pill-item">Enterprise Engineering Pedigree</div>
+        <!-- Row 2: Infrastructure & Engineering (Left to Right) -->
+        <div class="tech-marquee-wrapper" role="region" aria-label="Infrastructure and Engineering">
+            <div class="tech-marquee-track reverse">
+                <ul class="tech-marquee-group">
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>PostgreSQL</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>MySQL</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan" aria-hidden="true"></span><span>REST APIs</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan" aria-hidden="true"></span><span>GraphQL</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>Docker</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>GitHub Actions</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>CI/CD</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>API Security</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>OWASP Practices</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange" aria-hidden="true"></span><span>Workflow Automation</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue" aria-hidden="true"></span><span>Payment Integrations</span></li>
+                </ul>
+                <ul class="tech-marquee-group" aria-hidden="true">
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>PostgreSQL</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>MySQL</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan"></span><span>REST APIs</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-cyan"></span><span>GraphQL</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>Docker</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>GitHub Actions</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>CI/CD</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>API Security</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>OWASP Practices</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-orange"></span><span>Workflow Automation</span></li>
+                    <li class="tech-stack-card"><span class="tech-card-dot is-blue"></span><span>Payment Integrations</span></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -467,6 +493,7 @@ require_once __DIR__ . '/includes/header.php';
      WHAT WE OFFER — BUILD · GROW · AUTOMATE
      ========================================================================== -->
 <section class="section" id="divisions" aria-label="Company Divisions">
+    <div id="what-we-offer" aria-hidden="true" style="height: 0; overflow: hidden;"></div>
     <div class="container">
         <div class="section-header">
             <div class="section-tag">

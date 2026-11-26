@@ -31,20 +31,20 @@ require_once __DIR__ . '/includes/header.php';
 
         <div style="display: flex; flex-direction: column; gap: 3rem;">
             <!-- CASE STUDY 1: INSAN DEGREE COLLEGE ERP -->
-            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="card reveal-on-scroll case-detail-card">
+                <div class="case-detail-header">
                     <div>
-                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Higher Education & Institutional Operations</span>
-                        <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--white);">Insan Degree College — Institutional ERP & Fee Portal</h2>
-                        <a href="https://erpinsandegreeclg.codex404solutions.online" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; font-family: var(--font-mono);">
+                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Higher Education &amp; Institutional Operations</span>
+                        <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.85rem); margin-top: 0.5rem; color: var(--white);">Insan Degree College — Institutional ERP &amp; Fee Portal</h2>
+                        <a href="https://erpinsandegreeclg.codex404solutions.online" target="_blank" rel="noopener noreferrer" class="case-detail-url-link">
                             <span>erpinsandegreeclg.codex404solutions.online</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="case-detail-meta">
                         <span style="font-size: 0.85rem; color: var(--slate-dark); display: block;">Tech Stack: PHP 8.2 • MySQL 8 • Granular RBAC • DomPDF</span>
-                        <a href="https://insandegreeclg.codex404solutions.online" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; color: #94A3B8; text-decoration: none; margin-top: 0.35rem; display: inline-flex; align-items: center; gap: 0.25rem;">
-                            <span>insandegreeclg.codex404solutions.online</span> ↗
+                        <a href="https://insandegreeclg.codex404solutions.online" target="_blank" rel="noopener noreferrer" class="case-detail-url-link is-secondary">
+                            <span>insandegreeclg.codex404solutions.online</span> <span aria-hidden="true">↗</span>
                         </a>
                     </div>
                 </div>
@@ -78,17 +78,17 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- CASE STUDY 2: CENTRAL MEDICAL CLINIC -->
-            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="card reveal-on-scroll case-detail-card">
+                <div class="case-detail-header">
                     <div>
-                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Healthcare Systems & Clinical Operations</span>
-                        <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--white);">Central Medical — Clinical OPD & Healthcare Management</h2>
-                        <a href="https://centralmedicall.com" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; font-family: var(--font-mono);">
+                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Healthcare Systems &amp; Clinical Operations</span>
+                        <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.85rem); margin-top: 0.5rem; color: var(--white);">Central Medical — Clinical OPD &amp; Healthcare Management</h2>
+                        <a href="https://centralmedicall.com" target="_blank" rel="noopener noreferrer" class="case-detail-url-link">
                             <span>centralmedicall.com</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="case-detail-meta">
                         <span style="font-size: 0.85rem; color: var(--slate-dark); display: block;">Tech Stack: PHP 8.2 • MySQL 8 • Atomic Slot Locks • SMS Alerts</span>
                     </div>
                 </div>
@@ -122,17 +122,17 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- CASE STUDY 3: TENDER APPLIANCES -->
-            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="card reveal-on-scroll case-detail-card">
+                <div class="case-detail-header">
                     <div>
-                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Commerce & Wholesale Engine</span>
-                        <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--white);">Tender Appliances — Home & Kitchen Commercial Commerce</h2>
-                        <a href="https://tenderappliances.in" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; font-family: var(--font-mono);">
+                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Commerce &amp; Wholesale Engine</span>
+                        <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.85rem); margin-top: 0.5rem; color: var(--white);">Tender Appliances — Home &amp; Kitchen Commercial Commerce</h2>
+                        <a href="https://tenderappliances.in" target="_blank" rel="noopener noreferrer" class="case-detail-url-link">
                             <span>tenderappliances.in</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="case-detail-meta">
                         <span style="font-size: 0.85rem; color: var(--slate-dark); display: block;">Tech Stack: PHP 8.2 • MySQL 8 • Automated GST • Fast Checkout</span>
                     </div>
                 </div>
@@ -166,17 +166,17 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- CASE STUDY 4: WHEELCRAFT AUTOMOTIVE -->
-            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(34, 211, 238, 0.25);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="card reveal-on-scroll case-detail-card">
+                <div class="case-detail-header">
                     <div>
-                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Automotive Products & Wholesale Catalog</span>
-                        <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--white);">Wheelcraft — Automotive Products & Wheel Fitment Engine</h2>
-                        <a href="https://wheelcraft.codex404solutions.online" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; font-family: var(--font-mono);">
+                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.3);">Automotive Products &amp; Wholesale Catalog</span>
+                        <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.85rem); margin-top: 0.5rem; color: var(--white);">Wheelcraft — Automotive Products &amp; Wheel Fitment Engine</h2>
+                        <a href="https://wheelcraft.codex404solutions.online" target="_blank" rel="noopener noreferrer" class="case-detail-url-link">
                             <span>wheelcraft.codex404solutions.online</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="case-detail-meta">
                         <span style="font-size: 0.85rem; color: var(--slate-dark); display: block;">Tech Stack: PHP 8.2 • Vehicle Fitment Matrix • Instant WhatsApp Ingestion</span>
                     </div>
                 </div>
@@ -210,19 +210,19 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <!-- CASE STUDY 5: TURNKEY BOOKING & APPOINTMENT SYSTEMS -->
-            <div class="card reveal-on-scroll" style="padding: 2.75rem; border-color: rgba(6, 214, 160, 0.35); box-shadow: 0 10px 30px rgba(6, 214, 160, 0.08);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="card reveal-on-scroll case-detail-card" style="border-color: rgba(6, 214, 160, 0.35); box-shadow: 0 10px 30px rgba(6, 214, 160, 0.08);">
+                <div class="case-detail-header">
                     <div>
-                        <span class="tag-chip" style="color: #06D6A0; border-color: rgba(6, 214, 160, 0.4);">Healthcare, Wellness & Hospitality Automation</span>
-                        <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--white);">Turnkey Appointment & Booking Platforms (Dental, Salon, Parlour & Restaurant)</h2>
-                        <a href="https://smiledental.codex404solutions.online" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; font-family: var(--font-mono);">
+                        <span class="tag-chip" style="color: #06D6A0; border-color: rgba(6, 214, 160, 0.4);">Healthcare, Wellness &amp; Hospitality Automation</span>
+                        <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.85rem); margin-top: 0.5rem; color: var(--white);">Turnkey Appointment &amp; Booking Platforms (Dental, Salon, Parlour &amp; Restaurant)</h2>
+                        <a href="https://smiledental.codex404solutions.online" target="_blank" rel="noopener noreferrer" class="case-detail-url-link">
                             <span>smiledental.codex404solutions.online</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="case-detail-meta">
                         <span style="font-size: 0.85rem; color: var(--slate-dark); display: block;">Tech Stack: PHP 8.4 • MySQL Transactions • WhatsApp Webhooks • Redis Slot Locks</span>
-                        <span style="font-size: 0.8rem; color: #94A3B8; display: block; margin-top: 0.25rem;">Multi-Tenant & Mobile Responsive</span>
+                        <span style="font-size: 0.8rem; color: #94A3B8; display: block; margin-top: 0.25rem;">Multi-Tenant &amp; Mobile Responsive</span>
                     </div>
                 </div>
 

@@ -160,18 +160,20 @@
 }
 
 .careers-search-box {
-    min-width: 240px;
-    flex: 0 1 280px;
+    min-width: min(100%, 240px);
+    flex: 1 1 240px;
 }
 
 /* Job Cards Grid */
 .careers-jobs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
     gap: 1.35rem;
 }
 
 .careers-job-card {
+    min-width: 0;
+    max-width: 100%;
     background: rgba(11, 18, 32, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -240,6 +242,17 @@
     display: block;
     color: #F8FAFC;
     font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 420px) {
+    .careers-job-card {
+        padding: 1.15rem;
+    }
+
+    .careers-job-specs {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Vacancy Detail Layout */

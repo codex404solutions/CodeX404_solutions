@@ -82,15 +82,24 @@ $pageMeta = $pageMeta ?? [];
         <div class="container top-announcement-container">
             <div class="top-announcement-left">
                 <span class="status-indicator" aria-hidden="true"></span>
-                <span class="top-announcement-text">
-                    <span class="status-label-bold">BUILD · GROW · AUTOMATE</span>
-                    <span class="status-divider" aria-hidden="true">•</span>
-                    <span class="status-subtext">Where Bugs Meet Their Match</span>
-                </span>
+                <a href="<?= url('discovery-call.php') ?>" class="top-announcement-link">
+                    <span class="status-label-bold">Direct to Senior Engineers</span>
+                    <span class="status-divider" aria-hidden="true">&middot;</span>
+                    <span class="status-subtext">Custom Software, AI &amp; Growth Sprints</span>
+                    <span class="top-link-arrow" aria-hidden="true">&rarr;</span>
+                </a>
             </div>
 
             <div class="top-announcement-right">
-                <a href="https://mnoukhej.github.io/portfolio/" target="_blank" rel="noopener"
+                <a href="mailto:<?= COMPANY_EMAIL ?>"
+                    class="top-announcement-pill top-announcement-mail" title="Email CodeX404" aria-label="Email <?= COMPANY_EMAIL ?>">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span class="top-mail-text"><?= COMPANY_EMAIL ?></span>
+                </a>
+                <a href="https://mnoukhej.github.io/portfolio/" target="_blank" rel="noopener noreferrer"
                     class="top-announcement-pill" title="View Founder Portfolio">
                     <span>Founder Portfolio</span>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -98,13 +107,6 @@ $pageMeta = $pageMeta ?? [];
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                         <polyline points="15 3 21 3 21 9"></polyline>
                         <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                </a>
-                <a href="mailto:<?= COMPANY_EMAIL ?>"
-                    class="top-announcement-wa-btn" title="Email CodeX404" aria-label="Email CodeX404">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
                 </a>
             </div>
