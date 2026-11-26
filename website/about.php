@@ -5,73 +5,121 @@ require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
     'title' => 'About CodeX404 Solutions — Build, Grow, Automate',
-    'description' => 'Learn about CodeX404 Solutions, a technology and digital growth company working across software development, digital marketing, and business automation.',
+    'description' => 'Learn about CodeX404 Solutions, a technology and digital solutions company helping businesses build software, grow their digital presence, and automate workflows.',
     'canonical' => url('about.php'),
-    'keywords' => 'about CodeX404 Solutions, software engineering company, Muhammad Noukhez, Yousuf Ansari, engineering partner, global software development'
+    'keywords' => 'about CodeX404 Solutions, software engineering company, Muhammad Noukhez, Yousuf Ansari, technology partner'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'About Us'],
+];
+$heroTag = 'Who We Are';
+$heroTitleHtml = 'A Practical Technology Partner <span class="text-gradient gradient-text-animated">Focused on Business Outcomes</span>';
+$heroSubtitle = 'CodeX404 Solutions builds custom software, strengthens digital presence, and automates repetitive workflows so businesses operate with clarity and speed.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
-<!-- HERO SECTION -->
-<section class="section" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3.5rem;">
+<!-- WHO WE ARE, VISION & MISSION -->
+<section class="section">
     <div class="container">
-        <div class="section-header" style="max-width: 860px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Our Engineering Identity</span>
+        <div class="grid grid-cols-2" style="gap: 2.5rem; align-items: start; margin-bottom: 4rem;">
+            <div>
+                <div class="section-tag"><span class="dot"></span><span>About CodeX404</span></div>
+                <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1.15rem; color: var(--white); line-height: 1.25;">
+                    Solving Real Business Bottlenecks With Maintainable Technology
+                </h2>
+                <p style="font-size: 1.02rem; line-height: 1.75; margin-bottom: 1.15rem; color: var(--slate);">
+                    Businesses rarely stall because they lack another subscription tool. They stall when core workflows run across disconnected spreadsheets, slow portals, manual follow-ups, and fragmented software that refuses to adapt to how the company works.
+                </p>
+                <p style="font-size: 1.02rem; line-height: 1.75; color: var(--slate);">
+                    CodeX404 Solutions works directly with founders and operations teams to understand business requirements first, then design clear, secure systems with transparent milestones and direct engineering accountability.
+                </p>
             </div>
-            <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                An Engineering Partner That Treats <span class="gradient-text gradient-text-animated">Your Code Like Our Own</span>
-            </h1>
-            <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                CodeX404 Solutions was founded on a simple principle: growing businesses deserve world-class software engineering, transparent communication, and senior-level technical accountability without bloated agency bureaucracy or freelance fragility.
-            </p>
+
+            <div style="display: grid; gap: 1.35rem;">
+                <article class="card" style="padding: 1.75rem; border-left: 3px solid var(--electric-blue);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem;">
+                        <span class="inline-icon-box"><?= codex_icon('compass', 20) ?></span>
+                        <h3 style="color: var(--white); font-size: 1.2rem; margin: 0;">Our Vision</h3>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--slate); line-height: 1.65; margin: 0;">
+                        To be a trusted long-term technology partner for growing businesses—delivering dependable software, search discoverability, and practical automation without agency bloat or lock-in.
+                    </p>
+                </article>
+
+                <article class="card" style="padding: 1.75rem; border-left: 3px solid var(--amber);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem;">
+                        <span class="inline-icon-box is-amber"><?= codex_icon('target', 20) ?></span>
+                        <h3 style="color: var(--white); font-size: 1.2rem; margin: 0;">Our Mission</h3>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--slate); line-height: 1.65; margin: 0;">
+                        Turn operational friction into measurable efficiency by combining clean custom software development, conversion-ready digital execution, and responsible AI workflows.
+                    </p>
+                </article>
+            </div>
         </div>
 
-        <!-- Why We Exist & Operating Principles -->
-        <div class="grid grid-cols-2" style="margin-bottom: 4rem; gap: 3rem; align-items: center;">
-            <div>
-                <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">The Founding Mission</span>
-                <h2 style="font-size: 2.15rem; margin-bottom: 1.25rem; color: var(--white); line-height: 1.25;">Bridging the Gap in Global Software Engineering</h2>
-                <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem; color: var(--slate);">
-                    Too many growing businesses get burned by one of two extremes: overpriced agencies that bill enterprise rates while secretly handing off work to junior trainees, or low-cost freelancers who write brittle, unmaintainable code that breaks under real production loads.
+        <!-- WHAT WE DO: BUILD · GROW · AUTOMATE -->
+        <div class="section-header" style="margin-bottom: 2.25rem;">
+            <div class="section-tag"><span class="dot"></span><span>What We Do</span></div>
+            <h2 class="section-title">BUILD &middot; GROW &middot; AUTOMATE</h2>
+            <p class="section-subtitle">Three connected capabilities designed to carry a business from product foundation to sustainable growth and operational leverage.</p>
+        </div>
+
+        <div class="grid grid-cols-3" style="margin-bottom: 4rem;">
+            <article class="card card-tilt">
+                <div class="card-icon is-build"><?= codex_icon('code', 24) ?></div>
+                <h3 class="card-title">BUILD &mdash; Digital Products &amp; Software</h3>
+                <p class="card-description">Custom web development, SaaS platforms, CRM and ERP workflows, REST APIs, and internal business applications built around your exact operations.</p>
+                <a href="<?= url('build.php') ?>" class="card-arrow-link" style="color: var(--cyan); font-weight: 600;">Explore BUILD &rarr;</a>
+            </article>
+
+            <article class="card card-tilt">
+                <div class="card-icon is-grow"><?= codex_icon('chart', 24) ?></div>
+                <h3 class="card-title">GROW &mdash; Digital Presence &amp; Reach</h3>
+                <p class="card-description">SEO, answer engine optimization, conversion-focused websites, performance tuning, and digital marketing foundations that attract and convert real demand.</p>
+                <a href="<?= url('grow.php') ?>" class="card-arrow-link" style="color: var(--teal); font-weight: 600;">Explore GROW &rarr;</a>
+            </article>
+
+            <article class="card card-tilt">
+                <div class="card-icon is-automate"><?= codex_icon('workflow', 24) ?></div>
+                <h3 class="card-title">AUTOMATE &mdash; AI &amp; Process Automation</h3>
+                <p class="card-description">Applied generative AI, LLM and RAG knowledge tools, AI agents, and cross-system workflow automation that eliminate manual busywork safely.</p>
+                <a href="<?= url('automate.php') ?>" class="card-arrow-link" style="color: var(--amber); font-weight: 600;">Explore AUTOMATE &rarr;</a>
+            </article>
+        </div>
+
+        <!-- OUR APPROACH & ENGINEERING PHILOSOPHY -->
+        <div class="grid grid-cols-2" style="gap: 2.5rem; align-items: stretch;">
+            <div class="card" style="padding: 2.25rem;">
+                <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.35);">Our Approach</span>
+                <h3 style="color: var(--white); font-size: 1.35rem; margin-bottom: 1rem;">How We Work With Clients</h3>
+                <p style="font-size: 0.95rem; color: var(--slate); line-height: 1.7; margin-bottom: 1rem;">
+                    Every project starts with a direct technical conversation to clarify goals, constraints, data structure, and user roles before committing to code.
                 </p>
-                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate);">
-                    CodeX404 Solutions operates as an agile engineering extension of your team. We architect secure web applications, high-converting digital storefronts, and automated workflows with end-to-end transparency, fixed milestone roadmaps, and complete client code ownership.
+                <p style="font-size: 0.95rem; color: var(--slate); line-height: 1.7; margin: 0;">
+                    We deliver work in structured sprint milestones on testable staging environments so stakeholders review real progress continuously rather than waiting until launch day.
                 </p>
             </div>
 
-            <div style="background: var(--bg-surface); padding: 2.75rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
-                <h3 style="color: var(--cyan); margin-bottom: 1.5rem; font-size: 1.35rem;">Our Core Operating Principles</h3>
-                <ul class="transform-list" style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                        <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">01</span>
-                        <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Clean, Defensive Code</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">We write strictly typed, well-commented code with zero tolerance for security compromises, unparameterized queries, or fragile workarounds.</span>
-                        </div>
+            <div class="card" style="padding: 2.25rem;">
+                <span class="tag-chip" style="margin-bottom: 1rem; color: var(--amber); border-color: rgba(255, 140, 0, 0.35);">Engineering Philosophy</span>
+                <h3 style="color: var(--white); font-size: 1.35rem; margin-bottom: 1.25rem;">Principles Behind Every System</h3>
+                <ul class="transform-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <li style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                        <span style="color: var(--cyan); font-weight: 800;">01</span>
+                        <span><strong style="color: var(--white);">Clean, Defensive Code:</strong> Parameterized queries, strict input validation, and clear maintainable structure over brittle shortcuts.</span>
                     </li>
-                    <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                        <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">02</span>
-                        <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Direct Senior Engineering Access</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">No layers of non-technical account managers playing telephone. You communicate directly with senior software architects who design and write your code.</span>
-                        </div>
+                    <li style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                        <span style="color: var(--cyan); font-weight: 800;">02</span>
+                        <span><strong style="color: var(--white);">Direct Engineer Access:</strong> Collaborate directly with the engineers scoping and writing your software—no game of telephone.</span>
                     </li>
-                    <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                        <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">03</span>
-                        <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">100% Code & Asset Ownership</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Complete intellectual property transfer upon milestone completion. You own your code, databases, credentials, and architecture—zero recurring platform rent.</span>
-                        </div>
-                    </li>
-                    <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                        <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; line-height: 1;">04</span>
-                        <div>
-                            <strong style="color: var(--white); display: block; font-size: 1.05rem; margin-bottom: 0.25rem;">Bi-Weekly Working Demos</strong>
-                            <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Live staging environments updated every two weeks. You test actual functioning software throughout development, backed by guaranteed delivery roadmaps.</span>
-                        </div>
+                    <li style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                        <span style="color: var(--cyan); font-weight: 800;">03</span>
+                        <span><strong style="color: var(--white);">Written Ownership Terms:</strong> Source code, schemas, and project handoff terms agreed transparently before delivery.</span>
                     </li>
                 </ul>
             </div>
@@ -82,55 +130,46 @@ require_once __DIR__ . '/includes/header.php';
 <!-- LEADERSHIP COMPONENT -->
 <?php include __DIR__ . '/components/leadership.php'; ?>
 
-<!-- GLOBAL PRESENCE STRIP -->
+<!-- WHY WORK WITH US / COLLABORATION REGIONS -->
 <section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;">
                 <span class="dot"></span>
-                <span>Global Reach</span>
+                <span>Why Work With Us</span>
             </div>
-            <h2 class="section-title">Engineered in India. Trusted Across Timezones.</h2>
+            <h2 class="section-title">Clear Timezone Overlap &amp; Asynchronous Discipline</h2>
             <p class="section-subtitle">
-                We deliver software for international clients spanning multiple continents with asynchronous daily standups and dedicated overlapping communication hours.
+                Engineered in India for clients across timezones, using structured written updates, staging previews, and scheduled overlap hours.
             </p>
         </div>
 
         <div class="grid grid-cols-4" style="gap: 1.5rem;">
-            <div class="card" style="text-align: center; padding: 2.25rem;">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">North America</h3>
-                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    4–5 hours of guaranteed daily EST/PST overlap, sprint planning via Slack/Teams, and asynchronous video walkthroughs.
-                </p>
+            <div class="card" style="text-align: center; padding: 2rem;">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">North America</h3>
+                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">Scheduled EST/PST overlap windows supported by clear sprint notes and staging previews.</p>
             </div>
-
-            <div class="card" style="text-align: center; padding: 2.25rem;">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">United Kingdom & Europe</h3>
-                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Full afternoon GMT/CET overlap, GDPR-compliant engineering practices, and direct founder-level communication.
-                </p>
+            <div class="card" style="text-align: center; padding: 2rem;">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">UK &amp; Europe</h3>
+                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">Afternoon GMT/CET overlap for sprint reviews, privacy-conscious design, and direct founder access.</p>
             </div>
-
-            <div class="card" style="text-align: center; padding: 2.25rem;">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Middle East & GCC</h3>
-                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Near-complete GST/AST business hour alignment, rapid bi-weekly delivery cycles, and multi-currency billing.
-                </p>
+            <div class="card" style="text-align: center; padding: 2rem;">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">Middle East &amp; GCC</h3>
+                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">Close GST/AST business-hour alignment for rapid feedback cycles and iterative releases.</p>
             </div>
-
-            <div class="card" style="text-align: center; padding: 2.25rem;">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">India & APAC</h3>
-                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">
-                    Full-day real-time collaboration, rapid same-day deployments, and high-velocity engineering for growing enterprises.
-                </p>
+            <div class="card" style="text-align: center; padding: 2rem;">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">India &amp; APAC</h3>
+                <p style="font-size: 0.875rem; color: var(--slate); line-height: 1.6;">Same-day collaboration across regional teams for custom applications, growth, and automation.</p>
             </div>
         </div>
     </div>
 </section>
 
 <?php
-$ctaHeading = "Partner With an Engineering Team Focused on Your Business Outcomes";
-$ctaSubtitle = "Book a technical discovery session to discuss your architecture, specifications, and delivery milestones directly with our founding architects.";
+$ctaHeading = "Let's Build Something Practical Together";
+$ctaSubtitle = "Share your operational workflow, product idea, or growth goals and let's map out a realistic next step.";
+$ctaSecondaryText = "Explore Services";
+$ctaSecondaryUrl = url('solutions.php');
 include __DIR__ . '/components/cta.php';
 ?>
 

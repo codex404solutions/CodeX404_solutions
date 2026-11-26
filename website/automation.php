@@ -4,186 +4,132 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Business Process & Workflow Automation Engineering',
-    'description' => 'Plan workflow automations and integrations across business tools, CRM, messaging, billing, and APIs with appropriate data handling controls.',
+    'title' => 'Business Process & Workflow Automation | CodeX404 Solutions',
+    'description' => 'Plan workflow automations and integrations across business tools, CRM, messaging, billing, and APIs with reliable data handling controls.',
     'canonical' => url('automation.php'),
-    'keywords' => 'workflow automation, CRM automation, WhatsApp Business API automation, business process automation, API integrations, spreadsheet migration'
+    'keywords' => 'workflow automation, CRM automation, WhatsApp Business API automation, business process automation, API integrations'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Services', 'url' => url('solutions.php')],
+    ['label' => 'Workflow Automation'],
+];
+$heroTag = 'AUTOMATE · Workflows & Integrations';
+$heroTitleHtml = 'Automate Repetitive Work Across Your <span class="text-gradient">Business Systems</span>';
+$heroSubtitle = 'Eliminate manual copy-pasting between forms, spreadsheets, CRMs, messaging channels, and invoicing tools with reliable, auditable API integrations and background pipelines.';
+$heroActions = [
+    ['label' => 'Book an Automation Audit', 'url' => url('discovery-call.php') . '?division=AUTOMATE', 'variant' => 'primary'],
+    ['label' => 'Explore AI Agents', 'url' => url('ai-agents.php'), 'variant' => 'secondary'],
+];
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
-<!-- HERO SECTION -->
-<section class="section" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3.5rem;">
-    <div class="container">
-        <div class="section-header" style="max-width: 860px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Operational Velocity & Automation</span>
-            </div>
-            <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Automate the Repetitive. <span class="gradient-text">Accelerate Your Enterprise.</span>
-            </h1>
-            <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                Stop losing valuable hours to spreadsheet copy-pasting, disconnected SaaS tools, and slow manual follow-ups. We engineer custom automation pipelines that keep your business running smoothly, accurately, and 24/7.
-            </p>
-        </div>
-
-        <!-- Automation Capabilities Grid -->
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <!-- 1. Zero-Leakage Lead Capture -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">⚡</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Zero-Leakage Lead Ingestion</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Instantly capture high-intent inquiries from landing pages, Facebook ads, LinkedIn forms, and WhatsApp. Validates phone/email, enriches contact details, and assigns leads to available reps dynamically.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Real-Time Routing</span>
-                    <span class="tag-chip">Duplicate Deduplication</span>
-                    <span class="tag-chip">CRM Instant Sync</span>
-                    <span class="tag-chip">SMS & Email Alerts</span>
-                </div>
-            </div>
-
-            <!-- 2. WhatsApp Business Cloud API Pipelines -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">💬</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">WhatsApp Business Cloud API</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Connect directly to Meta's official WhatsApp Business Cloud API. Automate verified appointment reminders, invoice payment links, order tracking, and two-way interactive customer support.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Meta Cloud API</span>
-                    <span class="tag-chip">Interactive Quick Replies</span>
-                    <span class="tag-chip">Media Attachments</span>
-                    <span class="tag-chip">Green Tick Ready</span>
-                </div>
-            </div>
-
-            <!-- 3. Automated Invoicing & Payment Reconciliation -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">💳</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Automated Invoicing & Payments</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Generate branded PDF invoices, calculate GST/sales taxes dynamically, dispatch Razorpay/Stripe checkout links, and automatically reconcile paid transactions with accounting databases.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">PDF Invoice Generation</span>
-                    <span class="tag-chip">Stripe / Razorpay</span>
-                    <span class="tag-chip">Automatic Reconciliation</span>
-                    <span class="tag-chip">Payment Reminders</span>
-                </div>
-            </div>
-
-            <!-- 4. Custom API Orchestration Middleware -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">🔗</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Multi-System API Orchestration</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Bridge legacy databases and modern cloud apps that do not communicate out of the box. Robust middleware pipelines featuring asynchronous message queues and automatic exponential retry policies.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">REST & Webhooks</span>
-                    <span class="tag-chip">Redis Queues</span>
-                    <span class="tag-chip">Dead-Letter Audits</span>
-                    <span class="tag-chip">HMAC Verification</span>
-                </div>
-            </div>
-
-            <!-- 5. Automated Executive Reporting & Alerts -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">📈</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Scheduled Telemetry & Reports</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Automate the manual compilation of weekly sales summaries, operational bottlenecks, and financial KPI reports. Dispatches structured summaries straight to executive Slack channels or inboxes.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Automated Summaries</span>
-                    <span class="tag-chip">Slack Bot Integration</span>
-                    <span class="tag-chip">PDF Digest Dispatch</span>
-                    <span class="tag-chip">Real-Time Alarms</span>
-                </div>
-            </div>
-
-            <!-- 6. Spreadsheet to Relational Migrations -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">🛠️</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Spreadsheet-to-System Modernization</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Graduate your operations away from fragile, multi-tab Excel files. We clean historical data, architect normalized relational schemas, and build role-restricted web portals with zero formulas to break.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Data Sanitation</span>
-                    <span class="tag-chip">Relational PostgreSQL/MySQL</span>
-                    <span class="tag-chip">Field-Level Validation</span>
-                    <span class="tag-chip">Historical Integrity</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- MEASURABLE BUSINESS ROI STRIP -->
-<section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-    <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>The Automation Impact</span>
-            </div>
-            <h2 class="section-title">Measurable Gains in Operational Speed & Accuracy</h2>
-            <p class="section-subtitle">
-                Automation isn't just about saving hours — it's about eliminating costly human data entry mistakes and responding to customer demand instantaneously.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <div class="card card-tilt reveal-on-scroll" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">&lt; 60s</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Instant Lead Routing</h3>
-                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Inbound inquiries from landing pages, ads, and WhatsApp are parsed, enriched, and routed to sales in under 60 seconds.
-                </p>
-            </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">85%</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Manual Work Eliminated</h3>
-                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Automated two-way synchronization between your CRM, billing, and database removes repetitive copy-pasting and human error.
-                </p>
-            </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="text-align: center; padding: 2.5rem;">
-                <div style="font-size: 3.25rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.5rem; line-height: 1;">100%</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--white);">Validated &amp; Audited</h3>
-                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate);">
-                    Every webhook event, schema validation check, and error notification is recorded with complete audit trails and automated retries.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- LIVE DEMO SANDBOX BANNER -->
 <section class="section">
     <div class="container">
-        <div style="background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.08) 0%, var(--bg-surface) 100%); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 3rem; text-align: center;">
-            <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Interactive Simulator</span>
-            <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 1rem;">Test Our WhatsApp Lead Ingestion Pipeline</h3>
-            <p style="font-size: 1rem; color: var(--slate); max-width: 650px; margin: 0 auto 2rem auto; line-height: 1.6;">
-                Trigger a simulated webhook payload to watch how our pipeline captures contact details, calculates priority scores, and generates instant confirmations in real time.
-            </p>
-            <a href="<?= url('index.php#simulators') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch Pipeline Simulator ⚡</a>
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-automate"><?= codex_icon('zap', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Automated Lead Capture &amp; Routing</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Capture inquiries from website forms, ad leads, and messaging webhooks cleanly—validating fields, deduplicating records, and notifying team owners promptly.
+                </p>
+                <div class="card-tags"><span class="tag-chip">Instant Routing</span><span class="tag-chip">Deduplication</span><span class="tag-chip">CRM Sync</span></div>
+            </article>
+
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('message', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">WhatsApp Business Cloud API</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Integrate official Meta WhatsApp Business Cloud API templates and webhooks for appointment confirmations, payment reminders, and lead intake.
+                </p>
+                <div class="card-tags"><span class="tag-chip">Official Cloud API</span><span class="tag-chip">Status Webhooks</span><span class="tag-chip">Staff Escalation</span></div>
+            </article>
+
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-automate"><?= codex_icon('card', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Invoicing &amp; Payment Sync</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Generate structured PDF receipts, dispatch Razorpay or Stripe payment links, and reconcile paid transactions cleanly with operational records.
+                </p>
+                <div class="card-tags"><span class="tag-chip">PDF Invoices</span><span class="tag-chip">Stripe / Razorpay</span><span class="tag-chip">Reconciliation</span></div>
+            </article>
+
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-automate"><?= codex_icon('link', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Multi-System Middleware</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Connect internal databases and third-party SaaS apps using signed webhooks, background queues, idempotency keys, and retry handling.
+                </p>
+                <div class="card-tags"><span class="tag-chip">Signed Webhooks</span><span class="tag-chip">Job Queues</span><span class="tag-chip">Idempotency</span></div>
+            </article>
+
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('chart', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Scheduled Reporting Digests</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Replace manual weekly CSV exports with scheduled operational digests pushed to email, Slack, or internal admin dashboards.
+                </p>
+                <div class="card-tags"><span class="tag-chip">Scheduled Jobs</span><span class="tag-chip">Email / Slack</span><span class="tag-chip">Anomaly Alerts</span></div>
+            </article>
+
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-automate"><?= codex_icon('database', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Spreadsheet-to-Database Transitions</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Clean legacy spreadsheets, import historical records into normalized MySQL or PostgreSQL schemas, and replace brittle manual edits with validated forms.
+                </p>
+                <div class="card-tags"><span class="tag-chip">Data Cleanup</span><span class="tag-chip">MySQL / Postgres</span><span class="tag-chip">Field Validation</span></div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- PRACTICAL OUTCOMES (NO INVENTED PERCENTAGES) -->
+<section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Operational Benefits</span></div>
+            <h2 class="section-title">What Reliable Workflow Automation Improves</h2>
+            <p class="section-subtitle">Automation matters most where speed, data consistency, and accountability directly impact customer follow-through.</p>
+        </div>
+
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <div class="card" style="padding: 2rem;">
+                <div style="margin-bottom: 0.9rem;" class="inline-icon-box is-amber"><?= codex_icon('clock', 22) ?></div>
+                <h3 style="font-size: 1.18rem; margin-bottom: 0.65rem; color: var(--white);">Faster Lead Response</h3>
+                <p style="font-size: 0.9rem; line-height: 1.65; color: var(--slate); margin: 0;">Incoming web and messaging inquiries reach the right team member immediately rather than waiting in shared inboxes.</p>
+            </div>
+            <div class="card" style="padding: 2rem;">
+                <div style="margin-bottom: 0.9rem;" class="inline-icon-box"><?= codex_icon('workflow', 22) ?></div>
+                <h3 style="font-size: 1.18rem; margin-bottom: 0.65rem; color: var(--white);">Fewer Transcription Errors</h3>
+                <p style="font-size: 0.9rem; line-height: 1.65; color: var(--slate); margin: 0;">Validated two-way synchronization between forms, billing, and CRMs eliminates manual copy-paste mismatches.</p>
+            </div>
+            <div class="card" style="padding: 2rem;">
+                <div style="margin-bottom: 0.9rem;" class="inline-icon-box"><?= codex_icon('shield', 22) ?></div>
+                <h3 style="font-size: 1.18rem; margin-bottom: 0.65rem; color: var(--white);">Inspectable Run History</h3>
+                <p style="font-size: 0.9rem; line-height: 1.65; color: var(--slate); margin: 0;">Every webhook event, retry, and failure state is logged cleanly so operators stay in control.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIVE SIMULATOR BANNER -->
+<section class="section">
+    <div class="container">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
+            <span class="tag-chip" style="margin-bottom: 0.85rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Interactive Sandbox</span>
+            <h3 style="font-size: 1.65rem; color: var(--white); margin-bottom: 0.75rem;">Inspect Our Lead Webhook Pipeline Simulator</h3>
+            <p style="font-size: 0.98rem; color: var(--slate); max-width: 620px; margin: 0 auto 1.5rem auto; line-height: 1.6;">See how structured webhook payloads validate inputs, score intent, and sync across dashboards in real time.</p>
+            <a href="<?= url('portfolio.php') ?>" class="btn btn-primary">Explore Interactive Portfolio &rarr;</a>
         </div>
     </div>
 </section>
 
 <?php
-$ctaHeading = "Ready to Eliminate Repetitive Manual Friction?";
-$ctaSubtitle = "Request a complimentary Technology & Automation Audit to identify high-leverage workflows ready for immediate automation.";
+$ctaHeading = "Ready to Automate Repetitive Manual Workflows?";
+$ctaSubtitle = "Share the tools you currently connect manually and let's map out a clean integration plan.";
 include __DIR__ . '/components/cta.php';
-?>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+require_once __DIR__ . '/includes/footer.php';

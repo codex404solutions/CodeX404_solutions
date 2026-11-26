@@ -4,194 +4,137 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Enterprise AI Solutions & Private RAG Knowledge Systems',
-    'description' => 'Secure, domain-specific enterprise AI systems: private RAG applications, vector search, document intelligence, and omnichannel AI assistants with strict data privacy and grounded citation thresholds.',
+    'title' => 'Applied AI Solutions & Private RAG Systems | CodeX404 Solutions',
+    'description' => 'Build grounded business AI systems: private RAG knowledge assistants, document extraction pipelines, workforce copilots, and access-controlled AI integrations.',
     'canonical' => url('ai-solutions.php'),
-    'keywords' => 'enterprise AI solutions, private RAG applications, vector search, Qdrant AI, document OCR intelligence, bespoke AI assistants, self-hosted LLM'
+    'keywords' => 'applied AI solutions, private RAG applications, vector search, Qdrant AI, document OCR intelligence, bespoke AI assistants, self-hosted LLM'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Services', 'url' => url('solutions.php')],
+    ['label' => 'AI Solutions & RAG'],
+];
+$heroTag = 'AUTOMATE · Applied AI & Knowledge Systems';
+$heroTitleHtml = 'Applied AI Systems Built for <span class="text-gradient">Grounded Business Value</span>';
+$heroSubtitle = 'We engineer domain-specific AI assistants and document pipelines anchored directly to your approved internal documentation and databases—with source citations, schema validation, and explicit access boundaries.';
+$heroActions = [
+    ['label' => 'Discuss an AI Use Case', 'url' => url('discovery-call.php') . '?division=AUTOMATE', 'variant' => 'primary'],
+    ['label' => 'Explore AI Agents', 'url' => url('ai-agents.php'), 'variant' => 'secondary'],
+];
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
-<!-- HERO SECTION -->
-<section class="section" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3.5rem;">
+<section class="section">
     <div class="container">
-        <div class="section-header" style="max-width: 860px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Applied Enterprise Artificial Intelligence</span>
-            </div>
-            <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Enterprise AI Engineered for <span class="gradient-text">Deterministic Business Value</span>
-            </h1>
-            <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                We build secure, domain-specific AI systems that connect directly to your proprietary company documentation, databases, and operational tools — engineered without speculative hype, hallucination risks, or privacy leaks.
-            </p>
-        </div>
-
-        <!-- 6 Core AI Capability Cards -->
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <!-- 1. Retrieval-Augmented Generation (RAG) -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">📚</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Private Knowledge RAG Systems</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Connect Large Language Models directly to internal SOPs, product documentation, HR policies, and technical manuals. Generates precise answers with exact source citations and zero retraining costs.
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-automate"><?= codex_icon('book', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Private Knowledge RAG Systems</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Connect language models to internal SOPs, manuals, and policies using retrieval-augmented generation that cites source passages and refuses ungrounded answers.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Hybrid Vector Search</span>
-                    <span class="tag-chip">Qdrant / pgvector</span>
-                    <span class="tag-chip">Direct Citations</span>
-                    <span class="tag-chip">Grounded Citations</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Hybrid Vector Search</span><span class="tag-chip">Qdrant / pgvector</span><span class="tag-chip">Source Citations</span></div>
+            </article>
 
-            <!-- 2. Document & OCR Intelligence -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">📄</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Document Intelligence & OCR</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Automatically extract line items, totals, dates, and contractual clauses from unstructured PDFs, receipts, invoices, and physical scans into validated relational database tables.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('file', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Document Intelligence &amp; Extraction</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Extract line items, dates, and structured fields from PDFs, forms, and invoices into validated database records with human review checkpoints.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">OCR Parsing</span>
-                    <span class="tag-chip">Schema Validation</span>
-                    <span class="tag-chip">Invoice Ingestion</span>
-                    <span class="tag-chip">Human Review Gates</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">OCR Parsing</span><span class="tag-chip">Schema Validation</span><span class="tag-chip">Human Review</span></div>
+            </article>
 
-            <!-- 3. Omnichannel AI Customer & Sales Assistants -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">💬</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">24/7 AI Sales & Support Assistants</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Deploy intelligent conversational assistants across your website and WhatsApp that qualify prospect intent, answer technical inquiries accurately, and smoothly route high-ticket leads to reps.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-automate"><?= codex_icon('message', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Customer &amp; Inquiry Assistants</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Deploy structured web and WhatsApp assistants that answer product questions from verified documentation, capture lead context, and escalate to staff cleanly.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">WhatsApp Cloud API</span>
-                    <span class="tag-chip">Lead Qualification</span>
-                    <span class="tag-chip">Live Agent Handoff</span>
-                    <span class="tag-chip">CRM Sync</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">WhatsApp Cloud API</span><span class="tag-chip">Lead Qualification</span><span class="tag-chip">Staff Handoff</span></div>
+            </article>
 
-            <!-- 4. Internal Operational Search & Copilots -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">🔍</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Internal Workforce Copilots</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Empower your employees with an internal operational assistant that indexes Notion, Google Drive, Jira, and internal databases. Enforces role-based permissions so sensitive data stays isolated.
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-automate"><?= codex_icon('search', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Internal Team Copilots</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Give staff fast natural-language search across approved knowledge bases while enforcing role-based permission filters on retrieved records.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Role-Based Filtering</span>
-                    <span class="tag-chip">Data Segregation</span>
-                    <span class="tag-chip">Instant Retrieval</span>
-                    <span class="tag-chip">Zero Leakage</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Role Filtering</span><span class="tag-chip">Data Segregation</span><span class="tag-chip">Fast Retrieval</span></div>
+            </article>
 
-            <!-- 5. Natural Language Data Analytics -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">📊</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Natural Language SQL Analytics</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Enable business executives and non-technical managers to query operational databases in natural English. Automatically translates questions into verified read-only SQL queries with visual summaries.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('chart', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Guided Reporting &amp; Querying</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Translate approved reporting questions into strictly read-only, allowlisted queries so managers inspect operational metrics without writing SQL.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Text-to-SQL</span>
-                    <span class="tag-chip">Read-Only Enforced</span>
-                    <span class="tag-chip">Automated Graphs</span>
-                    <span class="tag-chip">Audit Trails</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Read-Only Guardrails</span><span class="tag-chip">Allowlisted Views</span><span class="tag-chip">Audit Logs</span></div>
+            </article>
 
-            <!-- 6. Private & Self-Hosted AI Infrastructure -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">🔒</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Self-Hosted VPC Deployments</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    For legal, healthcare, and enterprise clients bound by strict confidentiality: we deploy open-weight foundation models (Llama 3, Mistral) on your dedicated cloud hardware with zero external API calls.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-automate"><?= codex_icon('lock', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Private &amp; Scoped Hosting</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Select API-backed or dedicated self-hosted open-weight models according to your data sensitivity, budget, and compliance requirements.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Isolated VPC</span>
-                    <span class="tag-chip">GDPR & HIPAA Ready</span>
-                    <span class="tag-chip">Zero Model Training</span>
-                    <span class="tag-chip">Air-Gapped Options</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Isolated Hosting</span><span class="tag-chip">Data Boundaries</span><span class="tag-chip">Zero Training Policies</span></div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- GROUNDED ARCHITECTURAL RETRIEVAL BREAKDOWN -->
+<!-- 4-LAYER GROUNDED PIPELINE -->
 <section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Deterministic Safeguards</span>
-            </div>
-            <h2 class="section-title">The 4-Layer Grounded Retrieval Pipeline</h2>
-            <p class="section-subtitle">
-                How CodeX404 engineers AI systems that business operators can trust with mission-critical customer and financial workflows.
-            </p>
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Reliability Controls</span></div>
+            <h2 class="section-title">How We Keep Business AI Grounded</h2>
+            <p class="section-subtitle">Practical guardrails that keep outputs verifiable and safe for operational use.</p>
         </div>
 
         <div class="grid grid-cols-4" style="gap: 1.5rem;">
-            <div class="card" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">LAYER 1</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Semantic Grounding</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    Queries retrieve verified context chunks from high-dimension vector stores (Qdrant). If semantic similarity falls below threshold, the model gracefully admits missing context rather than fabricating.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 0.95rem; display: block; margin-bottom: 0.5rem;">LAYER 01</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Thresholded Retrieval</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Queries retrieve relevant chunks first; when confidence falls short, the assistant states what is missing instead of guessing.</p>
             </div>
-
-            <div class="card" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">LAYER 2</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Strict Schema Outputs</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    All LLM responses are enforced through rigid JSON schemas validated by runtime type parsers (Pydantic). Malformed responses trigger automated sub-second re-generation before reaching the user.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 0.95rem; display: block; margin-bottom: 0.5rem;">LAYER 02</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Validated Schemas</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Structured JSON outputs are checked by runtime parsers before touching downstream databases or APIs.</p>
             </div>
-
-            <div class="card" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">LAYER 3</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Source Citation Audit</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    Every AI response generates verifiable source citations linked to indexed documents and paragraph hashes, enabling instant human verification with zero speculative hallucination.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 0.95rem; display: block; margin-bottom: 0.5rem;">LAYER 03</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Source Citations</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Responses reference the indexed document section so team members can inspect source context quickly.</p>
             </div>
-
-            <div class="card" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">LAYER 4</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Human Approval Gates</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    High-impact business actions — issuing customer refunds, triggering external emails, or updating financial records — are paused at dedicated human verification gates awaiting manager sign-off.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 0.95rem; display: block; margin-bottom: 0.5rem;">LAYER 04</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Human Approval</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Sensitive updates, billing triggers, or outbound messages require explicit human review gates.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- LIVE DEMO SANDBOX BANNER -->
+<!-- LIVE DEMO BANNER -->
 <section class="section">
     <div class="container">
-        <div style="background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.08) 0%, var(--bg-surface) 100%); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 3rem; text-align: center;">
-            <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Interactive Sandbox</span>
-            <h3 style="font-size: 1.85rem; color: var(--white); margin-bottom: 1rem;">Test Our AI RAG Knowledge Retrieval System</h3>
-            <p style="font-size: 1rem; color: var(--slate); max-width: 650px; margin: 0 auto 2rem auto; line-height: 1.6;">
-                Ask questions against our pre-indexed product catalog and documentation in real time to see grounded semantic retrieval and citation matching in action.
-            </p>
-            <a href="<?= url('index.php#simulators') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch AI RAG Simulator ⚡</a>
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
+            <span class="tag-chip" style="margin-bottom: 0.85rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Interactive Sandbox</span>
+            <h3 style="font-size: 1.65rem; color: var(--white); margin-bottom: 0.75rem;">Test Our AI RAG &amp; Agent Sandboxes</h3>
+            <p style="font-size: 0.98rem; color: var(--slate); max-width: 620px; margin: 0 auto 1.5rem auto; line-height: 1.6;">Try interactive in-browser simulators showing retrieved citations and webhook routing.</p>
+            <a href="<?= url('portfolio.php') ?>" class="btn btn-primary">Explore Interactive Deliverables &rarr;</a>
         </div>
     </div>
 </section>
 
 <?php
-$ctaHeading = "Ready to Put Practical AI to Work in Your Business?";
-$ctaSubtitle = "Schedule a technical feasibility session to review your company data sources, security requirements, and implementation roadmap.";
+$ctaHeading = "Ready to Apply Practical AI to Your Operations?";
+$ctaSubtitle = "Book a feasibility call to review your data sources, privacy rules, and realistic automation goals.";
 include __DIR__ . '/components/cta.php';
-?>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+require_once __DIR__ . '/includes/footer.php';

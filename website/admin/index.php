@@ -106,7 +106,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="banner-meta-item">
                 <i class="bi bi-speedometer2 text-info"></i>
-                <span>Uptime SLA: <strong>99.98% High-Avail</strong></span>
+                <span>Runtime: <strong>PHP <?= PHP_VERSION ?></strong></span>
             </div>
             <div class="banner-meta-item">
                 <i class="bi bi-hdd-network text-primary"></i>
@@ -159,7 +159,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="admin-marquee-item">
                 <i class="bi bi-lightning-charge-fill text-warning"></i>
-                <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
+                <span>Runtime: <strong>PHP <?= PHP_VERSION ?> &bull; MySQL PDO</strong></span>
                 <span class="sep">&bull;</span>
             </div>
 

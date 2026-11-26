@@ -32,20 +32,19 @@ $pageMeta = [
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Book Discovery Call'],
+];
+$heroTag = 'Project Discovery Request';
+$heroTitleHtml = 'Schedule a Technical <span class="text-gradient">Discovery Call</span>';
+$heroSubtitle = 'Discuss your goals, current workflow, and technical constraints directly with our engineering team—focused on practical next steps.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
 <section class="section">
     <div class="container container-narrow">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Project Discovery Request</span>
-            </div>
-            <h1 class="section-title">Schedule a Technical Discovery Call</h1>
-            <p class="section-subtitle">
-                Discuss your system requirements, architecture, and timeline directly with our founding engineers. No sales reps, no fluff—just actionable engineering insights.
-            </p>
-        </div>
 
         <div class="form-card">
             <div class="form-alert-container">

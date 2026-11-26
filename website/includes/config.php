@@ -191,3 +191,5 @@ function admin_url(string $path = ''): string {
     $clean = clean_url_path($path);
     return ADMIN_URL . $clean;
 }
+
+require_once __DIR__ . '/icons.php';

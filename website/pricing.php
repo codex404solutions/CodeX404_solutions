@@ -12,69 +12,53 @@ $pageMeta = [
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Pricing & Scope'],
+];
+$heroTag = 'Milestone Estimates & Scoping';
+$heroTitleHtml = 'Transparent Scope for <span class="text-gradient gradient-text-animated">Practical Software Systems</span>';
+$heroSubtitle = 'Project estimates depend directly on workflow requirements, integrations, and delivery constraints. We agree on clear milestones before build starts—no hidden licensing fees or lock-in.';
+$heroActions = [
+    ['label' => 'Book a Discovery Call', 'url' => url('discovery-call.php'), 'variant' => 'primary'],
+    ['label' => 'Let\'s Discuss Your Project', 'url' => url('contact.php'), 'variant' => 'secondary'],
+];
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
-
-<!-- ==========================================================================
-     HERO SECTION
-     ========================================================================== -->
-<section class="page-hero-section" style="padding-top: calc(var(--nav-height) + 3.5rem); padding-bottom: 3rem; text-align: center;">
-    <div class="container" style="max-width: 900px; margin: 0 auto;">
-        <div class="hero-pill" style="margin: 0 auto 1.5rem auto;">
-            <span class="dot"></span>
-            <span>Transparent Investment &amp; Fixed Milestones</span>
-        </div>
-
-        <h1 class="hero-headline" style="font-size: clamp(2.25rem, 4.2vw, 3.5rem); margin-bottom: 1.25rem;">
-            Transparent Investment for <span class="text-gradient gradient-text-animated">Production Systems</span>
-        </h1>
-
-        <p class="hero-description" style="margin: 0 auto 2.25rem auto; font-size: 1.15rem; color: var(--slate); max-width: 720px; line-height: 1.7;">
-            Fixed-milestone pricing, guaranteed delivery roadmaps, and 100% code ownership. We agree on explicit technical scope upfront—no surprise costs, no vendor lock-in.
-        </p>
-
-        <div class="hero-cta-group" style="justify-content: center; gap: 1rem;">
-            <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg">
-                <span>📅 Book a Discovery Call</span>
-            </a>
-            <a href="<?= url('contact.php') ?>" class="btn btn-secondary btn-lg">
-                <span>Request Custom Quote &rarr;</span>
-            </a>
-        </div>
-    </div>
-</section>
 
 <!-- ==========================================================================
      ENGAGEMENT PRINCIPLES
      ========================================================================== -->
-<section class="section" style="padding-top: 0; padding-bottom: 2rem;">
+<section class="section" style="padding-top: 2rem; padding-bottom: 2rem;">
     <div class="container">
         <div class="pricing-guarantee-strip">
             <div class="guarantee-item">
-                <span class="guarantee-icon">🛡️</span>
+                <span class="guarantee-icon inline-icon-box"><?= codex_icon('shield', 20) ?></span>
                 <div>
-                    <h3 class="guarantee-title">Guaranteed Fixed Pricing</h3>
-                    <p class="guarantee-desc">Strict milestone boundaries with transparent roadmaps and zero surprise invoices.</p>
+                    <h3 class="guarantee-title">Written Milestone Scope</h3>
+                    <p class="guarantee-desc">Agreed deliverables and milestone estimates documented before coding begins.</p>
                 </div>
             </div>
             <div class="guarantee-item">
-                <span class="guarantee-icon">🎯</span>
+                <span class="guarantee-icon inline-icon-box"><?= codex_icon('target', 20) ?></span>
                 <div>
-                    <h3 class="guarantee-title">Bi-Weekly Staging Demos</h3>
-                    <p class="guarantee-desc">Review working, testable deployments every two weeks throughout development.</p>
+                    <h3 class="guarantee-title">Staging Previews</h3>
+                    <p class="guarantee-desc">Review working, testable deployments incrementally throughout development.</p>
                 </div>
             </div>
             <div class="guarantee-item">
-                <span class="guarantee-icon">⚡</span>
+                <span class="guarantee-icon inline-icon-box is-amber"><?= codex_icon('zap', 20) ?></span>
                 <div>
-                    <h3 class="guarantee-title">Sub-Second Performance</h3>
-                    <p class="guarantee-desc">Clean, type-safe architecture engineered for sub-second speeds and 99.9% uptime.</p>
+                    <h3 class="guarantee-title">Clean Architecture</h3>
+                    <p class="guarantee-desc">Lean queries, responsive interfaces, and security checks integrated from day one.</p>
                 </div>
             </div>
             <div class="guarantee-item">
-                <span class="guarantee-icon">📱</span>
+                <span class="guarantee-icon inline-icon-box"><?= codex_icon('code', 20) ?></span>
                 <div>
-                    <h3 class="guarantee-title">100% Code &amp; IP Ownership</h3>
-                    <p class="guarantee-desc">Full repository transfer, database schemas, and zero ongoing platform rent.</p>
+                    <h3 class="guarantee-title">Code &amp; Asset Ownership</h3>
+                    <p class="guarantee-desc">Repository transfer, database schemas, and ownership terms confirmed in writing.</p>
                 </div>
             </div>
         </div>
@@ -104,9 +88,9 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Tier 1: Diagnostic & Architecture -->
             <article class="price-card-modern card-tilt reveal-on-scroll">
                 <div class="price-card-top">
-                    <span class="price-category-tag">🔍 Assessment</span>
+                    <span class="price-category-tag">Assessment</span>
                     <h3 class="price-card-title">System Diagnostic</h3>
-                    <p class="price-card-desc">Find performance bottlenecks, UX drop-offs, and security vulnerabilities before committing to a full rebuild.</p>
+                    <p class="price-card-desc">Find performance bottlenecks, UX drop-offs, and security gaps before committing to a full rebuild.</p>
                 </div>
 
                 <div class="price-amount-box">
@@ -116,15 +100,15 @@ require_once __DIR__ . '/includes/header.php';
                 <ul class="price-feature-list">
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Full Core Web Vitals & performance audit</span>
+                        <span>Core Web Vitals &amp; performance audit</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Conversion friction & mobile UX breakdown</span>
+                        <span>Conversion friction &amp; mobile UX breakdown</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Prioritized code & database fix roadmap</span>
+                        <span>Prioritized code &amp; database fix roadmap</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -141,38 +125,38 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- Tier 2: Turnkey Booking Systems (FEATURED) -->
             <article class="price-card-modern featured card-tilt reveal-on-scroll reveal-delay-1">
-                <span class="price-pill-badge">Most In-Demand</span>
+                <span class="price-pill-badge">Popular Scope</span>
                 <div class="price-card-top">
-                    <span class="price-category-tag">📅 Turnkey Booking</span>
-                    <h3 class="price-card-title">Booking & Reservation Suite</h3>
-                    <p class="price-card-desc">Full-featured appointment & reservation systems engineered for Dental Clinics, Hair Salons, Spas & Restaurants.</p>
+                    <span class="price-category-tag">Booking Systems</span>
+                    <h3 class="price-card-title">Booking &amp; Reservation Suite</h3>
+                    <p class="price-card-desc">Appointment &amp; reservation systems tailored for Clinics, Salons, Spas &amp; Restaurants.</p>
                 </div>
 
                 <div class="price-amount-box">
                     <span class="price-amount-val price-amount-custom">By project scope</span>
-                    <span class="price-amount-period">/ 2–4 weeks turnkey</span>
+                    <span class="price-amount-period">/ scoped delivery</span>
                 </div>
 
                 <ul class="price-feature-list">
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><strong>Dental Clinic:</strong> Doctor slot allocation & treatment token engine</span>
+                        <span><strong>Clinics:</strong> Practitioner slot allocation &amp; intake queues</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><strong>Hair Salon & Spa:</strong> Stylist chair selection & real-time calendar sync</span>
+                        <span><strong>Salons &amp; Spas:</strong> Chair scheduling &amp; service menus</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><strong>Beauty Parlour:</strong> Custom treatment packages & deposit gate</span>
+                        <span><strong>Packages:</strong> Custom treatments &amp; booking deposits</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><strong>Restaurant:</strong> Interactive table floor plan & menu pre-ordering</span>
+                        <span><strong>Restaurants:</strong> Table reservation flow &amp; pre-orders</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Automated WhatsApp & SMS appointment notifications</span>
+                        <span>Automated WhatsApp &amp; SMS appointment notifications</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -181,8 +165,8 @@ require_once __DIR__ . '/includes/header.php';
                 </ul>
 
                 <div class="price-card-footer">
-                    <a href="<?= url('contact.php?interest=booking-system') ?>" class="btn btn-primary" style="width: 100%; text-align: center;">
-                        <span>Launch Your Booking System 🚀</span>
+                    <a href="<?= url('contact.php?division=BUILD') ?>" class="btn btn-primary" style="width: 100%; text-align: center;">
+                        <span>Discuss a Booking System &rarr;</span>
                     </a>
                 </div>
             </article>
@@ -190,32 +174,32 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Tier 3: Conversion Sprint / Custom Portal -->
             <article class="price-card-modern card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="price-card-top">
-                    <span class="price-category-tag">⚡ High Velocity</span>
-                    <h3 class="price-card-title">Conversion Sprint</h3>
-                    <p class="price-card-desc">Rebuild one mission-critical customer journey or launch a high-impact responsive business platform.</p>
+                    <span class="price-category-tag">GROW &amp; UX</span>
+                    <h3 class="price-card-title">Conversion &amp; Growth Sprint</h3>
+                    <p class="price-card-desc">Rebuild a key customer journey or launch a responsive, search-optimized business website.</p>
                 </div>
 
                 <div class="price-amount-box">
                     <span class="price-amount-val price-amount-custom">By project scope</span>
-                    <span class="price-amount-period">/ 3–5 weeks</span>
+                    <span class="price-amount-period">/ scoped sprint</span>
                 </div>
 
                 <ul class="price-feature-list">
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Custom UI/UX with neon accents & smooth animations</span>
+                        <span>Brand-aligned UI/UX with responsive mobile craft</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Fully responsive mobile layout with optimized asset delivery</span>
+                        <span>Technical SEO, schema markup &amp; Core Web Vitals tuning</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Lead routing, CRM hooks & analytics instrumentation</span>
+                        <span>Lead routing, CRM hooks &amp; analytics instrumentation</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>End-to-end deployment with Docker & SSL</span>
+                        <span>HTTPS deployment &amp; clean handoff documentation</span>
                     </li>
                 </ul>
 
@@ -226,27 +210,27 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </article>
 
-            <!-- Tier 4: Enterprise Platform / SaaS Build -->
+            <!-- Tier 4: Custom Platform / SaaS Build -->
             <article class="price-card-modern card-tilt reveal-on-scroll">
                 <div class="price-card-top">
-                    <span class="price-category-tag">🏢 Custom Architecture</span>
-                    <h3 class="price-card-title">Full Enterprise SaaS</h3>
-                    <p class="price-card-desc">End-to-end custom application architecture, multi-role access, database design, and autonomous AI pipelines.</p>
+                    <span class="price-category-tag">Custom Architecture</span>
+                    <h3 class="price-card-title">Custom Platform &amp; SaaS Build</h3>
+                    <p class="price-card-desc">Custom application architecture, multi-role access, normalized databases, and AI/automation integrations.</p>
                 </div>
 
                 <div class="price-amount-box">
                     <span class="price-amount-val price-amount-custom">By project scope</span>
-                    <span class="price-amount-period">/ 6–12 weeks</span>
+                    <span class="price-amount-period">/ milestone schedule</span>
                 </div>
 
                 <ul class="price-feature-list">
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Custom backend architecture (PHP 8.4, Python, Node)</span>
+                        <span>Clean backend architecture (PHP 8.2+, Python, Node.js)</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Role-based access control (RBAC) & tenant isolation</span>
+                        <span>Role-based access control (RBAC) &amp; tenant isolation</span>
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -254,13 +238,13 @@ require_once __DIR__ . '/includes/header.php';
                     </li>
                     <li class="price-feature-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Continuous CI/CD pipeline, staging & production servers</span>
+                        <span>CI/CD deployment, staging previews &amp; repository handoff</span>
                     </li>
                 </ul>
 
                 <div class="price-card-footer">
                     <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary" style="width: 100%; text-align: center;">
-                        <span>Scope Enterprise Build</span>
+                        <span>Scope Custom Build</span>
                     </a>
                 </div>
             </article>
@@ -385,12 +369,12 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div style="margin-bottom: 2rem;">
-                    <span style="font-size: 0.85rem; color: var(--slate); display: block; margin-bottom: 0.75rem; font-weight: 600;">Standard Guarantees Included:</span>
+                    <span style="font-size: 0.85rem; color: var(--slate); display: block; margin-bottom: 0.75rem; font-weight: 600;">Included Delivery Practices:</span>
                     <ul class="transform-list" style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--slate);">
-                        <li><span style="color: #34D399;">✓</span> Fixed-milestone agreement &amp; transparent roadmaps</li>
-                        <li><span style="color: #34D399;">✓</span> 100% intellectual property &amp; source code ownership</li>
-                        <li><span style="color: #34D399;">✓</span> 30-day post-launch warranty with zero defect guarantee</li>
-                        <li><span style="color: #34D399;">✓</span> Direct Slack / Teams daily standup integration</li>
+                        <li><span style="color: #34D399;">✓</span> Written milestone scope &amp; transparent schedules</li>
+                        <li><span style="color: #34D399;">✓</span> Code &amp; repository handoff agreed upfront</li>
+                        <li><span style="color: #34D399;">✓</span> 30-day post-launch defect resolution support</li>
+                        <li><span style="color: #34D399;">✓</span> Direct communication with engineering leads</li>
                     </ul>
                 </div>
 
@@ -476,10 +460,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
                 <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-lg">
-                    <span>📅 Book Discovery Call</span>
+                    <span>Book a Discovery Call</span>
                 </a>
                 <a href="<?= url('contact.php') ?>" class="btn btn-secondary btn-lg">
-                    <span>✉️ Send Direct Inquiry</span>
+                    <span>Let&rsquo;s Discuss Your Project &rarr;</span>
                 </a>
             </div>
         </div>

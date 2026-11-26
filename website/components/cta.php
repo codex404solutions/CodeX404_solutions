@@ -36,8 +36,12 @@ $ctaSecondaryUrl = $ctaSecondaryUrl ?? url('contact.php');
                 <?php endif; ?>
             </div>
 
-            <div style="font-size: 0.85rem; color: var(--slate-dark);">
-                ✓ Discuss the project with our team &nbsp;·&nbsp; ✓ Scope before implementation &nbsp;·&nbsp; ✓ Agree on delivery terms in writing
+            <div style="font-size: 0.85rem; color: var(--slate-dark); display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem 1.25rem;">
+                <span>Clear business scope upfront</span>
+                <span aria-hidden="true">·</span>
+                <span>Senior engineering execution</span>
+                <span aria-hidden="true">·</span>
+                <span>Full code and asset ownership</span>
             </div>
         </div>
     </div>

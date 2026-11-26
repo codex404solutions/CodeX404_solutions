@@ -6,60 +6,59 @@ require_once __DIR__ . '/includes/config.php';
 $faqs = [
     [
         'q' => 'Who owns the intellectual property (IP) and source code created during a project?',
-        'a' => 'You own 100% of all intellectual property, source code, database schemas, and design assets upon milestone completion. We provide clean Git repository transfers and deployment documentation with zero licensing fees or vendor lock-in.'
+        'a' => 'Ownership, repository access, and licensing terms are confirmed in writing for every project so you retain control of custom deliverables upon agreed milestone completion without hidden platform rent.'
     ],
     [
         'q' => 'How does CodeX404 collaborate across international timezones?',
-        'a' => 'We guarantee 4 to 5 hours of daily overlap with North American (EST/PST) and European (GMT/CET) business hours. We use asynchronous daily standups, recorded video walkthroughs, and Slack/Teams collaboration so progress never stalls.'
+        'a' => 'Operating from India, we align scheduled communication windows with clients across APAC, the Middle East, UK/Europe, and North America—paired with written sprint updates and reviewable staging deployments.'
     ],
     [
-        'q' => 'What is the typical timeline for an MVP or custom software deliverable?',
-        'a' => 'Production-ready MVPs typically launch within 6 to 10 weeks, structured into two-week agile sprints. You receive working staging preview deployments every two weeks to test functioning software throughout development.'
+        'q' => 'What is a realistic timeline for an MVP or custom software build?',
+        'a' => 'Timeline depends directly on functional scope, integrations, and approval speed. Most focused portals and MVPs are structured into iterative milestone sprints with working staging previews throughout development.'
     ],
     [
-        'q' => 'Do you sign Non-Disclosure Agreements (NDAs) before discussing project details?',
-        'a' => 'Yes, absolutely. We execute mutual Non-Disclosure Agreements (NDAs) prior to discussing any sensitive technical specifications, proprietary architectures, or commercial data.'
+        'q' => 'Do you sign Non-Disclosure Agreements (NDAs) before reviewing specifications?',
+        'a' => 'Yes. We execute mutual confidentiality agreements prior to reviewing sensitive commercial requirements, internal data samples, or proprietary workflows.'
     ],
     [
-        'q' => 'How do you handle post-launch maintenance, bug fixes, and system scaling?',
-        'a' => 'Every deliverable includes a 30-day post-launch warranty with zero defect guarantee. Following launch, we offer flexible SLA retainers or dedicated engineering squads for continuous feature expansion and cloud infrastructure scaling.'
+        'q' => 'How do you handle post-launch fixes and ongoing updates?',
+        'a' => 'Production launches include a 30-day post-launch defect support window covering bugs within agreed scope, plus optional retainers for ongoing features, SEO improvements, and automation expansion.'
     ],
     [
-        'q' => 'How do you prevent hallucinations and data leaks when implementing enterprise AI?',
-        'a' => 'We employ Retrieval-Augmented Generation (RAG) which binds model answers strictly to verified enterprise context documents. Furthermore, we enforce deterministic JSON output schemas, strict semantic similarity thresholds, and human-in-the-loop gates for high-impact actions.'
+        'q' => 'How do you keep business AI and RAG systems accurate and controlled?',
+        'a' => 'We bind responses to indexed approved documents, apply similarity thresholds so missing context is acknowledged honestly, validate structured schemas, and keep sensitive write actions behind human review gates.'
     ]
 ];
 
 $pageMeta = [
-    'title' => 'Frequently Asked Questions (FAQ) — Engineering & Partnerships',
-    'description' => 'Get clear answers to common questions regarding CodeX404 Solutions: intellectual property ownership, international timezones, pricing, AI safeguards, and engagement models.',
+    'title' => 'Frequently Asked Questions (FAQ) | CodeX404 Solutions',
+    'description' => 'Answers about CodeX404 Solutions engineering workflow, IP ownership, timezone collaboration, pricing scopes, post-launch support, and AI safeguards.',
     'canonical' => url('faq.php'),
-    'keywords' => 'software development FAQ, IP ownership, AI security FAQ, dedicated team questions',
+    'keywords' => 'software development FAQ, IP ownership, AI security FAQ, CodeX404 process',
     'faq' => $faqs
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Support'],
+    ['label' => 'FAQ'],
+];
+$heroTag = 'Clarity First';
+$heroTitleHtml = 'Frequently Asked <span class="text-gradient">Questions</span>';
+$heroSubtitle = 'Direct answers regarding project scoping, code ownership, communication rhythm, security boundaries, and post-launch support.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
 <section class="section">
     <div class="container container-narrow">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Clarity First</span>
-            </div>
-            <h1 class="section-title">Frequently Asked Questions</h1>
-            <p class="section-subtitle">
-                Clear, transparent answers about our engineering process, pricing structures, IP ownership, and operational standards.
-            </p>
-        </div>
-
         <div class="faq-list">
             <?php foreach ($faqs as $faq): ?>
                 <div class="faq-item">
                     <button type="button" class="faq-question" aria-expanded="false">
                         <span><?= htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="faq-icon">↓</span>
+                        <span class="faq-icon" aria-hidden="true">&darr;</span>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-inner">
@@ -70,12 +69,10 @@ require_once __DIR__ . '/includes/header.php';
             <?php endforeach; ?>
         </div>
 
-        <div style="text-align: center; margin-top: 3.5rem; background: var(--bg-surface); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
-            <h3 style="margin-bottom: 0.5rem;">Have a question not listed here?</h3>
-            <p style="font-size: 0.95rem; margin-bottom: 1.25rem;">Our solutions architects are available to answer any technical or operational questions directly.</p>
-            <a href="<?= url('contact.php') ?>" class="btn btn-secondary btn-sm">
-                Ask Our Team Directly →
-            </a>
+        <div class="card" style="text-align: center; margin-top: 3rem; padding: 2rem;">
+            <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.5rem;">Have a Question Not Covered Here?</h2>
+            <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 1.25rem;">Reach out directly to discuss your technical requirements, timeline, or partnership inquiry.</p>
+            <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-sm">Let's Discuss Your Project &rarr;</a>
         </div>
     </div>
 </section>

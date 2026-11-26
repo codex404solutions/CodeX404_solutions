@@ -34,11 +34,11 @@ $currentPage = $currentPage ?? 'overview';
                                 high-throughput interactive sandboxes, and verified engineering telemetry.
                             </p>
                             <div class="d-flex align-items-center gap-2 text-muted small" style="font-size: 0.75rem;">
-                                <span><i class="bi bi-shield-check text-success me-1"></i> ISO/IEC 27001 Aligned</span>
+                                <span><i class="bi bi-shield-check text-success me-1"></i> Prepared PDO Security</span>
                                 <span>&bull;</span>
-                                <span><i class="bi bi-speedometer2 text-info me-1"></i> 99.98% SLA Uptime</span>
+                                <span><i class="bi bi-database-check text-info me-1"></i> PHP &amp; MySQL Runtime</span>
                                 <span>&bull;</span>
-                                <span><i class="bi bi-hdd-network text-primary me-1"></i> Sub-100ms Edge</span>
+                                <span><i class="bi bi-layers text-primary me-1"></i> BUILD &middot; GROW &middot; AUTOMATE</span>
                             </div>
                         </div>
 

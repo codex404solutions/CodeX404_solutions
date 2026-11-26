@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $controller = new ContactController();
     $controllerResult = $controller->handle();
 
-    // If submitted via AJAX, return clean JSON
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
         header('Content-Type: application/json');
         echo json_encode($controllerResult);
@@ -26,109 +25,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageMeta = [
-    'title' => 'Contact CodeX404 Solutions — Start a Conversation',
-    'description' => 'Contact CodeX404 Solutions about software, digital growth, or workflow automation. Share your goals and constraints so the team can review your enquiry.',
+    'title' => 'Contact CodeX404 Solutions — Start a Project Discussion',
+    'description' => 'Contact CodeX404 Solutions for project discussions, service inquiries across BUILD, GROW, and AUTOMATE, business partnerships, general inquiries, or careers.',
     'canonical' => url('contact.php'),
-    'keywords' => 'contact CodeX404 Solutions, software development inquiry, AI consultation contact'
+    'keywords' => 'contact CodeX404 Solutions, software project inquiry, AI automation consultation, business partnerships'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Contact'],
+];
+$heroTag = 'Direct Engineering Communication';
+$heroTitleHtml = 'Let&rsquo;s Discuss <span class="text-gradient">Your Project</span>';
+$heroSubtitle = 'Reach out about custom software, search and conversion growth, workflow automation, business partnerships, or careers.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
 <section class="section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Direct Engineering Communication</span>
-            </div>
-            <h1 class="section-title">Tell us what you’re working on</h1>
-            <p class="section-subtitle">
-                Share the business goal, current setup, or workflow you want to improve. Choose the closest division, and we’ll review your enquiry.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-2" style="gap: 3.5rem; align-items: start;">
-            <!-- Left Column: Contact details and project terms -->
+        <div class="grid grid-cols-2" style="gap: 3rem; align-items: start;">
+            <!-- Left Column: Inquiry Pathways & Collaboration Terms -->
             <div>
-                <h2 style="font-size: 1.75rem; color: var(--white); margin-bottom: 1.25rem;">Direct Technical Access</h2>
-                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate); margin-bottom: 2rem;">
-                    Tell us whether your enquiry is about BUILD, GROW, or AUTOMATE. Scope, next steps, and the people involved are confirmed for each project.
+                <h2 style="font-size: 1.65rem; color: var(--white); margin-bottom: 1rem;">How Can We Help?</h2>
+                <p style="font-size: 1rem; line-height: 1.7; color: var(--slate); margin-bottom: 1.75rem;">
+                    Share your business goal, existing setup, or technical bottleneck. Every inquiry is reviewed directly by our engineering and delivery leads—never routed through scripted call centers.
                 </p>
 
-                <div style="background: rgba(34, 211, 238, 0.05); border: 1px solid rgba(34, 211, 238, 0.25); border-radius: var(--radius-md); padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
-                    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 10px #34D399;"></span>
-                    <span style="font-size: 0.85rem; color: var(--white); font-weight: 600;">
-                        Engineers Active: Mon–Fri (9:00 AM – 8:00 PM IST • Overlapping EST &amp; GMT)
-                    </span>
+                <!-- 5 Explicit Inquiry Options -->
+                <div style="display: grid; gap: 0.85rem; margin-bottom: 2rem;">
+                    <div class="card" style="padding: 1rem 1.2rem; display: flex; align-items: flex-start; gap: 0.9rem;">
+                        <span class="inline-icon-box"><?= codex_icon('code', 18) ?></span>
+                        <div>
+                            <strong style="color: var(--white); display: block; font-size: 0.95rem;">Project Discussions &amp; Service Inquiries</strong>
+                            <span style="font-size: 0.86rem; color: var(--slate);">Scope BUILD (software/SaaS/CRM), GROW (SEO/marketing), or AUTOMATE (AI/workflows) initiatives using the inquiry form.</span>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding: 1rem 1.2rem; display: flex; align-items: flex-start; gap: 0.9rem;">
+                        <span class="inline-icon-box"><?= codex_icon('users', 18) ?></span>
+                        <div>
+                            <strong style="color: var(--white); display: block; font-size: 0.95rem;">Business Partnerships &amp; General Inquiries</strong>
+                            <span style="font-size: 0.86rem; color: var(--slate);">Reach us directly via <a href="mailto:<?= COMPANY_EMAIL ?>" style="color: var(--cyan);"><?= COMPANY_EMAIL ?></a> or note your partnership context in the message.</span>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding: 1rem 1.2rem; display: flex; align-items: flex-start; gap: 0.9rem;">
+                        <span class="inline-icon-box is-amber"><?= codex_icon('rocket', 18) ?></span>
+                        <div>
+                            <strong style="color: var(--white); display: block; font-size: 0.95rem;">Careers &amp; Recruitment</strong>
+                            <span style="font-size: 0.86rem; color: var(--slate);">Explore open roles, internships, and fellowships on our <a href="<?= url('careers') ?>" style="color: var(--amber); font-weight: 600;">Careers Portal &rarr;</a></span>
+                        </div>
+                    </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">✉️</div>
+                <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
+                        <span class="inline-icon-box"><?= codex_icon('mail', 18) ?></span>
                         <div>
-                            <strong style="color: var(--white); display: block;">Primary Email</strong>
+                            <strong style="color: var(--white); display: block;">Direct Email</strong>
                             <a href="mailto:<?= COMPANY_EMAIL ?>" style="color: var(--cyan);"><?= COMPANY_EMAIL ?></a>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">📅</div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
+                        <span class="inline-icon-box"><?= codex_icon('calendar', 18) ?></span>
                         <div>
-                            <strong style="color: var(--white); display: block;">Technical Discovery Call</strong>
-                            <a href="<?= url('discovery-call.php') ?>" style="color: var(--cyan); font-weight: 600;">
-                                Request a 30-Min Architecture Session &rarr;
-                            </a>
+                            <strong style="color: var(--white); display: block;">Prefer a Structured Call?</strong>
+                            <a href="<?= url('discovery-call.php') ?>" style="color: var(--cyan); font-weight: 600;">Book a Discovery Call &rarr;</a>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">🌐</div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
+                        <span class="inline-icon-box"><?= codex_icon('globe', 18) ?></span>
                         <div>
-                            <strong style="color: var(--white); display: block;">Global Engineering Delivery</strong>
-                            <span>Dedicated timezone support across North America (EST/PST), UK/Europe (GMT/CET), GCC, and APAC.</span>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                        <div class="card-icon" style="width: 44px; height: 44px; font-size: 1.25rem; margin: 0;">⏱️</div>
-                        <div>
-                            <strong style="color: var(--white); display: block;">Guaranteed Response Time</strong>
-                            <span>Direct technical reply from our founding engineers within 24 hours.</span>
+                            <strong style="color: var(--white); display: block;">Collaboration Windows</strong>
+                            <span style="font-size: 0.9rem; color: var(--slate);">Scheduled timezone overlap across India/APAC, GCC, UK/Europe, and North America.</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project terms -->
-                <div class="trust-badge-list" style="margin-bottom: 2rem;">
+                <div class="trust-badge-list">
                     <div class="trust-badge-item">
-                        <div class="trust-badge-icon">✓</div>
-                        <span><strong>Fixed Scope & Transparent Pricing:</strong> Clear delivery roadmaps, bi-weekly demo previews, and zero surprise charges.</span>
+                        <div class="trust-badge-icon"><?= codex_icon('check', 14) ?></div>
+                        <span><strong>Clear Milestone Planning:</strong> Scopes, timelines, and deliverables agreed before build starts.</span>
                     </div>
                     <div class="trust-badge-item">
-                        <div class="trust-badge-icon">✓</div>
-                        <span><strong>Strict NDA & IP Protection:</strong> Mutual non-disclosure agreements and complete data confidentiality from day one.</span>
+                        <div class="trust-badge-icon"><?= codex_icon('check', 14) ?></div>
+                        <span><strong>Confidentiality &amp; NDA Ready:</strong> Mutual NDAs available prior to sharing sensitive specifications.</span>
                     </div>
                     <div class="trust-badge-item">
-                        <div class="trust-badge-icon">✓</div>
-                        <span><strong>100% Code & Asset Handoff:</strong> Full repository ownership, deployment guides, and zero ongoing vendor lock-in.</span>
+                        <div class="trust-badge-icon"><?= codex_icon('check', 14) ?></div>
+                        <span><strong>Code &amp; Asset Handoff:</strong> Ownership terms confirmed cleanly in writing.</span>
                     </div>
-                </div>
-
-                <div style="background: rgba(11, 31, 58, 0.4); padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--cyan);">Prefer a Direct Architecture Call?</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--slate);">Discuss your scope, tech stack, and timeline directly with our founding engineers.</p>
-                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm">
-                        Schedule a Discovery Call Instead &rarr;
-                    </a>
                 </div>
             </div>
 
             <!-- Right Column: Form Card -->
-            <div class="form-card" style="border: 1px solid rgba(59, 130, 246, 0.35); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(59, 130, 246, 0.15);">
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.35rem;">Send Us a Message</h3>
-                    <p style="font-size: 0.875rem; color: var(--slate-dark);">Fill out this form to connect directly with our engineering team.</p>
+            <div class="form-card" style="border: 1px solid rgba(59, 130, 246, 0.35);">
+                <div style="margin-bottom: 1.35rem;">
+                    <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.3rem;">Start a Conversation</h2>
+                    <p style="font-size: 0.88rem; color: var(--slate-dark); margin: 0;">Complete the form below and our team will review your requirements directly.</p>
                 </div>
 
                 <div class="form-alert-container">
@@ -142,7 +140,6 @@ require_once __DIR__ . '/includes/header.php';
                 <form action="<?= url('contact.php') ?>" method="POST" class="ajax-form" id="contactForm" novalidate>
                     <?= csrf_input_field() ?>
 
-                    <!-- Bot Honeypot (hidden from human view) -->
                     <div style="display: none;" aria-hidden="true">
                         <label for="_gotcha">Leave this empty</label>
                         <input type="text" name="_gotcha" id="_gotcha" tabindex="-1" autocomplete="off">
@@ -154,14 +151,14 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div class="form-group">
-                        <label for="division" class="form-label">Area of help <span class="required">*</span></label>
+                        <label for="division" class="form-label">Primary Pillar / Inquiry Area <span class="required">*</span></label>
                         <select id="division" name="division" class="form-control" required>
                             <option value="">Choose a division</option>
                             <?php foreach ($divisionServiceOptions as $code => $_services): ?>
                                 <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $selectedDivision === $code ? 'selected' : '' ?>><?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars(match ($code) {
-                                    'BUILD' => 'Software and digital products',
-                                    'GROW' => 'Digital marketing and discoverability',
-                                    default => 'Workflows, integrations, and AI',
+                                    'BUILD' => 'Software, Web Apps, CRM/ERP & SaaS',
+                                    'GROW' => 'Digital Marketing, SEO & Growth',
+                                    default => 'AI Systems, Agents & Automation',
                                 }, ENT_QUOTES, 'UTF-8') ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -170,7 +167,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="grid grid-cols-2" style="gap: 1rem;">
                         <div class="form-group">
                             <label for="email" class="form-label">Work Email <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="sarah@company.com" required>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="name@company.com" required>
                         </div>
                         <div class="form-group">
                             <label for="phone" class="form-label">Phone / WhatsApp</label>
@@ -181,7 +178,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="grid grid-cols-2" style="gap: 1rem;">
                         <div class="form-group">
                             <label for="company" class="form-label">Company / Organization</label>
-                            <input type="text" id="company" name="company" class="form-control" placeholder="e.g. Acme Corp">
+                            <input type="text" id="company" name="company" class="form-control" placeholder="e.g. Acme Operations">
                         </div>
                         <div class="form-group">
                             <label for="country" class="form-label">Country / Region (optional)</label>
@@ -190,7 +187,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div class="form-group">
-                        <label for="service" class="form-label">Primary Solution Needed (optional)</label>
+                        <label for="service" class="form-label">Specific Solution (optional)</label>
                         <select id="service" name="service" class="form-control" style="background: rgba(11, 20, 38, 0.9); color: var(--white);">
                             <option value="">Choose a service (optional)</option>
                             <?php foreach ($divisionServiceOptions as $code => $services): ?>
@@ -233,21 +230,20 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div class="form-group">
-                        <label for="message" class="form-label">Message Details & Challenge <span class="required">*</span></label>
-                        <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Briefly describe the operational friction, manual workflows, or technical idea you want to build..." required></textarea>
+                        <label for="message" class="form-label">Project Details, Partnership Context, or Questions <span class="required">*</span></label>
+                        <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Describe your business problem, current tools, or what you want to build, grow, or automate..." required></textarea>
                     </div>
 
-                    <!-- GDPR Consent Checkbox -->
                     <div class="form-group">
                         <label class="form-checkbox-label">
                             <input type="checkbox" name="privacy_consent" value="1" required>
-                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and consent to CodeX404 Solutions processing my contact and project details to reply to this inquiry.</span>
+                            <span>I agree to the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a> and consent to CodeX404 Solutions reviewing my contact details to respond to this inquiry.</span>
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        Send Inquiry
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        <span>Let&rsquo;s Discuss Your Project</span>
+                        <?= codex_icon('arrow-right', 18) ?>
                     </button>
                 </form>
             </div>

@@ -135,7 +135,7 @@ require_once __DIR__ . '/includes/header.php';
                 <?php if (!empty($project['client_logo'])): ?>
                     <img src="<?= asset($project['client_logo']) ?>" alt="<?= htmlspecialchars($project['public_client_name'] ?? 'Client') ?>" style="height: 24px; max-width: 100px; object-fit: contain; border-radius: 4px;">
                 <?php else: ?>
-                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(34, 211, 238, 0.15); color: var(--cyan); font-size: 0.75rem;">🏢</span>
+                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(34, 211, 238, 0.14); color: var(--cyan);"><?= codex_icon('building', 14) ?></span>
                 <?php endif; ?>
 
                 <span>
@@ -185,7 +185,7 @@ require_once __DIR__ . '/includes/header.php';
                 <!-- 1. PROBLEM VS SOLUTION SPLIT CARDS -->
                 <section class="project-section">
                     <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="color: var(--cyan);">⚡</span> Operational Context &amp; Engineered Solution
+                        <span style="color: var(--cyan); display: inline-flex;"><?= codex_icon('zap', 18) ?></span> Operational Context &amp; Engineered Solution
                     </h2>
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">

@@ -111,35 +111,31 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="careers-values-grid">
             <div class="careers-card">
-                <div class="careers-card-icon">&#9881;</div>
-                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Direct Senior Collaboration</h3>
+                <div class="careers-card-icon"><?= codex_icon('users', 20) ?></div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Direct Team Collaboration</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Work directly alongside engineering and operations leadership on live business systems rather than
-                    getting lost behind layers of bureaucracy.
+                    Work alongside engineering, product, and growth leads on real client and internal projects rather than sitting behind layers of bureaucracy.
                 </p>
             </div>
             <div class="careers-card">
-                <div class="careers-card-icon">&#128187;</div>
-                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Full-Stack &amp; AI Exposure</h3>
+                <div class="careers-card-icon"><?= codex_icon('code', 20) ?></div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">BUILD · GROW · AUTOMATE Exposure</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Gain hands-on exposure across BUILD, GROW, and AUTOMATE initiatives — from custom web portals and
-                    MySQL architecture to applied AI workflows.
+                    Contribute across custom web applications, digital marketing and client growth, business development, or applied AI workflows.
                 </p>
             </div>
             <div class="careers-card">
-                <div class="careers-card-icon">&#128200;</div>
-                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Growth Tied to Measurable Output</h3>
+                <div class="careers-card-icon"><?= codex_icon('chart', 20) ?></div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Clear Expectations &amp; Transparency</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Transparent expectations, constructive code and campaign reviews, and career progression grounded in
-                    shipped work quality.
+                    Each role lists its work arrangement, duration, responsibilities, and compensation model upfront—whether salaried, stipend-based, commission-linked, or unpaid learning.
                 </p>
             </div>
             <div class="careers-card">
-                <div class="careers-card-icon">&#127760;</div>
+                <div class="careers-card-icon"><?= codex_icon('globe', 20) ?></div>
                 <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Focused Remote Collaboration</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Structured asynchronous documentation combined with clear overlap hours so teams deliver reliably
-                    without unnecessary meetings.
+                    Structured asynchronous documentation paired with scheduled overlap windows so distributed teammates collaborate smoothly.
                 </p>
             </div>
         </div>
@@ -226,7 +222,7 @@ require_once __DIR__ . '/includes/header.php';
                                     <span>Experience</span><strong><?= htmlspecialchars((string) $job['experience_level']) ?></strong>
                                 </div>
                                 <div>
-                                    <span>Compensation</span><strong><?= htmlspecialchars((string) ($job['salary_display'] ?: $job['compensation_type'])) ?></strong>
+                                    <span>Compensation (<?= htmlspecialchars((string) ($job['compensation_type'] ?: 'Specified')) ?>)</span><strong><?= htmlspecialchars((string) ($job['salary_display'] ?: $job['compensation_type'])) ?></strong>
                                 </div>
                                 <div>
                                     <span>Deadline</span><strong><?= !empty($job['application_deadline']) ? date('M j, Y', strtotime((string) $job['application_deadline'])) : 'Rolling' ?></strong>

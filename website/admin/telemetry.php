@@ -72,7 +72,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="admin-marquee-item">
                 <i class="bi bi-lightning-charge-fill text-warning"></i>
-                <span>SLA Response: <strong>Sub-100ms Optimized Edge Cache</strong></span>
+                <span>Runtime: <strong>PHP <?= PHP_VERSION ?> &bull; MySQL PDO</strong></span>
                 <span class="sep">&bull;</span>
             </div>
 
@@ -113,14 +113,14 @@ require_once __DIR__ . '/includes/header.php';
     <div class="col-6 col-lg-3">
         <div class="stat-card accent-emerald">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted small fw-bold text-uppercase">Uptime SLA</span>
+                <span class="text-muted small fw-bold text-uppercase">PHP Runtime</span>
                 <div class="stat-icon bg-success-subtle text-success">
                     <i class="bi bi-speedometer2"></i>
                 </div>
             </div>
-            <div class="h3 fw-bold text-success mb-1">99.98%</div>
+            <div class="h3 fw-bold text-success mb-1"><?= PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION ?></div>
             <div class="small text-muted d-flex align-items-center gap-1">
-                <i class="bi bi-patch-check-fill text-success"></i> High-Availability
+                <i class="bi bi-patch-check-fill text-success"></i> Active Environment
             </div>
         </div>
     </div>

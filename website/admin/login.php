@@ -95,25 +95,25 @@ $flash = get_admin_flash();
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12) 0%, rgba(99, 102, 241, 0.08) 45%, rgba(3, 7, 18, 0.98) 75%), var(--bg-dark);
+            background: radial-gradient(circle at 50% 0%, rgba(11, 94, 215, 0.16) 0%, rgba(34, 211, 238, 0.06) 45%, #071426 80%);
             padding: 1.5rem;
             position: relative;
             overflow-x: hidden;
         }
-        /* Animated Cyber Grid Backdrop */
+        /* Subtle Engineering Grid Backdrop */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
-                linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+                linear-gradient(to right, rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             z-index: 1;
         }
         .text-gradient-rainbow {
-            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 35%, #F472B6 70%, #F59E0B 100%);
+            background: linear-gradient(95deg, #FFFFFF 0%, #22D3EE 55%, #FF8C00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;

@@ -11,23 +11,20 @@ $pageMeta = [
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Our Work', 'url' => url('our-work.php')],
+    ['label' => 'Case Studies'],
+];
+$heroTag = 'Verifiable Execution';
+$heroTitleHtml = 'Real Systems. Real Constraints. <span class="text-gradient gradient-text-animated">Practical Impact.</span>';
+$heroSubtitle = 'Detailed breakdowns of production systems and domain architectures designed by CodeX404 Solutions—grounded in actual requirements rather than inflated claims.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
-<!-- HERO SECTION -->
-<section class="section" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3.5rem;">
+<section class="section">
     <div class="container">
-        <div class="section-header" style="max-width: 860px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Verifiable Evidence of Execution</span>
-            </div>
-            <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Real Systems. Real Constraints. <span class="gradient-text gradient-text-animated">Measurable Impact.</span>
-            </h1>
-            <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                We believe in verifiable engineering facts over inflated claims. Below are detailed breakdowns of actual production systems designed, engineered, and deployed by our senior team.
-            </p>
-        </div>
 
         <div style="display: flex; flex-direction: column; gap: 3rem;">
             <!-- CASE STUDY 1: INSAN DEGREE COLLEGE ERP -->
@@ -267,7 +264,7 @@ require_once __DIR__ . '/includes/header.php';
             <p style="font-size: 1rem; color: var(--slate); line-height: 1.6; margin-bottom: 2rem;">
                 Don't just take our word for it. Launch our interactive in-browser simulators to test our AI RAG knowledge retrieval, WhatsApp webhook automation pipeline, and School ERP dashboard live.
             </p>
-            <a href="<?= url('index.php#simulators') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Launch Interactive Demos ⚡</a>
+            <a href="<?= url('portfolio.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2.25rem;">Explore Interactive Portfolio &rarr;</a>
         </div>
     </div>
 </section>

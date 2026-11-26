@@ -24,7 +24,10 @@ if ($isAdminPreview) {
 $job = $slug !== '' ? VacancyService::getBySlug($slug, $canPreview) : null;
 if (!$job) {
     http_response_code(404);
-    $pageMeta = ['title' => 'Vacancy Not Found — CodeX404 Careers'];
+    $pageMeta = [
+        'title' => 'Vacancy Not Found — CodeX404 Careers',
+        'description' => 'The requested open role or internship could not be found or is no longer accepting applications.',
+    ];
     require_once __DIR__ . '/includes/header.php';
     ?>
     <section class="section" style="padding-top:calc(var(--nav-height,78px) + 5rem);padding-bottom:5rem;text-align:center;">
@@ -119,7 +122,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div><span>Department</span><strong><?= htmlspecialchars((string)$job['department']) ?></strong></div>
                     <div><span>Work Location</span><strong><?= htmlspecialchars((string)$job['location']) ?></strong></div>
                     <div><span>Experience</span><strong><?= htmlspecialchars((string)$job['experience_level']) ?></strong></div>
-                    <div><span>Compensation</span><strong><?= htmlspecialchars((string)($job['salary_display'] ?: $job['compensation_type'])) ?></strong></div>
+                    <div><span>Compensation (<?= htmlspecialchars((string)($job['compensation_type'] ?: 'Specified')) ?>)</span><strong><?= htmlspecialchars((string)($job['salary_display'] ?: $job['compensation_type'])) ?></strong></div>
                     <div><span>Working Hours</span><strong><?= htmlspecialchars((string)($job['working_hours'] ?: 'Standard Business Hours')) ?></strong></div>
                     <div><span>Application Deadline</span><strong><?= !empty($job['application_deadline']) ? date('M j, Y', strtotime((string)$job['application_deadline'])) : 'Open until filled' ?></strong></div>
                 </div>

@@ -7,22 +7,43 @@ render_json_ld_faq($division['faqs']);
 $divisionContactUrl = url('contact.php') . '?division=' . rawurlencode($division['code']);
 $divisionDiscoveryUrl = url('discovery-call.php') . '?division=' . rawurlencode($division['code']);
 ?>
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Services', 'url' => url('solutions.php')],
+    ['label' => $division['code']],
+];
+$heroTag = $division['eyebrow'];
+$heroTitleHtml = $escape($division['title']);
+$heroSubtitle = $division['intro'];
+$heroActions = [
+    ['label' => 'Discuss Your ' . $division['code'] . ' Project', 'url' => $divisionDiscoveryUrl, 'variant' => 'primary'],
+    ['label' => 'Contact Our Team', 'url' => $divisionContactUrl, 'variant' => 'secondary'],
+];
+require __DIR__ . '/subpage-hero.php';
+?>
 <section class="section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag"><span class="dot"></span><span><?= $escape($division['eyebrow']) ?></span></div>
-            <h1 class="section-title"><?= $escape($division['title']) ?></h1>
-            <p class="section-subtitle"><?= $escape($division['intro']) ?></p>
-        </div>
-
         <div class="grid grid-cols-3">
+            <?php
+            $iconMap = [
+                'BUILD' => ['code', 'layers', 'smartphone'],
+                'GROW' => ['search', 'target', 'chart'],
+                'AUTOMATE' => ['cpu', 'bot', 'workflow'],
+            ];
+            $toneClass = match ($division['code']) {
+                'GROW' => 'is-grow',
+                'AUTOMATE' => 'is-automate',
+                default => 'is-build',
+            };
+            ?>
             <?php foreach ($division['services'] as $idx => $service): ?>
+                <?php $iconKey = $iconMap[$division['code']][$idx % 3] ?? 'layers'; ?>
                 <article class="card card-tilt reveal-on-scroll reveal-delay-<?= ($idx % 3) ?>">
-                    <div class="card-icon" aria-hidden="true"><?= $escape($service['icon']) ?></div>
+                    <div class="card-icon <?= $toneClass ?>"><?= codex_icon($iconKey, 24) ?></div>
                     <h2><?= $escape($service['title']) ?></h2>
                     <p><?= $escape($service['description']) ?></p>
                     <?php if (!empty($service['url'])): ?>
-                        <a class="btn btn-secondary btn-sm" href="<?= $escape(url($service['url'])) ?>">Explore this service <span aria-hidden="true">→</span></a>
+                        <a class="btn btn-secondary btn-sm" href="<?= $escape(url($service['url'])) ?>">Explore this service <span aria-hidden="true">&rarr;</span></a>
                     <?php endif; ?>
                 </article>
             <?php endforeach; ?>

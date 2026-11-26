@@ -4,212 +4,145 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Autonomous AI Agents & Tool-Calling Systems — Enterprise AI',
-    'description' => 'Build production-ready autonomous AI agents that interact with APIs, databases, and enterprise software to execute multi-step operational workflows with safety guardrails.',
+    'title' => 'AI Agents & Tool-Using Workflows | CodeX404 Solutions',
+    'description' => 'Build accountable AI agents that interact with approved APIs and databases to execute multi-step operational workflows with human approval gates and audit trails.',
     'canonical' => url('ai-agents.php'),
-    'keywords' => 'autonomous AI agents, tool-calling AI, multi-agent systems, AI workflow execution, function calling AI, enterprise AI agents'
+    'keywords' => 'AI agents, tool-calling AI, multi-step workflows, AI workflow automation, function calling AI'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Services', 'url' => url('solutions.php')],
+    ['label' => 'AI Agents'],
+];
+$heroTag = 'AUTOMATE · AI Agents & Tool Calling';
+$heroTitleHtml = 'Accountable AI Agents Built for <span class="text-gradient">Real Operational Workflows</span>';
+$heroSubtitle = 'Move beyond standalone chat boxes. We design tool-using agents that inspect requests, look up approved records, invoke typed APIs, and route consequential actions through human approval gates.';
+$heroActions = [
+    ['label' => 'Discuss an Agent Workflow', 'url' => url('discovery-call.php') . '?division=AUTOMATE', 'variant' => 'primary'],
+    ['label' => 'Explore Workflow Automation', 'url' => url('automation.php'), 'variant' => 'secondary'],
+];
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
-<!-- HERO SECTION -->
-<section class="section" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3.5rem;">
+<section class="section">
     <div class="container">
-        <div class="section-header" style="max-width: 860px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Autonomous Systems & Tool Calling</span>
-            </div>
-            <h1 class="section-title" style="font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                Autonomous AI Agents Engineered for <span class="gradient-text">Real Operational Work</span>
-            </h1>
-            <p class="section-subtitle" style="font-size: 1.1rem; line-height: 1.7; color: var(--slate); max-width: 740px; margin: 0 auto;">
-                Move beyond passive chatbots that merely answer questions. We build deterministic, goal-driven agents that plan actions, query databases, invoke external APIs, and execute complex business workflows with complete auditing and human safety controls.
-            </p>
-        </div>
-
-        <!-- Capability Grid -->
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <!-- 1. Tool & API Calling -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">⚙️</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Function & API Tool Calling</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Equip agents with real operational tools. Agents can read inventory records, create CRM contacts, trigger webhook events, or fetch live pricing using strict, type-safe JSON schemas.
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-automate"><?= codex_icon('cpu', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Typed Function &amp; API Tools</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Provide agents with constrained tools to check stock, look up CRM records, or dispatch structured webhooks using schema-checked JSON inputs.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Type-Safe Tools</span>
-                    <span class="tag-chip">REST & GraphQL</span>
-                    <span class="tag-chip">Deterministic I/O</span>
-                    <span class="tag-chip">Database Hooks</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Type-Safe Tools</span><span class="tag-chip">REST / Webhooks</span><span class="tag-chip">Schema Guarded</span></div>
+            </article>
 
-            <!-- 2. Multi-Agent Orchestration -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">👥</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Multi-Agent Orchestrations</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Deconstruct complex operations into specialized roles: a Supervisor Agent plans the tasks, Worker Agents gather intelligence and execute steps, and a Critic Agent validates quality before completion.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('users', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Coordinated Task Routing</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Separate triage, extraction, validation, and escalation into distinct accountable steps rather than relying on one opaque prompt.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Supervisor Pattern</span>
-                    <span class="tag-chip">State Sharing</span>
-                    <span class="tag-chip">Role Specialization</span>
-                    <span class="tag-chip">Self-Correction</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Role Separation</span><span class="tag-chip">State Tracking</span><span class="tag-chip">Validation Step</span></div>
+            </article>
 
-            <!-- 3. Human-in-the-Loop Safety -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">🛡️</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Human-in-the-Loop Safeguards</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Critical actions — issuing financial refunds, updating sensitive records, or dispatching external client contracts — pause automatically at verification gates until an authorized manager approves.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-automate"><?= codex_icon('shield', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Human-in-the-Loop Gates</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Refunds, sensitive record changes, or outbound client messages pause at clear verification checkpoints until an authorized person approves.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Approval Gates</span>
-                    <span class="tag-chip">Slack & Webhook Alerts</span>
-                    <span class="tag-chip">Granular Authority</span>
-                    <span class="tag-chip">Zero Runaway Risk</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Approval Gates</span><span class="tag-chip">Scoped Permissions</span><span class="tag-chip">Controlled Actions</span></div>
+            </article>
 
-            <!-- 4. Long-Term State & Memory -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">💾</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Long-Term Context & Memory</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Enable agents to retain context across long-running conversations and business cycles. Uses semantic vector memory and structured session checkpoints without unbounded token cost growth.
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-automate"><?= codex_icon('database', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Structured Session State</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Persist conversation and task context cleanly across multi-step workflows with clear token budgets and expiration rules.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Vector Episodic Memory</span>
-                    <span class="tag-chip">Session Serialization</span>
-                    <span class="tag-chip">Token Optimization</span>
-                    <span class="tag-chip">Cross-Session State</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Session Persistence</span><span class="tag-chip">Context Indexing</span><span class="tag-chip">Token Limits</span></div>
+            </article>
 
-            <!-- 5. Self-Healing & Dynamic Retries -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">🔄</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Self-Healing Workflows</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    When a third-party API returns an unexpected error or times out, the agent inspects the response status, adjusts its request arguments intelligently, and retries gracefully without failing the entire workflow.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('workflow', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Error Handling &amp; Fallbacks</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Handle external API timeouts, rate limits, and validation rejections gracefully with bounded retries and clear escalation alerts.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Dynamic Retries</span>
-                    <span class="tag-chip">Error Classification</span>
-                    <span class="tag-chip">Fallback Chains</span>
-                    <span class="tag-chip">Fault Tolerance</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Bounded Retries</span><span class="tag-chip">Fallback Paths</span><span class="tag-chip">Dead-Letter Logs</span></div>
+            </article>
 
-            <!-- 6. Complete Audit & Observability -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">📜</div>
-                <h2 class="card-title" style="font-size: 1.3rem;">Immutable Action Audit Logs</h2>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    Every single decision, reasoning trace, tool invocation, and token consumption metric is permanently recorded in tamper-resistant audit logs for total enterprise compliance and debugging.
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-automate"><?= codex_icon('file', 24) ?></div>
+                <h2 class="card-title" style="font-size: 1.28rem;">Action Audit Logs</h2>
+                <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
+                    Record every tool call, payload, outcome, and human sign-off step in structured logs for troubleshooting and accountability.
                 </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Step-by-Step Traces</span>
-                    <span class="tag-chip">Cost Telemetry</span>
-                    <span class="tag-chip">Audit Compliance</span>
-                    <span class="tag-chip">GDPR Friendly</span>
-                </div>
-            </div>
+                <div class="card-tags"><span class="tag-chip">Traceable Runs</span><span class="tag-chip">Cost Visibility</span><span class="tag-chip">Debuggable State</span></div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- ANATOMY OF AN AGENT RUN -->
+<!-- EXECUTION LIFECYCLE -->
 <section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Agent Execution Lifecycle</span>
-            </div>
-            <h2 class="section-title">From Natural Language Prompt to Verified Business Outcome</h2>
-            <p class="section-subtitle">
-                How our autonomous agents systematically parse, plan, verify, and execute operational tasks with zero guesswork.
-            </p>
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Execution Lifecycle</span></div>
+            <h2 class="section-title">How an Accountable Agent Run Executes</h2>
+            <p class="section-subtitle">Structured stages keep autonomous workflows predictable, debuggable, and safe.</p>
         </div>
 
         <div class="grid grid-cols-4" style="gap: 1.5rem;">
-            <div class="card card-tilt reveal-on-scroll" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">01</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Intent & Constraint Parsing</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    The agent deconstructs the business request, identifying required variables, authorized tool boundaries, and output formatting rules.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">01</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Intent Parsing</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Extract request variables, required permissions, and boundary constraints upfront.</p>
             </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">02</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Dynamic Tool Planning</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    The agent plans the sequence of required internal database queries, webhook calls, and calculations needed to satisfy the goal.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">02</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Tool Selection</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Map approved internal lookups and calculations before mutating any state.</p>
             </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">03</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Sandboxed Tool Execution</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    APIs execute in an isolated environment with input validation. High-privilege mutations wait for human manager approval before committing.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">03</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Guarded Execution</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Run validated tool requests; pause sensitive write actions for human confirmation.</p>
             </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-3" style="padding: 2rem;">
-                <span style="color: var(--cyan); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">04</span>
-                <h3 style="color: var(--white); font-size: 1.15rem; margin-bottom: 0.75rem;">Verification & Audit Commit</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">
-                    The Critic Agent validates output schema against success criteria, delivers formatted results to the stakeholder, and writes immutable logs.
-                </p>
+            <div class="card" style="padding: 1.75rem;">
+                <span style="color: var(--cyan); font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">04</span>
+                <h3 style="color: var(--white); font-size: 1.12rem; margin-bottom: 0.65rem;">Audit &amp; Delivery</h3>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Verify output formatting, return clear status updates, and store the execution trace.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- REAL ENTERPRISE USE CASES -->
+<!-- PRACTICAL USE CASES -->
 <section class="section">
     <div class="container">
-        <div class="section-header" style="max-width: 800px; margin: 0 auto 3.5rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Practical Implementations</span>
-            </div>
-            <h2 class="section-title">High-Leverage Workflows Ideal for AI Agents</h2>
-            <p class="section-subtitle">
-                Where autonomous agent engineering delivers immediate operational time savings and reduces costly administrative delays.
-            </p>
+        <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Practical Use Cases</span></div>
+            <h2 class="section-title">Workflows Well-Suited to Guarded AI Agents</h2>
         </div>
 
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <div class="card card-tilt reveal-on-scroll">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Autonomous Lead Triage Agent</h3>
-                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">
-                    Monitors website inquiries and WhatsApp messages 24/7. Validates company domain, extracts estimated budget and requirements, enriches contact details via LinkedIn, and routes qualified leads directly onto account executive calendars.
-                </p>
-                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Automated Ingestion &amp; Triage</span>
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <div class="card">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">Inbound Inquiry Triage</h3>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">Classify incoming web and WhatsApp requests continuously, extract scope details, and route clean briefs to team members.</p>
+                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Automated Triage</span>
             </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Invoice Reconciliation Agent</h3>
-                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">
-                    Extracts line items from incoming vendor PDF invoices, cross-references purchase orders in the ERP, flags mathematical or price discrepancies, and queues valid invoices for accountant sign-off in one click.
-                </p>
-                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Human review where needed</span>
+            <div class="card">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">Document &amp; Invoice Checking</h3>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">Extract vendor invoice lines, cross-check purchase orders, flag discrepancies, and queue clean entries for finance sign-off.</p>
+                <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Human Sign-Off</span>
             </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.75rem;">Technical Support Escalation Agent</h3>
-                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">
-                    Answers customer bug reports by querying error logs, reproducing test cases from documentation, drafting precise patch recommendations for engineers, and notifying the client once resolved.
-                </p>
+            <div class="card">
+                <h3 style="color: var(--cyan); font-size: 1.15rem; margin-bottom: 0.65rem;">Support Context Assembly</h3>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--slate); margin-bottom: 1rem;">Gather ticket history, look up relevant help documentation, and draft suggested responses for human support review.</p>
                 <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">Structured Escalation</span>
             </div>
         </div>
@@ -217,9 +150,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <?php
-$ctaHeading = "Ready to Deploy Autonomous AI Agents in Your Business?";
-$ctaSubtitle = "Schedule a technical scoping session to identify manual operations ripe for immediate agentic automation.";
+$ctaHeading = "Ready to Scope an AI Agent Workflow?";
+$ctaSubtitle = "Book a technical discovery session to review tools, approval boundaries, and implementation fit.";
 include __DIR__ . '/components/cta.php';
-?>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+require_once __DIR__ . '/includes/footer.php';

@@ -4,99 +4,87 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Engagement Models — Flexible Partnership Structures',
-    'description' => 'Explore CodeX404 Solutions engagement models: Dedicated Engineering Squads, Fixed-Scope Sprint Deliverables, and Fractional CTO & AI Architecture.',
+    'title' => 'Engagement Models — Partnership Structures | CodeX404 Solutions',
+    'description' => 'Explore CodeX404 Solutions collaboration models: Fixed-Scope Milestone Builds, Dedicated Engineering Capacity, and Technical & AI Architecture Advisory.',
     'canonical' => url('engagement-models.php'),
-    'keywords' => 'engagement models, dedicated engineering team, fixed scope software development, fractional CTO'
+    'keywords' => 'engagement models, fixed scope software development, dedicated engineering capacity, technical architecture advisory'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Trust & Pricing'],
+    ['label' => 'Engagement Models'],
+];
+$heroTag = 'Collaboration Frameworks';
+$heroTitleHtml = 'Structured <span class="text-gradient">Engagement Models</span> Fit for Your Stage';
+$heroSubtitle = 'Whether you need a well-defined milestone build, recurring development capacity for a product roadmap, or senior architectural guidance—choose the model that fits your budget and team.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
 <section class="section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Collaboration Frameworks</span>
-            </div>
-            <h1 class="section-title">Transparent, Flexible Engagement Models</h1>
-            <p class="section-subtitle">
-                Whether you need a full turnkey product delivered to specification, dedicated engineering capacity for your roadmap, or high-level architecture leadership — we have a partnership structure tailored to your needs.
-            </p>
-        </div>
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <article class="card card-tilt reveal-on-scroll" style="border-top: 4px solid var(--electric-blue); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span class="tag-chip" style="margin-bottom: 1rem; width: fit-content; color: var(--cyan);">Turnkey Delivery</span>
+                    <h2 class="card-title">Fixed-Scope Milestone Project</h2>
+                    <p class="card-description">Ideal for focused MVPs, custom business portals, website builds, and well-defined automation pipelines.</p>
+                    <div style="margin: 1.35rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.15rem;">
+                        <ul class="transform-list">
+                            <li>Written scope &amp; transparent milestone estimates</li>
+                            <li>Reviewable staging builds throughout development</li>
+                            <li>30-day post-launch defect resolution support</li>
+                            <li>Source code &amp; deployment handoff agreed in writing</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm" style="width: 100%;">Scope a Project &rarr;</a>
+            </article>
 
-        <div class="grid grid-cols-3">
-            <!-- Model 1 -->
-            <div class="card card-tilt reveal-on-scroll" style="border-top: 4px solid var(--electric-blue);">
-                <span class="tag-chip" style="margin-bottom: 1rem; width: fit-content; color: var(--cyan);">Turnkey Delivery</span>
-                <h2 class="card-title">Fixed-Scope Milestone Project</h2>
-                <p class="card-description">
-                    Best for clearly defined projects, MVPs, automation builds, or specific modules with unambiguous requirements.
-                </p>
-                <div style="margin: 1.5rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
-                    <ul class="transform-list">
-                        <li><span style="color: #34D399;">✓</span> Fixed pricing & guaranteed milestone roadmaps</li>
-                        <li><span style="color: #34D399;">✓</span> Working staging demo deployed every two weeks</li>
-                        <li><span style="color: #34D399;">✓</span> 30-day post-launch warranty with zero defect guarantee</li>
-                        <li><span style="color: #34D399;">✓</span> 100% intellectual property & source code ownership</li>
-                    </ul>
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1" style="border-top: 4px solid var(--cyan); background: var(--bg-surface-elevated); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Ongoing Delivery</span>
+                        <span style="font-size: 0.72rem; color: #34D399; font-weight: 700; letter-spacing: 0.04em;">ITERATIVE ROADMAP</span>
+                    </div>
+                    <h2 class="card-title">Ongoing Product &amp; Growth Retainer</h2>
+                    <p class="card-description">Best for businesses continuously shipping features, SEO/conversion improvements, and operational automations.</p>
+                    <div style="margin: 1.35rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.15rem;">
+                        <ul class="transform-list">
+                            <li>Combined BUILD, GROW &amp; AUTOMATE execution</li>
+                            <li>Direct communication with the engineers building your stack</li>
+                            <li>Prioritized sprint backlog &amp; regular progress demos</li>
+                            <li>Flexible monthly commitment without long-term lock-in</li>
+                        </ul>
+                    </div>
                 </div>
-                <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">
-                    Scope a Project
-                </a>
-            </div>
+                <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm" style="width: 100%;">Discuss Ongoing Support &rarr;</a>
+            </article>
 
-            <!-- Model 2 -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1" style="border-top: 4px solid var(--cyan); background: var(--bg-surface-elevated); box-shadow: var(--shadow-md);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Most Popular</span>
-                    <span style="font-size: 0.75rem; color: #34D399; font-weight: 700;">HIGH VELOCITY</span>
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2" style="border-top: 4px solid var(--amber); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span class="tag-chip" style="margin-bottom: 1rem; width: fit-content; color: var(--amber); border-color: rgba(255, 140, 0, 0.4);">Technical Advisory</span>
+                    <h2 class="card-title">Architecture &amp; AI Advisory</h2>
+                    <p class="card-description">Designed for teams validating database design, AI feasibility, codebase audits, or third-party build planning.</p>
+                    <div style="margin: 1.35rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.15rem;">
+                        <ul class="transform-list">
+                            <li>System architecture &amp; security review</li>
+                            <li>AI / RAG feasibility &amp; data-boundary planning</li>
+                            <li>Build-vs-buy scoping &amp; estimation review</li>
+                            <li>Structured technical specification handoff</li>
+                        </ul>
+                    </div>
                 </div>
-                <h2 class="card-title">Dedicated Agile Squad</h2>
-                <p class="card-description">
-                    Best for growing companies and funded startups needing continuous development velocity and feature delivery without hiring overhead.
-                </p>
-                <div style="margin: 1.5rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
-                    <ul class="transform-list">
-                        <li><span style="color: #34D399;">✓</span> Full-stack developers, QA & architect</li>
-                        <li><span style="color: #34D399;">✓</span> Direct Slack / Teams daily integration</li>
-                        <li><span style="color: #34D399;">✓</span> Bi-weekly sprint demos & planning</li>
-                        <li><span style="color: #34D399;">✓</span> Flexible monthly capacity with zero long-term lock-in</li>
-                    </ul>
-                </div>
-                <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm" style="width: 100%; margin-top: auto;">
-                    Hire an Agile Squad
-                </a>
-            </div>
-
-            <!-- Model 3 -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2" style="border-top: 4px solid var(--violet);">
-                <span class="tag-chip" style="margin-bottom: 1rem; width: fit-content; color: var(--soft-violet);">Strategic Leadership</span>
-                <h2 class="card-title">Fractional CTO & AI Architect</h2>
-                <p class="card-description">
-                    Best for non-technical founders or executives needing strategic architectural validation, vendor audits, and AI feasibility assessments.
-                </p>
-                <div style="margin: 1.5rem 0; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
-                    <ul class="transform-list">
-                        <li><span style="color: #34D399;">✓</span> Architecture review & code audits</li>
-                        <li><span style="color: #34D399;">✓</span> AI / LLM feasibility & cost modeling</li>
-                        <li><span style="color: #34D399;">✓</span> Technical hiring & vendor evaluation</li>
-                        <li><span style="color: #34D399;">✓</span> Flexible monthly retainer hours</li>
-                    </ul>
-                </div>
-                <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">
-                    Consult an Architect
-                </a>
-            </div>
+                <a href="<?= url('discovery-call.php') ?>" class="btn btn-secondary btn-sm" style="width: 100%;">Book an Advisory Session &rarr;</a>
+            </article>
         </div>
     </div>
 </section>
 
 <?php
-$ctaHeading = "Ready to choose the right engagement model?";
-$ctaSubtitle = "Let's review your product roadmap and recommend the most cost-effective structure for your stage.";
+$ctaHeading = "Not Sure Which Engagement Structure Fits Best?";
+$ctaSubtitle = "Share your goals and timeline constraints so we can recommend the simplest practical path.";
 include __DIR__ . '/components/cta.php';
-?>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+require_once __DIR__ . '/includes/footer.php';

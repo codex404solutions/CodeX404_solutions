@@ -4,133 +4,87 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 
 $pageMeta = [
-    'title' => 'Security and Data Protection',
-    'description' => 'Discuss application security, privacy, access, and recovery requirements for your software project with CodeX404 Solutions.',
+    'title' => 'Security & Data Protection Practices | CodeX404 Solutions',
+    'description' => 'Learn how CodeX404 Solutions approaches application security, prepared database queries, role-based access control, secret isolation, and responsible vulnerability reporting.',
     'canonical' => url('security.php'),
-    'keywords' => 'software security, data protection, application security, secure engineering'
+    'keywords' => 'software security, data protection, application security, secure engineering, OWASP practices'
 ];
 
 require_once __DIR__ . '/includes/header.php';
+
+$heroBreadcrumbs = [
+    ['label' => 'Home', 'url' => url('index.php')],
+    ['label' => 'Trust & Legal'],
+    ['label' => 'Security'],
+];
+$heroTag = 'Security & Data Protection';
+$heroTitleHtml = 'Security &amp; Data Protection <span class="text-gradient">Engineered Into Every Layer</span>';
+$heroSubtitle = 'Security is integrated from initial database design through deployment—enforcing prepared SQL queries, credential hygiene, least-privilege roles, and encrypted transport.';
+require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
 <section class="section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Security & Compliance</span>
-            </div>
-            <h1 class="section-title">Enterprise Security & Data Protection Standards</h1>
-            <p class="section-subtitle">
-                Security is engineered into our architecture from day one. We enforce OWASP Top 10 hardening, zero-trust access controls, end-to-end encryption, and rigorous data protection across all client platforms.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-3">
-            <!-- 1. Application Layer Security -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">🛡️</div>
+        <div class="grid grid-cols-3" style="gap: 1.75rem;">
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-build"><?= codex_icon('shield', 24) ?></div>
                 <h2 class="card-title">Application Layer Defenses</h2>
-                <p class="card-description">
-                    OWASP Top 10 hardening, strictly parameterized PDO SQL queries, rigorous CSRF token checks, automated XSS escaping, and strict input sanitization.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">PDO Prepared Stmts</span>
-                    <span class="tag-chip">CSRF Protection</span>
-                    <span class="tag-chip">XSS Sanitization</span>
-                </div>
-            </div>
+                <p class="card-description">OWASP-informed hardening with parameterized PDO SQL queries, CSRF tokens on state changes, output escaping, and server-side validation.</p>
+                <div class="card-tags"><span class="tag-chip">PDO Prepared Queries</span><span class="tag-chip">CSRF Protection</span><span class="tag-chip">Output Escaping</span></div>
+            </article>
 
-            <!-- 2. Encryption Everywhere -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">🔒</div>
-                <h2 class="card-title">Transport & At-Rest Encryption</h2>
-                <p class="card-description">
-                    Enforced TLS 1.3 in transit, AES-256 encryption for sensitive database fields, secure environment secret isolation, and strict credential hygiene.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">TLS 1.3 Everywhere</span>
-                    <span class="tag-chip">AES-256 Storage</span>
-                    <span class="tag-chip">Zero Plaintext Secrets</span>
-                </div>
-            </div>
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-build"><?= codex_icon('lock', 24) ?></div>
+                <h2 class="card-title">Transport &amp; Secret Hygiene</h2>
+                <p class="card-description">HTTPS/TLS transport enforcement, environment-isolated `.env` credentials excluded from version control, and zero plaintext password storage.</p>
+                <div class="card-tags"><span class="tag-chip">HTTPS / TLS</span><span class="tag-chip">Env Isolation</span><span class="tag-chip">Hashed Passwords</span></div>
+            </article>
 
-            <!-- 3. Authentication & RBAC -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">🔑</div>
-                <h2 class="card-title">Identity & Role-Based Access</h2>
-                <p class="card-description">
-                    Granular Role-Based Access Control (RBAC), multi-factor authentication (MFA) readiness, secure Argon2id/Bcrypt password hashing, and instant session revocation.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Argon2id Hashing</span>
-                    <span class="tag-chip">Granular RBAC</span>
-                    <span class="tag-chip">Session Isolation</span>
-                </div>
-            </div>
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-build"><?= codex_icon('key', 24) ?></div>
+                <h2 class="card-title">Identity &amp; Role Access</h2>
+                <p class="card-description">Least-privilege Role-Based Access Control (RBAC), secure session cookies, bcrypt/Argon2 password hashing, and explicit authorization checks.</p>
+                <div class="card-tags"><span class="tag-chip">RBAC Boundaries</span><span class="tag-chip">Password Hashing</span><span class="tag-chip">Session Security</span></div>
+            </article>
 
-            <!-- 4. GDPR & EU Data Protection -->
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">🇪🇺</div>
-                <h2 class="card-title">Privacy & GDPR Compliance</h2>
-                <p class="card-description">
-                    Engineered to meet GDPR and international data sovereignty standards. Includes automated data retention schedules, audit trails, and right-to-be-forgotten handling.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">GDPR Aligned</span>
-                    <span class="tag-chip">Data Minimization</span>
-                    <span class="tag-chip">Audit Trails</span>
-                </div>
-            </div>
+            <article class="card card-tilt reveal-on-scroll">
+                <div class="card-icon is-grow"><?= codex_icon('file', 24) ?></div>
+                <h2 class="card-title">Privacy-Conscious Data Handling</h2>
+                <p class="card-description">Minimal collection of form and applicant data, clear consent checkpoints, and configurable retention workflows scoped to client needs.</p>
+                <div class="card-tags"><span class="tag-chip">Data Minimization</span><span class="tag-chip">Consent Checkpoints</span><span class="tag-chip">Audit Trails</span></div>
+            </article>
 
-            <!-- 5. Rate Limiting & Abuse Defense -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">⏱️</div>
-                <h2 class="card-title">Rate Limiting & Abuse Defense</h2>
-                <p class="card-description">
-                    Multi-tier DDoS mitigation, sliding-window rate limiters, automated bot honeypots, and IP reputation filtering to prevent brute-force and credential stuffing.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Sliding Window Limits</span>
-                    <span class="tag-chip">Bot Honeypots</span>
-                    <span class="tag-chip">Brute-Force Guard</span>
-                </div>
-            </div>
+            <article class="card card-tilt reveal-on-scroll reveal-delay-1">
+                <div class="card-icon is-automate"><?= codex_icon('clock', 24) ?></div>
+                <h2 class="card-title">Rate Limiting &amp; Abuse Guards</h2>
+                <p class="card-description">Request throttling on authentication and form endpoints, honeypot bot filters, and lockout thresholds to deter credential stuffing.</p>
+                <div class="card-tags"><span class="tag-chip">Rate Limiters</span><span class="tag-chip">Honeypot Filters</span><span class="tag-chip">Lockout Guards</span></div>
+            </article>
 
-            <!-- 6. Automated Backups & Disaster Recovery -->
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">💾</div>
-                <h2 class="card-title">Resilience & Disaster Recovery</h2>
-                <p class="card-description">
-                    Automated offsite database snapshots, point-in-time recovery, containerized failover procedures, and verified disaster recovery playbooks for 99.9% uptime.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Automated Snapshots</span>
-                    <span class="tag-chip">Point-in-Time Recovery</span>
-                    <span class="tag-chip">99.9% Uptime Goal</span>
-                </div>
-            </div>
+            <article class="card card-tilt reveal-on-scroll reveal-delay-2">
+                <div class="card-icon is-build"><?= codex_icon('database', 24) ?></div>
+                <h2 class="card-title">Backups &amp; Recovery Planning</h2>
+                <p class="card-description">Versioned SQL migrations, scheduled backup routines, and documented restoration checks matched to project criticality.</p>
+                <div class="card-tags"><span class="tag-chip">Scheduled Backups</span><span class="tag-chip">SQL Migrations</span><span class="tag-chip">Recovery Checks</span></div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- Security Vulnerability Reporting -->
-<section class="section" style="background: rgba(11, 31, 58, 0.3);">
+<section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container container-narrow" style="text-align: center;">
-        <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">Responsible Vulnerability Disclosure</h2>
-        <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
-            If you believe you have identified a security vulnerability in a CodeX404 system, please email our security team with enough detail to reproduce the issue. We will review the report and follow up.
+        <h2 style="font-size: 1.7rem; color: var(--white); margin-bottom: 0.85rem;">Responsible Vulnerability Disclosure</h2>
+        <p style="font-size: 0.96rem; line-height: 1.7; color: var(--slate); margin-bottom: 1.25rem;">
+            If you believe you have identified a security issue in a CodeX404 Solutions property, please share reproduction details directly with our engineering team so we can investigate promptly.
         </p>
-        <div style="font-size: 1rem; color: var(--cyan); font-family: var(--font-mono);">
-            security@codex404solutions.com
-        </div>
+        <a href="mailto:<?= COMPANY_EMAIL ?>" style="font-size: 1rem; color: var(--cyan); font-family: var(--font-mono); text-decoration: underline;">
+            <?= COMPANY_EMAIL ?>
+        </a>
     </div>
 </section>
 
 <?php
-$ctaHeading = "Have specific compliance or infosec requirements?";
-$ctaSubtitle = "We are happy to sign custom NDAs, complete security questionnaires, and review architecture perimeters.";
+$ctaHeading = "Need to Review Security & Data Boundaries for Your Project?";
+$ctaSubtitle = "We review access requirements, NDA terms, and deployment environments during discovery scoping.";
 include __DIR__ . '/components/cta.php';
-?>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+require_once __DIR__ . '/includes/footer.php';
