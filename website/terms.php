@@ -24,7 +24,7 @@ require_once __DIR__ . '/includes/header.php';
             <p style="font-size: 0.9rem; color: var(--slate-dark);">Last updated: October 6, 2026</p>
         </div>
 
-        <div
+        <div class="obsidian-lit-panel is-subtle"
             style="background: var(--bg-surface); padding: clamp(1.35rem, 3.5vw, 3rem); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); line-height: 1.8;">
             <h2 style="font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">1. Acceptance of Terms</h2>
             <p>

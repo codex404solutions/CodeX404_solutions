@@ -119,7 +119,7 @@ require __DIR__ . '/includes/subpage-hero.php';
 <!-- LIVE SIMULATOR BANNER -->
 <section class="section">
     <div class="container">
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
+        <div class="obsidian-lit-panel" style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
             <span class="tag-chip" style="margin-bottom: 0.85rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Interactive Sandbox</span>
             <h3 style="font-size: 1.65rem; color: var(--white); margin-bottom: 0.75rem;">Inspect Our Lead Webhook Pipeline Simulator</h3>
             <p style="font-size: 0.98rem; color: var(--slate); max-width: 620px; margin: 0 auto 1.5rem auto; line-height: 1.6;">See how structured webhook payloads validate inputs, score intent, and sync across dashboards in real time.</p>

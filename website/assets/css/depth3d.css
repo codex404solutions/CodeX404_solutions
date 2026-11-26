@@ -860,6 +860,7 @@ textarea:focus-visible {
 }
 .process-card-container {
   background:
+    radial-gradient(520px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.08), transparent 58%) padding-box,
     linear-gradient(180deg, rgba(14, 24, 44, 0.96) 0%, rgba(7, 17, 31, 0.99) 100%) padding-box,
     var(--obs-rim-gradient) border-box !important;
   border: 1px solid transparent !important;
@@ -895,6 +896,7 @@ textarea:focus-visible {
 
 .process-pill-box {
   background:
+    radial-gradient(280px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.11), transparent 58%) padding-box,
     linear-gradient(180deg, #121E36 0%, #0B1220 100%) padding-box,
     var(--obs-rim-gradient) border-box !important;
   border: 1px solid transparent !important;
@@ -910,6 +912,7 @@ textarea:focus-visible {
 .process-step-item:hover .process-pill-box {
   transform: translateY(-4px) !important;
   background:
+    radial-gradient(280px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.12), transparent 58%) padding-box,
     linear-gradient(180deg, #172745 0%, #0D1629 100%) padding-box,
     var(--obs-rim-gradient-hover) border-box !important;
   border-color: transparent !important;
@@ -967,6 +970,7 @@ textarea:focus-visible {
   transform: scale(0.88) rotateY(14deg) translateZ(-70px);
   opacity: 0.78;
   background:
+    radial-gradient(340px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.1), transparent 58%) padding-box,
     linear-gradient(180deg, #0B192E 0%, #07111F 100%) padding-box,
     var(--obs-rim-pill) border-box;
   border: 1px solid transparent;
@@ -987,6 +991,7 @@ textarea:focus-visible {
   transform: scale(1.03) translateZ(36px);
   opacity: 1;
   background:
+    radial-gradient(380px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.12), transparent 58%) padding-box,
     linear-gradient(180deg, #0D1E36 0%, #081526 100%) padding-box,
     var(--obs-rim-gradient-hover) border-box;
   border: 1px solid transparent;
@@ -1166,6 +1171,7 @@ textarea:focus-visible {
 
 .sim-workbench-card {
   background:
+    radial-gradient(520px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.08), transparent 58%) padding-box,
     linear-gradient(172deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%) padding-box,
     var(--obs-rim-orange) border-box;
   border: 1px solid transparent;
@@ -1299,6 +1305,7 @@ textarea:focus-visible {
   justify-content: space-between;
   gap: 0.85rem;
   background:
+    radial-gradient(320px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.08), transparent 58%) padding-box,
     linear-gradient(180deg, rgba(8, 15, 29, 0.94) 0%, rgba(6, 12, 23, 0.98) 100%) padding-box,
     var(--obs-rim-pill) border-box;
   border: 1px solid transparent;
@@ -1332,6 +1339,7 @@ textarea:focus-visible {
   padding: 0.68rem 0.85rem;
   border-radius: 10px;
   background:
+    radial-gradient(240px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.1), transparent 60%) padding-box,
     linear-gradient(180deg, #13203A 0%, #0B1220 100%) padding-box,
     var(--obs-rim-pill) border-box;
   border: 1px solid transparent;
@@ -1343,6 +1351,7 @@ textarea:focus-visible {
 .sim-query-card:hover {
   transform: translateY(-1px);
   background:
+    radial-gradient(240px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.13), transparent 60%) padding-box,
     linear-gradient(180deg, #192B4D 0%, #0F1A2F 100%) padding-box,
     var(--obs-rim-pill-hover) border-box;
   border-color: transparent;
@@ -1514,10 +1523,20 @@ textarea:focus-visible {
   gap: 0.75rem;
   text-align: center;
   background:
+    radial-gradient(420px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.09), transparent 58%) padding-box,
     linear-gradient(180deg, rgba(16, 27, 48, 0.86) 0%, rgba(10, 18, 32, 0.94) 100%) padding-box,
     var(--obs-rim-pill) border-box;
   border: 1px solid transparent;
   box-shadow: var(--obs-specular-top), var(--obs-rim-glow);
+  transition: box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.sim-sandbox-notice:hover {
+  background:
+    radial-gradient(420px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.09), transparent 58%) padding-box,
+    linear-gradient(180deg, rgba(20, 34, 60, 0.9) 0%, rgba(12, 21, 38, 0.96) 100%) padding-box,
+    var(--obs-rim-pill-hover) border-box;
+  box-shadow: var(--obs-specular-top-strong), var(--obs-rim-glow-hover);
 }
 
 .sim-sandbox-notice p {
@@ -1597,6 +1616,7 @@ textarea:focus-visible {
    ========================================================================== */
 #leadership .card {
   background:
+    radial-gradient(380px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.11), transparent 55%) padding-box,
     linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(11, 18, 32, 0.99) 100%) padding-box,
     var(--obs-rim-gradient) border-box !important;
   border: 1px solid transparent !important;
@@ -1604,6 +1624,19 @@ textarea:focus-visible {
     var(--obs-specular-top),
     0 18px 42px rgba(2, 6, 18, 0.56),
     var(--obs-rim-glow) !important;
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+#leadership .card:hover {
+  transform: translateY(-3px);
+  background:
+    radial-gradient(380px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.11), transparent 55%) padding-box,
+    linear-gradient(170deg, rgba(20, 34, 60, 0.97) 0%, rgba(12, 21, 38, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient-hover) border-box !important;
+  box-shadow:
+    var(--obs-specular-top-strong),
+    0 24px 52px rgba(2, 6, 18, 0.68),
+    var(--obs-rim-glow-hover) !important;
 }
 
 .leader-portrait-ring {
@@ -1634,6 +1667,7 @@ textarea:focus-visible {
 
 .home-contact-section .form-card {
   background:
+    radial-gradient(480px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.06), transparent 58%) padding-box,
     linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(11, 18, 32, 0.99) 100%) padding-box,
     var(--obs-rim-gradient) border-box !important;
   border: 1px solid transparent !important;
@@ -1641,6 +1675,13 @@ textarea:focus-visible {
     var(--obs-specular-top),
     0 24px 54px rgba(2, 6, 18, 0.68),
     var(--obs-rim-glow) !important;
+}
+
+.home-contact-section .form-card:hover {
+  background:
+    radial-gradient(480px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.09), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(18, 30, 54, 0.97) 0%, rgba(11, 19, 34, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box !important;
 }
 
 .home-contact-section .form-control {
@@ -1771,6 +1812,7 @@ textarea:focus-visible {
 
 .footer-cta-card {
   background:
+    radial-gradient(300px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.09), transparent 58%) padding-box,
     linear-gradient(165deg, rgba(16, 30, 56, 0.94) 0%, rgba(8, 17, 34, 0.98) 100%) padding-box,
     linear-gradient(135deg, rgba(255, 140, 0, 0.55) 0%, rgba(34, 211, 238, 0.3) 55%, rgba(11, 94, 215, 0.35) 100%) border-box;
   border: 1px solid transparent;
@@ -1780,6 +1822,18 @@ textarea:focus-visible {
     inset 0 1px 0 rgba(255, 195, 115, 0.22),
     0 14px 30px rgba(2, 6, 18, 0.5),
     0 0 24px rgba(255, 140, 0, 0.1);
+  transition: box-shadow 0.24s ease;
+}
+
+.footer-cta-card:hover {
+  background:
+    radial-gradient(300px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.14), transparent 58%) padding-box,
+    linear-gradient(165deg, rgba(20, 36, 66, 0.96) 0%, rgba(10, 20, 38, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient-hover) border-box;
+  box-shadow:
+    var(--obs-specular-top-strong),
+    0 18px 36px rgba(2, 6, 18, 0.62),
+    var(--obs-rim-glow-hover);
 }
 
 .footer-cta-header {
@@ -2028,12 +2082,9 @@ textarea:focus-visible {
 .project-card,
 .industry-slider-card,
 .problem-path-card,
-.form-card,
-.rag-citation-card,
-.demo-modal-container,
-.nav-dropdown-mega,
-.codex-chat-window {
+.rag-citation-card {
   background:
+    radial-gradient(400px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.11), transparent 55%) padding-box,
     linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%) padding-box,
     var(--obs-rim-gradient) border-box !important;
   border: 1px solid transparent !important;
@@ -2053,6 +2104,7 @@ textarea:focus-visible {
 .industry-slider-card:hover,
 .problem-path-card:hover {
   background:
+    radial-gradient(400px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.11), transparent 55%) padding-box,
     linear-gradient(170deg, rgba(20, 34, 60, 0.97) 0%, rgba(12, 21, 38, 0.99) 100%) padding-box,
     var(--obs-rim-gradient-hover) border-box !important;
   border-color: transparent !important;
@@ -2060,6 +2112,127 @@ textarea:focus-visible {
     var(--obs-specular-top-strong),
     0 24px 52px rgba(2, 6, 18, 0.68),
     var(--obs-rim-glow-hover) !important;
+}
+
+/* Overlays, modals, and dropdowns keep static Obsidian framing */
+.demo-modal-container,
+.nav-dropdown-mega,
+.codex-chat-window {
+  background:
+    linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow:
+    var(--obs-specular-top),
+    0 18px 42px rgba(2, 6, 18, 0.56),
+    var(--obs-rim-glow) !important;
+}
+
+/* Tier 1 Site-Wide Surfaces: CTA banners, FAQs, Careers & Project tiles */
+.cta-section-wrap,
+.faq-item,
+.division-faq-item,
+.division-steps li,
+.faq-accordion-box details,
+.careers-card,
+.careers-job-card,
+.careers-portal-strip,
+.portal-timeline-item,
+.project-stat-triplets > div,
+.project-feature-tile,
+.obsidian-lit-panel {
+  background:
+    radial-gradient(380px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.1), transparent 56%) padding-box,
+    linear-gradient(170deg, rgba(16, 27, 48, 0.95) 0%, rgba(10, 18, 32, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow:
+    var(--obs-specular-top),
+    0 14px 34px rgba(2, 6, 18, 0.48),
+    var(--obs-rim-glow) !important;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.division-steps li {
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+}
+
+.cta-section-wrap:hover,
+.faq-item:hover,
+.faq-item.active,
+.division-faq-item:hover,
+.division-faq-item[open],
+.division-steps li:hover,
+.faq-accordion-box details:hover,
+.faq-accordion-box details[open],
+.careers-card:hover,
+.careers-job-card:hover,
+.careers-portal-strip:hover,
+.portal-timeline-item:hover,
+.project-stat-triplets > div:hover,
+.project-feature-tile:hover,
+.obsidian-lit-panel:hover {
+  background:
+    radial-gradient(380px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.11), transparent 56%) padding-box,
+    linear-gradient(170deg, rgba(20, 34, 60, 0.97) 0%, rgba(12, 21, 38, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient-hover) border-box !important;
+  border-color: transparent !important;
+  box-shadow:
+    var(--obs-specular-top-strong),
+    0 20px 44px rgba(2, 6, 18, 0.62),
+    var(--obs-rim-glow-hover) !important;
+}
+
+/* Tier 2 Subtle Ambient Cursor Light: Forms & Long-Form Reading Surfaces */
+.form-card,
+.careers-detail-panel,
+.careers-form-panel,
+.pricing-guarantee-strip,
+.article-reader-shell,
+.project-detail-hero,
+.obsidian-lit-panel.is-subtle {
+  background:
+    radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.055), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(16, 27, 48, 0.95) 0%, rgba(9, 17, 32, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow:
+    var(--obs-specular-top),
+    0 18px 44px rgba(2, 6, 18, 0.54),
+    var(--obs-rim-glow) !important;
+}
+
+.form-card:hover,
+.careers-detail-panel:hover,
+.careers-form-panel:hover,
+.pricing-guarantee-strip:hover,
+.article-reader-shell:hover,
+.project-detail-hero:hover,
+.obsidian-lit-panel.is-subtle:hover {
+  background:
+    radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.09), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(18, 30, 54, 0.97) 0%, rgba(10, 19, 35, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box !important;
+  box-shadow:
+    var(--obs-specular-top),
+    0 20px 48px rgba(2, 6, 18, 0.58),
+    var(--obs-rim-glow) !important;
+}
+
+.guarantee-item {
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.guarantee-item:hover {
+  background:
+    radial-gradient(260px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.1), transparent 60%) padding-box,
+    rgba(19, 35, 62, 0.55) padding-box,
+    var(--obs-rim-pill-hover) border-box;
+  box-shadow: var(--obs-specular-top);
 }
 
 .work-card-media {
@@ -2071,12 +2244,31 @@ textarea:focus-visible {
     var(--obs-rim-glow) !important;
 }
 
+.work-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(
+    340px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(255, 140, 0, 0.16),
+    transparent 55%
+  );
+}
+
 .work-card:hover .work-card-media {
   background: #0A1628 padding-box, var(--obs-rim-gradient-hover) border-box !important;
   box-shadow:
     var(--obs-specular-top-strong),
     0 18px 40px rgba(2, 6, 18, 0.65),
     var(--obs-rim-glow-hover) !important;
+}
+
+.work-card:hover .work-card-media::after {
+  opacity: 1;
 }
 
 .slider-nav-btn {
@@ -2226,7 +2418,14 @@ pre.wp-code,
   .process-pill-box,
   .service-row-card,
   .why-dark-card,
-  .hero-cap-item {
+  .hero-cap-item,
+  .card,
+  .cta-section-wrap,
+  .faq-item,
+  .division-faq-item,
+  .careers-card,
+  .careers-job-card,
+  .work-card-media::after {
     transform: none !important;
     transition: none !important;
   }
@@ -2725,11 +2924,23 @@ pre.wp-code,
 }
 
 .contact-panel {
-  background: linear-gradient(170deg, rgba(16, 27, 48, 0.94) 0%, rgba(9, 17, 32, 0.98) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    radial-gradient(360px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.1), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(16, 27, 48, 0.95) 0%, rgba(9, 17, 32, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box;
+  border: 1px solid transparent;
   border-radius: 18px;
   padding: clamp(1.25rem, 2.5vw, 1.85rem);
-  box-shadow: 0 18px 42px rgba(2, 6, 18, 0.48);
+  box-shadow: var(--obs-specular-top), 0 18px 42px rgba(2, 6, 18, 0.48), var(--obs-rim-glow);
+  transition: box-shadow 0.24s ease;
+}
+
+.contact-panel:hover {
+  background:
+    radial-gradient(360px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.1), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(20, 34, 60, 0.97) 0%, rgba(11, 20, 37, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient-hover) border-box;
+  box-shadow: var(--obs-specular-top-strong), 0 22px 46px rgba(2, 6, 18, 0.6), var(--obs-rim-glow-hover);
 }
 
 .contact-panel-label {
@@ -2749,14 +2960,20 @@ pre.wp-code,
   gap: 0.85rem;
   padding: 0.85rem 1rem;
   border-radius: 12px;
-  background: rgba(7, 17, 31, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: border-color 0.2s ease, background 0.2s ease;
+  background:
+    radial-gradient(240px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.09), transparent 60%) padding-box,
+    rgba(7, 17, 31, 0.75) padding-box,
+    var(--obs-rim-pill) border-box;
+  border: 1px solid transparent;
+  transition: box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .contact-direct-row:hover {
-  border-color: rgba(34, 211, 238, 0.35);
-  background: rgba(11, 25, 46, 0.9);
+  background:
+    radial-gradient(240px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.11), transparent 60%) padding-box,
+    rgba(11, 25, 46, 0.92) padding-box,
+    var(--obs-rim-pill-hover) border-box;
+  box-shadow: var(--obs-specular-top), var(--obs-rim-glow-hover);
 }
 
 .contact-direct-meta {
@@ -2815,7 +3032,9 @@ pre.wp-code,
   padding: 0.7rem 0.85rem;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(7, 17, 31, 0.65);
+  background:
+    radial-gradient(200px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(11, 94, 215, 0.08), transparent 60%),
+    rgba(7, 17, 31, 0.65);
   color: #CBD5E1;
   font-size: 0.82rem;
   font-weight: 600;
@@ -2830,8 +3049,10 @@ pre.wp-code,
 
 .contact-topic-btn:hover,
 .contact-topic-btn.is-active {
-  border-color: rgba(34, 211, 238, 0.48);
-  background: rgba(11, 94, 215, 0.16);
+  border-color: rgba(255, 140, 0, 0.55);
+  background:
+    radial-gradient(200px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.14), transparent 60%),
+    rgba(11, 94, 215, 0.16);
   color: #FFFFFF;
 }
 
@@ -2882,11 +3103,21 @@ pre.wp-code,
 }
 
 .contact-form-shell {
-  background: linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%);
-  border: 1px solid rgba(56, 189, 248, 0.26);
+  background:
+    radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.055), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box;
+  border: 1px solid transparent;
   border-radius: 20px;
   padding: clamp(1.35rem, 3vw, 2.5rem);
-  box-shadow: 0 24px 55px rgba(2, 6, 18, 0.6), 0 0 36px rgba(11, 94, 215, 0.12);
+  box-shadow: var(--obs-specular-top), 0 24px 55px rgba(2, 6, 18, 0.6), var(--obs-rim-glow);
+}
+
+.contact-form-shell:hover {
+  background:
+    radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.09), transparent 58%) padding-box,
+    linear-gradient(170deg, rgba(18, 30, 54, 0.97) 0%, rgba(10, 19, 35, 0.99) 100%) padding-box,
+    var(--obs-rim-gradient) border-box;
 }
 
 .contact-form-top {
@@ -2924,7 +3155,9 @@ pre.wp-code,
   padding: 0.72rem 0.65rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(6, 11, 24, 0.72);
+  background:
+    radial-gradient(180px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(34, 211, 238, 0.09), transparent 60%),
+    rgba(6, 11, 24, 0.72);
   color: #CBD5E1;
   text-align: left;
   cursor: pointer;
@@ -2932,6 +3165,13 @@ pre.wp-code,
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+
+.contact-pillar-btn:hover {
+  border-color: rgba(255, 140, 0, 0.5);
+  background:
+    radial-gradient(180px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 140, 0, 0.13), transparent 60%),
+    rgba(12, 22, 42, 0.85);
 }
 
 .contact-pillar-btn strong {
@@ -2970,6 +3210,25 @@ pre.wp-code,
 @media (max-width: 960px) {
   .contact-studio-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.contact-cat-section[hidden] {
+  display: none !important;
+}
+
+.contact-cat-section {
+  animation: contactSectionReveal 0.22s ease;
+}
+
+@keyframes contactSectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

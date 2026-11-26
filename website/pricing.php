@@ -273,7 +273,7 @@ require __DIR__ . '/includes/subpage-hero.php';
 
         <div class="grid grid-cols-2" style="gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto;">
             <!-- Controls Column -->
-            <div style="background: var(--bg-surface); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+            <div class="obsidian-lit-panel is-subtle" style="background: var(--bg-surface); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
                 <form id="scopeEstimatorForm">
                     <!-- Step 1: System Type -->
                     <div style="margin-bottom: 2rem;">
@@ -342,7 +342,7 @@ require __DIR__ . '/includes/subpage-hero.php';
             </div>
 
             <!-- Dynamic Output Column -->
-            <div style="background: linear-gradient(135deg, rgba(16, 29, 58, 0.95) 0%, rgba(10, 22, 40, 0.98) 100%); padding: 2.75rem; border-radius: var(--radius-lg); border: 1px solid rgba(34, 211, 238, 0.35); box-shadow: 0 0 35px rgba(34, 211, 238, 0.08);">
+            <div class="obsidian-lit-panel is-subtle" style="background: linear-gradient(135deg, rgba(16, 29, 58, 0.95) 0%, rgba(10, 22, 40, 0.98) 100%); padding: 2.75rem; border-radius: var(--radius-lg); border: 1px solid rgba(34, 211, 238, 0.35); box-shadow: 0 0 35px rgba(34, 211, 238, 0.08);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem;">
                     <div>
                         <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Estimated Delivery Blueprint</span>
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
      ========================================================================== -->
 <section class="section" style="padding-top: 0; padding-bottom: 4rem;">
     <div class="container">
-        <div style="background: linear-gradient(135deg, rgba(16, 29, 58, 0.9) 0%, rgba(10, 22, 40, 0.95) 100%); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: var(--radius-xl); padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden;">
+        <div class="obsidian-lit-panel" style="background: linear-gradient(135deg, rgba(16, 29, 58, 0.9) 0%, rgba(10, 22, 40, 0.95) 100%); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: var(--radius-xl); padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -50px; right: -50px; width: 220px; height: 220px; background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%); pointer-events: none;"></div>
             
             <span class="section-tag" style="margin: 0 auto 1.25rem auto;">
