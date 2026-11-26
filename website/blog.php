@@ -102,7 +102,7 @@ $articles = [
     ],
 ];
 
-$requestedSlug = trim((string)($_GET['brief'] ?? ''));
+$requestedSlug = trim((string) ($_GET['brief'] ?? ''));
 $activeArticle = $requestedSlug !== '' && isset($articles[$requestedSlug]) ? $articles[$requestedSlug] : null;
 
 if ($activeArticle) {
@@ -130,6 +130,7 @@ require_once __DIR__ . '/includes/header.php';
         ['label' => 'Insights', 'url' => url('blog.php')],
         ['label' => $activeArticle['category']],
     ];
+    $heroClass = 'subpage-hero--article';
     $heroTag = $activeArticle['pillar'] . ' · ' . $activeArticle['category'] . ' · ' . $activeArticle['read_time'];
     $heroTitleHtml = htmlspecialchars($activeArticle['title'], ENT_QUOTES, 'UTF-8');
     $heroSubtitle = $activeArticle['excerpt'];
@@ -139,9 +140,11 @@ require_once __DIR__ . '/includes/header.php';
     <section class="section">
         <div class="container">
             <article class="article-reader-shell">
-                <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding-bottom: 1.25rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: var(--slate-dark);">
+                <div
+                    style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding-bottom: 1.25rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: var(--slate-dark);">
                     <span>Published by <strong style="color: var(--white);">CodeX404 Solutions Engineering</strong></span>
-                    <span>Focus: <strong style="color: var(--cyan);"><?= htmlspecialchars($activeArticle['pillar'] . ' · ' . $activeArticle['read_time'], ENT_QUOTES, 'UTF-8') ?></strong></span>
+                    <span>Focus: <strong
+                            style="color: var(--cyan);"><?= htmlspecialchars($activeArticle['pillar'] . ' · ' . $activeArticle['read_time'], ENT_QUOTES, 'UTF-8') ?></strong></span>
                 </div>
 
                 <?php foreach ($activeArticle['body'] as $para): ?>
@@ -155,7 +158,8 @@ require_once __DIR__ . '/includes/header.php';
                     <?php endforeach; ?>
                 </ul>
 
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);">
+                <div
+                    style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);">
                     <?php foreach ($activeArticle['tags'] as $tag): ?>
                         <span class="tag-chip"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
                     <?php endforeach; ?>
@@ -169,10 +173,14 @@ require_once __DIR__ . '/includes/header.php';
                     <?php
                     $related = array_slice(array_filter($articles, fn($a) => $a['slug'] !== $activeArticle['slug']), 0, 2);
                     foreach ($related as $rel): ?>
-                        <a href="<?= url('blog.php?brief=' . urlencode($rel['slug'])) ?>" class="card" style="text-decoration: none; display: block;">
-                            <span style="font-size: 0.78rem; color: var(--cyan); font-weight: 700; display: block; margin-bottom: 0.4rem;"><?= htmlspecialchars($rel['pillar'] . ' · ' . $rel['read_time'], ENT_QUOTES, 'UTF-8') ?></span>
-                            <h4 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem;"><?= htmlspecialchars($rel['title'], ENT_QUOTES, 'UTF-8') ?></h4>
-                            <p style="font-size: 0.88rem; color: var(--slate); margin: 0;"><?= htmlspecialchars($rel['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
+                        <a href="<?= url('blog.php?brief=' . urlencode($rel['slug'])) ?>" class="card"
+                            style="text-decoration: none; display: block;">
+                            <span
+                                style="font-size: 0.78rem; color: var(--cyan); font-weight: 700; display: block; margin-bottom: 0.4rem;"><?= htmlspecialchars($rel['pillar'] . ' · ' . $rel['read_time'], ENT_QUOTES, 'UTF-8') ?></span>
+                            <h4 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem;">
+                                <?= htmlspecialchars($rel['title'], ENT_QUOTES, 'UTF-8') ?></h4>
+                            <p style="font-size: 0.88rem; color: var(--slate); margin: 0;">
+                                <?= htmlspecialchars($rel['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
                         </a>
                     <?php endforeach; ?>
                 </div>
@@ -187,24 +195,30 @@ require_once __DIR__ . '/includes/header.php';
         ['label' => 'Resources'],
         ['label' => 'Engineering Insights'],
     ];
+    $heroClass = '';
     $heroTag = 'AI · Software · SaaS · Business Tech';
-    $heroTitleHtml = 'Engineering &amp; Strategy <span class="text-gradient gradient-text-animated">Insights</span>';
+    $heroTitleHtml = 'Engineering &amp; Strategy <span class="text-amber">Insights</span>';
     $heroSubtitle = 'Practical architectural notes from CodeX404 Solutions on software reliability, SaaS scoping, grounded AI workflows, and digital conversion.';
     require __DIR__ . '/includes/subpage-hero.php';
     ?>
 
     <section class="section">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1.75rem;">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1.75rem;">
                 <?php foreach ($articles as $art): ?>
-                    <article class="clean-project-card card-tilt" style="padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+                    <article class="clean-project-card card-tilt"
+                        style="padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;">
                         <div>
                             <div class="cpc-header" style="margin-bottom: 1rem;">
                                 <span class="cpc-category"><?= htmlspecialchars($art['category'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="cpc-badge"><span class="cpc-dot"></span><?= htmlspecialchars($art['read_time'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="cpc-badge"><span
+                                        class="cpc-dot"></span><?= htmlspecialchars($art['read_time'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
-                            <h2 style="font-size: 1.28rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.8rem; line-height: 1.35;">
-                                <a href="<?= url('blog.php?brief=' . urlencode($art['slug'])) ?>" style="color: inherit; text-decoration: none;">
+                            <h2
+                                style="font-size: 1.28rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.8rem; line-height: 1.35;">
+                                <a href="<?= url('blog.php?brief=' . urlencode($art['slug'])) ?>"
+                                    style="color: inherit; text-decoration: none;">
                                     <?= htmlspecialchars($art['title'], ENT_QUOTES, 'UTF-8') ?>
                                 </a>
                             </h2>
@@ -218,7 +232,8 @@ require_once __DIR__ . '/includes/header.php';
                                     <span class="cpc-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
                                 <?php endforeach; ?>
                             </div>
-                            <a href="<?= url('blog.php?brief=' . urlencode($art['slug'])) ?>" style="color: var(--cyan); font-size: 0.88rem; font-weight: 600; text-decoration: none;">
+                            <a href="<?= url('blog.php?brief=' . urlencode($art['slug'])) ?>"
+                                style="color: var(--cyan); font-size: 0.88rem; font-weight: 600; text-decoration: none;">
                                 Read Brief &rarr;
                             </a>
                         </div>

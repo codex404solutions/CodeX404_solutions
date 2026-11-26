@@ -17,7 +17,7 @@ $heroBreadcrumbs = [
     ['label' => 'Services & Solutions'],
 ];
 $heroTag = 'BUILD · GROW · AUTOMATE';
-$heroTitleHtml = 'Practical Software, Growth &amp; <span class="text-gradient gradient-text-animated">AI Automation Services</span>';
+$heroTitleHtml = 'Practical Software, Growth &amp; <span class="text-amber">AI Automation Services</span>';
 $heroSubtitle = 'Every service solves a concrete operational problem—helping you ship reliable software, earn qualified search and web demand, and automate repetitive manual processes.';
 $heroActions = [
     ['label' => 'Book a Discovery Call', 'url' => url('discovery-call.php'), 'variant' => 'primary'],
@@ -255,7 +255,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <span class="dot"></span>
                 <span>Practical Comparison</span>
             </div>
-            <h2 class="section-title">When Custom Software Outperforms Off-the-Shelf Tools</h2>
+            <h2 class="section-title subpage-section-title">When Custom Software Outperforms <span
+                    class="text-amber">Off-the-Shelf Tools</span></h2>
             <p class="section-subtitle">
                 Generic subscriptions work well for standard tasks—until workflow workarounds and recurring seat costs
                 hold your team back.
@@ -307,7 +308,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <span class="dot"></span>
                 <span>Engineering Standards</span>
             </div>
-            <h2 class="section-title">How Every CodeX404 System Is Built</h2>
+            <h2 class="section-title subpage-section-title">How Every CodeX404 System <span class="text-amber">Is
+                    Built</span></h2>
             <p class="section-subtitle">Reliable engineering favors clarity, defensive data handling, and maintainable
                 architecture over unnecessary complexity.</p>
         </div>

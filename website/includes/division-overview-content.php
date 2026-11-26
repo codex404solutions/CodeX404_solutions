@@ -7,7 +7,7 @@ render_json_ld_faq($division['faqs']);
 $divisionContactUrl = url('contact.php') . '?division=' . rawurlencode($division['code']);
 $divisionDiscoveryUrl = url('discovery-call.php') . '?division=' . rawurlencode($division['code']);
 $heroTag = $division['eyebrow'];
-$heroTitleHtml = $escape($division['title']);
+$heroTitleHtml = $division['title_html'] ?? $escape($division['title']);
 $heroSubtitle = $division['intro'];
 $heroActions = [
     ['label' => 'Discuss Your ' . $division['code'] . ' Project', 'url' => $divisionDiscoveryUrl, 'variant' => 'primary'],
@@ -67,13 +67,15 @@ require __DIR__ . '/subpage-hero.php';
     <div class="container grid grid-cols-2" style="align-items: start; gap: 3rem;">
         <div>
             <div class="section-tag"><span class="dot"></span><span>How we work</span></div>
-            <h2 class="section-title" style="text-align: left;">A clear path from brief to delivery</h2>
+            <h2 class="section-title subpage-section-title" style="text-align: left;">A Clear Path From <span
+                    class="text-amber">Brief to Delivery</span></h2>
             <p class="section-subtitle" style="text-align: left; margin-left: 0;">We define the problem and scope
                 together, agree on deliverables, then share progress through reviewable work.</p>
         </div>
         <ol class="division-steps">
             <?php foreach ($division['steps'] as $index => $step): ?>
-                <li><span class="division-step-number"><?= (int) $index + 1 ?></span>
+                <li><span
+                        class="division-step-number"><?= str_pad((string) ((int) $index + 1), 2, '0', STR_PAD_LEFT) ?></span>
                     <div>
                         <h3><?= $escape($step['title']) ?></h3>
                         <p><?= $escape($step['description']) ?></p>
@@ -88,7 +90,8 @@ require __DIR__ . '/subpage-hero.php';
     <div class="container">
         <div class="section-header">
             <div class="section-tag"><span class="dot"></span><span>Illustrative applications</span></div>
-            <h2 class="section-title">Architectural Patterns &amp; Deliverables</h2>
+            <h2 class="section-title subpage-section-title">Architectural Patterns &amp; <span
+                    class="text-amber">Deliverables</span></h2>
             <p class="section-subtitle">Practical architectural patterns and production deliverables engineered across
                 this division.</p>
         </div>
@@ -107,7 +110,8 @@ require __DIR__ . '/subpage-hero.php';
     <div class="container container-narrow">
         <div class="section-header">
             <div class="section-tag"><span class="dot"></span><span>Frequently asked questions</span></div>
-            <h2 class="section-title">Questions about <?= $escape($division['code']) ?></h2>
+            <h2 class="section-title subpage-section-title">Questions About <span
+                    class="text-amber"><?= $escape($division['code']) ?></span></h2>
         </div>
         <div class="division-faq-list">
             <?php foreach ($division['faqs'] as $faq): ?>
@@ -120,19 +124,13 @@ require __DIR__ . '/subpage-hero.php';
     </div>
 </section>
 
-<section class="section section-alt">
-    <div class="container container-narrow">
-        <div class="section-header">
-            <div class="section-tag"><span class="dot"></span><span>Start a conversation</span></div>
-            <h2 class="section-title">Ready to Architect Your Solution?</h2>
-            <p class="section-subtitle">Share your project requirements, tech stack, and goals. We will provide
-                architectural recommendations and a clear milestone roadmap.</p>
-            <div class="hero-actions" style="justify-content: center;">
-                <a class="btn btn-primary" href="<?= $escape($divisionContactUrl) ?>">Contact the team <span
-                        aria-hidden="true">→</span></a>
-                <a class="btn btn-secondary" href="<?= $escape($divisionDiscoveryUrl) ?>">Request a Discovery Call</a>
-            </div>
-        </div>
-    </div>
-</section>
+<?php
+$ctaHeadingHtml = 'Ready to Architect <span class="text-amber">Your Solution?</span>';
+$ctaSubtitle = 'Share your project requirements, tech stack, and goals. We will provide architectural recommendations and a clear milestone roadmap.';
+$ctaPrimaryText = 'Contact the Team';
+$ctaPrimaryUrl = $divisionContactUrl;
+$ctaSecondaryText = 'Request a Discovery Call';
+$ctaSecondaryUrl = $divisionDiscoveryUrl;
+require __DIR__ . '/../components/cta.php';
+?>
 <?php require_once __DIR__ . '/footer.php'; ?>

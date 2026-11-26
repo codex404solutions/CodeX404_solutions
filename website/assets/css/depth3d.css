@@ -2659,56 +2659,56 @@ pre.wp-code,
    ========================================================================== */
 .subpage-hero {
   position: relative;
-  padding: clamp(2.5rem, 5vw, 4.25rem) 0 clamp(2rem, 3.5vw, 3rem);
+  padding: clamp(2.5rem, 5vw, 4.25rem) 0 clamp(2.25rem, 4vw, 3.25rem);
   background:
-    radial-gradient(ellipse 75% 60% at 50% 0%, rgba(11, 94, 215, 0.14) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(7, 20, 38, 0.65) 0%, transparent 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    radial-gradient(ellipse 68% 58% at 50% 18%, rgba(11, 94, 215, 0.16) 0%, rgba(34, 211, 238, 0.04) 44%, transparent 72%),
+    radial-gradient(ellipse 38% 34% at 78% 12%, rgba(255, 140, 0, 0.055), transparent 68%);
 }
 
-.subpage-breadcrumb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-bottom: 1.35rem;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: #94A3B8;
-}
-
-.subpage-breadcrumb a {
-  color: #CBD5E1;
-  text-decoration: none;
-  transition: color 0.18s ease;
-}
-
-.subpage-breadcrumb a:hover {
-  color: #22D3EE;
-}
-
-.subpage-crumb-sep {
-  color: rgba(148, 163, 184, 0.45);
+.subpage-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 3%,
+    rgba(34, 211, 238, 0.22) 24%,
+    rgba(147, 197, 253, 0.44) 50%,
+    rgba(34, 211, 238, 0.22) 76%,
+    transparent 97%
+  );
+  pointer-events: none;
 }
 
 .subpage-hero-inner {
-  max-width: 860px;
+  max-width: 880px;
   margin: 0 auto;
   text-align: center;
 }
 
 .subpage-tag {
-  margin: 0 auto 1.15rem;
+  margin: 0 auto 1.25rem;
 }
 
 .subpage-title {
-  font-size: clamp(2.1rem, 4vw, 3.25rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.05rem, 4.1vw, 3.25rem);
   font-weight: 800;
-  line-height: 1.14;
+  line-height: 1.12;
   letter-spacing: -0.025em;
+  text-transform: uppercase;
   color: #FFFFFF;
   margin-bottom: 1.15rem;
+  text-shadow: 0 2px 24px rgba(2, 6, 23, 0.65);
+}
+
+.subpage-hero--article .subpage-title {
+  text-transform: none;
+  font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+  line-height: 1.18;
 }
 
 .subpage-subtitle {
@@ -2726,6 +2726,89 @@ pre.wp-code,
   flex-wrap: wrap;
   gap: 0.9rem;
   margin-top: 2rem;
+}
+
+/* Homepage Display Parity for Subpage Sections & CTAs */
+.cta-section-wrap h2,
+.subpage-section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+/* Division Step Keycaps & Obsidian Filter Pills */
+.division-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 14px;
+}
+
+.division-step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  background:
+    linear-gradient(180deg, rgba(26, 115, 236, 0.28) 0%, rgba(11, 94, 215, 0.16) 100%) padding-box,
+    var(--obs-rim-pill) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow: var(--obs-specular-top), var(--obs-rim-glow);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.division-steps li:hover .division-step-number {
+  color: #FF8C00;
+  background:
+    linear-gradient(180deg, rgba(255, 140, 0, 0.22) 0%, rgba(16, 27, 48, 0.95) 100%) padding-box,
+    var(--obs-rim-pill-hover) border-box !important;
+  box-shadow: var(--obs-specular-top-strong), var(--obs-rim-glow-hover);
+  transform: scale(1.04);
+}
+
+.our-work-filter-btn,
+.project-filter-btn,
+.careers-filter-btn {
+  background:
+    linear-gradient(180deg, rgba(16, 27, 48, 0.94) 0%, rgba(10, 18, 32, 0.98) 100%) padding-box,
+    var(--obs-rim-pill) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow: var(--obs-specular-top), 0 6px 16px rgba(2, 6, 18, 0.42), var(--obs-rim-glow) !important;
+  color: #CBD5E1;
+  transition: transform 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.our-work-filter-btn:hover,
+.project-filter-btn:hover,
+.careers-filter-btn:hover {
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  background:
+    linear-gradient(180deg, rgba(22, 37, 68, 0.98) 0%, rgba(12, 22, 42, 0.99) 100%) padding-box,
+    var(--obs-rim-pill-hover) border-box !important;
+  box-shadow: var(--obs-specular-top-strong), var(--obs-rim-glow-hover) !important;
+}
+
+.our-work-filter-btn.active,
+.project-filter-btn.active,
+.careers-filter-btn.active {
+  color: #FFFFFF !important;
+  background:
+    linear-gradient(180deg, #1A73EC 0%, #0B5ED7 64%, #094BB0 100%) padding-box,
+    linear-gradient(135deg, rgba(147, 197, 253, 0.65), rgba(34, 211, 238, 0.4)) border-box !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 4px 0 var(--obs-key-base),
+    0 12px 24px rgba(11, 94, 215, 0.36) !important;
 }
 
 .codex-svg-icon {

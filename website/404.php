@@ -21,8 +21,8 @@ require_once __DIR__ . '/includes/header.php';
             <span>HTTP Status 404</span>
         </div>
 
-        <h1 style="font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; margin-bottom: 1rem; color: var(--white); font-family: var(--font-mono);">
-            404<span class="text-cyan">:</span> Not Found
+        <h1 style="font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; margin-bottom: 1rem; color: var(--white); font-family: var(--font-mono); text-transform: uppercase;">
+            404<span class="text-amber">:</span> Not Found
         </h1>
 
         <p style="font-size: 1.25rem; color: var(--slate); max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.6;">

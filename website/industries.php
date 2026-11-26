@@ -18,7 +18,7 @@ $heroBreadcrumbs = [
     ['label' => 'Industries'],
 ];
 $heroTag = 'Sector Solutions';
-$heroTitleHtml = 'Engineered for Your Industry&rsquo;s <span class="text-gradient">Operational Realities</span>';
+$heroTitleHtml = 'Engineered for Your Industry&rsquo;s <span class="text-amber">Operational Realities</span>';
 $heroSubtitle = 'While business rules vary by sector, operational bottlenecks share common roots: disconnected spreadsheets, double-booked schedules, and manual follow-ups. We adapt architecture directly to your domain.';
 $heroActions = [
     ['label' => 'Discuss Your Industry Workflow', 'url' => url('discovery-call.php'), 'variant' => 'primary'],
@@ -34,7 +34,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('book', 24) ?></div>
                 <h2 class="card-title">Education &amp; Institutions</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Replace manual fee registers and scattered spreadsheets with role-based school ERPs, student portals, attendance tracking, and fee reconciliation workflows.
+                    Replace manual fee registers and scattered spreadsheets with role-based school ERPs, student
+                    portals, attendance tracking, and fee reconciliation workflows.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">School ERPs</span>
@@ -47,7 +48,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('cart', 24) ?></div>
                 <h2 class="card-title">B2B Commerce &amp; Retail</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Synchronize multi-warehouse inventory with transactional stock locks, support volume pricing tiers, and automate clean invoice generation.
+                    Synchronize multi-warehouse inventory with transactional stock locks, support volume pricing tiers,
+                    and automate clean invoice generation.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Volume Pricing</span>
@@ -60,7 +62,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-automate"><?= codex_icon('file', 24) ?></div>
                 <h2 class="card-title">Legal &amp; Advisory Firms</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Build confidential client document portals, intake screening forms, and cited internal knowledge retrieval tailored to strict data boundaries.
+                    Build confidential client document portals, intake screening forms, and cited internal knowledge
+                    retrieval tailored to strict data boundaries.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Document Search</span>
@@ -73,7 +76,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('truck', 24) ?></div>
                 <h2 class="card-title">Logistics &amp; Field Dispatch</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Equip drivers and dispatch coordinators with offline-capable mobile checklists, barcode scans, status webhooks, and digital delivery proofs.
+                    Equip drivers and dispatch coordinators with offline-capable mobile checklists, barcode scans,
+                    status webhooks, and digital delivery proofs.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Offline Sync</span>
@@ -86,7 +90,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-grow"><?= codex_icon('building', 24) ?></div>
                 <h2 class="card-title">Real Estate &amp; Property Ops</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Coordinate tenant onboarding, maintenance ticket routing, rent reminders, and multi-channel inquiry capture across web and messaging.
+                    Coordinate tenant onboarding, maintenance ticket routing, rent reminders, and multi-channel inquiry
+                    capture across web and messaging.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Tenant Portals</span>
@@ -99,7 +104,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('heart', 24) ?></div>
                 <h2 class="card-title">Clinics &amp; Service Booking</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Run conflict-free appointment scheduling with patient/client intake, automated WhatsApp reminders, and structured privacy access controls.
+                    Run conflict-free appointment scheduling with patient/client intake, automated WhatsApp reminders,
+                    and structured privacy access controls.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Slot Locking</span>
@@ -111,13 +117,18 @@ require __DIR__ . '/includes/subpage-hero.php';
     </div>
 </section>
 
-<section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+<section class="section"
+    style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container" style="text-align: center;">
         <div style="max-width: 680px; margin: 0 auto;">
-            <span class="tag-chip" style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">In-Browser Preview</span>
-            <h3 style="font-size: 1.75rem; color: var(--white); margin-bottom: 0.85rem;">Test Domain Workflows in Interactive Sandboxes</h3>
+            <span class="tag-chip"
+                style="margin-bottom: 1rem; color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">In-Browser
+                Preview</span>
+            <h3 style="font-size: 1.75rem; color: var(--white); margin-bottom: 0.85rem;">Test Domain Workflows in
+                Interactive Sandboxes</h3>
             <p style="font-size: 0.98rem; color: var(--slate); line-height: 1.65; margin-bottom: 1.75rem;">
-                Inspect working demonstrations across institutional ERPs, clinic scheduling, and webhook lead pipelines directly in your browser.
+                Inspect working demonstrations across institutional ERPs, clinic scheduling, and webhook lead pipelines
+                directly in your browser.
             </p>
             <a href="<?= url('portfolio.php') ?>" class="btn btn-primary">Explore Interactive Portfolio &rarr;</a>
         </div>

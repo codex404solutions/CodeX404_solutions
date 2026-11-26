@@ -13,17 +13,15 @@ $pageMeta = [
 require_once __DIR__ . '/includes/header.php';
 ?>
 
+<?php
+$heroTag = 'Legal Terms';
+$heroTitleHtml = 'Terms of <span class="text-amber">Service</span>';
+$heroSubtitle = 'Last updated: October 6, 2026 — Website usage terms, project Statements of Work, intellectual property ownership, and mutual obligations.';
+require __DIR__ . '/includes/subpage-hero.php';
+?>
+
 <section class="section">
     <div class="container container-narrow">
-        <div class="section-header" style="text-align: left; margin-bottom: 2.5rem;">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Legal Terms</span>
-            </div>
-            <h1 class="section-title">Terms of Service</h1>
-            <p style="font-size: 0.9rem; color: var(--slate-dark);">Last updated: October 6, 2026</p>
-        </div>
-
         <div class="obsidian-lit-panel is-subtle"
             style="background: var(--bg-surface); padding: clamp(1.35rem, 3.5vw, 3rem); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); line-height: 1.8;">
             <h2 style="font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">1. Acceptance of Terms</h2>

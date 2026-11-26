@@ -25,7 +25,7 @@ $heroBreadcrumbs = [
     ['label' => 'SaaS & Products'],
 ];
 $heroTag = 'BUILD · SaaS Products & Digital Platforms';
-$heroTitleHtml = 'From Product Concept to <span class="text-gradient">Production-Ready SaaS</span>';
+$heroTitleHtml = 'From Product Concept to <span class="text-amber">Production-Ready SaaS</span>';
 $heroSubtitle = 'We design and build multi-tenant SaaS applications and internal platforms—handling data isolation, recurring billing, role-based access, and maintainable deployment pipelines.';
 $heroActions = [
     ['label' => 'Discuss a SaaS Build', 'url' => url('discovery-call.php') . '?division=BUILD', 'variant' => 'primary'],
@@ -36,60 +36,76 @@ require __DIR__ . '/includes/subpage-hero.php';
 
 <!-- CODEX404 PLATFORMS & CONCEPTS (VERIFIED PROJECT DATA) -->
 <?php if (!empty($internalPlatforms) || !empty($productConcepts)): ?>
-<section class="section" id="codex-platforms" style="background: rgba(11, 31, 58, 0.3); border-bottom: 1px solid var(--border-subtle);">
-    <div class="container">
-        <div class="section-header" style="max-width: 820px; margin: 0 auto 3rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Products &amp; Platform Showcase</span></div>
-            <h2 class="section-title">Internal Platforms &amp; Interactive Product Concepts</h2>
-            <p class="section-subtitle">Real internal products operated by CodeX404 alongside interactive functional prototypes built to demonstrate domain workflows.</p>
-        </div>
+    <section class="section" id="codex-platforms"
+        style="background: rgba(11, 31, 58, 0.3); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div class="section-header" style="max-width: 820px; margin: 0 auto 3rem auto; text-align: center;">
+                <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Products &amp;
+                        Platform Showcase</span></div>
+                <h2 class="section-title subpage-section-title">Internal Platforms &amp; <span
+                        class="text-amber">Interactive Concepts</span></h2>
+                <p class="section-subtitle">Real internal products operated by CodeX404 alongside interactive functional
+                    prototypes built to demonstrate domain workflows.</p>
+            </div>
 
-        <div class="grid grid-cols-3" style="gap: 1.75rem;">
-            <?php foreach (array_merge($internalPlatforms, $productConcepts) as $prod): ?>
-                <?php
-                $isLive = (($prod['project_type'] ?? '') === 'internal' && !empty($prod['live_url']));
-                $statusLabel = $isLive ? 'Live' : 'Interactive Sandbox';
-                $statusClass = $isLive ? 'status-pill-live' : 'status-pill-dev';
-                $title = htmlspecialchars((string)($prod['title'] ?? 'Platform'), ENT_QUOTES, 'UTF-8');
-                $desc = htmlspecialchars((string)($prod['problem'] ?: ($prod['solution'] ?: ($prod['description'] ?? ''))), ENT_QUOTES, 'UTF-8');
-                $audience = htmlspecialchars((string)($prod['category_label'] ?? 'Businesses & Teams'), ENT_QUOTES, 'UTF-8');
-                ?>
-                <article class="card card-tilt" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span style="font-size: 0.78rem; color: var(--slate-dark); font-weight: 600;"><?= $audience ?></span>
-                            <span class="status-pill <?= $statusClass ?>"><?= htmlspecialchars($statusLabel, ENT_QUOTES, 'UTF-8') ?></span>
-                        </div>
-                        <h3 style="font-size: 1.28rem; color: var(--white); margin-bottom: 0.65rem;"><?= $title ?></h3>
-                        <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.65; margin-bottom: 1.15rem;"><?= $desc ?></p>
-                        <?php if (!empty($prod['tags']) && is_array($prod['tags'])): ?>
-                            <div class="card-tags" style="margin-bottom: 1.25rem;">
-                                <?php foreach (array_slice($prod['tags'], 0, 4) as $tag): ?>
-                                    <span class="tag-chip"><?= htmlspecialchars((string)$tag, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endforeach; ?>
+            <div class="grid grid-cols-3" style="gap: 1.75rem;">
+                <?php foreach (array_merge($internalPlatforms, $productConcepts) as $prod): ?>
+                    <?php
+                    $isLive = (($prod['project_type'] ?? '') === 'internal' && !empty($prod['live_url']));
+                    $statusLabel = $isLive ? 'Live' : 'Interactive Sandbox';
+                    $statusClass = $isLive ? 'status-pill-live' : 'status-pill-dev';
+                    $title = htmlspecialchars((string) ($prod['title'] ?? 'Platform'), ENT_QUOTES, 'UTF-8');
+                    $desc = htmlspecialchars((string) ($prod['problem'] ?: ($prod['solution'] ?: ($prod['description'] ?? ''))), ENT_QUOTES, 'UTF-8');
+                    $audience = htmlspecialchars((string) ($prod['category_label'] ?? 'Businesses & Teams'), ENT_QUOTES, 'UTF-8');
+                    ?>
+                    <article class="card card-tilt"
+                        style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                                <span
+                                    style="font-size: 0.78rem; color: var(--slate-dark); font-weight: 600;"><?= $audience ?></span>
+                                <span
+                                    class="status-pill <?= $statusClass ?>"><?= htmlspecialchars($statusLabel, ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                    <div style="padding-top: 0.9rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                        <a href="<?= url('project.php?id=' . urlencode((string)$prod['id'])) ?>" class="card-arrow-link" style="color: var(--cyan); font-weight: 600;">View Architecture &rarr;</a>
-                        <?php if ($isLive): ?>
-                            <a href="<?= htmlspecialchars((string)$prod['live_url'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; color: var(--teal); font-weight: 600;">Visit Live Site &nearr;</a>
-                        <?php endif; ?>
-                    </div>
-                </article>
-            <?php endforeach; ?>
+                            <h3 style="font-size: 1.28rem; color: var(--white); margin-bottom: 0.65rem;"><?= $title ?></h3>
+                            <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.65; margin-bottom: 1.15rem;">
+                                <?= $desc ?></p>
+                            <?php if (!empty($prod['tags']) && is_array($prod['tags'])): ?>
+                                <div class="card-tags" style="margin-bottom: 1.25rem;">
+                                    <?php foreach (array_slice($prod['tags'], 0, 4) as $tag): ?>
+                                        <span class="tag-chip"><?= htmlspecialchars((string) $tag, ENT_QUOTES, 'UTF-8') ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div
+                            style="padding-top: 0.9rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                            <a href="<?= url('project.php?id=' . urlencode((string) $prod['id'])) ?>" class="card-arrow-link"
+                                style="color: var(--cyan); font-weight: 600;">View Architecture &rarr;</a>
+                            <?php if ($isLive): ?>
+                                <a href="<?= htmlspecialchars((string) $prod['live_url'], ENT_QUOTES, 'UTF-8') ?>" target="_blank"
+                                    rel="noopener noreferrer" style="font-size: 0.8rem; color: var(--teal); font-weight: 600;">Visit
+                                    Live Site &nearr;</a>
+                            <?php endif; ?>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 <?php endif; ?>
 
 <!-- SAAS ENGINEERING CAPABILITIES -->
 <section class="section">
     <div class="container">
         <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>SaaS Engineering Capabilities</span></div>
-            <h2 class="section-title">How We Build Scalable Multi-Tenant Software</h2>
-            <p class="section-subtitle">Focused scope control paired with clean tenant isolation, recurring billing, and maintainable back-office tooling.</p>
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>SaaS
+                    Engineering Capabilities</span></div>
+            <h2 class="section-title subpage-section-title">How We Build Scalable <span class="text-amber">Multi-Tenant
+                    Software</span></h2>
+            <p class="section-subtitle">Focused scope control paired with clean tenant isolation, recurring billing, and
+                maintainable back-office tooling.</p>
         </div>
 
         <div class="grid grid-cols-3" style="gap: 1.75rem;">
@@ -97,7 +113,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('zap', 24) ?></div>
                 <h3 class="card-title" style="font-size: 1.25rem;">Focused MVP Scope</h3>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Launch a working Minimum Viable Product focused tightly on your primary customer workflow instead of burying time in low-value extras.
+                    Launch a working Minimum Viable Product focused tightly on your primary customer workflow instead of
+                    burying time in low-value extras.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Validated Core</span>
@@ -110,7 +127,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('database', 24) ?></div>
                 <h3 class="card-title" style="font-size: 1.25rem;">Multi-Tenant Data Isolation</h3>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Design tenant boundaries matched to your data model and security risk—using row-level scoping, subdomain routing, and tested access checks.
+                    Design tenant boundaries matched to your data model and security risk—using row-level scoping,
+                    subdomain routing, and tested access checks.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Tenant Scoping</span>
@@ -123,7 +141,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('card', 24) ?></div>
                 <h3 class="card-title" style="font-size: 1.25rem;">Subscription Billing</h3>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Stripe or Razorpay billing integration supporting monthly and annual plans, webhook verification, self-serve receipts, and tier upgrades.
+                    Stripe or Razorpay billing integration supporting monthly and annual plans, webhook verification,
+                    self-serve receipts, and tier upgrades.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Stripe &amp; Razorpay</span>
@@ -136,7 +155,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('users', 24) ?></div>
                 <h3 class="card-title" style="font-size: 1.25rem;">Team Management &amp; RBAC</h3>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Allow customer accounts to invite team members, assign roles (Owner, Admin, Member, Viewer), and revoke sessions securely.
+                    Allow customer accounts to invite team members, assign roles (Owner, Admin, Member, Viewer), and
+                    revoke sessions securely.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Team Invites</span>
@@ -149,7 +169,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-build"><?= codex_icon('chart', 24) ?></div>
                 <h3 class="card-title" style="font-size: 1.25rem;">Operations Control Plane</h3>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Equip internal operators with dashboards to inspect tenant status, billing events, support flags, and system configuration safely.
+                    Equip internal operators with dashboards to inspect tenant status, billing events, support flags,
+                    and system configuration safely.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">Tenant Health</span>
@@ -162,7 +183,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="card-icon is-automate"><?= codex_icon('bot', 24) ?></div>
                 <h3 class="card-title" style="font-size: 1.25rem;">Embedded AI Workflows</h3>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Integrate grounded document search, summarization, or workflow assistants directly inside tenant workspaces with clear quota controls.
+                    Integrate grounded document search, summarization, or workflow assistants directly inside tenant
+                    workspaces with clear quota controls.
                 </p>
                 <div class="card-tags">
                     <span class="tag-chip">RAG Integration</span>
@@ -175,30 +197,38 @@ require __DIR__ . '/includes/subpage-hero.php';
 </section>
 
 <!-- PRODUCTION BASELINE -->
-<section class="section" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+<section class="section"
+    style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
     <div class="container">
         <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
-            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>The Production Baseline</span></div>
-            <h2 class="section-title">Foundations Included in Serious SaaS Builds</h2>
-            <p class="section-subtitle">Essential security, deployment, and messaging foundations configured cleanly so your team focuses on customers.</p>
+            <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>The Production
+                    Baseline</span></div>
+            <h2 class="section-title subpage-section-title">Foundations Included in <span class="text-amber">Serious
+                    SaaS Builds</span></h2>
+            <p class="section-subtitle">Essential security, deployment, and messaging foundations configured cleanly so
+                your team focuses on customers.</p>
         </div>
 
         <div class="grid grid-cols-4" style="gap: 1.5rem;">
             <div class="card" style="padding: 1.75rem;">
                 <h3 style="color: var(--cyan); margin-bottom: 0.65rem; font-size: 1.12rem;">Auth &amp; Identity</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Session hardening, hashed credentials, OAuth/magic-link flows, and MFA options tailored to risk.</p>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Session hardening, hashed
+                    credentials, OAuth/magic-link flows, and MFA options tailored to risk.</p>
             </div>
             <div class="card" style="padding: 1.75rem;">
                 <h3 style="color: var(--cyan); margin-bottom: 0.65rem; font-size: 1.12rem;">Rate Limiting</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Endpoint throttling and abuse safeguards protecting database capacity and API quotas.</p>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Endpoint throttling and abuse
+                    safeguards protecting database capacity and API quotas.</p>
             </div>
             <div class="card" style="padding: 1.75rem;">
                 <h3 style="color: var(--cyan); margin-bottom: 0.65rem; font-size: 1.12rem;">Transactional Email</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Reliable SMTP/API templates for verification codes, password resets, and billing receipts.</p>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Reliable SMTP/API templates for
+                    verification codes, password resets, and billing receipts.</p>
             </div>
             <div class="card" style="padding: 1.75rem;">
                 <h3 style="color: var(--cyan); margin-bottom: 0.65rem; font-size: 1.12rem;">Automated Deploys</h3>
-                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Version-controlled SQL migrations, GitHub Actions checks, and clean staging-to-production releases.</p>
+                <p style="font-size: 0.875rem; line-height: 1.6; color: var(--slate);">Version-controlled SQL
+                    migrations, GitHub Actions checks, and clean staging-to-production releases.</p>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ $division = [
     'code' => 'GROW',
     'eyebrow' => 'GROW · Digital marketing and discoverability',
     'title' => 'Accelerate Discoverability and Convert High-Intent Traffic',
+    'title_html' => 'Accelerate Discoverability &amp; <span class="text-amber">Convert High-Intent Traffic</span>',
     'intro' => 'Drive qualified customer acquisition through technical SEO, authoritative content architecture, targeted performance marketing, and conversion funnel optimization.',
     'audience' => 'Brands seeking predictable organic search rankings, e-commerce storefronts optimizing sales conversions, and B2B firms scaling qualified leads.',
     'problems' => [

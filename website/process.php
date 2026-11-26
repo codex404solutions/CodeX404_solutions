@@ -18,14 +18,15 @@ $heroBreadcrumbs = [
     ['label' => 'Delivery Process'],
 ];
 $heroTag = 'Engineering Discipline';
-$heroTitleHtml = 'The <span class="text-gradient">7-Stage Delivery</span> Framework';
+$heroTitleHtml = 'The <span class="text-amber">7-Stage Delivery</span> Framework';
 $heroSubtitle = 'Disciplined, transparent software delivery from initial problem framing through production deployment—verified at every stage on reviewable staging builds.';
 require __DIR__ . '/includes/subpage-hero.php';
 ?>
 
 <section class="section">
     <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 980px; margin: 0 auto 3.5rem auto;">
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 980px; margin: 0 auto 3.5rem auto;">
             <div class="card" style="padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 0.85rem;">
                 <span class="inline-icon-box"><?= codex_icon('clock', 20) ?></span>
                 <div>
@@ -43,7 +44,8 @@ require __DIR__ . '/includes/subpage-hero.php';
             <div class="card" style="padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 0.85rem;">
                 <span class="inline-icon-box"><?= codex_icon('lock', 20) ?></span>
                 <div>
-                    <strong style="color: var(--white); font-size: 0.9rem; display: block;">Privacy-Mindful Data</strong>
+                    <strong style="color: var(--white); font-size: 0.9rem; display: block;">Privacy-Mindful
+                        Data</strong>
                     <span style="font-size: 0.8rem; color: var(--slate);">Scoped storage &amp; audit logs</span>
                 </div>
             </div>
@@ -73,7 +75,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                         <div class="step-num" style="margin: 0;"><?= $st[0] ?></div>
                         <h2 style="font-size: 1.42rem; color: var(--white); margin: 0;"><?= $st[1] ?></h2>
                     </div>
-                    <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.9rem; color: var(--slate);"><?= $st[2] ?></p>
+                    <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.9rem; color: var(--slate);">
+                        <?= $st[2] ?></p>
                     <div style="font-size: 0.85rem; color: var(--cyan);">
                         <strong>Stage Deliverables:</strong> <?= htmlspecialchars($st[3], ENT_QUOTES, 'UTF-8') ?>
                     </div>

@@ -57,52 +57,28 @@ $pageMeta = [
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- SECTION A: HERO -->
-<section class="careers-hero" id="careers-hero">
-    <div class="container">
-        <div class="careers-hero-grid">
-            <div class="careers-hero-eyebrow">
-                <span class="dot" style="width:7px;height:7px;border-radius:50%;background:#FF8C00;"></span>
-                <span>Careers at CodeX404 Solutions</span>
-            </div>
-
-            <h1 class="careers-hero-title">
-                Build Your Career. <span class="careers-amber-accent">Create What's Next.</span>
-            </h1>
-
-            <p class="careers-hero-sub">
-                Join CodeX404 Solutions and work with a team building innovative software, AI-powered solutions,
-                intelligent automation and digital products.
-            </p>
-
-            <div class="careers-hero-actions">
-                <a href="#open-positions" class="btn btn-primary btn-lg"
-                    style="background:#0B5ED7;border-color:#0B5ED7;">
-                    Explore Opportunities &darr;
-                </a>
-                <a href="#general-application" class="btn btn-secondary btn-lg">
-                    Join Our Team
-                </a>
-            </div>
-
-            <div class="careers-portal-strip">
-                <span>Already applied?</span>
-                <a href="<?= url('careers/application-status') ?>">Track Application Status &amp; Applicant Portal
-                    &rarr;</a>
-            </div>
-        </div>
-    </div>
-</section>
+<?php
+$heroTag = 'Careers at CodeX404 Solutions';
+$heroTitleHtml = 'Build Your Career. <span class="text-amber">Create What&rsquo;s Next.</span>';
+$heroSubtitle = 'Join CodeX404 Solutions and work with a team building custom software, AI-powered solutions, intelligent automation, and digital products.';
+$heroActions = [
+    ['label' => 'Explore Opportunities ↓', 'url' => '#open-positions', 'variant' => 'primary'],
+    ['label' => 'Join Our Team', 'url' => '#general-application', 'variant' => 'secondary'],
+];
+$heroExtraHtml = '<div class="careers-portal-strip"><span>Already applied?</span><a href="' . htmlspecialchars(url('careers/application-status'), ENT_QUOTES, 'UTF-8') . '">Track Application Status &amp; Applicant Portal &rarr;</a></div>';
+require __DIR__ . '/includes/subpage-hero.php';
+?>
 
 <!-- SECTION B: WHY JOIN US -->
-<section class="section" style="padding-top:1rem;padding-bottom:4rem;">
+<section class="section" style="padding-top:2.5rem;padding-bottom:4rem;">
     <div class="container">
         <div class="section-header" style="text-align:center;max-width:760px;margin:0 auto 2.5rem;">
             <div class="section-tag" style="margin:0 auto 1rem;">
                 <span class="dot"></span>
                 <span>Why Join CodeX404</span>
             </div>
-            <h2 class="section-title">Practical Craft, Real Systems &amp; Direct Ownership</h2>
+            <h2 class="section-title subpage-section-title">Practical Craft, Real Systems &amp; <span
+                    class="text-amber">Direct Ownership</span></h2>
             <p class="section-subtitle">
                 We focus on clean software engineering, disciplined execution, and continuous learning alongside senior
                 practitioners.
@@ -114,28 +90,32 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="careers-card-icon"><?= codex_icon('users', 20) ?></div>
                 <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Direct Team Collaboration</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Work alongside engineering, product, and growth leads on real client and internal projects rather than sitting behind layers of bureaucracy.
+                    Work alongside engineering, product, and growth leads on real client and internal projects rather
+                    than sitting behind layers of bureaucracy.
                 </p>
             </div>
             <div class="careers-card">
                 <div class="careers-card-icon"><?= codex_icon('code', 20) ?></div>
                 <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">BUILD · GROW · AUTOMATE Exposure</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Contribute across custom web applications, digital marketing and client growth, business development, or applied AI workflows.
+                    Contribute across custom web applications, digital marketing and client growth, business
+                    development, or applied AI workflows.
                 </p>
             </div>
             <div class="careers-card">
                 <div class="careers-card-icon"><?= codex_icon('chart', 20) ?></div>
                 <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Clear Expectations &amp; Transparency</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Each role lists its work arrangement, duration, responsibilities, and compensation model upfront—whether salaried, stipend-based, commission-linked, or unpaid learning.
+                    Each role lists its work arrangement, duration, responsibilities, and compensation model
+                    upfront—whether salaried, stipend-based, commission-linked, or unpaid learning.
                 </p>
             </div>
             <div class="careers-card">
                 <div class="careers-card-icon"><?= codex_icon('globe', 20) ?></div>
                 <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Focused Remote Collaboration</h3>
                 <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
-                    Structured asynchronous documentation paired with scheduled overlap windows so distributed teammates collaborate smoothly.
+                    Structured asynchronous documentation paired with scheduled overlap windows so distributed teammates
+                    collaborate smoothly.
                 </p>
             </div>
         </div>
@@ -147,7 +127,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="section-header" style="margin-bottom:2rem;">
             <div class="section-tag"><span class="dot"></span><span>Open Positions</span></div>
-            <h2 class="section-title">Current <span class="careers-amber-accent">Vacancies</span></h2>
+            <h2 class="section-title subpage-section-title">Current <span class="text-amber">Vacancies</span></h2>
             <p class="section-subtitle">Browse active roles across departments, internships, and fellowships.</p>
         </div>
 
@@ -222,7 +202,8 @@ require_once __DIR__ . '/includes/header.php';
                                     <span>Experience</span><strong><?= htmlspecialchars((string) $job['experience_level']) ?></strong>
                                 </div>
                                 <div>
-                                    <span>Compensation (<?= htmlspecialchars((string) ($job['compensation_type'] ?: 'Specified')) ?>)</span><strong><?= htmlspecialchars((string) ($job['salary_display'] ?: $job['compensation_type'])) ?></strong>
+                                    <span>Compensation
+                                        (<?= htmlspecialchars((string) ($job['compensation_type'] ?: 'Specified')) ?>)</span><strong><?= htmlspecialchars((string) ($job['salary_display'] ?: $job['compensation_type'])) ?></strong>
                                 </div>
                                 <div>
                                     <span>Deadline</span><strong><?= !empty($job['application_deadline']) ? date('M j, Y', strtotime((string) $job['application_deadline'])) : 'Rolling' ?></strong>

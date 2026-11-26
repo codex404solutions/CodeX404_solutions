@@ -5,6 +5,7 @@ $division = [
     'code' => 'BUILD',
     'eyebrow' => 'BUILD · Digital products and software',
     'title' => 'Engineer Scalable Digital Products Grounded in Business Value',
+    'title_html' => 'Engineer Scalable Digital Products <span class="text-amber">Grounded in Business Value</span>',
     'intro' => 'We engineer custom web platforms, SaaS applications, and enterprise software with clean architecture, predictable two-week milestones, and complete client code ownership.',
     'audience' => 'Founders launching new software products, operations leaders replacing fragmented legacy tools, and businesses scaling customer portals.',
     'problems' => [

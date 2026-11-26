@@ -38,7 +38,7 @@ $heroBreadcrumbs = [
     ['label' => 'Book Discovery Call'],
 ];
 $heroTag = 'Project Discovery Request';
-$heroTitleHtml = 'Schedule a Technical <span class="text-gradient">Discovery Call</span>';
+$heroTitleHtml = 'Schedule a Technical <span class="text-amber">Discovery Call</span>';
 $heroSubtitle = 'Discuss your goals, current workflow, and technical constraints directly with our engineering team—focused on practical next steps.';
 require __DIR__ . '/includes/subpage-hero.php';
 ?>
@@ -49,13 +49,15 @@ require __DIR__ . '/includes/subpage-hero.php';
         <div class="form-card">
             <div class="form-alert-container">
                 <?php if ($leadResult): ?>
-                    <div class="alert-box <?= $leadResult['status'] === 'success' ? 'alert-success' : 'alert-danger' ?>" role="alert">
+                    <div class="alert-box <?= $leadResult['status'] === 'success' ? 'alert-success' : 'alert-danger' ?>"
+                        role="alert">
                         <?= htmlspecialchars($leadResult['message'], ENT_QUOTES, 'UTF-8') ?>
                     </div>
                 <?php endif; ?>
             </div>
 
-            <form action="<?= url('discovery-call.php') ?>" method="POST" class="ajax-form" id="discoveryForm" novalidate>
+            <form action="<?= url('discovery-call.php') ?>" method="POST" class="ajax-form" id="discoveryForm"
+                novalidate>
                 <?= csrf_input_field() ?>
 
                 <!-- Honeypot -->
@@ -67,55 +69,63 @@ require __DIR__ . '/includes/subpage-hero.php';
                 <div class="grid grid-cols-2" style="gap: 1.25rem;">
                     <div class="form-group">
                         <label for="name" class="form-label">Full Name <span class="required">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="e.g. David Vance" required>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="e.g. David Vance"
+                            required>
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="form-label">Work Email <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="david@company.com" required>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="david@company.com"
+                            required>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-3" style="gap: 1.25rem;">
                     <div class="form-group">
                         <label for="company" class="form-label">Company Name (optional)</label>
-                        <input type="text" id="company" name="company" class="form-control" placeholder="Acme Logistics">
+                        <input type="text" id="company" name="company" class="form-control"
+                            placeholder="Acme Logistics">
                     </div>
 
                     <div class="form-group">
                         <label for="country" class="form-label">Country / Region</label>
-                        <input type="text" id="country" name="country" class="form-control" placeholder="e.g. United States, UK, UAE">
+                        <input type="text" id="country" name="country" class="form-control"
+                            placeholder="e.g. United States, UK, UAE">
                     </div>
 
                     <div class="form-group">
                         <label for="job_title" class="form-label">Your Role / Title</label>
-                        <input type="text" id="job_title" name="job_title" class="form-control" placeholder="Founder, COO, CTO">
+                        <input type="text" id="job_title" name="job_title" class="form-control"
+                            placeholder="Founder, COO, CTO">
                     </div>
                 </div>
 
-                    <div class="form-group">
-                        <label for="division" class="form-label">Division <span class="required">*</span></label>
-                        <select id="division" name="division" class="form-select" required>
-                            <option value="">Choose a division...</option>
-                            <?php foreach ($divisionServiceOptions as $code => $_services): ?>
-                                <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $selectedDivision === $code ? 'selected' : '' ?>><?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars(match ($code) {
-                                    'BUILD' => 'Software and digital products',
-                                    'GROW' => 'Digital marketing and discoverability',
-                                    default => 'Workflows, integrations, and AI',
-                                }, ENT_QUOTES, 'UTF-8') ?></option>
-                            <?php endforeach; ?>
+                <div class="form-group">
+                    <label for="division" class="form-label">Division <span class="required">*</span></label>
+                    <select id="division" name="division" class="form-select" required>
+                        <option value="">Choose a division...</option>
+                        <?php foreach ($divisionServiceOptions as $code => $_services): ?>
+                            <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $selectedDivision === $code ? 'selected' : '' ?>><?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars(match ($code) {
+                                                 'BUILD' => 'Software and digital products',
+                                                 'GROW' => 'Digital marketing and discoverability',
+                                                 default => 'Workflows, integrations, and AI',
+                                             }, ENT_QUOTES, 'UTF-8') ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="grid grid-cols-3" style="gap: 1.25rem;">
                     <div class="form-group">
-                        <label for="service_interest" class="form-label">Primary Solution Area <span class="required">*</span></label>
+                        <label for="service_interest" class="form-label">Primary Solution Area <span
+                                class="required">*</span></label>
                         <select id="service_interest" name="service_interest" class="form-select" required>
                             <option value="">Select a service area...</option>
                             <?php foreach ($divisionServiceOptions as $code => $services): ?>
-                                <optgroup label="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" data-division="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>">
+                                <optgroup label="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-division="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>">
                                     <?php foreach ($services as $serviceCode => $serviceLabel): ?>
-                                        <option value="<?= htmlspecialchars($serviceCode, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($serviceLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                                        <option value="<?= htmlspecialchars($serviceCode, ENT_QUOTES, 'UTF-8') ?>">
+                                            <?= htmlspecialchars($serviceLabel, ENT_QUOTES, 'UTF-8') ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                             <?php endforeach; ?>
@@ -148,30 +158,40 @@ require __DIR__ . '/includes/subpage-hero.php';
 
                 <div class="form-group">
                     <label for="website" class="form-label">Business Website (optional)</label>
-                    <input type="url" id="website" name="website" class="form-control" maxlength="255" placeholder="https://example.com">
+                    <input type="url" id="website" name="website" class="form-control" maxlength="255"
+                        placeholder="https://example.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="problem_description" class="form-label">Business Problem or Project Vision <span class="required">*</span></label>
-                    <textarea id="problem_description" name="problem_description" class="form-textarea" rows="4" placeholder="Describe the operational friction you are solving, existing systems in place, or what your target software needs to do..." required></textarea>
+                    <label for="problem_description" class="form-label">Business Problem or Project Vision <span
+                            class="required">*</span></label>
+                    <textarea id="problem_description" name="problem_description" class="form-textarea" rows="4"
+                        placeholder="Describe the operational friction you are solving, existing systems in place, or what your target software needs to do..."
+                        required></textarea>
                 </div>
 
                 <!-- GDPR Consent -->
                 <div class="form-group">
                     <label class="form-checkbox-label">
                         <input type="checkbox" name="privacy_consent" value="1" required>
-                        <span>I consent to CodeX404 Solutions processing my contact and project details to review this request and follow up under the <a href="<?= url('privacy.php') ?>" target="_blank" style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a>.</span>
+                        <span>I consent to CodeX404 Solutions processing my contact and project details to review this
+                            request and follow up under the <a href="<?= url('privacy.php') ?>" target="_blank"
+                                style="color: var(--cyan); text-decoration: underline;">Privacy Policy</a>.</span>
                     </label>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
                     Send Discovery Call Request
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                 </button>
             </form>
 
             <div style="margin-top: 1.75rem; text-align: center; font-size: 0.85rem; color: var(--slate-dark);">
-                Protected by CSRF and rate-limiting safeguards. Your project specifications are kept strictly confidential under mutual NDA standards.
+                Protected by CSRF and rate-limiting safeguards. Your project specifications are kept strictly
+                confidential under mutual NDA standards.
             </div>
         </div>
     </div>

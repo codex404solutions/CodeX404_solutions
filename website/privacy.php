@@ -13,17 +13,15 @@ $pageMeta = [
 require_once __DIR__ . '/includes/header.php';
 ?>
 
+<?php
+$heroTag = 'Compliance & Trust';
+$heroTitleHtml = 'Privacy Policy &amp; <span class="text-amber">Data Protection</span>';
+$heroSubtitle = 'Last updated: November 19, 2026 — How CodeX404 Solutions handles inquiry submissions, optional analytics, and data requests.';
+require __DIR__ . '/includes/subpage-hero.php';
+?>
+
 <section class="section">
     <div class="container container-narrow">
-        <div class="section-header" style="text-align: left; margin-bottom: 2.5rem;">
-            <div class="section-tag">
-                <span class="dot"></span>
-                <span>Compliance & Trust</span>
-            </div>
-            <h1 class="section-title">Privacy Policy & Data Protection</h1>
-            <p style="font-size: 0.9rem; color: var(--slate-dark);">Last updated: November 19, 2026</p>
-        </div>
-
         <div class="obsidian-lit-panel is-subtle"
             style="background: var(--bg-surface); padding: clamp(1.35rem, 3.5vw, 3rem); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); line-height: 1.8;">
             <h2 style="font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">1. Document Scope & Data Controller

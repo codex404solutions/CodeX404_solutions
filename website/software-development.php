@@ -18,7 +18,7 @@ $heroBreadcrumbs = [
     ['label' => 'Custom Software'],
 ];
 $heroTag = 'BUILD · Custom Software & Portals';
-$heroTitleHtml = 'Custom Software Built Around Your <span class="text-gradient">Operational Workflow</span>';
+$heroTitleHtml = 'Custom Software Built Around Your <span class="text-amber">Operational Workflow</span>';
 $heroSubtitle = 'Off-the-shelf software forces your business into rigid templates while charging per-seat fees. We design and engineer web platforms, internal ERPs, CRMs, and customer portals tailored to how your team operates.';
 $heroActions = [
     ['label' => 'Book a Discovery Call', 'url' => url('discovery-call.php') . '?division=BUILD', 'variant' => 'primary'],
@@ -159,7 +159,8 @@ require __DIR__ . '/includes/subpage-hero.php';
         <div class="section-header" style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center;">
             <div class="section-tag" style="margin: 0 auto 1.15rem auto;"><span class="dot"></span><span>Technology
                     Stack</span></div>
-            <h2 class="section-title">Pragmatic Stacks Chosen for Maintainability</h2>
+            <h2 class="section-title subpage-section-title">Pragmatic Stacks Chosen for <span
+                    class="text-amber">Maintainability</span></h2>
             <p class="section-subtitle">Proven technologies that keep infrastructure lean, security auditable, and
                 long-term maintenance straightforward.</p>
         </div>

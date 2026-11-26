@@ -46,7 +46,7 @@ $heroBreadcrumbs = [
     ['label' => 'FAQ'],
 ];
 $heroTag = 'Clarity First';
-$heroTitleHtml = 'Frequently Asked <span class="text-gradient">Questions</span>';
+$heroTitleHtml = 'Frequently Asked <span class="text-amber">Questions</span>';
 $heroSubtitle = 'Direct answers regarding project scoping, code ownership, communication rhythm, security boundaries, and post-launch support.';
 require __DIR__ . '/includes/subpage-hero.php';
 ?>
@@ -70,8 +70,10 @@ require __DIR__ . '/includes/subpage-hero.php';
         </div>
 
         <div class="card" style="text-align: center; margin-top: 3rem; padding: 2rem;">
-            <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.5rem;">Have a Question Not Covered Here?</h2>
-            <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 1.25rem;">Reach out directly to discuss your technical requirements, timeline, or partnership inquiry.</p>
+            <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.5rem;">Have a Question Not Covered
+                Here?</h2>
+            <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 1.25rem;">Reach out directly to discuss
+                your technical requirements, timeline, or partnership inquiry.</p>
             <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-sm">Let's Discuss Your Project &rarr;</a>
         </div>
     </div>

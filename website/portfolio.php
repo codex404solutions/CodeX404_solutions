@@ -32,7 +32,7 @@ $heroBreadcrumbs = [
     ['label' => 'Portfolio Specs'],
 ];
 $heroTag = 'Verified Deliverables & Interactive Sandboxes';
-$heroTitleHtml = 'Engineered Deliverables &amp; <span class="text-gradient gradient-text-animated">Interactive Systems</span>';
+$heroTitleHtml = 'Engineered Deliverables &amp; <span class="text-amber">Interactive Systems</span>';
 $heroSubtitle = 'Inspect production client websites, proprietary CodeX404 platforms, and interactive domain prototypes with transparent features and technical stacks.';
 require __DIR__ . '/includes/subpage-hero.php';
 ?>

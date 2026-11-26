@@ -5,6 +5,7 @@ $division = [
     'code' => 'AUTOMATE',
     'eyebrow' => 'AUTOMATE · Integrations, workflows, and AI',
     'title' => 'Streamline Operations With Applied AI & Intelligent Workflows',
+    'title_html' => 'Streamline Operations With <span class="text-amber">Applied AI &amp; Workflows</span>',
     'intro' => 'Eliminate repetitive manual work by connecting internal tools, building grounded AI assistants, and automating business workflows with clear safety guardrails.',
     'audience' => 'Operations managers, support teams, and founders looking to eliminate repetitive manual handoffs and scattered data entry.',
     'problems' => [

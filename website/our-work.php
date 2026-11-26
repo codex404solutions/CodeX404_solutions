@@ -27,7 +27,7 @@ $heroBreadcrumbs = [
     ['label' => 'Our Work'],
 ];
 $heroTag = 'Completed Projects · Internal Platforms · Concepts';
-$heroTitleHtml = 'Selected Work &amp; <span class="text-gradient gradient-text-animated">Software Systems</span>';
+$heroTitleHtml = 'Selected Work &amp; <span class="text-amber">Software Systems</span>';
 $heroSubtitle = 'A transparent catalog distinguishing live client builds, internal platforms operated by CodeX404, and interactive concepts built to demonstrate domain workflows.';
 require __DIR__ . '/includes/subpage-hero.php';
 ?>
@@ -35,11 +35,16 @@ require __DIR__ . '/includes/subpage-hero.php';
 <section class="our-work-grid-section" style="padding-top: 2.5rem;">
     <div class="container">
         <!-- Clear Project Classification Filter Tabs -->
-        <div class="our-work-filters" role="tablist" aria-label="Filter projects by classification" style="margin-bottom: 2.5rem;">
-            <button type="button" class="our-work-filter-btn active" data-type-filter="all">All Work (<?= $totalCount ?>)</button>
-            <button type="button" class="our-work-filter-btn" data-type-filter="client">Completed Client Projects (<?= $countClient ?>)</button>
-            <button type="button" class="our-work-filter-btn" data-type-filter="internal">Internal Platforms (<?= $countInternal ?>)</button>
-            <button type="button" class="our-work-filter-btn" data-type-filter="concept">Interactive Concepts (<?= $countConcept ?>)</button>
+        <div class="our-work-filters" role="tablist" aria-label="Filter projects by classification"
+            style="margin-bottom: 2.5rem;">
+            <button type="button" class="our-work-filter-btn active" data-type-filter="all">All Work
+                (<?= $totalCount ?>)</button>
+            <button type="button" class="our-work-filter-btn" data-type-filter="client">Completed Client Projects
+                (<?= $countClient ?>)</button>
+            <button type="button" class="our-work-filter-btn" data-type-filter="internal">Internal Platforms
+                (<?= $countInternal ?>)</button>
+            <button type="button" class="our-work-filter-btn" data-type-filter="concept">Interactive Concepts
+                (<?= $countConcept ?>)</button>
         </div>
 
         <div class="our-work-grid" id="portfolioGrid">
@@ -57,13 +62,13 @@ require __DIR__ . '/includes/subpage-hero.php';
                     'concept' => 'status-pill-soon',
                     default => 'status-pill-live',
                 };
-                $cat = htmlspecialchars((string)($p['category'] ?? 'software'), ENT_QUOTES, 'UTF-8');
-                $title = htmlspecialchars((string)($p['title'] ?? 'Platform Deliverable'), ENT_QUOTES, 'UTF-8');
-                $liveUrl = trim((string)($p['live_url'] ?? ''));
-                $detailUrl = url('project.php?id=' . urlencode((string)$p['id']));
+                $cat = htmlspecialchars((string) ($p['category'] ?? 'software'), ENT_QUOTES, 'UTF-8');
+                $title = htmlspecialchars((string) ($p['title'] ?? 'Platform Deliverable'), ENT_QUOTES, 'UTF-8');
+                $liveUrl = trim((string) ($p['live_url'] ?? ''));
+                $detailUrl = url('project.php?id=' . urlencode((string) $p['id']));
                 $targetUrl = $liveUrl !== '' ? htmlspecialchars($liveUrl, ENT_QUOTES, 'UTF-8') : $detailUrl;
                 $isExternal = ($liveUrl !== '');
-                $mockupHost = htmlspecialchars((string)($p['mockup_host'] ?? ($isExternal ? parse_url($liveUrl, PHP_URL_HOST) : 'app.codex404solutions.online')), ENT_QUOTES, 'UTF-8');
+                $mockupHost = htmlspecialchars((string) ($p['mockup_host'] ?? ($isExternal ? parse_url($liveUrl, PHP_URL_HOST) : 'app.codex404solutions.online')), ENT_QUOTES, 'UTF-8');
                 $isHidden = ($index >= 9);
 
                 $artClass = match ($cat) {
@@ -79,21 +84,25 @@ require __DIR__ . '/includes/subpage-hero.php';
                     'ai' => 'bot',
                     default => 'code'
                 };
-                $categoryBadge = htmlspecialchars((string)($p['category_label'] ?? ucfirst($cat)), ENT_QUOTES, 'UTF-8');
+                $categoryBadge = htmlspecialchars((string) ($p['category_label'] ?? ucfirst($cat)), ENT_QUOTES, 'UTF-8');
                 $screenshotUrl = \App\Services\ProjectService::getScreenshotUrl($p);
                 ?>
-                <article class="work-card <?= $isHidden ? 'is-hidden' : '' ?>" data-category="<?= $cat ?>" data-type="<?= htmlspecialchars($typeKey, ENT_QUOTES, 'UTF-8') ?>">
+                <article class="work-card <?= $isHidden ? 'is-hidden' : '' ?>" data-category="<?= $cat ?>"
+                    data-type="<?= htmlspecialchars($typeKey, ENT_QUOTES, 'UTF-8') ?>">
                     <a href="<?= $detailUrl ?>" class="work-card-media" aria-label="View details for <?= $title ?>">
                         <?php if (!empty($screenshotUrl)): ?>
-                            <img src="<?= htmlspecialchars($screenshotUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= $title ?>" class="work-card-img" loading="lazy"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="<?= htmlspecialchars($screenshotUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= $title ?>"
+                                class="work-card-img" loading="lazy"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="work-card-placeholder <?= $artClass ?>" style="display: none;">
                                 <div class="work-preview-bar">
-                                    <div class="work-preview-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                                    <div class="work-preview-dots"><span class="dot-red"></span><span
+                                            class="dot-yellow"></span><span class="dot-green"></span></div>
                                     <span class="work-preview-host font-mono"><?= $mockupHost ?></span>
                                 </div>
                                 <div class="work-preview-center">
-                                    <span class="inline-icon-box" style="margin-bottom: 0.4rem;"><?= codex_icon($iconKey, 20) ?></span>
+                                    <span class="inline-icon-box"
+                                        style="margin-bottom: 0.4rem;"><?= codex_icon($iconKey, 20) ?></span>
                                     <span class="work-preview-title"><?= $title ?></span>
                                     <span class="work-preview-chip"><?= $categoryBadge ?></span>
                                 </div>
@@ -101,11 +110,13 @@ require __DIR__ . '/includes/subpage-hero.php';
                         <?php else: ?>
                             <div class="work-card-placeholder <?= $artClass ?>">
                                 <div class="work-preview-bar">
-                                    <div class="work-preview-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                                    <div class="work-preview-dots"><span class="dot-red"></span><span
+                                            class="dot-yellow"></span><span class="dot-green"></span></div>
                                     <span class="work-preview-host font-mono"><?= $mockupHost ?></span>
                                 </div>
                                 <div class="work-preview-center">
-                                    <span class="inline-icon-box" style="margin-bottom: 0.4rem;"><?= codex_icon($iconKey, 20) ?></span>
+                                    <span class="inline-icon-box"
+                                        style="margin-bottom: 0.4rem;"><?= codex_icon($iconKey, 20) ?></span>
                                     <span class="work-preview-title"><?= $title ?></span>
                                     <span class="work-preview-chip"><?= $categoryBadge ?></span>
                                 </div>
@@ -122,13 +133,16 @@ require __DIR__ . '/includes/subpage-hero.php';
 
                     <div class="work-card-content">
                         <div style="margin-bottom: 0.5rem;">
-                            <span class="status-pill <?= $typeStatusClass ?>"><?= htmlspecialchars($typeLabel, ENT_QUOTES, 'UTF-8') ?></span>
+                            <span
+                                class="status-pill <?= $typeStatusClass ?>"><?= htmlspecialchars($typeLabel, ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                         <div class="work-card-title-row">
                             <h2 class="work-card-title">
                                 <a href="<?= $detailUrl ?>"><?= $title ?></a>
                             </h2>
-                            <a href="<?= $targetUrl ?>" <?= $isExternal ? 'target="_blank" rel="noopener noreferrer"' : '' ?> class="work-card-arrow-icon" aria-label="<?= $isExternal ? 'Visit live site for ' . $title : 'Open details for ' . $title ?>">
+                            <a href="<?= $targetUrl ?>" <?= $isExternal ? 'target="_blank" rel="noopener noreferrer"' : '' ?>
+                                class="work-card-arrow-icon"
+                                aria-label="<?= $isExternal ? 'Visit live site for ' . $title : 'Open details for ' . $title ?>">
                                 <?= codex_icon($isExternal ? 'arrow-up-right' : 'arrow-right', 14) ?>
                             </a>
                         </div>
@@ -136,7 +150,8 @@ require __DIR__ . '/includes/subpage-hero.php';
                             <span class="work-tag-badge"><?= $categoryBadge ?></span>
                             <?php if (!empty($p['tags']) && is_array($p['tags'])): ?>
                                 <?php foreach (array_slice($p['tags'], 0, 2) as $extraTag): ?>
-                                    <span class="work-tag-badge"><?= htmlspecialchars((string)$extraTag, ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span
+                                        class="work-tag-badge"><?= htmlspecialchars((string) $extraTag, ENT_QUOTES, 'UTF-8') ?></span>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
@@ -146,11 +161,11 @@ require __DIR__ . '/includes/subpage-hero.php';
         </div>
 
         <?php if ($totalCount > 9): ?>
-        <div class="our-work-loadmore-wrap" id="loadMoreWrap">
-            <button type="button" class="btn btn-primary our-work-loadmore-btn" id="loadMoreBtn">
-                <span>Load More Work</span>
-            </button>
-        </div>
+            <div class="our-work-loadmore-wrap" id="loadMoreWrap">
+                <button type="button" class="btn btn-primary our-work-loadmore-btn" id="loadMoreBtn">
+                    <span>Load More Work</span>
+                </button>
+            </div>
         <?php endif; ?>
     </div>
 </section>
@@ -164,42 +179,42 @@ include __DIR__ . '/components/cta.php';
 ?>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const filterBtns = document.querySelectorAll('.our-work-filter-btn[data-type-filter]');
-    const cards = document.querySelectorAll('#portfolioGrid .work-card');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const loadMoreWrap = document.getElementById('loadMoreWrap');
+    document.addEventListener('DOMContentLoaded', function () {
+        const filterBtns = document.querySelectorAll('.our-work-filter-btn[data-type-filter]');
+        const cards = document.querySelectorAll('#portfolioGrid .work-card');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loadMoreWrap = document.getElementById('loadMoreWrap');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            const filterValue = this.getAttribute('data-type-filter');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const filterValue = this.getAttribute('data-type-filter');
 
-            cards.forEach((card, idx) => {
-                const cardType = card.getAttribute('data-type');
-                if (filterValue === 'all') {
-                    card.classList.toggle('is-hidden', idx >= 9 && loadMoreWrap && !loadMoreWrap.classList.contains('is-done'));
-                } else if (cardType === filterValue) {
-                    card.classList.remove('is-hidden');
-                } else {
-                    card.classList.add('is-hidden');
+                cards.forEach((card, idx) => {
+                    const cardType = card.getAttribute('data-type');
+                    if (filterValue === 'all') {
+                        card.classList.toggle('is-hidden', idx >= 9 && loadMoreWrap && !loadMoreWrap.classList.contains('is-done'));
+                    } else if (cardType === filterValue) {
+                        card.classList.remove('is-hidden');
+                    } else {
+                        card.classList.add('is-hidden');
+                    }
+                });
+
+                if (loadMoreWrap && !loadMoreWrap.classList.contains('is-done')) {
+                    loadMoreWrap.classList.toggle('is-hidden', filterValue !== 'all');
                 }
             });
-
-            if (loadMoreWrap && !loadMoreWrap.classList.contains('is-done')) {
-                loadMoreWrap.classList.toggle('is-hidden', filterValue !== 'all');
-            }
         });
+
+        if (loadMoreBtn && loadMoreWrap) {
+            loadMoreBtn.addEventListener('click', function () {
+                document.querySelectorAll('#portfolioGrid .work-card.is-hidden').forEach(c => c.classList.remove('is-hidden'));
+                loadMoreWrap.classList.add('is-hidden', 'is-done');
+            });
+        }
     });
-
-    if (loadMoreBtn && loadMoreWrap) {
-        loadMoreBtn.addEventListener('click', function () {
-            document.querySelectorAll('#portfolioGrid .work-card.is-hidden').forEach(c => c.classList.remove('is-hidden'));
-            loadMoreWrap.classList.add('is-hidden', 'is-done');
-        });
-    }
-});
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
