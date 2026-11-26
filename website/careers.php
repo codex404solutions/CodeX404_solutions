@@ -3,244 +3,314 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/security.php';
+require_once __DIR__ . '/config/Env.php';
+Env::load(__DIR__ . '/.env');
+
+use App\Careers\ApplicationService;
+use App\Careers\FormBuilderService;
+use App\Careers\FormValidationException;
+use App\Careers\RecruitmentSettingsService;
+use App\Careers\VacancyService;
+
+$categories = VacancyService::listCategories();
+$selectedCategory = trim((string) ($_GET['category'] ?? 'all'));
+$searchTerm = trim((string) ($_GET['q'] ?? ''));
+
+$vacancies = VacancyService::listPublicVacancies($selectedCategory === 'all' ? '' : $selectedCategory, $searchTerm);
+$allowGeneral = RecruitmentSettingsService::getBool('allow_general_applications', true);
+$generalFields = $allowGeneral ? FormBuilderService::getEffectiveFields(null) : [];
+
+$generalSuccess = null;
+$generalError = null;
+$generalFieldErrors = [];
+$oldGeneral = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_mode'] ?? '') === 'general_talent_pool') {
+    if (!$allowGeneral) {
+        $generalError = 'General Talent Pool applications are currently closed.';
+    } elseif (!check_rate_limit('careers_general_apply', 6, 300)) {
+        $generalError = 'Too many submission attempts. Please wait a few minutes before trying again.';
+    } elseif (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $generalError = 'Security session expired. Please refresh and submit again.';
+    } else {
+        $oldGeneral = is_array($_POST['fields'] ?? null) ? $_POST['fields'] : [];
+        try {
+            $res = ApplicationService::submitApplication(null, $_POST, $_FILES);
+            $generalSuccess = $res;
+            $oldGeneral = [];
+        } catch (FormValidationException $e) {
+            $generalFieldErrors = $e->getFieldErrors();
+            $generalError = $e->getMessage();
+        } catch (\Throwable $e) {
+            $generalError = $e->getMessage();
+        }
+    }
+}
 
 $pageMeta = [
-    'title' => 'Careers & Engineering Culture — CodeX404 Solutions',
-    'description' => 'Join our high-ownership engineering team. We build custom web applications, SaaS platforms, and enterprise AI systems with zero bureaucracy and clean, defensive code.',
-    'canonical' => url('careers.php'),
-    'keywords' => 'engineering careers, software developer jobs, remote developer India, full-stack PHP developer, AI engineer jobs'
+    'title' => 'Careers — Build Your Career at CodeX404 Solutions',
+    'description' => 'Join CodeX404 Solutions to build custom software, AI-powered solutions, intelligent automation and digital products.',
+    'canonical' => url('careers'),
+    'keywords' => 'CodeX404 Solutions careers, software engineering jobs, marketing jobs, internships, fellowships',
 ];
 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- ==========================================================================
-     HERO SECTION
-     ========================================================================== -->
-<section class="page-hero-section" style="padding-top: calc(var(--nav-height) + 3.5rem); padding-bottom: 3.5rem; text-align: center;">
-    <div class="container" style="max-width: 900px; margin: 0 auto;">
-        <div class="hero-pill" style="margin: 0 auto 1.5rem auto;">
-            <span class="dot"></span>
-            <span>High-Ownership Engineering Culture</span>
-        </div>
-
-        <h1 class="hero-headline" style="font-size: clamp(2.25rem, 4.2vw, 3.5rem); margin-bottom: 1.25rem;">
-            Build Software That Matters. <span class="text-gradient gradient-text-animated">No Bureaucracy.</span>
-        </h1>
-
-        <p class="hero-description" style="margin: 0 auto 2.25rem auto; font-size: 1.15rem; color: var(--slate); max-width: 720px; line-height: 1.7;">
-            We are a practitioner-led engineering collective. No non-technical middle managers playing telephone, no bloated corporate theater—just talented software architects building production systems for global enterprises.
-        </p>
-
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="#open-roles" class="btn btn-primary btn-lg">
-                <span>View Open Positions &darr;</span>
-            </a>
-            <a href="<?= url('about.php') ?>" class="btn btn-secondary btn-lg">
-                <span>Our Engineering Philosophy &rarr;</span>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     ENGINEERING CULTURE & VALUES
-     ========================================================================== -->
-<section class="section" style="padding-top: 0; padding-bottom: 4rem;">
+<!-- SECTION A: HERO -->
+<section class="careers-hero" id="careers-hero">
     <div class="container">
-        <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>How We Build</span>
+        <div class="careers-hero-grid">
+            <div class="careers-hero-eyebrow">
+                <span class="dot" style="width:7px;height:7px;border-radius:50%;background:#FFB547;"></span>
+                <span>Careers at CodeX404 Solutions</span>
             </div>
-            <h2 class="section-title">What It Means to Build at CodeX404</h2>
-            <p class="section-subtitle">
-                Our culture is designed for engineers who take pride in craftsmanship, speed, and real-world impact.
+
+            <h1 class="careers-hero-title">
+                Build Your Career. <span class="careers-amber-accent">Create What's Next.</span>
+            </h1>
+
+            <p class="careers-hero-sub">
+                Join CodeX404 Solutions and work with a team building innovative software, AI-powered solutions,
+                intelligent automation and digital products.
             </p>
-        </div>
 
-        <div class="grid grid-cols-3" style="gap: 2rem;">
-            <div class="card card-tilt reveal-on-scroll">
-                <div class="card-icon">⚡</div>
-                <h3 class="card-title" style="font-size: 1.3rem;">Clean, Defensive Code</h3>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    We write strictly typed, well-commented code with zero tolerance for unparameterized queries, fragile workarounds, or bloated dependencies.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Strict Types</span>
-                    <span class="tag-chip">PDO Prepared</span>
-                    <span class="tag-chip">Sub-Second Speed</span>
-                </div>
+            <div class="careers-hero-actions">
+                <a href="#open-positions" class="btn btn-primary btn-lg"
+                    style="background:#0B5ED7;border-color:#0B5ED7;">
+                    Explore Opportunities &darr;
+                </a>
+                <a href="#general-application" class="btn btn-secondary btn-lg">
+                    Join Our Team
+                </a>
             </div>
 
-            <div class="card card-tilt reveal-on-scroll reveal-delay-1">
-                <div class="card-icon">🎯</div>
-                <h3 class="card-title" style="font-size: 1.3rem;">Direct Founder &amp; Client Access</h3>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    You collaborate directly with founders and senior client stakeholders. Your architectural decisions shape real products deployed to thousands of users.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Flat Hierarchy</span>
-                    <span class="tag-chip">Zero Middlemen</span>
-                    <span class="tag-chip">High Agency</span>
-                </div>
-            </div>
-
-            <div class="card card-tilt reveal-on-scroll reveal-delay-2">
-                <div class="card-icon">🚀</div>
-                <h3 class="card-title" style="font-size: 1.3rem;">Bi-Weekly Staging Shipping</h3>
-                <p class="card-description" style="font-size: 0.925rem; line-height: 1.6;">
-                    We don't get trapped in multi-month theoretical planning. We deploy functioning staging previews every two weeks so real software is continually tested.
-                </p>
-                <div class="card-tags">
-                    <span class="tag-chip">Agile Sprints</span>
-                    <span class="tag-chip">Live Staging</span>
-                    <span class="tag-chip">Continuous CI/CD</span>
-                </div>
+            <div class="careers-portal-strip">
+                <span>Already applied?</span>
+                <a href="<?= url('careers/application-status') ?>">Track Application Status &amp; Applicant Portal
+                    &rarr;</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================================================
-     OPEN POSITIONS
-     ========================================================================== -->
-<section class="section" id="open-roles" style="background: rgba(11, 31, 58, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 5rem 0;">
+<!-- SECTION B: WHY JOIN US -->
+<section class="section" style="padding-top:1rem;padding-bottom:4rem;">
     <div class="container">
-        <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem auto;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
+        <div class="section-header" style="text-align:center;max-width:760px;margin:0 auto 2.5rem;">
+            <div class="section-tag" style="margin:0 auto 1rem;">
                 <span class="dot"></span>
-                <span>Join The Team</span>
+                <span>Why Join CodeX404</span>
             </div>
-            <h2 class="section-title">Open Engineering Positions</h2>
+            <h2 class="section-title">Practical Craft, Real Systems &amp; Direct Ownership</h2>
             <p class="section-subtitle">
-                We hire builders who value engineering rigor, autonomy, and delivering measurable results.
+                We focus on clean software engineering, disciplined execution, and continuous learning alongside senior
+                practitioners.
             </p>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 1.75rem; max-width: 960px; margin: 0 auto;">
-            
-            <!-- Role 1 -->
-            <article class="card card-tilt" style="padding: 2.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-                <div style="max-width: 600px;">
-                    <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
-                        <span class="tag-chip" style="color: var(--cyan); border-color: rgba(34, 211, 238, 0.4);">Full-Time • Remote (India)</span>
-                        <span style="font-size: 0.8rem; color: var(--slate-dark);">Engineering Division</span>
-                    </div>
-                    <h3 style="font-size: 1.45rem; color: var(--white); margin-bottom: 0.5rem;">Senior Full-Stack PHP &amp; MySQL Architect</h3>
-                    <p style="font-size: 0.925rem; color: var(--slate); line-height: 1.6; margin: 0;">
-                        Architect high-throughput web applications, institutional ERPs, and custom CRM engines using modern PHP 8.2+, strictly typed models, and optimized relational schemas.
-                    </p>
-                </div>
-                <div>
-                    <a href="mailto:careers@codex404solutions.com?subject=Application:%20Senior%20Full-Stack%20PHP%20Architect" class="btn btn-primary btn-sm">
-                        Apply Now &rarr;
-                    </a>
-                </div>
-            </article>
-
-            <!-- Role 2 -->
-            <article class="card card-tilt" style="padding: 2.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-                <div style="max-width: 600px;">
-                    <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
-                        <span class="tag-chip" style="color: #34D399; border-color: rgba(52, 211, 153, 0.4);">Full-Time • Remote</span>
-                        <span style="font-size: 0.8rem; color: var(--slate-dark);">AI &amp; Automation</span>
-                    </div>
-                    <h3 style="font-size: 1.45rem; color: var(--white); margin-bottom: 0.5rem;">Python AI &amp; RAG Systems Engineer</h3>
-                    <p style="font-size: 0.925rem; color: var(--slate); line-height: 1.6; margin: 0;">
-                        Build private enterprise RAG pipelines, autonomous tool-calling agents, and webhook ingestion engines using FastAPI, Qdrant/pgvector, and official cloud LLM APIs.
-                    </p>
-                </div>
-                <div>
-                    <a href="mailto:careers@codex404solutions.com?subject=Application:%20Python%20AI%20Engineer" class="btn btn-primary btn-sm">
-                        Apply Now &rarr;
-                    </a>
-                </div>
-            </article>
-
-            <!-- Role 3 -->
-            <article class="card card-tilt" style="padding: 2.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-                <div style="max-width: 600px;">
-                    <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
-                        <span class="tag-chip" style="color: #A78BFA; border-color: rgba(167, 139, 250, 0.4);">Contract / Full-Time</span>
-                        <span style="font-size: 0.8rem; color: var(--slate-dark);">Frontend &amp; UX</span>
-                    </div>
-                    <h3 style="font-size: 1.45rem; color: var(--white); margin-bottom: 0.5rem;">Frontend Systems &amp; Performance Engineer</h3>
-                    <p style="font-size: 0.925rem; color: var(--slate); line-height: 1.6; margin: 0;">
-                        Create sub-second, accessible user interfaces with vanilla CSS tokens, responsive micro-interactions, and modern reactive client frameworks.
-                    </p>
-                </div>
-                <div>
-                    <a href="mailto:careers@codex404solutions.com?subject=Application:%20Frontend%20Systems%20Engineer" class="btn btn-primary btn-sm">
-                        Apply Now &rarr;
-                    </a>
-                </div>
-            </article>
-
+        <div class="careers-values-grid">
+            <div class="careers-card">
+                <div class="careers-card-icon">&#9881;</div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Direct Senior Collaboration</h3>
+                <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
+                    Work directly alongside engineering and operations leadership on live business systems rather than
+                    getting lost behind layers of bureaucracy.
+                </p>
+            </div>
+            <div class="careers-card">
+                <div class="careers-card-icon">&#128187;</div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Full-Stack &amp; AI Exposure</h3>
+                <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
+                    Gain hands-on exposure across BUILD, GROW, and AUTOMATE initiatives — from custom web portals and
+                    MySQL architecture to applied AI workflows.
+                </p>
+            </div>
+            <div class="careers-card">
+                <div class="careers-card-icon">&#128200;</div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Growth Tied to Measurable Output</h3>
+                <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
+                    Transparent expectations, constructive code and campaign reviews, and career progression grounded in
+                    shipped work quality.
+                </p>
+            </div>
+            <div class="careers-card">
+                <div class="careers-card-icon">&#127760;</div>
+                <h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.5rem;">Focused Remote Collaboration</h3>
+                <p style="color:#CBD5E1;font-size:0.92rem;line-height:1.65;margin:0;">
+                    Structured asynchronous documentation combined with clear overlap hours so teams deliver reliably
+                    without unnecessary meetings.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================================================
-     HIRING PROCESS
-     ========================================================================== -->
-<section class="section">
-    <div class="container container-narrow">
-        <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-            <div class="section-tag" style="margin: 0 auto 1.25rem auto;">
-                <span class="dot"></span>
-                <span>Transparent Process</span>
-            </div>
-            <h2 class="section-title">Our 4-Step Hiring Process</h2>
-            <p class="section-subtitle">
-                We respect your time. No multi-month interview loops or endless whiteboard trivia.
-            </p>
+<!-- SECTION C: OPEN POSITIONS -->
+<section class="section" id="open-positions" style="padding-top:1.5rem;padding-bottom:4.5rem;">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:2rem;">
+            <div class="section-tag"><span class="dot"></span><span>Open Positions</span></div>
+            <h2 class="section-title">Current <span class="careers-amber-accent">Vacancies</span></h2>
+            <p class="section-subtitle">Browse active roles across departments, internships, and fellowships.</p>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <div style="background: var(--bg-surface); padding: 1.75rem 2rem; border-radius: var(--radius-md); border-left: 3px solid var(--cyan); display: flex; gap: 1.25rem; align-items: flex-start;">
-                <span style="font-weight: 800; color: var(--cyan); font-size: 1.25rem;">01</span>
-                <div>
-                    <strong style="color: var(--white); font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">Initial Architecture Review (30 mins)</strong>
-                    <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">A casual technical chat with a founder discussing projects you've shipped and your architectural philosophy.</span>
-                </div>
+        <div class="careers-filter-bar">
+            <div class="careers-filter-tabs" role="tablist" aria-label="Filter vacancies by category">
+                <a href="<?= url('careers') ?>#open-positions"
+                    class="careers-filter-btn <?= $selectedCategory === 'all' ? 'active' : '' ?>"
+                    data-cat-filter="all">All Positions</a>
+                <?php foreach ($categories as $cat): ?>
+                    <a href="<?= url('careers?category=' . urlencode((string) $cat['slug'])) ?>#open-positions"
+                        class="careers-filter-btn <?= $selectedCategory === $cat['slug'] ? 'active' : '' ?>"
+                        data-cat-filter="<?= htmlspecialchars((string) $cat['slug']) ?>">
+                        <?= htmlspecialchars((string) $cat['name']) ?>
+                    </a>
+                <?php endforeach; ?>
             </div>
 
-            <div style="background: var(--bg-surface); padding: 1.75rem 2rem; border-radius: var(--radius-md); border-left: 3px solid #34D399; display: flex; gap: 1.25rem; align-items: flex-start;">
-                <span style="font-weight: 800; color: #34D399; font-size: 1.25rem;">02</span>
-                <div>
-                    <strong style="color: var(--white); font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">Practical Coding Challenge</strong>
-                    <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">A focused, real-world task (e.g. building an API endpoint with SQL query optimization or a RAG context parser).</span>
-                </div>
-            </div>
-
-            <div style="background: var(--bg-surface); padding: 1.75rem 2rem; border-radius: var(--radius-md); border-left: 3px solid #A78BFA; display: flex; gap: 1.25rem; align-items: flex-start;">
-                <span style="font-weight: 800; color: #A78BFA; font-size: 1.25rem;">03</span>
-                <div>
-                    <strong style="color: var(--white); font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">System Deep Dive &amp; Culture Alignment</strong>
-                    <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Walk through your code submission, discuss trade-offs, and align on communication cadences.</span>
-                </div>
-            </div>
-
-            <div style="background: var(--bg-surface); padding: 1.75rem 2rem; border-radius: var(--radius-md); border-left: 3px solid var(--electric-blue); display: flex; gap: 1.25rem; align-items: flex-start;">
-                <span style="font-weight: 800; color: var(--electric-blue); font-size: 1.25rem;">04</span>
-                <div>
-                    <strong style="color: var(--white); font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">Written Offer &amp; Day 1 Onboarding</strong>
-                    <span style="font-size: 0.9rem; color: var(--slate); line-height: 1.5;">Competitive compensation, clear scope expectations, and immediate deployment access on Day 1.</span>
-                </div>
-            </div>
+            <form method="GET" action="<?= url('careers') ?>#open-positions" class="careers-search-box">
+                <?php if ($selectedCategory !== 'all'): ?>
+                    <input type="hidden" name="category" value="<?= htmlspecialchars($selectedCategory) ?>">
+                <?php endif; ?>
+                <input type="search" name="q" id="careersSearchInput" class="careers-input"
+                    value="<?= htmlspecialchars($searchTerm) ?>" placeholder="Search title, skills, location...">
+            </form>
         </div>
 
-        <div style="margin-top: 3.5rem; text-align: center; background: rgba(11, 31, 58, 0.4); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
-            <h3 style="font-size: 1.4rem; color: var(--white); margin-bottom: 0.75rem;">Don't see a role that fits?</h3>
-            <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 1.5rem; max-width: 580px; margin-left: auto; margin-right: auto;">
-                We are always eager to talk with exceptional engineers. Email your GitHub profile, portfolio, and a note about what you like building to <a href="mailto:careers@codex404solutions.com" style="color: var(--cyan); text-decoration: underline;">careers@codex404solutions.com</a>.
-            </p>
-            <a href="mailto:careers@codex404solutions.com" class="btn btn-secondary">
-                Send Speculative Application &rarr;
-            </a>
-        </div>
+        <?php if (empty($vacancies)): ?>
+            <div class="careers-card" style="text-align:center;padding:3rem 1.5rem;">
+                <h3 style="color:#fff;margin-bottom:0.5rem;">No Open Roles Match This Filter Right Now</h3>
+                <p style="color:#94A3B8;max-width:560px;margin:0 auto 1.25rem;">
+                    Try switching to "All Positions" or submit a General Application below so our team can keep your profile
+                    on file for future openings.
+                </p>
+                <a href="<?= url('careers') ?>#general-application" class="btn btn-primary"
+                    style="background:#0B5ED7;border-color:#0B5ED7;">Submit General Application</a>
+            </div>
+        <?php else: ?>
+            <div class="careers-jobs-grid" id="careersJobsGrid">
+                <?php foreach ($vacancies as $job): ?>
+                    <article class="careers-job-card" data-category="<?= htmlspecialchars((string) $job['category_slug']) ?>"
+                        data-search="<?= htmlspecialchars(strtolower($job['title'] . ' ' . $job['department'] . ' ' . $job['location'] . ' ' . $job['skills'])) ?>">
+                        <div>
+                            <div class="careers-job-meta-row">
+                                <span
+                                    class="careers-badge careers-badge-dept"><?= htmlspecialchars((string) $job['department']) ?></span>
+                                <span
+                                    class="careers-badge careers-badge-cyan"><?= htmlspecialchars((string) $job['employment_type']) ?></span>
+                                <span class="careers-badge"><?= htmlspecialchars((string) $job['work_mode']) ?></span>
+                                <?php if ((int) ($job['vacancies_count'] ?? 0) > 1): ?>
+                                    <span class="careers-badge careers-badge-amber"><?= (int) $job['vacancies_count'] ?>
+                                        Openings</span>
+                                <?php endif; ?>
+                            </div>
+
+                            <h3 style="font-size:1.22rem;font-weight:700;color:#fff;margin-bottom:0.55rem;">
+                                <a href="<?= url('careers/' . urlencode((string) $job['slug'])) ?>"
+                                    style="color:inherit;text-decoration:none;">
+                                    <?= htmlspecialchars((string) $job['title']) ?>
+                                </a>
+                            </h3>
+
+                            <p style="color:#CBD5E1;font-size:0.9rem;line-height:1.6;margin-bottom:1rem;">
+                                <?= htmlspecialchars((string) $job['overview']) ?>
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="careers-job-specs">
+                                <div><span>Location</span><strong><?= htmlspecialchars((string) $job['location']) ?></strong>
+                                </div>
+                                <div>
+                                    <span>Experience</span><strong><?= htmlspecialchars((string) $job['experience_level']) ?></strong>
+                                </div>
+                                <div>
+                                    <span>Compensation</span><strong><?= htmlspecialchars((string) ($job['salary_display'] ?: $job['compensation_type'])) ?></strong>
+                                </div>
+                                <div>
+                                    <span>Deadline</span><strong><?= !empty($job['application_deadline']) ? date('M j, Y', strtotime((string) $job['application_deadline'])) : 'Rolling' ?></strong>
+                                </div>
+                            </div>
+
+                            <div
+                                style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center;gap:0.75rem;">
+                                <span
+                                    style="font-size:0.78rem;color:#94A3B8;"><?= htmlspecialchars((string) $job['category_name']) ?></span>
+                                <a href="<?= url('careers/' . urlencode((string) $job['slug'])) ?>"
+                                    class="btn btn-primary btn-sm" style="background:#0B5ED7;border-color:#0B5ED7;">
+                                    Apply Now &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
+
+<!-- SECTION E: GENERAL APPLICATION (TALENT POOL) -->
+<?php if ($allowGeneral): ?>
+    <section class="section" id="general-application" style="padding-top:1rem;padding-bottom:5rem;">
+        <div class="container" style="max-width:880px;">
+            <div class="careers-form-panel">
+                <div class="section-tag" style="margin-bottom:0.9rem;"><span class="dot"></span><span>General Talent
+                        Pool</span></div>
+                <h2 style="color:#fff;font-size:1.75rem;margin-bottom:0.6rem;">Don't See Your Role Yet? <span
+                        class="careers-amber-accent">Join Our Talent Pool</span></h2>
+                <p style="color:#CBD5E1;font-size:0.94rem;line-height:1.65;margin-bottom:1rem;">
+                    Submit your profile cleanly into our talent pool for future openings matching your background.
+                    <strong style="color:#FFB547;">Please note:</strong> A general application does not guarantee an
+                    interview or a specific job offer; our recruitment team reaches out when an aligned vacancy opens.
+                </p>
+
+                <?php if ($generalSuccess): ?>
+                    <div class="careers-alert careers-alert-success">
+                        <strong>General Application Received!</strong> Your Talent Pool Reference ID is
+                        <code
+                            style="color:#fff;font-weight:700;"><?= htmlspecialchars((string) $generalSuccess['reference_code']) ?></code>.
+                        A confirmation email has been queued. You can monitor updates anytime inside our
+                        <a href="<?= url('careers/application-status') ?>" style="color:#22D3EE;font-weight:700;">Applicant
+                            Portal</a>.
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($generalError): ?>
+                    <div class="careers-alert careers-alert-error"><?= htmlspecialchars($generalError) ?></div>
+                <?php endif; ?>
+
+                <form method="POST" action="<?= url('careers') ?>#general-application" enctype="multipart/form-data">
+                    <?= csrf_input_field() ?>
+                    <input type="hidden" name="form_mode" value="general_talent_pool">
+                    <!-- Honeypot Anti-Spam -->
+                    <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                        <label>Website<input type="text" name="website_hp" tabindex="-1" autocomplete="off"></label>
+                    </div>
+
+                    <?= FormBuilderService::renderFormSectionsHtml($generalFields, $oldGeneral, $generalFieldErrors) ?>
+
+                    <div style="display:flex;justify-content:flex-end;gap:1rem;align-items:center;margin-top:1.5rem;">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                            style="background:#0B5ED7;border-color:#0B5ED7;">
+                            Submit General Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
+
+<script>
+    // Live search filtering alongside server-side filtering
+    document.getElementById('careersSearchInput')?.addEventListener('input', function () {
+        const q = this.value.trim().toLowerCase();
+        document.querySelectorAll('#careersJobsGrid .careers-job-card').forEach(card => {
+            const hay = card.dataset.search || '';
+            card.style.display = (!q || hay.includes(q)) ? 'flex' : 'none';
+        });
+    });
+</script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

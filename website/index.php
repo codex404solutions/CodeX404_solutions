@@ -865,8 +865,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ==========================================================================
      INTERACTIVE ARCHITECTURAL SIMULATORS (SIMULATION ONLY)
      ========================================================================== -->
-<section class="section" id="simulators"
-    style="border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); position: relative;">
+<section class="section sim-section" id="simulators">
     <div class="container">
         <div class="section-header">
             <div class="section-tag">
@@ -882,68 +881,111 @@ require_once __DIR__ . '/includes/header.php';
             </p>
         </div>
 
-        <div class="grid grid-cols-2" style="gap: 2rem; align-items: stretch;">
-            <!-- Simulator 1: Enterprise AI RAG Assistant -->
-            <div class="card card-tilt"
-                style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 0.75rem;">
-                    <div>
-                        <div style="display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.25rem;">
-                            <svg class="icon-svg-inline" style="width:19px;height:19px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path></svg>
-                            <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 700; margin: 0;">Enterprise AI RAG Assistant</h3>
+        <div class="sim-workbench-stack">
+            <!-- Simulator 01: Enterprise AI RAG Assistant -->
+            <div class="sim-workbench-card">
+                <div class="sim-card-topbar">
+                    <div class="sim-card-title-group">
+                        <div class="sim-module-icon" aria-hidden="true">
+                            <svg class="icon-svg-inline" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path></svg>
                         </div>
-                        <p style="font-size: 0.85rem; color: var(--slate); margin: 0;">Multi-source grounded vector search with source citations</p>
+                        <div>
+                            <div class="sim-module-eyebrow">01 // VECTOR RETRIEVAL ENGINE</div>
+                            <h3 class="sim-module-title">Enterprise AI RAG Assistant</h3>
+                            <p class="sim-module-subtitle">Multi-source grounded vector search with source citations</p>
+                        </div>
                     </div>
-                    <span class="live-tag-pill green" style="flex-shrink: 0;">Vector DB Online</span>
-                </div>
-
-                <!-- Quick Prompt Chips -->
-                <div class="rag-prompt-chips-bar" style="margin-bottom: 1rem;">
-                    <span class="chips-label">Try Asking:</span>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Who owns the source code and IP after completion?">IP Ownership Terms</button>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="How does the WhatsApp lead pipeline automate CRM?">WhatsApp Pipeline</button>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Explain how patient appointment double-booking is prevented.">Concurrency Locks</button>
-                    <button type="button" class="rag-chip onpage-rag-chip" data-prompt="Tell me about the School ERP architecture">Campus ERP</button>
-                </div>
-
-                <!-- Chat Stream Viewport -->
-                <div class="rag-chat-stream" id="onpageRagChatBox" style="height: 275px; flex: 1;">
-                    <div class="rag-message-row ai">
-                        <div class="rag-avatar font-mono" style="font-size:0.72rem;font-weight:700;">RAG</div>
-                        <div class="rag-msg-bubble">
-                            <div class="rag-msg-meta">CodeX404 Grounded RAG Agent &bull; Isolated Context</div>
-                            <p>Welcome to the CodeX404 Architecture Demonstrator. Ask any question regarding our software engineering standards, relational schemas, or deployment pipelines.</p>
-                        </div>
+                    <div class="sim-card-meta-group">
+                        <span class="sim-spec-chip">Qdrant &bull; 1536d Cosine</span>
+                        <span class="live-tag-pill green"><span class="sim-status-dot" aria-hidden="true"></span>Vector DB Online</span>
                     </div>
                 </div>
 
-                <!-- Input Bar -->
-                <div class="rag-input-bar" style="margin-top: 1rem;">
-                    <input type="text" id="onpageRagInput" placeholder="Ask a technical or architectural question..." autocomplete="off">
-                    <button type="button" id="onpageRagSendBtn" class="btn btn-primary btn-sm">
-                        <span>Query &rarr;</span>
-                    </button>
+                <div class="sim-rag-grid">
+                    <!-- Left Rail: Grounded Prompt Presets -->
+                    <aside class="sim-rag-sidebar" aria-label="Suggested Architecture Queries">
+                        <div class="sim-sidebar-heading">Try Asking</div>
+                        <div class="sim-query-list">
+                            <button type="button" class="rag-chip onpage-rag-chip sim-query-card" data-prompt="Who owns the source code and IP after completion?">
+                                <span class="sim-query-copy">
+                                    <strong>IP Ownership Terms</strong>
+                                    <span>Full source code &amp; schema handover</span>
+                                </span>
+                                <span class="sim-query-arrow" aria-hidden="true">&rarr;</span>
+                            </button>
+                            <button type="button" class="rag-chip onpage-rag-chip sim-query-card" data-prompt="How does the WhatsApp lead pipeline automate CRM?">
+                                <span class="sim-query-copy">
+                                    <strong>WhatsApp Pipeline</strong>
+                                    <span>HMAC validation &amp; MySQL lead sync</span>
+                                </span>
+                                <span class="sim-query-arrow" aria-hidden="true">&rarr;</span>
+                            </button>
+                            <button type="button" class="rag-chip onpage-rag-chip sim-query-card" data-prompt="Explain how patient appointment double-booking is prevented.">
+                                <span class="sim-query-copy">
+                                    <strong>Concurrency Locks</strong>
+                                    <span>Atomic row-level slot reservations</span>
+                                </span>
+                                <span class="sim-query-arrow" aria-hidden="true">&rarr;</span>
+                            </button>
+                            <button type="button" class="rag-chip onpage-rag-chip sim-query-card" data-prompt="Tell me about the School ERP architecture">
+                                <span class="sim-query-copy">
+                                    <strong>Campus ERP</strong>
+                                    <span>Relational student ledgers &amp; RBAC</span>
+                                </span>
+                                <span class="sim-query-arrow" aria-hidden="true">&rarr;</span>
+                            </button>
+                        </div>
+                        <div class="sim-sidebar-foot">
+                            <span>Isolated Context</span>
+                            <span>&bull;</span>
+                            <span>Source-Cited Output</span>
+                        </div>
+                    </aside>
+
+                    <!-- Right Pane: Chat Stream & Query Bar -->
+                    <div class="sim-rag-console">
+                        <div class="rag-chat-stream sim-rag-stream" id="onpageRagChatBox">
+                            <div class="rag-message-row ai">
+                                <div class="rag-avatar font-mono">RAG</div>
+                                <div class="rag-msg-bubble">
+                                    <div class="rag-msg-meta">CodeX404 Grounded RAG Agent &bull; Isolated Context</div>
+                                    <p>Welcome to the CodeX404 Architecture Demonstrator. Ask any question regarding our software engineering standards, relational schemas, or deployment pipelines.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rag-input-bar sim-rag-inputbar">
+                            <input type="text" id="onpageRagInput" placeholder="Ask a technical or architectural question..." autocomplete="off">
+                            <button type="button" id="onpageRagSendBtn" class="btn btn-primary btn-sm">
+                                <span>Query &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Simulator 2: WhatsApp CRM Automation -->
-            <div class="card card-tilt"
-                style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 0.75rem;">
-                    <div>
-                        <div style="display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.25rem;">
-                            <svg class="icon-svg-inline" style="width:19px;height:19px;color:#34D399;" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                            <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 700; margin: 0;">WhatsApp Cloud &amp; CRM Pipeline</h3>
+            <!-- Simulator 02: WhatsApp Cloud & CRM Pipeline -->
+            <div class="sim-workbench-card">
+                <div class="sim-card-topbar">
+                    <div class="sim-card-title-group">
+                        <div class="sim-module-icon is-emerald" aria-hidden="true">
+                            <svg class="icon-svg-inline" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                         </div>
-                        <p style="font-size: 0.85rem; color: var(--slate); margin: 0;">Synchronous webhook ingestion with automated qualification</p>
+                        <div>
+                            <div class="sim-module-eyebrow">02 // SYNCHRONOUS WEBHOOK PIPELINE</div>
+                            <h3 class="sim-module-title">WhatsApp Cloud &amp; CRM Pipeline</h3>
+                            <p class="sim-module-subtitle">Synchronous webhook ingestion with automated qualification</p>
+                        </div>
                     </div>
-                    <span class="live-tag-pill green" style="flex-shrink: 0;">HMAC Webhook Active</span>
+                    <div class="sim-card-meta-group">
+                        <span class="sim-spec-chip">Meta Cloud &rarr; HMAC &rarr; MySQL</span>
+                        <span class="live-tag-pill green"><span class="sim-status-dot" aria-hidden="true"></span>HMAC Webhook Active</span>
+                    </div>
                 </div>
 
-                <!-- Dual-Column Interactive Frame -->
-                <div class="onpage-wa-grid" style="flex: 1;">
+                <div class="onpage-wa-grid sim-wa-workbench">
                     <!-- Left: Smartphone WhatsApp Frame -->
-                    <div class="phone-simulator-frame">
+                    <div class="phone-simulator-frame sim-phone-frame">
                         <div class="phone-notch">
                             <span class="phone-speaker"></span>
                             <span class="phone-camera"></span>
@@ -957,36 +999,36 @@ require_once __DIR__ . '/includes/header.php';
                             </div>
                         </div>
 
-                        <div class="wa-chat-canvas" id="onpageWaChatLog" style="height: 195px;">
+                        <div class="wa-chat-canvas sim-wa-canvas" id="onpageWaChatLog">
                             <div class="wa-msg inbound">
                                 <p>Hi CodeX404, we are planning a custom B2B wholesale platform for 100+ dealers. Can we discuss technical feasibility?</p>
                                 <span class="wa-time">10:42 AM</span>
                             </div>
                             <div class="wa-msg outbound">
                                 <p>Hello. Thank you for reaching out to CodeX404. We specialize in B2B commerce and custom enterprise platforms.</p>
-                                <p style="margin-top: 4px;">Ticket: <strong>#CX-8842</strong>.</p>
+                                <p class="sim-ticket-line">Ticket: <strong>#CX-8842</strong>.</p>
                                 <span class="wa-time">10:42 AM</span>
                             </div>
                         </div>
 
                         <div class="wa-action-bar">
-                            <button type="button" id="onpageWaSimulateBtn" class="btn btn-primary btn-sm" style="width: 100%;">
+                            <button type="button" id="onpageWaSimulateBtn" class="btn btn-primary btn-sm sim-wa-btn">
                                 <span>Trigger Next Simulated Message</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- Right: Real-Time Webhook JSON Payload -->
-                    <div class="demo-card-box" style="padding: 1rem;">
-                        <div class="demo-box-header" style="margin-bottom: 0.5rem; padding-bottom: 0.4rem;">
-                            <div style="display: flex; align-items: center; gap: 0.4rem;">
-                                <svg class="icon-svg-inline" style="width:14px;height:14px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                                <h4 style="font-size: 0.82rem; margin: 0;">Ingestion Telemetry</h4>
+                    <div class="demo-card-box sim-telemetry-box">
+                        <div class="demo-box-header sim-telemetry-header">
+                            <div class="sim-telemetry-title">
+                                <svg class="icon-svg-inline" style="width:15px;height:15px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                <h4>Ingestion Telemetry</h4>
                             </div>
-                            <span class="live-tag-pill green" style="font-size: 0.65rem;">200 OK</span>
+                            <span class="live-tag-pill green sim-http-badge"><span class="sim-status-dot" aria-hidden="true"></span>200 OK</span>
                         </div>
 
-                        <div class="webhook-telemetry-feed" id="onpageCrmLeadList" style="max-height: 245px;">
+                        <div class="webhook-telemetry-feed sim-telemetry-feed" id="onpageCrmLeadList">
                             <div class="webhook-payload-item">
                                 <div class="wp-top">
                                     <span class="wp-endpoint">POST /api/webhooks/whatsapp/inbound</span>
@@ -1009,10 +1051,10 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Bottom Engineering Sandbox Disclaimer -->
-        <div style="margin-top: 2rem; background: rgba(11, 18, 32, 0.72); border: 1px solid rgba(148, 163, 184, 0.14); border-radius: 10px; padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; text-align: center;">
+        <div class="sim-sandbox-notice">
             <svg class="icon-svg-inline" style="width:17px;height:17px;color:#38BDF8;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <p style="margin: 0; font-size: 0.825rem; color: var(--slate-dark); line-height: 1.5;">
-                <strong style="color: var(--slate);">Interactive Architectural Demonstrators:</strong> These panels run client-side vector search matching and webhook ingestion simulations. In production, our systems connect directly with Qdrant Vector DB, Meta Cloud API, and secure MySQL CRM tables.
+            <p>
+                <strong>Interactive Architectural Demonstrators:</strong> These panels run client-side vector search matching and webhook ingestion simulations. In production, our systems connect directly with Qdrant Vector DB, Meta Cloud API, and secure MySQL CRM tables.
             </p>
         </div>
     </div>

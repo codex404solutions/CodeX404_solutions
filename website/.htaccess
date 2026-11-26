@@ -30,6 +30,21 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.+)/$ $1 [R=301,L,NE]
 
+    # Careers & Applicant Portal Routes
+    RewriteRule ^careers/application-status/?$ career-status.php [L,QSA]
+    RewriteRule ^careers/candidate-portal/applications/([A-Za-z0-9_-]+)/?$ candidate-portal.php?view=detail&ref=$1 [L,QSA]
+    RewriteRule ^careers/candidate-portal/applications/?$ candidate-portal.php?view=applications [L,QSA]
+    RewriteRule ^careers/candidate-portal/?$ candidate-portal.php [L,QSA]
+    RewriteRule ^careers/resume/([0-9]+)/?$ career-resume.php?application_id=$1 [L,QSA]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^careers/([a-z0-9-]+)/?$ career-detail.php?slug=$1 [L,QSA]
+
+    # Admin Careers Sub-routes
+    RewriteRule ^admin/careers/resume/?$ admin/careers.php?tab=resume [L,QSA]
+    RewriteRule ^admin/careers/export/?$ admin/careers.php?tab=export [L,QSA]
+    RewriteRule ^admin/careers/([a-z0-9-]+)/?$ admin/careers.php?tab=$1 [L,QSA]
+
     # 3. Internally rewrite extensionless URLs to .php files if matching .php exists
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f

@@ -168,6 +168,12 @@ $isContactActive = ($currentScript === 'contact.php');
                                 <span>Common architecture & delivery questions</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= url('careers') ?>" class="dropdown-link">
+                                <strong>Careers &amp; Hiring</strong>
+                                <span>Open roles &amp; application tracking</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

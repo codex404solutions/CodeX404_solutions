@@ -64,6 +64,7 @@ $pageMeta = $pageMeta ?? [];
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/components.css') ? filemtime(dirname(__DIR__) . '/assets/css/components.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/responsive.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/responsive.css') ? filemtime(dirname(__DIR__) . '/assets/css/responsive.css') : '1.0' ?>">
     <link rel="stylesheet" href="<?= asset('css/depth3d.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/depth3d.css') ? filemtime(dirname(__DIR__) . '/assets/css/depth3d.css') : '1.0' ?>">
+    <link rel="stylesheet" href="<?= asset('css/careers.css') ?>?v=<?= file_exists(dirname(__DIR__) . '/assets/css/careers.css') ? filemtime(dirname(__DIR__) . '/assets/css/careers.css') : '1.0' ?>">
 </head>
 
 <body class="<?= htmlspecialchars((string)($bodyClass ?? ''), ENT_QUOTES, 'UTF-8') ?>">

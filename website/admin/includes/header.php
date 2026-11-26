@@ -96,19 +96,25 @@ $flash = get_admin_flash();
                     </div>
 
                     <!-- User Status Card with Multi-Role Footprint -->
-                    <?php 
+                    <?php
                     $adminProfile = current_admin_profile();
-                    $adminRoles = (array)($adminProfile['roles'] ?? ['superadmin']);
+                    $adminRoles = (array) ($adminProfile['roles'] ?? ['superadmin']);
                     ?>
                     <div class="p-2 mb-2 rounded-3"
                         style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
                         <div class="d-flex align-items-center justify-content-between mb-1">
-                            <a href="<?= admin_url('profile') ?>" class="d-flex align-items-center gap-1.5 text-decoration-none">
-                                <?php 
-                                $headerAvatar = \CRM\Services\UserService::getAvatarInfo($adminProfile);
-                                if (!empty($headerAvatar['image'])): 
-                                ?>
-                                    <img src="<?= asset($headerAvatar['image']) ?>" alt="<?= htmlspecialchars((string)($adminProfile['name'] ?? 'Admin')) ?>" class="rounded-circle object-fit-cover border" style="width: 20px; height: 20px; border-color: rgba(56, 189, 248, 0.4) !important;">
+                            <a href="<?= admin_url('profile') ?>"
+                                class="d-flex align-items-center gap-1.5 text-decoration-none">
+                                <?php
+                                $headerAvatar = class_exists('\\CRM\\Services\\UserService')
+                                    ? \CRM\Services\UserService::getAvatarInfo($adminProfile)
+                                    : ['image' => $adminProfile['avatar'] ?? null];
+                                if (!empty($headerAvatar['image'])):
+                                    ?>
+                                    <img src="<?= asset($headerAvatar['image']) ?>"
+                                        alt="<?= htmlspecialchars((string) ($adminProfile['name'] ?? 'Admin')) ?>"
+                                        class="rounded-circle object-fit-cover border"
+                                        style="width: 20px; height: 20px; border-color: rgba(56, 189, 248, 0.4) !important;">
                                 <?php else: ?>
                                     <span class="live-dot" title="Active Session" style="width: 5px; height: 5px;"></span>
                                 <?php endif; ?>
@@ -116,9 +122,12 @@ $flash = get_admin_flash();
                                     style="font-size: 0.75rem; max-width: 100px;"><?= htmlspecialchars((string) ($adminProfile['name'] ?? $adminProfile['username'] ?? 'Admin')) ?></span>
                             </a>
                             <div class="d-flex align-items-center gap-1">
-                                <a href="<?= admin_url('profile') ?>" class="text-info small text-decoration-none" title="My Account Profile" style="font-size: 0.72rem;"><i class="bi bi-person-badge"></i></a>
+                                <a href="<?= admin_url('profile') ?>" class="text-info small text-decoration-none"
+                                    title="My Account Profile" style="font-size: 0.72rem;"><i
+                                        class="bi bi-person-badge"></i></a>
                                 <a href="<?= admin_url('logout') ?>" class="text-danger small text-decoration-none ms-1"
-                                    title="Sign Out" style="font-size: 0.72rem;"><i class="bi bi-box-arrow-left"></i></a>
+                                    title="Sign Out" style="font-size: 0.72rem;"><i
+                                        class="bi bi-box-arrow-left"></i></a>
                             </div>
                         </div>
                         <div class="d-flex gap-1 flex-wrap">
@@ -127,7 +136,8 @@ $flash = get_admin_flash();
                                     style="font-size: 0.55rem; padding: 0.2em 0.4em;"><?= htmlspecialchars($r) ?></span>
                             <?php endforeach; ?>
                             <?php if (count($adminRoles) > 2): ?>
-                                <span class="badge bg-secondary-subtle text-muted" style="font-size: 0.55rem;">+<?= count($adminRoles) - 2 ?></span>
+                                <span class="badge bg-secondary-subtle text-muted"
+                                    style="font-size: 0.55rem;">+<?= count($adminRoles) - 2 ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -137,27 +147,38 @@ $flash = get_admin_flash();
 
                     <!-- Dedicated Multi-Page Navigation Links -->
                     <nav class="nav flex-column mb-2" id="adminSidebarNav">
-                        <a href="<?= admin_url() ?>" class="admin-sidebar-link <?= ($currentPage === 'overview') ? 'active' : '' ?>">
+                        <a href="<?= admin_url() ?>"
+                            class="admin-sidebar-link <?= ($currentPage === 'overview') ? 'active' : '' ?>">
                             <span><i class="bi bi-grid-1x2-fill me-2 text-info"></i> Overview</span>
                             <span class="badge rounded-pill bg-dark border border-secondary text-muted"
                                 style="font-size: 0.62rem;">Top</span>
                         </a>
-                        <a href="<?= admin_url('deliverables') ?>" class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
+                        <a href="<?= admin_url('deliverables') ?>"
+                            class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
                             <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
                             <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"
                                 style="font-size: 0.62rem;"><?= $totalCount ?></span>
                         </a>
-                        <a href="<?= admin_url('showcase') ?>" class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
+                        <a href="<?= admin_url('showcase') ?>"
+                            class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
                             <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
                             <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"
                                 style="font-size: 0.62rem;"><?= min(6, $totalCount) ?></span>
                         </a>
-                        <a href="<?= admin_url('users') ?>" class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
+                        <a href="<?= admin_url('careers') ?>"
+                            class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
+                            <span><i class="bi bi-briefcase-fill me-2 text-warning"></i> Careers &amp; Hiring</span>
+                            <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"
+                                style="font-size: 0.62rem;">ATS</span>
+                        </a>
+                        <a href="<?= admin_url('users') ?>"
+                            class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
                             <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
                             <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle"
                                 style="font-size: 0.62rem;">RBAC</span>
                         </a>
-                        <a href="<?= admin_url('telemetry') ?>" class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
+                        <a href="<?= admin_url('telemetry') ?>"
+                            class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
                             <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
                             <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle"
                                 style="font-size: 0.62rem;">Live</span>
@@ -208,7 +229,7 @@ $flash = get_admin_flash();
                     <!-- Platform Bridges Section Title -->
                     <div class="admin-sidebar-section-title">Platform Bridges</div>
                     <div class="d-flex gap-1 mb-2">
-                        <?php 
+                        <?php
                         $hasCrmClearance = in_array($adminProfile['access_scope'] ?? 'crm_only', ['both', 'crm_only'], true);
                         ?>
                         <?php if ($hasCrmClearance): ?>
@@ -218,8 +239,10 @@ $flash = get_admin_flash();
                                 <i class="bi bi-robot me-1 text-warning"></i> CRM
                             </a>
                         <?php else: ?>
-                            <span class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1 text-muted opacity-50"
-                                style="font-size: 0.72rem; cursor: not-allowed;" title="Restricted: Your account is Admin-Only. Dual or CRM clearance required to access CRM portal.">
+                            <span
+                                class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1 text-muted opacity-50"
+                                style="font-size: 0.72rem; cursor: not-allowed;"
+                                title="Restricted: Your account is Admin-Only. Dual or CRM clearance required to access CRM portal.">
                                 <i class="bi bi-lock-fill me-1 text-secondary"></i> CRM
                             </span>
                         <?php endif; ?>

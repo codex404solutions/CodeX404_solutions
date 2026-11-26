@@ -589,6 +589,28 @@ function current_admin_profile(): array
         }
     }
 
+    // Refresh from MySQL `users` table directly when available so role updates take effect immediately
+    $pdo = Database::getConnection();
+    $sessionUser = (string)($_SESSION['codex_admin_user'] ?? '');
+    if ($pdo && $sessionUser !== '') {
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM `users` WHERE LOWER(`username`) = LOWER(?) OR LOWER(`email`) = LOWER(?) LIMIT 1");
+            $stmt->execute([$sessionUser, $sessionUser]);
+            $dbUser = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($dbUser) {
+                $decodedRoles = !empty($dbUser['roles']) ? json_decode((string)$dbUser['roles'], true) : [];
+                $dbUser['roles'] = is_array($decodedRoles) && !empty($decodedRoles) ? $decodedRoles : [!empty($dbUser['role']) ? (string)$dbUser['role'] : 'viewer'];
+                $decodedCustom = !empty($dbUser['custom_permissions']) ? json_decode((string)$dbUser['custom_permissions'], true) : null;
+                $dbUser['custom_permissions'] = is_array($decodedCustom) ? $decodedCustom : null;
+                $_SESSION['codex_admin_profile'] = $dbUser;
+                $_SESSION['codex_admin_roles'] = $dbUser['roles'];
+                return $dbUser;
+            }
+        } catch (\Throwable $e) {
+            // Fall through safely
+        }
+    }
+
     if (!empty($_SESSION['codex_admin_profile']) && is_array($_SESSION['codex_admin_profile'])) {
         return $_SESSION['codex_admin_profile'];
     }
@@ -613,13 +635,14 @@ function current_admin_can(string $permission): bool
 {
     $profile = current_admin_profile();
     $roles = (array)($profile['roles'] ?? ['superadmin']);
+    $custom = is_array($profile['custom_permissions'] ?? null) ? $profile['custom_permissions'] : null;
 
     if (class_exists('\\CRM\\Services\\RBACService')) {
-        return \CRM\Services\RBACService::hasPermission(
-            $roles,
-            $permission,
-            (array)($profile['custom_permissions'] ?? null)
-        );
+        return \CRM\Services\RBACService::hasPermission($roles, $permission, $custom);
+    }
+
+    if (class_exists('\\App\\Careers\\RecruitmentAuthService')) {
+        return \App\Careers\RecruitmentAuthService::adminRolesHavePermission($roles, $permission, $custom);
     }
 
     return in_array('superadmin', array_map('strtolower', $roles), true);
