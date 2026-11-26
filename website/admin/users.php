@@ -7,9 +7,17 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/auth.php';
 require_admin_auth();
+require_admin_permission('users.view');
 
-use CRM\Services\RBACService;
-use CRM\Services\UserService;
+use App\Services\RBACService;
+use App\Services\UserService;
+
+$canCreateUsers = current_admin_can('users.create');
+$canEditUsers = current_admin_can('users.edit');
+$canDeleteUsers = current_admin_can('users.delete');
+$canDelegateUsers = current_admin_can('users.delegate') || $canEditUsers;
+$canScopeUsers = current_admin_can('users.scope') || $canEditUsers;
+$canManageRoles = current_admin_can('roles.manage');
 
 $currentPage = 'users';
 $pageTitle = 'Workforce Directory & Multi-Role RBAC';
@@ -30,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($action) {
         case 'create_user':
+            require_admin_permission('users.create', false, 'users');
             try {
                 $grantedPerms = isset($_POST['custom_granted']) && is_array($_POST['custom_granted']) ? $_POST['custom_granted'] : [];
                 $deniedPerms = isset($_POST['custom_denied']) && is_array($_POST['custom_denied']) ? $_POST['custom_denied'] : [];
@@ -66,12 +75,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 'update_user':
+            require_admin_permission('users.edit', false, 'users');
             $targetId = trim((string)($_POST['user_id'] ?? ''));
             try {
                 $grantedPerms = isset($_POST['custom_granted']) && is_array($_POST['custom_granted']) ? $_POST['custom_granted'] : [];
                 $deniedPerms = isset($_POST['custom_denied']) && is_array($_POST['custom_denied']) ? $_POST['custom_denied'] : [];
                 $userAssignedRoles = isset($_POST['roles']) && is_array($_POST['roles']) ? $_POST['roles'] : null;
                 $accessScope = isset($_POST['access_scope']) ? trim((string)$_POST['access_scope']) : null;
+
+                if ($userAssignedRoles !== null && !$canDelegateUsers) {
+                    throw new \RuntimeException('Missing permission: users.delegate is required to assign roles.');
+                }
+                if ($accessScope !== null && !$canScopeUsers) {
+                    throw new \RuntimeException('Missing permission: users.scope is required to change portal clearance.');
+                }
 
                 $updatePayload = [
                     'name' => trim((string)($_POST['name'] ?? '')),
@@ -113,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 'change_user_password':
+            require_admin_permission('users.edit', false, 'users');
             $targetId = trim((string)($_POST['user_id'] ?? ''));
             $newPass = (string)($_POST['new_password'] ?? '');
             try {
@@ -127,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 'delete_user':
+            require_admin_permission('users.delete', false, 'users');
             $targetId = trim((string)($_POST['user_id'] ?? ''));
             try {
                 if (UserService::delete($targetId, $currentUserId)) {
@@ -140,6 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 'save_role':
+            require_admin_permission('roles.manage', false, 'users');
             $slug = strtolower(trim((string)($_POST['slug'] ?? '')));
             $name = trim((string)($_POST['name'] ?? ''));
             $desc = trim((string)($_POST['description'] ?? ''));
@@ -162,6 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 'delete_role':
+            require_admin_permission('roles.manage', false, 'users');
             $slug = trim((string)($_POST['slug'] ?? ''));
             if (RBACService::deleteRole($slug)) {
                 set_admin_flash('success', "Role '{$slug}' deleted.");
@@ -270,12 +291,16 @@ require_once __DIR__ . '/includes/header.php';
         </ul>
 
         <div class="d-flex align-items-center gap-2">
-            <button class="btn btn-outline-info btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalAdminNewRole">
-                <i class="bi bi-plus-circle me-1"></i> New Custom Role
-            </button>
-            <button class="btn btn-info btn-sm fw-bold text-dark px-3" data-bs-toggle="modal" data-bs-target="#modalAdminNewUser">
-                <i class="bi bi-person-plus-fill me-1"></i> Provision New User
-            </button>
+            <?php if ($canManageRoles): ?>
+                <button class="btn btn-outline-info btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalAdminNewRole">
+                    <i class="bi bi-plus-circle me-1"></i> New Custom Role
+                </button>
+            <?php endif; ?>
+            <?php if ($canCreateUsers): ?>
+                <button class="btn btn-info btn-sm fw-bold text-dark px-3" data-bs-toggle="modal" data-bs-target="#modalAdminNewUser">
+                    <i class="bi bi-person-plus-fill me-1"></i> Provision New User
+                </button>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -381,17 +406,19 @@ require_once __DIR__ . '/includes/header.php';
                                                 <i class="bi bi-person-badge text-info me-2"></i> View Full Profile
                                             </button>
                                         </li>
-                                        <li>
-                                            <button class="dropdown-item btn-admin-edit-user" type="button" data-user='<?= htmlspecialchars(json_encode($u, JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>'>
-                                                <i class="bi bi-pencil-square text-warning me-2"></i> Edit User &amp; Roles
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="dropdown-item btn-admin-reset-pass" type="button" data-id="<?= htmlspecialchars($u['id']) ?>" data-name="<?= htmlspecialchars($u['name']) ?>">
-                                                <i class="bi bi-key text-primary me-2"></i> Reset Password
-                                            </button>
-                                        </li>
-                                        <?php if (!$isAdminSelf): ?>
+                                        <?php if ($canEditUsers): ?>
+                                            <li>
+                                                <button class="dropdown-item btn-admin-edit-user" type="button" data-user='<?= htmlspecialchars(json_encode($u, JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>'>
+                                                    <i class="bi bi-pencil-square text-warning me-2"></i> Edit User &amp; Roles
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item btn-admin-reset-pass" type="button" data-id="<?= htmlspecialchars($u['id']) ?>" data-name="<?= htmlspecialchars($u['name']) ?>">
+                                                    <i class="bi bi-key text-primary me-2"></i> Reset Password
+                                                </button>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if (!$isAdminSelf && $canDeleteUsers): ?>
                                             <li><hr class="dropdown-divider"></li>
                                             <li>
                                                 <button class="dropdown-item text-danger btn-admin-delete-user" type="button" data-id="<?= htmlspecialchars($u['id']) ?>" data-name="<?= htmlspecialchars($u['name']) ?>">
@@ -535,19 +562,21 @@ require_once __DIR__ . '/includes/header.php';
                                     <?php endif; ?>
                                 </div>
 
-                                <div class="d-flex gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-sm btn-outline-info btn-admin-edit-role" data-role='<?= htmlspecialchars(json_encode($rData, JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>'>
-                                        <i class="bi bi-sliders me-1"></i> Edit
-                                    </button>
-                                    <?php if (!$isSystem): ?>
-                                        <form method="POST" onsubmit="return confirm('Delete custom role <?= htmlspecialchars($rData['name']) ?>?');">
-                                            <?= csrf_input_field() ?>
-                                            <input type="hidden" name="action" value="delete_role">
-                                            <input type="hidden" name="slug" value="<?= htmlspecialchars($rSlug) ?>">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                        </form>
-                                    <?php endif; ?>
-                                </div>
+                                <?php if ($canManageRoles): ?>
+                                    <div class="d-flex gap-2 justify-content-end">
+                                        <button type="button" class="btn btn-sm btn-outline-info btn-admin-edit-role" data-role='<?= htmlspecialchars(json_encode($rData, JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>'>
+                                            <i class="bi bi-sliders me-1"></i> Edit
+                                        </button>
+                                        <?php if (!$isSystem): ?>
+                                            <form method="POST" onsubmit="return confirm('Delete custom role <?= htmlspecialchars($rData['name']) ?>?');">
+                                                <?= csrf_input_field() ?>
+                                                <input type="hidden" name="action" value="delete_role">
+                                                <input type="hidden" name="slug" value="<?= htmlspecialchars($rSlug) ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

@@ -106,8 +106,8 @@ $flash = get_admin_flash();
                             <a href="<?= admin_url('profile') ?>"
                                 class="d-flex align-items-center gap-1.5 text-decoration-none">
                                 <?php
-                                $headerAvatar = class_exists('\\CRM\\Services\\UserService')
-                                    ? \CRM\Services\UserService::getAvatarInfo($adminProfile)
+                                $headerAvatar = class_exists('\\App\\Services\\UserService')
+                                    ? \App\Services\UserService::getAvatarInfo($adminProfile)
                                     : ['image' => $adminProfile['avatar'] ?? null];
                                 if (!empty($headerAvatar['image'])):
                                     ?>
@@ -153,36 +153,44 @@ $flash = get_admin_flash();
                             <span class="badge rounded-pill bg-dark border border-secondary text-muted"
                                 style="font-size: 0.62rem;">Top</span>
                         </a>
-                        <a href="<?= admin_url('deliverables') ?>"
-                            class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
-                            <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
-                            <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"
-                                style="font-size: 0.62rem;"><?= $totalCount ?></span>
-                        </a>
-                        <a href="<?= admin_url('showcase') ?>"
-                            class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
-                            <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
-                            <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"
-                                style="font-size: 0.62rem;"><?= min(6, $totalCount) ?></span>
-                        </a>
-                        <a href="<?= admin_url('careers') ?>"
-                            class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
-                            <span><i class="bi bi-briefcase-fill me-2 text-warning"></i> Careers &amp; Hiring</span>
-                            <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"
-                                style="font-size: 0.62rem;">ATS</span>
-                        </a>
-                        <a href="<?= admin_url('users') ?>"
-                            class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
-                            <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
-                            <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle"
-                                style="font-size: 0.62rem;">RBAC</span>
-                        </a>
-                        <a href="<?= admin_url('telemetry') ?>"
-                            class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
-                            <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
-                            <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle"
-                                style="font-size: 0.62rem;">Live</span>
-                        </a>
+                        <?php if (current_admin_can('portfolio.view')): ?>
+                            <a href="<?= admin_url('deliverables') ?>"
+                                class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
+                                <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
+                                <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"
+                                    style="font-size: 0.62rem;"><?= $totalCount ?></span>
+                            </a>
+                            <a href="<?= admin_url('showcase') ?>"
+                                class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
+                                <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
+                                <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"
+                                    style="font-size: 0.62rem;"><?= min(6, $totalCount) ?></span>
+                            </a>
+                        <?php endif; ?>
+                        <?php if (current_admin_can('careers.view')): ?>
+                            <a href="<?= admin_url('careers') ?>"
+                                class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
+                                <span><i class="bi bi-briefcase-fill me-2 text-warning"></i> Careers &amp; Hiring</span>
+                                <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle"
+                                    style="font-size: 0.62rem;">ATS</span>
+                            </a>
+                        <?php endif; ?>
+                        <?php if (current_admin_can('users.view')): ?>
+                            <a href="<?= admin_url('users') ?>"
+                                class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
+                                <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
+                                <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle"
+                                    style="font-size: 0.62rem;">RBAC</span>
+                            </a>
+                        <?php endif; ?>
+                        <?php if (current_admin_can('settings.view')): ?>
+                            <a href="<?= admin_url('telemetry') ?>"
+                                class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
+                                <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
+                                <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle"
+                                    style="font-size: 0.62rem;">Live</span>
+                            </a>
+                        <?php endif; ?>
                     </nav>
 
                     <!-- Filter By Status Section Title -->
@@ -228,33 +236,34 @@ $flash = get_admin_flash();
 
                     <!-- Platform Bridges Section Title -->
                     <div class="admin-sidebar-section-title">Platform Bridges</div>
-                    <div class="d-flex gap-1 mb-2">
+                    <div class="admin-bridge-grid mb-2">
                         <?php
-                        $hasCrmClearance = in_array($adminProfile['access_scope'] ?? 'crm_only', ['both', 'crm_only'], true);
+                        $crmAvailable = is_dir(dirname(__DIR__, 3) . '/crm');
+                        $hasCrmClearance = $crmAvailable && in_array($adminProfile['access_scope'] ?? 'crm_only', ['both', 'crm_only'], true);
                         ?>
                         <?php if ($hasCrmClearance): ?>
                             <a href="../../crm/" target="_blank"
-                                class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                                style="font-size: 0.72rem;" title="Access Company CRM Command (Authorized)">
-                                <i class="bi bi-robot me-1 text-warning"></i> CRM
+                                class="admin-sidebar-bridge-link"
+                                title="Access Company CRM Command (Authorized)">
+                                <i class="bi bi-robot text-warning"></i><span>CRM</span>
                             </a>
                         <?php else: ?>
                             <span
-                                class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1 text-muted opacity-50"
-                                style="font-size: 0.72rem; cursor: not-allowed;"
-                                title="Restricted: Your account is Admin-Only. Dual or CRM clearance required to access CRM portal.">
-                                <i class="bi bi-lock-fill me-1 text-secondary"></i> CRM
+                                class="admin-sidebar-bridge-link text-muted opacity-50"
+                                style="cursor: not-allowed;"
+                                title="<?= $crmAvailable ? 'Restricted: Dual or CRM clearance required.' : 'CRM portal is not deployed in this workspace.' ?>">
+                                <i class="bi bi-lock-fill text-secondary"></i><span>CRM</span>
                             </span>
                         <?php endif; ?>
                         <a href="<?= url('#work') ?>" target="_blank"
-                            class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                            style="font-size: 0.72rem;" title="Public Portfolio Showcase">
-                            <i class="bi bi-globe2 me-1 text-primary"></i> Public
+                            class="admin-sidebar-bridge-link"
+                            title="Public Portfolio Showcase">
+                            <i class="bi bi-globe2 text-primary"></i><span>Public</span>
                         </a>
                         <a href="<?= url('discovery-call') ?>" target="_blank"
-                            class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                            style="font-size: 0.72rem;" title="Client Discovery Intake">
-                            <i class="bi bi-lightning-charge me-1 text-info"></i> Intake
+                            class="admin-sidebar-bridge-link"
+                            title="Client Discovery Intake">
+                            <i class="bi bi-lightning-charge text-info"></i><span>Intake</span>
                         </a>
                     </div>
                 </div>
@@ -263,7 +272,7 @@ $flash = get_admin_flash();
             <!-- ======================================================== -->
             <!-- MAIN CONTENT AREA                                        -->
             <!-- ======================================================== -->
-            <main class="col-12 col-lg-10 p-3 p-md-4 d-flex flex-column" style="min-height: 100vh; overflow-x: hidden;">
+            <main class="col-12 col-lg-10 p-3 p-md-4 d-flex flex-column" style="min-height: 100vh; min-width: 0; overflow-x: clip;">
 
                 <!-- Top Header & Status Bar -->
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pb-3 mb-4 border-bottom"
@@ -329,10 +338,12 @@ $flash = get_admin_flash();
                         </div>
 
                         <!-- New Deliverable Action Button -->
-                        <a href="<?= admin_url('project-form') ?>" class="btn btn-info btn-sm fw-bold text-dark px-3"
-                            style="background: #38BDF8; border-color: #38BDF8;">
-                            <i class="bi bi-plus-lg me-1"></i> New Deliverable
-                        </a>
+                        <?php if (current_admin_can('portfolio.edit')): ?>
+                            <a href="<?= admin_url('project-form') ?>" class="btn btn-info btn-sm fw-bold text-dark px-3"
+                                style="background: #38BDF8; border-color: #38BDF8;">
+                                <i class="bi bi-plus-lg me-1"></i> New Deliverable
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
 

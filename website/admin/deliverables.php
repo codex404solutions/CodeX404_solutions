@@ -5,6 +5,9 @@ declare(strict_types=1);
  * CodeX404 Solutions — Admin Deliverables Management Page (Multi-Page)
  */
 
+require_once __DIR__ . '/auth.php';
+require_admin_permission('portfolio.view');
+
 use App\Services\ProjectService;
 
 $currentPage = 'deliverables';
@@ -180,19 +183,19 @@ $permissionStatuses = ProjectService::getPermissionStatuses();
 
                             <!-- Title, Client & Host -->
                             <td>
-                                <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-3" style="min-width: 0;">
                                     <div class="rounded-3 d-flex align-items-center justify-content-center text-info fw-bold"
                                         style="width: 40px; height: 40px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.25); flex-shrink: 0;">
                                         <i class="bi <?= $category === 'ai' ? 'bi-cpu' : ($category === 'cloud' ? 'bi-cloud-check' : ($category === 'mobile' ? 'bi-phone' : 'bi-code-square')) ?> fs-5"></i>
                                     </div>
-                                    <div>
-                                        <div class="fw-bold text-white fs-6 mb-1 project-title-text">
+                                    <div style="min-width: 0;">
+                                        <div class="fw-bold fs-6 mb-1 project-title-text text-truncate" style="max-width: 300px;">
                                             <?= htmlspecialchars($p['title']) ?>
                                         </div>
                                         <div class="d-flex align-items-center gap-2 flex-wrap">
-                                            <span class="project-id-chip"><?= htmlspecialchars($p['id']) ?></span>
+                                            <span class="project-id-chip" title="<?= htmlspecialchars($p['id']) ?>"><?= htmlspecialchars($p['id']) ?></span>
                                             <span class="text-muted">&bull;</span>
-                                            <span class="text-white-50 small">
+                                            <span class="text-muted small">
                                                 <i class="bi bi-building me-1"></i><?= htmlspecialchars($clientName) ?>
                                             </span>
                                             <?php if (!empty($p['live_url'])): ?>

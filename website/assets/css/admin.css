@@ -95,45 +95,30 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Gradient Typography */
-        .text-gradient-rainbow {
-            background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 30%, #8B5CF6 65%, #EC4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #38BDF8;
-        }
-
+        /* Typography Accents (restrained, high-contrast) */
+        .text-gradient-rainbow,
         .text-gradient-cyan {
-            background: linear-gradient(135deg, #22D3EE 0%, #0284C7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #22D3EE;
+            color: var(--cx-text-primary);
+            background: none;
+            -webkit-text-fill-color: currentColor;
         }
 
         .text-gradient-emerald {
-            background: linear-gradient(135deg, #34D399 0%, #059669 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #10B981;
+            color: var(--cx-emerald);
+            background: none;
+            -webkit-text-fill-color: currentColor;
         }
 
         .text-gradient-amber {
-            background: linear-gradient(135deg, #FBBF24 0%, #EA580C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #F59E0B;
+            color: var(--cx-amber);
+            background: none;
+            -webkit-text-fill-color: currentColor;
         }
 
         .text-gradient-purple {
-            background: linear-gradient(135deg, #C084FC 0%, #7C3AED 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #A855F7;
+            color: var(--cx-indigo);
+            background: none;
+            -webkit-text-fill-color: currentColor;
         }
 
         /* Live Pulse Dot */
@@ -159,17 +144,16 @@
             }
         }
 
-        /* Hero Banner */
+        /* Executive Command Header */
         .admin-hero-banner {
             position: relative;
-            background: var(--cx-hero-bg);
-            border: 1px solid var(--cx-banner-border);
-            border-radius: 20px;
+            background: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--cx-card-shadow);
-            padding: 2.25rem 2rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(12px);
+            padding: 1.75rem 2rem;
+            margin-bottom: 1.25rem;
         }
 
         .admin-hero-banner::before {
@@ -178,9 +162,43 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #22D3EE 0%, #3B82F6 35%, #8B5CF6 70%, #EC4899 100%);
+            height: 2px;
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.75) 0%, rgba(59, 130, 246, 0.35) 60%, transparent 100%);
             z-index: 2;
+        }
+
+        .admin-status-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+            background: var(--cx-bg-card);
+            border: 1px solid var(--cx-border);
+            border-radius: 12px;
+            padding: 0.75rem 1.15rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .admin-status-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .admin-status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--cx-text-secondary);
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-status-item strong {
+            color: var(--cx-text-primary);
+            font-weight: 600;
         }
 
         .banner-svg-canvas {
@@ -497,42 +515,32 @@
         .stat-card {
             background-color: var(--cx-bg-card);
             border: 1px solid var(--cx-border);
-            border-radius: 16px;
-            padding: 1.35rem 1.5rem;
+            border-radius: 14px;
+            padding: 1.25rem 1.35rem;
             box-shadow: var(--cx-card-shadow);
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease;
             height: 100%;
+            font-variant-numeric: tabular-nums;
         }
 
         .stat-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--cx-cyan);
+            border-color: rgba(56, 189, 248, 0.45);
         }
 
         .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--card-accent, var(--cx-cyan));
+            display: none;
         }
 
-        .stat-card.accent-emerald::before { background: var(--cx-emerald); }
-        .stat-card.accent-amber::before { background: var(--cx-amber); }
-        .stat-card.accent-indigo::before { background: var(--cx-indigo); }
-
         .stat-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.35rem;
+            font-size: 1.1rem;
             flex-shrink: 0;
         }
 
@@ -540,9 +548,9 @@
         .action-hub-card {
             background-color: var(--cx-bg-card);
             border: 1px solid var(--cx-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 14px;
+            padding: 1.25rem 1.35rem;
+            transition: border-color 0.18s ease, background-color 0.18s ease;
             text-decoration: none;
             color: inherit;
             display: block;
@@ -551,10 +559,8 @@
         }
 
         .action-hub-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--cx-cyan);
+            border-color: rgba(56, 189, 248, 0.45);
             color: inherit;
-            box-shadow: 0 16px 36px -8px rgba(34, 211, 238, 0.2);
         }
 
         /* Tables */
@@ -572,36 +578,52 @@
         }
 
         .table-admin th {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--cx-text-muted);
-            padding: 1rem 1.15rem;
-            background: rgba(0, 0, 0, 0.02);
+            padding: 0.85rem 0.9rem;
+            background: rgba(15, 23, 42, 0.03);
             border-bottom: 1px solid var(--cx-border);
             white-space: nowrap;
         }
 
         [data-bs-theme="dark"] .table-admin th {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.025);
         }
 
         .table-admin td {
-            padding: 1.15rem 1.15rem;
+            padding: 0.9rem 0.9rem;
             vertical-align: middle;
             border-bottom: 1px solid var(--cx-border);
+        }
+
+        .table-admin tr:last-child td {
+            border-bottom: none;
         }
 
         .table-admin tr:hover td {
             background-color: var(--cx-bg-hover);
         }
 
+        .project-title-text {
+            color: var(--cx-text-primary);
+            font-weight: 700;
+            font-size: 0.88rem;
+            line-height: 1.3;
+        }
+
         .project-id-chip {
             font-family: var(--font-mono);
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             color: var(--cx-text-muted);
-            word-break: break-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .demo-chip {
@@ -708,6 +730,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            overflow-x: hidden;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
         }
@@ -773,26 +796,37 @@
             font-weight: 600;
         }
 
+        .admin-bridge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.35rem;
+            width: 100%;
+        }
+
         .admin-sidebar-bridge-link {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0.42rem 0.65rem;
+            justify-content: center;
+            gap: 0.25rem;
+            padding: 0.38rem 0.25rem;
             border-radius: 8px;
             color: #94A3B8;
-            font-size: 0.78rem;
-            font-weight: 500;
+            font-size: 0.68rem;
+            font-weight: 600;
             text-decoration: none;
             transition: all 0.15s ease;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
         }
 
         .admin-sidebar-bridge-link:hover {
             color: #38BDF8 !important;
-            background: rgba(56, 189, 248, 0.08) !important;
-            border-color: rgba(56, 189, 248, 0.25) !important;
-            transform: translateX(2px);
+            background: rgba(56, 189, 248, 0.1) !important;
+            border-color: rgba(56, 189, 248, 0.28) !important;
         }
 
         .admin-sidebar .badge.bg-dark,

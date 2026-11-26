@@ -13,13 +13,18 @@ require_once dirname(__DIR__) . '/includes/security.php';
 require_once dirname(__DIR__) . '/config/Env.php';
 Env::load(dirname(__DIR__) . '/.env');
 
-// Link CRM RBAC & UserService for unified workforce profiling
-$crmServicesDir = dirname(__DIR__, 2) . '/crm/app/Services';
-if (file_exists($crmServicesDir . '/UserService.php')) {
-    require_once $crmServicesDir . '/StorageService.php';
-    require_once $crmServicesDir . '/RBACService.php';
-    require_once $crmServicesDir . '/UserService.php';
-    \CRM\Services\StorageService::init(dirname(__DIR__, 2) . '/crm/storage');
+// Load local App\Services RBAC & UserService (and alias CRM\Services\* for legacy callers)
+if (!class_exists('\\App\\Services\\RBACService', false) && file_exists(dirname(__DIR__) . '/app/Services/RBACService.php')) {
+    require_once dirname(__DIR__) . '/app/Services/RBACService.php';
+}
+if (!class_exists('\\App\\Services\\UserService', false) && file_exists(dirname(__DIR__) . '/app/Services/UserService.php')) {
+    require_once dirname(__DIR__) . '/app/Services/UserService.php';
+}
+if (class_exists('\\App\\Services\\RBACService') && !class_exists('\\CRM\\Services\\RBACService', false)) {
+    class_alias(\App\Services\RBACService::class, 'CRM\\Services\\RBACService');
+}
+if (class_exists('\\App\\Services\\UserService') && !class_exists('\\CRM\\Services\\UserService', false)) {
+    class_alias(\App\Services\UserService::class, 'CRM\\Services\\UserService');
 }
 
 // Configure admin session settings before session starts or enforce if active
@@ -402,10 +407,10 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
 
     $cleanUser = trim(strtolower($username));
 
-    // 1. Try unified UserService (MySQL or StorageService fallback)
-    if (class_exists('\\CRM\\Services\\UserService')) {
+    // 1. Try unified UserService (MySQL-backed)
+    if (class_exists('\\App\\Services\\UserService')) {
         try {
-            $user = \CRM\Services\UserService::getByUsernameOrEmail($cleanUser);
+            $user = \App\Services\UserService::getByUsernameOrEmail($cleanUser);
             if ($user && ($user['status'] ?? 'active') === 'active' && !empty($user['password_hash']) && password_verify($password, $user['password_hash'])) {
                 // Portal Access Scope Enforcement
                 $scope = $user['access_scope'] ?? 'both';
@@ -430,7 +435,7 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
                 $_SESSION['codex_admin_ip'] = get_client_ip();
                 $_SESSION['codex_admin_ua'] = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255);
 
-                \CRM\Services\UserService::recordLogin($user['id']);
+                \App\Services\UserService::recordLogin((string)$user['id']);
                 reset_admin_failed_attempts($username);
                 return true;
             }
@@ -507,9 +512,9 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
         $_SESSION['codex_admin_roles'] = ['superadmin', 'founder', 'ceo', 'cto'];
 
         // Pull full profile if available
-        if (class_exists('\\CRM\\Services\\UserService')) {
-            \CRM\Services\UserService::seedDefaultUsersIfEmpty();
-            $seeded = \CRM\Services\UserService::getByUsernameOrEmail('admin');
+        if (class_exists('\\App\\Services\\UserService')) {
+            \App\Services\UserService::seedDefaultUsersIfEmpty();
+            $seeded = \App\Services\UserService::getByUsernameOrEmail('admin');
             if ($seeded) {
                 $_SESSION['codex_admin_profile'] = $seeded;
                 $_SESSION['codex_admin_user_id'] = $seeded['id'];
@@ -580,9 +585,9 @@ function get_admin_flash(): ?array
  */
 function current_admin_profile(): array
 {
-    if (class_exists('\\CRM\\Services\\UserService')) {
+    if (class_exists('\\App\\Services\\UserService')) {
         $username = (string)($_SESSION['codex_admin_user'] ?? 'admin');
-        $user = \CRM\Services\UserService::getByUsernameOrEmail($username);
+        $user = \App\Services\UserService::getByUsernameOrEmail($username);
         if ($user) {
             $_SESSION['codex_admin_profile'] = $user;
             return $user;
@@ -637,8 +642,8 @@ function current_admin_can(string $permission): bool
     $roles = (array)($profile['roles'] ?? ['superadmin']);
     $custom = is_array($profile['custom_permissions'] ?? null) ? $profile['custom_permissions'] : null;
 
-    if (class_exists('\\CRM\\Services\\RBACService')) {
-        return \CRM\Services\RBACService::hasPermission($roles, $permission, $custom);
+    if (class_exists('\\App\\Services\\RBACService')) {
+        return \App\Services\RBACService::hasPermission($roles, $permission, $custom);
     }
 
     if (class_exists('\\App\\Careers\\RecruitmentAuthService')) {
@@ -656,6 +661,56 @@ function current_admin_has_role(string $role): bool
     $profile = current_admin_profile();
     $roles = array_map('strtolower', (array)($profile['roles'] ?? []));
     return in_array(strtolower(trim($role)), $roles, true);
+}
+
+/**
+ * Enforce a required RBAC permission on an admin page or POST/JSON endpoint.
+ */
+function require_admin_permission(string $permission, bool $jsonResponse = false, string $redirectPage = ''): void
+{
+    require_admin_auth();
+
+    if (!current_admin_can($permission)) {
+        if ($jsonResponse) {
+            http_response_code(403);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['ok' => false, 'error' => 'Insufficient permissions (' . $permission . ').']);
+            exit;
+        }
+
+        set_admin_flash('error', 'Access Denied: Your role does not include permission "' . $permission . '".');
+        http_response_code(403);
+        header('Location: ' . admin_url($redirectPage));
+        exit;
+    }
+}
+
+/**
+ * Enforce that the current admin holds at least one of the listed RBAC permissions.
+ *
+ * @param array<int, string> $permissions
+ */
+function require_any_admin_permission(array $permissions, bool $jsonResponse = false, string $redirectPage = ''): void
+{
+    require_admin_auth();
+
+    foreach ($permissions as $permission) {
+        if (current_admin_can((string)$permission)) {
+            return;
+        }
+    }
+
+    if ($jsonResponse) {
+        http_response_code(403);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['ok' => false, 'error' => 'Insufficient permissions.']);
+        exit;
+    }
+
+    set_admin_flash('error', 'Access Denied: You do not have permission to access this section.');
+    http_response_code(403);
+    header('Location: ' . admin_url($redirectPage));
+    exit;
 }
 
 

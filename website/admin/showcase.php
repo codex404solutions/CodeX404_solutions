@@ -5,6 +5,9 @@ declare(strict_types=1);
  * CodeX404 Solutions — Admin Deliverables Showcase & Sandboxes (Multi-Page)
  */
 
+require_once __DIR__ . '/auth.php';
+require_admin_permission('portfolio.view');
+
 use App\Services\ProjectService;
 
 $currentPage = 'showcase';

@@ -15,176 +15,73 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- ======================================================== -->
-<!-- 1. FUTURISTIC ANIMATED SVG HERO BANNER                   -->
+<!-- 1. EXECUTIVE COMMAND HEADER                              -->
 <!-- ======================================================== -->
 <section class="admin-hero-banner" id="admin-hero">
-    <!-- High-Detail Animated Cyber Vector SVG Canvas -->
-    <svg class="banner-svg-canvas" viewBox="0 0 650 320" fill="none" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-            <linearGradient id="cyberGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.8" />
-                <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.6" />
-                <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.2" />
-            </linearGradient>
-            <linearGradient id="cyberGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#EC4899" stop-opacity="0.7" />
-                <stop offset="100%" stop-color="#6366F1" stop-opacity="0.2" />
-            </linearGradient>
-            <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="6" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-            <pattern id="adminGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(34, 211, 238, 0.08)" stroke-width="1" />
-                <circle cx="40" cy="40" r="1.5" fill="rgba(34, 211, 238, 0.25)" />
-            </pattern>
-        </defs>
-
-        <rect width="650" height="320" fill="url(#adminGrid)" />
-
-        <g class="svg-floating-group">
-            <path d="M 120 280 C 220 180, 320 240, 480 90" stroke="url(#cyberGrad1)" stroke-width="2.5" fill="none" class="svg-flow-path" />
-            <path d="M 180 310 C 280 230, 360 210, 560 140" stroke="url(#cyberGrad2)" stroke-width="2" fill="none" class="svg-flow-path" style="animation-duration: 20s; animation-direction: reverse;" />
-            <path d="M 280 20 L 400 120 L 320 240 Z" stroke="rgba(99, 102, 241, 0.25)" stroke-width="1.5" fill="none" />
-        </g>
-
-        <g class="svg-rotating-ring">
-            <circle cx="350" cy="180" r="90" stroke="rgba(34, 211, 238, 0.2)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" />
-            <circle cx="350" cy="180" r="60" stroke="rgba(168, 85, 247, 0.25)" stroke-width="1" stroke-dasharray="6 6" fill="none" />
-            <circle cx="440" cy="180" r="4.5" fill="#22D3EE" filter="url(#glowFilter)" />
-            <circle cx="290" cy="180" r="3.5" fill="#EC4899" filter="url(#glowFilter)" />
-        </g>
-
-        <g class="svg-pulsing-node">
-            <circle cx="480" cy="90" r="6" fill="#22D3EE" filter="url(#glowFilter)" />
-            <circle cx="480" cy="90" r="14" stroke="#22D3EE" stroke-width="1" opacity="0.4" />
-        </g>
-        <g class="svg-pulsing-node" style="animation-delay: 1.2s;">
-            <circle cx="180" cy="310" r="5" fill="#3B82F6" filter="url(#glowFilter)" />
-        </g>
-        <g class="svg-pulsing-node" style="animation-delay: 2s;">
-            <circle cx="320" cy="240" r="5.5" fill="#EC4899" filter="url(#glowFilter)" />
-        </g>
-    </svg>
-
-    <div class="banner-content">
-        <div class="banner-tech-pill">
-            <i class="bi bi-cpu-fill"></i>
-            <span>Central Admin Engine &bull; Production v2.4</span>
-        </div>
-        <h2 class="banner-title text-gradient-rainbow">
-            CodeX404 Multi-Page Mission Control
-        </h2>
-        <p class="banner-description">
-            Live orchestrator for production client systems, verified architectural performance metrics, high-throughput sandboxes, and cross-platform CRM synchronization.
-        </p>
-
-        <!-- Banner Quick Action Buttons -->
-        <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
-            <a href="<?= admin_url('deliverables') ?>" class="btn btn-info btn-sm fw-bold text-dark px-3 py-2 d-inline-flex align-items-center gap-2"
-                style="background: #38BDF8; border-color: #38BDF8; border-radius: 10px;">
-                <i class="bi bi-collection-play-fill"></i>
-                <span>Manage All Deliverables (<?= $totalCount ?>)</span>
-            </a>
-            <a href="<?= admin_url('showcase') ?>" class="btn btn-outline-primary btn-sm fw-semibold px-3 py-2 d-inline-flex align-items-center gap-2"
-                style="border-radius: 10px;">
-                <i class="bi bi-stars text-warning"></i>
-                <span>Open Showcase Carousel</span>
-            </a>
-            <a href="../../crm/" target="_blank" class="btn btn-outline-warning btn-sm fw-semibold px-3 py-2 d-inline-flex align-items-center gap-2"
-                style="border-radius: 10px;">
-                <i class="bi bi-robot text-warning"></i>
-                <span>Launch CRM Command</span>
-            </a>
+    <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
+        <div class="banner-content">
+            <div class="banner-tech-pill">
+                <span class="live-dot" style="width: 6px; height: 6px;"></span>
+                <span>Operations Console &middot; Production</span>
+            </div>
+            <h2 class="banner-title mb-2" style="color: var(--cx-text-primary);">
+                Portfolio &amp; Deliverables Control
+            </h2>
+            <p class="banner-description mb-0">
+                Manage live client systems, case studies, recruitment workflows, and role-based access from one unified workspace.
+            </p>
         </div>
 
-        <div class="banner-meta-bar">
-            <div class="banner-meta-item">
-                <i class="bi bi-shield-check text-success"></i>
-                <span>Sync: <strong>Instant Webhooks</strong></span>
-            </div>
-            <div class="banner-meta-item">
-                <i class="bi bi-speedometer2 text-info"></i>
-                <span>Runtime: <strong>PHP <?= PHP_VERSION ?></strong></span>
-            </div>
-            <div class="banner-meta-item">
-                <i class="bi bi-hdd-network text-primary"></i>
-                <span>Inventory: <strong><?= $totalCount ?> Total Systems</strong></span>
-            </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap flex-shrink-0">
+            <?php if (current_admin_can('portfolio.view')): ?>
+                <a href="<?= admin_url('deliverables') ?>" class="btn btn-info btn-sm fw-semibold text-dark px-3 py-2 d-inline-flex align-items-center gap-2"
+                    style="background: #38BDF8; border-color: #38BDF8; border-radius: 10px;">
+                    <i class="bi bi-collection-play-fill"></i>
+                    <span>Deliverables (<?= $totalCount ?>)</span>
+                </a>
+                <a href="<?= admin_url('showcase') ?>" class="btn btn-outline-secondary btn-sm fw-semibold px-3 py-2 d-inline-flex align-items-center gap-2"
+                    style="border-radius: 10px;">
+                    <i class="bi bi-stars text-primary"></i>
+                    <span>Showcase</span>
+                </a>
+            <?php endif; ?>
+            <?php if (current_admin_can('users.view')): ?>
+                <a href="<?= admin_url('users') ?>" class="btn btn-outline-secondary btn-sm fw-semibold px-3 py-2 d-inline-flex align-items-center gap-2"
+                    style="border-radius: 10px;">
+                    <i class="bi bi-people-fill text-info"></i>
+                    <span>Users &amp; Roles</span>
+                </a>
+            <?php endif; ?>
+            <?php if (is_dir(dirname(__DIR__, 2) . '/crm')): ?>
+                <a href="../../crm/" target="_blank" class="btn btn-outline-warning btn-sm fw-semibold px-3 py-2 d-inline-flex align-items-center gap-2"
+                    style="border-radius: 10px;">
+                    <i class="bi bi-robot"></i>
+                    <span>CRM</span>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </section>
 
 <!-- ======================================================== -->
-<!-- 2. CONTINUOUS MARQUEE SCROLLER TICKER                    -->
+<!-- 2. SYSTEM TELEMETRY STRIP                                -->
 <!-- ======================================================== -->
-<div class="admin-marquee-wrap" id="telemetry-ticker">
-    <div class="admin-marquee-label">
-        <span class="live-dot" style="width: 6px; height: 6px;"></span>
-        <span>Live Telemetry</span>
+<div class="admin-status-strip" id="telemetry-ticker">
+    <div class="admin-status-item">
+        <i class="bi bi-collection-play-fill text-info"></i>
+        <span>Deliverables: <strong><?= $totalCount ?> Systems</strong></span>
     </div>
-    <div class="admin-marquee-viewport">
-        <div class="admin-marquee-track">
-            <!-- Set 1 -->
-            <div class="admin-marquee-item">
-                <i class="bi bi-collection-play-fill text-info"></i>
-                <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-check-circle-fill text-success"></i>
-                <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-shield-lock-fill text-warning"></i>
-                <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-cpu-fill text-primary"></i>
-                <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-robot text-warning"></i>
-                <span>CRM Operations: <strong>Armed &amp; Connected</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-globe-americas text-info"></i>
-                <span>Domains: <strong><?= count($categories) ?> Industry Categories Synchronized</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-lightning-charge-fill text-warning"></i>
-                <span>Runtime: <strong>PHP <?= PHP_VERSION ?> &bull; MySQL PDO</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-
-            <!-- Set 2 (Continuous Duplicate) -->
-            <div class="admin-marquee-item">
-                <i class="bi bi-collection-play-fill text-info"></i>
-                <span>Deliverables: <strong><?= $totalCount ?> Managed Applications</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-check-circle-fill text-success"></i>
-                <span>Public Showcase: <strong><?= $activeCount ?> Published Live</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-shield-lock-fill text-warning"></i>
-                <span>Staging Sandbox: <strong><?= $draftCount ?> In Review</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-            <div class="admin-marquee-item">
-                <i class="bi bi-cpu-fill text-primary"></i>
-                <span>Tech Stack: <strong>PHP 8.3 &bull; Bootstrap 5.3.3 &bull; Dual-Tone Engine</strong></span>
-                <span class="sep">&bull;</span>
-            </div>
-        </div>
+    <div class="admin-status-item">
+        <i class="bi bi-check-circle-fill text-success"></i>
+        <span>Published: <strong><?= $activeCount ?> Live</strong></span>
+    </div>
+    <div class="admin-status-item">
+        <i class="bi bi-shield-lock-fill text-warning"></i>
+        <span>Staging: <strong><?= $draftCount ?> Drafts</strong></span>
+    </div>
+    <div class="admin-status-item">
+        <i class="bi bi-hdd-network-fill text-primary"></i>
+        <span>Runtime: <strong>PHP <?= PHP_VERSION ?> &middot; MySQL PDO</strong></span>
     </div>
 </div>
 
@@ -397,20 +294,20 @@ require_once __DIR__ . '/includes/header.php';
                             <?= (int) ($p['order'] ?? ($idx + 1)) ?>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-3" style="min-width: 0;">
                                 <div class="rounded-3 d-flex align-items-center justify-content-center text-info fw-bold"
                                     style="width: 36px; height: 36px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.25); flex-shrink: 0;">
                                     <i class="bi <?= $category === 'ai' ? 'bi-cpu' : ($category === 'cloud' ? 'bi-cloud-check' : ($category === 'mobile' ? 'bi-phone' : 'bi-code-square')) ?>"></i>
                                 </div>
-                                <div>
-                                    <div class="fw-bold text-white small mb-0">
+                                <div style="min-width: 0;">
+                                    <div class="project-title-text text-truncate mb-0" style="max-width: 280px;">
                                         <?= htmlspecialchars($p['title']) ?>
                                     </div>
-                                    <div class="d-flex align-items-center gap-2 text-muted" style="font-size: 0.74rem;">
-                                        <code class="project-id-chip"><?= htmlspecialchars($p['id']) ?></code>
+                                    <div class="d-flex align-items-center gap-2 text-muted flex-wrap" style="font-size: 0.74rem;">
+                                        <code class="project-id-chip" title="<?= htmlspecialchars($p['id']) ?>"><?= htmlspecialchars($p['id']) ?></code>
                                         <?php if (!empty($p['mockup_host'])): ?>
                                             <span>&bull;</span>
-                                            <span style="font-family: var(--font-mono);"><?= htmlspecialchars($p['mockup_host']) ?></span>
+                                            <span class="text-truncate" style="font-family: var(--font-mono); max-width: 200px; display: inline-block; vertical-align: middle;"><?= htmlspecialchars($p['mockup_host']) ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -460,10 +357,12 @@ require_once __DIR__ . '/includes/header.php';
                                     title="Quick Preview">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <a href="<?= admin_url('project-form?id=' . urlencode($p['id'])) ?>"
-                                    class="btn btn-sm btn-outline-primary btn-action-icon" title="Edit Deliverable">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
+                                <?php if (current_admin_can('portfolio.edit')): ?>
+                                    <a href="<?= admin_url('project-form?id=' . urlencode($p['id'])) ?>"
+                                        class="btn btn-sm btn-outline-primary btn-action-icon" title="Edit Deliverable">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </td>
                     </tr>

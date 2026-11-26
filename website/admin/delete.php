@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/auth.php';
-require_admin_auth();
+require_admin_permission('portfolio.edit');
 
 use App\Services\ProjectService;
 

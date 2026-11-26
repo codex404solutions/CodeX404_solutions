@@ -8,8 +8,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/auth.php';
 require_admin_auth();
 
-use CRM\Services\RBACService;
-use CRM\Services\UserService;
+use App\Services\RBACService;
+use App\Services\UserService;
 
 $currentPage = 'profile';
 $pageTitle = 'Account Profile & Multi-Role Footprint';

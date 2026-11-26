@@ -7,6 +7,9 @@ declare(strict_types=1);
 
 
 
+require_once __DIR__ . '/auth.php';
+require_admin_permission('settings.view');
+
 $currentPage = 'telemetry';
 $pageTitle = 'Platform Telemetry & System Diagnostics';
 $pageSubtitle = 'Real-time repository health, JSON data store integrity, PHP runtime parameters, and security session controls';

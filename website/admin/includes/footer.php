@@ -303,29 +303,37 @@ $currentPage = $currentPage ?? 'overview';
                     <span><i class="bi bi-grid-1x2-fill me-2 text-info"></i> Overview</span>
                     <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
                 </a>
-                <a href="<?= admin_url('deliverables') ?>" class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
-                    <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
-                    <span
-                        class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
-                </a>
-                <a href="<?= admin_url('showcase') ?>" class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
-                    <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
-                    <span
-                        class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
-                </a>
-                <a href="<?= admin_url('users') ?>" class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
-                    <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
-                    <span
-                        class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">RBAC</span>
-                </a>
+                <?php if (current_admin_can('portfolio.view')): ?>
+                    <a href="<?= admin_url('deliverables') ?>" class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
+                        <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
+                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
+                    </a>
+                    <a href="<?= admin_url('showcase') ?>" class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
+                        <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
+                    </a>
+                <?php endif; ?>
+                <?php if (current_admin_can('careers.view')): ?>
+                    <a href="<?= admin_url('careers') ?>" class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
+                        <span><i class="bi bi-briefcase-fill me-2 text-warning"></i> Careers &amp; Hiring</span>
+                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill">ATS</span>
+                    </a>
+                <?php endif; ?>
+                <?php if (current_admin_can('users.view')): ?>
+                    <a href="<?= admin_url('users') ?>" class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
+                        <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
+                        <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">RBAC</span>
+                    </a>
+                <?php endif; ?>
                 <a href="<?= admin_url('profile') ?>" class="admin-sidebar-link <?= ($currentPage === 'profile') ? 'active' : '' ?>">
                     <span><i class="bi bi-person-badge me-2 text-primary"></i> My Profile</span>
                 </a>
-                <a href="<?= admin_url('telemetry') ?>" class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
-                    <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
-                    <span
-                        class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
-                </a>
+                <?php if (current_admin_can('settings.view')): ?>
+                    <a href="<?= admin_url('telemetry') ?>" class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
+                        <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
+                    </a>
+                <?php endif; ?>
             </nav>
 
             <div class="admin-sidebar-section-title">Filter By Status</div>
@@ -369,21 +377,22 @@ $currentPage = $currentPage ?? 'overview';
             </div>
 
             <div class="admin-sidebar-section-title">Platform Bridges</div>
-            <div class="d-flex gap-1 mb-3">
-                <a href="../../crm/" target="_blank"
-                    class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                    style="font-size: 0.72rem;">
-                    <i class="bi bi-robot me-1 text-warning"></i> CRM
+            <div class="admin-bridge-grid mb-3">
+                <?php $crmMobileOk = is_dir(dirname(__DIR__, 3) . '/crm'); ?>
+                <?php if ($crmMobileOk): ?>
+                    <a href="../../crm/" target="_blank" class="admin-sidebar-bridge-link">
+                        <i class="bi bi-robot text-warning"></i><span>CRM</span>
+                    </a>
+                <?php else: ?>
+                    <span class="admin-sidebar-bridge-link text-muted opacity-50" style="cursor: not-allowed;">
+                        <i class="bi bi-lock-fill text-secondary"></i><span>CRM</span>
+                    </span>
+                <?php endif; ?>
+                <a href="<?= url('#work') ?>" target="_blank" class="admin-sidebar-bridge-link">
+                    <i class="bi bi-globe2 text-primary"></i><span>Public</span>
                 </a>
-                <a href="<?= url('#work') ?>" target="_blank"
-                    class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                    style="font-size: 0.72rem;">
-                    <i class="bi bi-globe2 me-1 text-primary"></i> Public
-                </a>
-                <a href="<?= url('discovery-call') ?>" target="_blank"
-                    class="admin-sidebar-bridge-link flex-fill text-center justify-content-center py-1"
-                    style="font-size: 0.72rem;">
-                    <i class="bi bi-lightning-charge me-1 text-info"></i> Intake
+                <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-sidebar-bridge-link">
+                    <i class="bi bi-lightning-charge text-info"></i><span>Intake</span>
                 </a>
             </div>
 
