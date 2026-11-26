@@ -17,9 +17,9 @@ $heroBreadcrumbs = [
     ['label' => 'Services', 'url' => url('solutions.php')],
     ['label' => 'Workflow Automation'],
 ];
-$heroTag = 'AUTOMATE · Workflows & Integrations';
-$heroTitleHtml = 'Automate Repetitive Work Across Your <span class="text-amber">Business Systems</span>';
-$heroSubtitle = 'Eliminate manual copy-pasting between forms, spreadsheets, CRMs, messaging channels, and invoicing tools with reliable, auditable API integrations and background pipelines.';
+$heroTag = 'AUTOMATE · Workflow & App Sync';
+$heroTitleHtml = 'Automate Repetitive Tasks Across <span class="text-amber">Your Business Tools</span>';
+$heroSubtitle = 'Stop copying and pasting data between website forms, spreadsheets, WhatsApp, and invoicing software. We connect your apps cleanly so routine updates run reliably in the background.';
 $heroActions = [
     ['label' => 'Book an Automation Audit', 'url' => url('discovery-call.php') . '?division=AUTOMATE', 'variant' => 'primary'],
     ['label' => 'Explore AI Agents', 'url' => url('ai-agents.php'), 'variant' => 'secondary'],
@@ -32,68 +32,56 @@ require __DIR__ . '/includes/subpage-hero.php';
         <div class="grid grid-cols-3" style="gap: 1.75rem;">
             <article class="card card-tilt reveal-on-scroll">
                 <div class="card-icon is-automate"><?= codex_icon('zap', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Automated Lead Capture &amp; Routing</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Automatic Lead Capture &amp; Alerts</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Capture inquiries from website forms, ad leads, and messaging webhooks cleanly—validating fields,
-                    deduplicating records, and notifying team owners promptly.
+                    Collect inquiries from website forms, ads, and messages cleanly—check details, prevent duplicates, and notify the right team member right away.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Instant Routing</span><span
-                        class="tag-chip">Deduplication</span><span class="tag-chip">CRM Sync</span></div>
+                <div class="card-tags"><span class="tag-chip">Instant Alerts</span><span class="tag-chip">No Duplicates</span><span class="tag-chip">CRM Updates</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon is-automate"><?= codex_icon('message', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">WhatsApp Business Cloud API</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">WhatsApp Business Messaging</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Integrate official Meta WhatsApp Business Cloud API templates and webhooks for appointment
-                    confirmations, payment reminders, and lead intake.
+                    Send official WhatsApp appointment confirmations, order updates, and payment reminders automatically while letting staff jump in whenever needed.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Official Cloud API</span><span class="tag-chip">Status
-                        Webhooks</span><span class="tag-chip">Staff Escalation</span></div>
+                <div class="card-tags"><span class="tag-chip">Official WhatsApp API</span><span class="tag-chip">Booking Alerts</span><span class="tag-chip">Team Handoff</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon is-automate"><?= codex_icon('card', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Invoicing &amp; Payment Sync</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Automatic Invoices &amp; Payments</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Generate structured PDF receipts, dispatch Razorpay or Stripe payment links, and reconcile paid
-                    transactions cleanly with operational records.
+                    Create PDF invoices, send Stripe or Razorpay payment links automatically, and mark orders paid across your accounts right on time.
                 </p>
-                <div class="card-tags"><span class="tag-chip">PDF Invoices</span><span class="tag-chip">Stripe /
-                        Razorpay</span><span class="tag-chip">Reconciliation</span></div>
+                <div class="card-tags"><span class="tag-chip">PDF Invoices</span><span class="tag-chip">Stripe / Razorpay</span><span class="tag-chip">Auto Receipts</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll">
                 <div class="card-icon is-automate"><?= codex_icon('link', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Multi-System Middleware</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Connect Your Existing Apps</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Connect internal databases and third-party SaaS apps using signed webhooks, background queues,
-                    idempotency keys, and retry handling.
+                    Link your website, accounting tools, CRM, and email systems together safely so data stays in sync without manual copying.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Signed Webhooks</span><span class="tag-chip">Job
-                        Queues</span><span class="tag-chip">Idempotency</span></div>
+                <div class="card-tags"><span class="tag-chip">App Connections</span><span class="tag-chip">Background Sync</span><span class="tag-chip">Reliable Retries</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon is-automate"><?= codex_icon('chart', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Scheduled Reporting Digests</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Daily &amp; Weekly Summary Reports</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Replace manual weekly CSV exports with scheduled operational digests pushed to email, Slack, or
-                    internal admin dashboards.
+                    Replace manual Friday spreadsheet work with automatic sales, inquiry, and status summaries sent directly to email or Slack.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Scheduled Jobs</span><span class="tag-chip">Email /
-                        Slack</span><span class="tag-chip">Anomaly Alerts</span></div>
+                <div class="card-tags"><span class="tag-chip">Scheduled Reports</span><span class="tag-chip">Email / Slack</span><span class="tag-chip">Early Warnings</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon is-automate"><?= codex_icon('database', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Spreadsheet-to-Database Transitions</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Move Off Messy Spreadsheets</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Clean legacy spreadsheets, import historical records into normalized MySQL or PostgreSQL schemas,
-                    and replace brittle manual edits with validated forms.
+                    Clean up scattered Excel sheets, import records safely into a proper database, and give your team clean forms that prevent typos.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Data Cleanup</span><span class="tag-chip">MySQL /
-                        Postgres</span><span class="tag-chip">Field Validation</span></div>
+                <div class="card-tags"><span class="tag-chip">Data Cleanup</span><span class="tag-chip">MySQL / Postgres</span><span class="tag-chip">Safe Forms</span></div>
             </article>
         </div>
     </div>

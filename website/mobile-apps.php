@@ -17,9 +17,9 @@ $heroBreadcrumbs = [
     ['label' => 'Services', 'url' => url('solutions.php')],
     ['label' => 'Mobile Applications'],
 ];
-$heroTag = 'BUILD · Mobile & Field Operations';
-$heroTitleHtml = 'Practical Mobile Apps for <span class="text-amber">Teams &amp; Customers</span>';
-$heroSubtitle = 'Put reliable mobile tools into the hands of customers and field operators—supporting cross-platform iOS/Android deployment, offline queuing, and synchronized backend APIs.';
+$heroTag = 'BUILD · Mobile Apps';
+$heroTitleHtml = 'Easy-to-Use Mobile Apps for <span class="text-amber">Teams &amp; Customers</span>';
+$heroSubtitle = 'Put fast, dependable Android, iPhone, and mobile web apps in your customers’ and field staff’s hands—working smoothly even when mobile internet connections drop.';
 $heroActions = [
     ['label' => 'Discuss a Mobile App', 'url' => url('discovery-call.php') . '?division=BUILD', 'variant' => 'primary'],
     ['label' => 'Explore Custom Software', 'url' => url('software-development.php'), 'variant' => 'secondary'],

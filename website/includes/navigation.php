@@ -6,12 +6,11 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
 
 $isHomeActive = ($currentScript === 'index.php');
 $isBuildActive = in_array($currentScript, ['build.php', 'software-development.php', 'saas.php', 'mobile-apps.php']);
-$isGrowActive = in_array($currentScript, ['grow.php', 'solutions.php']);
+$isGrowActive = in_array($currentScript, ['grow.php', 'seo-visibility.php', 'digital-ads.php', 'conversion-optimization.php', 'solutions.php']);
 $isAutomateActive = in_array($currentScript, ['automate.php', 'ai-solutions.php', 'ai-agents.php', 'automation.php']);
-$isServicesActive = ($isBuildActive || $isGrowActive || $isAutomateActive || $currentScript === 'solutions.php');
+$isServicesActive = ($isBuildActive || $isGrowActive || $isAutomateActive);
 $isWorkActive = in_array($currentScript, ['our-work.php', 'case-studies.php', 'portfolio.php', 'project.php']);
-$isAboutActive = in_array($currentScript, ['about.php', 'process.php', 'engagement-models.php', 'security.php', 'faq.php']);
-$isCompanyActive = $isAboutActive;
+$isAboutActive = in_array($currentScript, ['about.php', 'process.php', 'pricing.php', 'engagement-models.php', 'security.php', 'faq.php', 'careers.php', 'career-detail.php']);
 $isContactActive = ($currentScript === 'contact.php');
 ?>
 <header class="site-header">
@@ -21,7 +20,7 @@ $isContactActive = ($currentScript === 'contact.php');
             <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" class="site-logo-img" width="160" height="44">
         </a>
 
-        <!-- Main Navigation Links (PRD §7 Taxonomy) -->
+        <!-- Main Navigation Links -->
         <nav aria-label="Primary navigation">
             <ul class="nav-menu" id="navMenu">
                 <!-- 1. Home -->
@@ -29,10 +28,10 @@ $isContactActive = ($currentScript === 'contact.php');
                     <a href="<?= url('index.php') ?>" class="nav-link <?= $isHomeActive ? 'active' : '' ?>">Home</a>
                 </li>
 
-                <!-- 2. Services Dropdown (BUILD · GROW · AUTOMATE 3-Column Mega Menu) -->
+                <!-- 2. Services Dropdown (BUILD · GROW · AUTOMATE — 1-to-1 dedicated tabs) -->
                 <li class="nav-item nav-item-dropdown nav-item-mega">
                     <div class="nav-link-group">
-                        <a href="<?= url('build.php') ?>" class="nav-link <?= $isServicesActive ? 'active' : '' ?>">Services</a>
+                        <a href="<?= url('solutions.php') ?>" class="nav-link <?= $isServicesActive ? 'active' : '' ?>">Services</a>
                         <button type="button" class="nav-dropdown-toggle" aria-label="Toggle Services menu" aria-expanded="false" aria-controls="servicesMenu">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <path d="M6 9l6 6 6-6" />
@@ -48,17 +47,27 @@ $isContactActive = ($currentScript === 'contact.php');
                                         <span class="mega-dot dot-build"></span>
                                         <strong class="mega-col-title">BUILD</strong>
                                     </div>
-                                    <span class="mega-header-sub">/build &rarr;</span>
+                                    <span class="mega-header-sub">Overview &rarr;</span>
                                 </a>
                                 <ul class="mega-links-list">
-                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">Custom Web Application Development</a></li>
-                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">School ERP &amp; Institutional Portals</a></li>
-                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">Custom CRM Development</a></li>
-                                    <li><a href="<?= url('saas.php') ?>" class="mega-link">E-Commerce &amp; Checkout Platforms</a></li>
-                                    <li><a href="<?= url('saas.php') ?>" class="mega-link">SaaS MVP &amp; Multi-Tenant Setup</a></li>
-                                    <li><a href="<?= url('mobile-apps.php') ?>" class="mega-link">Cross-Platform Mobile &amp; PWA</a></li>
-                                    <li><a href="<?= url('software-development.php') ?>" class="mega-link">API Development &amp; Integrations</a></li>
-                                    <li><a href="<?= url('build.php') ?>" class="mega-link">Website Redesign &amp; Modernization</a></li>
+                                    <li>
+                                        <a href="<?= url('software-development.php') ?>" class="mega-link">
+                                            <strong>Custom Websites &amp; Software</strong>
+                                            <span>Websites, business portals, CRM &amp; ERP tools</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= url('saas.php') ?>" class="mega-link">
+                                            <strong>Online Products &amp; SaaS</strong>
+                                            <span>Subscription apps, stores &amp; online payments</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= url('mobile-apps.php') ?>" class="mega-link">
+                                            <strong>Mobile Apps</strong>
+                                            <span>Phone apps for iOS, Android &amp; field teams</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -69,17 +78,27 @@ $isContactActive = ($currentScript === 'contact.php');
                                         <span class="mega-dot dot-grow"></span>
                                         <strong class="mega-col-title">GROW</strong>
                                     </div>
-                                    <span class="mega-header-sub">/grow &rarr;</span>
+                                    <span class="mega-header-sub">Overview &rarr;</span>
                                 </a>
                                 <ul class="mega-links-list">
-                                    <li><a href="<?= url('solutions.php') ?>" class="mega-link">Search Engine Optimization (SEO)</a></li>
-                                    <li><a href="<?= url('solutions.php') ?>" class="mega-link">Answer Engine &amp; AI Search (AEO/GEO)</a></li>
-                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">PPC Advertising &amp; Google Ads</a></li>
-                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Social Media Management &amp; Marketing</a></li>
-                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Conversion Rate Optimization (CRO)</a></li>
-                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Content Writing &amp; Copywriting</a></li>
-                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">Website Maintenance &amp; Support</a></li>
-                                    <li><a href="<?= url('grow.php') ?>" class="mega-link">SEO &amp; Digital Growth Audits</a></li>
+                                    <li>
+                                        <a href="<?= url('seo-visibility.php') ?>" class="mega-link">
+                                            <strong>Google Search &amp; SEO</strong>
+                                            <span>Help more customers find your business online</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= url('digital-ads.php') ?>" class="mega-link">
+                                            <strong>Ads &amp; Social Media</strong>
+                                            <span>Targeted ads &amp; posts that bring real leads</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= url('conversion-optimization.php') ?>" class="mega-link">
+                                            <strong>Website Speed &amp; Sales</strong>
+                                            <span>Turn more visitors into calls, inquiries &amp; orders</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -90,17 +109,27 @@ $isContactActive = ($currentScript === 'contact.php');
                                         <span class="mega-dot dot-automate"></span>
                                         <strong class="mega-col-title">AUTOMATE</strong>
                                     </div>
-                                    <span class="mega-header-sub">/automate &rarr;</span>
+                                    <span class="mega-header-sub">Overview &rarr;</span>
                                 </a>
                                 <ul class="mega-links-list">
-                                    <li><a href="<?= url('ai-agents.php') ?>" class="mega-link">24/7 AI Customer Support Agents</a></li>
-                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">WhatsApp Cloud API &amp; CRM Pipelines</a></li>
-                                    <li><a href="<?= url('ai-solutions.php') ?>" class="mega-link">Enterprise RAG &amp; Knowledge Bases</a></li>
-                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">Automated Invoicing &amp; Workflows</a></li>
-                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">Event-Driven Webhooks &amp; Sync</a></li>
-                                    <li><a href="<?= url('ai-solutions.php') ?>" class="mega-link">Document Data Extraction &amp; OCR</a></li>
-                                    <li><a href="<?= url('ai-agents.php') ?>" class="mega-link">Multi-Agent Autonomous Systems</a></li>
-                                    <li><a href="<?= url('automation.php') ?>" class="mega-link">Real-Time Lead Capture &amp; Routing</a></li>
+                                    <li>
+                                        <a href="<?= url('ai-solutions.php') ?>" class="mega-link">
+                                            <strong>Smart AI Assistants</strong>
+                                            <span>Instant answers trained on your company files</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= url('ai-agents.php') ?>" class="mega-link">
+                                            <strong>AI Support &amp; Task Agents</strong>
+                                            <span>24/7 helpful assistants with human approval rules</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= url('automation.php') ?>" class="mega-link">
+                                            <strong>Workflow &amp; App Sync</strong>
+                                            <span>Connect WhatsApp, billing &amp; forms automatically</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -108,14 +137,14 @@ $isContactActive = ($currentScript === 'contact.php');
                         <!-- Mega Menu Footer Bar -->
                         <div class="mega-footer-bar">
                             <div class="mega-footer-text">
-                                <span>⚡ Need a custom architecture tailored to your business?</span>
+                                <span>Not sure where to start? We will help you choose the simplest path.</span>
                             </div>
                             <div class="mega-footer-links">
                                 <a href="<?= url('discovery-call.php') ?>" class="mega-footer-cta">
                                     <span>Book a Discovery Call &rarr;</span>
                                 </a>
-                                <a href="<?= url('index.php#divisions') ?>" class="mega-footer-sublink">
-                                    <span>Compare All Offerings &rarr;</span>
+                                <a href="<?= url('solutions.php') ?>" class="mega-footer-sublink">
+                                    <span>View All Services &rarr;</span>
                                 </a>
                             </div>
                         </div>
@@ -127,7 +156,7 @@ $isContactActive = ($currentScript === 'contact.php');
                     <a href="<?= url('our-work.php') ?>" class="nav-link <?= $isWorkActive ? 'active' : '' ?>">Our Work</a>
                 </li>
 
-                <!-- 4. About Dropdown (About, Process, Engagement Models, Security, FAQ) -->
+                <!-- 4. About Dropdown (Essential Pages Only) -->
                 <li class="nav-item nav-item-dropdown">
                     <div class="nav-link-group">
                         <a href="<?= url('about.php') ?>" class="nav-link <?= $isAboutActive ? 'active' : '' ?>">About</a>
@@ -137,40 +166,34 @@ $isContactActive = ($currentScript === 'contact.php');
                             </svg>
                         </button>
                     </div>
-                    <ul class="nav-dropdown" id="aboutMenu" style="min-width: 275px;">
+                    <ul class="nav-dropdown" id="aboutMenu" style="min-width: 270px;">
                         <li>
                             <a href="<?= url('about.php') ?>" class="dropdown-link">
                                 <strong>About CodeX404</strong>
-                                <span>Engineering philosophy & leadership</span>
+                                <span>Who we are and how our team helps</span>
                             </a>
                         </li>
                         <li>
                             <a href="<?= url('process.php') ?>" class="dropdown-link">
-                                <strong>Engineering Process</strong>
-                                <span>Step-by-step verified development</span>
+                                <strong>How We Work</strong>
+                                <span>Simple step-by-step project process</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= url('engagement-models.php') ?>" class="dropdown-link">
-                                <strong>Engagement Models</strong>
-                                <span>Milestone, dedicated & advisory</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= url('security.php') ?>" class="dropdown-link">
-                                <strong>Security & Compliance</strong>
-                                <span>Data isolation & access governance</span>
+                            <a href="<?= url('pricing.php') ?>" class="dropdown-link">
+                                <strong>Pricing &amp; Estimates</strong>
+                                <span>Clear project costs and scope tool</span>
                             </a>
                         </li>
                         <li>
                             <a href="<?= url('faq.php') ?>" class="dropdown-link">
-                                <strong>Technical FAQ</strong>
-                                <span>Common architecture & delivery questions</span>
+                                <strong>Common Questions</strong>
+                                <span>Plain answers before you start</span>
                             </a>
                         </li>
                         <li>
                             <a href="<?= url('careers') ?>" class="dropdown-link">
-                                <strong>Careers &amp; Hiring</strong>
+                                <strong>Careers</strong>
                                 <span>Open roles &amp; application tracking</span>
                             </a>
                         </li>

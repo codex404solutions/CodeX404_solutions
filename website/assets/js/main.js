@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.remove('open');
         document.body.classList.remove('nav-open');
         navToggleBtn.innerHTML = hamburgerSvg;
+        navMenu.querySelectorAll('.nav-dropdown.active').forEach(d => d.classList.remove('active'));
+        navMenu.querySelectorAll('.nav-dropdown-toggle[aria-expanded="true"]').forEach(t => t.setAttribute('aria-expanded', 'false'));
         if (focusWasInMenu) navToggleBtn.focus();
       }
     };
@@ -44,9 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close menu when tapping links inside drawer
+    // Close menu when tapping destination links (skip top-level accordion triggers on mobile)
     navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        const isAccordionParent = navMenu.classList.contains('open') && !!link.closest('.nav-link-group');
+        if (isAccordionParent) {
+          e.preventDefault();
+          const toggleBtn = link.closest('.nav-link-group')?.querySelector('.nav-dropdown-toggle');
+          if (toggleBtn) toggleBtn.click();
+          return;
+        }
         toggleNav(false);
       });
     });
@@ -1512,8 +1521,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropdown = parent.querySelector('.nav-dropdown');
         if (!dropdown) return;
 
-        const isExpanded = dropdown.classList.toggle('active');
-        toggle.setAttribute('aria-expanded', String(isExpanded));
+        const willOpen = !dropdown.classList.contains('active');
+        // Keep only one mobile accordion open at a time for clean scrolling
+        document.querySelectorAll('.nav-item-dropdown .nav-dropdown.active').forEach(other => {
+          if (other !== dropdown) {
+            other.classList.remove('active');
+            const otherBtn = other.closest('.nav-item-dropdown')?.querySelector('.nav-dropdown-toggle');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        dropdown.classList.toggle('active', willOpen);
+        toggle.setAttribute('aria-expanded', String(willOpen));
       });
     });
   };

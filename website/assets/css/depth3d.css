@@ -2114,18 +2114,46 @@ textarea:focus-visible {
     var(--obs-rim-glow-hover) !important;
 }
 
-/* Overlays, modals, and dropdowns keep static Obsidian framing */
+/* Overlays, modals, and dropdowns keep solid high-contrast Obsidian framing */
 .demo-modal-container,
+.nav-dropdown,
 .nav-dropdown-mega,
 .codex-chat-window {
   background:
-    linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%) padding-box,
+    linear-gradient(170deg, rgba(10, 19, 36, 0.985) 0%, rgba(6, 12, 24, 0.995) 100%) padding-box,
     var(--obs-rim-gradient) border-box !important;
   border: 1px solid transparent !important;
   box-shadow:
     var(--obs-specular-top),
-    0 18px 42px rgba(2, 6, 18, 0.56),
+    0 24px 60px rgba(2, 6, 18, 0.85),
     var(--obs-rim-glow) !important;
+}
+
+.nav-dropdown-mega .mega-link {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.18rem;
+  padding: 0.62rem 0.78rem;
+}
+
+.nav-dropdown-mega .mega-link strong {
+  display: block;
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.nav-dropdown-mega .mega-link span {
+  display: block;
+  color: #94A3B8;
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.nav-dropdown .dropdown-link span {
+  color: #94A3B8;
 }
 
 /* Tier 1 Site-Wide Surfaces: CTA banners, FAQs, Careers & Project tiles */

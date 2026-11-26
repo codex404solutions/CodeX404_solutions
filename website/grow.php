@@ -5,8 +5,8 @@ $division = [
     'code' => 'GROW',
     'eyebrow' => 'GROW · Digital marketing and discoverability',
     'title' => 'Accelerate Discoverability and Convert High-Intent Traffic',
-    'title_html' => 'Accelerate Discoverability &amp; <span class="text-amber">Convert High-Intent Traffic</span>',
-    'intro' => 'Drive qualified customer acquisition through technical SEO, authoritative content architecture, targeted performance marketing, and conversion funnel optimization.',
+    'title_html' => 'Help More Customers Find &amp; <span class="text-amber">Choose Your Business</span>',
+    'intro' => 'Attract ready-to-buy visitors through clearer Google search visibility, focused ad campaigns, and faster websites built to turn visits into real inquiries.',
     'audience' => 'Brands seeking predictable organic search rankings, e-commerce storefronts optimizing sales conversions, and B2B firms scaling qualified leads.',
     'problems' => [
         'High-value buyers cannot discover your website on major search engines.',
@@ -14,10 +14,9 @@ $division = [
         'Website traffic fails to convert into qualified inquiries or paying customers.',
     ],
     'services' => [
-        ['icon' => '⌕', 'title' => 'Technical & Semantic SEO', 'description' => 'Core Web Vitals optimization, schema markup, and clean information architecture that strengthen organic search visibility.', 'url' => 'solutions.php'],
-        ['icon' => '↗', 'title' => 'Performance Marketing', 'description' => 'Focused campaigns across Google Ads, Meta, and LinkedIn calibrated around qualified pipeline rather than vanity clicks.', 'url' => 'contact.php'],
-        ['icon' => '✎', 'title' => 'High-Clarity Content', 'description' => 'Service positioning, search-friendly landing pages, and clear product messaging written for real buyers.', 'url' => 'contact.php'],
-        ['icon' => '◎', 'title' => 'CRO & Conversion Analytics', 'description' => 'Form flow improvements, user journey analysis, and event tracking that turn existing traffic into real inquiries.', 'url' => 'contact.php'],
+        ['icon' => '⌕', 'title' => 'Google Search & SEO', 'description' => 'Improve your website structure, page speed, and search keywords so local and online buyers find you first.', 'url' => 'seo-visibility.php'],
+        ['icon' => '↗', 'title' => 'Ads & Social Media', 'description' => 'Clear Google, Instagram, and LinkedIn campaigns with honest budget tracking focused on real inquiries.', 'url' => 'digital-ads.php'],
+        ['icon' => '◎', 'title' => 'Website Speed & More Sales', 'description' => 'Make pages load faster and guide visitors cleanly toward calling, messaging, or booking a consultation.', 'url' => 'conversion-optimization.php'],
     ],
     'steps' => [
         ['title' => 'Audit & Benchmark', 'description' => 'Analyze technical SEO, site speed, competitor positioning, and conversion friction.'],

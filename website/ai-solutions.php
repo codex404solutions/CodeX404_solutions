@@ -17,9 +17,9 @@ $heroBreadcrumbs = [
     ['label' => 'Services', 'url' => url('solutions.php')],
     ['label' => 'AI Solutions & RAG'],
 ];
-$heroTag = 'AUTOMATE · Applied AI & Knowledge Systems';
-$heroTitleHtml = 'Applied AI Systems Built for <span class="text-amber">Grounded Business Value</span>';
-$heroSubtitle = 'We engineer domain-specific AI assistants and document pipelines anchored directly to your approved internal documentation and databases—with source citations, schema validation, and explicit access boundaries.';
+$heroTag = 'AUTOMATE · Smart AI Assistants';
+$heroTitleHtml = 'Smart AI Assistants Trained on <span class="text-amber">Your Company Knowledge</span>';
+$heroSubtitle = 'Stop digging through hundreds of PDFs, manuals, and policies. We build helpful, private AI assistants that answer questions strictly from your approved files—always showing where each answer came from.';
 $heroActions = [
     ['label' => 'Discuss an AI Use Case', 'url' => url('discovery-call.php') . '?division=AUTOMATE', 'variant' => 'primary'],
     ['label' => 'Explore AI Agents', 'url' => url('ai-agents.php'), 'variant' => 'secondary'],
@@ -32,68 +32,56 @@ require __DIR__ . '/includes/subpage-hero.php';
         <div class="grid grid-cols-3" style="gap: 1.75rem;">
             <article class="card card-tilt reveal-on-scroll">
                 <div class="card-icon is-automate"><?= codex_icon('book', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Private Knowledge RAG Systems</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Company Q&amp;A Knowledge Search</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Connect language models to internal SOPs, manuals, and policies using retrieval-augmented generation
-                    that cites source passages and refuses ungrounded answers.
+                    Connect AI search directly to your company guides, SOPs, and manuals so staff get clear answers with links to the exact source document—no made-up guesses.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Hybrid Vector Search</span><span class="tag-chip">Qdrant /
-                        pgvector</span><span class="tag-chip">Source Citations</span></div>
+                <div class="card-tags"><span class="tag-chip">Private File Search</span><span class="tag-chip">Source Links</span><span class="tag-chip">Zero Guesswork</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon is-automate"><?= codex_icon('file', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Document Intelligence &amp; Extraction</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Automatic Document Reading</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Extract line items, dates, and structured fields from PDFs, forms, and invoices into validated
-                    database records with human review checkpoints.
+                    Pull line items, totals, and customer details out of uploaded PDFs, forms, and invoices cleanly into your database, with simple human review before saving.
                 </p>
-                <div class="card-tags"><span class="tag-chip">OCR Parsing</span><span class="tag-chip">Schema
-                        Validation</span><span class="tag-chip">Human Review</span></div>
+                <div class="card-tags"><span class="tag-chip">Invoice Reading</span><span class="tag-chip">Clean Data Checks</span><span class="tag-chip">Human Review</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon is-automate"><?= codex_icon('message', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Customer &amp; Inquiry Assistants</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">24/7 Customer Help Chat</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Deploy structured web and WhatsApp assistants that answer product questions from verified
-                    documentation, capture lead context, and escalate to staff cleanly.
+                    Helpful website and WhatsApp chat assistants that answer common product questions from verified guides, collect inquiry details, and hand off to your team anytime.
                 </p>
-                <div class="card-tags"><span class="tag-chip">WhatsApp Cloud API</span><span class="tag-chip">Lead
-                        Qualification</span><span class="tag-chip">Staff Handoff</span></div>
+                <div class="card-tags"><span class="tag-chip">WhatsApp &amp; Web</span><span class="tag-chip">Lead Intake</span><span class="tag-chip">Human Handoff</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll">
                 <div class="card-icon is-automate"><?= codex_icon('search', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Internal Team Copilots</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Internal Team Helpers</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Give staff fast natural-language search across approved knowledge bases while enforcing role-based
-                    permission filters on retrieved records.
+                    Let staff search answers in plain English across approved handbooks and past records while keeping private files hidden from unauthorized roles.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Role Filtering</span><span class="tag-chip">Data
-                        Segregation</span><span class="tag-chip">Fast Retrieval</span></div>
+                <div class="card-tags"><span class="tag-chip">Staff Permissions</span><span class="tag-chip">Private Folders</span><span class="tag-chip">Fast Search</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon is-automate"><?= codex_icon('chart', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Guided Reporting &amp; Querying</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Plain-English Report Summaries</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Translate approved reporting questions into strictly read-only, allowlisted queries so managers
-                    inspect operational metrics without writing SQL.
+                    Ask everyday questions about approved sales or operations figures safely using read-only views—no technical database skills required.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Read-Only Guardrails</span><span
-                        class="tag-chip">Allowlisted Views</span><span class="tag-chip">Audit Logs</span></div>
+                <div class="card-tags"><span class="tag-chip">Read-Only Safe</span><span class="tag-chip">Approved Views</span><span class="tag-chip">Activity History</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon is-automate"><?= codex_icon('lock', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Private &amp; Scoped Hosting</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Private Data Protection</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Select API-backed or dedicated self-hosted open-weight models according to your data sensitivity,
-                    budget, and compliance requirements.
+                    Keep business files isolated on private servers or API plans configured so your confidential data is never used to train public AI models.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Isolated Hosting</span><span class="tag-chip">Data
-                        Boundaries</span><span class="tag-chip">Zero Training Policies</span></div>
+                <div class="card-tags"><span class="tag-chip">Private Hosting</span><span class="tag-chip">Access Rules</span><span class="tag-chip">No Public Training</span></div>
             </article>
         </div>
     </div>

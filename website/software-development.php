@@ -17,9 +17,9 @@ $heroBreadcrumbs = [
     ['label' => 'Services', 'url' => url('solutions.php')],
     ['label' => 'Custom Software'],
 ];
-$heroTag = 'BUILD · Custom Software & Portals';
-$heroTitleHtml = 'Custom Software Built Around Your <span class="text-amber">Operational Workflow</span>';
-$heroSubtitle = 'Off-the-shelf software forces your business into rigid templates while charging per-seat fees. We design and engineer web platforms, internal ERPs, CRMs, and customer portals tailored to how your team operates.';
+$heroTag = 'BUILD · Custom Websites & Software';
+$heroTitleHtml = 'Custom Software Built Around <span class="text-amber">How Your Business Works</span>';
+$heroSubtitle = 'Generic templates force your staff to change how they work and charge growing monthly per-user fees. We build reliable websites, customer portals, and business software tailored to your exact team.';
 $heroActions = [
     ['label' => 'Book a Discovery Call', 'url' => url('discovery-call.php') . '?division=BUILD', 'variant' => 'primary'],
     ['label' => 'View Case Studies', 'url' => url('case-studies.php'), 'variant' => 'secondary'],

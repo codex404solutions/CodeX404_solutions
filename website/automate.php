@@ -5,8 +5,8 @@ $division = [
     'code' => 'AUTOMATE',
     'eyebrow' => 'AUTOMATE · Integrations, workflows, and AI',
     'title' => 'Streamline Operations With Applied AI & Intelligent Workflows',
-    'title_html' => 'Streamline Operations With <span class="text-amber">Applied AI &amp; Workflows</span>',
-    'intro' => 'Eliminate repetitive manual work by connecting internal tools, building grounded AI assistants, and automating business workflows with clear safety guardrails.',
+    'title_html' => 'Save Hours Every Week With <span class="text-amber">Smart AI &amp; Automation</span>',
+    'intro' => 'Cut out repetitive manual typing by connecting your apps, automating everyday follow-ups, and using helpful AI tools grounded safely in your business files.',
     'audience' => 'Operations managers, support teams, and founders looking to eliminate repetitive manual handoffs and scattered data entry.',
     'problems' => [
         'Teams waste hours re-entering identical data across disparate CRMs, ERPs, and spreadsheets.',

@@ -17,9 +17,9 @@ $heroBreadcrumbs = [
     ['label' => 'Services', 'url' => url('solutions.php')],
     ['label' => 'AI Agents'],
 ];
-$heroTag = 'AUTOMATE · AI Agents & Tool Calling';
-$heroTitleHtml = 'Accountable AI Agents Built for <span class="text-amber">Real Operational Workflows</span>';
-$heroSubtitle = 'Move beyond standalone chat boxes. We design tool-using agents that inspect requests, look up approved records, invoke typed APIs, and route consequential actions through human approval gates.';
+$heroTag = 'AUTOMATE · AI Support & Task Agents';
+$heroTitleHtml = 'Helpful AI Agents With <span class="text-amber">Clear Safety Rules</span>';
+$heroSubtitle = 'Go beyond basic chatbots. We build smart task assistants that look up customer orders, prepare updates across your tools, and pause for human approval before taking important actions.';
 $heroActions = [
     ['label' => 'Discuss an Agent Workflow', 'url' => url('discovery-call.php') . '?division=AUTOMATE', 'variant' => 'primary'],
     ['label' => 'Explore Workflow Automation', 'url' => url('automation.php'), 'variant' => 'secondary'],
@@ -32,68 +32,56 @@ require __DIR__ . '/includes/subpage-hero.php';
         <div class="grid grid-cols-3" style="gap: 1.75rem;">
             <article class="card card-tilt reveal-on-scroll">
                 <div class="card-icon is-automate"><?= codex_icon('cpu', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Typed Function &amp; API Tools</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Smart App &amp; Tool Actions</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Provide agents with constrained tools to check stock, look up CRM records, or dispatch structured
-                    webhooks using schema-checked JSON inputs.
+                    Let your assistant safely check inventory, look up customer records, or update approved tools using strict input checks.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Type-Safe Tools</span><span class="tag-chip">REST /
-                        Webhooks</span><span class="tag-chip">Schema Guarded</span></div>
+                <div class="card-tags"><span class="tag-chip">Safe Tool Access</span><span class="tag-chip">Real-Time Lookup</span><span class="tag-chip">Checked Inputs</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon is-automate"><?= codex_icon('users', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Coordinated Task Routing</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Step-by-Step Task Routing</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Separate triage, extraction, validation, and escalation into distinct accountable steps rather than
-                    relying on one opaque prompt.
+                    Break work into clear steps—reading requests, checking facts, preparing replies, and passing tricky issues to staff cleanly.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Role Separation</span><span class="tag-chip">State
-                        Tracking</span><span class="tag-chip">Validation Step</span></div>
+                <div class="card-tags"><span class="tag-chip">Clear Steps</span><span class="tag-chip">Status Tracking</span><span class="tag-chip">Team Handoff</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon is-automate"><?= codex_icon('shield', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Human-in-the-Loop Gates</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Human Approval Before Action</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Refunds, sensitive record changes, or outbound client messages pause at clear verification
-                    checkpoints until an authorized person approves.
+                    Important steps like refunds, sensitive record edits, or outbound messages always wait for a team member to approve before running.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Approval Gates</span><span class="tag-chip">Scoped
-                        Permissions</span><span class="tag-chip">Controlled Actions</span></div>
+                <div class="card-tags"><span class="tag-chip">Human Checkpoints</span><span class="tag-chip">Clear Limits</span><span class="tag-chip">Safe Actions</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll">
                 <div class="card-icon is-automate"><?= codex_icon('database', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Structured Session State</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Organized Task Memory</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Persist conversation and task context cleanly across multi-step workflows with clear token budgets
-                    and expiration rules.
+                    Remember active conversations and order context cleanly across follow-up messages without losing track of what was already answered.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Session Persistence</span><span class="tag-chip">Context
-                        Indexing</span><span class="tag-chip">Token Limits</span></div>
+                <div class="card-tags"><span class="tag-chip">Session History</span><span class="tag-chip">Clean Context</span><span class="tag-chip">Cost Limits</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-1">
                 <div class="card-icon is-automate"><?= codex_icon('workflow', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Error Handling &amp; Fallbacks</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Safe Error Recovery</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Handle external API timeouts, rate limits, and validation rejections gracefully with bounded retries
-                    and clear escalation alerts.
+                    When another app slows down or misses a message, the task safely retries or sends an alert to your team instead of silently failing.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Bounded Retries</span><span class="tag-chip">Fallback
-                        Paths</span><span class="tag-chip">Dead-Letter Logs</span></div>
+                <div class="card-tags"><span class="tag-chip">Safe Retries</span><span class="tag-chip">Backup Paths</span><span class="tag-chip">Team Alerts</span></div>
             </article>
 
             <article class="card card-tilt reveal-on-scroll reveal-delay-2">
                 <div class="card-icon is-automate"><?= codex_icon('file', 24) ?></div>
-                <h2 class="card-title" style="font-size: 1.28rem;">Action Audit Logs</h2>
+                <h2 class="card-title" style="font-size: 1.28rem;">Clear Activity Logs</h2>
                 <p class="card-description" style="font-size: 0.92rem; line-height: 1.65;">
-                    Record every tool call, payload, outcome, and human sign-off step in structured logs for
-                    troubleshooting and accountability.
+                    See every question handled, every check made, and every team approval in one easy-to-read activity log for full peace of mind.
                 </p>
-                <div class="card-tags"><span class="tag-chip">Traceable Runs</span><span class="tag-chip">Cost
-                        Visibility</span><span class="tag-chip">Debuggable State</span></div>
+                <div class="card-tags"><span class="tag-chip">Full Traceability</span><span class="tag-chip">Usage Clarity</span><span class="tag-chip">Easy Audits</span></div>
             </article>
         </div>
     </div>

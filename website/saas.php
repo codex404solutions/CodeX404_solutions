@@ -24,9 +24,9 @@ $heroBreadcrumbs = [
     ['label' => 'Services', 'url' => url('solutions.php')],
     ['label' => 'SaaS & Products'],
 ];
-$heroTag = 'BUILD · SaaS Products & Digital Platforms';
-$heroTitleHtml = 'From Product Concept to <span class="text-amber">Production-Ready SaaS</span>';
-$heroSubtitle = 'We design and build multi-tenant SaaS applications and internal platforms—handling data isolation, recurring billing, role-based access, and maintainable deployment pipelines.';
+$heroTag = 'BUILD · Online Products & SaaS';
+$heroTitleHtml = 'Turn Your Product Idea Into a <span class="text-amber">Launch-Ready Platform</span>';
+$heroSubtitle = 'We design and build subscription software, online portals, and digital products—taking care of customer accounts, recurring payments, user roles, and clean updates.';
 $heroActions = [
     ['label' => 'Discuss a SaaS Build', 'url' => url('discovery-call.php') . '?division=BUILD', 'variant' => 'primary'],
     ['label' => 'Explore Product Catalog', 'url' => '#codex-platforms', 'variant' => 'secondary'],
