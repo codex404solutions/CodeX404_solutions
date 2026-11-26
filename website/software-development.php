@@ -203,7 +203,7 @@ require __DIR__ . '/includes/subpage-hero.php';
 <!-- LIVE WORK & INTERACTIVE SIMULATOR CALLOUT -->
 <section class="section">
     <div class="container">
-        <div
+        <div class="obsidian-lit-panel"
             style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
             <div style="max-width: 600px;">
                 <span class="tag-chip"

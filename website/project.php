@@ -266,7 +266,7 @@ require_once __DIR__ . '/includes/header.php';
 
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
                             <?php foreach ($project['features'] as $feat): ?>
-                                <div
+                                <div class="project-feature-tile"
                                     style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0.75rem; padding: 1.15rem 1.25rem; display: flex; align-items: flex-start; gap: 0.75rem;">
                                     <span
                                         style="color: var(--cyan); font-size: 1rem; line-height: 1.2; flex-shrink: 0;">✓</span>

@@ -57,6 +57,64 @@ class FormValidator {
         ][$timeline] ?? '';
     }
 
+    /** @return array<string, string> */
+    public static function contactCategories(): array {
+        return [
+            'project' => 'Project Discussion',
+            'service' => 'Service Inquiry',
+            'partnership' => 'Business Partnership',
+            'general' => 'General Inquiry',
+        ];
+    }
+
+    /** @return array<string, string> */
+    public static function partnershipTypes(): array {
+        return [
+            'agency_whitelabel' => 'Agency / White-Label Delivery',
+            'referral_channel' => 'Referral / Channel Partner',
+            'tech_integration' => 'Technology / API Integration',
+            'strategic_jv' => 'Strategic Joint Venture',
+            'other' => 'Other Collaboration',
+        ];
+    }
+
+    /** @return array<string, string> */
+    public static function engagementModels(): array {
+        return [
+            'fixed_scope' => 'Fixed-Scope Milestone Build',
+            'retainer' => 'Ongoing Product / Growth Retainer',
+            'advisory' => 'Architecture Audit / Advisory',
+            'flexible' => 'Flexible — Recommend Best Fit',
+        ];
+    }
+
+    /** @return array<string, string> */
+    public static function generalInquiryAreas(): array {
+        return [
+            'general_info' => 'General Information',
+            'security_report' => 'Security & Vulnerability Disclosure',
+            'press_media' => 'Press, Media & Speaking',
+            'billing_vendor' => 'Billing & Vendor Relations',
+            'other' => 'Other Inquiry',
+        ];
+    }
+
+    public static function categoryLabel(string $category): string {
+        return self::contactCategories()[strtolower(trim($category))] ?? 'Project Discussion';
+    }
+
+    public static function partnershipTypeLabel(string $type): string {
+        return self::partnershipTypes()[$type] ?? '';
+    }
+
+    public static function engagementModelLabel(string $model): string {
+        return self::engagementModels()[$model] ?? '';
+    }
+
+    public static function generalInquiryAreaLabel(string $area): string {
+        return self::generalInquiryAreas()[$area] ?? '';
+    }
+
     private function validateServiceForDivision(string $division, string $service, bool $required, string $field): void {
         if ($service === '') {
             if ($required) {
@@ -210,12 +268,50 @@ class FormValidator {
             $this->errors['company'] = 'Company name cannot exceed 120 characters.';
         }
 
+        $category = strtolower(trim((string)($data['inquiry_category'] ?? 'project')));
+        if (!array_key_exists($category, self::contactCategories())) {
+            $this->errors['inquiry_category'] = 'Please select a valid inquiry category.';
+            $category = 'project';
+        }
+
         $division = strtoupper(trim((string)($data['division'] ?? '')));
-        if (!in_array($division, ['BUILD', 'GROW', 'AUTOMATE'], true)) {
+        $requiresDivision = in_array($category, ['project', 'service'], true);
+        if ($requiresDivision) {
+            if (!in_array($division, ['BUILD', 'GROW', 'AUTOMATE'], true)) {
+                $this->errors['division'] = 'Please select BUILD, GROW, or AUTOMATE.';
+            }
+        } elseif ($division !== '' && !in_array($division, ['BUILD', 'GROW', 'AUTOMATE'], true)) {
             $this->errors['division'] = 'Please select BUILD, GROW, or AUTOMATE.';
         }
 
-        $this->validateServiceForDivision($division, trim((string)($data['service'] ?? '')), false, 'service');
+        if ($category === 'service') {
+            $this->validateServiceForDivision($division, trim((string)($data['service'] ?? '')), true, 'service');
+            $engagementModel = trim((string)($data['engagement_model'] ?? ''));
+            if ($engagementModel !== '' && self::engagementModelLabel($engagementModel) === '') {
+                $this->errors['engagement_model'] = 'Please select a valid engagement model.';
+            }
+        } elseif ($category === 'project') {
+            $this->validateServiceForDivision($division, trim((string)($data['service'] ?? '')), false, 'service');
+        }
+
+        if ($category === 'partnership') {
+            $partnershipType = trim((string)($data['partnership_type'] ?? ''));
+            if ($partnershipType === '' || self::partnershipTypeLabel($partnershipType) === '') {
+                $this->errors['partnership_type'] = 'Please select a partnership type.';
+            }
+            $partnerRole = trim((string)($data['partner_role'] ?? ''));
+            if ($partnerRole !== '' && mb_strlen($partnerRole, 'UTF-8') > 100) {
+                $this->errors['partner_role'] = 'Role / title cannot exceed 100 characters.';
+            }
+        }
+
+        if ($category === 'general') {
+            $inquiryArea = trim((string)($data['inquiry_area'] ?? ''));
+            if ($inquiryArea !== '' && self::generalInquiryAreaLabel($inquiryArea) === '') {
+                $this->errors['inquiry_area'] = 'Please select a valid inquiry department.';
+            }
+        }
+
         $this->validateProjectContext($data);
 
         // Subject

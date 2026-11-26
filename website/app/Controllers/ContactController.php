@@ -32,20 +32,34 @@ class ContactController {
             ];
         }
 
+        $category = strtolower(Sanitizer::cleanString($_POST['inquiry_category'] ?? 'project', 30));
+        if (!array_key_exists($category, FormValidator::contactCategories())) {
+            $category = 'project';
+        }
+        $categoryLabel = FormValidator::categoryLabel($category);
+
         $division = strtoupper(Sanitizer::cleanString($_POST['division'] ?? '', 20));
         $serviceCode = Sanitizer::cleanString($_POST['service'] ?? '', 80);
-        $serviceLabel = FormValidator::serviceLabel($division, $serviceCode);
+        $serviceLabel = $division !== '' ? FormValidator::serviceLabel($division, $serviceCode) : '';
+        $partnershipType = Sanitizer::cleanString($_POST['partnership_type'] ?? '', 50);
+        $partnerRole = Sanitizer::cleanString($_POST['partner_role'] ?? '', 100);
+        $engagementModel = Sanitizer::cleanString($_POST['engagement_model'] ?? '', 50);
+        $inquiryArea = Sanitizer::cleanString($_POST['inquiry_area'] ?? '', 50);
+
         $rawSubject = Sanitizer::cleanString($_POST['subject'] ?? '', 120);
         if ($rawSubject === '') {
-            $rawSubject = $serviceLabel !== '' ? $serviceLabel : 'General Inquiry';
+            $rawSubject = $serviceLabel !== '' ? $serviceLabel : $categoryLabel;
         }
         if ($division !== '') {
             $rawSubject = $division . ': ' . $rawSubject;
+        } elseif ($category !== 'project' && stripos($rawSubject, $categoryLabel) === false) {
+            $rawSubject = $categoryLabel . ': ' . $rawSubject;
         }
 
         // Sanitize with strict field length bounds
         $data = [
             'type' => 'general_contact',
+            'inquiry_category' => $category,
             'name' => Sanitizer::cleanString($_POST['name'] ?? '', 100),
             'email' => Sanitizer::cleanEmail($_POST['email'] ?? '', 254),
             'phone' => Sanitizer::cleanPhone($_POST['phone'] ?? '', 25),
@@ -54,6 +68,10 @@ class ContactController {
             'website' => Sanitizer::cleanString($_POST['website'] ?? '', 255),
             'division' => $division,
             'service' => $serviceCode,
+            'partnership_type' => $partnershipType,
+            'partner_role' => $partnerRole,
+            'engagement_model' => $engagementModel,
+            'inquiry_area' => $inquiryArea,
             'budget' => Sanitizer::cleanString($_POST['budget'] ?? '', 30),
             'timeline' => Sanitizer::cleanString($_POST['timeline'] ?? '', 30),
             'subject' => Sanitizer::cleanString($rawSubject, 150),
@@ -72,17 +90,25 @@ class ContactController {
             ];
         }
 
-        $data['service'] = FormValidator::serviceLabel($data['division'], $data['service']);
+        $data['inquiry_category'] = $categoryLabel;
+        $data['service'] = $data['division'] !== '' ? FormValidator::serviceLabel($data['division'], $data['service']) : '';
+        $data['partnership_type'] = FormValidator::partnershipTypeLabel($data['partnership_type']);
+        $data['engagement_model'] = FormValidator::engagementModelLabel($data['engagement_model']);
+        $data['inquiry_area'] = FormValidator::generalInquiryAreaLabel($data['inquiry_area']);
         $data['budget'] = FormValidator::budgetLabel($data['budget']);
         $data['timeline'] = FormValidator::timelineLabel($data['timeline']);
 
-        $messageLines = ['Project details: ' . $data['message']];
+        $messageLines = ['Category: ' . $categoryLabel, 'Inquiry details: ' . $data['message']];
         foreach ([
             'Company' => $data['company'],
+            'Role / Title' => $data['partner_role'],
             'Phone' => $data['phone'],
             'Country' => $data['country'],
             'Website' => $data['website'],
             'Service' => $data['service'],
+            'Engagement Model' => $data['engagement_model'],
+            'Partnership Type' => $data['partnership_type'],
+            'Inquiry Area' => $data['inquiry_area'],
             'Budget' => $data['budget'],
             'Timeline' => $data['timeline'],
         ] as $label => $value) {

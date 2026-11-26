@@ -9,8 +9,18 @@ use App\Controllers\ContactController;
 use App\Validators\FormValidator;
 
 $divisionServiceOptions = FormValidator::serviceOptions();
+$contactCategories = FormValidator::contactCategories();
+$partnershipTypes = FormValidator::partnershipTypes();
+$engagementModels = FormValidator::engagementModels();
+$generalAreas = FormValidator::generalInquiryAreas();
+
 $requestedDivision = is_string($_GET['division'] ?? null) ? strtoupper(trim($_GET['division'])) : '';
 $selectedDivision = isset($divisionServiceOptions[$requestedDivision]) ? $requestedDivision : '';
+
+$requestedTopic = is_string($_GET['topic'] ?? ($_GET['category'] ?? null))
+    ? strtolower(trim((string)($_GET['topic'] ?? $_GET['category'])))
+    : '';
+$selectedCategory = array_key_exists($requestedTopic, $contactCategories) ? $requestedTopic : 'project';
 
 $controllerResult = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -105,20 +115,20 @@ require_once __DIR__ . '/includes/header.php';
                 <!-- 2. Inquiry Focus Shortcuts -->
                 <div class="contact-panel">
                     <span class="contact-panel-label">Select What Brings You Here</span>
-                    <div class="contact-topic-grid">
-                        <button type="button" class="contact-topic-btn is-active" data-topic="Project Discussion">
+                    <div class="contact-topic-grid" role="tablist" aria-label="Select inquiry category">
+                        <button type="button" class="contact-topic-btn <?= $selectedCategory === 'project' ? 'is-active' : '' ?>" data-category="project" data-topic="Project Discussion" aria-pressed="<?= $selectedCategory === 'project' ? 'true' : 'false' ?>">
                             <span>Project Discussion</span>
                             <?= codex_icon('arrow-right', 14) ?>
                         </button>
-                        <button type="button" class="contact-topic-btn" data-topic="Service Inquiry">
+                        <button type="button" class="contact-topic-btn <?= $selectedCategory === 'service' ? 'is-active' : '' ?>" data-category="service" data-topic="Service Inquiry" aria-pressed="<?= $selectedCategory === 'service' ? 'true' : 'false' ?>">
                             <span>Service Inquiry</span>
                             <?= codex_icon('arrow-right', 14) ?>
                         </button>
-                        <button type="button" class="contact-topic-btn" data-topic="Business Partnership">
+                        <button type="button" class="contact-topic-btn <?= $selectedCategory === 'partnership' ? 'is-active' : '' ?>" data-category="partnership" data-topic="Business Partnership" aria-pressed="<?= $selectedCategory === 'partnership' ? 'true' : 'false' ?>">
                             <span>Business Partnership</span>
                             <?= codex_icon('arrow-right', 14) ?>
                         </button>
-                        <button type="button" class="contact-topic-btn" data-topic="General Inquiry">
+                        <button type="button" class="contact-topic-btn <?= $selectedCategory === 'general' ? 'is-active' : '' ?>" data-category="general" data-topic="General Inquiry" aria-pressed="<?= $selectedCategory === 'general' ? 'true' : 'false' ?>">
                             <span>General Inquiry</span>
                             <?= codex_icon('arrow-right', 14) ?>
                         </button>
@@ -163,12 +173,12 @@ require_once __DIR__ . '/includes/header.php';
             <div class="contact-form-shell">
                 <div class="contact-form-top">
                     <div>
-                        <h2 style="font-size: 1.45rem; color: var(--white); margin: 0 0 0.25rem;">Send Your Project or Inquiry Brief</h2>
-                        <p style="font-size: 0.88rem; color: var(--slate-dark); margin: 0;">Complete the essential fields below&mdash;detailed tech specs are optional.</p>
+                        <h2 id="contactFormHeading" style="font-size: 1.45rem; color: var(--white); margin: 0 0 0.25rem;">Send Your Project Brief</h2>
+                        <p id="contactFormSubheading" style="font-size: 0.88rem; color: var(--slate-dark); margin: 0;">Complete the essential fields below&mdash;detailed tech specs are optional.</p>
                     </div>
                     <span class="contact-live-badge">
                         <span style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; display: inline-block;"></span>
-                        Direct Intake
+                        <span id="contactCategoryBadge">Project Intake</span>
                     </span>
                 </div>
 
@@ -180,17 +190,18 @@ require_once __DIR__ . '/includes/header.php';
                     <?php endif; ?>
                 </div>
 
-                <form action="<?= url('contact.php') ?>" method="POST" class="ajax-form" id="contactForm" novalidate>
+                <form action="<?= url('contact.php') ?>" method="POST" class="ajax-form" id="contactForm" data-active-category="<?= htmlspecialchars($selectedCategory, ENT_QUOTES, 'UTF-8') ?>" novalidate>
                     <?= csrf_input_field() ?>
+                    <input type="hidden" id="inquiry_category" name="inquiry_category" value="<?= htmlspecialchars($selectedCategory, ENT_QUOTES, 'UTF-8') ?>">
 
                     <div style="display: none;" aria-hidden="true">
                         <label for="_gotcha">Leave this empty</label>
                         <input type="text" name="_gotcha" id="_gotcha" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <!-- Interactive BGA Pillar Selector (Synced with #division) -->
-                    <div class="form-group">
-                        <label for="division" class="form-label">1. Which CodeX404 Pillar Fits Best? <span class="required">*</span></label>
+                    <!-- Interactive BGA Pillar Selector (Shown for Project Discussion & Service Inquiry) -->
+                    <div class="form-group contact-cat-section" data-cat-for="project,service" id="pillarGroup">
+                        <label for="division" class="form-label">Which CodeX404 Pillar Fits Best? <span class="required">*</span></label>
                         <div class="contact-pillar-picker" role="group" aria-label="Choose CodeX404 division pillar">
                             <button type="button" class="contact-pillar-btn <?= $selectedDivision === 'BUILD' ? 'is-selected' : '' ?>" data-pillar="BUILD">
                                 <strong><span class="pillar-dot-build"></span>BUILD</strong>
@@ -220,14 +231,17 @@ require_once __DIR__ . '/includes/header.php';
                         </select>
                     </div>
 
+                    <!-- Row: Inquiry Topic + Category-Specific Primary Selector -->
                     <div class="grid grid-cols-2" style="gap: 1rem;">
                         <div class="form-group">
-                            <label for="subject" class="form-label">2. Inquiry Topic</label>
-                            <input type="text" id="subject" name="subject" class="form-control" maxlength="150" value="Project Discussion" placeholder="e.g. Project Discussion, Partnership">
+                            <label for="subject" class="form-label">Inquiry Topic</label>
+                            <input type="text" id="subject" name="subject" class="form-control" maxlength="150"
+                                value="<?= htmlspecialchars($contactCategories[$selectedCategory] ?? 'Project Discussion', ENT_QUOTES, 'UTF-8') ?>"
+                                placeholder="e.g. Project Discussion, Partnership">
                         </div>
 
-                        <div class="form-group">
-                            <label for="service" class="form-label">Specific Solution (optional)</label>
+                        <div class="form-group contact-cat-section" data-cat-for="project,service" id="serviceSelectGroup">
+                            <label for="service" class="form-label" id="serviceSelectLabel">Specific Solution (optional)</label>
                             <select id="service" name="service" class="form-select">
                                 <option value="">Choose a specific service (optional)</option>
                                 <?php foreach ($divisionServiceOptions as $code => $services): ?>
@@ -239,6 +253,37 @@ require_once __DIR__ . '/includes/header.php';
                                 <?php endforeach; ?>
                             </select>
                         </div>
+
+                        <div class="form-group contact-cat-section" data-cat-for="partnership" id="partnershipTypeGroup" hidden>
+                            <label for="partnership_type" class="form-label">Partnership Type <span class="required">*</span></label>
+                            <select id="partnership_type" name="partnership_type" class="form-select" disabled>
+                                <option value="">Select partnership model...</option>
+                                <?php foreach ($partnershipTypes as $pKey => $pLabel): ?>
+                                    <option value="<?= htmlspecialchars($pKey, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($pLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group contact-cat-section" data-cat-for="general" id="generalAreaGroup" hidden>
+                            <label for="inquiry_area" class="form-label">Department / Routing (optional)</label>
+                            <select id="inquiry_area" name="inquiry_area" class="form-select" disabled>
+                                <option value="">General Routing</option>
+                                <?php foreach ($generalAreas as $aKey => $aLabel): ?>
+                                    <option value="<?= htmlspecialchars($aKey, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($aLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Service-Specific Engagement Model -->
+                    <div class="form-group contact-cat-section" data-cat-for="service" id="engagementGroup" hidden>
+                        <label for="engagement_model" class="form-label">Preferred Engagement Model (optional)</label>
+                        <select id="engagement_model" name="engagement_model" class="form-select" disabled>
+                            <option value="">Not decided / open to recommendation</option>
+                            <?php foreach ($engagementModels as $eKey => $eLabel): ?>
+                                <option value="<?= htmlspecialchars($eKey, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($eLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
                     <div class="grid grid-cols-2" style="gap: 1rem;">
@@ -258,14 +303,20 @@ require_once __DIR__ . '/includes/header.php';
                             <input type="tel" id="phone" name="phone" class="form-control" placeholder="+1 (555) 000-0000">
                         </div>
                         <div class="form-group">
-                            <label for="company" class="form-label">Company / Organization (optional)</label>
+                            <label for="company" class="form-label" id="companyLabel">Company / Organization (optional)</label>
                             <input type="text" id="company" name="company" class="form-control" placeholder="e.g. Acme Operations">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2" style="gap: 1rem;">
+                    <!-- Partnership Role + Website -->
+                    <div class="form-group contact-cat-section" data-cat-for="partnership" id="partnerRoleGroup" hidden>
+                        <label for="partner_role" class="form-label">Your Role / Title (optional)</label>
+                        <input type="text" id="partner_role" name="partner_role" class="form-control" maxlength="100" placeholder="e.g. Managing Partner, Agency Director, Alliances Lead" disabled>
+                    </div>
+
+                    <div class="grid grid-cols-2 contact-cat-section" data-cat-for="project,service,partnership" id="webCountryGroup" style="gap: 1rem;">
                         <div class="form-group">
-                            <label for="website" class="form-label">Current Website (optional)</label>
+                            <label for="website" class="form-label" id="websiteLabel">Current Website (optional)</label>
                             <input type="url" id="website" name="website" class="form-control" maxlength="255" placeholder="https://example.com">
                         </div>
                         <div class="form-group">
@@ -274,7 +325,7 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2" style="gap: 1rem;">
+                    <div class="grid grid-cols-2 contact-cat-section" data-cat-for="project,service" id="scopingGroup" style="gap: 1rem;">
                         <div class="form-group">
                             <label for="budget" class="form-label">Estimated Budget (optional)</label>
                             <select id="budget" name="budget" class="form-select">
@@ -299,7 +350,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div class="form-group">
-                        <label for="message" class="form-label">Project Context, Bottleneck, or Inquiry Details <span class="required">*</span></label>
+                        <label for="message" class="form-label" id="messageLabel">Project Context, Bottleneck, or Inquiry Details <span class="required">*</span></label>
                         <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Briefly describe what problem you want to solve, the users involved, or what you want to discuss..." required></textarea>
                     </div>
 
@@ -311,7 +362,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">
-                        <span>Let&rsquo;s Discuss Your Project</span>
+                        <span id="contactSubmitLabel">Let&rsquo;s Discuss Your Project</span>
                         <?= codex_icon('arrow-right', 18) ?>
                     </button>
                 </form>
@@ -322,11 +373,84 @@ require_once __DIR__ . '/includes/header.php';
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.getElementById('contactForm');
+    const categoryInput = document.getElementById('inquiry_category');
     const divisionSelect = document.getElementById('division');
+    const serviceSelect = document.getElementById('service');
+    const serviceSelectLabel = document.getElementById('serviceSelectLabel');
+    const partnershipTypeSelect = document.getElementById('partnership_type');
     const pillarBtns = document.querySelectorAll('.contact-pillar-btn');
-    const topicBtns = document.querySelectorAll('.contact-topic-btn[data-topic]');
+    const topicBtns = document.querySelectorAll('.contact-topic-btn[data-category]');
+    const categorySections = document.querySelectorAll('.contact-cat-section[data-cat-for]');
     const subjectInput = document.getElementById('subject');
+    const companyLabel = document.getElementById('companyLabel');
+    const companyInput = document.getElementById('company');
+    const websiteLabel = document.getElementById('websiteLabel');
+    const messageLabel = document.getElementById('messageLabel');
+    const messageTextarea = document.getElementById('message');
+    const formHeading = document.getElementById('contactFormHeading');
+    const formSubheading = document.getElementById('contactFormSubheading');
+    const categoryBadge = document.getElementById('contactCategoryBadge');
+    const submitLabel = document.getElementById('contactSubmitLabel');
     const copyBtn = document.getElementById('copyEmailBtn');
+
+    const CATEGORY_CONFIG = {
+        project: {
+            topic: 'Project Discussion',
+            heading: 'Send Your Project Brief',
+            subheading: 'Scope your custom software, growth sprint, or AI system\u2014detailed specs are optional.',
+            badge: 'Project Intake',
+            companyLabel: 'Company / Organization (optional)',
+            companyPlaceholder: 'e.g. Acme Operations',
+            websiteLabel: 'Current Website (optional)',
+            messageLabel: 'Project Context, Bottleneck, or Inquiry Details <span class="required">*</span>',
+            messagePlaceholder: 'Describe what problem you want to solve, the users involved, or existing systems to integrate...',
+            submitText: 'Let\u2019s Discuss Your Project',
+            serviceRequired: false
+        },
+        service: {
+            topic: 'Service Inquiry',
+            heading: 'Inquire About a Specific Service',
+            subheading: 'Choose the pillar and capability you are evaluating so an engineer can respond with relevant details.',
+            badge: 'Service Desk',
+            companyLabel: 'Company / Organization (optional)',
+            companyPlaceholder: 'e.g. Acme Operations',
+            websiteLabel: 'Current Website (optional)',
+            messageLabel: 'Service Questions & Requirements <span class="required">*</span>',
+            messagePlaceholder: 'Share the service scope, technical stack, integration requirements, or delivery questions...',
+            submitText: 'Send Service Inquiry',
+            serviceRequired: true
+        },
+        partnership: {
+            topic: 'Business Partnership',
+            heading: 'Propose a Business or Technical Partnership',
+            subheading: 'White-label engineering, agency alliances, referral channels, or technology co-delivery.',
+            badge: 'Partnership Desk',
+            companyLabel: 'Agency / Partner Organization (optional)',
+            companyPlaceholder: 'e.g. Northstar Digital Agency',
+            websiteLabel: 'Organization Website (optional)',
+            messageLabel: 'Partnership Proposal & Collaboration Model <span class="required">*</span>',
+            messagePlaceholder: 'Tell us about your organization, client vertical, collaboration structure, and expected project volume...',
+            submitText: 'Submit Partnership Proposal',
+            serviceRequired: false
+        },
+        general: {
+            topic: 'General Inquiry',
+            heading: 'Send a General Inquiry',
+            subheading: 'Questions about CodeX404 Solutions, media, security, or anything else\u2014straight to our team.',
+            badge: 'General Desk',
+            companyLabel: 'Company / Organization (optional)',
+            companyPlaceholder: 'e.g. Acme Operations',
+            websiteLabel: 'Current Website (optional)',
+            messageLabel: 'How Can We Help? <span class="required">*</span>',
+            messagePlaceholder: 'Write your question or message here and our team will reply directly by email...',
+            submitText: 'Send General Inquiry',
+            serviceRequired: false
+        }
+    };
+
+    const presetTopics = new Set(Object.values(CATEGORY_CONFIG).map(c => c.topic));
+    let activeCategory = (categoryInput && CATEGORY_CONFIG[categoryInput.value]) ? categoryInput.value : 'project';
 
     const syncPillarButtons = (val) => {
         const upper = (val || '').toUpperCase();
@@ -334,6 +458,76 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.classList.toggle('is-selected', btn.dataset.pillar === upper);
         });
     };
+
+    const applyCategory = (catKey, { focusSubject = false } = {}) => {
+        const cfg = CATEGORY_CONFIG[catKey] || CATEGORY_CONFIG.project;
+        activeCategory = catKey in CATEGORY_CONFIG ? catKey : 'project';
+
+        if (categoryInput) categoryInput.value = activeCategory;
+        if (contactForm) contactForm.dataset.activeCategory = activeCategory;
+
+        topicBtns.forEach(btn => {
+            const isMatch = btn.dataset.category === activeCategory;
+            btn.classList.toggle('is-active', isMatch);
+            btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+        });
+
+        categorySections.forEach(section => {
+            const allowed = (section.dataset.catFor || '').split(',').map(s => s.trim());
+            const isVisible = allowed.includes(activeCategory);
+            section.hidden = !isVisible;
+            section.querySelectorAll('input, select, textarea').forEach(el => {
+                el.disabled = !isVisible;
+                if (!isVisible) {
+                    el.classList.remove('is-invalid');
+                    el.removeAttribute('aria-invalid');
+                }
+            });
+        });
+
+        // Update conditional required attributes cleanly
+        const needsPillar = activeCategory === 'project' || activeCategory === 'service';
+        if (divisionSelect) divisionSelect.required = needsPillar;
+        if (serviceSelect) {
+            serviceSelect.required = cfg.serviceRequired;
+            if (serviceSelectLabel) {
+                serviceSelectLabel.innerHTML = cfg.serviceRequired
+                    ? 'Specific Solution <span class="required">*</span>'
+                    : 'Specific Solution (optional)';
+            }
+            const firstOpt = serviceSelect.querySelector('option[value=""]');
+            if (firstOpt) {
+                firstOpt.textContent = cfg.serviceRequired
+                    ? 'Select a specific service...'
+                    : 'Choose a specific service (optional)';
+            }
+        }
+        if (partnershipTypeSelect) {
+            partnershipTypeSelectSelectRequired(activeCategory === 'partnership');
+        }
+
+        // Update copy, placeholders, and submit CTA
+        if (formHeading) formHeading.textContent = cfg.heading;
+        if (formSubheading) formSubheading.textContent = cfg.subheading;
+        if (categoryBadge) categoryBadge.textContent = cfg.badge;
+        if (companyLabel) companyLabel.textContent = cfg.companyLabel;
+        if (companyInput) companyInput.placeholder = cfg.companyPlaceholder;
+        if (websiteLabel) websiteLabel.textContent = cfg.websiteLabel;
+        if (messageLabel) messageLabel.innerHTML = cfg.messageLabel;
+        if (messageTextarea) messageTextarea.placeholder = cfg.messagePlaceholder;
+        if (submitLabel) submitLabel.textContent = cfg.submitText;
+
+        if (subjectInput && (subjectInput.value.trim() === '' || presetTopics.has(subjectInput.value.trim()))) {
+            subjectInput.value = cfg.topic;
+        }
+        if (focusSubject && subjectInput) {
+            subjectInput.focus({ preventScroll: true });
+        }
+    };
+
+    function partnershipTypeSelectSelectRequired(isReq) {
+        if (partnershipTypeSelect) partnershipTypeSelect.required = isReq;
+    }
 
     pillarBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -350,14 +544,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     topicBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            topicBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-            if (subjectInput) {
-                subjectInput.value = btn.dataset.topic || 'Project Discussion';
-                subjectInput.focus();
-            }
+            const cat = btn.dataset.category || 'project';
+            applyCategory(cat, { focusSubject: false });
         });
     });
+
+    if (contactForm) {
+        contactForm.addEventListener('reset', () => {
+            requestAnimationFrame(() => {
+                applyCategory(activeCategory);
+                syncPillarButtons(divisionSelect ? divisionSelect.value : '');
+            });
+        });
+    }
+
+    // Initialize state on load
+    applyCategory(activeCategory);
+    syncPillarButtons(divisionSelect ? divisionSelect.value : '');
 
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {

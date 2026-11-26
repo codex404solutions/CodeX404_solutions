@@ -703,25 +703,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCaseStudiesSlider();
 
   // ======================================================================
-  // 13. Interactive Card Spotlight Glow (Follows Cursor)
-  // ======================================================================
-  const initCardSpotlights = () => {
-    const cards = document.querySelectorAll('.card, .slider-card, .process-step, .testimonial-card');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      });
-    });
-  };
-
-  initCardSpotlights();
-
-  // ======================================================================
-  // 14. Interactive Project Filter Tabs & 2-Row "View More" System
+  // 13. Interactive Project Filter Tabs & 2-Row "View More" System
   // ======================================================================
   const initProjectFilters = () => {
     const filterButtons = document.querySelectorAll('.project-filter-btn');

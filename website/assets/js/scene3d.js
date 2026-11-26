@@ -864,17 +864,83 @@
       });
     }
 
-    // Specular Cursor Light on Division & Why Cards
-    const litCards = document.querySelectorAll('.service-row-card, .why-dark-card, .testimonial-card');
-    litCards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const px = (((e.clientX - rect.left) / rect.width) * 100).toFixed(1);
-        const py = (((e.clientY - rect.top) / rect.height) * 100).toFixed(1);
-        card.style.setProperty('--spot-x', `${px}%`);
-        card.style.setProperty('--spot-y', `${py}%`);
-      }, { passive: true });
-    });
+    // Specular Cursor Light across all site cards, panels, and interactive surfaces
+    const LIT_SURFACE_SELECTOR = [
+      '.service-row-card',
+      '.why-dark-card',
+      '.testimonial-card',
+      '.card',
+      '.leader-card',
+      '.division-card',
+      '.price-card-modern',
+      '.clean-project-card',
+      '.project-card',
+      '.industry-slider-card',
+      '.problem-path-card',
+      '.process-pill-box',
+      '.process-card-container',
+      '.case-study-visual-card',
+      '.work-card-media',
+      '.sim-workbench-card',
+      '.sim-rag-sidebar',
+      '.sim-query-card',
+      '.sim-sandbox-notice',
+      '.form-card',
+      '.contact-panel',
+      '.contact-form-shell',
+      '.contact-direct-row',
+      '.contact-topic-btn',
+      '.contact-pillar-btn',
+      '.careers-card',
+      '.careers-job-card',
+      '.careers-detail-panel',
+      '.careers-form-panel',
+      '.careers-portal-strip',
+      '.portal-timeline-item',
+      '.guarantee-item',
+      '.pricing-guarantee-strip',
+      '.faq-item',
+      '.division-faq-item',
+      '.division-steps li',
+      '.faq-accordion-box details',
+      '.cta-section-wrap',
+      '.footer-cta-card',
+      '.article-reader-shell',
+      '.project-detail-hero',
+      '.project-stat-triplets > div',
+      '.project-feature-tile',
+      '.obsidian-lit-panel'
+    ].join(', ');
+
+    let pendingTarget = null;
+    let pendingX = 0;
+    let pendingY = 0;
+    let spotlightRafId = 0;
+
+    function flushCursorSpotlight() {
+      spotlightRafId = 0;
+      let node = pendingTarget instanceof Element ? pendingTarget.closest(LIT_SURFACE_SELECTOR) : null;
+      while (node) {
+        const rect = node.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          const px = (((pendingX - rect.left) / rect.width) * 100).toFixed(1);
+          const py = (((pendingY - rect.top) / rect.height) * 100).toFixed(1);
+          node.style.setProperty('--spot-x', `${px}%`);
+          node.style.setProperty('--spot-y', `${py}%`);
+        }
+        node = node.parentElement ? node.parentElement.closest(LIT_SURFACE_SELECTOR) : null;
+      }
+    }
+
+    document.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      pendingTarget = e.target;
+      pendingX = e.clientX;
+      pendingY = e.clientY;
+      if (!spotlightRafId) {
+        spotlightRafId = requestAnimationFrame(flushCursorSpotlight);
+      }
+    }, { passive: true });
   }
 
   /* ==========================================================================
