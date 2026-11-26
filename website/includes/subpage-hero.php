@@ -21,21 +21,6 @@ $heroActions = $heroActions ?? [];
 ?>
 <section class="subpage-hero">
     <div class="container">
-        <?php if (!empty($heroBreadcrumbs)): ?>
-            <nav class="subpage-breadcrumb" aria-label="Breadcrumb">
-                <?php foreach ($heroBreadcrumbs as $idx => $crumb): ?>
-                    <?php if ($idx > 0): ?>
-                        <span class="subpage-crumb-sep" aria-hidden="true">/</span>
-                    <?php endif; ?>
-                    <?php if (!empty($crumb['url'])): ?>
-                        <a href="<?= htmlspecialchars((string)$crumb['url'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string)$crumb['label'], ENT_QUOTES, 'UTF-8') ?></a>
-                    <?php else: ?>
-                        <span aria-current="page"><?= htmlspecialchars((string)$crumb['label'], ENT_QUOTES, 'UTF-8') ?></span>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </nav>
-        <?php endif; ?>
-
         <div class="subpage-hero-inner">
             <?php if ($heroTag !== ''): ?>
                 <div class="section-tag subpage-tag">

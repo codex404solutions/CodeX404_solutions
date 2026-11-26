@@ -49,7 +49,7 @@ require __DIR__ . '/includes/subpage-hero.php';
         <!-- Services Grid -->
         <div class="grid grid-cols-3" style="gap: 1.75rem;">
             <!-- 1. BUILD: Custom Software, Web & CRM/ERP -->
-            <article class="card card-tilt reveal-on-scroll" data-category="software"
+            <article id="build" class="card card-tilt reveal-on-scroll" data-category="software"
                 style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div
@@ -146,7 +146,7 @@ require __DIR__ . '/includes/subpage-hero.php';
             </article>
 
             <!-- 4. GROW: Digital Marketing, SEO & Website Optimization -->
-            <article class="card card-tilt reveal-on-scroll" data-category="growth"
+            <article id="grow" class="card card-tilt reveal-on-scroll" data-category="growth"
                 style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div
@@ -178,7 +178,7 @@ require __DIR__ . '/includes/subpage-hero.php';
             </article>
 
             <!-- 5. AUTOMATE: Applied AI & Private RAG -->
-            <article class="card card-tilt reveal-on-scroll reveal-delay-1" data-category="ai"
+            <article id="automate" class="card card-tilt reveal-on-scroll reveal-delay-1" data-category="ai"
                 style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <div

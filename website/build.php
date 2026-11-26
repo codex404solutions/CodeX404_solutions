@@ -24,7 +24,7 @@ $division = [
         ['title' => 'Handoff & Scale', 'description' => 'Deploy to production with automated backups, full source ownership, and 30-day warranty.'],
     ],
     'examples' => [
-        ['title' => 'Enterprise Client Portal', 'description' => 'Role-based customer platform featuring document exchange, status tracking, and automated invoicing.'],
+        ['title' => 'Business Client Portal', 'description' => 'Role-based customer platform featuring document exchange, status tracking, and automated invoicing.'],
         ['title' => 'Unified Operations ERP', 'description' => 'Centralized web platform unifying inventory, billing, staff permissions, and real-time reporting.'],
         ['title' => 'SaaS MVP Platform', 'description' => 'Production launch build with authentication, Stripe billing, customer onboarding, and analytics.'],
     ],

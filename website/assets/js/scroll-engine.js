@@ -24,10 +24,19 @@
       return;
     }
 
+    const revealVisibleOrAbove = () => {
+      const triggerY = window.innerHeight + 80;
+      document.querySelectorAll('.reveal-on-scroll:not(.is-revealed), [data-reveal]:not(.is-revealed)').forEach(function (el) {
+        if (el.getBoundingClientRect().top <= triggerY) {
+          el.classList.add('is-revealed');
+        }
+      });
+    };
+
     const revealObserver = new IntersectionObserver(
       function (entries, observer) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting || entry.boundingClientRect.top <= window.innerHeight + 80) {
             entry.target.classList.add('is-revealed');
             observer.unobserve(entry.target);
           }
@@ -35,14 +44,18 @@
       },
       {
         root: null,
-        rootMargin: '0px 0px -40px 0px',
-        threshold: 0.12
+        rootMargin: '80px 0px 80px 0px',
+        threshold: 0.01
       }
     );
 
     document.querySelectorAll('.reveal-on-scroll, [data-reveal]').forEach(function (el) {
       revealObserver.observe(el);
     });
+
+    revealVisibleOrAbove();
+    window.addEventListener('scroll', revealVisibleOrAbove, { passive: true });
+    window.addEventListener('hashchange', revealVisibleOrAbove, { passive: true });
   }
 
   /* ==========================================================================

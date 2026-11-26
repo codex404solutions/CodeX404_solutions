@@ -2687,3 +2687,298 @@ pre.wp-code,
     font-size: 0.76rem;
   }
 }
+
+/* ==========================================================================
+   CONTACT PAGE STUDIO REDESIGN
+   ========================================================================== */
+.contact-hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.84rem;
+  color: #94A3B8;
+}
+
+.contact-hero-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.contact-hero-trust-item svg {
+  color: #22D3EE;
+}
+
+.contact-studio-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
+}
+
+.contact-rail-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.contact-panel {
+  background: linear-gradient(170deg, rgba(16, 27, 48, 0.94) 0%, rgba(9, 17, 32, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  box-shadow: 0 18px 42px rgba(2, 6, 18, 0.48);
+}
+
+.contact-panel-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #22D3EE;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.contact-direct-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(7, 17, 31, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.contact-direct-row:hover {
+  border-color: rgba(34, 211, 238, 0.35);
+  background: rgba(11, 25, 46, 0.9);
+}
+
+.contact-direct-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.contact-direct-meta strong {
+  display: block;
+  font-size: 0.82rem;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.contact-direct-meta a,
+.contact-direct-meta span.val {
+  color: #FFFFFF;
+  font-size: 0.93rem;
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-direct-meta a:hover {
+  color: #22D3EE;
+}
+
+.contact-copy-btn {
+  padding: 0.38rem 0.72rem;
+  border-radius: 8px;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  background: rgba(34, 211, 238, 0.08);
+  color: #22D3EE;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.contact-copy-btn:hover {
+  background: rgba(34, 211, 238, 0.18);
+  color: #FFFFFF;
+}
+
+.contact-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.contact-topic-btn {
+  text-align: left;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(7, 17, 31, 0.65);
+  color: #CBD5E1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.contact-topic-btn:hover,
+.contact-topic-btn.is-active {
+  border-color: rgba(34, 211, 238, 0.48);
+  background: rgba(11, 94, 215, 0.16);
+  color: #FFFFFF;
+}
+
+.contact-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.contact-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(11, 94, 215, 0.16);
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  color: #22D3EE;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-step-item strong {
+  display: block;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+.contact-step-item span {
+  display: block;
+  font-size: 0.82rem;
+  color: #94A3B8;
+  line-height: 1.5;
+}
+
+.contact-form-shell {
+  background: linear-gradient(170deg, rgba(16, 27, 48, 0.96) 0%, rgba(10, 18, 32, 0.99) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.26);
+  border-radius: 20px;
+  padding: clamp(1.35rem, 3vw, 2.5rem);
+  box-shadow: 0 24px 55px rgba(2, 6, 18, 0.6), 0 0 36px rgba(11, 94, 215, 0.12);
+}
+
+.contact-form-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.34);
+  color: #34D399;
+}
+
+.contact-pillar-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.contact-pillar-btn {
+  padding: 0.72rem 0.65rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(6, 11, 24, 0.72);
+  color: #CBD5E1;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.contact-pillar-btn strong {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.contact-pillar-btn span {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  line-height: 1.3;
+}
+
+.contact-pillar-btn[data-pillar="BUILD"].is-selected {
+  border-color: rgba(11, 94, 215, 0.8);
+  background: rgba(11, 94, 215, 0.18);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
+}
+
+.contact-pillar-btn[data-pillar="GROW"].is-selected {
+  border-color: rgba(16, 185, 129, 0.75);
+  background: rgba(16, 185, 129, 0.14);
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3);
+}
+
+.contact-pillar-btn[data-pillar="AUTOMATE"].is-selected {
+  border-color: rgba(255, 140, 0, 0.8);
+  background: rgba(255, 140, 0, 0.14);
+  box-shadow: 0 0 0 1px rgba(255, 140, 0, 0.32);
+}
+
+@media (max-width: 960px) {
+  .contact-studio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .contact-pillar-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-topic-grid {
+    grid-template-columns: 1fr;
+  }
+}

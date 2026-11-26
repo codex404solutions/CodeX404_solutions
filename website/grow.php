@@ -13,10 +13,10 @@ $division = [
         'Website traffic fails to convert into qualified inquiries or paying customers.',
     ],
     'services' => [
-        ['icon' => '⌕', 'title' => 'Technical & Semantic SEO', 'description' => 'Core Web Vitals optimization, schema markup, and keyword architecture that dominates search rankings.', 'url' => 'solutions.php'],
-        ['icon' => '↗', 'title' => 'Performance Marketing', 'description' => 'Precision campaigns across Google Ads, Meta, and LinkedIn calibrated for lowest CPA.', 'url' => 'contact.php'],
-        ['icon' => '✎', 'title' => 'High-Authority Content', 'description' => 'Thought leadership, SEO landing pages, and conversion copy engineered to persuade.', 'url' => 'contact.php'],
-        ['icon' => '◎', 'title' => 'CRO & Funnel Analytics', 'description' => 'A/B testing, user session analysis, and conversion rate optimization that maximizes lead capture.', 'url' => 'contact.php'],
+        ['icon' => '⌕', 'title' => 'Technical & Semantic SEO', 'description' => 'Core Web Vitals optimization, schema markup, and clean information architecture that strengthen organic search visibility.', 'url' => 'solutions.php'],
+        ['icon' => '↗', 'title' => 'Performance Marketing', 'description' => 'Focused campaigns across Google Ads, Meta, and LinkedIn calibrated around qualified pipeline rather than vanity clicks.', 'url' => 'contact.php'],
+        ['icon' => '✎', 'title' => 'High-Clarity Content', 'description' => 'Service positioning, search-friendly landing pages, and clear product messaging written for real buyers.', 'url' => 'contact.php'],
+        ['icon' => '◎', 'title' => 'CRO & Conversion Analytics', 'description' => 'Form flow improvements, user journey analysis, and event tracking that turn existing traffic into real inquiries.', 'url' => 'contact.php'],
     ],
     'steps' => [
         ['title' => 'Audit & Benchmark', 'description' => 'Analyze technical SEO, site speed, competitor positioning, and conversion friction.'],

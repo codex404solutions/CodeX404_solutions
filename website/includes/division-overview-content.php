@@ -2,16 +2,10 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/header.php';
-$escape = static fn (string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+$escape = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 render_json_ld_faq($division['faqs']);
 $divisionContactUrl = url('contact.php') . '?division=' . rawurlencode($division['code']);
 $divisionDiscoveryUrl = url('discovery-call.php') . '?division=' . rawurlencode($division['code']);
-?>
-$heroBreadcrumbs = [
-    ['label' => 'Home', 'url' => url('index.php')],
-    ['label' => 'Services', 'url' => url('solutions.php')],
-    ['label' => $division['code']],
-];
 $heroTag = $division['eyebrow'];
 $heroTitleHtml = $escape($division['title']);
 $heroSubtitle = $division['intro'];
@@ -43,7 +37,8 @@ require __DIR__ . '/subpage-hero.php';
                     <h2><?= $escape($service['title']) ?></h2>
                     <p><?= $escape($service['description']) ?></p>
                     <?php if (!empty($service['url'])): ?>
-                        <a class="btn btn-secondary btn-sm" href="<?= $escape(url($service['url'])) ?>">Explore this service <span aria-hidden="true">&rarr;</span></a>
+                        <a class="btn btn-secondary btn-sm" href="<?= $escape(url($service['url'])) ?>">Explore this service
+                            <span aria-hidden="true">&rarr;</span></a>
                     <?php endif; ?>
                 </article>
             <?php endforeach; ?>
@@ -73,11 +68,17 @@ require __DIR__ . '/subpage-hero.php';
         <div>
             <div class="section-tag"><span class="dot"></span><span>How we work</span></div>
             <h2 class="section-title" style="text-align: left;">A clear path from brief to delivery</h2>
-            <p class="section-subtitle" style="text-align: left; margin-left: 0;">We define the problem and scope together, agree on deliverables, then share progress through reviewable work.</p>
+            <p class="section-subtitle" style="text-align: left; margin-left: 0;">We define the problem and scope
+                together, agree on deliverables, then share progress through reviewable work.</p>
         </div>
         <ol class="division-steps">
             <?php foreach ($division['steps'] as $index => $step): ?>
-                <li><span class="division-step-number"><?= (int)$index + 1 ?></span><div><h3><?= $escape($step['title']) ?></h3><p><?= $escape($step['description']) ?></p></div></li>
+                <li><span class="division-step-number"><?= (int) $index + 1 ?></span>
+                    <div>
+                        <h3><?= $escape($step['title']) ?></h3>
+                        <p><?= $escape($step['description']) ?></p>
+                    </div>
+                </li>
             <?php endforeach; ?>
         </ol>
     </div>
@@ -88,7 +89,8 @@ require __DIR__ . '/subpage-hero.php';
         <div class="section-header">
             <div class="section-tag"><span class="dot"></span><span>Illustrative applications</span></div>
             <h2 class="section-title">Architectural Patterns &amp; Deliverables</h2>
-            <p class="section-subtitle">Practical architectural patterns and production deliverables engineered across this division.</p>
+            <p class="section-subtitle">Practical architectural patterns and production deliverables engineered across
+                this division.</p>
         </div>
         <div class="grid grid-cols-3">
             <?php foreach ($division['examples'] as $idx => $example): ?>
@@ -123,9 +125,11 @@ require __DIR__ . '/subpage-hero.php';
         <div class="section-header">
             <div class="section-tag"><span class="dot"></span><span>Start a conversation</span></div>
             <h2 class="section-title">Ready to Architect Your Solution?</h2>
-            <p class="section-subtitle">Share your project requirements, tech stack, and goals. We will provide architectural recommendations and a clear milestone roadmap.</p>
+            <p class="section-subtitle">Share your project requirements, tech stack, and goals. We will provide
+                architectural recommendations and a clear milestone roadmap.</p>
             <div class="hero-actions" style="justify-content: center;">
-                <a class="btn btn-primary" href="<?= $escape($divisionContactUrl) ?>">Contact the team <span aria-hidden="true">→</span></a>
+                <a class="btn btn-primary" href="<?= $escape($divisionContactUrl) ?>">Contact the team <span
+                        aria-hidden="true">→</span></a>
                 <a class="btn btn-secondary" href="<?= $escape($divisionDiscoveryUrl) ?>">Request a Discovery Call</a>
             </div>
         </div>
