@@ -62,7 +62,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="careers-hero-grid">
             <div class="careers-hero-eyebrow">
-                <span class="dot" style="width:7px;height:7px;border-radius:50%;background:#FFB547;"></span>
+                <span class="dot" style="width:7px;height:7px;border-radius:50%;background:#FF8C00;"></span>
                 <span>Careers at CodeX404 Solutions</span>
             </div>
 
@@ -261,7 +261,7 @@ require_once __DIR__ . '/includes/header.php';
                         class="careers-amber-accent">Join Our Talent Pool</span></h2>
                 <p style="color:#CBD5E1;font-size:0.94rem;line-height:1.65;margin-bottom:1rem;">
                     Submit your profile cleanly into our talent pool for future openings matching your background.
-                    <strong style="color:#FFB547;">Please note:</strong> A general application does not guarantee an
+                    <strong style="color:#FF8C00;">Please note:</strong> A general application does not guarantee an
                     interview or a specific job offer; our recruitment team reaches out when an aligned vacancy opens.
                 </p>
 

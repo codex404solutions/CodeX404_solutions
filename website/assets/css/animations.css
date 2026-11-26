@@ -5,80 +5,55 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Animated Colorful Gradient Text
+   1. Cyan Headline & Division Emphasis (Zero Purple)
    -------------------------------------------------------------------------- */
 .text-gradient {
-  background: var(--gradient-text, linear-gradient(135deg, #FFFFFF 10%, #A78BFA 40%, #EC4899 65%, #06D6A0 100%));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #22D3EE;
   display: inline;
 }
 
 .gradient-text-animated {
-  background: linear-gradient(
-    120deg,
-    #00F0FF 0%,
-    #3B82F6 20%,
-    #8B5CF6 40%,
-    #EC4899 60%,
-    #06D6A0 80%,
-    #00F0FF 100%
-  );
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientFlow 8s ease-in-out infinite;
+  color: #22D3EE;
 }
 
 .text-gradient-build {
-  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #1D4ED8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #3B82F6;
 }
 
 .text-gradient-grow {
-  background: linear-gradient(135deg, #C084FC 0%, #8B5CF6 50%, #6D28D9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #22D3EE;
 }
 
 .text-gradient-automate {
-  background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #059669 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #10B981;
 }
 
 /* --------------------------------------------------------------------------
-   2. Division Semantic Accent Tokens & Badges
+   2. Division Semantic Accent Tokens & Badges (Blue / Cyan / Green)
    -------------------------------------------------------------------------- */
 :root {
-  --color-build: #3B82F6;
-  --color-build-glow: rgba(59, 130, 246, 0.25);
+  --color-build: #0B5ED7;
+  --color-build-glow: rgba(11, 94, 215, 0.25);
   --color-build-border: rgba(59, 130, 246, 0.4);
 
-  --color-grow: #8B5CF6;
-  --color-grow-glow: rgba(139, 92, 246, 0.25);
-  --color-grow-border: rgba(139, 92, 246, 0.4);
+  --color-grow: #22D3EE;
+  --color-grow-glow: rgba(34, 211, 238, 0.22);
+  --color-grow-border: rgba(34, 211, 238, 0.4);
 
   --color-automate: #10B981;
-  --color-automate-glow: rgba(16, 185, 129, 0.25);
+  --color-automate-glow: rgba(16, 185, 129, 0.22);
   --color-automate-border: rgba(16, 185, 129, 0.4);
 }
 
 .badge-build {
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(11, 94, 215, 0.14);
   color: #60A5FA;
   border: 1px solid var(--color-build-border);
 }
 
 .badge-grow {
-  background: rgba(139, 92, 246, 0.12);
-  color: #C084FC;
+  background: rgba(34, 211, 238, 0.12);
+  color: #22D3EE;
   border: 1px solid var(--color-grow-border);
 }
 
@@ -115,12 +90,12 @@
 
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 15px rgba(11, 94, 215, 0.22);
+    border-color: rgba(11, 94, 215, 0.35);
   }
   50% {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
-    border-color: rgba(139, 92, 246, 0.6);
+    box-shadow: 0 0 28px rgba(255, 140, 0, 0.38);
+    border-color: rgba(255, 140, 0, 0.65);
   }
 }
 

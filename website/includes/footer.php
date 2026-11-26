@@ -6,20 +6,24 @@ declare(strict_types=1);
     <div class="container">
         <div class="footer-grid">
             <!-- Col 1: Brand Info -->
-            <div class="footer-col">
-                <a href="<?= url('index.php') ?>" class="brand-logo" style="margin-bottom: 1.25rem;">
+            <div class="footer-col footer-brand-col">
+                <a href="<?= url('index.php') ?>" class="brand-logo footer-brand-logo">
                     <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" class="site-logo-img"
                         width="160" height="44">
                 </a>
-                <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
-                    <strong style="color: var(--white); display: block; margin-bottom: 0.25rem;">Where Bugs Meet Their
-                        Match.</strong>
-                    High-performance software, custom enterprise platforms, and intelligent AI automation systems
-                    engineered for growth.
+                <div class="footer-brand-tagline">
+                    <span class="footer-tagline-dot" aria-hidden="true"></span>
+                    <span>Where Bugs Meet Their Match</span>
+                </div>
+                <p class="footer-brand-desc">
+                    Custom software &amp; CRM/ERP systems, performance-driven digital growth, and 24/7 AI workflow automation engineered to scale your business.
                 </p>
-                <div class="system-status-indicator">
-                    <span class="status-pulse"></span>
-                    <span>BUILD · GROW · AUTOMATE</span>
+                <div class="footer-bga-pill" role="navigation" aria-label="Core Divisions">
+                    <a href="<?= url('build.php') ?>" class="footer-bga-item is-build">BUILD</a>
+                    <span class="footer-bga-sep" aria-hidden="true"></span>
+                    <a href="<?= url('grow.php') ?>" class="footer-bga-item is-grow">GROW</a>
+                    <span class="footer-bga-sep" aria-hidden="true"></span>
+                    <a href="<?= url('automate.php') ?>" class="footer-bga-item is-automate">AUTOMATE</a>
                 </div>
 
                 <!-- Official Social Media Channels (Non-floating) -->
@@ -109,21 +113,36 @@ declare(strict_types=1);
 
             <!-- Col 5: Direct Contact -->
             <div class="footer-col">
-                <h4>Start a Project</h4>
-                <p style="font-size: 0.85rem; margin-bottom: 1rem;">
-                    Discuss architecture, automation blueprints, or MVP roadmaps with our engineers.
-                </p>
-                <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm"
-                    style="width: 100%; margin-bottom: 0.85rem;">
-                    Book Discovery Call
-                </a>
-                <p style="font-size: 0.8rem; color: var(--slate-dark); margin-bottom: 0.35rem;">
-                    Direct: <a href="mailto:<?= COMPANY_EMAIL ?>"><?= COMPANY_EMAIL ?></a>
-                </p>
-                <p style="font-size: 0.8rem; color: var(--slate-dark);">
-                    Inquiries: <a href="<?= url('contact.php') ?>" style="color: var(--cyan); font-weight: 600;">Contact
-                        Form &rarr;</a>
-                </p>
+                <div class="footer-cta-card">
+                    <div class="footer-cta-header">
+                        <h4>Start Your Project</h4>
+                        <span class="footer-availability-badge">
+                            <span class="footer-avail-dot" aria-hidden="true"></span>
+                            Direct Lead
+                        </span>
+                    </div>
+                    <p class="footer-cta-copy">
+                        Book a free 30-min engineering call to scope your custom platform, growth funnel, or AI workflow.
+                    </p>
+                    <a href="<?= url('discovery-call.php') ?>" class="btn btn-primary btn-sm footer-cta-primary">
+                        Book a Discovery Call &rarr;
+                    </a>
+                    <div class="footer-contact-meta">
+                        <a href="mailto:<?= COMPANY_EMAIL ?>" class="footer-meta-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span><?= COMPANY_EMAIL ?></span>
+                        </a>
+                        <a href="<?= url('contact.php') ?>" class="footer-meta-link is-inquiry">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                            <span>Send Project Inquiry &rarr;</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -136,14 +155,6 @@ declare(strict_types=1);
                         style="height: 18px; width: auto; vertical-align: middle;"></a>
             </div>
             <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
-                <button type="button" id="restoreChatbotBtn" class="footer-chat-toggle"
-                    style="background: none; border: none; color: var(--slate); font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0;"
-                    title="Open or restore AI Assistant">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    AI Assistant
-                </button>
                 <a href="<?= admin_url('index.php') ?>"
                     style="opacity: 0.75; display: inline-flex; align-items: center; gap: 0.25rem;">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

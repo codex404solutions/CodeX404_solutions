@@ -149,16 +149,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const setWidgetVisibility = (show) => {
     if (show) {
       localStorage.removeItem(STORAGE_KEY_HIDDEN);
-      launcherContainer.style.display = 'flex';
-      launcherContainer.classList.remove('widget-hidden');
-      chatRestorePill.hidden = true;
+      if (launcherContainer) {
+        launcherContainer.style.display = 'flex';
+        launcherContainer.classList.remove('widget-hidden');
+      }
+      if (chatRestorePill) chatRestorePill.hidden = true;
     } else {
       localStorage.setItem(STORAGE_KEY_HIDDEN, 'true');
-      launcherContainer.style.display = 'none';
-      launcherContainer.classList.add('widget-hidden');
       closeChatWindow();
-      chatRestorePill.hidden = false;
-      showToastNotification('Chat widget hidden. Restore anytime via footer link or the AI Chat tab.');
+      if (launcherContainer) {
+        launcherContainer.style.display = 'flex';
+        launcherContainer.classList.remove('widget-hidden');
+      }
+      if (chatRestorePill) chatRestorePill.hidden = true;
     }
   };
 
@@ -232,24 +235,29 @@ document.addEventListener('DOMContentLoaded', () => {
     closeChatWindow();
   });
 
-  // Completely Hide Widget
-  chatHideWidgetBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    setWidgetVisibility(false);
-  });
+  // Optional hide / restore listeners (guarded when single-pill UI is used)
+  if (chatHideWidgetBtn) {
+    chatHideWidgetBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setWidgetVisibility(false);
+    });
+  }
 
-  quickHideBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setWidgetVisibility(false);
-  });
+  if (quickHideBtn) {
+    quickHideBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setWidgetVisibility(false);
+    });
+  }
 
-  // Restore Widget buttons (discreet pill and footer link)
-  chatRestorePill.addEventListener('click', (e) => {
-    e.preventDefault();
-    setWidgetVisibility(true);
-    openChatWindow();
-  });
+  if (chatRestorePill) {
+    chatRestorePill.addEventListener('click', (e) => {
+      e.preventDefault();
+      setWidgetVisibility(true);
+      openChatWindow();
+    });
+  }
 
   if (footerRestoreBtn) {
     footerRestoreBtn.addEventListener('click', (e) => {
@@ -550,12 +558,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // INITIALIZATION
   // --------------------------------------------------------------------------
-  if (isWidgetHidden()) {
-    launcherContainer.style.display = 'none';
-    launcherContainer.classList.add('widget-hidden');
-    chatRestorePill.hidden = false;
-  } else {
+  if (launcherContainer) {
     launcherContainer.style.display = 'flex';
+    launcherContainer.classList.remove('widget-hidden');
+  }
+  if (chatRestorePill) {
     chatRestorePill.hidden = true;
   }
 

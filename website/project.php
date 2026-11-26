@@ -330,7 +330,7 @@ require_once __DIR__ . '/includes/header.php';
 
                         <!-- Video Walkthrough Button (If URL exists) -->
                         <?php if (!empty($project['video_url'])): ?>
-                            <a href="<?= htmlspecialchars($project['video_url']) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="justify-content: center; padding: 0.85rem 1.25rem; font-size: 0.95rem; border-color: rgba(139, 92, 246, 0.5); color: #C4B5FD;">
+                            <a href="<?= htmlspecialchars($project['video_url']) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="justify-content: center; padding: 0.85rem 1.25rem; font-size: 0.95rem; border-color: rgba(255, 140, 0, 0.6); color: #FFFFFF;">
                                 <span>🎬 Watch Video Walkthrough</span>
                             </a>
                         <?php endif; ?>

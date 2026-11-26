@@ -1,6 +1,7 @@
 /* ==========================================================================
    CodeX404 Solutions — Careers & Applicant Portal Styles
-   Brand Palette: #07111F Navy | #0B5ED7 Royal Blue | #22D3EE Cyan | #FFB547 Amber
+   Brand Palette: #071426 Navy | #0B5ED7 Blue | #22D3EE Cyan |
+                  #10B981 Green | #FF8C00 Electric Orange
    ========================================================================== */
 
 .careers-hero {
@@ -39,7 +40,7 @@
 }
 
 .careers-amber-accent {
-    color: #FFB547;
+    color: #FF8C00;
 }
 
 .careers-cyan-accent {
@@ -75,7 +76,7 @@
 }
 
 .careers-portal-strip a {
-    color: #FFB547;
+    color: #FF8C00;
     font-weight: 600;
     text-decoration: none;
 }
@@ -113,7 +114,7 @@
     justify-content: center;
     background: rgba(11, 94, 215, 0.16);
     border: 1px solid rgba(34, 211, 238, 0.28);
-    color: #FFB547;
+    color: #FF8C00;
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
@@ -183,7 +184,7 @@
 }
 
 .careers-job-card:hover {
-    border-color: rgba(255, 181, 71, 0.45);
+    border-color: rgba(255, 140, 0, 0.45);
 }
 
 .careers-job-meta-row {
@@ -213,9 +214,9 @@
 }
 
 .careers-badge-amber {
-    background: rgba(255, 181, 71, 0.12);
-    border-color: rgba(255, 181, 71, 0.32);
-    color: #FFB547;
+    background: rgba(255, 140, 0, 0.12);
+    border-color: rgba(255, 140, 0, 0.32);
+    color: #FF8C00;
 }
 
 .careers-badge-cyan {
@@ -273,7 +274,7 @@
     color: #FFFFFF;
     margin-bottom: 0.65rem;
     padding-left: 0.65rem;
-    border-left: 3px solid #FFB547;
+    border-left: 3px solid #FF8C00;
 }
 
 .careers-detail-block p,
@@ -356,7 +357,7 @@
 }
 
 .req-star {
-    color: #FFB547;
+    color: #FF8C00;
 }
 
 .careers-input {
@@ -503,7 +504,7 @@
 }
 
 .portal-step-pill.current {
-    background: rgba(255, 181, 71, 0.16);
-    border-color: #FFB547;
-    color: #FFB547;
+    background: rgba(255, 140, 0, 0.16);
+    border-color: #FF8C00;
+    color: #FF8C00;
 }

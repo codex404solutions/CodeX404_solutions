@@ -201,7 +201,7 @@ require_once __DIR__ . '/includes/header.php';
                             <h3 style="color:#fff;font-size:1.15rem;margin:1.75rem 0 1rem;">Interview Schedule</h3>
                             <?php foreach ($selectedApp['interviews'] as $intv): ?>
                                 <div class="careers-card" style="margin-bottom:0.85rem;border-color:rgba(34,211,238,0.3);">
-                                    <div style="font-weight:700;color:#FFB547;margin-bottom:0.35rem;"><?= htmlspecialchars((string)$intv['interview_round']) ?> (<?= ucfirst((string)$intv['status']) ?>)</div>
+                                    <div style="font-weight:700;color:#FF8C00;margin-bottom:0.35rem;"><?= htmlspecialchars((string)$intv['interview_round']) ?> (<?= ucfirst((string)$intv['status']) ?>)</div>
                                     <div style="font-size:0.9rem;color:#fff;"><?= htmlspecialchars((string)$intv['scheduled_at']) ?> (<?= htmlspecialchars((string)$intv['timezone']) ?>) &bull; <?= (int)$intv['duration_minutes'] ?> mins</div>
                                     <div style="font-size:0.85rem;color:#CBD5E1;">Interviewer: <?= htmlspecialchars((string)$intv['interviewer_name']) ?></div>
                                     <?php if (!empty($intv['meeting_link'])): ?>
@@ -279,7 +279,7 @@ require_once __DIR__ . '/includes/header.php';
                             <h2 style="color:#fff;font-size:1.2rem;margin-bottom:1rem;">Upcoming Interviews</h2>
                             <?php foreach ($dashboard['interviews'] as $intv): ?>
                                 <div class="careers-card" style="margin-bottom:0.75rem;border-color:rgba(34,211,238,0.35);">
-                                    <div style="font-weight:700;color:#FFB547;"><?= htmlspecialchars((string)$intv['interview_round']) ?> — <?= htmlspecialchars((string)$intv['job_title']) ?></div>
+                                    <div style="font-weight:700;color:#FF8C00;"><?= htmlspecialchars((string)$intv['interview_round']) ?> — <?= htmlspecialchars((string)$intv['job_title']) ?></div>
                                     <div style="color:#fff;font-size:0.92rem;margin-top:0.25rem;"><?= htmlspecialchars((string)$intv['scheduled_at']) ?> (<?= htmlspecialchars((string)$intv['timezone']) ?>)</div>
                                     <?php if (!empty($intv['meeting_link'])): ?>
                                         <a href="<?= htmlspecialchars((string)$intv['meeting_link']) ?>" target="_blank" rel="noopener noreferrer" style="color:#22D3EE;font-size:0.85rem;">Join Interview &rarr;</a>

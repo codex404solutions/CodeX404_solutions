@@ -182,7 +182,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="careers-alert careers-alert-success">
                         <strong style="display:block;font-size:1.05rem;margin-bottom:0.35rem;">Application Submitted Successfully!</strong>
                         Your unique Application Reference ID is:
-                        <code style="display:inline-block;padding:0.2rem 0.55rem;background:rgba(0,0,0,0.35);border-radius:6px;color:#FFB547;font-weight:700;"><?= htmlspecialchars((string)$appSuccess['reference_code']) ?></code>
+                        <code style="display:inline-block;padding:0.2rem 0.55rem;background:rgba(0,0,0,0.35);border-radius:6px;color:#FF8C00;font-weight:700;"><?= htmlspecialchars((string)$appSuccess['reference_code']) ?></code>
                         <p style="margin:0.65rem 0 0;">
                             Track live status updates, interviews, and recruiter messages anytime via the
                             <a href="<?= url('careers/application-status') ?>" style="color:#22D3EE;font-weight:700;">Applicant Portal &rarr;</a>

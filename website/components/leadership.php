@@ -27,7 +27,7 @@ declare(strict_types=1);
                         <img src="<?= FOUNDER_IMAGE ?>" alt="<?= FOUNDER_NAME ?>">
                     </div>
                     <h3 style="font-size: 1.4rem; color: #FFFFFF; margin-bottom: 0.35rem;"><?= FOUNDER_NAME ?></h3>
-                    <div style="font-size: 0.85rem; color: #FFB547; font-weight: 600; margin-bottom: 1rem;">
+                    <div style="font-size: 0.85rem; color: #FF8C00; font-weight: 600; margin-bottom: 1rem;">
                         <?= FOUNDER_ROLE ?>
                     </div>
                     <p style="font-size: 0.9rem; color: var(--slate); line-height: 1.6; margin-bottom: 1.5rem;">

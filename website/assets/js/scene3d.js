@@ -336,8 +336,10 @@
       uniform float uMetalness;
       uniform float uIsGrid;
       uniform float uIsGlow;
+      uniform float uIsGlobe;
       uniform float uEmissive;
       uniform float uAlpha;
+      uniform float uTime;
       void main(void) {
         // Volumetric soft-edge aura sphere (zero polygon silhouette)
         if (uIsGlow > 0.5) {
@@ -348,16 +350,70 @@
           return;
         }
 
-        // Grid floor rendering with depth + radial fog
+        // Realistic night-side 3D Earth horizon dome with fine city-light clusters & smooth lateral fade
+        if (uIsGlobe > 0.5) {
+          vec3 N = normalize(vNormal);
+          vec3 V = normalize(-vViewPos);
+          vec3 P = normalize(vLocalPos);
+
+          float lon = atan(P.z, P.x);
+          float lat = asin(clamp(P.y, -1.0, 1.0));
+
+          // Whisper-thin planetary coordinate arcs (subtle texture, never overpowering)
+          float mer = smoothstep(0.982, 0.999, abs(cos(lon * 10.0)));
+          float par = smoothstep(0.984, 0.999, abs(cos(lat * 8.0)));
+          float globeGrid = max(mer, par) * 0.11;
+
+          // Multi-scale orbital city-light networks in warm gold/orange (#FF8C00 / #FFD166)
+          float macroLand = sin(lon * 2.3 + 0.6) * cos(lat * 3.1 - 0.15)
+                          + sin(lon * 4.8 - lat * 2.5) * 0.58;
+          float landMask = smoothstep(-0.08, 0.72, macroLand);
+          float clusterA = smoothstep(0.45, 1.05, sin(lon * 19.0 + uTime * 0.03) * sin(lat * 23.0) + cos(lon * 29.0 - lat * 17.0) * 0.65);
+          float pinpointB = pow(max(sin(lon * 47.0 - 0.4) * cos(lat * 53.0 + 0.2), 0.0), 6.0);
+          float pinpointC = pow(max(cos(lon * 67.0 + lat * 61.0), 0.0), 8.0);
+          float cityLights = landMask * (clusterA * 0.55 + pinpointB * 1.15 + pinpointC * 1.45);
+
+          // Luminous cyan-blue atmospheric horizon corona hugging the planetary limb
+          float viewDot = max(dot(N, V), 0.0);
+          float fresnel = pow(1.0 - viewDot, 2.85);
+          float outerRim = pow(1.0 - viewDot, 5.2);
+          float horizonBand = smoothstep(-0.22, 0.68, P.y);
+          float warmFlank = smoothstep(0.05, 0.85, N.x) * fresnel;
+
+          vec3 oceanNavy = vec3(0.018, 0.055, 0.135);
+          vec3 cyanAtmos = vec3(0.14, 0.84, 0.96);
+          vec3 royalBlue = vec3(0.06, 0.40, 0.88);
+          vec3 orangeLight = vec3(1.0, 0.55, 0.05);
+          vec3 goldSpark = vec3(1.0, 0.84, 0.46);
+
+          vec3 col = oceanNavy
+            + royalBlue * (fresnel * 0.92 + globeGrid * 0.4)
+            + cyanAtmos * ((fresnel * 0.78 + outerRim * 1.15) * horizonBand + globeGrid * 0.35)
+            + orangeLight * (cityLights * 0.88 + warmFlank * 0.58)
+            + goldSpark * (landMask * (pinpointB * 0.7 + pinpointC * 1.2));
+
+          // Deep smooth fade from both lateral limbs into dark navy background
+          float sideFade = pow(1.0 - smoothstep(0.18, 0.88, abs(N.x)), 1.35);
+          col = min(col, vec3(0.90, 0.88, 0.86)) * (0.14 + sideFade * 0.86);
+          float globeAlpha = uAlpha * (0.04 + sideFade * 0.96);
+
+          gl_FragColor = vec4(col, globeAlpha);
+          return;
+        }
+
+        // Grid floor rendering with depth + radial + lateral side fog
         if (uIsGrid > 0.5) {
           float radial = length(vLocalPos.xz);
-          float edgeFade = 1.0 - smoothstep(4.0, 11.0, radial);
-          float depthFade = smoothstep(-22.0, -5.0, vViewPos.z);
-          float alpha = clamp(depthFade * edgeFade * 0.52, 0.0, 0.52);
-          // Horizon glow at grid center
-          float horizonGlow = exp(-radial * 0.22) * 0.35;
-          vec3 gridColor = uRimColor + vec3(horizonGlow * 0.15, horizonGlow * 0.25, horizonGlow * 0.4);
-          gl_FragColor = vec4(gridColor, alpha + horizonGlow * 0.18);
+          float sideGridFade = 1.0 - smoothstep(3.2, 8.2, abs(vLocalPos.x));
+          float edgeFade = (1.0 - smoothstep(3.0, 8.6, radial)) * sideGridFade;
+          float depthFade = smoothstep(-19.0, -5.5, vViewPos.z);
+          float alpha = clamp(depthFade * edgeFade * 0.30, 0.0, 0.30);
+          float horizonGlow = exp(-radial * 0.28) * 0.24 * sideGridFade;
+          float warmMask = smoothstep(-1.5, 4.5, vLocalPos.x) * exp(-radial * 0.32) * sideGridFade;
+          vec3 gridColor = uRimColor
+            + vec3(horizonGlow * 0.10, horizonGlow * 0.26, horizonGlow * 0.42)
+            + vec3(1.0, 0.55, 0.0) * (warmMask * 0.44);
+          gl_FragColor = vec4(gridColor, alpha + horizonGlow * 0.12 + warmMask * 0.10);
           return;
         }
 
@@ -434,8 +490,10 @@
     const uMetal = gl.getUniformLocation(prog, 'uMetalness');
     const uIsGrid = gl.getUniformLocation(prog, 'uIsGrid');
     const uIsGlow = gl.getUniformLocation(prog, 'uIsGlow');
+    const uIsGlobe = gl.getUniformLocation(prog, 'uIsGlobe');
     const uEmissive = gl.getUniformLocation(prog, 'uEmissive');
     const uAlpha = gl.getUniformLocation(prog, 'uAlpha');
+    const uTime = gl.getUniformLocation(prog, 'uTime');
 
     function createGpuMesh(mesh) {
       const posBuf = gl.createBuffer();
@@ -463,6 +521,7 @@
     const corePrism = createGpuMesh(buildOctahedronMesh(0.64));
     const tinyFacet = createGpuMesh(buildOctahedronMesh(0.2));
     const glowSphere = createGpuMesh(buildIcosphereMesh(1.18, 2));
+    const horizonGlobe = createGpuMesh(buildIcosphereMesh(4.95, 3));
 
     /* ---- Perspective Floor Grid ---- */
     const gridPos = [];
@@ -486,9 +545,10 @@
     /* ---- Constellation Lines between sculpture elements ---- */
     // These will be drawn dynamically each frame using computed positions
 
-    function drawGpuMesh(gpu, mvMatrix, baseColor, rimColor, metalness, emissive, alpha, isGlow) {
+    function drawGpuMesh(gpu, mvMatrix, baseColor, rimColor, metalness, emissive, alpha, isGlow, isGlobe) {
       gl.uniform1f(uIsGrid, 0.0);
       gl.uniform1f(uIsGlow, isGlow ? 1.0 : 0.0);
+      gl.uniform1f(uIsGlobe, isGlobe ? 1.0 : 0.0);
       gl.uniform1f(uEmissive, emissive || 0.0);
       gl.uniform1f(uAlpha, alpha !== undefined ? alpha : 0.96);
 
@@ -561,6 +621,7 @@
       gl.uniform1f(uMetal, 0.2);
       gl.uniform1f(uIsGrid, 0.0);
       gl.uniform1f(uIsGlow, 0.0);
+      gl.uniform1f(uIsGlobe, 0.0);
       gl.uniform1f(uEmissive, 0.4 + Math.sin(t * 2.0) * 0.15);
       gl.uniform1f(uAlpha, 0.22 + Math.sin(t * 1.5) * 0.08);
 
@@ -619,6 +680,7 @@
       const t = (now - start) * 0.001;
       pointerX += (targetPX - pointerX) * 0.055;
       pointerY += (targetPY - pointerY) * 0.055;
+      gl.uniform1f(uTime, t);
 
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -627,9 +689,33 @@
       const proj = mat4Perspective(Math.PI / 4.5, aspect, 0.1, 50.0);
       gl.uniformMatrix4fv(uProj, false, proj);
 
+      /* ---- 0. 3D Illuminated Earth Horizon Dome (bottom-center cosmic wave horizon) ---- */
+      const globeY = aspect > 1.05 ? -7.45 : -7.85;
+      const globeZ = aspect > 1.05 ? -14.1 : -14.8;
+      let mGlobeAtmos = mat4Identity();
+      mGlobeAtmos = mat4Translate(mGlobeAtmos, pointerX * 0.12, globeY, globeZ - 0.15);
+      mGlobeAtmos = mat4Scale(mGlobeAtmos, 5.4, 5.4, 5.4);
+      gl.depthMask(false);
+      drawGpuMesh(glowSphere, mGlobeAtmos, [0.05, 0.37, 0.84], [0.13, 0.83, 0.93], 0.0, 0.0, 0.56, true, false);
+      gl.depthMask(true);
+
+      let mGlobe = mat4Identity();
+      mGlobe = mat4Translate(mGlobe, pointerX * 0.12, globeY, globeZ);
+      mGlobe = mat4RotateX(mGlobe, 0.22 + pointerY * 0.04);
+      mGlobe = mat4RotateY(mGlobe, t * 0.055 + pointerX * 0.1);
+      mGlobe = mat4Scale(mGlobe, 1.1, 1.1, 1.1);
+      drawGpuMesh(horizonGlobe, mGlobe, [0.04, 0.16, 0.36], [0.13, 0.83, 0.93], 0.55, 0.3, 0.98, false, true);
+
+      let mGlobeWarm = mat4Identity();
+      mGlobeWarm = mat4Translate(mGlobeWarm, 2.2 + pointerX * 0.12, globeY + 1.85, globeZ - 0.35);
+      mGlobeWarm = mat4Scale(mGlobeWarm, 3.1, 2.0, 2.6);
+      gl.depthMask(false);
+      drawGpuMesh(glowSphere, mGlobeWarm, [1.0, 0.55, 0.0], [1.0, 0.56, 0.06], 0.0, 0.0, 0.24, true, false);
+      gl.depthMask(true);
+
       /* ---- 1. Depth-fogged perspective floor grid ---- */
       let floorM = mat4Identity();
-      floorM = mat4Translate(floorM, 0.0, -2.3, -10.5);
+      floorM = mat4Translate(floorM, 0.0, -2.05, -10.5);
       floorM = mat4RotateX(floorM, 0.22 + pointerY * 0.03);
       floorM = mat4RotateY(floorM, pointerX * 0.04);
       gl.bindBuffer(gl.ARRAY_BUFFER, gridPosBuf);
@@ -644,15 +730,16 @@
       gl.uniform1f(uMetal, 0.2);
       gl.uniform1f(uIsGrid, 1.0);
       gl.uniform1f(uIsGlow, 0.0);
+      gl.uniform1f(uIsGlobe, 0.0);
       gl.uniform1f(uEmissive, 0.0);
       gl.uniform1f(uAlpha, 1.0);
       gl.drawArrays(gl.LINES, 0, gridVertCount);
 
       /* ---- 2. Main sculptural assembly ---- */
-      // Positioned cleanly in the negative-space pocket between headline & showcase chassis
-      const offsetX = aspect > 1.05 ? 0.92 : 0.0;
-      const offsetY = aspect > 1.05 ? 1.48 : -0.8;
-      const camZ = aspect > 1.05 ? -13.9 : -10.5;
+      // Centered cleanly in the negative-space pocket above the horizon globe & beside showcase chassis
+      const offsetX = aspect > 1.05 ? 0.12 : 0.0;
+      const offsetY = aspect > 1.05 ? 0.92 : -0.15;
+      const camZ = aspect > 1.05 ? -13.4 : -10.5;
 
       let base = mat4Identity();
       base = mat4Translate(base, offsetX, offsetY, camZ);
@@ -661,54 +748,61 @@
 
       const constellationPoints = [];
 
-      // 2a. Three stepped architectural plinths
+      // 2a. Three stepped architectural plinths (Navy slabs with glowing Electric Orange #FF8C00 rims)
       let mSlab1 = mat4Translate(base, 0, -1.1, 0);
       mSlab1 = mat4RotateY(mSlab1, Math.sin(t * 0.3) * 0.06);
-      drawGpuMesh(slabBase, mSlab1, [0.08, 0.13, 0.22], [0.18, 0.5, 0.88], 0.6, 0.0);
+      drawGpuMesh(slabBase, mSlab1, [0.06, 0.12, 0.22], [1.0, 0.55, 0.0], 0.6, 0.05);
       constellationPoints.push(getPos(mSlab1));
 
       let mSlab2 = mat4Translate(base, 0, -0.65, 0);
       mSlab2 = mat4RotateY(mSlab2, Math.PI * 0.25 + Math.cos(t * 0.25) * 0.06);
-      drawGpuMesh(slabMid, mSlab2, [0.1, 0.16, 0.28], [0.2, 0.62, 0.92], 0.65, 0.02);
+      drawGpuMesh(slabMid, mSlab2, [0.08, 0.15, 0.28], [1.0, 0.58, 0.04], 0.65, 0.06);
 
       let mSlab3 = mat4Translate(base, 0, -0.28, 0);
       mSlab3 = mat4RotateY(mSlab3, -Math.PI * 0.125 + Math.sin(t * 0.2) * 0.04);
-      drawGpuMesh(slabTop, mSlab3, [0.12, 0.2, 0.34], [0.22, 0.68, 0.95], 0.7, 0.04);
+      drawGpuMesh(slabTop, mSlab3, [0.1, 0.18, 0.33], [1.0, 0.64, 0.1], 0.7, 0.08);
 
-      // 2b. Three concentric precision gyroscope rings
+      // Warm orange plinth aura glow beneath stepped slabs
+      let mPlinthGlow = mat4Translate(base, 0, -0.82, 0);
+      mPlinthGlow = mat4Scale(mPlinthGlow, 1.35, 0.38, 1.35);
+      gl.depthMask(false);
+      drawGpuMesh(glowSphere, mPlinthGlow, [1.0, 0.55, 0.0], [1.0, 0.55, 0.0], 0.0, 0.0, 0.26, true);
+      gl.depthMask(true);
+
+      // 2b. Three concentric precision gyroscope rings (Blue & Cyan)
       let mRing1 = mat4Translate(base, 0, 0.5, 0);
       mRing1 = mat4RotateZ(mRing1, 0.42);
       mRing1 = mat4RotateY(mRing1, t * 0.3);
-      drawGpuMesh(ringOuter, mRing1, [0.22, 0.36, 0.56], [0.34, 0.78, 0.98], 0.92, 0.08);
+      drawGpuMesh(ringOuter, mRing1, [0.08, 0.42, 0.82], [0.13, 0.83, 0.93], 0.92, 0.08);
       constellationPoints.push(getPos(mRing1));
 
       let mRing2 = mat4Translate(base, 0, 0.55, 0);
       mRing2 = mat4RotateX(mRing2, -0.52);
       mRing2 = mat4RotateZ(mRing2, -t * 0.4);
-      drawGpuMesh(ringMid, mRing2, [0.16, 0.44, 0.84], [0.24, 0.8, 0.96], 0.88, 0.1);
+      drawGpuMesh(ringMid, mRing2, [0.04, 0.37, 0.84], [0.13, 0.83, 0.93], 0.88, 0.1);
 
       let mRing3 = mat4Translate(base, 0, 0.48, 0);
       mRing3 = mat4RotateY(mRing3, t * 0.55);
       mRing3 = mat4RotateX(mRing3, 0.65);
-      drawGpuMesh(ringInner, mRing3, [0.2, 0.5, 0.92], [0.3, 0.84, 0.99], 0.85, 0.12);
+      drawGpuMesh(ringInner, mRing3, [0.13, 0.83, 0.93], [0.45, 0.92, 1.0], 0.85, 0.12);
 
       // 2c. Volumetric soft-edge aura sphere around core
       const pulseIntensity = 0.35 + Math.sin(t * 1.8) * 0.15 + Math.sin(t * 3.1) * 0.06;
       let mGlow = mat4Translate(base, 0, 0.55 + Math.sin(t * 1.2) * 0.08, 0);
       mGlow = mat4Scale(mGlow, 1.0 + pulseIntensity * 0.14, 1.0 + pulseIntensity * 0.14, 1.0 + pulseIntensity * 0.14);
       gl.depthMask(false);
-      drawGpuMesh(glowSphere, mGlow, [0.1, 0.38, 0.85], [0.22, 0.68, 1.0], 0.0, 0.0, 0.32 + pulseIntensity * 0.18, true);
+      drawGpuMesh(glowSphere, mGlow, [0.04, 0.37, 0.84], [0.13, 0.83, 0.93], 0.0, 0.0, 0.3 + pulseIntensity * 0.16, true);
       gl.depthMask(true);
 
-      // 2d. Floating sapphire core octahedron with breathing pulse
+      // 2d. Floating cyan/blue core octahedron with breathing pulse
       const corePulse = 0.08 + Math.sin(t * 1.4) * 0.04;
       let mCore = mat4Translate(base, 0, 0.55 + Math.sin(t * 1.2) * 0.08, 0);
       mCore = mat4RotateY(mCore, t * 0.55);
       mCore = mat4RotateX(mCore, Math.sin(t * 0.45) * 0.22);
-      drawGpuMesh(corePrism, mCore, [0.18, 0.55, 0.98], [0.65, 0.92, 1.0], 0.95, corePulse + 0.12);
+      drawGpuMesh(corePrism, mCore, [0.13, 0.72, 0.95], [0.65, 0.94, 1.0], 0.95, corePulse + 0.12);
       constellationPoints.push(getPos(mCore));
 
-      // 2e. Orbiting micro-facets positioned clear of headline typography
+      // 2e. Orbiting micro-facets with subtle orange AI accent rims
       const microSpots = [
         [0.4, 3.25, -16.2, 0.35, 0.0],
         [6.1, -1.8, -14.8, -0.45, 0.4],
@@ -727,7 +821,15 @@
         );
         mf = mat4RotateY(mf, t * sp[3]);
         mf = mat4RotateX(mf, t * 0.25 + sp[4]);
-        drawGpuMesh(tinyFacet, mf, [0.1, 0.22, 0.42], [0.26, 0.68, 0.94], 0.8, 0.05);
+        const isOrangeAccent = i % 2 === 0;
+        drawGpuMesh(
+          tinyFacet,
+          mf,
+          isOrangeAccent ? [0.75, 0.38, 0.04] : [0.1, 0.22, 0.42],
+          isOrangeAccent ? [1.0, 0.55, 0.0] : [0.13, 0.83, 0.93],
+          0.8,
+          isOrangeAccent ? 0.12 : 0.05
+        );
         constellationPoints.push(getPos(mf));
       });
 

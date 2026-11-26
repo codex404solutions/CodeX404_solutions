@@ -15,55 +15,30 @@ $csrfToken = generate_csrf_token();
      ========================================================================== -->
 <aside class="codex-chatbot-wrapper" id="codexChatbotWrapper" aria-label="Interactive CodeX404 Assistant">
 
-    <!-- 1. Floating Launcher Button (Bottom Right) -->
+    <!-- 1. Single Sleek AI Chat Launcher Pill (Bottom Right) -->
     <div class="chatbot-launcher-container" id="chatbotLauncherContainer">
-        <!-- Floating Prompt Bubble / Tooltip -->
-        <div class="chatbot-launcher-tooltip" id="chatbotLauncherTooltip" role="tooltip">
-            <span>Need an estimate or architecture review?</span>
-            <button type="button" class="tooltip-dismiss" id="chatbotTooltipDismiss" aria-label="Dismiss message">&times;</button>
-        </div>
-
         <button type="button" 
                 class="chatbot-launcher-btn" 
                 id="chatbotLauncherBtn" 
                 aria-haspopup="dialog" 
                 aria-expanded="false" 
                 aria-controls="codexChatWindow" 
-                aria-label="Open CodeX404 AI & Engineering Assistant" 
-                title="Chat with CodeX404 Assistant">
-            <span class="chatbot-pulse-ring" aria-hidden="true"></span>
-            
-            <!-- Default Bot Icon -->
+                aria-label="Open CodeX404 AI Chat" 
+                title="Open AI Chat">
             <span class="launcher-icon launcher-icon-open" aria-hidden="true">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    <path d="M8 9h8"></path>
-                    <path d="M8 13h5"></path>
                 </svg>
             </span>
 
-            <!-- Close (X) Icon when open -->
             <span class="launcher-icon launcher-icon-close" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </span>
 
-            <!-- Active Online Indicator -->
-            <span class="chatbot-status-dot" aria-hidden="true"></span>
-        </button>
-
-        <!-- Subtle Fast-Hide Button next to launcher -->
-        <button type="button" 
-                class="chatbot-quick-hide-btn" 
-                id="chatbotQuickHideBtn" 
-                title="Hide chat widget" 
-                aria-label="Hide chat widget from screen">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+            <span class="launcher-pill-label">AI Chat</span>
         </button>
     </div>
 
@@ -111,18 +86,6 @@ $csrfToken = generate_csrf_token();
                         aria-label="Minimize chat window">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </button>
-
-                <!-- Hide Completely Button -->
-                <button type="button" 
-                        class="chat-header-btn hide-action" 
-                        id="chatHideWidgetBtn" 
-                        title="Hide floating widget completely" 
-                        aria-label="Hide chat widget completely">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                        <line x1="1" y1="1" x2="23" y2="23"></line>
                     </svg>
                 </button>
 
@@ -187,17 +150,4 @@ $csrfToken = generate_csrf_token();
             </div>
         </form>
     </div>
-
-    <!-- 3. Discreet Restore Tab (Shown only when floating launcher is completely hidden) -->
-    <button type="button" 
-            class="chatbot-restore-pill" 
-            id="chatbotRestorePill" 
-            title="Restore AI Assistant widget" 
-            aria-label="Restore CodeX404 AI Assistant widget" 
-            hidden>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-        </svg>
-        <span>AI Chat</span>
-    </button>
 </aside>

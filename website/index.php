@@ -42,7 +42,9 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <h1 class="hero-headline">
-                    We Build, Grow & Automate Systems That <span class="text-gradient gradient-text-animated">Scale Your Business</span>
+                    <span class="hero-line">We Build, Grow &amp;</span>
+                    <span class="hero-line">Automate Systems That</span>
+                    <span class="hero-line text-gradient gradient-text-animated">Scale Your Business</span>
                 </h1>
 
                 <!-- Brand Divisions Emblem (BUILD · GROW · AUTOMATE) -->
@@ -283,6 +285,127 @@ require_once __DIR__ . '/includes/header.php';
             </div>
         </div>
     </div>
+
+    <!-- 3D Horizon Light Waves & Earth Rim Glow -->
+    <div class="hero-horizon-stage" aria-hidden="true">
+        <div class="hero-horizon-atmosphere"></div>
+        <svg class="hero-horizon-waves" viewBox="0 0 1440 220" preserveAspectRatio="none" focusable="false">
+            <defs>
+                <filter id="cxWaveGlow" x="-10%" y="-40%" width="120%" height="180%">
+                    <feGaussianBlur stdDeviation="5.5" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <linearGradient id="cxWaveCyan" x1="0%" y1="50%" x2="100%" y2="50%">
+                    <stop offset="0%" stop-color="#0B5ED7" stop-opacity="0" />
+                    <stop offset="16%" stop-color="#22D3EE" stop-opacity="0.85" />
+                    <stop offset="46%" stop-color="#38BDF8" stop-opacity="0.72" />
+                    <stop offset="76%" stop-color="#22D3EE" stop-opacity="0.6" />
+                    <stop offset="100%" stop-color="#0B5ED7" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="cxWaveOrange" x1="0%" y1="50%" x2="100%" y2="50%">
+                    <stop offset="0%" stop-color="#FF8C00" stop-opacity="0" />
+                    <stop offset="18%" stop-color="#FF7A00" stop-opacity="0.75" />
+                    <stop offset="48%" stop-color="#FF8C00" stop-opacity="0.16" />
+                    <stop offset="78%" stop-color="#FF9E2C" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#FF8C00" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="cxWaveRibbonFill" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#071426" stop-opacity="0" />
+                    <stop offset="22%" stop-color="#0B5ED7" stop-opacity="0.22" />
+                    <stop offset="50%" stop-color="#22D3EE" stop-opacity="0.14" />
+                    <stop offset="80%" stop-color="#FF8C00" stop-opacity="0.26" />
+                    <stop offset="100%" stop-color="#071426" stop-opacity="0" />
+                </linearGradient>
+            </defs>
+            <path d="M0,185 C220,104 420,206 720,118 C1020,30 1230,152 1440,78 L1440,220 L0,220 Z" fill="url(#cxWaveRibbonFill)" />
+            <g filter="url(#cxWaveGlow)">
+                <path d="M0,156 C200,98 410,178 720,104 C1020,34 1220,144 1440,86" fill="none" stroke="url(#cxWaveCyan)" stroke-width="2.6" />
+                <path d="M0,198 C190,136 375,146 610,182 C890,224 1130,84 1440,46" fill="none" stroke="url(#cxWaveOrange)" stroke-width="2.8" />
+            </g>
+            <!-- Silky harmonic wave mesh strands -->
+            <path d="M0,164 C205,110 412,184 720,112 C1025,44 1225,150 1440,94" fill="none" stroke="url(#cxWaveCyan)" stroke-width="1.35" opacity="0.72" />
+            <path d="M0,172 C215,124 416,190 720,122 C1030,56 1230,158 1440,102" fill="none" stroke="url(#cxWaveCyan)" stroke-width="0.9" opacity="0.48" />
+            <path d="M0,180 C225,138 422,198 720,132 C1035,68 1235,166 1440,112" fill="none" stroke="url(#cxWaveCyan)" stroke-width="0.7" opacity="0.3" />
+            <path d="M0,204 C195,146 385,156 625,186 C905,220 1140,94 1440,56" fill="none" stroke="url(#cxWaveOrange)" stroke-width="1.4" opacity="0.75" />
+            <path d="M0,210 C205,158 395,168 645,190 C925,216 1150,106 1440,68" fill="none" stroke="url(#cxWaveOrange)" stroke-width="0.95" opacity="0.46" />
+            <path d="M0,190 C215,158 420,174 660,152 C960,124 1170,116 1440,72" fill="none" stroke="url(#cxWaveOrange)" stroke-width="0.8" opacity="0.36" />
+        </svg>
+    </div>
+
+    <!-- Bottom 3D Architectural Capability Strip -->
+    <nav class="hero-capability-dock" aria-label="Core Services &amp; Global Delivery">
+        <div class="container">
+            <div class="hero-capability-grid">
+                <a href="#division-automate" class="hero-cap-item">
+                    <span class="hero-cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="7" y="7" width="10" height="10" rx="2"></rect>
+                            <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path>
+                            <text x="12" y="14.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="currentColor" stroke="none" font-family="var(--font-mono)">AI</text>
+                        </svg>
+                    </span>
+                    <span class="hero-cap-label">AI Automation</span>
+                </a>
+
+                <a href="#division-build" class="hero-cap-item">
+                    <span class="hero-cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 3 21 8 12 13 3 8 12 3"></polygon>
+                            <polyline points="3 12 12 17 21 12"></polyline>
+                            <polyline points="3 16 12 21 21 16"></polyline>
+                        </svg>
+                    </span>
+                    <span class="hero-cap-label">Web Development</span>
+                </a>
+
+                <a href="#division-build" class="hero-cap-item">
+                    <span class="hero-cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 20 6.5 12 11 4 6.5 12 2"></polygon>
+                            <polyline points="4 11.5 12 16 20 11.5"></polyline>
+                            <polyline points="4 16.5 12 21 20 16.5"></polyline>
+                        </svg>
+                    </span>
+                    <span class="hero-cap-label">CRM / ERP</span>
+                </a>
+
+                <a href="#division-build" class="hero-cap-item">
+                    <span class="hero-cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                        </svg>
+                    </span>
+                    <span class="hero-cap-label">SaaS Products</span>
+                </a>
+
+                <a href="#division-grow" class="hero-cap-item">
+                    <span class="hero-cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 11v2a1 1 0 0 0 1 1h2l4 5V5L6 10H4a1 1 0 0 0-1 1z"></path>
+                            <path d="M11 8.5l8-3.5v14l-8-3.5"></path>
+                            <path d="M21 9.5a3.5 3.5 0 0 1 0 5"></path>
+                        </svg>
+                    </span>
+                    <span class="hero-cap-label">Digital Marketing</span>
+                </a>
+
+                <a href="#why-choose" class="hero-cap-item">
+                    <span class="hero-cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9.5"></circle>
+                            <ellipse cx="12" cy="12" rx="4.2" ry="9.5"></ellipse>
+                            <line x1="2.8" y1="9" x2="21.2" y2="9"></line>
+                            <line x1="2.8" y1="15" x2="21.2" y2="15"></line>
+                        </svg>
+                    </span>
+                    <span class="hero-cap-label">Global Delivery</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 </section>
 
 <!-- ==========================================================================
@@ -830,7 +953,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Card 03 -->
             <div class="why-dark-card card-tilt">
                 <span class="why-card-number">03</span>
-                <div class="why-card-icon-wrap" style="color: #FFB547;">
+                <div class="why-card-icon-wrap" style="color: #FF8C00;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
