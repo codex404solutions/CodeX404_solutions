@@ -29,16 +29,12 @@ final class RBACService
     private const PROTECTED_SYSTEM_ROLES = ['superadmin', 'founder', 'ceo', 'cto', 'viewer'];
 
     private const MODULE_META = [
-        'approvals' => ['title' => 'Executive HITL Approvals', 'icon' => 'shield-check'],
-        'careers' => ['title' => 'Careers & Recruitment ATS', 'icon' => 'briefcase-fill'],
-        'finance' => ['title' => 'Finance & Valuations', 'icon' => 'currency-dollar'],
-        'leads' => ['title' => 'Leads & Discovery', 'icon' => 'person-lines-fill'],
-        'opportunities' => ['title' => 'Sales Pipeline & Proposals', 'icon' => 'graph-up-arrow'],
-        'paperclip' => ['title' => 'Paperclip AI Routines', 'icon' => 'robot'],
         'portfolio' => ['title' => 'Portfolio & Deliverables', 'icon' => 'collection-play-fill'],
-        'projects' => ['title' => 'Client Projects & Milestones', 'icon' => 'kanban-fill'],
-        'settings' => ['title' => 'System Settings & Telemetry', 'icon' => 'gear-fill'],
+        'inquiries' => ['title' => 'Website Inquiries & Leads', 'icon' => 'envelope-paper-fill'],
+        'careers' => ['title' => 'Careers & Recruitment ATS', 'icon' => 'briefcase-fill'],
         'users' => ['title' => 'Workforce & RBAC Governance', 'icon' => 'people-fill'],
+        'approvals' => ['title' => 'Executive HITL Approvals', 'icon' => 'shield-check'],
+        'settings' => ['title' => 'Audit Logs & Telemetry', 'icon' => 'gear-fill'],
     ];
 
     /**

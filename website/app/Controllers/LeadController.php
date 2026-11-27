@@ -7,15 +7,30 @@ use App\Validators\FormValidator;
 use App\Services\CRMIntegrationService;
 use App\Services\EmailService;
 use App\Helpers\Sanitizer;
+use Database;
 
-class LeadController {
-    public function handleDiscovery(): array {
+class LeadController
+{
+    private static function normalizeWebsiteUrl(string $rawUrl): string
+    {
+        $trimmed = trim($rawUrl);
+        if ($trimmed === '') {
+            return '';
+        }
+        if (!str_contains($trimmed, '://') && preg_match('/^[a-z0-9.-]+\.[a-z]{2,}(\/.*)?$/i', $trimmed)) {
+            return 'https://' . $trimmed;
+        }
+        return $trimmed;
+    }
+
+    public function handleDiscovery(): array
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return ['status' => 'error', 'message' => 'Invalid request method.'];
         }
 
         // Rate limiting
-        if (!check_rate_limit('discovery_submit', 5, 60)) {
+        if (!check_rate_limit('discovery_submit', 12, 60)) {
             return [
                 'status' => 'error',
                 'message' => 'Too many requests. Please wait a minute before submitting again.'
@@ -40,7 +55,7 @@ class LeadController {
             'company' => Sanitizer::cleanString($_POST['company'] ?? '', 120),
             'division' => strtoupper(Sanitizer::cleanString($_POST['division'] ?? '', 20)),
             'country' => Sanitizer::cleanString($_POST['country'] ?? '', 100),
-            'website' => Sanitizer::cleanString($_POST['website'] ?? '', 255),
+            'website' => self::normalizeWebsiteUrl(Sanitizer::cleanString($_POST['website'] ?? '', 255)),
             'job_title' => Sanitizer::cleanString($_POST['job_title'] ?? '', 100),
             'service_interest' => Sanitizer::cleanString($_POST['service_interest'] ?? '', 100),
             'budget' => Sanitizer::cleanString($_POST['budget'] ?? '', 50),
@@ -60,15 +75,68 @@ class LeadController {
             ];
         }
 
+        $referenceCode = 'lead_' . bin2hex(random_bytes(16));
+        $data['reference_code'] = $referenceCode;
         $data['service_interest'] = FormValidator::serviceLabel($data['division'], $data['service_interest']);
         $data['budget'] = FormValidator::budgetLabel($data['budget']);
         $data['timeline'] = FormValidator::timelineLabel($data['timeline']);
 
-        // Dispatch
+        $clientIp = function_exists('get_client_ip')
+            ? substr((string) get_client_ip(), 0, 50)
+            : substr((string) ($_SERVER['REMOTE_ADDR'] ?? ''), 0, 50);
+
+        $subject = $data['division'] . ': Discovery Call' . ($data['service_interest'] !== '' ? ' — ' . $data['service_interest'] : '');
+
+        // 1. Persist Discovery Call request to MySQL contact_messages
+        $pdo = Database::getConnection();
+        $dbSaved = false;
+        if ($pdo) {
+            try {
+                $stmt = $pdo->prepare("
+                    INSERT INTO `contact_messages` (
+                        `type`, `reference_code`, `inquiry_category`, `division`,
+                        `service_interest`, `partner_role`, `name`, `email`, `phone`,
+                        `company`, `country`, `website`, `budget`, `timeline`,
+                        `subject`, `message`, `ip_address`, `status`, `created_at`
+                    ) VALUES (
+                        'discovery_call', :reference_code, 'discovery', :division,
+                        :service_interest, :partner_role, :name, :email, :phone,
+                        :company, :country, :website, :budget, :timeline,
+                        :subject, :message, :ip_address, 'new', NOW()
+                    )
+                ");
+                $stmt->execute([
+                    ':reference_code'   => $referenceCode,
+                    ':division'         => $data['division'] !== '' ? $data['division'] : null,
+                    ':service_interest' => $data['service_interest'] !== '' ? $data['service_interest'] : null,
+                    ':partner_role'     => $data['job_title'] !== '' ? $data['job_title'] : null,
+                    ':name'             => $data['name'],
+                    ':email'            => $data['email'],
+                    ':phone'            => $data['phone'] !== '' ? $data['phone'] : null,
+                    ':company'          => $data['company'] !== '' ? $data['company'] : null,
+                    ':country'          => $data['country'] !== '' ? $data['country'] : null,
+                    ':website'          => $data['website'] !== '' ? $data['website'] : null,
+                    ':budget'           => $data['budget'] !== '' ? $data['budget'] : null,
+                    ':timeline'         => $data['timeline'] !== '' ? $data['timeline'] : null,
+                    ':subject'          => substr($subject, 0, 255),
+                    ':message'          => $data['problem_description'],
+                    ':ip_address'       => $clientIp !== '' ? $clientIp : null,
+                ]);
+                $dbSaved = true;
+            } catch (\Throwable $e) {
+                @file_put_contents(
+                    LOGS_PATH . '/app.log',
+                    "[" . date('c') . "] Discovery DB insert skipped: code " . $e->getCode() . PHP_EOL,
+                    FILE_APPEND | LOCK_EX
+                );
+            }
+        }
+
+        // 2. Dispatch backup JSON & optional outbound webhook + Email notification
         $crmService = new CRMIntegrationService();
         $crmResult = $crmService->dispatchLead($data);
 
-        if (($crmResult['status'] ?? '') === 'unavailable') {
+        if (($crmResult['status'] ?? '') === 'unavailable' && !$dbSaved) {
             return [
                 'status' => 'error',
                 'message' => 'We could not save your request. Please email ' . COMPANY_EMAIL . ' directly.'
@@ -81,7 +149,7 @@ class LeadController {
         return [
             'status' => 'success',
             'message' => 'Your Discovery Call request has been saved for follow-up. We’ll contact you by email to coordinate next steps.',
-            'ref' => $crmResult['idempotency_key'] ?? null,
+            'ref' => $referenceCode,
             'crm_sync' => $crmResult['status'] ?? 'stored_locally'
         ];
     }

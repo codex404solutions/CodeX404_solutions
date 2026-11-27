@@ -253,7 +253,7 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
 
                         <select id="division" name="division" class="form-select" required>
-                            <option value="">Choose a division (BUILD, GROW, or AUTOMATE)...</option>
+                            <option value="">Select division (BUILD, GROW, or AUTOMATE)...</option>
                             <?php foreach ($divisionServiceOptions as $code => $_services): ?>
                                 <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>"
                                     <?= $selectedDivision === $code ? 'selected' : '' ?>>
@@ -281,7 +281,7 @@ require_once __DIR__ . '/includes/header.php';
                             <label for="service" class="form-label" id="serviceSelectLabel">Specific Solution
                                 (optional)</label>
                             <select id="service" name="service" class="form-select">
-                                <option value="">Choose a specific service (optional)</option>
+                                <option value="">Select a service (optional)</option>
                                 <?php foreach ($divisionServiceOptions as $code => $services): ?>
                                     <optgroup label="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>"
                                         data-division="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>">
@@ -558,8 +558,8 @@ require_once __DIR__ . '/includes/header.php';
                 const firstOpt = serviceSelect.querySelector('option[value=""]');
                 if (firstOpt) {
                     firstOpt.textContent = cfg.serviceRequired
-                        ? 'Select a specific service...'
-                        : 'Choose a specific service (optional)';
+                        ? 'Select a service...'
+                        : 'Select a service (optional)';
                 }
             }
             if (partnershipTypeSelect) {

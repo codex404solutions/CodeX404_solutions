@@ -106,7 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorMsg.className = 'invalid-feedback';
                 errorMsg.id = uniqueErrorId;
                 errorMsg.innerText = result.errors[fieldName];
-                field.parentNode.appendChild(errorMsg);
+                const errorHost = field.closest('.form-group') || field.parentNode;
+                if (errorHost) {
+                  errorHost.appendChild(errorMsg);
+                }
               }
             });
             if (firstInvalidField) {

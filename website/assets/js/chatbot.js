@@ -1,200 +1,176 @@
 /**
- * CodeX404 Solutions — Intelligent AI & Engineering Assistant
- * Handles conversational queries, FAQ retrieval, quick quote intake,
- * WhatsApp escalation, and user-controlled hide / minimize persistence.
+ * CodeX404 Solutions — Help Desk & Customer Assistant
+ * Simple, clear answers, interactive message/quote intake, and full route awareness.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
   const wrapper = document.getElementById('codexChatbotWrapper');
-  const launcherContainer = document.getElementById('chatbotLauncherContainer');
   const launcherBtn = document.getElementById('chatbotLauncherBtn');
-  const launcherTooltip = document.getElementById('chatbotLauncherTooltip');
-  const tooltipDismiss = document.getElementById('chatbotTooltipDismiss');
-  const quickHideBtn = document.getElementById('chatbotQuickHideBtn');
+  const launcherContainer = document.getElementById('chatbotLauncherContainer');
   const chatWindow = document.getElementById('codexChatWindow');
   const chatMinimizeBtn = document.getElementById('chatMinimizeBtn');
-  const chatHideWidgetBtn = document.getElementById('chatHideWidgetBtn');
   const chatCloseBtn = document.getElementById('chatCloseBtn');
   const chatMessagesBody = document.getElementById('chatMessagesBody');
   const chatQuickChips = document.getElementById('chatQuickChips');
   const chatInputForm = document.getElementById('chatInputForm');
   const chatInputText = document.getElementById('chatInputText');
-  const chatSendBtn = document.getElementById('chatSendBtn');
   const chatResetBtn = document.getElementById('chatResetBtn');
-  const chatRestorePill = document.getElementById('chatbotRestorePill');
-  const footerRestoreBtn = document.getElementById('restoreChatbotBtn');
 
-  if (!wrapper || !launcherBtn || !chatWindow) return;
+  if (!wrapper || !launcherBtn || !chatWindow || !chatInputForm || !chatInputText) return;
 
-  // Local storage keys
-  const STORAGE_KEY_HIDDEN = 'codex_chat_hidden';
-  const STORAGE_KEY_TOOLTIP_DISMISSED = 'codex_chat_tooltip_dismissed';
-  const SESSION_KEY_MESSAGES = 'codex_chat_messages_v1';
+  const baseUrl = (wrapper.dataset.baseUrl || '/').replace(/\/?$/, '/');
+  const companyEmail = wrapper.dataset.email || 'info@codex404solutions.com';
+  const SESSION_KEY_MESSAGES = 'codex_chat_messages_v2';
 
-  // State
   let isOpen = false;
-  let isAwaitingQuoteDetails = null; // null | 'awaiting_email' | 'awaiting_phone'
-  let leadDraft = { name: '', email: '', phone: '', message: '' };
+  let intakeState = null; // null | 'awaiting_message_or_email' | 'awaiting_email'
+  let leadNoteBuffer = '';
+
+  const pageLink = (slug) => `${baseUrl}${String(slug).replace(/^\/+/, '')}`;
+  const escapeHtml = (str) => String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 
   // --------------------------------------------------------------------------
-  // KNOWLEDGE BASE & INTENT ENGINE
+  // PLAIN-ENGLISH KNOWLEDGE BASE
   // --------------------------------------------------------------------------
   const KNOWLEDGE_BASE = [
     {
+      id: 'greeting',
+      keywords: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'namaste', 'assalam', 'hola'],
+      reply: () => `
+        <p>Hello! Glad you stopped by.</p>
+        <p>What are you looking to build or improve right now? Tell me in plain words—like a website, mobile app, marketing/SEO, or AI helper—or tap one of the quick topics below.</p>
+      `
+    },
+    {
       id: 'services',
-      label: '⚡ What services do you offer?',
-      keywords: ['service', 'services', 'capabilities', 'what do you do', 'offer', 'solution', 'solutions', 'build', 'web app', 'software', 'mobile', 'ai agent', 'erp', 'saas'],
-      reply: `
-        <p><strong>CodeX404 Solutions</strong> provides full-spectrum custom software and AI engineering:</p>
+      keywords: ['service', 'services', 'what do you do', 'offer', 'capabilities', 'solution', 'solutions', 'help me'],
+      reply: () => `
+        <p>We help businesses in three clear areas:</p>
         <ul>
-          <li><strong>Custom Web Applications:</strong> High-performance enterprise portals, CRM systems, and responsive web platforms.</li>
-          <li><strong>Autonomous AI Agents & RAG:</strong> Tailored document search, LLM integrations, and private data retrieval pipelines.</li>
-          <li><strong>Mobile App Development:</strong> Native & cross-platform iOS & Android mobile applications.</li>
-          <li><strong>Scalable SaaS Platforms:</strong> Multi-tenant SaaS architectures with Stripe/billing automation.</li>
-          <li><strong>Custom ERP & School Systems:</strong> Institutional platforms with attendance, fee collection, and grade books.</li>
-          <li><strong>Workflow & WhatsApp Automation:</strong> Cloud API pipelines that eliminate manual data entry.</li>
+          <li><strong>Build:</strong> Websites, business portals, online stores, and mobile apps made from scratch.</li>
+          <li><strong>Grow:</strong> Better Google search rankings (SEO), online ads, and higher website sales.</li>
+          <li><strong>Automate:</strong> AI chat helpers, auto-replies, and tools that cut out repetitive manual work.</li>
         </ul>
-        <p><a href="solutions.php" class="chat-link">Explore Solutions &rarr;</a> &nbsp;|&nbsp; <a href="discovery-call.php" class="chat-link">Book Free Discovery &rarr;</a></p>
+        <p><a href="${pageLink('solutions')}" class="chat-link">See all services &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('contact')}" class="chat-link">Start a project &rarr;</a></p>
+      `
+    },
+    {
+      id: 'build_software',
+      keywords: ['website', 'web app', 'software', 'saas', 'mobile app', 'android', 'ios', 'crm', 'erp', 'portal', 'ecommerce', 'store', 'custom'],
+      reply: () => `
+        <p>Yes—we design and build custom websites, customer/admin portals, booking systems, e-commerce sites, and mobile apps tailored to how your business actually runs.</p>
+        <p>Small business sites usually take <strong>2–4 weeks</strong>, while full custom systems take <strong>6–10 weeks</strong> with weekly progress previews.</p>
+        <p><a href="${pageLink('build')}" class="chat-link">See software services &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('contact?topic=project&division=BUILD')}" class="chat-link">Ask about a build &rarr;</a></p>
+      `
+    },
+    {
+      id: 'grow_marketing',
+      keywords: ['seo', 'google', 'marketing', 'ads', 'digital', 'traffic', 'rank', 'leads', 'conversion', 'social'],
+      reply: () => `
+        <p>Our <strong>Grow</strong> team helps your website show up higher on Google, run focused ad campaigns, and turn more visitors into real calls and inquiries.</p>
+        <p><a href="${pageLink('grow')}" class="chat-link">See growth services &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('contact?topic=service&division=GROW')}" class="chat-link">Ask about SEO &amp; ads &rarr;</a></p>
+      `
+    },
+    {
+      id: 'ai_automation',
+      keywords: ['ai', 'chatbot', 'agent', 'agents', 'automate', 'automation', 'whatsapp', 'workflow', 'rag', 'bot'],
+      reply: () => `
+        <p>Our <strong>Automate</strong> team builds practical AI tools—like customer support bots trained on your documents, WhatsApp notifications, and automatic CRM/email updates—so your staff saves hours every week.</p>
+        <p><a href="${pageLink('automate')}" class="chat-link">See automation tools &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('contact?topic=service&division=AUTOMATE')}" class="chat-link">Ask about AI &rarr;</a></p>
       `
     },
     {
       id: 'pricing',
-      label: '💰 How does pricing work?',
-      keywords: ['price', 'pricing', 'cost', 'how much', 'rate', 'rates', 'fees', 'quote', 'package', 'budget', 'expensive', 'cheap'],
-      reply: `
-        <p>We work on transparent fixed-milestone pricing with bi-weekly working staging previews. You always know what is being built, when, and for what cost—with zero surprise invoices.</p>
-        <p><a href="pricing.php" class="chat-link">Explore Pricing Tiers &rarr;</a> &nbsp;|&nbsp; <a href="contact.php" class="chat-link">Request a Custom Quote &rarr;</a></p>
+      keywords: ['price', 'pricing', 'cost', 'how much', 'rate', 'rates', 'fee', 'fees', 'budget', 'package', 'packages', 'cheap', 'expensive'],
+      reply: () => `
+        <p>We charge per agreed step (<strong>fixed milestones</strong>), so you always know the exact cost before work starts—with no surprise bills.</p>
+        <ul>
+          <li><strong>Smaller sites &amp; automations:</strong> Under $5,000</li>
+          <li><strong>Custom portals, apps &amp; growth plans:</strong> $5,000–$15,000+</li>
+        </ul>
+        <p><a href="${pageLink('pricing')}" class="chat-link">View pricing guide &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('contact?topic=project')}" class="chat-link">Get an estimate &rarr;</a></p>
       `
     },
     {
       id: 'demos',
-      label: '🚀 Live demos & portfolio',
-      keywords: ['portfolio', 'demo', 'demos', 'examples', 'case study', 'case studies', 'sample', 'work', 'projects'],
-      reply: `
-        <p>Explore our verified production deliverables, institutional ERPs, booking platforms, and interactive in-browser project demos.</p>
-        <p><a href="our-work.php" class="chat-link">Explore Our Work &rarr;</a> &nbsp;|&nbsp; <a href="case-studies.php" class="chat-link">Read Case Studies &rarr;</a></p>
-      `
-    },
-    {
-      id: 'discovery',
-      label: '📅 Book a discovery call',
-      keywords: ['discovery', 'book', 'call', 'meeting', 'schedule', 'talk', 'consultation', 'discuss'],
-      reply: `
-        <p>We'd love to discuss your technical architecture or MVP scope! Our discovery calls are direct with senior engineering leads — no sales reps.</p>
-        <p>We can discuss your goals, existing systems, constraints, and the next steps needed to define a project scope.</p>
-        <p><a href="discovery-call.php" class="btn btn-primary btn-sm chat-btn-action">Book 30-Min Discovery Call &rarr;</a></p>
-      `
-    },
-    {
-      id: 'contact_eng',
-      label: '✉️ Contact engineering directly',
-      keywords: ['human', 'person', 'support', 'live person', 'phone', 'contact', 'email', 'talk to someone'],
-      reply: `
-        <p>Prefer direct communication? Connect directly with our engineering team:</p>
-        <p><strong>Email:</strong> <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a></p>
-        <p><a href="discovery-call.php" class="btn btn-primary btn-sm chat-btn-action">
-          Book 30-Min Discovery Call &rarr;
-        </a></p>
-      `
-    },
-    {
-      id: 'quote',
-      label: '📝 Request a quick project quote',
-      keywords: ['quote', 'estimate', 'request quote', 'proposal', 'hire', 'start project', 'rfp'],
-      reply: `
-        <p>Let's get you a tailored estimate! Please type your <strong>work email or phone</strong> along with a brief description of what you're building (e.g., <em>"Web app for logistics, email: name@company.com"</em>), and our team will prepare a scope analysis.</p>
-        <p>Or jump straight to our structured inquiry form:</p>
-        <p><a href="contact.php" class="chat-link">Submit Detailed Inquiry Form &rarr;</a></p>
-      `
-    },
-    {
-      id: 'tech_stack',
-      label: '⚙️ What tech stack do you use?',
-      keywords: ['stack', 'tech stack', 'technologies', 'php', 'python', 'react', 'node', 'fastapi', 'database', 'mysql', 'postgres', 'docker', 'cloud', 'aws'],
-      reply: `
-        <p>Our core production tech stack focuses on reliability, speed, and zero bloat:</p>
-        <ul>
-          <li><strong>Backend:</strong> Modern PHP 8.2+ (strict types, PDO, zero-framework overhead) and Python 3.11+ / FastAPI for AI microservices.</li>
-          <li><strong>Frontend:</strong> Modern ES6+ JavaScript, Vanilla CSS / Tailwind, and React/Vue for complex interactive SPAs.</li>
-          <li><strong>Data & Storage:</strong> PostgreSQL, MySQL, Redis caching, SQLite embedded engines.</li>
-          <li><strong>Infrastructure & AI:</strong> Docker, Nginx, Meta WhatsApp Cloud API, LangChain / LlamaIndex, OpenAI / Claude / Gemini API connectors.</li>
-        </ul>
-        <p><a href="solutions.php" class="chat-link">Read Architecture Standards &rarr;</a></p>
+      keywords: ['portfolio', 'demo', 'demos', 'examples', 'case study', 'case studies', 'sample', 'work', 'projects', 'built'],
+      reply: () => `
+        <p>You can inspect real websites and live interactive demos we built for clinics, schools, retail businesses, and booking teams.</p>
+        <p><a href="${pageLink('our-work')}" class="chat-link">Browse past work &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('case-studies')}" class="chat-link">Read case studies &rarr;</a></p>
       `
     },
     {
       id: 'timeline',
-      label: '⏱️ How fast can you deliver?',
-      keywords: ['timeline', 'turnaround', 'how long', 'how fast', 'deadline', 'delivery', 'weeks', 'days', 'speed'],
-      reply: `
-        <p>Our agile delivery framework is engineered for predictability and speed:</p>
+      keywords: ['timeline', 'turnaround', 'how long', 'how fast', 'deadline', 'delivery', 'weeks', 'days', 'process', 'steps'],
+      reply: () => `
+        <p>We work in simple 2-week steps where you test real progress on a live preview link—never disappearing for months:</p>
         <ul>
-          <li><strong>Production MVPs:</strong> Typically 6 to 10 weeks delivered in focused two-week sprints.</li>
-          <li><strong>Bi-Weekly Demos:</strong> Live staging environments updated every two weeks for testing.</li>
-          <li><strong>Guaranteed Roadmaps:</strong> Explicit scope boundaries with 30-day post-launch warranty.</li>
+          <li><strong>Focused website or automation:</strong> 2–4 weeks</li>
+          <li><strong>Full custom web/mobile system:</strong> 6–10 weeks</li>
         </ul>
-        <p><a href="process.php" class="chat-link">Explore Our 7-Stage Delivery Framework &rarr;</a></p>
+        <p><a href="${pageLink('process')}" class="chat-link">See how we work &rarr;</a></p>
+      `
+    },
+    {
+      id: 'discovery',
+      keywords: ['discovery', 'book', 'call', 'meeting', 'schedule', 'talk', 'consultation', 'discuss', 'zoom'],
+      reply: () => `
+        <p>You can book a free 30-minute call straight with an engineer—no pushy sales script. We will listen to your goal and share honest next steps.</p>
+        <p><a href="${pageLink('discovery-call')}" class="btn btn-primary btn-sm chat-btn-action">Book a free call &rarr;</a></p>
+      `
+    },
+    {
+      id: 'partnership',
+      keywords: ['partner', 'partnership', 'agency', 'white label', 'referral', 'collaborate', 'resell'],
+      reply: () => `
+        <p>We partner with agencies and consultants for white-label web/software delivery, referral channels, and technical integrations.</p>
+        <p><a href="${pageLink('contact?topic=partnership')}" class="chat-link">Open partnership form &rarr;</a></p>
+      `
+    },
+    {
+      id: 'careers',
+      keywords: ['job', 'jobs', 'career', 'careers', 'intern', 'internship', 'hiring', 'apply', 'vacancy', 'role', 'roles'],
+      reply: () => `
+        <p>Looking to join CodeX404? Check our open roles and internships or track an application you already submitted:</p>
+        <p><a href="${pageLink('careers')}" class="chat-link">View open roles &rarr;</a> &nbsp;|&nbsp; <a href="${pageLink('careers/candidate-portal')}" class="chat-link">Applicant portal &rarr;</a></p>
+      `
+    },
+    {
+      id: 'security',
+      keywords: ['security', 'safe', 'privacy', 'nda', 'confidential', 'data', 'trust'],
+      reply: () => `
+        <p>Your idea and data stay strictly yours. We sign NDAs upfront and store all logins and inquiries securely with encryption.</p>
+        <p><a href="${pageLink('security')}" class="chat-link">Security overview &rarr;</a></p>
+      `
+    },
+    {
+      id: 'contact_eng',
+      keywords: ['human', 'person', 'support', 'phone', 'email', 'location', 'where', 'hours', 'timing', 'reach'],
+      reply: () => `
+        <p>You can reach our team directly anytime (India/APAC, GCC, UK/EU &amp; US overlap):</p>
+        <p><strong>Email:</strong> <a href="mailto:${escapeHtml(companyEmail)}" class="chat-link">${escapeHtml(companyEmail)}</a></p>
+        <p><a href="${pageLink('contact?topic=general')}" class="chat-link">Send a contact note &rarr;</a></p>
       `
     }
   ];
 
   // --------------------------------------------------------------------------
-  // UI CONTROLS & HIDE / MINIMIZE PERSISTENCE
+  // UI OPEN / CLOSE / HELPERS
   // --------------------------------------------------------------------------
-
-  // Check if user previously hid the widget
-  const isWidgetHidden = () => localStorage.getItem(STORAGE_KEY_HIDDEN) === 'true';
-
-  const setWidgetVisibility = (show) => {
-    if (show) {
-      localStorage.removeItem(STORAGE_KEY_HIDDEN);
-      if (launcherContainer) {
-        launcherContainer.style.display = 'flex';
-        launcherContainer.classList.remove('widget-hidden');
-      }
-      if (chatRestorePill) chatRestorePill.hidden = true;
-    } else {
-      localStorage.setItem(STORAGE_KEY_HIDDEN, 'true');
-      closeChatWindow();
-      if (launcherContainer) {
-        launcherContainer.style.display = 'flex';
-        launcherContainer.classList.remove('widget-hidden');
-      }
-      if (chatRestorePill) chatRestorePill.hidden = true;
-    }
+  const scrollMessagesToBottom = () => {
+    chatMessagesBody.scrollTop = chatMessagesBody.scrollHeight;
   };
 
-  // Toast notification for user confirmation
-  const showToastNotification = (text) => {
-    const existing = document.querySelector('.chat-global-toast');
-    if (existing) existing.remove();
-
-    const toast = document.createElement('div');
-    toast.className = 'chat-global-toast';
-    toast.setAttribute('role', 'status');
-    toast.innerHTML = `
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      <span>${text}</span>
-    `;
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-      toast.classList.add('fade-out');
-      setTimeout(() => toast.remove(), 400);
-    }, 4500);
-  };
-
-  // Toggle Chat Window
   const openChatWindow = () => {
     isOpen = true;
     chatWindow.hidden = false;
     chatWindow.classList.add('open');
     launcherBtn.setAttribute('aria-expanded', 'true');
     launcherBtn.classList.add('active');
-    if (launcherTooltip) launcherTooltip.style.display = 'none';
-
-    // Focus input or message container
     setTimeout(() => {
       chatInputText.focus();
       scrollMessagesToBottom();
@@ -208,116 +184,43 @@ document.addEventListener('DOMContentLoaded', () => {
     launcherBtn.classList.remove('active');
     setTimeout(() => {
       if (!isOpen) chatWindow.hidden = true;
-    }, 280);
+    }, 260);
   };
 
-  const toggleChatWindow = () => {
-    if (isOpen) {
-      closeChatWindow();
-    } else {
-      openChatWindow();
-    }
-  };
-
-  // Event Listeners for Launcher & Header controls
   launcherBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    toggleChatWindow();
+    isOpen ? closeChatWindow() : openChatWindow();
   });
-
-  chatMinimizeBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    closeChatWindow();
-  });
-
-  chatCloseBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    closeChatWindow();
-  });
-
-  // Optional hide / restore listeners (guarded when single-pill UI is used)
-  if (chatHideWidgetBtn) {
-    chatHideWidgetBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      setWidgetVisibility(false);
-    });
-  }
-
-  if (quickHideBtn) {
-    quickHideBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setWidgetVisibility(false);
-    });
-  }
-
-  if (chatRestorePill) {
-    chatRestorePill.addEventListener('click', (e) => {
-      e.preventDefault();
-      setWidgetVisibility(true);
-      openChatWindow();
-    });
-  }
-
-  if (footerRestoreBtn) {
-    footerRestoreBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      setWidgetVisibility(true);
-      openChatWindow();
-    });
-  }
-
-  // Dismiss tooltip
-  if (tooltipDismiss && launcherTooltip) {
-    tooltipDismiss.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      launcherTooltip.style.display = 'none';
-      localStorage.setItem(STORAGE_KEY_TOOLTIP_DISMISSED, 'true');
-    });
-
-    if (localStorage.getItem(STORAGE_KEY_TOOLTIP_DISMISSED) === 'true') {
-      launcherTooltip.style.display = 'none';
-    }
-  }
-
-  // Close on Escape key
+  if (chatMinimizeBtn) chatMinimizeBtn.addEventListener('click', (e) => { e.preventDefault(); closeChatWindow(); });
+  if (chatCloseBtn) chatCloseBtn.addEventListener('click', (e) => { e.preventDefault(); closeChatWindow(); });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) {
-      closeChatWindow();
-    }
+    if (e.key === 'Escape' && isOpen) closeChatWindow();
   });
 
   // --------------------------------------------------------------------------
-  // MESSAGING & CONVERSATION RENDERING
+  // MESSAGE RENDERING & HISTORY
   // --------------------------------------------------------------------------
-  const scrollMessagesToBottom = () => {
-    chatMessagesBody.scrollTop = chatMessagesBody.scrollHeight;
-  };
-
   const createMessageElement = (sender, htmlContent, timestamp = null) => {
     const timeStr = timestamp || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const msgDiv = document.createElement('div');
     msgDiv.className = `chat-msg ${sender === 'bot' ? 'msg-bot' : 'msg-user'}`;
-    
     msgDiv.innerHTML = `
       <div class="msg-bubble">
         <div class="msg-text">${htmlContent}</div>
-        <span class="msg-time">${timeStr}</span>
+        <span class="msg-time">${escapeHtml(timeStr)}</span>
       </div>
     `;
     return msgDiv;
   };
 
   const showTypingIndicator = () => {
+    hideTypingIndicator();
     const typingDiv = document.createElement('div');
     typingDiv.className = 'chat-msg msg-bot msg-typing';
     typingDiv.id = 'chatTypingIndicator';
     typingDiv.innerHTML = `
       <div class="msg-bubble">
-        <div class="typing-dots">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="typing-dots"><span></span><span></span><span></span></div>
       </div>
     `;
     chatMessagesBody.appendChild(typingDiv);
@@ -329,7 +232,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typing) typing.remove();
   };
 
-  const appendBotReply = (htmlContent, delay = 350) => {
+  const saveChatHistory = () => {
+    try {
+      const messages = [];
+      chatMessagesBody.querySelectorAll('.chat-msg:not(.msg-typing)').forEach(node => {
+        const isBot = node.classList.contains('msg-bot');
+        const text = node.querySelector('.msg-text') ? node.querySelector('.msg-text').innerHTML : '';
+        const time = node.querySelector('.msg-time') ? node.querySelector('.msg-time').textContent : '';
+        if (text) messages.push({ sender: isBot ? 'bot' : 'user', text, time });
+      });
+      sessionStorage.setItem(SESSION_KEY_MESSAGES, JSON.stringify(messages.slice(-25)));
+    } catch (err) {}
+  };
+
+  const appendBotReply = (htmlContent, delay = 220) => {
     showTypingIndicator();
     setTimeout(() => {
       hideTypingIndicator();
@@ -340,74 +256,157 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   };
 
+  const appendBotImmediate = (htmlContent) => {
+    hideTypingIndicator();
+    const el = createMessageElement('bot', htmlContent);
+    chatMessagesBody.appendChild(el);
+    scrollMessagesToBottom();
+    saveChatHistory();
+  };
+
   const appendUserMessage = (text) => {
-    const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    const el = createMessageElement('user', `<p>${escaped}</p>`);
+    const el = createMessageElement('user', `<p>${escapeHtml(text)}</p>`);
     chatMessagesBody.appendChild(el);
     scrollMessagesToBottom();
     saveChatHistory();
   };
 
   // --------------------------------------------------------------------------
-  // QUICK ACTION CHIPS
+  // QUICK CHIPS (Simple plain-English labels, zero emojis)
   // --------------------------------------------------------------------------
   const renderQuickChips = () => {
+    if (!chatQuickChips) return;
     chatQuickChips.innerHTML = '';
-    const initialChips = [
-      { id: 'services', text: '⚡ Services' },
-      { id: 'pricing', text: '💰 Pricing Models' },
-      { id: 'demos', text: '🚀 Live Demos' },
-      { id: 'discovery', text: '📅 Book Discovery Call' },
-      { id: 'quote', text: '📝 Request a Quote' },
-      { id: 'whatsapp', text: '💬 WhatsApp Us' }
+    const chips = [
+      { id: 'services', label: 'What we do' },
+      { id: 'pricing', label: 'Pricing' },
+      { id: 'demos', label: 'Past work' },
+      { id: 'discovery', label: 'Book a call' },
+      { id: 'quote', label: 'Send a message' }
     ];
 
-    initialChips.forEach(chip => {
+    chips.forEach(chip => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'quick-chip-btn';
-      btn.textContent = chip.text;
-      btn.addEventListener('click', () => {
-        handleChipClick(chip.id, chip.text);
-      });
+      btn.textContent = chip.label;
+      btn.addEventListener('click', () => handleChipClick(chip.id, chip.label));
       chatQuickChips.appendChild(btn);
     });
   };
 
   const handleChipClick = (id, label) => {
     appendUserMessage(label);
+    if (id === 'quote') {
+      intakeState = 'awaiting_message_or_email';
+      leadNoteBuffer = '';
+      appendBotReply(`
+        <p>Sure! Just type <strong>what you need</strong> and your <strong>email address</strong> (for example: <em>"Need a company website, me@company.com"</em>).</p>
+        <p>Or use our <a href="${pageLink('contact')}" class="chat-link">full Contact page &rarr;</a></p>
+      `);
+      return;
+    }
+
+    intakeState = null;
     const item = KNOWLEDGE_BASE.find(k => k.id === id);
     if (item) {
-      appendBotReply(item.reply);
-    } else {
-      appendBotReply("<p>Let me look into that for you. How can our engineering team assist?</p>");
+      appendBotReply(item.reply());
     }
   };
 
   // --------------------------------------------------------------------------
-  // NLP / QUERY MATCHING ENGINE
+  // REAL MESSAGE / LEAD SUBMISSION -> contact_messages DB
+  // --------------------------------------------------------------------------
+  const handleLeadSubmission = async (fullText, detectedEmail, detectedPhone) => {
+    showTypingIndicator();
+
+    const csrfToken = document.getElementById('chatCsrfToken') ? document.getElementById('chatCsrfToken').value : '';
+    const formData = new FormData();
+    formData.append('csrf_token', csrfToken);
+    formData.append('inquiry_category', 'general');
+    formData.append('inquiry_area', 'general_info');
+    formData.append('name', 'Website Visitor');
+    formData.append('email', detectedEmail);
+    if (detectedPhone) formData.append('phone', detectedPhone);
+    formData.append('subject', 'Live Chat Message');
+    formData.append('message', fullText);
+    formData.append('privacy_consent', '1');
+
+    try {
+      const response = await fetch(pageLink('contact'), {
+        method: 'POST',
+        body: formData,
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      });
+      const result = await response.json();
+
+      if (result && result.status === 'success') {
+        intakeState = null;
+        leadNoteBuffer = '';
+        appendBotImmediate(`
+          <div class="chat-success-card">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <div>
+              <strong>Message sent!</strong>
+              <p style="margin: 4px 0 0; font-size: 0.82rem;">We saved your note (Ref: <code>${escapeHtml(result.ref || 'SAVED')}</code>) and will reply to <strong>${escapeHtml(detectedEmail)}</strong> soon.</p>
+            </div>
+          </div>
+        `);
+      } else {
+        appendBotImmediate(`
+          <p>We could not send that automatically (${escapeHtml(result?.message || 'please check your email format')}). You can email us directly at <a href="mailto:${escapeHtml(companyEmail)}" class="chat-link">${escapeHtml(companyEmail)}</a> or use the <a href="${pageLink('contact')}" class="chat-link">Contact form</a>.</p>
+        `);
+      }
+    } catch (e) {
+      appendBotImmediate(`
+        <p>Connection hiccup—please reach us at <a href="mailto:${escapeHtml(companyEmail)}" class="chat-link">${escapeHtml(companyEmail)}</a> or <a href="${pageLink('contact')}" class="chat-link">Contact page</a>.</p>
+      `);
+    }
+  };
+
+  // --------------------------------------------------------------------------
+  // SIMPLE INTENT ENGINE + 2-STEP MESSAGE INTAKE
   // --------------------------------------------------------------------------
   const processUserQuery = async (query) => {
     const cleanQuery = query.toLowerCase().trim();
+    const emailMatch = query.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
+    const phoneMatch = query.match(/(\+?[0-9][0-9\s\-]{7,16})/);
 
-    // Check if user is typing an email/contact lead submission
-    const emailMatch = cleanQuery.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/i);
-    const phoneMatch = cleanQuery.match(/(\+?[0-9]{10,14})/);
-
-    if (emailMatch || isAwaitingQuoteDetails) {
-      await handleLeadSubmission(query, emailMatch ? emailMatch[0] : null, phoneMatch ? phoneMatch[0] : null);
+    if (emailMatch) {
+      const combinedText = leadNoteBuffer ? `${leadNoteBuffer} — Contact: ${query}` : query;
+      const safeMsg = combinedText.length >= 10 ? combinedText : `Chat inquiry from visitor (${query})`;
+      await handleLeadSubmission(safeMsg, emailMatch[0], phoneMatch ? phoneMatch[0].trim() : null);
       return;
     }
 
-    // Keyword matching against knowledge base
+    if (intakeState === 'awaiting_message_or_email') {
+      leadNoteBuffer = query;
+      intakeState = 'awaiting_email';
+      appendBotReply(`
+        <p>Got it! What <strong>email address</strong> should our team reply to?</p>
+      `);
+      return;
+    }
+
+    if (intakeState === 'awaiting_email') {
+      appendBotReply(`
+        <p>Please include a valid email address (for example: <em>name@company.com</em>) so we can reply to your note, or open our <a href="${pageLink('contact')}" class="chat-link">Contact form</a>.</p>
+      `);
+      return;
+    }
+
+    // Score knowledge base entries using whole-word / phrase matching
     let bestMatch = null;
     let highestScore = 0;
 
     KNOWLEDGE_BASE.forEach(entry => {
       let score = 0;
       entry.keywords.forEach(keyword => {
-        if (cleanQuery.includes(keyword)) {
-          score += keyword.length > 5 ? 2 : 1;
+        if (keyword.includes(' ')) {
+          if (cleanQuery.includes(keyword)) score += 3;
+        } else {
+          const rx = new RegExp(`\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+          if (rx.test(cleanQuery)) score += 2;
         }
       });
       if (score > highestScore) {
@@ -417,72 +416,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (bestMatch && highestScore > 0) {
-      appendBotReply(bestMatch.reply);
-    } else {
-      // Fallback friendly reply with guidance & direct options
-      const fallbackReply = `
-        <p>Thanks for your question! While I'm specialized in CodeX404's engineering capabilities, our lead engineers can answer your exact scenario right away:</p>
-        <ul>
-          <li><strong>Discovery Call:</strong> <a href="discovery-call" class="chat-link">Book a 30-min architecture review</a></li>
-          <li><strong>Email:</strong> <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a></li>
-          <li><strong>Inquiry Form:</strong> <a href="contact" class="chat-link">Submit detailed requirements</a></li>
-        </ul>
-        <p>Would you like to explore our <strong>Services</strong>, <strong>Pricing</strong>, or request a <strong>Project Quote</strong>?</p>
-      `;
-      appendBotReply(fallbackReply);
+      appendBotReply(bestMatch.reply());
+      return;
     }
+
+    // Friendly, non-jargon fallback that also offers to pass the message along
+    leadNoteBuffer = query;
+    intakeState = 'awaiting_email';
+    appendBotReply(`
+      <p>Good question! I can pass <em>"${escapeHtml(query)}"</em> straight to our team—just type your <strong>email address</strong> below so they can reply to you.</p>
+      <p>Or choose what you need: <a href="${pageLink('solutions')}" class="chat-link">Services</a> &middot; <a href="${pageLink('pricing')}" class="chat-link">Pricing</a> &middot; <a href="${pageLink('discovery-call')}" class="chat-link">Book a call</a></p>
+    `);
   };
 
-  // Lead Submission via AJAX to contact.php
-  const handleLeadSubmission = async (fullText, detectedEmail, detectedPhone) => {
-    showTypingIndicator();
-
-    const csrfToken = document.getElementById('chatCsrfToken') ? document.getElementById('chatCsrfToken').value : '';
-    const email = detectedEmail || 'visitor@codex404.chat';
-    const name = 'Chatbot Visitor';
-
-    const formData = new FormData();
-    formData.append('csrf_token', csrfToken);
-    formData.append('name', name);
-    formData.append('email', email);
-    if (detectedPhone) formData.append('phone', detectedPhone);
-    formData.append('subject', 'Chatbot Instant Inquiry');
-    formData.append('message', `Inquiry submitted via Chatbot: ${fullText}`);
-    formData.append('privacy_consent', '1');
-
-    try {
-      const response = await fetch('contact', {
-        method: 'POST',
-        body: formData,
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-      });
-      const result = await response.json();
-      hideTypingIndicator();
-
-      if (result.status === 'success') {
-        appendBotReply(`
-          <div class="chat-success-card">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <div>
-              <strong>Inquiry Received!</strong>
-              <p style="margin: 0.35rem 0 0; font-size: 0.85rem;">Thank you! Your requirements have been logged with reference code <code>${result.ref || 'CODEX-LEAD'}</code>. Our Solutions Architect will reach out shortly.</p>
-            </div>
-          </div>
-        `, 200);
-      } else {
-        appendBotReply(`
-          <p>Thank you! We've captured your note: <em>"${fullText}"</em>. You can also email us directly at <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a> or book a call via <a href="discovery-call" class="chat-link">Discovery Call</a>.</p>
-        `, 200);
-      }
-    } catch (e) {
-      hideTypingIndicator();
-      appendBotReply(`
-        <p>Thank you! Your note has been registered. You can also reach our engineering lead directly via email at <a href="mailto:info@codex404solutions.com" class="chat-link">info@codex404solutions.com</a> or book a <a href="discovery-call" class="chat-link">Discovery Call</a>.</p>
-      `, 200);
-    }
-  };
-
-  // Form Submit Handler
   chatInputForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = chatInputText.value.trim();
@@ -493,31 +439,14 @@ document.addEventListener('DOMContentLoaded', () => {
     processUserQuery(query);
   });
 
-  // Reset Chat Conversation
-  chatResetBtn.addEventListener('click', () => {
-    sessionStorage.removeItem(SESSION_KEY_MESSAGES);
-    initWelcomeConversation();
-  });
-
-  // --------------------------------------------------------------------------
-  // HISTORY & PERSISTENCE IN SESSIONSTORAGE
-  // --------------------------------------------------------------------------
-  const saveChatHistory = () => {
-    try {
-      const messages = [];
-      chatMessagesBody.querySelectorAll('.chat-msg:not(.msg-typing)').forEach(node => {
-        const isBot = node.classList.contains('msg-bot');
-        const text = node.querySelector('.msg-text') ? node.querySelector('.msg-text').innerHTML : '';
-        const time = node.querySelector('.msg-time') ? node.querySelector('.msg-time').textContent : '';
-        if (text) {
-          messages.push({ sender: isBot ? 'bot' : 'user', text, time });
-        }
-      });
-      sessionStorage.setItem(SESSION_KEY_MESSAGES, JSON.stringify(messages.slice(-25)));
-    } catch (err) {
-      // Storage unavailable or quota exceeded
-    }
-  };
+  if (chatResetBtn) {
+    chatResetBtn.addEventListener('click', () => {
+      sessionStorage.removeItem(SESSION_KEY_MESSAGES);
+      intakeState = null;
+      leadNoteBuffer = '';
+      initWelcomeConversation();
+    });
+  }
 
   const loadChatHistory = () => {
     try {
@@ -526,17 +455,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const messages = JSON.parse(saved);
         if (Array.isArray(messages) && messages.length > 0) {
           chatMessagesBody.innerHTML = '';
-          messages.forEach(m => {
-            const el = createMessageElement(m.sender, m.text, m.time);
-            chatMessagesBody.appendChild(el);
-          });
+          messages.forEach(m => chatMessagesBody.appendChild(createMessageElement(m.sender, m.text, m.time)));
           scrollMessagesToBottom();
           return true;
         }
       }
-    } catch (err) {
-      // Fallback to welcome
-    }
+    } catch (err) {}
     return false;
   };
 
@@ -544,31 +468,22 @@ document.addEventListener('DOMContentLoaded', () => {
     chatMessagesBody.innerHTML = '';
     const welcomeHtml = `
       <div class="chat-welcome-card">
-        <div class="chat-welcome-badge">🚀 Welcome to CodeX404 Solutions</div>
-        <p>I'm your <strong>Engineering & Architecture Assistant</strong>. I can answer questions about our bespoke development, AI pipelines, pricing, and live project deliverables.</p>
-        <p style="margin-bottom: 0;">Tap any topic below or ask your own question:</p>
+        <div class="chat-welcome-badge">Online Support</div>
+        <p>Hi! I can explain what CodeX404 builds, how pricing works, show real examples, or send your question straight to our team.</p>
+        <p style="margin-bottom: 0;">Pick a quick topic below or type in plain words:</p>
       </div>
     `;
-    const el = createMessageElement('bot', welcomeHtml);
-    chatMessagesBody.appendChild(el);
+    chatMessagesBody.appendChild(createMessageElement('bot', welcomeHtml));
     renderQuickChips();
     scrollMessagesToBottom();
   };
 
-  // --------------------------------------------------------------------------
-  // INITIALIZATION
-  // --------------------------------------------------------------------------
   if (launcherContainer) {
     launcherContainer.style.display = 'flex';
     launcherContainer.classList.remove('widget-hidden');
   }
-  if (chatRestorePill) {
-    chatRestorePill.hidden = true;
-  }
 
-  // Load existing history or initialize fresh welcome conversation
-  const hasLoadedHistory = loadChatHistory();
-  if (!hasLoadedHistory) {
+  if (!loadChatHistory()) {
     initWelcomeConversation();
   } else {
     renderQuickChips();

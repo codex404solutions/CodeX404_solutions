@@ -242,6 +242,11 @@ $currentPage = $currentPage ?? 'overview';
                         <span class="admin-sidebar-count"><?= min(6, $totalCount) ?></span>
                     </a>
                 <?php endif; ?>
+                <?php if (current_admin_can('inquiries.view')): ?>
+                    <a href="<?= admin_url('inquiries') ?>" class="admin-sidebar-link <?= ($currentPage === 'inquiries') ? 'active' : '' ?>">
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-envelope-paper"></i><span>Inquiries</span></span>
+                    </a>
+                <?php endif; ?>
                 <?php if (current_admin_can('careers.view')): ?>
                     <a href="<?= admin_url('careers') ?>" class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
                         <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-briefcase"></i><span>Careers &amp; Hiring</span></span>

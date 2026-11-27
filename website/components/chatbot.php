@@ -13,7 +13,10 @@ $csrfToken = generate_csrf_token();
      - Allows users to minimize, close, or completely hide the floating widget at will
      - Persists user hide/show preference across navigation via localStorage
      ========================================================================== -->
-<aside class="codex-chatbot-wrapper" id="codexChatbotWrapper" aria-label="Interactive CodeX404 Assistant">
+<aside class="codex-chatbot-wrapper" id="codexChatbotWrapper"
+    data-base-url="<?= htmlspecialchars(BASE_URL, ENT_QUOTES, 'UTF-8') ?>"
+    data-email="<?= htmlspecialchars(COMPANY_EMAIL, ENT_QUOTES, 'UTF-8') ?>"
+    aria-label="CodeX404 Help Desk">
 
     <!-- 1. Single Sleek AI Chat Launcher Pill (Bottom Right) -->
     <div class="chatbot-launcher-container" id="chatbotLauncherContainer">
@@ -50,19 +53,13 @@ $csrfToken = generate_csrf_token();
             <div class="chat-header-info">
                 <div class="chat-avatar-wrap">
                     <div class="chat-avatar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-                            <circle cx="12" cy="5" r="2"></circle>
-                            <path d="M12 7v4"></path>
-                            <line x1="8" y1="16" x2="8" y2="16"></line>
-                            <line x1="16" y1="16" x2="16" y2="16"></line>
-                        </svg>
+                        <img src="<?= asset('images/logo/favicon-32x32.png') ?>" alt="CodeX404" width="22" height="22">
                     </div>
                     <span class="avatar-live-indicator" title="Online & ready"></span>
                 </div>
                 <div>
-                    <h3 class="chat-title" id="chatWindowTitle">CodeX404 Assistant</h3>
-                    <p class="chat-subtitle">Engineering & Architecture Guide</p>
+                    <h3 class="chat-title" id="chatWindowTitle">CodeX404 Help Desk</h3>
+                    <p class="chat-subtitle">Ask us anything &middot; Online</p>
                 </div>
             </div>
 
@@ -125,28 +122,28 @@ $csrfToken = generate_csrf_token();
             
             <div class="chat-input-wrapper">
                 <label for="chatInputText" class="sr-only">Type your question or message</label>
-                <input type="text" 
-                       id="chatInputText" 
-                       class="chat-input-text" 
-                       placeholder="Ask about services, pricing, tech stack..." 
-                       maxlength="300"
+                <input type="text"
+                       id="chatInputText"
+                       class="chat-input-text"
+                       placeholder="Ask a simple question or share your idea..."
+                       maxlength="400"
                        required>
-                
-                <button type="submit" 
-                        class="chat-send-btn" 
-                        id="chatSendBtn" 
-                        aria-label="Send message" 
-                        title="Send message">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+
+                <button type="submit"
+                        class="chat-send-btn"
+                        id="chatSendBtn"
+                        aria-label="Send message"
+                        title="Send">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="22" y1="2" x2="11" y2="13"></line>
                         <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                     </svg>
                 </button>
             </div>
-            
+
             <div class="chat-input-footer">
-                <span class="chat-brand-tag">⚡ CodeX404 AI Assistant</span>
-                <button type="button" class="chat-reset-link" id="chatResetBtn" title="Start new conversation">Clear Chat</button>
+                <span class="chat-brand-tag">Direct team support</span>
+                <button type="button" class="chat-reset-link" id="chatResetBtn" title="Start new conversation">Start over</button>
             </div>
         </form>
     </div>

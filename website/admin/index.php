@@ -114,18 +114,18 @@ $recentAuditLogs = class_exists('\\App\\Services\\AuditLogService') ? AuditLogSe
                 <div>
                     <div class="d-flex align-items-center justify-content-between">
                         <span class="text-muted fw-semibold small"><?= $usersCount !== null ? 'Workforce Accounts' : 'Industry Domains' ?></span>
-                        <div class="stat-icon" style="background: var(--cx-pill-bg); color: var(--cx-text-secondary);">
+                        <div class="stat-icon cx-highlight-pill">
                             <i class="bi <?= $usersCount !== null ? 'bi-people' : 'bi-tags' ?>"></i>
                         </div>
                     </div>
-                    <div class="stat-value" style="color: var(--cx-text-primary);"><?= $usersCount !== null ? $usersCount : count($categories) ?></div>
+                    <div class="stat-value" style="color: var(--cx-highlight-ink);"><?= $usersCount !== null ? $usersCount : count($categories) ?></div>
                 </div>
                 <div>
                     <div class="small text-muted text-truncate">
                         <?= $usersCount !== null ? 'RBAC-protected admin & CRM users' : htmlspecialchars(implode(' · ', array_slice($categories, 0, 3))) ?>
                     </div>
                     <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 100%; background: var(--cx-text-muted);"></div>
+                        <div class="stat-progress-bar" style="width: 100%; background: var(--cx-highlight);"></div>
                     </div>
                 </div>
             </div>
@@ -279,8 +279,11 @@ $recentAuditLogs = class_exists('\\App\\Services\\AuditLogService') ? AuditLogSe
     <!-- Right Column: Quick Actions, Audit Log, System Health -->
     <div class="col-12 col-xl-4 d-flex flex-column gap-3">
         <!-- Quick Actions -->
-        <div class="admin-card p-3">
-            <h6 class="fw-semibold mb-3">Quick Actions</h6>
+        <div class="admin-card cx-brand-signature-bar p-3">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="fw-semibold mb-0">Quick Actions</h6>
+                <span class="badge cx-highlight-pill" style="font-size: 0.65rem;">Priority</span>
+            </div>
             <div class="d-grid gap-2">
                 <?php if (current_admin_can('portfolio.edit')): ?>
                     <a href="<?= admin_url('project-form') ?>" class="btn btn-sm btn-cx-primary d-flex align-items-center justify-content-between px-3 py-2">
@@ -288,10 +291,16 @@ $recentAuditLogs = class_exists('\\App\\Services\\AuditLogService') ? AuditLogSe
                         <i class="bi bi-arrow-right"></i>
                     </a>
                 <?php endif; ?>
-                <?php if (current_admin_can('careers.view')): ?>
-                    <a href="<?= admin_url('careers') ?>" class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-between px-3 py-2">
-                        <span><i class="bi bi-briefcase me-2"></i>Review Applications</span>
+                <?php if (current_admin_can('inquiries.view')): ?>
+                    <a href="<?= admin_url('inquiries') ?>" class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-between px-3 py-2">
+                        <span><i class="bi bi-envelope-paper me-2"></i>Inquiries Inbox</span>
                         <i class="bi bi-chevron-right"></i>
+                    </a>
+                <?php endif; ?>
+                <?php if (current_admin_can('careers.view')): ?>
+                    <a href="<?= admin_url('careers') ?>" class="btn btn-sm cx-btn-orange d-flex align-items-center justify-content-between px-3 py-2">
+                        <span><i class="bi bi-briefcase me-2" style="color: var(--cx-highlight-ink);"></i>Review Applications</span>
+                        <i class="bi bi-chevron-right" style="color: var(--cx-highlight-ink);"></i>
                     </a>
                 <?php endif; ?>
                 <?php if (current_admin_can('users.view')): ?>

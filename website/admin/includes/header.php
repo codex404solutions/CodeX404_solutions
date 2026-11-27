@@ -89,8 +89,11 @@ $flash = get_admin_flash();
                             <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions" class="img-fluid"
                                 style="max-height: 24px; object-fit: contain;">
                         </a>
-                        <span class="badge fw-medium"
-                            style="font-size: 0.65rem; background: rgba(255, 255, 255, 0.06); color: #94A3B8; border: 1px solid rgba(255, 255, 255, 0.08);">Admin</span>
+                        <span class="badge fw-semibold d-inline-flex align-items-center gap-1"
+                            style="font-size: 0.65rem; background: rgba(255, 140, 0, 0.14); color: #FFA940; border: 1px solid rgba(255, 140, 0, 0.4);">
+                            <span class="cx-orange-dot" style="width: 5px; height: 5px;"></span>
+                            Admin
+                        </span>
                     </div>
 
                     <!-- Executive User Profile Card -->
@@ -150,6 +153,12 @@ $flash = get_admin_flash();
                                 class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
                                 <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-layers"></i><span>Showcase</span></span>
                                 <span class="admin-sidebar-count"><?= min(6, $totalCount) ?></span>
+                            </a>
+                        <?php endif; ?>
+                        <?php if (current_admin_can('inquiries.view')): ?>
+                            <a href="<?= admin_url('inquiries') ?>"
+                                class="admin-sidebar-link <?= ($currentPage === 'inquiries') ? 'active' : '' ?>">
+                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-envelope-paper"></i><span>Inquiries</span></span>
                             </a>
                         <?php endif; ?>
                         <?php if (current_admin_can('careers.view')): ?>

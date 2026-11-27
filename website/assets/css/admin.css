@@ -21,25 +21,28 @@
             /* Semantic Status (used strictly for state indicators) */
             --cx-emerald: #10B981;
             --cx-amber: #D97706;
+            --cx-orange: #D97706;
             --cx-rose: #E11D48;
 
-            /* Subtle neutral/accent highlight (replaces loud yellow slop) */
-            --cx-highlight: var(--cx-accent);
-            --cx-highlight-bg: var(--cx-accent-soft);
-            --cx-highlight-border: var(--cx-accent-border);
-            --cx-highlight-ink: var(--cx-accent);
+            /* Second Brand Highlight: CodeX404 Signature Orange (matches main.css #FF8C00) */
+            --cx-highlight: var(--cx-orange);
+            --cx-highlight-bg: rgba(217, 119, 6, 0.10);
+            --cx-highlight-border: rgba(217, 119, 6, 0.38);
+            --cx-highlight-ink: #B45309;
+            --cx-gradient-signature: linear-gradient(90deg, #0B5ED7 0%, #22D3EE 65%, #FF8C00 100%);
 
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'Fira Code', monospace;
         }
 
-        /* 1. DARK MODE (60% #0B0F17 Canvas | 30% #111827/#161E2E Surfaces | 10% #38BDF8 Accent) */
+        /* 1. DARK MODE (60% #0B0F17 Canvas | 30% #111827/#161E2E Surfaces | 10% #38BDF8 + #FF8C00 Highlights) */
         [data-bs-theme="dark"] {
             --cx-accent: #38BDF8;
             --cx-accent-hover: #0EA5E9;
             --cx-accent-ink: #070B14;
             --cx-accent-soft: rgba(56, 189, 248, 0.1);
             --cx-accent-border: rgba(56, 189, 248, 0.24);
+            --cx-orange: #FF8C00;
 
             --cx-bg-canvas: #0B0F17;
             --cx-bg-surface: #111827;
@@ -56,7 +59,10 @@
             --cx-hero-bg: #141B29;
             --cx-banner-border: rgba(255, 255, 255, 0.08);
             --cx-ticker-bg: #111827;
-            --cx-highlight-ink: #38BDF8;
+            --cx-highlight: #FF8C00;
+            --cx-highlight-bg: rgba(255, 140, 0, 0.14);
+            --cx-highlight-border: rgba(255, 140, 0, 0.45);
+            --cx-highlight-ink: #FFA940;
         }
 
         /* 2. PURE LIGHT MODE (60% #F8FAFC Canvas | 30% #FFFFFF/#F1F5F9 Surfaces | 10% #0284C7 Accent) */
@@ -120,10 +126,19 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Typography Accents (restrained, high-contrast) */
+        /* Typography Accents (CodeX404 Brand Cyan + Signature Orange) */
         ::selection {
             background: var(--cx-highlight);
-            color: #090D16;
+            color: #071426;
+        }
+
+        .cx-brand-cyan {
+            color: var(--cx-cyan);
+        }
+
+        [data-bs-theme="light"] .cx-brand-cyan,
+        [data-bs-theme="combo"] .cx-brand-cyan {
+            color: #0284C7;
         }
 
         .cx-highlight-mark {
@@ -139,6 +154,62 @@
             background: var(--cx-highlight-bg) !important;
             border: 1px solid var(--cx-highlight-border) !important;
             color: var(--cx-highlight-ink) !important;
+        }
+
+        .cx-btn-brand {
+            background: linear-gradient(180deg, #1672F3 0%, #0B5ED7 100%);
+            border: 1px solid #1672F3;
+            color: #FFFFFF !important;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(11, 94, 215, 0.28);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .cx-btn-brand:hover {
+            filter: brightness(1.08);
+            box-shadow: 0 6px 18px rgba(11, 94, 215, 0.38);
+            color: #FFFFFF !important;
+        }
+
+        .cx-btn-orange {
+            background: var(--cx-pill-bg);
+            border: 1px solid var(--cx-highlight-border);
+            color: var(--cx-text-primary);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+        }
+
+        .cx-btn-orange:hover,
+        .cx-btn-orange:focus-visible {
+            background: var(--cx-highlight-bg);
+            border-color: var(--cx-orange);
+            color: var(--cx-highlight-ink);
+        }
+
+        .cx-brand-signature-bar {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cx-brand-signature-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--cx-gradient-signature);
+        }
+
+        .cx-orange-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--cx-orange);
+            box-shadow: 0 0 8px rgba(255, 140, 0, 0.55);
+            flex-shrink: 0;
         }
 
         .text-gradient-rainbow,

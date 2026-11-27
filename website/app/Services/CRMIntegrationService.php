@@ -20,7 +20,10 @@ class CRMIntegrationService
      */
     public function dispatchLead(array $leadData): array
     {
-        $idempotencyKey = 'lead_' . bin2hex(random_bytes(16));
+        $providedRef = isset($leadData['reference_code']) && is_string($leadData['reference_code'])
+            ? preg_replace('/[^a-zA-Z0-9_-]/', '', $leadData['reference_code'])
+            : '';
+        $idempotencyKey = $providedRef !== '' ? $providedRef : ('lead_' . bin2hex(random_bytes(16)));
         $timestamp = date('c');
         $payload = [
             'idempotency_key' => $idempotencyKey,
