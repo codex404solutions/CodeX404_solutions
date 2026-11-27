@@ -12,6 +12,7 @@ $pageSubtitle = 'Portfolio deliverables, publishing status, and recent admin act
 require_once __DIR__ . '/includes/header.php';
 
 use App\Services\AuditLogService;
+use App\Services\MigrationService;
 
 $pct = $totalCount > 0 ? (int) round(($activeCount / $totalCount) * 100) : 0;
 
@@ -27,7 +28,32 @@ if ($pdo) {
     }
 }
 $recentAuditLogs = class_exists('\\App\\Services\\AuditLogService') ? AuditLogService::recent(5) : [];
+$pendingMigrations = (current_admin_can('settings.edit') && class_exists('\\App\\Services\\MigrationService'))
+    ? MigrationService::pendingCount()
+    : 0;
 ?>
+
+<?php if ($pendingMigrations > 0): ?>
+    <div class="admin-card p-3 mb-4 d-flex flex-wrap align-items-center justify-content-between gap-3"
+        style="border-left: 3px solid var(--cx-amber) !important;">
+        <div class="d-flex align-items-center gap-3">
+            <div class="stat-icon bg-warning-subtle text-warning">
+                <i class="bi bi-database-up"></i>
+            </div>
+            <div>
+                <div class="fw-semibold small"><?= $pendingMigrations ?> Pending Database Migration<?= $pendingMigrations === 1 ? '' : 's' ?></div>
+                <div class="small text-muted">New SQL schema updates are ready to apply to this server&rsquo;s MySQL database.</div>
+            </div>
+        </div>
+        <form method="POST" action="<?= admin_url('telemetry') ?>" class="d-inline">
+            <?= csrf_input_field() ?>
+            <input type="hidden" name="action" value="apply_migrations">
+            <button type="submit" class="btn btn-sm btn-cx-primary px-3">
+                <i class="bi bi-play-fill me-1"></i>Apply Migrations Now
+            </button>
+        </form>
+    </div>
+<?php endif; ?>
 
 <!-- ======================================================== -->
 <!-- 1. KPI METRICS ROW                                       -->

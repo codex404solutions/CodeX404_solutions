@@ -9,6 +9,25 @@ require_once __DIR__ . '/auth.php';
 require_admin_permission('settings.view');
 
 use App\Services\AuditLogService;
+use App\Services\MigrationService;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_POST['action'] ?? '') === 'apply_migrations')) {
+    require_admin_permission('settings.edit', false, 'telemetry');
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        set_admin_flash('error', 'Security token invalid or expired.');
+    } else {
+        $actor = current_admin_profile();
+        $res = MigrationService::applyPending(
+            (string) ($actor['id'] ?? ''),
+            (string) ($actor['username'] ?? '')
+        );
+        set_admin_flash($res['ok'] ? 'success' : 'error', $res['message']);
+    }
+    header('Location: ' . admin_url('telemetry') . '#migrations');
+    exit;
+}
+
+$migrationStatus = MigrationService::status();
 
 $currentPage = 'telemetry';
 $pageTitle = 'Platform Telemetry & System Diagnostics';
@@ -370,19 +389,96 @@ require_once __DIR__ . '/includes/header.php';
 </div>
 
 <!-- ======================================================== -->
-<!-- 4. RECENT ADMIN AUDIT LOG                                -->
+<!-- 4. DATABASE SCHEMA & MIGRATIONS                          -->
+<!-- ======================================================== -->
+<div class="admin-card overflow-hidden mb-4" id="migrations">
+    <div class="p-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2"
+        style="border-color: var(--cx-border) !important;">
+        <div>
+            <h6 class="fw-semibold mb-0 d-flex align-items-center gap-2 cx-text-primary">
+                <i class="bi bi-layers" style="color: var(--cx-accent);"></i>
+                <span>Database Schema &amp; Migrations</span>
+            </h6>
+            <small class="text-muted">
+                Connected DB: <code><?= htmlspecialchars($migrationStatus['database'] ?: 'None') ?></code>
+                &middot; <?= $migrationStatus['applied_count'] ?> Applied
+                &middot; <?= $migrationStatus['pending_count'] ?> Pending
+            </small>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <?php if ($migrationStatus['pending_count'] > 0): ?>
+                <?php if (current_admin_can('settings.edit')): ?>
+                    <form method="POST" action="<?= admin_url('telemetry') ?>" class="d-inline">
+                        <?= csrf_input_field() ?>
+                        <input type="hidden" name="action" value="apply_migrations">
+                        <button type="submit" class="btn btn-sm btn-cx-primary px-3">
+                            <i class="bi bi-play-fill me-1"></i>Apply Pending (<?= $migrationStatus['pending_count'] ?>)
+                        </button>
+                    </form>
+                <?php else: ?>
+                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle"><?= $migrationStatus['pending_count'] ?> Pending</span>
+                <?php endif; ?>
+            <?php else: ?>
+                <span class="badge bg-success-subtle text-success border border-success-subtle">Schema Up to Date</span>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-admin align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Migration File</th>
+                    <th>Status</th>
+                    <th>Batch</th>
+                    <th>Applied At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($migrationStatus['timeline'])): ?>
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-3 small">No migration records found.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach (array_reverse($migrationStatus['timeline']) as $mig): ?>
+                        <tr>
+                            <td class="small" style="font-family: var(--font-mono);">
+                                <?= htmlspecialchars($mig['filename']) ?>
+                            </td>
+                            <td>
+                                <?php if ($mig['status'] === 'applied'): ?>
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle">Applied</span>
+                                <?php else: ?>
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Pending</span>
+                                <?php endif; ?>
+                            </td>
+                            <td class="small text-muted" style="font-family: var(--font-mono);">
+                                <?= $mig['batch'] !== null ? '#' . (int) $mig['batch'] : '—' ?>
+                            </td>
+                            <td class="small text-muted" style="font-family: var(--font-mono);">
+                                <?= htmlspecialchars((string) ($mig['applied_at'] ?? 'Pending apply')) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- 5. RECENT ADMIN AUDIT LOG                                -->
 <!-- ======================================================== -->
 <div class="admin-card overflow-hidden mb-4">
     <div class="p-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2"
         style="border-color: var(--cx-border) !important;">
         <div>
-            <h6 class="fw-bold mb-0 d-flex align-items-center gap-2 cx-text-primary">
-                <i class="bi bi-journal-text text-info"></i>
+            <h6 class="fw-semibold mb-0 d-flex align-items-center gap-2 cx-text-primary">
+                <i class="bi bi-journal-text" style="color: var(--cx-accent);"></i>
                 <span>Recent Admin Audit Trail</span>
             </h6>
-            <small class="text-muted">Authentication, RBAC, and deliverable mutation events stored in MySQL</small>
+            <small class="text-muted">Authentication, RBAC, migration, and deliverable mutation events</small>
         </div>
-        <span class="badge cx-highlight-pill" style="font-size: 0.7rem;"><?= count($recentAuditLogs) ?> Recent</span>
+        <a href="<?= admin_url('logs') ?>" class="small fw-semibold text-decoration-none" style="color: var(--cx-accent);">Open Full Logs &rarr;</a>
     </div>
     <div class="table-responsive">
         <table class="table table-admin align-middle mb-0">
