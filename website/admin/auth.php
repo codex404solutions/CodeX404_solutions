@@ -20,6 +20,9 @@ if (!class_exists('\\App\\Services\\RBACService', false) && file_exists(dirname(
 if (!class_exists('\\App\\Services\\UserService', false) && file_exists(dirname(__DIR__) . '/app/Services/UserService.php')) {
     require_once dirname(__DIR__) . '/app/Services/UserService.php';
 }
+if (!class_exists('\\App\\Services\\AuditLogService', false) && file_exists(dirname(__DIR__) . '/app/Services/AuditLogService.php')) {
+    require_once dirname(__DIR__) . '/app/Services/AuditLogService.php';
+}
 if (class_exists('\\App\\Services\\RBACService') && !class_exists('\\CRM\\Services\\RBACService', false)) {
     class_alias(\App\Services\RBACService::class, 'CRM\\Services\\RBACService');
 }
@@ -347,13 +350,19 @@ function is_admin_logged_in(): bool
         return false;
     }
 
-    // Session hijacking protection: verify IP address and User-Agent binding
+    // Session hijacking protection: configurable IP binding (strict | subnet | none)
+    $ipBindMode = strtolower((string)Env::get('ADMIN_SESSION_IP_BIND', 'strict'));
     $storedIp = (string)($_SESSION['codex_admin_ip'] ?? '');
     $currentIp = get_client_ip();
-    if ($storedIp !== '' && !hash_equals($storedIp, $currentIp)) {
-        // Suspected IP mismatch
-        admin_logout();
-        return false;
+    if ($ipBindMode !== 'none' && $storedIp !== '' && !hash_equals($storedIp, $currentIp)) {
+        $ipAllowed = false;
+        if ($ipBindMode === 'subnet' && filter_var($storedIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) && filter_var($currentIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            $ipAllowed = (ip2long($storedIp) & 0xFFFFFF00) === (ip2long($currentIp) & 0xFFFFFF00);
+        }
+        if (!$ipAllowed) {
+            admin_logout();
+            return false;
+        }
     }
 
     // Periodic session rotation (every 15 minutes) for active sessions
@@ -436,6 +445,9 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
                 $_SESSION['codex_admin_ua'] = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255);
 
                 \App\Services\UserService::recordLogin((string)$user['id']);
+                if (class_exists('\\App\\Services\\AuditLogService')) {
+                    \App\Services\AuditLogService::record((string)$user['id'], (string)$user['username'], 'auth.login_success', 'session', (string)$user['id'], 'Admin signed in via UserService');
+                }
                 reset_admin_failed_attempts($username);
                 return true;
             }
@@ -533,6 +545,9 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
     }
 
     record_failed_admin_attempt($username);
+    if (class_exists('\\App\\Services\\AuditLogService')) {
+        \App\Services\AuditLogService::record(null, $cleanUser, 'auth.login_failed', 'session', null, 'Failed admin login attempt');
+    }
     return false;
 }
 
@@ -541,9 +556,18 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
  */
 function admin_logout(): void
 {
+    $actorId = isset($_SESSION['codex_admin_user_id']) ? (string)$_SESSION['codex_admin_user_id'] : null;
+    $actorUser = isset($_SESSION['codex_admin_user']) ? (string)$_SESSION['codex_admin_user'] : null;
+    if (($actorId !== null || $actorUser !== null) && class_exists('\\App\\Services\\AuditLogService')) {
+        \App\Services\AuditLogService::record($actorId, $actorUser, 'auth.logout', 'session', $actorId, 'Admin session terminated');
+    }
+
     unset(
         $_SESSION['codex_admin_logged'],
         $_SESSION['codex_admin_user'],
+        $_SESSION['codex_admin_user_id'],
+        $_SESSION['codex_admin_profile'],
+        $_SESSION['codex_admin_roles'],
         $_SESSION['codex_admin_time'],
         $_SESSION['codex_admin_last_activity'],
         $_SESSION['codex_admin_rotated_at'],

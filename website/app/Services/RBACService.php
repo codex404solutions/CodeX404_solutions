@@ -56,13 +56,13 @@ final class RBACService
         $roles = [];
         $stmt = $pdo->query('SELECT `id`, `slug`, `name`, `description`, `color`, `is_system` FROM `roles` ORDER BY `is_system` DESC, `name` ASC');
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-            $slug = strtolower((string)$row['slug']);
+            $slug = strtolower((string) $row['slug']);
             $roles[$slug] = [
-                'id' => (string)$row['id'],
+                'id' => (string) $row['id'],
                 'slug' => $slug,
-                'name' => (string)$row['name'],
-                'description' => (string)($row['description'] ?? ''),
-                'color' => (string)($row['color'] ?: 'info'),
+                'name' => (string) $row['name'],
+                'description' => (string) ($row['description'] ?? ''),
+                'color' => (string) ($row['color'] ?: 'info'),
                 'icon' => in_array($slug, self::TOP_EXECUTIVE_ROLES, true) ? 'shield-lock-fill' : 'shield-check',
                 'is_system' => !empty($row['is_system']),
                 'permissions' => in_array($slug, self::TOP_EXECUTIVE_ROLES, true) ? ['*'] : [],
@@ -77,11 +77,11 @@ final class RBACService
             ORDER BY p.slug ASC
         ';
         foreach ($pdo->query($permSql)->fetchAll(PDO::FETCH_ASSOC) as $link) {
-            $rSlug = (string)$link['role_slug'];
+            $rSlug = (string) $link['role_slug'];
             if (!isset($roles[$rSlug]) || in_array('*', $roles[$rSlug]['permissions'], true)) {
                 continue;
             }
-            $roles[$rSlug]['permissions'][] = (string)$link['perm_slug'];
+            $roles[$rSlug]['permissions'][] = (string) $link['perm_slug'];
         }
 
         return $roles;
@@ -102,7 +102,7 @@ final class RBACService
         $modules = [];
         $stmt = $pdo->query('SELECT `slug`, `module`, `description` FROM `permissions` ORDER BY `module` ASC, `slug` ASC');
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-            $modKey = strtolower((string)$row['module']);
+            $modKey = strtolower((string) $row['module']);
             if (!isset($modules[$modKey])) {
                 $meta = self::MODULE_META[$modKey] ?? [
                     'title' => ucfirst($modKey),
@@ -114,7 +114,7 @@ final class RBACService
                     'permissions' => [],
                 ];
             }
-            $modules[$modKey]['permissions'][(string)$row['slug']] = (string)($row['description'] ?? '');
+            $modules[$modKey]['permissions'][(string) $row['slug']] = (string) ($row['description'] ?? '');
         }
 
         return $modules;
@@ -125,7 +125,13 @@ final class RBACService
      *
      * @param array<int, string> $roles
      * @param array<string, mixed>|null $customPermissions
-     * @return array{effective: array<int, string>, from_roles: array<int, string>, granted: array<int, string>, denied: array<int, string>}
+     * @return array{
+     *   effective: array<int, string>,
+     *   from_roles: array<int, string>,
+     *   granted: array<int, string>,
+     *   denied: array<int, string>,
+     *   details: array<string, array{source: string}>
+     * }
      */
     public static function getEffectivePermissions(array $roles, ?array $customPermissions = null): array
     {
@@ -136,33 +142,55 @@ final class RBACService
         $allPermissionSlugs = [];
         foreach ($allModules as $mod) {
             foreach (array_keys($mod['permissions']) as $slug) {
-                $allPermissionSlugs[] = strtolower((string)$slug);
+                $allPermissionSlugs[] = strtolower((string) $slug);
             }
         }
         $allPermissionSlugs = array_values(array_unique($allPermissionSlugs));
 
         $fromRoles = [];
-        $hasWildcard = !empty(array_intersect($normalizedRoles, self::TOP_EXECUTIVE_ROLES));
+        $details = [];
+        $hasWildcard = false;
+        $wildcardSource = '';
 
         foreach ($normalizedRoles as $rSlug) {
+            $roleName = (string) ($allRoles[$rSlug]['name'] ?? ucfirst($rSlug));
             $rolePerms = $allRoles[$rSlug]['permissions'] ?? [];
-            if (in_array('*', $rolePerms, true)) {
+            if (in_array($rSlug, self::TOP_EXECUTIVE_ROLES, true) || in_array('*', $rolePerms, true)) {
                 $hasWildcard = true;
-                break;
+                if ($wildcardSource === '') {
+                    $wildcardSource = $roleName . ' (*)';
+                }
+                continue;
             }
             foreach ($rolePerms as $p) {
-                $fromRoles[] = strtolower((string)$p);
+                $pLower = strtolower((string) $p);
+                $fromRoles[] = $pLower;
+                if (!isset($details[$pLower])) {
+                    $details[$pLower] = ['source' => $roleName];
+                }
             }
         }
 
         if ($hasWildcard) {
             $fromRoles = $allPermissionSlugs;
+            foreach ($allPermissionSlugs as $pSlug) {
+                if (!isset($details[$pSlug])) {
+                    $details[$pSlug] = ['source' => $wildcardSource ?: 'Executive Wildcard (*)'];
+                }
+            }
         } else {
             $fromRoles = array_values(array_unique($fromRoles));
         }
 
-        $granted = self::normalizeList((array)($customPermissions['granted'] ?? []));
-        $denied = self::normalizeList((array)($customPermissions['denied'] ?? []));
+        $granted = self::normalizeList((array) ($customPermissions['granted'] ?? []));
+        $denied = self::normalizeList((array) ($customPermissions['denied'] ?? []));
+
+        foreach ($granted as $gSlug) {
+            $details[$gSlug] = ['source' => 'Custom Grant'];
+        }
+        foreach ($denied as $dSlug) {
+            unset($details[$dSlug]);
+        }
 
         $effective = array_values(array_diff(
             array_values(array_unique(array_merge($fromRoles, $granted))),
@@ -175,6 +203,7 @@ final class RBACService
             'from_roles' => $fromRoles,
             'granted' => $granted,
             'denied' => $denied,
+            'details' => $details,
         ];
     }
 
@@ -193,11 +222,11 @@ final class RBACService
         }
 
         if (is_array($customPermissions)) {
-            $denied = self::normalizeList((array)($customPermissions['denied'] ?? []));
+            $denied = self::normalizeList((array) ($customPermissions['denied'] ?? []));
             if (in_array($target, $denied, true)) {
                 return false;
             }
-            $granted = self::normalizeList((array)($customPermissions['granted'] ?? []));
+            $granted = self::normalizeList((array) ($customPermissions['granted'] ?? []));
             if (in_array($target, $granted, true)) {
                 return true;
             }
@@ -229,7 +258,7 @@ final class RBACService
             ";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array_merge($normalizedRoles, [$target]));
-            return (int)$stmt->fetchColumn() > 0;
+            return (int) $stmt->fetchColumn() > 0;
         } catch (\Throwable $e) {
             return false;
         }
@@ -274,12 +303,12 @@ final class RBACService
             throw new \RuntimeException('Database connection unavailable.');
         }
 
-        $slug = strtolower(trim((string)($data['slug'] ?? '')));
+        $slug = strtolower(trim((string) ($data['slug'] ?? '')));
         $slug = preg_replace('/[^a-z0-9_-]/', '_', $slug) ?? '';
-        $name = trim((string)($data['name'] ?? ''));
-        $description = trim((string)($data['description'] ?? ''));
-        $color = trim((string)($data['color'] ?? 'info')) ?: 'info';
-        $permSlugs = self::normalizeList((array)($data['permissions'] ?? []));
+        $name = trim((string) ($data['name'] ?? ''));
+        $description = trim((string) ($data['description'] ?? ''));
+        $color = trim((string) ($data['color'] ?? 'info')) ?: 'info';
+        $permSlugs = self::normalizeList((array) ($data['permissions'] ?? []));
 
         if ($slug === '' || $name === '') {
             throw new \InvalidArgumentException('Role slug and name are required.');
@@ -292,7 +321,7 @@ final class RBACService
             $existing = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($existing) {
-                $roleId = (string)$existing['id'];
+                $roleId = (string) $existing['id'];
                 $upd = $pdo->prepare('UPDATE `roles` SET `name` = ?, `description` = ?, `color` = ? WHERE `id` = ?');
                 $upd->execute([$name, $description, $color, $roleId]);
             } else {
@@ -360,7 +389,7 @@ final class RBACService
             return false;
         }
 
-        $roleId = (string)$role['id'];
+        $roleId = (string) $role['id'];
         $pdo->beginTransaction();
         try {
             $pdo->prepare('DELETE FROM `role_permissions` WHERE `role_id` = ?')->execute([$roleId]);
@@ -383,7 +412,7 @@ final class RBACService
     private static function normalizeList(array $items): array
     {
         return array_values(array_unique(array_filter(array_map(
-            static fn($item): string => strtolower(trim((string)$item)),
+            static fn($item): string => strtolower(trim((string) $item)),
             $items
         ), static fn(string $v): bool => $v !== '')));
     }

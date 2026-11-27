@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $id = trim((string)($_POST['id'] ?? ''));
         if ($id !== '' && ProjectService::delete($id)) {
+            $actor = current_admin_profile();
+            \App\Services\AuditLogService::record((string)($actor['id'] ?? ''), (string)($actor['username'] ?? ''), 'portfolio.deleted', 'project', $id, "Deleted deliverable '{$id}'");
             set_admin_flash('success', "Project '{$id}' was successfully deleted.");
         } else {
             set_admin_flash('error', "Failed to delete project. Item may not exist.");

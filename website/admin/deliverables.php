@@ -30,7 +30,7 @@ $permissionStatuses = ProjectService::getPermissionStatuses();
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Deliverables</span>
-                    <div class="h3 fw-bold mb-0 text-gradient-cyan"><?= $totalCount ?></div>
+                    <div class="h3 fw-bold mb-0" style="color: var(--cx-text-primary);"><?= $totalCount ?></div>
                 </div>
                 <div class="stat-icon bg-info-subtle text-info" style="width: 40px; height: 40px; font-size: 1.15rem;">
                     <i class="bi bi-collection-play-fill"></i>
@@ -72,7 +72,7 @@ $permissionStatuses = ProjectService::getPermissionStatuses();
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <span class="text-muted small fw-bold text-uppercase d-block mb-1">Domain Sectors</span>
-                    <div class="h3 fw-bold mb-0 text-gradient-purple"><?= count($categories) ?></div>
+                    <div class="h3 fw-bold mb-0" style="color: var(--cx-accent);"><?= count($categories) ?></div>
                 </div>
                 <div class="stat-icon bg-primary-subtle text-primary" style="width: 40px; height: 40px; font-size: 1.15rem;">
                     <i class="bi bi-tags-fill"></i>
@@ -117,8 +117,7 @@ $permissionStatuses = ProjectService::getPermissionStatuses();
                 <?php endforeach; ?>
             </select>
 
-            <a href="<?= admin_url('project-form') ?>" class="btn btn-sm btn-info fw-bold text-dark d-inline-flex align-items-center gap-1"
-                style="background: #38BDF8; border-color: #38BDF8; border-radius: 8px;">
+            <a href="<?= admin_url('project-form') ?>" class="btn btn-sm btn-cx-primary d-inline-flex align-items-center gap-1">
                 <i class="bi bi-plus-lg"></i>
                 <span class="d-none d-sm-inline">Create Deliverable</span>
             </a>

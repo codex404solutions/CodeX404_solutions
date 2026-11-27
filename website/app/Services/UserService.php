@@ -96,10 +96,10 @@ final class UserService
             throw new \RuntimeException('Database connection unavailable.');
         }
 
-        $name = trim((string)($data['name'] ?? ''));
-        $username = strtolower(trim((string)($data['username'] ?? '')));
-        $email = strtolower(trim((string)($data['email'] ?? '')));
-        $password = (string)($data['password'] ?? '');
+        $name = trim((string) ($data['name'] ?? ''));
+        $username = strtolower(trim((string) ($data['username'] ?? '')));
+        $email = strtolower(trim((string) ($data['email'] ?? '')));
+        $password = (string) ($data['password'] ?? '');
 
         if ($name === '' || $username === '' || $email === '') {
             throw new \InvalidArgumentException('Name, username, and email are required.');
@@ -107,18 +107,16 @@ final class UserService
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException('Please provide a valid email address.');
         }
-        if (strlen($password) < 8) {
-            throw new \InvalidArgumentException('Password must be at least 8 characters.');
-        }
+        self::assertStrongPassword($password);
 
-        $roles = self::normalizeRoles((array)($data['roles'] ?? ['viewer']));
-        $scope = self::normalizeScope((string)($data['access_scope'] ?? 'crm_only'));
-        $status = self::normalizeStatus((string)($data['status'] ?? 'active'));
+        $roles = self::normalizeRoles((array) ($data['roles'] ?? ['viewer']));
+        $scope = self::normalizeScope((string) ($data['access_scope'] ?? 'crm_only'));
+        $status = self::normalizeStatus((string) ($data['status'] ?? 'active'));
         $targetTier = RBACService::getAuthorityTier($roles);
 
         $requiresApproval = false;
         if ($actor !== null) {
-            $actorTier = RBACService::getAuthorityTier((array)($actor['roles'] ?? []));
+            $actorTier = RBACService::getAuthorityTier((array) ($actor['roles'] ?? []));
             if ($actorTier >= 3) {
                 throw new \RuntimeException('Insufficient authority tier to provision user accounts.');
             }
@@ -154,10 +152,10 @@ final class UserService
                 $email,
                 password_hash($password, PASSWORD_DEFAULT),
                 $name,
-                trim((string)($data['phone'] ?? '')) ?: null,
-                trim((string)($data['title'] ?? 'Staff Member')),
-                trim((string)($data['department'] ?? 'Operations')),
-                trim((string)($data['bio'] ?? '')) ?: null,
+                trim((string) ($data['phone'] ?? '')) ?: null,
+                trim((string) ($data['title'] ?? 'Staff Member')),
+                trim((string) ($data['department'] ?? 'Operations')),
+                trim((string) ($data['bio'] ?? '')) ?: null,
                 $primaryRole,
                 json_encode($roles),
                 $status,
@@ -202,21 +200,21 @@ final class UserService
             throw new \RuntimeException('Database connection unavailable.');
         }
 
-        $roles = isset($data['roles']) ? self::normalizeRoles((array)$data['roles']) : (array)$existing['roles'];
+        $roles = isset($data['roles']) ? self::normalizeRoles((array) $data['roles']) : (array) $existing['roles'];
         $scope = isset($data['access_scope'])
-            ? self::normalizeScope((string)$data['access_scope'])
-            : (string)($existing['access_scope'] ?? 'crm_only');
+            ? self::normalizeScope((string) $data['access_scope'])
+            : (string) ($existing['access_scope'] ?? 'crm_only');
         $status = isset($data['status'])
-            ? self::normalizeStatus((string)$data['status'])
-            : (string)($existing['status'] ?? 'active');
+            ? self::normalizeStatus((string) $data['status'])
+            : (string) ($existing['status'] ?? 'active');
 
         $targetTier = RBACService::getAuthorityTier($roles);
-        $existingTier = (int)($existing['authority_tier'] ?? RBACService::getAuthorityTier((array)$existing['roles']));
+        $existingTier = (int) ($existing['authority_tier'] ?? RBACService::getAuthorityTier((array) $existing['roles']));
 
         // Enforce actor authority boundaries when modifying roles or clearance
         $requiresApproval = false;
         if ($actor !== null) {
-            $actorTier = RBACService::getAuthorityTier((array)($actor['roles'] ?? []));
+            $actorTier = RBACService::getAuthorityTier((array) ($actor['roles'] ?? []));
             $isPrivilegeChange = ($roles !== $existing['roles']) || ($scope !== ($existing['access_scope'] ?? 'crm_only'));
             if ($isPrivilegeChange && $actorTier >= 3) {
                 throw new \RuntimeException('Insufficient authority tier to modify roles or portal clearance.');
@@ -229,8 +227,8 @@ final class UserService
             }
         }
 
-        $username = isset($data['username']) ? strtolower(trim((string)$data['username'])) : (string)$existing['username'];
-        $email = isset($data['email']) ? strtolower(trim((string)$data['email'])) : (string)$existing['email'];
+        $username = isset($data['username']) ? strtolower(trim((string) $data['username'])) : (string) $existing['username'];
+        $email = isset($data['email']) ? strtolower(trim((string) $data['email'])) : (string) $existing['email'];
 
         if ($username === '' || $email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException('Valid username and email are required.');
@@ -286,22 +284,22 @@ final class UserService
             ';
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
-                trim((string)($data['name'] ?? $existing['name'])),
+                trim((string) ($data['name'] ?? $existing['name'])),
                 $username,
                 $email,
-                array_key_exists('phone', $data) ? (trim((string)$data['phone']) ?: null) : ($existing['phone'] ?? null),
-                trim((string)($data['title'] ?? $existing['title'] ?? 'Staff Member')),
-                trim((string)($data['department'] ?? $existing['department'] ?? 'Operations')),
-                array_key_exists('bio', $data) ? (trim((string)$data['bio']) ?: null) : ($existing['bio'] ?? null),
-                trim((string)($data['timezone'] ?? $existing['timezone'] ?? 'UTC')),
-                trim((string)($data['currency'] ?? $existing['currency'] ?? 'USD')),
+                array_key_exists('phone', $data) ? (trim((string) $data['phone']) ?: null) : ($existing['phone'] ?? null),
+                trim((string) ($data['title'] ?? $existing['title'] ?? 'Staff Member')),
+                trim((string) ($data['department'] ?? $existing['department'] ?? 'Operations')),
+                array_key_exists('bio', $data) ? (trim((string) $data['bio']) ?: null) : ($existing['bio'] ?? null),
+                trim((string) ($data['timezone'] ?? $existing['timezone'] ?? 'UTC')),
+                trim((string) ($data['currency'] ?? $existing['currency'] ?? 'USD')),
                 $status,
                 $scope,
                 $roles[0] ?? 'viewer',
                 json_encode($roles),
                 $targetTier,
                 json_encode($customPerms),
-                array_key_exists('avatar', $data) ? (trim((string)$data['avatar']) ?: null) : ($existing['avatar'] ?? null),
+                array_key_exists('avatar', $data) ? (trim((string) $data['avatar']) ?: null) : ($existing['avatar'] ?? null),
                 $id,
             ]);
 
@@ -322,9 +320,7 @@ final class UserService
      */
     public static function updatePassword(string $id, string $newPassword): bool
     {
-        if (strlen($newPassword) < 8) {
-            throw new \InvalidArgumentException('New password must be at least 8 characters.');
-        }
+        self::assertStrongPassword($newPassword);
 
         $pdo = Database::getConnection();
         if (!$pdo) {
@@ -334,6 +330,107 @@ final class UserService
         $stmt = $pdo->prepare('UPDATE `users` SET `password_hash` = ? WHERE `id` = ?');
         $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $id]);
         return $stmt->rowCount() > 0;
+    }
+
+    /**
+     * Approve a pending privilege/scope elevation request (Tier 1 executive only).
+     *
+     * @param array<string, mixed> $actor
+     * @return array<string, mixed>
+     */
+    public static function approvePendingElevation(string $id, array $actor): array
+    {
+        if (RBACService::getAuthorityTier((array) ($actor['roles'] ?? [])) !== 1) {
+            throw new \RuntimeException('Only Tier 1 executives can approve elevation requests.');
+        }
+
+        $user = self::getById($id);
+        if (!$user || ($user['approval_status'] ?? 'approved') !== 'pending') {
+            throw new \RuntimeException('No pending approval request found for this user.');
+        }
+
+        $payload = !empty($user['pending_payload']) ? json_decode((string) $user['pending_payload'], true) : [];
+        if (!is_array($payload)) {
+            $payload = [];
+        }
+
+        $roles = isset($payload['roles']) ? self::normalizeRoles((array) $payload['roles']) : (array) $user['roles'];
+        $scope = isset($payload['access_scope'])
+            ? self::normalizeScope((string) $payload['access_scope'])
+            : (string) ($user['access_scope'] ?? 'crm_only');
+        $tier = RBACService::getAuthorityTier($roles);
+
+        $pdo = Database::getConnection();
+        if (!$pdo) {
+            throw new \RuntimeException('Database connection unavailable.');
+        }
+
+        $pdo->beginTransaction();
+        try {
+            $stmt = $pdo->prepare('
+                UPDATE `users` SET
+                    `role` = ?,
+                    `roles` = ?,
+                    `access_scope` = ?,
+                    `authority_tier` = ?,
+                    `approval_status` = ?,
+                    `pending_payload` = NULL
+                WHERE `id` = ?
+            ');
+            $stmt->execute([$roles[0] ?? 'viewer', json_encode($roles), $scope, $tier, 'approved', $id]);
+            self::syncUserRolesPivot($pdo, $id, $roles);
+            $pdo->commit();
+        } catch (\Throwable $e) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            throw $e;
+        }
+
+        return self::getById($id) ?? $user;
+    }
+
+    /**
+     * Reject a pending privilege/scope elevation request (Tier 1 executive only).
+     *
+     * @param array<string, mixed> $actor
+     */
+    public static function rejectPendingElevation(string $id, array $actor): bool
+    {
+        if (RBACService::getAuthorityTier((array) ($actor['roles'] ?? [])) !== 1) {
+            throw new \RuntimeException('Only Tier 1 executives can reject elevation requests.');
+        }
+
+        $pdo = Database::getConnection();
+        if (!$pdo) {
+            return false;
+        }
+
+        $stmt = $pdo->prepare('UPDATE `users` SET `approval_status` = ?, `pending_payload` = NULL WHERE `id` = ? AND `approval_status` = ?');
+        $stmt->execute(['approved', $id, 'pending']);
+        return $stmt->rowCount() > 0;
+    }
+
+    private static function assertStrongPassword(string $password): void
+    {
+        if (function_exists('validate_admin_password_strength')) {
+            $errors = [];
+            if (!validate_admin_password_strength($password, $errors)) {
+                throw new \InvalidArgumentException(implode(' ', $errors));
+            }
+            return;
+        }
+
+        if (
+            strlen($password) < 12
+            || !preg_match('/[A-Z]/', $password)
+            || !preg_match('/[a-z]/', $password)
+            || !preg_match('/[0-9]/', $password)
+            || !preg_match('/[^A-Za-z0-9]/', $password)
+            || preg_match('/\s/', $password)
+        ) {
+            throw new \InvalidArgumentException('Password must be at least 12 characters with uppercase, lowercase, number, and symbol (no spaces).');
+        }
     }
 
     /**
@@ -380,7 +477,7 @@ final class UserService
         try {
             $ip = function_exists('get_client_ip') ? get_client_ip() : ($_SERVER['REMOTE_ADDR'] ?? '');
             $stmt = $pdo->prepare('UPDATE `users` SET `last_login` = NOW(), `last_ip` = ? WHERE `id` = ?');
-            $stmt->execute([substr((string)$ip, 0, 50), $id]);
+            $stmt->execute([substr((string) $ip, 0, 50), $id]);
         } catch (\Throwable $e) {
             // Non-critical telemetry
         }
@@ -397,13 +494,13 @@ final class UserService
         }
 
         try {
-            $count = (int)$pdo->query('SELECT COUNT(*) FROM `users`')->fetchColumn();
+            $count = (int) $pdo->query('SELECT COUNT(*) FROM `users`')->fetchColumn();
             if ($count > 0) {
                 return;
             }
 
-            $adminUser = strtolower(trim((string)Env::get('ADMIN_USER', 'admin')));
-            $adminPassHash = (string)Env::get('ADMIN_PASS_HASH', '');
+            $adminUser = strtolower(trim((string) Env::get('ADMIN_USER', 'admin')));
+            $adminPassHash = (string) Env::get('ADMIN_PASS_HASH', '');
             if ($adminUser === '' || $adminPassHash === '') {
                 return;
             }
@@ -444,16 +541,16 @@ final class UserService
         if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
             throw new \RuntimeException('File upload failed.');
         }
-        $tmpName = (string)($file['tmp_name'] ?? '');
+        $tmpName = (string) ($file['tmp_name'] ?? '');
         if ($tmpName === '' || !is_uploaded_file($tmpName)) {
             throw new \InvalidArgumentException('Invalid uploaded file.');
         }
-        if ((int)($file['size'] ?? 0) > 2 * 1024 * 1024) {
+        if ((int) ($file['size'] ?? 0) > 2 * 1024 * 1024) {
             throw new \InvalidArgumentException('Avatar image must be 2 MB or smaller.');
         }
 
         $finfo = new \finfo(FILEINFO_MIME_TYPE);
-        $mime = (string)$finfo->file($tmpName);
+        $mime = (string) $finfo->file($tmpName);
         $extMap = [
             'image/jpeg' => 'jpg',
             'image/png' => 'png',
@@ -511,7 +608,7 @@ final class UserService
      */
     public static function getAvatarInfo(array $user): array
     {
-        $name = trim((string)($user['name'] ?? $user['username'] ?? 'U'));
+        $name = trim((string) ($user['name'] ?? $user['username'] ?? 'U'));
         $parts = preg_split('/\s+/', $name) ?: ['U'];
         $initials = strtoupper(substr($parts[0], 0, 1) . (isset($parts[1]) ? substr($parts[1], 0, 1) : ''));
 
@@ -524,7 +621,7 @@ final class UserService
         ];
         $idx = abs(crc32($name)) % count($palettes);
 
-        $image = !empty($user['avatar']) ? (string)$user['avatar'] : null;
+        $image = !empty($user['avatar']) ? (string) $user['avatar'] : null;
 
         return [
             'image' => $image,
@@ -540,19 +637,19 @@ final class UserService
      */
     private static function hydrateUser(array $row): array
     {
-        $decodedRoles = !empty($row['roles']) ? json_decode((string)$row['roles'], true) : [];
+        $decodedRoles = !empty($row['roles']) ? json_decode((string) $row['roles'], true) : [];
         if (!is_array($decodedRoles) || empty($decodedRoles)) {
-            $decodedRoles = [!empty($row['role']) ? (string)$row['role'] : 'viewer'];
+            $decodedRoles = [!empty($row['role']) ? (string) $row['role'] : 'viewer'];
         }
         $row['roles'] = self::normalizeRoles($decodedRoles);
 
-        $decodedCustom = !empty($row['custom_permissions']) ? json_decode((string)$row['custom_permissions'], true) : null;
+        $decodedCustom = !empty($row['custom_permissions']) ? json_decode((string) $row['custom_permissions'], true) : null;
         $row['custom_permissions'] = is_array($decodedCustom)
             ? self::normalizeCustomPermissions($decodedCustom)
             : ['granted' => [], 'denied' => []];
 
         $row['authority_tier'] = isset($row['authority_tier'])
-            ? (int)$row['authority_tier']
+            ? (int) $row['authority_tier']
             : RBACService::getAuthorityTier($row['roles']);
 
         return $row;
@@ -582,7 +679,7 @@ final class UserService
     private static function removeOldAvatarFile(string $id): void
     {
         $existing = self::getById($id);
-        $rel = (string)($existing['avatar'] ?? '');
+        $rel = (string) ($existing['avatar'] ?? '');
         if ($rel !== '' && str_starts_with($rel, 'images/avatars/')) {
             $full = dirname(__DIR__, 2) . '/assets/' . $rel;
             if (is_file($full)) {
@@ -598,7 +695,7 @@ final class UserService
     private static function normalizeRoles(array $roles): array
     {
         $normalized = array_values(array_unique(array_filter(array_map(
-            static fn($r): string => strtolower(trim((string)$r)),
+            static fn($r): string => strtolower(trim((string) $r)),
             $roles
         ), static fn(string $v): bool => $v !== '')));
 
@@ -628,13 +725,13 @@ final class UserService
         }
 
         $clean = static fn(array $list): array => array_values(array_unique(array_filter(array_map(
-            static fn($p): string => strtolower(trim((string)$p)),
+            static fn($p): string => strtolower(trim((string) $p)),
             $list
         ), static fn(string $v): bool => $v !== '')));
 
         return [
-            'granted' => $clean((array)($custom['granted'] ?? [])),
-            'denied' => $clean((array)($custom['denied'] ?? [])),
+            'granted' => $clean((array) ($custom['granted'] ?? [])),
+            'denied' => $clean((array) ($custom['denied'] ?? [])),
         ];
     }
 }

@@ -411,4 +411,72 @@ document.addEventListener('DOMContentLoaded', function () {
                     applyTheme('auto');
                 }
             });
+
+            // =========================================================
+            // Obsidian Cursor Spotlight Lighting (rAF-throttled)
+            // =========================================================
+            const LIT_ADMIN_SELECTOR = [
+                '.admin-hero-banner',
+                '.admin-status-strip',
+                '.admin-profile-card',
+                '.stat-card',
+                '.action-hub-card',
+                '.admin-card',
+                '.slider-card-item',
+                '.cx-panel',
+                '.cx-subpanel',
+                '.admin-footer',
+                '.admin-sidebar-bridge-link',
+                '.modal-content'
+            ].join(', ');
+
+            let pendingTarget = null;
+            let pendingX = 0;
+            let pendingY = 0;
+            let spotlightRafId = 0;
+
+            function flushAdminSpotlight() {
+                spotlightRafId = 0;
+                let node = pendingTarget instanceof Element ? pendingTarget.closest(LIT_ADMIN_SELECTOR) : null;
+                while (node) {
+                    const rect = node.getBoundingClientRect();
+                    if (rect.width > 0 && rect.height > 0) {
+                        const px = (((pendingX - rect.left) / rect.width) * 100).toFixed(1);
+                        const py = (((pendingY - rect.top) / rect.height) * 100).toFixed(1);
+                        node.style.setProperty('--spot-x', `${px}%`);
+                        node.style.setProperty('--spot-y', `${py}%`);
+                    }
+                    node = node.parentElement ? node.parentElement.closest(LIT_ADMIN_SELECTOR) : null;
+                }
+            }
+
+            document.addEventListener('pointermove', (e) => {
+                if (e.pointerType === 'touch') return;
+                pendingTarget = e.target;
+                pendingX = e.clientX;
+                pendingY = e.clientY;
+                if (!spotlightRafId) {
+                    spotlightRafId = requestAnimationFrame(flushAdminSpotlight);
+                }
+            }, { passive: true });
+
+            // =========================================================
+            // Standard Admin Keyboard Shortcuts (/ or Ctrl+K to search)
+            // =========================================================
+            document.addEventListener('keydown', (e) => {
+                const activeTag = document.activeElement ? document.activeElement.tagName : '';
+                const isTyping = activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || (document.activeElement && document.activeElement.isContentEditable);
+
+                if ((e.key === '/' && !isTyping) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+                    const targetSearch = document.querySelector('#projectSearch, input[type="search"], input[name="q"]');
+                    if (targetSearch) {
+                        e.preventDefault();
+                        targetSearch.focus();
+                        targetSearch.select();
+                    }
+                } else if (e.key === 'Escape' && document.activeElement && document.activeElement.id === 'projectSearch' && document.activeElement.value !== '') {
+                    document.activeElement.value = '';
+                    document.activeElement.dispatchEvent(new Event('input'));
+                }
+            });
         });

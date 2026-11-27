@@ -172,7 +172,7 @@ $tagsCsv = is_array($tagsArr) ? implode(', ', $tagsArr) : '';
                             <textarea name="instructions" rows="2" class="form-control form-control-sm" placeholder="Shown inside Applicant Portal & invitation email..."></textarea>
                         </div>
                         <div class="col-12 text-end mt-2">
-                            <button type="submit" class="btn btn-info btn-sm fw-semibold text-dark"><i class="bi bi-calendar-plus me-1"></i> Schedule Interview &amp; Notify Candidate</button>
+                            <button type="submit" class="btn btn-sm btn-cx-primary"><i class="bi bi-calendar-plus me-1"></i> Schedule Interview &amp; Notify Candidate</button>
                         </div>
                     </form>
                 <?php endif; ?>

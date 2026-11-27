@@ -230,6 +230,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
 
             $saved = ProjectService::save($saveData);
+            $actor = current_admin_profile();
+            \App\Services\AuditLogService::record(
+                (string)($actor['id'] ?? ''),
+                (string)($actor['username'] ?? ''),
+                $isEdit ? 'portfolio.updated' : 'portfolio.created',
+                'project',
+                (string)($saved['id'] ?? ''),
+                ($isEdit ? 'Updated' : 'Created') . " deliverable '{$saved['title']}'"
+            );
             set_admin_flash('success', "Project '{$saved['title']}' was successfully " . ($isEdit ? 'updated' : 'created') . '!');
             header('Location: ' . admin_url('deliverables'));
             exit;

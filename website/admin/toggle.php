@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($id !== '' && ProjectService::toggleStatus($id)) {
             $project = ProjectService::getById($id);
             $statusLabel = (!empty($project['active'])) ? 'Published (Active)' : 'Draft (Hidden)';
+            $actor = current_admin_profile();
+            \App\Services\AuditLogService::record((string)($actor['id'] ?? ''), (string)($actor['username'] ?? ''), 'portfolio.toggled', 'project', $id, "Changed project '{$id}' status to {$statusLabel}");
             set_admin_flash('success', "Project status changed to {$statusLabel}.");
         } else {
             set_admin_flash('error', 'Could not toggle project status.');

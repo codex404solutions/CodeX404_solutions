@@ -12,107 +12,30 @@ $draftCount = $draftCount ?? 0;
 $currentPage = $currentPage ?? 'overview';
 ?>
                 <!-- ======================================================== -->
-                <!-- ADMIN CONSOLE ENTERPRISE FOOTER                          -->
+                <!-- ADMIN CONSOLE FOOTER                                     -->
                 <!-- ======================================================== -->
-                <footer class="admin-footer mt-auto">
-                    <div class="row g-4 align-items-center">
-                        <!-- Brand & Scope -->
-                        <div class="col-12 col-md-5">
-                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                <span class="admin-footer-brand-pill">
+                <footer class="admin-footer mt-auto py-3 px-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2" style="font-size: 0.76rem;">
+                        <div class="text-muted d-flex align-items-center gap-2 flex-wrap">
+                            <span>&copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong>.</span>
+                            <span>&middot;</span>
+                            <span class="d-inline-flex align-items-center gap-1">
+                                Developed by
+                                <a href="https://codex404solutions.com" target="_blank" rel="noopener noreferrer"
+                                    class="d-inline-flex align-items-center text-decoration-none">
                                     <img src="<?= asset('images/logo/logo.png') ?>" alt="CodeX404 Solutions"
-                                        style="height: 26px; object-fit: contain;">
-                                </span>
-                                <span class="badge border text-uppercase"
-                                    style="font-size: 0.6rem; letter-spacing: 0.08em; background: #0F172A; color: #38BDF8; border-color: rgba(56, 189, 248, 0.3) !important;">
-                                    DELIVERABLES ADMIN
-                                </span>
-                                <span class="admin-footer-badge">Production v2.4</span>
-                            </div>
-                            <p class="text-muted small mb-2" style="max-width: 440px; font-size: 0.8rem; line-height: 1.5;">
-                                Centralized administration console for CodeX404 production solutions, live client systems,
-                                high-throughput interactive sandboxes, and verified engineering telemetry.
-                            </p>
-                            <div class="d-flex align-items-center gap-2 text-muted small" style="font-size: 0.75rem;">
-                                <span><i class="bi bi-shield-check text-success me-1"></i> Prepared PDO Security</span>
-                                <span>&bull;</span>
-                                <span><i class="bi bi-database-check text-info me-1"></i> PHP &amp; MySQL Runtime</span>
-                                <span>&bull;</span>
-                                <span><i class="bi bi-layers text-primary me-1"></i> BUILD &middot; GROW &middot; AUTOMATE</span>
-                            </div>
-                        </div>
-
-                        <!-- Telemetry Summary -->
-                        <div class="col-12 col-md-4">
-                            <div class="admin-footer-telemetry">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="small fw-bold text-uppercase text-muted"
-                                        style="font-size: 0.68rem; letter-spacing: 0.06em;">Repository Status</span>
-                                    <span class="d-flex align-items-center gap-1 text-success small"
-                                        style="font-size: 0.72rem;">
-                                        <span class="live-dot" style="width: 6px; height: 6px;"></span> Active
-                                        Synchronization
-                                    </span>
-                                </div>
-                                <div class="row g-2 text-center" style="font-size: 0.75rem;">
-                                    <div class="col-4">
-                                        <div class="admin-footer-stat-box">
-                                            <div class="fw-bold text-info"><?= $totalCount ?></div>
-                                            <div class="admin-footer-stat-label">Total Projects</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="admin-footer-stat-box">
-                                            <div class="fw-bold text-success"><?= $activeCount ?></div>
-                                            <div class="admin-footer-stat-label">Published</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="admin-footer-stat-box">
-                                            <div class="fw-bold text-warning"><?= $draftCount ?></div>
-                                            <div class="admin-footer-stat-label">In Review</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Cross-Platform Navigation -->
-                        <div class="col-12 col-md-3 text-md-end">
-                            <div class="small fw-bold text-uppercase text-muted mb-2"
-                                style="font-size: 0.68rem; letter-spacing: 0.06em;">Platform Bridges</div>
-                            <div class="d-flex flex-column gap-1 align-items-md-end">
-                                <a href="../../crm/" target="_blank" class="admin-footer-link text-warning">
-                                    <i class="bi bi-briefcase"></i> <span>Company CRM</span>
+                                        style="height: 15px; object-fit: contain;">
                                 </a>
-                                <a href="<?= url('#work') ?>" target="_blank" class="admin-footer-link">
-                                    <i class="bi bi-box-arrow-up-right text-primary"></i> <span>Public Portfolio
-                                        Showcase</span>
-                                </a>
-                                <a href="<?= url('discovery-call') ?>" target="_blank" class="admin-footer-link">
-                                    <i class="bi bi-lightning-charge text-info"></i> <span>Client Discovery Intake
-                                        Form</span>
-                                </a>
-                            </div>
+                            </span>
                         </div>
-                    </div>
-
-                    <!-- Bottom Copyright & Security Notice -->
-                    <div class="admin-footer-divider pt-3 mt-3 d-flex flex-wrap align-items-center justify-content-between gap-2"
-                        style="font-size: 0.75rem;">
-                        <div class="text-muted">
-                            &copy; <?= date('Y') ?> <strong>CodeX404 Solutions</strong>. Enterprise Deliverables Admin
-                            Console &bull; Built with PHP 8.3 &bull; Bootstrap 5.3.3 &bull; All Rights Reserved.
-                        </div>
-                        <div class="d-flex align-items-center gap-3 text-muted flex-wrap">
-                            <span class="d-flex align-items-center gap-1"><i class="bi bi-database-check text-info"></i>
-                                Storage: JSON Data Store</span>
-                            <span>&bull;</span>
-                            <span class="d-flex align-items-center gap-1"><i class="bi bi-shield-lock text-success"></i>
-                                Active Session</span>
-                            <span>&bull;</span>
-                            <a href="<?= admin_url('logout') ?>" class="text-danger text-decoration-none fw-semibold"><i
-                                    class="bi bi-box-arrow-left me-1"></i>Sign Out</a>
+                        <div class="d-flex align-items-center gap-3 text-muted">
+                            <span>Admin Console v2.4</span>
+                            <span>&middot;</span>
+                            <span>PHP <?= PHP_VERSION ?></span>
+                            <span>&middot;</span>
+                            <a href="<?= admin_url('logout') ?>" class="text-danger text-decoration-none fw-semibold d-inline-flex align-items-center gap-1">
+                                <i class="bi bi-box-arrow-left"></i><span>Sign Out</span>
+                            </a>
                         </div>
                     </div>
                 </footer>
@@ -191,8 +114,8 @@ $currentPage = $currentPage ?? 'overview';
                         </div>
                         <div class="col-4">
                             <div class="p-3 text-center rounded-3"
-                                style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2);">
-                                <div class="h4 fw-bold text-primary mb-0" id="previewStat3Val">-</div>
+                                style="background: var(--cx-accent-soft); border: 1px solid var(--cx-accent-border);">
+                                <div class="h4 fw-bold mb-0" style="color: var(--cx-accent);" id="previewStat3Val">-</div>
                                 <small class="text-muted" id="previewStat3Lbl">Metric 3</small>
                             </div>
                         </div>
@@ -268,30 +191,37 @@ $currentPage = $currentPage ?? 'overview';
             </div>
         </div>
         <div class="offcanvas-body p-3">
-            <!-- User Status Card -->
-            <div class="p-2 mb-3 rounded-3"
-                style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
-                <div class="d-flex align-items-center justify-content-between mb-1">
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="live-dot" title="Active Session" style="width: 6px; height: 6px;"></span>
-                        <span class="fw-bold small text-white"
-                            style="font-size: 0.78rem;"><?= htmlspecialchars((string) ($_SESSION['codex_admin_user'] ?? 'admin')) ?></span>
+            <!-- User Profile Card -->
+            <?php
+            $mobProfile = $adminProfile ?? current_admin_profile();
+            $mobRoles = (array) ($mobProfile['roles'] ?? ['superadmin']);
+            $mobName = (string) ($mobProfile['name'] ?? $mobProfile['username'] ?? 'Admin');
+            $mobRoleLbl = ucfirst((string) ($mobRoles[0] ?? 'admin')) . (count($mobRoles) > 1 ? ' · +' . (count($mobRoles) - 1) : '');
+            $mobInitials = strtoupper(substr(preg_replace('/[^A-Za-z0-9]/', '', $mobName) ?: 'A', 0, 2));
+            ?>
+            <div class="admin-profile-card">
+                <a href="<?= admin_url('profile') ?>" class="d-flex align-items-center justify-content-between gap-2 text-decoration-none" style="min-width: 0;" title="Open Account Profile">
+                    <div class="d-flex align-items-center gap-2" style="min-width: 0; flex: 1;">
+                        <div class="admin-profile-avatar-wrap">
+                            <?php if (!empty($headerAvatar['image'])): ?>
+                                <img src="<?= asset($headerAvatar['image']) ?>" alt="<?= htmlspecialchars($mobName) ?>" class="admin-profile-avatar">
+                            <?php else: ?>
+                                <div class="admin-profile-initials"><?= htmlspecialchars($mobInitials) ?></div>
+                            <?php endif; ?>
+                            <span class="admin-profile-status-dot" title="Active Session"></span>
+                        </div>
+                        <div style="min-width: 0; flex: 1;">
+                            <div class="fw-semibold text-white text-truncate" style="font-size: 0.84rem;"><?= htmlspecialchars($mobName) ?></div>
+                            <div class="text-truncate" style="font-size: 0.72rem; color: #94A3B8;"><?= htmlspecialchars($mobRoleLbl) ?></div>
+                        </div>
                     </div>
-                    <a href="<?= admin_url('logout') ?>" class="text-danger small text-decoration-none" title="Sign Out"
-                        style="font-size: 0.75rem;"><i class="bi bi-box-arrow-left"></i></a>
-                </div>
-                <div class="d-flex gap-1 flex-wrap">
-                    <span class="badge bg-info-subtle text-info border border-info-subtle text-uppercase"
-                        style="font-size: 0.58rem;">Superadmin</span>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle"
-                        style="font-size: 0.58rem;">Live Sync</span>
-                </div>
+                    <i class="bi bi-chevron-right text-muted" style="font-size: 0.75rem; flex-shrink: 0;"></i>
+                </a>
             </div>
 
             <div class="d-grid mb-3">
                 <a href="<?= admin_url('project-form') ?>"
-                    class="btn btn-info btn-sm fw-bold text-dark d-flex align-items-center justify-content-center gap-2 py-2"
-                    style="background: #38BDF8; border-color: #38BDF8; border-radius: 8px;">
+                    class="btn btn-sm btn-cx-primary d-flex align-items-center justify-content-center gap-2 py-2">
                     <i class="bi bi-plus-lg"></i>
                     <span>New Deliverable</span>
                 </a>
@@ -300,83 +230,43 @@ $currentPage = $currentPage ?? 'overview';
             <div class="admin-sidebar-section-title">Pages</div>
             <nav class="nav flex-column mb-3">
                 <a href="<?= admin_url() ?>" class="admin-sidebar-link <?= ($currentPage === 'overview') ? 'active' : '' ?>">
-                    <span><i class="bi bi-grid-1x2-fill me-2 text-info"></i> Overview</span>
-                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">Top</span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-grid-1x2"></i><span>Overview</span></span>
                 </a>
                 <?php if (current_admin_can('portfolio.view')): ?>
                     <a href="<?= admin_url('deliverables') ?>" class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
-                        <span><i class="bi bi-collection-play-fill me-2 text-warning"></i> Deliverables</span>
-                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $totalCount ?></span>
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-collection-play"></i><span>Deliverables</span></span>
+                        <span class="admin-sidebar-count"><?= $totalCount ?></span>
                     </a>
                     <a href="<?= admin_url('showcase') ?>" class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
-                        <span><i class="bi bi-stars me-2 text-primary"></i> Showcase</span>
-                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill"><?= min(6, $totalCount) ?></span>
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-layers"></i><span>Showcase</span></span>
+                        <span class="admin-sidebar-count"><?= min(6, $totalCount) ?></span>
                     </a>
                 <?php endif; ?>
                 <?php if (current_admin_can('careers.view')): ?>
                     <a href="<?= admin_url('careers') ?>" class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
-                        <span><i class="bi bi-briefcase-fill me-2 text-warning"></i> Careers &amp; Hiring</span>
-                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill">ATS</span>
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-briefcase"></i><span>Careers &amp; Hiring</span></span>
+                        <span class="admin-sidebar-count">ATS</span>
                     </a>
                 <?php endif; ?>
                 <?php if (current_admin_can('users.view')): ?>
                     <a href="<?= admin_url('users') ?>" class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
-                        <span><i class="bi bi-people-fill me-2 text-info"></i> Users &amp; Roles</span>
-                        <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">RBAC</span>
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-people"></i><span>Users &amp; Roles</span></span>
                     </a>
                 <?php endif; ?>
                 <a href="<?= admin_url('profile') ?>" class="admin-sidebar-link <?= ($currentPage === 'profile') ? 'active' : '' ?>">
-                    <span><i class="bi bi-person-badge me-2 text-primary"></i> My Profile</span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-person-badge"></i><span>My Profile</span></span>
                 </a>
                 <?php if (current_admin_can('settings.view')): ?>
+                    <a href="<?= admin_url('logs') ?>" class="admin-sidebar-link <?= ($currentPage === 'logs') ? 'active' : '' ?>">
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-journal-text"></i><span>Audit Logs</span></span>
+                    </a>
                     <a href="<?= admin_url('telemetry') ?>" class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
-                        <span><i class="bi bi-activity me-2 text-success"></i> Telemetry</span>
-                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Live</span>
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-activity"></i><span>Telemetry</span></span>
                     </a>
                 <?php endif; ?>
             </nav>
 
-            <div class="admin-sidebar-section-title">Filter By Status</div>
-            <div class="d-flex flex-column gap-1 mb-3">
-                <?php if ($currentPage === 'deliverables'): ?>
-                    <button type="button" class="admin-sidebar-link sidebar-status-filter active" data-status-filter="all"
-                        data-bs-dismiss="offcanvas">
-                        <span><i class="bi bi-grid-fill me-2 text-info"></i> All Systems</span>
-                        <span
-                            class="badge bg-dark border border-secondary text-white rounded-pill"><?= $totalCount ?></span>
-                    </button>
-                    <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="published"
-                        data-bs-dismiss="offcanvas">
-                        <span><i class="bi bi-check-circle-fill me-2 text-success"></i> Published Live</span>
-                        <span
-                            class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><?= $activeCount ?></span>
-                    </button>
-                    <button type="button" class="admin-sidebar-link sidebar-status-filter" data-status-filter="draft"
-                        data-bs-dismiss="offcanvas">
-                        <span><i class="bi bi-shield-lock-fill me-2 text-warning"></i> Staging Drafts</span>
-                        <span
-                            class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $draftCount ?></span>
-                    </button>
-                <?php else: ?>
-                    <a href="<?= admin_url('deliverables?filter=all') ?>" class="admin-sidebar-link">
-                        <span><i class="bi bi-grid-fill me-2 text-info"></i> All Systems</span>
-                        <span
-                            class="badge bg-dark border border-secondary text-white rounded-pill"><?= $totalCount ?></span>
-                    </a>
-                    <a href="<?= admin_url('deliverables?filter=published') ?>" class="admin-sidebar-link">
-                        <span><i class="bi bi-check-circle-fill me-2 text-success"></i> Published Live</span>
-                        <span
-                            class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><?= $activeCount ?></span>
-                    </a>
-                    <a href="<?= admin_url('deliverables?filter=draft') ?>" class="admin-sidebar-link">
-                        <span><i class="bi bi-shield-lock-fill me-2 text-warning"></i> Staging Drafts</span>
-                        <span
-                            class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill"><?= $draftCount ?></span>
-                    </a>
-                <?php endif; ?>
-            </div>
-
-            <div class="admin-sidebar-section-title">Platform Bridges</div>
+            <div class="admin-sidebar-section-title">Platform bridges</div>
             <div class="admin-bridge-grid mb-3">
                 <?php $crmMobileOk = is_dir(dirname(__DIR__, 3) . '/crm'); ?>
                 <?php if ($crmMobileOk): ?>

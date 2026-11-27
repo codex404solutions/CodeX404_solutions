@@ -95,54 +95,42 @@ $flash = get_admin_flash();
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 50% 0%, rgba(11, 94, 215, 0.16) 0%, rgba(34, 211, 238, 0.06) 45%, #071426 80%);
+            background: #0B0F17;
             padding: 1.5rem;
             position: relative;
             overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        /* Subtle Engineering Grid Backdrop */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(to right, rgba(34, 211, 238, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .text-gradient-rainbow {
-            background: linear-gradient(95deg, #FFFFFF 0%, #22D3EE 55%, #FF8C00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .text-gradient-rainbow,
         .text-gradient-cyan {
-            background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #F1F5F9;
         }
         .login-card {
+            --spot-x: 50%;
+            --spot-y: 50%;
             width: 100%;
-            max-width: 440px;
-            background: rgba(15, 23, 42, 0.88);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 1.25rem;
-            padding: 2.5rem 2.25rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.15);
-            backdrop-filter: blur(18px);
+            max-width: 420px;
+            background:
+                radial-gradient(420px circle at var(--spot-x) var(--spot-y), rgba(56, 189, 248, 0.08), transparent 55%) padding-box,
+                #111827 padding-box,
+                rgba(255, 255, 255, 0.08) border-box;
+            border: 1px solid transparent;
+            border-radius: 16px;
+            padding: 2.25rem 2rem;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
             position: relative;
             z-index: 10;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
         }
         .login-card:hover {
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), 0 0 45px rgba(56, 189, 248, 0.22);
+            background:
+                radial-gradient(460px circle at var(--spot-x) var(--spot-y), rgba(255, 140, 0, 0.13), rgba(255, 180, 77, 0.04) 40%, transparent 62%) padding-box,
+                #111827 padding-box,
+                radial-gradient(320px circle at var(--spot-x) var(--spot-y), rgba(255, 180, 77, 0.85), rgba(255, 140, 0, 0.52) 45%, rgba(255, 255, 255, 0.09) 78%) border-box;
         }
         .login-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
             position: relative;
             z-index: 10;
         }
@@ -150,22 +138,20 @@ $flash = get_admin_flash();
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.35rem 0.85rem;
-            background: rgba(34, 211, 238, 0.1);
-            border: 1px solid rgba(34, 211, 238, 0.3);
+            padding: 0.3rem 0.75rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.22);
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--cyan);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            color: #38BDF8;
             margin-bottom: 1rem;
         }
         .login-title {
-            font-size: 1.85rem;
-            font-weight: 800;
-            color: #FFFFFF;
-            margin-bottom: 0.5rem;
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: #F8FAFC;
+            margin-bottom: 0.375rem;
             letter-spacing: -0.02em;
         }
         .login-subtitle {
@@ -503,6 +489,20 @@ document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
         applyTheme(selected);
     });
 });
+
+const loginCard = document.querySelector('.login-card');
+if (loginCard) {
+    loginCard.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        const rect = loginCard.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+            const px = (((e.clientX - rect.left) / rect.width) * 100).toFixed(1);
+            const py = (((e.clientY - rect.top) / rect.height) * 100).toFixed(1);
+            loginCard.style.setProperty('--spot-x', `${px}%`);
+            loginCard.style.setProperty('--spot-y', `${py}%`);
+        }
+    }, { passive: true });
+}
 </script>
 
 </body>
