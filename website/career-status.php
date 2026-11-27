@@ -6,26 +6,35 @@ require_once __DIR__ . '/includes/security.php';
 require_once __DIR__ . '/config/Env.php';
 Env::load(__DIR__ . '/.env');
 
+use App\Careers\CareersDB;
 use App\Careers\RecruitmentAuthService;
 use App\Careers\RecruitmentSettingsService;
 
-if (!RecruitmentSettingsService::getBool('enable_applicant_portal', true)) {
-    http_response_code(503);
-    exit('Applicant Portal is temporarily offline.');
-}
+$portalUnavailable = false;
+try {
+    if (!RecruitmentSettingsService::getBool('enable_applicant_portal', true)) {
+        http_response_code(503);
+        exit('Applicant Portal is temporarily offline.');
+    }
 
-// If already verified in session, go directly to Applicant Portal
-if (RecruitmentAuthService::currentApplicant() !== null) {
-    header('Location: ' . url('careers/candidate-portal'));
-    exit;
+    // If already verified in session, go directly to Applicant Portal
+    if (RecruitmentAuthService::currentApplicant() !== null) {
+        header('Location: ' . url('careers/candidate-portal'));
+        exit;
+    }
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'career-status');
+    $portalUnavailable = true;
 }
 
 $step = trim((string) ($_GET['step'] ?? 'request'));
 $emailVal = trim((string) ($_SESSION['portal_pending_email'] ?? ($_GET['email'] ?? '')));
 $infoMsg = '';
-$errMsg = '';
+$errMsg = $portalUnavailable
+    ? 'Applicant Portal is temporarily unavailable while recruitment services are being initialized. Please try again shortly or email ' . COMPANY_EMAIL . '.'
+    : '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$portalUnavailable) {
     if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
         $errMsg = 'Security session expired. Please refresh and try again.';
     } else {
@@ -97,7 +106,14 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="careers-alert careers-alert-error"><?= htmlspecialchars($errMsg) ?></div>
             <?php endif; ?>
 
-            <?php if ($step !== 'verify'): ?>
+            <?php if ($portalUnavailable): ?>
+                <div style="margin-top:0.5rem;">
+                    <a href="<?= url('contact') ?>" class="btn btn-primary btn-lg"
+                        style="width:100%;background:#0B5ED7;border-color:#0B5ED7;">
+                        Contact Recruitment Team
+                    </a>
+                </div>
+            <?php elseif ($step !== 'verify'): ?>
                 <form method="POST" action="<?= url('careers/application-status') ?>">
                     <?= csrf_input_field() ?>
                     <input type="hidden" name="portal_action" value="request_otp">

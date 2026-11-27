@@ -175,6 +175,7 @@ final class MigrationService
 
         $status = self::status();
         if (empty($status['pending'])) {
+            self::runCareersSeeder($pdo, true);
             return ['ok' => true, 'applied' => [], 'message' => 'Database schema is already up to date.'];
         }
 
@@ -208,6 +209,10 @@ final class MigrationService
                 }
             }
 
+            if ($filename === '007_careers_recruitment_system.sql') {
+                self::runCareersSeeder($pdo, false);
+            }
+
             $rec = $pdo->prepare('INSERT INTO `migrations` (`migration`, `batch`) VALUES (?, ?)');
             $rec->execute([$filename, $nextBatch]);
             $appliedNow[] = $filename;
@@ -224,11 +229,30 @@ final class MigrationService
             }
         }
 
+        // Ensure Careers defaults are seeded even if 007 was previously applied without migrate_careers.php
+        self::runCareersSeeder($pdo, true);
+
         return [
             'ok'      => true,
             'applied' => $appliedNow,
             'message' => 'Applied ' . count($appliedNow) . ' migration(s): ' . implode(', ', $appliedNow) . '.',
         ];
+    }
+
+    private static function runCareersSeeder(PDO $pdo, bool $onlyIfEmpty): void
+    {
+        $seederFile = dirname(__DIR__) . '/Careers/CareersSeeder.php';
+        if (!class_exists('\\App\\Careers\\CareersSeeder', false) && is_file($seederFile)) {
+            require_once $seederFile;
+        }
+        if (!class_exists('\\App\\Careers\\CareersSeeder')) {
+            return;
+        }
+        if ($onlyIfEmpty) {
+            \App\Careers\CareersSeeder::seedIfEmpty($pdo);
+        } else {
+            \App\Careers\CareersSeeder::seed($pdo);
+        }
     }
 
     /**

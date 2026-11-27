@@ -56,6 +56,31 @@ final class CareersDB
         return $pdo;
     }
 
+    /**
+     * Write sanitized Careers runtime errors to storage/logs/errors.log without crashing public responses.
+     */
+    public static function logError(\Throwable $e, string $context = 'careers'): void
+    {
+        $logFile = (defined('LOGS_PATH') ? LOGS_PATH : dirname(__DIR__, 2) . '/storage/logs') . '/errors.log';
+        @mkdir(dirname($logFile), 0755, true);
+        $sanitized = preg_replace(
+            ['/password[=:][^\s;,\)]+/i', '/user[=:][^\s;,\)]+/i', "/user '[^']+'/i"],
+            ['password=***', 'user=***', "user '***'"],
+            $e->getMessage()
+        ) ?? 'Unexpected error';
+        $line = sprintf(
+            "[%s] [%s] %s: %s in %s:%d%s",
+            date('Y-m-d H:i:s'),
+            $context,
+            get_class($e),
+            $sanitized,
+            basename($e->getFile()),
+            $e->getLine(),
+            PHP_EOL
+        );
+        @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
+    }
+
     public static function hashIp(?string $ip = null): string
     {
         $raw = $ip ?? (function_exists('get_client_ip') ? get_client_ip() : ($_SERVER['REMOTE_ADDR'] ?? '0.0.0.0'));

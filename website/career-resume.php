@@ -7,14 +7,21 @@ require_once __DIR__ . '/config/Env.php';
 Env::load(__DIR__ . '/.env');
 
 use App\Careers\ApplicationService;
+use App\Careers\CareersDB;
 use App\Careers\FileStorageService;
 use App\Careers\RecruitmentAuthService;
 
-$applicant = RecruitmentAuthService::requireApplicantAuth();
-$appId = (int)($_GET['application_id'] ?? 0);
+try {
+    $applicant = RecruitmentAuthService::requireApplicantAuth();
+    $appId = (int)($_GET['application_id'] ?? 0);
 
-// Strictly enforce ownership: applicant can only download files from THEIR OWN application
-$app = $appId > 0 ? ApplicationService::getApplicantApplicationByRef((int)$applicant['id'], (string)$appId) : null;
+    // Strictly enforce ownership: applicant can only download files from THEIR OWN application
+    $app = $appId > 0 ? ApplicationService::getApplicantApplicationByRef((int)$applicant['id'], (string)$appId) : null;
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'career-resume');
+    http_response_code(503);
+    exit('Resume service is temporarily unavailable.');
+}
 if (!$app || empty($app['resume_path'])) {
     http_response_code(403);
     exit('Access denied or resume unavailable.');

@@ -7,18 +7,30 @@ require_once __DIR__ . '/config/Env.php';
 Env::load(__DIR__ . '/.env');
 
 use App\Careers\ApplicationService;
+use App\Careers\CareersDB;
 use App\Careers\FormBuilderService;
 use App\Careers\FormValidationException;
 use App\Careers\RecruitmentSettingsService;
 use App\Careers\VacancyService;
 
-$categories = VacancyService::listCategories();
 $selectedCategory = trim((string) ($_GET['category'] ?? 'all'));
 $searchTerm = trim((string) ($_GET['q'] ?? ''));
 
-$vacancies = VacancyService::listPublicVacancies($selectedCategory === 'all' ? '' : $selectedCategory, $searchTerm);
-$allowGeneral = RecruitmentSettingsService::getBool('allow_general_applications', true);
-$generalFields = $allowGeneral ? FormBuilderService::getEffectiveFields(null) : [];
+$categories = [];
+$vacancies = [];
+$allowGeneral = false;
+$generalFields = [];
+$careersServiceUnavailable = false;
+
+try {
+    $categories = VacancyService::listCategories();
+    $vacancies = VacancyService::listPublicVacancies($selectedCategory === 'all' ? '' : $selectedCategory, $searchTerm);
+    $allowGeneral = RecruitmentSettingsService::getBool('allow_general_applications', true);
+    $generalFields = $allowGeneral ? FormBuilderService::getEffectiveFields(null) : [];
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'careers');
+    $careersServiceUnavailable = true;
+}
 
 $generalSuccess = null;
 $generalError = null;
@@ -154,7 +166,21 @@ require __DIR__ . '/includes/subpage-hero.php';
             </form>
         </div>
 
-        <?php if (empty($vacancies)): ?>
+        <?php if ($careersServiceUnavailable): ?>
+            <div class="careers-card" style="text-align:center;padding:3rem 1.5rem;">
+                <h3 style="color:#fff;margin-bottom:0.5rem;">Open Positions Are Temporarily Unavailable</h3>
+                <p style="color:#94A3B8;max-width:580px;margin:0 auto 1.25rem;">
+                    Our recruitment portal is currently undergoing maintenance. You can still reach our team directly
+                    for engineering, growth, or internship inquiries.
+                </p>
+                <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+                    <a href="<?= url('contact') ?>" class="btn btn-primary"
+                        style="background:#0B5ED7;border-color:#0B5ED7;">Contact Our Team</a>
+                    <a href="mailto:<?= htmlspecialchars(COMPANY_EMAIL, ENT_QUOTES, 'UTF-8') ?>"
+                        class="btn btn-secondary"><?= htmlspecialchars(COMPANY_EMAIL, ENT_QUOTES, 'UTF-8') ?></a>
+                </div>
+            </div>
+        <?php elseif (empty($vacancies)): ?>
             <div class="careers-card" style="text-align:center;padding:3rem 1.5rem;">
                 <h3 style="color:#fff;margin-bottom:0.5rem;">No Open Roles Match This Filter Right Now</h3>
                 <p style="color:#94A3B8;max-width:560px;margin:0 auto 1.25rem;">

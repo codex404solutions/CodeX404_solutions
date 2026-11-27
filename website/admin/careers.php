@@ -301,7 +301,23 @@ $pageSubtitle = 'Publish dynamic vacancies, build custom application forms, trac
 
 require_once __DIR__ . '/includes/header.php';
 
-$stats = ApplicationService::getOverviewStats();
+$careersAdminError = null;
+try {
+    $stats = ApplicationService::getOverviewStats();
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'admin/careers');
+    $careersAdminError = 'Careers database tables are unavailable or pending migration. Open Platform Telemetry to apply pending SQL migrations.';
+    $stats = [
+        'total_jobs' => 0,
+        'published_jobs' => 0,
+        'total_applications' => 0,
+        'new_applications' => 0,
+        'shortlisted_count' => 0,
+        'hired_count' => 0,
+        'upcoming_interviews' => 0,
+        'unread_del_requests' => 0,
+    ];
+}
 $navTabs = [
     'overview'     => ['label' => 'Overview',        'icon' => 'bi-speedometer2',          'perm' => 'careers.view'],
     'jobs'         => ['label' => 'Jobs (' . $stats['total_jobs'] . ')', 'icon' => 'bi-briefcase', 'perm' => 'careers.view'],
@@ -357,10 +373,20 @@ $partialMap = [
 ];
 
 $partial = $partialMap[$tab] ?? $partialMap['overview'];
-if (is_file($partial)) {
-    include $partial;
-} else {
+if ($careersAdminError !== null): ?>
+    <div class="alert alert-warning d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div><i class="bi bi-database-exclamation me-2"></i><?= htmlspecialchars($careersAdminError) ?></div>
+        <a href="<?= admin_url('telemetry') ?>#migrations" class="btn btn-sm btn-warning">Open Telemetry &amp; Migrations</a>
+    </div>
+<?php elseif (is_file($partial)):
+    try {
+        include $partial;
+    } catch (\Throwable $e) {
+        CareersDB::logError($e, 'admin/careers:' . $tab);
+        echo '<div class="alert alert-warning">Unable to load this recruitment section until database migrations are applied. <a href="' . htmlspecialchars(admin_url('telemetry') . '#migrations') . '" class="alert-link">Open Migrations</a></div>';
+    }
+else:
     echo '<div class="alert alert-warning">Recruitment module view not found.</div>';
-}
+endif;
 
 require_once __DIR__ . '/includes/footer.php';

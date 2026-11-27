@@ -16,7 +16,13 @@ if (($_GET['action'] ?? '') === 'logout') {
     exit;
 }
 
-$applicant = RecruitmentAuthService::requireApplicantAuth();
+try {
+    $applicant = RecruitmentAuthService::requireApplicantAuth();
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'candidate-portal');
+    header('Location: ' . url('careers/application-status'));
+    exit;
+}
 $candidateId = (int) $applicant['id'];
 $candidateName = (string) $applicant['full_name'];
 $candidateEmail = (string) $applicant['email'];
@@ -68,8 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$dashboard = ApplicationService::getApplicantDashboardData($candidateId);
-$selectedApp = ($view === 'detail' && $ref !== '') ? ApplicationService::getApplicantApplicationByRef($candidateId, $ref) : null;
+try {
+    $dashboard = ApplicationService::getApplicantDashboardData($candidateId);
+    $selectedApp = ($view === 'detail' && $ref !== '') ? ApplicationService::getApplicantApplicationByRef($candidateId, $ref) : null;
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'candidate-portal');
+    $dashboard = ['applications' => [], 'interviews' => [], 'notifications' => [], 'unread_count' => 0];
+    $selectedApp = null;
+    $flashError = $flashError !== '' ? $flashError : 'Unable to load portal data right now. Please try again shortly.';
+}
 
 $pageMeta = [
     'title' => 'Applicant Portal — CodeX404 Solutions Careers',

@@ -7,6 +7,7 @@ require_once __DIR__ . '/config/Env.php';
 Env::load(__DIR__ . '/.env');
 
 use App\Careers\ApplicationService;
+use App\Careers\CareersDB;
 use App\Careers\FormBuilderService;
 use App\Careers\FormValidationException;
 use App\Careers\VacancyService;
@@ -21,23 +22,34 @@ if ($isAdminPreview) {
     $canPreview = is_admin_logged_in();
 }
 
-$job = $slug !== '' ? VacancyService::getBySlug($slug, $canPreview) : null;
+$careersServiceUnavailable = false;
+$job = null;
+if ($slug !== '') {
+    try {
+        $job = VacancyService::getBySlug($slug, $canPreview);
+    } catch (\Throwable $e) {
+        CareersDB::logError($e, 'career-detail');
+        $careersServiceUnavailable = true;
+    }
+}
 if (!$job) {
-    http_response_code(404);
+    http_response_code($careersServiceUnavailable ? 503 : 404);
     $pageMeta = [
-        'title' => 'Vacancy Not Found — CodeX404 Careers',
-        'description' => 'The requested open role or internship could not be found or is no longer accepting applications.',
+        'title' => $careersServiceUnavailable ? 'Careers Temporarily Unavailable — CodeX404 Careers' : 'Vacancy Not Found — CodeX404 Careers',
+        'description' => $careersServiceUnavailable
+            ? 'CodeX404 Careers listings are temporarily undergoing maintenance.'
+            : 'The requested open role or internship could not be found or is no longer accepting applications.',
     ];
     require_once __DIR__ . '/includes/header.php';
     ?>
     <section class="section" style="padding-top:calc(var(--nav-height,78px) + 5rem);padding-bottom:5rem;text-align:center;">
         <div class="container" style="max-width:680px;">
             <div class="careers-card">
-                <h1 style="color:#fff;margin-bottom:0.75rem;">Position No Longer Available</h1>
-                <p style="color:#CBD5E1;margin-bottom:1.5rem;">This vacancy may have been filled, closed, or its deadline has passed.</p>
+                <h1 style="color:#fff;margin-bottom:0.75rem;"><?= $careersServiceUnavailable ? 'Careers Portal Temporarily Unavailable' : 'Position No Longer Available' ?></h1>
+                <p style="color:#CBD5E1;margin-bottom:1.5rem;"><?= $careersServiceUnavailable ? 'Our recruitment system is currently undergoing maintenance. Please check back shortly or contact our team directly.' : 'This vacancy may have been filled, closed, or its deadline has passed.' ?></p>
                 <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
                     <a href="<?= url('careers') ?>" class="btn btn-primary" style="background:#0B5ED7;border-color:#0B5ED7;">View Open Positions</a>
-                    <a href="<?= url('careers/application-status') ?>" class="btn btn-secondary">Applicant Portal</a>
+                    <a href="<?= url($careersServiceUnavailable ? 'contact' : 'careers/application-status') ?>" class="btn btn-secondary"><?= $careersServiceUnavailable ? 'Contact Our Team' : 'Applicant Portal' ?></a>
                 </div>
             </div>
         </div>
@@ -47,7 +59,12 @@ if (!$job) {
     exit;
 }
 
-$fields = FormBuilderService::getEffectiveFields($job);
+$fields = [];
+try {
+    $fields = FormBuilderService::getEffectiveFields($job);
+} catch (\Throwable $e) {
+    CareersDB::logError($e, 'career-detail');
+}
 $appSuccess = null;
 $appError = null;
 $fieldErrors = [];
