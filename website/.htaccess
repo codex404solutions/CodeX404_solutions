@@ -13,7 +13,7 @@
     RewriteRule ^project/([a-zA-Z0-9_-]+)/?$ project.php?id=$1 [L,QSA]
 
     # Block access to hidden files and sensitive directories
-    RewriteRule ^(\.git|\.env|storage|app|config) - [F,L]
+    RewriteRule ^(\.git|\.env|storage|app|config|database) - [F,L]
 
     # 1. Redirect /index.php to / (root or directory) for GET/HEAD requests
     RewriteCond %{REQUEST_METHOD} !POST

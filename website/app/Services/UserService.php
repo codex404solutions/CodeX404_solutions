@@ -234,7 +234,7 @@ final class UserService
             throw new \InvalidArgumentException('Valid username and email are required.');
         }
 
-        $dup = $pdo->prepare('SELECT `id` FROM `users` WHERE (`LOWER`(`username`) = ? OR LOWER(`email`) = ?) AND `id` != ? LIMIT 1');
+        $dup = $pdo->prepare('SELECT `id` FROM `users` WHERE (LOWER(`username`) = ? OR LOWER(`email`) = ?) AND `id` != ? LIMIT 1');
         $dup->execute([$username, $email, $id]);
         if ($dup->fetchColumn()) {
             throw new \InvalidArgumentException('Another account already uses that username or email.');
