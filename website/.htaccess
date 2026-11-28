@@ -3,9 +3,16 @@
 # Clean URLs, Security Hardening, Compression, and Caching
 # ==============================================================================
 
+# Serve branded 404 page on missing routes
+ErrorDocument 404 /404.php
+
 # Enable Rewrite Engine
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # Serve root favicon requests from logo assets
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^favicon\.ico$ assets/images/logo/favicon.ico [L]
 
     # Clean URL routing for project detail pages: /project/slug -> project.php?id=slug
     RewriteCond %{REQUEST_FILENAME} !-f

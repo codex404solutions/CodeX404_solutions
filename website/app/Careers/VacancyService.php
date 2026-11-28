@@ -285,15 +285,16 @@ final class VacancyService
         if (!isset(CareersDB::JOB_STATUSES[$newStatus])) {
             throw new \InvalidArgumentException('Invalid job status.');
         }
+        $isPublished = $newStatus === 'published' ? 1 : 0;
         $pdo = CareersDB::pdo();
         $stmt = $pdo->prepare("
             UPDATE `job_openings`
             SET `status` = ?,
-                `published_at` = CASE WHEN ? = 'published' AND `published_at` IS NULL THEN NOW() ELSE `published_at` END,
+                `published_at` = CASE WHEN ? = 1 AND `published_at` IS NULL THEN NOW() ELSE `published_at` END,
                 `updated_by` = ?
             WHERE `id` = ?
         ");
-        $stmt->execute([$newStatus, $newStatus, $actorId, $id]);
+        $stmt->execute([$newStatus, $isPublished, $actorId, $id]);
         ActivityLogService::log('admin', $actorId, $actorName, 'job.status_changed', 'job_opening', (string)$id, "Set vacancy #{$id} status to {$newStatus}");
     }
 
