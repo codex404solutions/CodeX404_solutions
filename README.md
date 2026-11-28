@@ -799,9 +799,12 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── data
     │   └── projects.json
     ├── database
+    │   ├── create_user.php
     │   ├── migrate.php
     │   ├── migrate_careers.php
     │   └── migrations
+    │       ├── 001_website_core_schema.sql
+    │       ├── 001_website_core_schema_down.sql
     │       ├── 007_careers_recruitment_system.sql
     │       ├── 007_careers_recruitment_system_down.sql
     │       ├── 008_admin_audit_logs.sql
