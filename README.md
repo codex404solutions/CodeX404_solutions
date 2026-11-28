@@ -606,14 +606,12 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
 ├── README.md
 ├── docs
 │   ├── API_CONTRACT.md
-│   ├── CRM
-│   │   ├── ARCHITECTURE.md
-│   │   ├── DESIGN.md
-│   │   ├── DEVELOPMENT_PROMPT.md
-│   │   ├── MEMORY.md
-│   │   ├── PRD.md
-│   │   ├── RULES.md
-│   │   └── TASKS.md
+│   ├── CAREERS_API.md
+│   ├── CAREERS_ARCHITECTURE.md
+│   ├── CAREERS_DATABASE.md
+│   ├── CAREERS_PRD.md
+│   ├── CAREERS_SECURITY.md
+│   ├── CAREERS_TESTING.md
 │   ├── DEPLOYMENT.md
 │   ├── MONOREPO_STRUCTURE.md
 │   ├── Main-Website
@@ -662,14 +660,27 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── about.php
     ├── admin
     │   ├── auth.php
+    │   ├── careers.php
+    │   ├── careers_views
+    │   │   ├── applications.php
+    │   │   ├── candidate-detail.php
+    │   │   ├── emails.php
+    │   │   ├── form-builder.php
+    │   │   ├── jobs.php
+    │   │   ├── logs.php
+    │   │   ├── overview.php
+    │   │   ├── recruiters.php
+    │   │   └── settings.php
     │   ├── delete.php
     │   ├── deliverables.php
     │   ├── includes
     │   │   ├── footer.php
     │   │   └── header.php
     │   ├── index.php
+    │   ├── inquiries.php
     │   ├── login.php
     │   ├── logout.php
+    │   ├── logs.php
     │   ├── overview.php
     │   ├── profile.php
     │   ├── project-form.php
@@ -680,22 +691,40 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── ai-agents.php
     ├── ai-solutions.php
     ├── app
+    │   ├── Careers
+    │   │   ├── ActivityLogService.php
+    │   │   ├── ApplicationService.php
+    │   │   ├── CareersDB.php
+    │   │   ├── CareersSeeder.php
+    │   │   ├── FileStorageService.php
+    │   │   ├── FormBuilderService.php
+    │   │   ├── FormValidationException.php
+    │   │   ├── RecruitmentAuthService.php
+    │   │   ├── RecruitmentEmailService.php
+    │   │   ├── RecruitmentSettingsService.php
+    │   │   └── VacancyService.php
     │   ├── Controllers
     │   │   ├── ContactController.php
     │   │   └── LeadController.php
     │   ├── Helpers
     │   │   └── Sanitizer.php
     │   ├── Services
+    │   │   ├── AuditLogService.php
     │   │   ├── CRMIntegrationService.php
     │   │   ├── EmailService.php
-    │   │   └── ProjectService.php
+    │   │   ├── MigrationService.php
+    │   │   ├── ProjectService.php
+    │   │   ├── RBACService.php
+    │   │   └── UserService.php
     │   └── Validators
     │       └── FormValidator.php
     ├── assets
     │   ├── css
     │   │   ├── admin.css
     │   │   ├── animations.css
+    │   │   ├── careers.css
     │   │   ├── components.css
+    │   │   ├── depth3d.css
     │   │   ├── main.css
     │   │   ├── responsive.css
     │   │   └── v2-tokens.css
@@ -743,11 +772,16 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     │       ├── chatbot.js
     │       ├── forms.js
     │       ├── main.js
+    │       ├── scene3d.js
     │       └── scroll-engine.js
     ├── automate.php
     ├── automation.php
     ├── blog.php
     ├── build.php
+    ├── candidate-portal.php
+    ├── career-detail.php
+    ├── career-resume.php
+    ├── career-status.php
     ├── careers.php
     ├── case-studies.php
     ├── components
@@ -761,8 +795,19 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     │   ├── Env.php
     │   └── database.php
     ├── contact.php
+    ├── conversion-optimization.php
     ├── data
     │   └── projects.json
+    ├── database
+    │   ├── migrate.php
+    │   ├── migrate_careers.php
+    │   └── migrations
+    │       ├── 007_careers_recruitment_system.sql
+    │       ├── 007_careers_recruitment_system_down.sql
+    │       ├── 008_admin_audit_logs.sql
+    │       ├── 009_website_schema_alignment.sql
+    │       └── 009_website_schema_alignment_down.sql
+    ├── digital-ads.php
     ├── discovery-call.php
     ├── engagement-models.php
     ├── faq.php
@@ -772,9 +817,11 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     │   ├── division-overview-content.php
     │   ├── footer.php
     │   ├── header.php
+    │   ├── icons.php
     │   ├── navigation.php
     │   ├── security.php
-    │   └── seo.php
+    │   ├── seo.php
+    │   └── subpage-hero.php
     ├── index.php
     ├── industries.php
     ├── mobile-apps.php
@@ -787,6 +834,7 @@ This is proprietary business software. Unauthorized copying, distribution, or mo
     ├── robots.txt
     ├── saas.php
     ├── security.php
+    ├── seo-visibility.php
     ├── sitemap.xml
     ├── software-development.php
     ├── solutions.php
