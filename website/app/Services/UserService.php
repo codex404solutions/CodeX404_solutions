@@ -28,10 +28,13 @@ final class UserService
             return [];
         }
 
-        $stmt = $pdo->query('SELECT * FROM `users` ORDER BY `authority_tier` ASC, `name` ASC');
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return array_map([self::class, 'hydrateUser'], $rows);
+        try {
+            $stmt = $pdo->query('SELECT * FROM `users` ORDER BY `authority_tier` ASC, `name` ASC');
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return array_map([self::class, 'hydrateUser'], $rows);
+        } catch (\Throwable $e) {
+            return [];
+        }
     }
 
     /**
@@ -51,11 +54,14 @@ final class UserService
             return null;
         }
 
-        $stmt = $pdo->prepare('SELECT * FROM `users` WHERE `id` = ? LIMIT 1');
-        $stmt->execute([$cleanId]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $row ? self::hydrateUser($row) : null;
+        try {
+            $stmt = $pdo->prepare('SELECT * FROM `users` WHERE `id` = ? LIMIT 1');
+            $stmt->execute([$cleanId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? self::hydrateUser($row) : null;
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     /**
@@ -75,11 +81,14 @@ final class UserService
             return null;
         }
 
-        $stmt = $pdo->prepare('SELECT * FROM `users` WHERE LOWER(`username`) = ? OR LOWER(`email`) = ? LIMIT 1');
-        $stmt->execute([$clean, $clean]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $row ? self::hydrateUser($row) : null;
+        try {
+            $stmt = $pdo->prepare('SELECT * FROM `users` WHERE LOWER(`username`) = ? OR LOWER(`email`) = ? LIMIT 1');
+            $stmt->execute([$clean, $clean]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? self::hydrateUser($row) : null;
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     /**

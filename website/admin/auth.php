@@ -523,14 +523,18 @@ function authenticate_admin(string $username, string $password, ?string &$errorR
         $_SESSION['codex_admin_user_id'] = 'usr_admin_alex';
         $_SESSION['codex_admin_roles'] = ['superadmin', 'founder', 'ceo', 'cto'];
 
-        // Pull full profile if available
+        // Pull full profile if available (graceful when users table does not exist yet)
         if (class_exists('\\App\\Services\\UserService')) {
-            \App\Services\UserService::seedDefaultUsersIfEmpty();
-            $seeded = \App\Services\UserService::getByUsernameOrEmail('admin');
-            if ($seeded) {
-                $_SESSION['codex_admin_profile'] = $seeded;
-                $_SESSION['codex_admin_user_id'] = $seeded['id'];
-                $_SESSION['codex_admin_roles'] = $seeded['roles'] ?? ['superadmin'];
+            try {
+                \App\Services\UserService::seedDefaultUsersIfEmpty();
+                $seeded = \App\Services\UserService::getByUsernameOrEmail((string) ADMIN_USER);
+                if ($seeded) {
+                    $_SESSION['codex_admin_profile'] = $seeded;
+                    $_SESSION['codex_admin_user_id'] = $seeded['id'];
+                    $_SESSION['codex_admin_roles'] = $seeded['roles'] ?? ['superadmin'];
+                }
+            } catch (\Throwable $e) {
+                // Safe no-op before initial migrations run
             }
         }
 
@@ -610,11 +614,15 @@ function get_admin_flash(): ?array
 function current_admin_profile(): array
 {
     if (class_exists('\\App\\Services\\UserService')) {
-        $username = (string)($_SESSION['codex_admin_user'] ?? 'admin');
-        $user = \App\Services\UserService::getByUsernameOrEmail($username);
-        if ($user) {
-            $_SESSION['codex_admin_profile'] = $user;
-            return $user;
+        try {
+            $username = (string)($_SESSION['codex_admin_user'] ?? 'admin');
+            $user = \App\Services\UserService::getByUsernameOrEmail($username);
+            if ($user) {
+                $_SESSION['codex_admin_profile'] = $user;
+                return $user;
+            }
+        } catch (\Throwable $e) {
+            // Fall through safely before initial migrations run
         }
     }
 
