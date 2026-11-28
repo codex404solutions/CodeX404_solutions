@@ -109,23 +109,26 @@ $flash = get_admin_flash();
                         : ['image' => $adminProfile['avatar'] ?? null];
                     ?>
                     <div class="admin-profile-card">
-                        <a href="<?= admin_url('profile') ?>" class="d-flex align-items-center justify-content-between gap-2 text-decoration-none" style="min-width: 0;" title="Open Account Profile">
+                        <a href="<?= admin_url('profile') ?>"
+                            class="d-flex align-items-center justify-content-between gap-2 text-decoration-none"
+                            style="min-width: 0;" title="Open Account Profile">
                             <div class="d-flex align-items-center gap-2" style="min-width: 0; flex: 1;">
                                 <div class="admin-profile-avatar-wrap">
                                     <?php if (!empty($headerAvatar['image'])): ?>
                                         <img src="<?= asset($headerAvatar['image']) ?>"
-                                            alt="<?= htmlspecialchars($displayName) ?>"
-                                            class="admin-profile-avatar">
+                                            alt="<?= htmlspecialchars($displayName) ?>" class="admin-profile-avatar">
                                     <?php else: ?>
                                         <div class="admin-profile-initials"><?= htmlspecialchars($initials) ?></div>
                                     <?php endif; ?>
                                     <span class="admin-profile-status-dot" title="Active Session"></span>
                                 </div>
                                 <div style="min-width: 0; flex: 1;">
-                                    <div class="fw-semibold text-white text-truncate" style="font-size: 0.84rem; line-height: 1.25;">
+                                    <div class="fw-semibold text-white text-truncate"
+                                        style="font-size: 0.84rem; line-height: 1.25;">
                                         <?= htmlspecialchars($displayName) ?>
                                     </div>
-                                    <div class="text-truncate" style="font-size: 0.72rem; color: #94A3B8; line-height: 1.25;">
+                                    <div class="text-truncate"
+                                        style="font-size: 0.72rem; color: #94A3B8; line-height: 1.25;">
                                         <?= htmlspecialchars($primaryRole . $extraRoles) ?>
                                     </div>
                                 </div>
@@ -141,52 +144,61 @@ $flash = get_admin_flash();
                     <nav class="nav flex-column mb-2" id="adminSidebarNav">
                         <a href="<?= admin_url() ?>"
                             class="admin-sidebar-link <?= ($currentPage === 'overview') ? 'active' : '' ?>">
-                            <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-grid-1x2"></i><span>Overview</span></span>
+                            <span class="d-inline-flex align-items-center gap-2"><i
+                                    class="bi bi-grid-1x2"></i><span>Overview</span></span>
                         </a>
                         <?php if (current_admin_can('portfolio.view')): ?>
                             <a href="<?= admin_url('deliverables') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'deliverables') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-collection-play"></i><span>Deliverables</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i
+                                        class="bi bi-collection-play"></i><span>Deliverables</span></span>
                                 <span class="admin-sidebar-count"><?= $totalCount ?></span>
                             </a>
                             <a href="<?= admin_url('showcase') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'showcase') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-layers"></i><span>Showcase</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i
+                                        class="bi bi-layers"></i><span>Showcase</span></span>
                                 <span class="admin-sidebar-count"><?= min(6, $totalCount) ?></span>
                             </a>
                         <?php endif; ?>
                         <?php if (current_admin_can('inquiries.view')): ?>
                             <a href="<?= admin_url('inquiries') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'inquiries') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-envelope-paper"></i><span>Inquiries</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i
+                                        class="bi bi-envelope-paper"></i><span>Inquiries</span></span>
                             </a>
                         <?php endif; ?>
                         <?php if (current_admin_can('careers.view')): ?>
                             <a href="<?= admin_url('careers') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'careers') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-briefcase"></i><span>Careers &amp; Hiring</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i
+                                        class="bi bi-briefcase"></i><span>Careers &amp; Hiring</span></span>
                                 <span class="admin-sidebar-count">ATS</span>
                             </a>
                         <?php endif; ?>
                         <?php if (current_admin_can('users.view')): ?>
                             <a href="<?= admin_url('users') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'users') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-people"></i><span>Users &amp; Roles</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-people"></i><span>Users
+                                        &amp; Roles</span></span>
                             </a>
                         <?php endif; ?>
                         <?php if (current_admin_can('settings.view')): ?>
                             <a href="<?= admin_url('logs') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'logs') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-journal-text"></i><span>Audit Logs</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i
+                                        class="bi bi-journal-text"></i><span>Audit Logs</span></span>
                             </a>
                             <a href="<?= admin_url('telemetry') ?>"
                                 class="admin-sidebar-link <?= ($currentPage === 'telemetry') ? 'active' : '' ?>">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-activity"></i><span>Telemetry</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i
+                                        class="bi bi-activity"></i><span>Telemetry</span></span>
                             </a>
                         <?php endif; ?>
                         <a href="<?= admin_url('profile') ?>"
                             class="admin-sidebar-link <?= ($currentPage === 'profile') ? 'active' : '' ?>">
-                            <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-person-badge"></i><span>My Profile</span></span>
+                            <span class="d-inline-flex align-items-center gap-2"><i
+                                    class="bi bi-person-badge"></i><span>My Profile</span></span>
                         </a>
                     </nav>
 
@@ -219,8 +231,8 @@ $flash = get_admin_flash();
                     </div>
 
                     <div class="mt-3 pt-3 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
-                        <a href="<?= admin_url('logout') ?>"
-                            class="admin-profile-action is-danger w-100" title="Sign Out">
+                        <a href="<?= admin_url('logout') ?>" class="admin-profile-action is-danger w-100"
+                            title="Sign Out">
                             <i class="bi bi-box-arrow-right"></i><span>Sign out</span>
                         </a>
                     </div>
